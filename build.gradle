@@ -1,0 +1,57 @@
+group 'com.bookverse.development.packapps'
+version '1.0-SNAPSHOT'
+
+repositories {
+    /*maven {
+        url "https://artifactory.apps.bancolombia.com/maven-bancolombia"
+    }*/
+    mavenLocal()
+    jcenter()
+}
+buildscript {
+    repositories {
+        /*maven {
+            url "https://artifactory.apps.bancolombia.com/maven-bancolombia"
+        }*/
+        mavenLocal()
+        jcenter()
+
+        dependencies {
+            classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.33")
+        }
+    }
+}
+tasks.withType(JavaCompile) {
+    options.encoding = 'ISO-8859-1'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+ext {
+    serenityCoreVersion = "2.0.49"
+    serenityCucumberVersion = "1.9.31"
+}
+
+dependencies {
+    implementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
+    implementation "net.serenity-bdd:serenity-junit:${serenityCoreVersion}"
+    implementation "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}"
+
+    implementation group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.10'
+    implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.5.0'
+    implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
+    implementation group: 'org.apache.commons', name: 'commons-pool2', version: '2.7.0'
+    implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13'
+    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+    implementation group: 'com.jtattoo', name: 'JTattoo', version: '1.6.12'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.22'
+    implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
+}
+
+gradle.startParameter.continueOnFailure = true
