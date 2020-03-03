@@ -21,18 +21,9 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-.gradle
-.settings
-bin
-build
-target
-.project
-.classpath
-*.project
-*.classpath
-.idea
-EcuColombia.iml
-out
+/build/
+/.gradle/
+/.idea/
 
 # Not ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !EcuColombia/gradle/wrapper/gradle-wrapper.jar
