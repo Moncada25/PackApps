@@ -39,7 +39,7 @@ public class Resources {
         return menu;
     }
 
-    public JButton getBoton(String name, Color color, ActionListener listener, Container container) {
+    public JButton getButton(String name, Color color, ActionListener listener, Container container) {
 
         JButton button = new JButton(name);
         button.setBackground(color);

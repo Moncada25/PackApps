@@ -43,10 +43,10 @@ public class Timesheet extends JDialog implements ActionListener {
     setLayout(null);
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-    btnRun = img.getBoton("Run", img.cr.AZUL, this, this);
+    btnRun = img.getButton("Run", img.cr.AZUL, this, this);
     btnRun.setBounds(60, 215, 100, 30);
 
-    btnCancel = img.getBoton("Return", img.cr.ROJO, this, this);
+    btnCancel = img.getButton("Return", img.cr.ROJO, this, this);
     btnCancel.setBounds(300, 215, 86, 30);
 
     tittle = img

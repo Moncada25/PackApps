@@ -61,7 +61,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
 
         for (int j = 0; j < cola.length; j++) {
 
-            cola[j] = h.getBoton("", null, this, this);
+            cola[j] = h.getButton("", null, this, this);
             cola[j].setBounds(x, y, 80, 40);
             cola[j].setForeground(h.cr.ROJO);
             cola[j].setVisible(false);

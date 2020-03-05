@@ -44,10 +44,10 @@ public class Prestamos extends JDialog implements ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(img.getImage("prestar.png")).getImage());
 
-        btnsalir = img.getBoton("Return", img.cr.ROJO, this, this);
+        btnsalir = img.getButton("Return", img.cr.ROJO, this, this);
         btnsalir.setBounds(330, 320, 86, 30);
 
-        btnprestar = img.getBoton("Prestar", img.cr.AZUL, this, this);
+        btnprestar = img.getButton("Prestar", img.cr.AZUL, this, this);
         btnprestar.setBounds(30, 320, 86, 30);
 
         titulo = img.getLabel("<html><strong><em>Registrar Préstamo</em></strong></html>", img.cr.ROJO, this, img.cr.BIG);

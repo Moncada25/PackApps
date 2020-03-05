@@ -32,13 +32,13 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
 
         setLayout(null);// Permite el posicionamiento absoluto de los componentes
 
-        btnplay = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnplay = h.getButton("Show", h.cr.AZUL, this, this);
         btnplay.setBounds(315, 195, 75, 25);
 
         primero = h.getLabel("<html><strong>Buscar rango</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
         primero.setBounds(25, 70, 120, 30);
 
-        btnstart = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart = h.getButton("Show", h.cr.AZUL, this, this);
         btnstart.setBounds(315, 75, 75, 25);
 
         segundo = h.getLabel("<html><strong>Verificar</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
@@ -75,7 +75,7 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
             }
         });
 
-        btnstart2 = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart2 = h.getButton("Show", h.cr.AZUL, this, this);
         btnstart2.setBounds(315, 135, 75, 25);
 
         txtdesde = new JTextField();

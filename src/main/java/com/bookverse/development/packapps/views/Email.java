@@ -57,10 +57,10 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         setIconImage(new ImageIcon(h.getImage("email.png")).getImage());
         setDefaultCloseOperation(0);
 
-        btnenviar = h.getBoton("Send", h.cr.AZUL, this, this);
+        btnenviar = h.getButton("Send", h.cr.AZUL, this, this);
         btnenviar.setBounds(140, 400, 86, 30);
 
-        btnsalir = h.getBoton("Return", h.cr.ROJO, this, this);
+        btnsalir = h.getButton("Return", h.cr.ROJO, this, this);
         btnsalir.setBounds(250, 400, 86, 30);
 
         mensaje = h.getLabel("<html><strong><em>Write Email</em></strong></html>", h.cr.ROJO, this, h.cr.BIG);

@@ -51,14 +51,14 @@ public class Triqui extends JDialog implements ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(new Resources().getImage("triqui.png")).getImage());
 
-        btnsalir = h.getBoton("Return", h.cr.ROJO, this, this);
+        btnsalir = h.getButton("Return", h.cr.ROJO, this, this);
         btnsalir.setBounds(310, 300, 86, 30);
 
-        btnreset = h.getBoton("Reset", h.cr.AZUL, this, this);
+        btnreset = h.getButton("Reset", h.cr.AZUL, this, this);
         btnreset.setEnabled(false);
         btnreset.setBounds(180, 300, 86, 30);
 
-        btnplay = h.getBoton("Play", h.cr.AZUL, this, this);
+        btnplay = h.getButton("Play", h.cr.AZUL, this, this);
         btnplay.setBounds(50, 300, 86, 30);
 
         tablero = new JButton[3][3];
@@ -67,7 +67,7 @@ public class Triqui extends JDialog implements ActionListener {
 
         for (int f = 0; f < 3; f++) {
             for (int c = 0; c < 3; c++) {
-                tablero[f][c] = h.getBoton("", null, this, this);
+                tablero[f][c] = h.getButton("", null, this, this);
                 tablero[f][c].setBounds(x, y, 70, 70);
                 tablero[f][c].setFont(new Font("Times New Roman", 0, 45));
                 tablero[f][c].setOpaque(true);

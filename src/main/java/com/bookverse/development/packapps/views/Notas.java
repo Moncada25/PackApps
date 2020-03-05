@@ -45,20 +45,20 @@ public class Notas extends JDialog implements ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(h.getImage("notas.png")).getImage());
 
-        btnsalir = h.getBoton("Return", h.cr.ROJO, this, this);
+        btnsalir = h.getButton("Return", h.cr.ROJO, this, this);
         btnsalir.setBounds(248, 330, 86, 30);
 
-        btncalcular = h.getBoton("Show", h.cr.AZUL, this, this);
+        btncalcular = h.getButton("Show", h.cr.AZUL, this, this);
         btncalcular.setBounds(200, 280, 86, 30);
 
-        btnaddNote = h.getBoton("Add", h.cr.AZUL, this, this);
+        btnaddNote = h.getButton("Add", h.cr.AZUL, this, this);
         btnaddNote.setBounds(200, 220, 86, 30);
 
-        btndeleteNote = h.getBoton("Delete", h.cr.ROJO, this, this);
+        btndeleteNote = h.getButton("Delete", h.cr.ROJO, this, this);
         btndeleteNote.setBounds(300, 220, 86, 30);
         btndeleteNote.setEnabled(false);
 
-        btnreset = h.getBoton("Reset", h.cr.ROJO, this, this);
+        btnreset = h.getButton("Reset", h.cr.ROJO, this, this);
         btnreset.setBounds(300, 280, 86, 30);
         btnreset.setEnabled(false);
 

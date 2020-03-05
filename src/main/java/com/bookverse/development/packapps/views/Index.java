@@ -96,8 +96,7 @@ public class Index extends JFrame implements ActionListener {
   private JMenuItem guessPDF;
   private JMenuItem hangmanPDF;
   private JMenuItem dicesPDF;
-  private JMenuItem notesPDF;
-  private JMenuItem inventoryPDF;
+  private JMenuItem notesPDF, inventoryPDF;
   private JMenuItem purchasesPDF;
   private JMenuItem salesPDF;
   private JMenuItem cashRegisterPDF;
@@ -219,28 +218,28 @@ public class Index extends JFrame implements ActionListener {
     exit.add(send);
 
     JMenu apps = img.getMenu("Games", "games");
-    hangman = img.getMenuItem("Ahorcadito", "ahorcado", this);
-    dices = img.getMenuItem("Dados", "dado", this);
-    roulette = img.getMenuItem("Ruleta", "ruleta", this);
+    hangman = img.getMenuItem("Hangman", "ahorcado", this);
+    dices = img.getMenuItem("Dices", "dado", this);
+    roulette = img.getMenuItem("Roulette", "ruleta", this);
 
-    JMenu adivinarNumero = img.getMenu("Adivinar Número", "adivinar");
+    JMenu guessNumber = img.getMenu("Guess Number", "adivinar");
     guess = img.getMenuItem("Easy", "easy", this);
     guessHard = img.getMenuItem("Hard", "hard", this);
 
-    adivinarNumero.add(guess);
-    adivinarNumero.addSeparator();
-    adivinarNumero.add(guessHard);
+    guessNumber.add(guess);
+    guessNumber.addSeparator();
+    guessNumber.add(guessHard);
 
-    JMenu rompe = img.getMenu("Rompecabezas", "rompecabezas");
+    JMenu puzzle = img.getMenu("Puzzle", "rompecabezas");
     puzzle4x4 = img.getMenuItem("Easy", "easy", this);
     puzzle5x5 = img.getMenuItem("Medium", "medio", this);
     puzzle6x6 = img.getMenuItem("Hard", "hard", this);
 
-    rompe.add(puzzle4x4);
-    rompe.addSeparator();
-    rompe.add(puzzle5x5);
-    rompe.addSeparator();
-    rompe.add(puzzle6x6);
+    puzzle.add(puzzle4x4);
+    puzzle.addSeparator();
+    puzzle.add(puzzle5x5);
+    puzzle.addSeparator();
+    puzzle.add(puzzle6x6);
 
     JMenu triqui = img.getMenu("Triqui", "triqui");
     triquiPvsP = img.getMenuItem("Player vs Player", "jvsj", this);
@@ -250,13 +249,13 @@ public class Index extends JFrame implements ActionListener {
     triqui.addSeparator();
     triqui.add(triquiPvsCPU);
 
-    apps.add(adivinarNumero);
+    apps.add(guessNumber);
     apps.addSeparator();
     apps.add(hangman);
     apps.addSeparator();
     apps.add(dices);
     apps.addSeparator();
-    apps.add(rompe);
+    apps.add(puzzle);
     apps.addSeparator();
     apps.add(roulette);
     apps.addSeparator();
@@ -268,11 +267,11 @@ public class Index extends JFrame implements ActionListener {
     scores.add(tables);
 
     JMenu tools = img.getMenu("Tools", "tools");
-    buyAndSell = img.getMenuItem("Compraventa", "compraventa", this);
-    structures = img.getMenuItem("Estructuras", "estructuras", this);
-    numbers = img.getMenuItem("Numeritos", "numeritos", this);
-    notes = img.getMenuItem("Notas", "notas", this);
-    texts = img.getMenuItem("Textos", "textos", this);
+    buyAndSell = img.getMenuItem("Buy and Sell", "compraventa", this);
+    structures = img.getMenuItem("Structures", "estructuras", this);
+    numbers = img.getMenuItem("Numbers", "numeritos", this);
+    notes = img.getMenuItem("Notes", "notas", this);
+    texts = img.getMenuItem("Texts", "textos", this);
 
     changeBackground = img.getMenu("Background", "background");
 
@@ -287,107 +286,107 @@ public class Index extends JFrame implements ActionListener {
 
     JMenu export = img.getMenu("Export Data", "export");
 
-    JMenu ex_txt = img.getMenu("Archivo de Texto", "txt");
-    guessTXT = img.getMenuItem("Adivinar Número", "adivinar", this);
-    hangmanTXT = img.getMenuItem("Ahorcadito", "ahorcado", this);
-    purchasesTXT = img.getMenuItem("Compras", "comprar", this);
-    dicesTXT = img.getMenuItem("Dados", "dado", this);
-    notesTXT = img.getMenuItem("Notas", "notas", this);
-    puzzleTXT = img.getMenuItem("Rompecabezas", "rompecabezas", this);
-    inventoryTXT = img.getMenuItem("Inventario", "inventario", this);
-    cashRegisterTXT = img.getMenuItem("Registradora", "registradora", this);
-    loansTXT = img.getMenuItem("Préstamos", "prestamos", this);
-    salesTXT = img.getMenuItem("Ventas", "vender", this);
+    JMenu exportTXT = img.getMenu("Text file", "txt");
+    guessTXT = img.getMenuItem("Guess Number", "adivinar", this);
+    hangmanTXT = img.getMenuItem("Hangman", "ahorcado", this);
+    purchasesTXT = img.getMenuItem("Purchases", "comprar", this);
+    dicesTXT = img.getMenuItem("Dices", "dado", this);
+    notesTXT = img.getMenuItem("Notes", "notas", this);
+    puzzleTXT = img.getMenuItem("Puzzle", "rompecabezas", this);
+    inventoryTXT = img.getMenuItem("Inventory", "inventario", this);
+    cashRegisterTXT = img.getMenuItem("Cash Register", "registradora", this);
+    loansTXT = img.getMenuItem("Loans", "prestamos", this);
+    salesTXT = img.getMenuItem("Sales", "vender", this);
 
-    ex_txt.add(guessTXT);
-    ex_txt.addSeparator();
-    ex_txt.add(hangmanTXT);
-    ex_txt.addSeparator();
-    ex_txt.add(purchasesTXT);
-    ex_txt.addSeparator();
-    ex_txt.add(dicesTXT);
-    ex_txt.addSeparator();
-    ex_txt.add(inventoryTXT);
-    ex_txt.addSeparator();
-    ex_txt.add(notesTXT);
-    ex_txt.addSeparator();
-    ex_txt.add(loansTXT);
-    ex_txt.addSeparator();
-    ex_txt.add(cashRegisterTXT);
-    ex_txt.addSeparator();
-    ex_txt.add(puzzleTXT);
-    ex_txt.addSeparator();
-    ex_txt.add(salesTXT);
+    exportTXT.add(guessTXT);
+    exportTXT.addSeparator();
+    exportTXT.add(hangmanTXT);
+    exportTXT.addSeparator();
+    exportTXT.add(purchasesTXT);
+    exportTXT.addSeparator();
+    exportTXT.add(dicesTXT);
+    exportTXT.addSeparator();
+    exportTXT.add(inventoryTXT);
+    exportTXT.addSeparator();
+    exportTXT.add(notesTXT);
+    exportTXT.addSeparator();
+    exportTXT.add(loansTXT);
+    exportTXT.addSeparator();
+    exportTXT.add(cashRegisterTXT);
+    exportTXT.addSeparator();
+    exportTXT.add(puzzleTXT);
+    exportTXT.addSeparator();
+    exportTXT.add(salesTXT);
 
-    JMenu ex_excel = img.getMenu("Hoja de Cálculo", "excel");
-    guessEXCEL = img.getMenuItem("Adivinar Número", "adivinar", this);
-    hangmanEXCEL = img.getMenuItem("Ahorcadito", "ahorcado", this);
-    purchasesEXCEL = img.getMenuItem("Compras", "comprar", this);
-    dicesEXCEL = img.getMenuItem("Dados", "dado", this);
-    notesEXCEL = img.getMenuItem("Notas", "notas", this);
-    puzzleEXCEL = img.getMenuItem("Rompecabezas", "rompecabezas", this);
-    inventoryEXCEL = img.getMenuItem("Inventario", "inventario", this);
-    cashRegisterEXCEL = img.getMenuItem("Registradora", "registradora", this);
-    loansEXCEL = img.getMenuItem("Préstamos", "prestamos", this);
-    salesEXCEL = img.getMenuItem("Ventas", "vender", this);
+    JMenu exportEXCEL = img.getMenu("Hoja de Cálculo", "excel");
+    guessEXCEL = img.getMenuItem("Guess Number", "adivinar", this);
+    hangmanEXCEL = img.getMenuItem("Hangman", "ahorcado", this);
+    purchasesEXCEL = img.getMenuItem("Purchases", "comprar", this);
+    dicesEXCEL = img.getMenuItem("Dices", "dado", this);
+    notesEXCEL = img.getMenuItem("Notes", "notas", this);
+    puzzleEXCEL = img.getMenuItem("Puzzle", "rompecabezas", this);
+    inventoryEXCEL = img.getMenuItem("Inventory", "inventario", this);
+    cashRegisterEXCEL = img.getMenuItem("Cash Register", "registradora", this);
+    loansEXCEL = img.getMenuItem("Loans", "prestamos", this);
+    salesEXCEL = img.getMenuItem("Sales", "vender", this);
 
-    ex_excel.add(guessEXCEL);
-    ex_excel.addSeparator();
-    ex_excel.add(hangmanEXCEL);
-    ex_excel.addSeparator();
-    ex_excel.add(purchasesEXCEL);
-    ex_excel.addSeparator();
-    ex_excel.add(dicesEXCEL);
-    ex_excel.addSeparator();
-    ex_excel.add(inventoryEXCEL);
-    ex_excel.addSeparator();
-    ex_excel.add(notesEXCEL);
-    ex_excel.addSeparator();
-    ex_excel.add(loansEXCEL);
-    ex_excel.addSeparator();
-    ex_excel.add(cashRegisterEXCEL);
-    ex_excel.addSeparator();
-    ex_excel.add(puzzleEXCEL);
-    ex_excel.addSeparator();
-    ex_excel.add(salesEXCEL);
+    exportEXCEL.add(guessEXCEL);
+    exportEXCEL.addSeparator();
+    exportEXCEL.add(hangmanEXCEL);
+    exportEXCEL.addSeparator();
+    exportEXCEL.add(purchasesEXCEL);
+    exportEXCEL.addSeparator();
+    exportEXCEL.add(dicesEXCEL);
+    exportEXCEL.addSeparator();
+    exportEXCEL.add(inventoryEXCEL);
+    exportEXCEL.addSeparator();
+    exportEXCEL.add(notesEXCEL);
+    exportEXCEL.addSeparator();
+    exportEXCEL.add(loansEXCEL);
+    exportEXCEL.addSeparator();
+    exportEXCEL.add(cashRegisterEXCEL);
+    exportEXCEL.addSeparator();
+    exportEXCEL.add(puzzleEXCEL);
+    exportEXCEL.addSeparator();
+    exportEXCEL.add(salesEXCEL);
 
-    JMenu ex_pdf = img.getMenu("Documento PDF", "pdf");
-    guessPDF = img.getMenuItem("Adivinar Número", "adivinar", this);
-    hangmanPDF = img.getMenuItem("Ahorcadito", "ahorcado", this);
-    purchasesPDF = img.getMenuItem("Compras", "comprar", this);
-    dicesPDF = img.getMenuItem("Dados", "dado", this);
-    notesPDF = img.getMenuItem("Notas", "notas", this);
-    puzzlePDF = img.getMenuItem("Rompecabezas", "rompecabezas", this);
-    inventoryPDF = img.getMenuItem("Inventario", "inventario", this);
-    cashRegisterPDF = img.getMenuItem("Registradora", "registradora", this);
-    loansPDF = img.getMenuItem("Préstamos", "prestamos", this);
-    salesPDF = img.getMenuItem("Ventas", "vender", this);
+    JMenu exportPDF = img.getMenu("Document PDF", "pdf");
+    guessPDF = img.getMenuItem("Guess Number", "adivinar", this);
+    hangmanPDF = img.getMenuItem("Hangman", "ahorcado", this);
+    purchasesPDF = img.getMenuItem("Purchases", "comprar", this);
+    dicesPDF = img.getMenuItem("Dices", "dado", this);
+    notesPDF = img.getMenuItem("Notes", "notas", this);
+    puzzlePDF = img.getMenuItem("Puzzle", "rompecabezas", this);
+    inventoryPDF = img.getMenuItem("Inventory", "inventario", this);
+    cashRegisterPDF = img.getMenuItem("Cash Register", "registradora", this);
+    loansPDF = img.getMenuItem("Loans", "prestamos", this);
+    salesPDF = img.getMenuItem("Sales", "vender", this);
 
-    ex_pdf.add(guessPDF);
-    ex_pdf.addSeparator();
-    ex_pdf.add(hangmanPDF);
-    ex_pdf.addSeparator();
-    ex_pdf.add(purchasesPDF);
-    ex_pdf.addSeparator();
-    ex_pdf.add(dicesPDF);
-    ex_pdf.addSeparator();
-    ex_pdf.add(inventoryPDF);
-    ex_pdf.addSeparator();
-    ex_pdf.add(notesPDF);
-    ex_pdf.addSeparator();
-    ex_pdf.add(loansPDF);
-    ex_pdf.addSeparator();
-    ex_pdf.add(cashRegisterPDF);
-    ex_pdf.addSeparator();
-    ex_pdf.add(puzzlePDF);
-    ex_pdf.addSeparator();
-    ex_pdf.add(salesPDF);
+    exportPDF.add(guessPDF);
+    exportPDF.addSeparator();
+    exportPDF.add(hangmanPDF);
+    exportPDF.addSeparator();
+    exportPDF.add(purchasesPDF);
+    exportPDF.addSeparator();
+    exportPDF.add(dicesPDF);
+    exportPDF.addSeparator();
+    exportPDF.add(inventoryPDF);
+    exportPDF.addSeparator();
+    exportPDF.add(notesPDF);
+    exportPDF.addSeparator();
+    exportPDF.add(loansPDF);
+    exportPDF.addSeparator();
+    exportPDF.add(cashRegisterPDF);
+    exportPDF.addSeparator();
+    exportPDF.add(puzzlePDF);
+    exportPDF.addSeparator();
+    exportPDF.add(salesPDF);
 
-    export.add(ex_txt);
+    export.add(exportTXT);
     export.addSeparator();
-    export.add(ex_pdf);
+    export.add(exportPDF);
     export.addSeparator();
-    export.add(ex_excel);
+    export.add(exportEXCEL);
 
     JMenu tasks = img.getMenu("Tasks", "task");
     timesheet = img.getMenuItem("Timesheet Entry", "timesheet", this);
@@ -437,47 +436,22 @@ public class Index extends JFrame implements ActionListener {
     menuBar.add(about);
     menuBar.add(exit);
 
-    // A?ado la barra de men? al frame
     add(menuBar, BorderLayout.NORTH);
   }
 
-  public void AdivinarAP() {
-    Adivinar window = new Adivinar(this, true, false);
-    window.setSize(430, 330);
-    window.setResizable(false);
-    window.setLocationRelativeTo(this);
-    window.setTitle("Level Easy");
-    img.cr.fadeIn(window);
-    setVisible(false);
-    img.cr.instruccionesAdivinar();
-    window.setVisible(true);
-  }
-
-  public void AdivinarHardAP() {
-    Adivinar window = new Adivinar(this, true, true);
-    window.setSize(430, 330);
-    window.setResizable(false);
-    window.setLocationRelativeTo(this);
-    window.setTitle("Level Hard");
-    img.cr.fadeIn(window);
-    setVisible(false);
-    img.cr.instruccionesAdivinar();
-    window.setVisible(true);
-  }
-
-  public void NumeritosAP() {
-    Numeritos window = new Numeritos(this, true);
+  public void startNumbersAP() {
+    Numbers window = new Numbers(this, true);
     window.setSize(980, 570);
     window.setMinimumSize(new Dimension(480, 380));
     window.setMaximumSize(new Dimension(1295, 820));
     window.setLocationRelativeTo(this);
-    window.setTitle("Numeritos");
+    window.setTitle("Numbers");
     img.cr.fadeIn(window);
     setVisible(false);
     window.setVisible(true);
   }
 
-  public void EstructurasAP() {
+  public void structuresAP() {
     Estructuras window = new Estructuras(this, true);
     window.setSize(717, 380);
     window.setResizable(false);
@@ -1151,10 +1125,10 @@ public class Index extends JFrame implements ActionListener {
       TextosAP();
       setVisible(true);
     } else if (e.getSource() == guess) {
-      AdivinarAP();
+      new GuessNumber(this, true, false).start(this);
       setVisible(true);
     } else if (e.getSource() == guessHard) {
-      AdivinarHardAP();
+      new GuessNumber(this, true, true).start(this);
       setVisible(true);
     } else if (e.getSource() == triquiPvsP) {
       TriquiAP();
@@ -1166,7 +1140,7 @@ public class Index extends JFrame implements ActionListener {
       AhorcaditoAP();
       setVisible(true);
     } else if (e.getSource() == numbers) {
-      NumeritosAP();
+      startNumbersAP();
       setVisible(true);
     } else if (e.getSource() == puzzle4x4) {
       Rompecabezas4x4AP();
@@ -1178,7 +1152,7 @@ public class Index extends JFrame implements ActionListener {
       Rompecabezas6x6AP();
       setVisible(true);
     } else if (e.getSource() == structures) {
-      EstructurasAP();
+      structuresAP();
       setVisible(true);
     } else if (e.getSource() == dices) {
       DadosAP();

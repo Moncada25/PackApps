@@ -47,13 +47,13 @@ public class Compras extends JDialog implements ActionListener {
         setIconImage(new ImageIcon(img.getImage("comprar.png")).getImage());
         setDefaultCloseOperation(0);
 
-        btnsalir = img.getBoton("Return", img.cr.ROJO, this, this);
+        btnsalir = img.getButton("Return", img.cr.ROJO, this, this);
         btnsalir.setBounds(310, 320, 95, 30);
 
-        btningresar = img.getBoton("Comprar", img.cr.AZUL, this, this);
+        btningresar = img.getButton("Comprar", img.cr.AZUL, this, this);
         btningresar.setBounds(30, 320, 95, 30);
 
-        btnbuscar = img.getBoton("Buscar", img.cr.AZUL, this, this);
+        btnbuscar = img.getButton("Buscar", img.cr.AZUL, this, this);
         btnbuscar.setBounds(340, 65, 86, 25);
 
         titulo = img.getLabel("<html><strong><em>Registrar Compra</em></strong></html>", img.cr.ROJO, this, img.cr.BIG);

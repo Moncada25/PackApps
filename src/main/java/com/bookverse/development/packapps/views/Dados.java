@@ -39,13 +39,13 @@ public class Dados extends JDialog implements ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(h.getImage("dado.png")).getImage());
 
-        btnsalir = h.getBoton("Return", h.cr.ROJO, this, this);
+        btnsalir = h.getButton("Return", h.cr.ROJO, this, this);
         btnsalir.setBounds(330, 320, 86, 30);
 
-        btntirar = h.getBoton("Spin", h.cr.AZUL, this, this);
+        btntirar = h.getButton("Spin", h.cr.AZUL, this, this);
         btntirar.setBounds(25, 320, 86, 30);
 
-        btnreset = h.getBoton("Reset", h.cr.AZUL, this, this);
+        btnreset = h.getButton("Reset", h.cr.AZUL, this, this);
         btnreset.setBounds(185, 320, 86, 30);
         btnreset.setEnabled(false);
 

@@ -36,7 +36,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
         forma1 = h.getLabel("<html><strong>Enésimo número de Fibonacci</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
         forma1.setBounds(25, 120, 260, 30);
 
-        btnstart = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart = h.getButton("Show", h.cr.AZUL, this, this);
         btnstart.setBounds(360, 75, 70, 25);
 
         txt1 = new JTextField();
@@ -80,10 +80,10 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
         forma2 = h.getLabel("<html><strong>Proporción áurea</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
         forma2.setBounds(25, 170, 280, 30);
 
-        btnstart3 = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart3 = h.getButton("Show", h.cr.AZUL, this, this);
         btnstart3.setBounds(360, 175, 70, 25);
 
-        btnstart2 = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart2 = h.getButton("Show", h.cr.AZUL, this, this);
         btnstart2.setBounds(360, 125, 70, 25);
 
         txt2 = new JTextField();

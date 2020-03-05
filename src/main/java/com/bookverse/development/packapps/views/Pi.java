@@ -37,7 +37,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
         forma1 = h.getLabel("? = 4/1 - 4/3 + 4/5 - 4/7 + 4/9...", h.cr.AZUL, this, h.cr.MEDIUM);
         forma1.setBounds(25, 90, 280, 60);
 
-        btnstart = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart = h.getButton("Show", h.cr.AZUL, this, this);
         btnstart.setBounds(315, 110, 75, 25);
 
         txt1 = new JTextField();
@@ -77,7 +77,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
         forma2 = h.getLabel("?²/6 = 1/1² + 1/2² + 1/3² + 1/4²...", h.cr.AZUL, this, h.cr.MEDIUM);
         forma2.setBounds(25, 180, 280, 60);
 
-        btnstart2 = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart2 = h.getButton("Show", h.cr.AZUL, this, this);
         btnstart2.setBounds(315, 200, 75, 25);
 
         txt2 = new JTextField();

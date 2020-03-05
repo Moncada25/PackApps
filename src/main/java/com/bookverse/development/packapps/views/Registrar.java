@@ -38,10 +38,10 @@ public class Registrar extends JDialog implements ActionListener {
         setIconImage(new ImageIcon(img.getImage("añadir_usuario.png")).getImage());
         setDefaultCloseOperation(0);
 
-        btnregistro = img.getBoton("Registrar", img.cr.AZUL, this, this);
+        btnregistro = img.getButton("Registrar", img.cr.AZUL, this, this);
         btnregistro.setBounds(60, 215, 100, 30);
 
-        btncancelar = img.getBoton("Return", img.cr.ROJO, this, this);
+        btncancelar = img.getButton("Return", img.cr.ROJO, this, this);
         btncancelar.setBounds(300, 215, 86, 30);
 
         registrarse = img.getLabel("<html><strong><em>Registrarse</em></strong></html>", img.cr.ROJO, this, img.cr.BIG);

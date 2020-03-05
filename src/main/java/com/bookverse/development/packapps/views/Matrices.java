@@ -40,7 +40,7 @@ public class Matrices extends JDialog implements ActionListener {
 
         for (int f = 0; f < matriz.length; f++) {
             for (int c = 0; c < matriz.length; c++) {
-                matriz[f][c] = h.getBoton("", null, this, this);
+                matriz[f][c] = h.getButton("", null, this, this);
                 matriz[f][c].setBounds(x, y, 45, 45);
                 matriz[f][c].setVisible(false);
                 x = x + 45;
@@ -53,30 +53,30 @@ public class Matrices extends JDialog implements ActionListener {
         welcome = h.getLabel("<html><em><strong>Operaciones Con Matrices</strong></em></html>", h.cr.ROJO, this, h.cr.BIG);
         welcome.setBounds(280, 10, 500, 40);
 
-        btnaction = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnaction = h.getButton("Show", h.cr.AZUL, this, this);
         btnaction.setBounds(20, 190, 70, 25);
 
-        btnautofill = h.getBoton("Autofill", h.cr.AZUL, this, this);
+        btnautofill = h.getButton("Autofill", h.cr.AZUL, this, this);
         btnautofill.setBounds(120, 100, 90, 25);
         btnautofill.setEnabled(false);
 
-        btnempty = h.getBoton("Empty", h.cr.ROJO, this, this);
+        btnempty = h.getButton("Empty", h.cr.ROJO, this, this);
         btnempty.setBounds(120, 150, 90, 25);
         btnempty.setEnabled(false);
 
-        btntranspuesta = h.getBoton("Transponer", h.cr.AZUL, this, this);
+        btntranspuesta = h.getButton("Transponer", h.cr.AZUL, this, this);
         btntranspuesta.setBounds(720, 100, 120, 25);
         btntranspuesta.setEnabled(false);
 
-        btnmultiplicar = h.getBoton("Multiplicar", h.cr.AZUL, this, this);
+        btnmultiplicar = h.getButton("Multiplicar", h.cr.AZUL, this, this);
         btnmultiplicar.setBounds(720, 200, 120, 25);
         btnmultiplicar.setEnabled(false);
 
-        btndeterminante = h.getBoton("|A|", h.cr.AZUL, this, this);
+        btndeterminante = h.getButton("|A|", h.cr.AZUL, this, this);
         btndeterminante.setBounds(720, 250, 120, 25);
         btndeterminante.setEnabled(false);
 
-        btndiagonales = h.getBoton("Diagonales", h.cr.AZUL, this, this);
+        btndiagonales = h.getButton("Diagonales", h.cr.AZUL, this, this);
         btndiagonales.setBounds(720, 150, 120, 25);
         btndiagonales.setEnabled(false);
 

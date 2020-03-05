@@ -47,14 +47,14 @@ public class Ventas extends JDialog implements ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(img.getImage("vender.png")).getImage());
 
-        btnsalir = img.getBoton("Return", img.cr.ROJO, this, this);
+        btnsalir = img.getButton("Return", img.cr.ROJO, this, this);
         btnsalir.setBounds(310, 320, 86, 30);
 
-        btningresar = img.getBoton("Vender", img.cr.AZUL, this, this);
+        btningresar = img.getButton("Vender", img.cr.AZUL, this, this);
         btningresar.setBounds(30, 320, 86, 30);
         btningresar.setEnabled(false);
 
-        btnbuscar = img.getBoton("Buscar", img.cr.AZUL, this, this);
+        btnbuscar = img.getButton("Buscar", img.cr.AZUL, this, this);
         btnbuscar.setBounds(340, 65, 86, 25);
 
         titulo = img.getLabel("<html><strong><em>Registrar Venta</em></strong></html>", img.cr.ROJO, this, img.cr.BIG);

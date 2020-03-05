@@ -262,10 +262,10 @@ public class AdivinarTabla extends JDialog implements ActionListener, MouseListe
 
             if (opcion.toString().equals("Easy")) {
                 setVisible(false);
-                new Index().AdivinarAP();
+                new GuessNumber(this, true, false).start(this);
             } else if (opcion.toString().equals("Hard")) {
                 setVisible(false);
-                new Index().AdivinarHardAP();
+                new GuessNumber(this, true, true).start(this);
             }
         }
     }

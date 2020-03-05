@@ -1,5 +1,7 @@
 package com.bookverse.development.packapps.views;
 
+import static javax.swing.WindowConstants.*;
+
 import com.bookverse.development.packapps.core.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 public class Login extends JDialog implements ActionListener {
 
@@ -38,20 +41,20 @@ public class Login extends JDialog implements ActionListener {
   public void componentes() {
 
     setLayout(null);
-    setDefaultCloseOperation(0);
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(img.getImage("compraventa.png")).getImage());
 
-    btnsalir = img.getBoton("Return", img.cr.ROJO, this, this);
+    btnsalir = img.getButton("Return", img.cr.ROJO, this, this);
     btnsalir.setBounds(200, 225, 90, 30);
 
     men = img.getLabel("<html><strong>¿No estás registrado?</strong></html>", img.cr.ROJO, this,
         img.cr.SMALL);
     men.setBounds(112, 260, 300, 50);
 
-    btnregistrar = img.getBoton("Regístrate", img.cr.AZUL, this, this);
+    btnregistrar = img.getButton("Regístrate", img.cr.AZUL, this, this);
     btnregistrar.setBounds(130, 300, 110, 30);
 
-    btningresar = img.getBoton("Ingresar", img.cr.AZUL, this, this);
+    btningresar = img.getButton("Ingresar", img.cr.AZUL, this, this);
     btningresar.setBounds(80, 225, 90, 30);
 
     ingreso = img

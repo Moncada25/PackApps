@@ -15,20 +15,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Numeritos extends JDialog implements MouseListener {
+public class Numbers extends JDialog implements MouseListener {
 
     private JLabel btnprimos, btncalcular, btnphi, btnpi, btnotros, welcome;
 
     private Resources img = new Resources();
 
-    public Numeritos(JFrame parent, boolean modal) {
+    public Numbers(JFrame parent, boolean modal) {
 
         super(parent, modal);
 
         Componentes();
     }
 
-    public Numeritos() {
+    public Numbers() {
         Componentes();
     }
 

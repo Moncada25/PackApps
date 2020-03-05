@@ -35,19 +35,19 @@ public class Otros extends JDialog implements ActionListener, MouseListener {
 
         setLayout(null);// Permite el posicionamiento absoluto de los componentes
 
-        btnstart1 = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart1 = h.getButton("Show", h.cr.AZUL, this, this);
         btnstart1.setBounds(330, 125, 75, 25);
 
-        btnstart3 = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart3 = h.getButton("Show", h.cr.AZUL, this, this);
         btnstart3.setBounds(330, 225, 75, 25);
 
-        btnstart2 = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart2 = h.getButton("Show", h.cr.AZUL, this, this);
         btnstart2.setBounds(330, 175, 75, 25);
 
         primero = h.getLabel("<html><strong>Generar RGB</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
         primero.setBounds(25, 70, 280, 30);
 
-        btncolor = h.getBoton("Color", null, this, this);
+        btncolor = h.getButton("Color", null, this, this);
         btncolor.setBounds(350, 75, 70, 25);
 
         red = h.getLabel("<html><strong>Red</strong></html>", h.cr.ROJO, this, null);

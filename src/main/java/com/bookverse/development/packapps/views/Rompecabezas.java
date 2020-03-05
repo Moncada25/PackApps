@@ -43,13 +43,13 @@ public class Rompecabezas extends JDialog implements Runnable, ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(h.getImage("rompecabezas.png")).getImage());
 
-        btnsalir = h.getBoton("Return", h.cr.ROJO, this, this);
+        btnsalir = h.getButton("Return", h.cr.ROJO, this, this);
         btnsalir.setBounds(330, 300, 86, 30);
 
-        btnplay = h.getBoton("Play", h.cr.AZUL, this, this);
+        btnplay = h.getButton("Play", h.cr.AZUL, this, this);
         btnplay.setBounds(70, 300, 86, 30);
 
-        btnreset = h.getBoton("Stop", h.cr.ROJO, this, this);
+        btnreset = h.getButton("Stop", h.cr.ROJO, this, this);
         btnreset.setBounds(200, 300, 86, 30);
         btnreset.setEnabled(false);
 
@@ -66,7 +66,7 @@ public class Rompecabezas extends JDialog implements Runnable, ActionListener {
 
         for (int f = 0; f < tablero.length; f++) {
             for (int c = 0; c < tablero.length; c++) {
-                tablero[f][c] = h.getBoton(".", null, this, this);
+                tablero[f][c] = h.getButton(".", null, this, this);
                 tablero[f][c].setBounds(x, y, lado, lado);
                 tablero[f][c].setEnabled(false);
 

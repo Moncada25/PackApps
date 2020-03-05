@@ -62,7 +62,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
         for (int j = 0; j < pila.length; j++) {
 
-            pila[j] = h.getBoton("", null, this, this);
+            pila[j] = h.getButton("", null, this, this);
             pila[j].setBounds(x, y, 80, 40);
             pila[j].setForeground(h.cr.ROJO);
             pila[j].setVisible(false);

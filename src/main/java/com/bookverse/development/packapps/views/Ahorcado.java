@@ -53,10 +53,10 @@ public class Ahorcado extends JDialog implements ActionListener, KeyListener, Ru
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(h.getImage("ahorcado.png")).getImage());
 
-        btnplay = h.getBoton("Play", h.cr.AZUL, this, this);
+        btnplay = h.getButton("Play", h.cr.AZUL, this, this);
         btnplay.setBounds(30, 160, 86, 30);
 
-        btnsalir = h.getBoton("Return", h.cr.ROJO, this, this);
+        btnsalir = h.getButton("Return", h.cr.ROJO, this, this);
         btnsalir.setBounds(140, 160, 86, 30);
 
         titulo = h.getLabel("<html>"
