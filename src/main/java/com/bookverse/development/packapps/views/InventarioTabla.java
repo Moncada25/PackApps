@@ -218,13 +218,9 @@ public class InventarioTabla extends JDialog implements MouseListener {
           IDs[i] = String.valueOf(modelo.getValueAt(rows[i], 0));
         }
 
-        try {
-          img.db.deleteData(IDs, "inventario");
-          dispose();
-          new Opciones().btnInventarioAP(false);
-        } catch (SQLException ex) {
-          Logger.getLogger(InventarioTabla.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        img.db.deleteData(IDs, "inventario");
+        dispose();
+        new Opciones().btnInventarioAP(false);
       }
     }
   }

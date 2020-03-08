@@ -417,23 +417,18 @@ public class Ventas extends JDialog implements ActionListener {
 
         if (inv.status == 1) {
 
-            try {
-                img.db.importarDatos(inv.referencia);
+            img.db.importarDatos(inv.referencia);
 
-                txtRef.setText(inv.referencia);
+            txtRef.setText(inv.referencia);
 
-                if (img.db.getEst().equals("Nuevo")) {
-                    nuevo.setSelected(true);
-                } else {
-                    usado.setSelected(true);
-                }
-
-                txtPrecio.setText(String.valueOf(img.db.getPrecio()));
-                cantDisponible.setText(String.valueOf(img.db.getDisp()));
-
-            } catch (SQLException e1) {
-                JOptionPane.showMessageDialog(null, e1.getMessage());
+            if (img.db.getEst().equals("Nuevo")) {
+                nuevo.setSelected(true);
+            } else {
+                usado.setSelected(true);
             }
+
+            txtPrecio.setText(String.valueOf(img.db.getPrecio()));
+            cantDisponible.setText(String.valueOf(img.db.getDisp()));
 
             btningresar.setEnabled(true);
             disponibles.setVisible(true);
@@ -448,7 +443,6 @@ public class Ventas extends JDialog implements ActionListener {
         }
     }
 
-    // Eventos al presionar un botón
     @Override
     public void actionPerformed(ActionEvent e) {
 

@@ -396,22 +396,17 @@ public class Compras extends JDialog implements ActionListener {
 
         if (inv.status == 1 || inv.status == 2) {
 
-            try {
-                img.db.importarDatos(inv.referencia);
+            img.db.importarDatos(inv.referencia);
 
-                txtRef.setText(inv.referencia);
+            txtRef.setText(inv.referencia);
 
-                if (img.db.getEst().equals("Nuevo")) {
-                    nuevo.setSelected(true);
-                } else {
-                    usado.setSelected(true);
-                }
-
-                txtPrecio.setText(String.valueOf(img.db.getPrecio()));
-
-            } catch (SQLException e1) {
-                e1.printStackTrace();
+            if (img.db.getEst().equals("Nuevo")) {
+                nuevo.setSelected(true);
+            } else {
+                usado.setSelected(true);
             }
+
+            txtPrecio.setText(String.valueOf(img.db.getPrecio()));
 
             txtRef.setEnabled(false);
             nuevo.setEnabled(false);

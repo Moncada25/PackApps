@@ -146,11 +146,7 @@ public class Login extends JDialog implements ActionListener {
         if (img.db.buscarEmpleado(txtUsuario.getText(),
             img.cr.Encriptar(String.valueOf(txtPass.getPassword()), true))) {
 
-          try {
-            img.db.login("Online", txtUsuario.getText());
-          } catch (SQLException e1) {
-            e1.printStackTrace();
-          }
+          img.db.login("Online", txtUsuario.getText());
 
           op.setSize(620, 380);
           op.setResizable(false);

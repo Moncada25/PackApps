@@ -89,24 +89,19 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
 
         if (h.cr.comprobarConexion("Asegúrate de estar conectado a una red", true)) {
 
-            try {
+            String data[] = {"feedback", username, commentary, h.cr.obtenerDate()};
 
-                String data[] = {"feedback", username, commentary, h.cr.obtenerDate()};
+            if (h.db.insertData(data)) {
 
-                if (h.db.insertData(data)) {
+                JOptionPane.showMessageDialog(null,
+                        "<html>" + h.cr.styleJOption() + "<strong><center>Comentario enviado</center></strong><br>"
+                                + "Feedback enviado exitosamente, su opinión será tomada en cuenta." + "</html>",
+                        "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
 
-                    JOptionPane.showMessageDialog(null,
-                            "<html>" + h.cr.styleJOption() + "<strong><center>Comentario enviado</center></strong><br>"
-                                    + "Feedback enviado exitosamente, su opinión será tomada en cuenta." + "</html>",
-                            "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
-
-                    user.setText("");
-                    texto.setText("");
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+                user.setText("");
+                texto.setText("");
             }
+
         }
     }
 

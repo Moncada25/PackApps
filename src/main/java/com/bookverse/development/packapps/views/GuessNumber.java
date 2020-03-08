@@ -226,7 +226,8 @@ public class GuessNumber extends JDialog implements ActionListener {
         }
 
         try {
-          String[] data = {Format.tableName(GUESS_NUMBER), resources.cr.ingreseNickname("Enter a Nickname", 20),
+          String[] data = {Format.tableName(GUESS_NUMBER),
+              resources.cr.ingreseNickname("Enter a Nickname", 20),
               String.valueOf(high), level + " - " + attempts,
               resources.cr.obtenerDate()};
           resources.db.insertData(data);

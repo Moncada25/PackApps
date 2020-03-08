@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.utils.AppsConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.AppsConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.ArrayData.LONG_IMAGES;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_IMAGES;
 import static com.bookverse.development.packapps.utils.ArrayData.WIDTH_IMAGES;
@@ -35,7 +36,7 @@ public class Index extends JFrame implements ActionListener {
   private static int background = 9;
 
   private static JLabel welcome;
-  public AhorcadoTabla hangmanTable = new AhorcadoTabla(this, true);
+  public HangmanTable hangmanTable = new HangmanTable(this, true);
   public GuessNumberTable guessNumberTable = new GuessNumberTable(this, true);
   public RompecabezasTabla puzzleTable = new RompecabezasTabla(this, true);
   public DadosTabla dicesTable = new DadosTabla(this, true);
@@ -48,65 +49,12 @@ public class Index extends JFrame implements ActionListener {
   private JMenuItem[] images = new JMenuItem[14];
   private boolean isWork = true;
   private JMenu changeBackground;
-  private JMenuItem moreProfiles;
-  private JMenuItem moreSystems;
-  private JMenuItem moreBookverse;
-  private JMenuItem darkMode;
-  private JMenuItem textureMode;
-  private JMenuItem mintMode;
-  private JMenuItem classicMode;
-  private JMenuItem macMode;
-  private JMenuItem grayMode;
-  private JMenuItem texts;
-  private JMenuItem guess;
-  private JMenuItem guessHard;
-  private JMenuItem hangman;
-  private JMenuItem structures;
-  private JMenuItem dices;
-  private JMenuItem buyAndSell;
-  private JMenuItem numbers;
-  private JMenuItem puzzle4x4;
-  private JMenuItem puzzle5x5;
-  private JMenuItem puzzle6x6;
-  private JMenuItem roulette;
-  private JMenuItem triquiPvsP;
-  private JMenuItem triquiPvsCPU;
-  private JMenuItem tables;
-  private JMenuItem notes;
-  private JMenuItem yes_exit;
-  private JMenuItem email;
-  private JMenuItem comment;
-  private JMenuItem guessTXT;
-  private JMenuItem hangmanTXT;
-  private JMenuItem dicesTXT;
-  private JMenuItem notesTXT;
-  private JMenuItem inventoryTXT;
-  private JMenuItem purchasesTXT;
-  private JMenuItem salesTXT;
-  private JMenuItem cashRegisterTXT;
-  private JMenuItem loansTXT;
-  private JMenuItem puzzleTXT;
-  private JMenuItem guessEXCEL;
-  private JMenuItem hangmanEXCEL;
-  private JMenuItem dicesEXCEL;
-  private JMenuItem notesEXCEL;
-  private JMenuItem inventoryEXCEL;
-  private JMenuItem purchasesEXCEL;
-  private JMenuItem salesEXCEL;
-  private JMenuItem cashRegisterEXCEL;
-  private JMenuItem loansEXCEL;
-  private JMenuItem puzzleEXCEL;
-  private JMenuItem guessPDF;
-  private JMenuItem hangmanPDF;
-  private JMenuItem dicesPDF;
-  private JMenuItem notesPDF, inventoryPDF;
-  private JMenuItem purchasesPDF;
-  private JMenuItem salesPDF;
-  private JMenuItem cashRegisterPDF;
-  private JMenuItem loansPDF;
-  private JMenuItem puzzlePDF;
-  private JMenuItem read;
-  private JMenuItem timesheet;
+  private JMenuItem moreProfiles, moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,
+      texts, guessNumber, guessNumberHard, hangman, structures, dices, buyAndSell, numbers, puzzle4x4, puzzle5x5, puzzle6x6,
+      roulette, triquiPvsP, triquiPvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
+      inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
+      inventoryEXCEL, purchasesEXCEL, salesEXCEL, cashRegisterEXCEL, loansEXCEL, puzzleEXCEL, guessNumberPDF, hangmanPDF, dicesPDF,
+      notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet;
 
   public Index() {
     createComponents();
@@ -225,13 +173,13 @@ public class Index extends JFrame implements ActionListener {
     dices = img.getMenuItem("Dices", "dado", this);
     roulette = img.getMenuItem("Roulette", "ruleta", this);
 
-    JMenu guessNumber = img.getMenu("Guess Number", "adivinar");
-    guess = img.getMenuItem("Easy", "easy", this);
-    guessHard = img.getMenuItem("Hard", "hard", this);
+    JMenu guessNumberMenu = img.getMenu("Guess Number", "adivinar");
+    this.guessNumber = img.getMenuItem("Easy", "easy", this);
+    guessNumberHard = img.getMenuItem("Hard", "hard", this);
 
-    guessNumber.add(guess);
-    guessNumber.addSeparator();
-    guessNumber.add(guessHard);
+    guessNumberMenu.add(this.guessNumber);
+    guessNumberMenu.addSeparator();
+    guessNumberMenu.add(guessNumberHard);
 
     JMenu puzzle = img.getMenu("Puzzle", "rompecabezas");
     puzzle4x4 = img.getMenuItem("Easy", "easy", this);
@@ -252,7 +200,7 @@ public class Index extends JFrame implements ActionListener {
     triqui.addSeparator();
     triqui.add(triquiPvsCPU);
 
-    apps.add(guessNumber);
+    apps.add(guessNumberMenu);
     apps.addSeparator();
     apps.add(hangman);
     apps.addSeparator();
@@ -290,7 +238,7 @@ public class Index extends JFrame implements ActionListener {
     JMenu export = img.getMenu("Export Data", "export");
 
     JMenu exportTXT = img.getMenu("Text file", "txt");
-    guessTXT = img.getMenuItem("Guess Number", "adivinar", this);
+    guessNumberTXT = img.getMenuItem("Guess Number", "adivinar", this);
     hangmanTXT = img.getMenuItem("Hangman", "ahorcado", this);
     purchasesTXT = img.getMenuItem("Purchases", "comprar", this);
     dicesTXT = img.getMenuItem("Dices", "dado", this);
@@ -301,7 +249,7 @@ public class Index extends JFrame implements ActionListener {
     loansTXT = img.getMenuItem("Loans", "prestamos", this);
     salesTXT = img.getMenuItem("Sales", "vender", this);
 
-    exportTXT.add(guessTXT);
+    exportTXT.add(guessNumberTXT);
     exportTXT.addSeparator();
     exportTXT.add(hangmanTXT);
     exportTXT.addSeparator();
@@ -322,7 +270,7 @@ public class Index extends JFrame implements ActionListener {
     exportTXT.add(salesTXT);
 
     JMenu exportEXCEL = img.getMenu("Hoja de Cálculo", "excel");
-    guessEXCEL = img.getMenuItem("Guess Number", "adivinar", this);
+    guessNumberEXCEL = img.getMenuItem("Guess Number", "adivinar", this);
     hangmanEXCEL = img.getMenuItem("Hangman", "ahorcado", this);
     purchasesEXCEL = img.getMenuItem("Purchases", "comprar", this);
     dicesEXCEL = img.getMenuItem("Dices", "dado", this);
@@ -333,7 +281,7 @@ public class Index extends JFrame implements ActionListener {
     loansEXCEL = img.getMenuItem("Loans", "prestamos", this);
     salesEXCEL = img.getMenuItem("Sales", "vender", this);
 
-    exportEXCEL.add(guessEXCEL);
+    exportEXCEL.add(guessNumberEXCEL);
     exportEXCEL.addSeparator();
     exportEXCEL.add(hangmanEXCEL);
     exportEXCEL.addSeparator();
@@ -354,7 +302,7 @@ public class Index extends JFrame implements ActionListener {
     exportEXCEL.add(salesEXCEL);
 
     JMenu exportPDF = img.getMenu("Document PDF", "pdf");
-    guessPDF = img.getMenuItem("Guess Number", "adivinar", this);
+    guessNumberPDF = img.getMenuItem("Guess Number", "adivinar", this);
     hangmanPDF = img.getMenuItem("Hangman", "ahorcado", this);
     purchasesPDF = img.getMenuItem("Purchases", "comprar", this);
     dicesPDF = img.getMenuItem("Dices", "dado", this);
@@ -365,7 +313,7 @@ public class Index extends JFrame implements ActionListener {
     loansPDF = img.getMenuItem("Loans", "prestamos", this);
     salesPDF = img.getMenuItem("Sales", "vender", this);
 
-    exportPDF.add(guessPDF);
+    exportPDF.add(guessNumberPDF);
     exportPDF.addSeparator();
     exportPDF.add(hangmanPDF);
     exportPDF.addSeparator();
@@ -463,18 +411,6 @@ public class Index extends JFrame implements ActionListener {
     img.cr.fadeIn(window);
     setVisible(false);
     img.cr.instruccionesEstructuras();
-    window.setVisible(true);
-  }
-
-  public void AhorcaditoAP() {
-    Ahorcado window = new Ahorcado(this, true);
-    window.setSize(750, 500);
-    window.setResizable(false);
-    window.setLocationRelativeTo(this);
-    window.setTitle("Ahorcadito");
-    img.cr.fadeIn(window);
-    setVisible(false);
-    img.cr.instruccionesAhorcado();
     window.setVisible(true);
   }
 
@@ -644,7 +580,8 @@ public class Index extends JFrame implements ActionListener {
     guessNumberTable.cleanTable();
 
     try {
-      img.db.readTable(guessNumberTable.guessNumberTab, Querys.getAllData(Format.tableName(GUESS_NUMBER)), true);
+      img.db.readTable(guessNumberTable.guessNumberTab,
+          Querys.getAllData(Format.tableName(GUESS_NUMBER)), true);
     } catch (Exception e1) {
       img.cr.exception(e1);
     }
@@ -653,16 +590,16 @@ public class Index extends JFrame implements ActionListener {
     guessNumberTable.setLocationRelativeTo(null);
     guessNumberTable.setMinimumSize(new Dimension(830, 400));
     guessNumberTable.setMaximumSize(new Dimension(1280, 720));
-    guessNumberTable.setTitle(GUESS_NUMBER+" Information");
+    guessNumberTable.setTitle(GUESS_NUMBER + " Information");
     img.cr.fadeIn(guessNumberTable);
     guessNumberTable.setVisible(true);
   }
 
-  public void ahorcadoTableAP() {
-    hangmanTable.limpiarTabla();
+  public void hangmanTableAP() {
+    hangmanTable.cleanTable();
 
     try {
-      img.db.readTable(hangmanTable.ahorcadoTab, "select * from ahorcado", true);
+      img.db.readTable(hangmanTable.hangmanTab, Querys.getAllData(HANGMAN), true);
     } catch (Exception e1) {
       img.cr.exception(e1);
     }
@@ -671,7 +608,7 @@ public class Index extends JFrame implements ActionListener {
     hangmanTable.setLocationRelativeTo(null);
     hangmanTable.setMinimumSize(new Dimension(830, 400));
     hangmanTable.setMaximumSize(new Dimension(1280, 720));
-    hangmanTable.setTitle("Ahorcadito Information");
+    hangmanTable.setTitle(HANGMAN+" Information");
     img.cr.fadeIn(hangmanTable);
     hangmanTable.setVisible(true);
   }
@@ -1127,10 +1064,10 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == texts) {
       TextosAP();
       setVisible(true);
-    } else if (e.getSource() == guess) {
+    } else if (e.getSource() == guessNumber) {
       new GuessNumber(this, true, false).start(this);
       setVisible(true);
-    } else if (e.getSource() == guessHard) {
+    } else if (e.getSource() == guessNumberHard) {
       new GuessNumber(this, true, true).start(this);
       setVisible(true);
     } else if (e.getSource() == triquiPvsP) {
@@ -1140,7 +1077,7 @@ public class Index extends JFrame implements ActionListener {
       TriquiCPUAP();
       setVisible(true);
     } else if (e.getSource() == hangman) {
-      AhorcaditoAP();
+      new Hangman(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == numbers) {
       startNumbersAP();
@@ -1218,7 +1155,7 @@ public class Index extends JFrame implements ActionListener {
           setVisible(true);
         }
 
-      } else if (e.getSource() == guessTXT) {
+      } else if (e.getSource() == guessNumberTXT) {
 
         try {
           guessNumberTable.cleanTable();
@@ -1229,8 +1166,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == hangmanTXT) {
 
         try {
-          hangmanTable.limpiarTabla();
-          img.cr.txt(hangmanTable.ahorcadoTab, "select * from ahorcado", ".txt");
+          hangmanTable.cleanTable();
+          img.cr.txt(hangmanTable.hangmanTab, "select * from ahorcado", ".txt");
         } catch (Exception ex) {
         }
 
@@ -1311,11 +1248,12 @@ public class Index extends JFrame implements ActionListener {
 
         }
 
-      } else if (e.getSource() == guessPDF) {
+      } else if (e.getSource() == guessNumberPDF) {
 
         try {
           guessNumberTable.cleanTable();
-          img.cr.pdf(guessNumberTable.guessNumberTab, "Adivinar N?mero", "select * from adivinar", ".pdf");
+          img.cr.pdf(guessNumberTable.guessNumberTab, "Adivinar N?mero", "select * from adivinar",
+              ".pdf");
         } catch (Exception ex) {
 
         }
@@ -1323,8 +1261,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == hangmanPDF) {
 
         try {
-          hangmanTable.limpiarTabla();
-          img.cr.pdf(hangmanTable.ahorcadoTab, "Ahorcadito", "select * from ahorcado", ".pdf");
+          hangmanTable.cleanTable();
+          img.cr.pdf(hangmanTable.hangmanTab, "Ahorcadito", "select * from ahorcado", ".pdf");
         } catch (Exception ex) {
 
         }
@@ -1406,7 +1344,7 @@ public class Index extends JFrame implements ActionListener {
         } catch (Exception ex) {
 
         }
-      } else if (e.getSource() == guessEXCEL) {
+      } else if (e.getSource() == guessNumberEXCEL) {
 
         try {
           guessNumberTable.cleanTable();
@@ -1418,8 +1356,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == hangmanEXCEL) {
 
         try {
-          hangmanTable.limpiarTabla();
-          img.cr.excel(hangmanTable.ahorcadoTab, "select * from ahorcado", ".xls");
+          hangmanTable.cleanTable();
+          img.cr.excel(hangmanTable.hangmanTab, "select * from ahorcado", ".xls");
         } catch (Exception ex) {
 
         }

@@ -1,7 +1,6 @@
 package com.bookverse.development.packapps.views;
 
 import com.bookverse.development.packapps.core.Resources;
-
 import com.bookverse.development.packapps.models.Table;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -27,294 +26,293 @@ import javax.swing.table.TableRowSorter;
 
 public class UsuariosTabla extends JDialog implements MouseListener {
 
-    private JLabel titulo, men;
-    private JLabel[] tablas = new JLabel[3];
-    private JScrollPane scroll;
-    public JTable usuariosTab;
-    private Table modelo = new Table();
-    private TableRowSorter<TableModel> ordenar;
-    private String[] columnas = {"USERNAME", "STATUS"};
-    private Resources img = new Resources();
+  public JTable usuariosTab;
+  private JLabel titulo, men;
+  private JLabel[] tablas = new JLabel[3];
+  private JScrollPane scroll;
+  private Table modelo = new Table();
+  private TableRowSorter<TableModel> ordenar;
+  private String[] columnas = {"USERNAME", "STATUS"};
+  private Resources img = new Resources();
 
-    // Constructor que recibe la ventana padre y el valor modal
-    public UsuariosTabla(JDialog parent, boolean modal) {
+  // Constructor que recibe la ventana padre y el valor modal
+  public UsuariosTabla(JDialog parent, boolean modal) {
 
-        super(parent, modal);
+    super(parent, modal);
 
-        componentes();
+    componentes();
+  }
+
+  // Constructor que no recibe parámetros
+  public UsuariosTabla() {
+
+    componentes();
+  }
+
+  public JPanel getPanel() {
+
+    JPanel panel = new JPanel(new GridLayout());
+
+    JPanel fila = new JPanel(new FlowLayout());
+
+    String[] imgs = {"añadir_usuario.png", "editar_usuario.png", "eliminar_usuario.png"};
+
+    panel.setBorder(img.cr.bordeAzul("Select Action"));
+
+    titulo = new JLabel();
+    titulo.setFont(img.cr.BIG);
+    titulo.setForeground(img.cr.ROJO);
+
+    men = new JLabel();
+    men.setFont(img.cr.BIG);
+    men.setForeground(img.cr.AZUL);
+
+    /* ICONOS */
+    for (int i = 0; i < tablas.length; i++) {
+
+      tablas[i] = new JLabel();
+      tablas[i].setIcon(new ImageIcon(img.getImage(imgs[i])));
+      tablas[i].addMouseListener(this);
+      fila.add(tablas[i]);
     }
 
-    // Constructor que no recibe parámetros
-    public UsuariosTabla() {
+    panel.add(titulo, BorderLayout.EAST);
+    panel.add(fila, BorderLayout.CENTER);
+    panel.add(men, BorderLayout.WEST);
 
-        componentes();
+    return panel;
+  }
+
+  // Crea los componentes de la tabla
+  private void componentes() {
+
+    setIconImage(new ImageIcon(img.getImage("usuario.png")).getImage());
+    add(getPanel(), BorderLayout.SOUTH);
+
+    /* TABLA */
+    for (int i = 0; i < columnas.length; i++) {
+      modelo.addColumn(columnas[i]);
     }
 
-    public JPanel getPanel() {
+    usuariosTab = new JTable(modelo);
+    usuariosTab.getTableHeader().setReorderingAllowed(false);
+    scroll = new JScrollPane(usuariosTab);
+    add(scroll, BorderLayout.CENTER);
 
-        JPanel panel = new JPanel(new GridLayout());
+    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        JPanel fila = new JPanel(new FlowLayout());
+    pack();
 
-        String[] imgs = {"añadir_usuario.png", "editar_usuario.png", "eliminar_usuario.png"};
+    ordenar = new TableRowSorter<TableModel>(modelo);
+    usuariosTab.setRowSorter(ordenar);
 
-        panel.setBorder(img.cr.bordeAzul("Select Action"));
+    for (int i = 0; i < columnas.length; i++) {
+      DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+      tcr.setHorizontalAlignment(SwingConstants.CENTER);
+      usuariosTab.getColumnModel().getColumn(i).setCellRenderer(tcr);
+    }
 
-        titulo = new JLabel();
-        titulo.setFont(img.cr.BIG);
-        titulo.setForeground(img.cr.ROJO);
+    repaint();
+  }
 
-        men = new JLabel();
-        men.setFont(img.cr.BIG);
-        men.setForeground(img.cr.AZUL);
+  @Override
+  public void paint(Graphics g) {
+    Dimension d = getSize();
+    Dimension m = getMaximumSize();
+    boolean resize = d.width > m.width || d.height > m.height;
+    d.width = Math.min(m.width, d.width);
+    d.height = Math.min(m.height, d.height);
+    if (resize) {
+      Point p = getLocation();
+      setVisible(false);
+      setSize(d);
+      setLocation(p);
+      setVisible(true);
+    }
+    super.paint(g);
+  }
 
-        /* ICONOS */
-        for (int i = 0; i < tablas.length; i++) {
+  public void limpiarTabla() {
 
-            tablas[i] = new JLabel();
-            tablas[i].setIcon(new ImageIcon(img.getImage(imgs[i])));
-            tablas[i].addMouseListener(this);
-            fila.add(tablas[i]);
+    while (modelo.getRowCount() > 0) {
+      modelo.removeRow(0);
+    }
+  }
+
+  private void editarUsuario() {
+
+    if (usuariosTab.getRowCount() != 0) {
+
+      int filaseleccionada = usuariosTab.getSelectedRow();
+
+      boolean isRoot = false;
+
+      if (filaseleccionada != -1) {
+
+        if (String.valueOf(modelo.getValueAt(filaseleccionada, 0)).equals("root")) {
+          isRoot = true;
         }
+      }
 
-        panel.add(titulo, BorderLayout.EAST);
-        panel.add(fila, BorderLayout.CENTER);
-        panel.add(men, BorderLayout.WEST);
+      if (!isRoot) {
 
-        return panel;
-    }
+        if (filaseleccionada == -1) {
 
-    // Crea los componentes de la tabla
-    private void componentes() {
-
-        setIconImage(new ImageIcon(img.getImage("usuario.png")).getImage());
-        add(getPanel(), BorderLayout.SOUTH);
-
-        /* TABLA */
-        for (int i = 0; i < columnas.length; i++) {
-            modelo.addColumn(columnas[i]);
-        }
-
-        usuariosTab = new JTable(modelo);
-        usuariosTab.getTableHeader().setReorderingAllowed(false);
-        scroll = new JScrollPane(usuariosTab);
-        add(scroll, BorderLayout.CENTER);
-
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        pack();
-
-        ordenar = new TableRowSorter<TableModel>(modelo);
-        usuariosTab.setRowSorter(ordenar);
-
-        for (int i = 0; i < columnas.length; i++) {
-            DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-            tcr.setHorizontalAlignment(SwingConstants.CENTER);
-            usuariosTab.getColumnModel().getColumn(i).setCellRenderer(tcr);
-        }
-
-        repaint();
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        Dimension d = getSize();
-        Dimension m = getMaximumSize();
-        boolean resize = d.width > m.width || d.height > m.height;
-        d.width = Math.min(m.width, d.width);
-        d.height = Math.min(m.height, d.height);
-        if (resize) {
-            Point p = getLocation();
-            setVisible(false);
-            setSize(d);
-            setLocation(p);
-            setVisible(true);
-        }
-        super.paint(g);
-    }
-
-    public void limpiarTabla() {
-
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
-        }
-    }
-
-    private void editarUsuario() {
-
-        if (usuariosTab.getRowCount() != 0) {
-
-            int filaseleccionada = usuariosTab.getSelectedRow();
-
-            boolean isRoot = false;
-
-            if (filaseleccionada != -1) {
-
-                if (String.valueOf(modelo.getValueAt(filaseleccionada, 0)).equals("root")) {
-                    isRoot = true;
-                }
-            }
-
-            if (!isRoot) {
-
-                if (filaseleccionada == -1) {
-
-                    JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún usuario", "Update",
-                            JOptionPane.PLAIN_MESSAGE);
-
-                } else {
-
-                    String user = String.valueOf(modelo.getValueAt(filaseleccionada, 0));
-
-                    try {
-
-                        if (img.db.buscarEmpleado(user, img.cr.Encriptar(img.cr.loginUser(), true))) {
-
-                            Object opcion = null;
-
-                            opcion = JOptionPane.showInputDialog(null,
-                                    "<html>" + img.cr.styleJOption()
-                                            + "<strong><em>¿Qué quiere actualizar?</em></strong></html>",
-                                    "Update Data", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Password"},
-                                    "Password");
-
-                            if (opcion != null) {
-
-                                if (opcion.toString().equals("Password")) {
-                                    img.db.updatePassword(user, img.cr.Encriptar(img.cr.newPassword(), true));
-                                    JOptionPane.showMessageDialog(null,
-                                            "<html>" + img.cr.styleJOption()
-                                                    + "<strong>Contraseña actualizada</strong></html>",
-                                            "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
-                                }
-                            }
-
-                        } else {
-                            JOptionPane.showMessageDialog(null,
-                                    "<html>" + img.cr.styleJOption() + "<strong>Contraseña incorrecta</strong></html>",
-                                    "Error", JOptionPane.PLAIN_MESSAGE);
-                        }
-                    } catch (HeadlessException | SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No es posible editar al usuario root", "Access denied",
-                        JOptionPane.PLAIN_MESSAGE);
-            }
+          JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún usuario", "Update",
+              JOptionPane.PLAIN_MESSAGE);
 
         } else {
-            JOptionPane.showMessageDialog(null, "Tabla vacía", "Update", JOptionPane.PLAIN_MESSAGE);
-        }
-    }
 
-    private void eliminarUsuario() {
+          String user = String.valueOf(modelo.getValueAt(filaseleccionada, 0));
 
-        if (usuariosTab.getRowCount() != 0) {
+          try {
 
-            int[] rows = usuariosTab.getSelectedRows();
-            boolean isOnline = false;
-            String userOnline = "";
+            if (img.db.buscarEmpleado(user, img.cr.Encriptar(img.cr.loginUser(), true))) {
 
-            for (int i = 0; i < rows.length; i++) {
+              Object opcion = null;
 
-                if (String.valueOf(modelo.getValueAt(rows[i], 0)).equals("root")
-                        || String.valueOf(modelo.getValueAt(rows[i], 1)).equals("Online")) {
-                    isOnline = true;
-                    userOnline = String.valueOf(modelo.getValueAt(rows[i], 0));
+              opcion = JOptionPane.showInputDialog(null,
+                  "<html>" + img.cr.styleJOption()
+                      + "<strong><em>¿Qué quiere actualizar?</em></strong></html>",
+                  "Update Data", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Password"},
+                  "Password");
+
+              if (opcion != null) {
+
+                if (opcion.toString().equals("Password")) {
+                  img.db.updatePassword(user, img.cr.Encriptar(img.cr.newPassword(), true));
+                  JOptionPane.showMessageDialog(null,
+                      "<html>" + img.cr.styleJOption()
+                          + "<strong>Contraseña actualizada</strong></html>",
+                      "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
                 }
-            }
-
-            if (!isOnline) {
-
-                if (usuariosTab.getSelectedRow() == -1) {
-
-                    JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún usuario", "Delete",
-                            JOptionPane.PLAIN_MESSAGE);
-
-                } else {
-
-                    String[] IDs = new String[rows.length];
-
-                    for (int i = 0; i < rows.length; i++) {
-                        try {
-                            IDs[i] = String.valueOf(img.db.getIDUser(String.valueOf(modelo.getValueAt(rows[i], 0))));
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    if (img.cr.loginDBA()) {
-                        try {
-                            img.db.deleteData(IDs, "usuarios");
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-
-                        dispose();
-                        new Opciones().btnUsuariosAP();
-                    }
-                }
+              }
 
             } else {
-                JOptionPane.showMessageDialog(null, "No es posible eliminar al usuario " + userOnline, "Access denied",
-                        JOptionPane.PLAIN_MESSAGE);
+              JOptionPane.showMessageDialog(null,
+                  "<html>" + img.cr.styleJOption()
+                      + "<strong>Contraseña incorrecta</strong></html>",
+                  "Error", JOptionPane.PLAIN_MESSAGE);
             }
+          } catch (HeadlessException | SQLException e) {
+            e.printStackTrace();
+          }
+        }
+
+      } else {
+        JOptionPane.showMessageDialog(null, "No es posible editar al usuario root", "Access denied",
+            JOptionPane.PLAIN_MESSAGE);
+      }
+
+    } else {
+      JOptionPane.showMessageDialog(null, "Tabla vacía", "Update", JOptionPane.PLAIN_MESSAGE);
+    }
+  }
+
+  private void eliminarUsuario() {
+
+    if (usuariosTab.getRowCount() != 0) {
+
+      int[] rows = usuariosTab.getSelectedRows();
+      boolean isOnline = false;
+      String userOnline = "";
+
+      for (int i = 0; i < rows.length; i++) {
+
+        if (String.valueOf(modelo.getValueAt(rows[i], 0)).equals("root")
+            || String.valueOf(modelo.getValueAt(rows[i], 1)).equals("Online")) {
+          isOnline = true;
+          userOnline = String.valueOf(modelo.getValueAt(rows[i], 0));
+        }
+      }
+
+      if (!isOnline) {
+
+        if (usuariosTab.getSelectedRow() == -1) {
+
+          JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún usuario", "Delete",
+              JOptionPane.PLAIN_MESSAGE);
 
         } else {
-            JOptionPane.showMessageDialog(null, "Tabla vacía", "Delete", JOptionPane.PLAIN_MESSAGE);
-        }
-    }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
+          String[] IDs = new String[rows.length];
 
-        if (e.getSource() == tablas[0]) {
-            setVisible(false);
-            new Login().btnRegistrarAP();
+          for (int i = 0; i < rows.length; i++) {
+            try {
+              IDs[i] = String
+                  .valueOf(img.db.getIDUser(String.valueOf(modelo.getValueAt(rows[i], 0))));
+            } catch (SQLException e) {
+              e.printStackTrace();
+            }
+          }
+
+          if (img.cr.loginDBA()) {
+            img.db.deleteData(IDs, "usuarios");
+
+            dispose();
             new Opciones().btnUsuariosAP();
-        } else if (e.getSource() == tablas[1]) {
-            editarUsuario();
-        } else if (e.getSource() == tablas[2]) {
-            eliminarUsuario();
+          }
         }
+
+      } else {
+        JOptionPane.showMessageDialog(null, "No es posible eliminar al usuario " + userOnline,
+            "Access denied",
+            JOptionPane.PLAIN_MESSAGE);
+      }
+
+    } else {
+      JOptionPane.showMessageDialog(null, "Tabla vacía", "Delete", JOptionPane.PLAIN_MESSAGE);
     }
+  }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
+  @Override
+  public void mouseClicked(MouseEvent e) {
 
-        if (e.getSource() == tablas[0]) {
-            tablas[0].setCursor(img.cr.MANO);
-            titulo.setText("Add User");
-        } else if (e.getSource() == tablas[1]) {
-            tablas[1].setCursor(img.cr.MANO);
-            titulo.setText("Edit User");
-        } else if (e.getSource() == tablas[2]) {
-            tablas[2].setCursor(img.cr.MANO);
-            titulo.setText("Delete User");
-        }
+    if (e.getSource() == tablas[0]) {
+      setVisible(false);
+      new Login().btnRegistrarAP();
+      new Opciones().btnUsuariosAP();
+    } else if (e.getSource() == tablas[1]) {
+      editarUsuario();
+    } else if (e.getSource() == tablas[2]) {
+      eliminarUsuario();
     }
+  }
 
-    @Override
-    public void mouseExited(MouseEvent e) {
+  @Override
+  public void mouseEntered(MouseEvent e) {
 
-        if (e.getSource() == tablas[0]) {
-            titulo.setText("");
-        } else if (e.getSource() == tablas[1]) {
-            titulo.setText("");
-        } else if (e.getSource() == tablas[2]) {
-            titulo.setText("");
-        }
+    if (e.getSource() == tablas[0]) {
+      tablas[0].setCursor(img.cr.MANO);
+      titulo.setText("Add User");
+    } else if (e.getSource() == tablas[1]) {
+      tablas[1].setCursor(img.cr.MANO);
+      titulo.setText("Edit User");
+    } else if (e.getSource() == tablas[2]) {
+      tablas[2].setCursor(img.cr.MANO);
+      titulo.setText("Delete User");
     }
+  }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
+  @Override
+  public void mouseExited(MouseEvent e) {
 
+    if (e.getSource() == tablas[0]) {
+      titulo.setText("");
+    } else if (e.getSource() == tablas[1]) {
+      titulo.setText("");
+    } else if (e.getSource() == tablas[2]) {
+      titulo.setText("");
     }
+  }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
+  @Override
+  public void mousePressed(MouseEvent e) {
 
-    }
+  }
+
+  @Override
+  public void mouseReleased(MouseEvent e) {
+
+  }
 }

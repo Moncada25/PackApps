@@ -222,12 +222,8 @@ public class DadosTabla extends JDialog implements ActionListener, MouseListener
             } else {
 
                 if (img.cr.loginDBA()) {
-                    try {
-                        img.db.updateData(img.cr.ingreseNickname("Ingrese un Nickname", 20),
-                                String.valueOf(modelo.getValueAt(filaseleccionada, 0)), "dados");
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    img.db.updateData(img.cr.ingreseNickname("Ingrese un Nickname", 20),
+                            String.valueOf(modelo.getValueAt(filaseleccionada, 0)), "dados");
 
                     dispose();
                     new Index().DadosTableAP();
@@ -258,11 +254,7 @@ public class DadosTabla extends JDialog implements ActionListener, MouseListener
                 }
 
                 if (img.cr.loginDBA()) {
-                    try {
-                        img.db.deleteData(IDs, "dados");
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    img.db.deleteData(IDs, "dados");
 
                     dispose();
                     new Index().DadosTableAP();
@@ -276,13 +268,13 @@ public class DadosTabla extends JDialog implements ActionListener, MouseListener
 
     public void resultadoBusqueda(int alto, String sql) {
 
-        ResultadoTabla resultado = new ResultadoTabla(this, true, columnas);
+        TableResult resultado = new TableResult(this, true, columnas);
 
-        resultado.limpiarTabla((DefaultTableModel) resultado.resultadoTab.getModel());
+        resultado.cleanTable((DefaultTableModel) resultado.tabResult.getModel());
 
         try {
 
-            if (img.db.readTable(resultado.resultadoTab, sql, false)) {
+            if (img.db.readTable(resultado.tabResult, sql, false)) {
                 resultado.setBounds(0, 0, 780, alto);
                 resultado.setResizable(false);
                 resultado.setLocationRelativeTo(null);
@@ -319,7 +311,7 @@ public class DadosTabla extends JDialog implements ActionListener, MouseListener
             new Index().guessNumberTableAP();
         } else if (e.getSource() == tablas[1]) {
             setVisible(false);
-            new Index().ahorcadoTableAP();
+            new Index().hangmanTableAP();
         } else if (e.getSource() == tablas[2]) {
             JOptionPane.showMessageDialog(null, "<html><em>" + "<strong>You're here!</strong><br>" + "</em></html>",
                     "Usuario, cámate po favo", JOptionPane.PLAIN_MESSAGE);

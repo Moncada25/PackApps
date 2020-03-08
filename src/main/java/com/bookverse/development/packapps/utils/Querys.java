@@ -1,5 +1,8 @@
 package com.bookverse.development.packapps.utils;
 
+import static com.bookverse.development.packapps.utils.AppsConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.AppsConstants.HANGMAN;
+
 import com.bookverse.development.packapps.core.Resources;
 
 public class Querys {
@@ -16,5 +19,21 @@ public class Querys {
 
   public static String getAllData(String table){
     return "SELECT * FROM "+table;
+  }
+
+  public static String updateNickname(String nickname, String ID, String table){
+    return "UPDATE " + table + " SET Nickname='" + nickname + "' WHERE ID='" + ID + "'";
+  }
+
+  public static String deleteDataByID(String id, String table){
+    return "DELETE FROM " + table + " WHERE ID ='" + id + "'";
+  }
+
+  public static String insertGuessNumber(){
+    return "INSERT INTO " + Format.tableName(GUESS_NUMBER) + " (Nickname,Limitation,Level,Date) VALUES (?,?,?,?)";
+  }
+
+  public static String insertHangman(){
+    return "insert into "+Format.tableName(HANGMAN)+" (Nickname,Mistakes,State, Category, Date) values (?,?,?,?,?)";
   }
 }
