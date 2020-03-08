@@ -158,9 +158,9 @@ public class GuessNumber extends JDialog implements ActionListener {
   protected void start(JFrame parent) {
 
     if (isHard) {
-      setTitle("Level Hard");
+      setTitle(GUESS_NUMBER + " - Level Hard");
     } else {
-      setTitle("Level Easy");
+      setTitle(GUESS_NUMBER + " - Level Easy");
     }
 
     setSize(430, 330);
@@ -175,9 +175,9 @@ public class GuessNumber extends JDialog implements ActionListener {
   protected void start(JDialog parent) {
 
     if (isHard) {
-      setTitle("Level Hard");
+      setTitle(GUESS_NUMBER + " - Level Hard");
     } else {
-      setTitle("Level Easy");
+      setTitle(GUESS_NUMBER + " - Level Easy");
     }
 
     setSize(430, 330);

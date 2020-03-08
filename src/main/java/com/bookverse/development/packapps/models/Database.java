@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.models;
 
+import static com.bookverse.development.packapps.utils.AppsConstants.DICES;
 import static com.bookverse.development.packapps.utils.AppsConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.AppsConstants.HANGMAN;
 
@@ -53,9 +54,8 @@ public class Database {
         stm.setString(4, data[4]);
         stm.setString(5, data[5]);
         stm.execute();
-      } else if (data[0].equals("dados")) {
-        stm = conexion
-            .prepareStatement("insert into dados (Nickname,Winner,Round,Date) values (?,?,?,?)");
+      } else if (data[0].equals(Format.tableName(DICES))) {
+        stm = conexion.prepareStatement(Querys.insertDices());
         stm.setString(1, data[1]);
         stm.setString(2, data[2]);
         stm.setInt(3, Integer.parseInt(data[3]));
@@ -179,23 +179,23 @@ public class Database {
       stm = conexion.prepareStatement(query);
       rs = stm.executeQuery();
       rsm = rs.getMetaData();
-      ArrayList<Object[]> datos = new ArrayList<>();
+      ArrayList<Object[]> data = new ArrayList<>();
       while (rs.next()) {
-        Object[] filas = new Object[rsm.getColumnCount()];
-        for (int i = 0; i < filas.length; i++) {
-          filas[i] = rs.getObject(i + 1);
+        Object[] rows = new Object[rsm.getColumnCount()];
+        for (int i = 0; i < rows.length; i++) {
+          rows[i] = rs.getObject(i + 1);
         }
-        datos.add(filas);
+        data.add(rows);
       }
 
-      if (datos.isEmpty() && !isMain) {
+      if (data.isEmpty() && !isMain) {
 
         V.emptyTable();
 
         return false;
       } else {
         modelo = (DefaultTableModel) tabla.getModel();
-        IntStream.range(0, datos.size()).forEach(i -> modelo.addRow(datos.get(i)));
+        IntStream.range(0, data.size()).forEach(i -> modelo.addRow(data.get(i)));
         return true;
       }
 

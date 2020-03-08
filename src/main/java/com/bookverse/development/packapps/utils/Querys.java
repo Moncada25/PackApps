@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.utils;
 
+import static com.bookverse.development.packapps.utils.AppsConstants.DICES;
 import static com.bookverse.development.packapps.utils.AppsConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.AppsConstants.HANGMAN;
 
@@ -34,6 +35,10 @@ public class Querys {
   }
 
   public static String insertHangman(){
-    return "insert into "+Format.tableName(HANGMAN)+" (Nickname,Mistakes,State, Category, Date) values (?,?,?,?,?)";
+    return "INSERT INTO "+Format.tableName(HANGMAN)+" (Nickname,Mistakes,State, Category, Date) VALUES (?,?,?,?,?)";
+  }
+
+  public static String insertDices(){
+    return "INSERT INTO "+Format.tableName(DICES)+" (Nickname,Winner,Round,Date) VALUES (?,?,?,?)";
   }
 }

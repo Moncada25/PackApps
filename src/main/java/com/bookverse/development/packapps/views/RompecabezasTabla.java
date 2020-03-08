@@ -339,7 +339,7 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
       new Index().hangmanTableAP();
     } else if (e.getSource() == tablas[2]) {
       setVisible(false);
-      new Index().DadosTableAP();
+      new Index().dicesTableAP();
     } else if (e.getSource() == tablas[3]) {
       setVisible(false);
       new Index().NotasTableAP();

@@ -6,6 +6,7 @@ import static com.bookverse.development.packapps.utils.AppsConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.AppsConstants.NOTES;
 import static com.bookverse.development.packapps.utils.AppsConstants.PUZZLE;
 
+import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.models.Table;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -42,7 +43,7 @@ import javax.swing.table.TableRowSorter;
 
 public class GuessNumberTable extends JDialog implements ActionListener, MouseListener {
 
-  public JTable guessNumberTab;
+  public JTable viewTable;
   private JLabel[] tables = new JLabel[5];
   private JLabel tittle, message;
   private Table model = new Table();
@@ -94,14 +95,14 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
     Arrays.stream(columns).forEach(column -> model.addColumn(column));
 
-    guessNumberTab = new JTable(model);
-    guessNumberTab.getTableHeader().setReorderingAllowed(false);
-    JScrollPane scroll = new JScrollPane(guessNumberTab);
+    viewTable = new JTable(model);
+    viewTable.getTableHeader().setReorderingAllowed(false);
+    JScrollPane scroll = new JScrollPane(viewTable);
     add(scroll, BorderLayout.CENTER);
 
     int[] sizes = {20, 200, 20, 20, 100};
-    IntStream.range(0, guessNumberTab.getColumnCount())
-        .forEach(i -> guessNumberTab.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
+    IntStream.range(0, viewTable.getColumnCount())
+        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
     JMenuBar menuBar = new JMenuBar();
 
@@ -127,12 +128,12 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
     pack();
 
     TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(model);
-    guessNumberTab.setRowSorter(rowSorter);
+    viewTable.setRowSorter(rowSorter);
 
     IntStream.range(0, columns.length).forEach(i -> {
       DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
       tcr.setHorizontalAlignment(SwingConstants.CENTER);
-      guessNumberTab.getColumnModel().getColumn(i).setCellRenderer(tcr);
+      viewTable.getColumnModel().getColumn(i).setCellRenderer(tcr);
     });
 
     repaint();
@@ -147,12 +148,12 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
   private void btnConsultAP() {
 
-    if (guessNumberTab.getRowCount() != 0) {
+    if (viewTable.getRowCount() != 0) {
 
       Object option;
 
       option = JOptionPane.showInputDialog(null,
-          "<html>" + resources.cr.styleJOption()
+          "<html>" + Core.styleJOption()
               + "<strong><em>What are you looking for?</em></strong></html>",
           "Search records", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"ID", "Nickname"},
           "ID");
@@ -181,9 +182,9 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
   private void btnUpdateAP() {
 
-    if (guessNumberTab.getRowCount() != 0) {
+    if (viewTable.getRowCount() != 0) {
 
-      int selectedRow = guessNumberTab.getSelectedRow();
+      int selectedRow = viewTable.getSelectedRow();
 
       if (selectedRow == -1) {
         Alerts.message("Update", "No record selected");
@@ -206,18 +207,14 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
   private void btnDeleteAP() {
 
-    if (guessNumberTab.getRowCount() != 0) {
+    if (viewTable.getRowCount() != 0) {
 
-      if (guessNumberTab.getSelectedRow() == -1) {
+      if (viewTable.getSelectedRow() == -1) {
         Alerts.message("Delete", "No record selected");
       } else {
 
-        int[] rows = guessNumberTab.getSelectedRows();
-        String[] IDs = new String[rows.length];
-
-        for (int i = 0; i < rows.length; i++) {
-          IDs[i] = String.valueOf(model.getValueAt(rows[i], 0));
-        }
+        int[] rows = viewTable.getSelectedRows();
+        String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0))).toArray(String[]::new);
 
         if (resources.cr.loginDBA()) {
           resources.db.deleteData(IDs, Format.tableName(GUESS_NUMBER));
@@ -235,7 +232,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
     Object option;
 
-    option = JOptionPane.showInputDialog(null, "<html>" + resources.cr.styleJOption()
+    option = JOptionPane.showInputDialog(null, "<html>" + Core.styleJOption()
             + "<strong><em>Select difficulty</em></strong></html>",
         "Difficulty level", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Easy", "Hard"},
         "Easy");
@@ -298,7 +295,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
       new Index().hangmanTableAP();
     } else if (e.getSource() == tables[2]) {
       setVisible(false);
-      new Index().DadosTableAP();
+      new Index().dicesTableAP();
     } else if (e.getSource() == tables[3]) {
       setVisible(false);
       new Index().NotasTableAP();

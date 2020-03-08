@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.utils.AppsConstants.DICES;
 import static com.bookverse.development.packapps.utils.AppsConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.AppsConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.ArrayData.LONG_IMAGES;
@@ -7,6 +8,7 @@ import static com.bookverse.development.packapps.utils.ArrayData.PATH_IMAGES;
 import static com.bookverse.development.packapps.utils.ArrayData.WIDTH_IMAGES;
 
 import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.Querys;
 import java.awt.BorderLayout;
@@ -32,14 +34,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class Index extends JFrame implements ActionListener {
 
-  public static Resources img = new Resources();
+  private static Resources resources = new Resources();
   private static int background = 9;
-
   private static JLabel welcome;
   public HangmanTable hangmanTable = new HangmanTable(this, true);
   public GuessNumberTable guessNumberTable = new GuessNumberTable(this, true);
   public RompecabezasTabla puzzleTable = new RompecabezasTabla(this, true);
-  public DadosTabla dicesTable = new DadosTabla(this, true);
+  public DicesTable dicesTable = new DicesTable(this, true);
   public NotasTabla notesTable = new NotasTabla(this, true);
   public InventarioTabla inventoryTable = new InventarioTabla(this, true);
   public RegistradoraTabla cashRegisterTable = new RegistradoraTabla(this, true);
@@ -66,45 +67,45 @@ public class Index extends JFrame implements ActionListener {
 
       UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
 
-      UIManager.put("PasswordField.border", img.cr.MEDIO);
-      UIManager.put("PasswordField.font", img.cr.MEDIUM);
+      UIManager.put("PasswordField.border", resources.cr.MEDIO);
+      UIManager.put("PasswordField.font", resources.cr.MEDIUM);
 
-      UIManager.put("TextField.border", img.cr.MEDIO);
-      UIManager.put("TextField.font", img.cr.MEDIUM);
+      UIManager.put("TextField.border", resources.cr.MEDIO);
+      UIManager.put("TextField.font", resources.cr.MEDIUM);
 
       UIManager.put("FileChooser.saveButtonText", "Save");
       UIManager.put("FileChooser.cancelButtonText", "Cancel");
 
-      UIManager.put("RadioButton.font", img.cr.MEDIUM);
+      UIManager.put("RadioButton.font", resources.cr.MEDIUM);
 
-      UIManager.put("TextArea.font", img.cr.MEDIUM);
+      UIManager.put("TextArea.font", resources.cr.MEDIUM);
 
-      UIManager.put("ComboBox.font", img.cr.MEDIUM);
-      UIManager.put("ComboBox.foreground", img.cr.AZUL);
+      UIManager.put("ComboBox.font", resources.cr.MEDIUM);
+      UIManager.put("ComboBox.foreground", resources.cr.AZUL);
 
-      UIManager.put("ScrollPane.border", img.cr.MEDIO);
+      UIManager.put("ScrollPane.border", resources.cr.MEDIO);
 
-      UIManager.put("MenuItem.foreground", img.cr.AZUL);
-      UIManager.put("MenuItem.font", img.cr.MEDIUM);
+      UIManager.put("MenuItem.foreground", resources.cr.AZUL);
+      UIManager.put("MenuItem.font", resources.cr.MEDIUM);
 
-      UIManager.put("Menu.foreground", img.cr.ROJO);
-      UIManager.put("Menu.font", img.cr.MEDIUM);
+      UIManager.put("Menu.foreground", resources.cr.ROJO);
+      UIManager.put("Menu.font", resources.cr.MEDIUM);
 
-      UIManager.put("Button.font", img.cr.MEDIUM);
+      UIManager.put("Button.font", resources.cr.MEDIUM);
 
-      UIManager.put("Table.focusCellHighlightBorder", img.cr.MEDIO);
-      UIManager.put("TableHeader.foreground", img.cr.ROJO);
-      UIManager.put("TableHeader.font", img.cr.MEDIUM);
-      UIManager.put("Table.font", img.cr.MEDIUM);
-      UIManager.put("Table.foreground", img.cr.AZUL);
+      UIManager.put("Table.focusCellHighlightBorder", resources.cr.MEDIO);
+      UIManager.put("TableHeader.foreground", resources.cr.ROJO);
+      UIManager.put("TableHeader.font", resources.cr.MEDIUM);
+      UIManager.put("Table.font", resources.cr.MEDIUM);
+      UIManager.put("Table.foreground", resources.cr.AZUL);
 
       UIManager.put("OptionPane.okButtonText", "Done");
       UIManager.put("OptionPane.cancelButtonText", "No, thanks.");
       UIManager.put("OptionPane.yesButtonText", "Yes, it is okay.");
       UIManager.put("OptionPane.noButtonText", "No, thanks.");
-      UIManager.put("OptionPane.messageFont", img.cr.MEDIUM);
-      UIManager.put("OptionPane.buttonFont", img.cr.MEDIUM);
-      UIManager.put("OptionPane.messageForeground", img.cr.AZUL);
+      UIManager.put("OptionPane.messageFont", resources.cr.MEDIUM);
+      UIManager.put("OptionPane.buttonFont", resources.cr.MEDIUM);
+      UIManager.put("OptionPane.messageForeground", resources.cr.AZUL);
 
     } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
         | IllegalAccessException e) {
@@ -122,26 +123,26 @@ public class Index extends JFrame implements ActionListener {
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
-    window.setTitle(img.cr.getTitle());
-    window.images[background - 1].setForeground(img.cr.ROJO);
-    window.macMode.setForeground(img.cr.ROJO);
-    img.cr.fadeIn(window);
+    window.setTitle(resources.cr.getTitle());
+    window.images[background - 1].setForeground(resources.cr.ROJO);
+    window.macMode.setForeground(resources.cr.ROJO);
+    resources.cr.fadeIn(window);
     window.setVisible(true);
   }
 
   public void createComponents() {
 
-    setIconImage(new ImageIcon(img.getImage("more.png")).getImage());
+    setIconImage(new ImageIcon(resources.getImage("more.png")).getImage());
 
     JMenuBar menuBar = new JMenuBar();
 
-    JMenu about = img.getMenu("About", "about");
-    read = img.getMenuItem("Developer", "developer", this);
+    JMenu about = resources.getMenu("About", "about");
+    read = resources.getMenuItem("Developer", "developer", this);
 
-    JMenu more = img.getMenu("See More", "more");
-    moreSystems = img.getMenuItem("My Systems", "mysystems", this);
-    moreProfiles = img.getMenuItem("Profiles", "profiles", this);
-    moreBookverse = img.getMenuItem("Bookverse", "books", this);
+    JMenu more = resources.getMenu("See More", "more");
+    moreSystems = resources.getMenuItem("My Systems", "mysystems", this);
+    moreProfiles = resources.getMenuItem("Profiles", "profiles", this);
+    moreBookverse = resources.getMenuItem("Bookverse", "books", this);
 
     more.add(moreBookverse);
     more.addSeparator();
@@ -153,12 +154,12 @@ public class Index extends JFrame implements ActionListener {
     about.addSeparator();
     about.add(more);
 
-    JMenu exit = img.getMenu("Exit", "exit");
-    yes_exit = img.getMenuItem("Are you sure?", "salir", this);
+    JMenu exit = resources.getMenu("Exit", "exit");
+    yes_exit = resources.getMenuItem("Are you sure?", "salir", this);
 
-    JMenu send = img.getMenu("Send Feedback", "send");
-    email = img.getMenuItem("Email (priority)", "email", this);
-    comment = img.getMenuItem("Comment (simple)", "coment", this);
+    JMenu send = resources.getMenu("Send Feedback", "send");
+    email = resources.getMenuItem("Email (priority)", "email", this);
+    comment = resources.getMenuItem("Comment (simple)", "coment", this);
 
     send.add(comment);
     send.addSeparator();
@@ -168,23 +169,23 @@ public class Index extends JFrame implements ActionListener {
     exit.addSeparator();
     exit.add(send);
 
-    JMenu apps = img.getMenu("Games", "games");
-    hangman = img.getMenuItem("Hangman", "ahorcado", this);
-    dices = img.getMenuItem("Dices", "dado", this);
-    roulette = img.getMenuItem("Roulette", "ruleta", this);
+    JMenu apps = resources.getMenu("Games", "games");
+    hangman = resources.getMenuItem("Hangman", "ahorcado", this);
+    dices = resources.getMenuItem("Dices", "dado", this);
+    roulette = resources.getMenuItem("Roulette", "ruleta", this);
 
-    JMenu guessNumberMenu = img.getMenu("Guess Number", "adivinar");
-    this.guessNumber = img.getMenuItem("Easy", "easy", this);
-    guessNumberHard = img.getMenuItem("Hard", "hard", this);
+    JMenu guessNumberMenu = resources.getMenu("Guess Number", "adivinar");
+    this.guessNumber = resources.getMenuItem("Easy", "easy", this);
+    guessNumberHard = resources.getMenuItem("Hard", "hard", this);
 
     guessNumberMenu.add(this.guessNumber);
     guessNumberMenu.addSeparator();
     guessNumberMenu.add(guessNumberHard);
 
-    JMenu puzzle = img.getMenu("Puzzle", "rompecabezas");
-    puzzle4x4 = img.getMenuItem("Easy", "easy", this);
-    puzzle5x5 = img.getMenuItem("Medium", "medio", this);
-    puzzle6x6 = img.getMenuItem("Hard", "hard", this);
+    JMenu puzzle = resources.getMenu("Puzzle", "rompecabezas");
+    puzzle4x4 = resources.getMenuItem("Easy", "easy", this);
+    puzzle5x5 = resources.getMenuItem("Medium", "medio", this);
+    puzzle6x6 = resources.getMenuItem("Hard", "hard", this);
 
     puzzle.add(puzzle4x4);
     puzzle.addSeparator();
@@ -192,9 +193,9 @@ public class Index extends JFrame implements ActionListener {
     puzzle.addSeparator();
     puzzle.add(puzzle6x6);
 
-    JMenu triqui = img.getMenu("Triqui", "triqui");
-    triquiPvsP = img.getMenuItem("Player vs Player", "jvsj", this);
-    triquiPvsCPU = img.getMenuItem("Player vs CPU (beta)", "jvscpu", this);
+    JMenu triqui = resources.getMenu("Triqui", "triqui");
+    triquiPvsP = resources.getMenuItem("Player vs Player", "jvsj", this);
+    triquiPvsCPU = resources.getMenuItem("Player vs CPU (beta)", "jvscpu", this);
 
     triqui.add(triquiPvsP);
     triqui.addSeparator();
@@ -212,42 +213,42 @@ public class Index extends JFrame implements ActionListener {
     apps.addSeparator();
     apps.add(triqui);
 
-    JMenu scores = img.getMenu("Data", "data");
-    tables = img.getMenuItem("Database", "tabla", this);
+    JMenu scores = resources.getMenu("Data", "data");
+    tables = resources.getMenuItem("Database", "tabla", this);
 
     scores.add(tables);
 
-    JMenu tools = img.getMenu("Tools", "tools");
-    buyAndSell = img.getMenuItem("Buy and Sell", "compraventa", this);
-    structures = img.getMenuItem("Structures", "estructuras", this);
-    numbers = img.getMenuItem("Numbers", "numeritos", this);
-    notes = img.getMenuItem("Notes", "notas", this);
-    texts = img.getMenuItem("Texts", "textos", this);
+    JMenu tools = resources.getMenu("Tools", "tools");
+    buyAndSell = resources.getMenuItem("Buy and Sell", "compraventa", this);
+    structures = resources.getMenuItem("Structures", "estructuras", this);
+    numbers = resources.getMenuItem("Numbers", "numeritos", this);
+    notes = resources.getMenuItem("Notes", "notas", this);
+    texts = resources.getMenuItem("Texts", "textos", this);
 
-    changeBackground = img.getMenu("Background", "background");
+    changeBackground = resources.getMenu("Background", "background");
 
     IntStream.range(0, images.length).forEach(i -> {
       images[i] = new JMenuItem("Image " + (i + 1));
-      images[i].setForeground(img.cr.AZUL);
-      images[i].setIcon(new ImageIcon(img.getImage("backs.png")));
+      images[i].setForeground(resources.cr.AZUL);
+      images[i].setIcon(new ImageIcon(resources.getImage("backs.png")));
       images[i].addActionListener(this);
       changeBackground.add(images[i]);
       changeBackground.addSeparator();
     });
 
-    JMenu export = img.getMenu("Export Data", "export");
+    JMenu export = resources.getMenu("Export Data", "export");
 
-    JMenu exportTXT = img.getMenu("Text file", "txt");
-    guessNumberTXT = img.getMenuItem("Guess Number", "adivinar", this);
-    hangmanTXT = img.getMenuItem("Hangman", "ahorcado", this);
-    purchasesTXT = img.getMenuItem("Purchases", "comprar", this);
-    dicesTXT = img.getMenuItem("Dices", "dado", this);
-    notesTXT = img.getMenuItem("Notes", "notas", this);
-    puzzleTXT = img.getMenuItem("Puzzle", "rompecabezas", this);
-    inventoryTXT = img.getMenuItem("Inventory", "inventario", this);
-    cashRegisterTXT = img.getMenuItem("Cash Register", "registradora", this);
-    loansTXT = img.getMenuItem("Loans", "prestamos", this);
-    salesTXT = img.getMenuItem("Sales", "vender", this);
+    JMenu exportTXT = resources.getMenu("Text file", "txt");
+    guessNumberTXT = resources.getMenuItem("Guess Number", "adivinar", this);
+    hangmanTXT = resources.getMenuItem("Hangman", "ahorcado", this);
+    purchasesTXT = resources.getMenuItem("Purchases", "comprar", this);
+    dicesTXT = resources.getMenuItem("Dices", "dado", this);
+    notesTXT = resources.getMenuItem("Notes", "notas", this);
+    puzzleTXT = resources.getMenuItem("Puzzle", "rompecabezas", this);
+    inventoryTXT = resources.getMenuItem("Inventory", "inventario", this);
+    cashRegisterTXT = resources.getMenuItem("Cash Register", "registradora", this);
+    loansTXT = resources.getMenuItem("Loans", "prestamos", this);
+    salesTXT = resources.getMenuItem("Sales", "vender", this);
 
     exportTXT.add(guessNumberTXT);
     exportTXT.addSeparator();
@@ -269,17 +270,17 @@ public class Index extends JFrame implements ActionListener {
     exportTXT.addSeparator();
     exportTXT.add(salesTXT);
 
-    JMenu exportEXCEL = img.getMenu("Hoja de Cálculo", "excel");
-    guessNumberEXCEL = img.getMenuItem("Guess Number", "adivinar", this);
-    hangmanEXCEL = img.getMenuItem("Hangman", "ahorcado", this);
-    purchasesEXCEL = img.getMenuItem("Purchases", "comprar", this);
-    dicesEXCEL = img.getMenuItem("Dices", "dado", this);
-    notesEXCEL = img.getMenuItem("Notes", "notas", this);
-    puzzleEXCEL = img.getMenuItem("Puzzle", "rompecabezas", this);
-    inventoryEXCEL = img.getMenuItem("Inventory", "inventario", this);
-    cashRegisterEXCEL = img.getMenuItem("Cash Register", "registradora", this);
-    loansEXCEL = img.getMenuItem("Loans", "prestamos", this);
-    salesEXCEL = img.getMenuItem("Sales", "vender", this);
+    JMenu exportEXCEL = resources.getMenu("Hoja de Cálculo", "excel");
+    guessNumberEXCEL = resources.getMenuItem("Guess Number", "adivinar", this);
+    hangmanEXCEL = resources.getMenuItem("Hangman", "ahorcado", this);
+    purchasesEXCEL = resources.getMenuItem("Purchases", "comprar", this);
+    dicesEXCEL = resources.getMenuItem("Dices", "dado", this);
+    notesEXCEL = resources.getMenuItem("Notes", "notas", this);
+    puzzleEXCEL = resources.getMenuItem("Puzzle", "rompecabezas", this);
+    inventoryEXCEL = resources.getMenuItem("Inventory", "inventario", this);
+    cashRegisterEXCEL = resources.getMenuItem("Cash Register", "registradora", this);
+    loansEXCEL = resources.getMenuItem("Loans", "prestamos", this);
+    salesEXCEL = resources.getMenuItem("Sales", "vender", this);
 
     exportEXCEL.add(guessNumberEXCEL);
     exportEXCEL.addSeparator();
@@ -301,17 +302,17 @@ public class Index extends JFrame implements ActionListener {
     exportEXCEL.addSeparator();
     exportEXCEL.add(salesEXCEL);
 
-    JMenu exportPDF = img.getMenu("Document PDF", "pdf");
-    guessNumberPDF = img.getMenuItem("Guess Number", "adivinar", this);
-    hangmanPDF = img.getMenuItem("Hangman", "ahorcado", this);
-    purchasesPDF = img.getMenuItem("Purchases", "comprar", this);
-    dicesPDF = img.getMenuItem("Dices", "dado", this);
-    notesPDF = img.getMenuItem("Notes", "notas", this);
-    puzzlePDF = img.getMenuItem("Puzzle", "rompecabezas", this);
-    inventoryPDF = img.getMenuItem("Inventory", "inventario", this);
-    cashRegisterPDF = img.getMenuItem("Cash Register", "registradora", this);
-    loansPDF = img.getMenuItem("Loans", "prestamos", this);
-    salesPDF = img.getMenuItem("Sales", "vender", this);
+    JMenu exportPDF = resources.getMenu("Document PDF", "pdf");
+    guessNumberPDF = resources.getMenuItem("Guess Number", "adivinar", this);
+    hangmanPDF = resources.getMenuItem("Hangman", "ahorcado", this);
+    purchasesPDF = resources.getMenuItem("Purchases", "comprar", this);
+    dicesPDF = resources.getMenuItem("Dices", "dado", this);
+    notesPDF = resources.getMenuItem("Notes", "notas", this);
+    puzzlePDF = resources.getMenuItem("Puzzle", "rompecabezas", this);
+    inventoryPDF = resources.getMenuItem("Inventory", "inventario", this);
+    cashRegisterPDF = resources.getMenuItem("Cash Register", "registradora", this);
+    loansPDF = resources.getMenuItem("Loans", "prestamos", this);
+    salesPDF = resources.getMenuItem("Sales", "vender", this);
 
     exportPDF.add(guessNumberPDF);
     exportPDF.addSeparator();
@@ -339,17 +340,17 @@ public class Index extends JFrame implements ActionListener {
     export.addSeparator();
     export.add(exportEXCEL);
 
-    JMenu tasks = img.getMenu("Tasks", "task");
-    timesheet = img.getMenuItem("Timesheet Entry", "timesheet", this);
+    JMenu tasks = resources.getMenu("Tasks", "task");
+    timesheet = resources.getMenuItem("Timesheet Entry", "timesheet", this);
     tasks.add(timesheet);
 
-    JMenu mode = img.getMenu("UI", "mode");
-    darkMode = img.getMenuItem("Dark", "dark", this);
-    textureMode = img.getMenuItem("Texture", "texture", this);
-    macMode = img.getMenuItem("Mac OS", "mac", this);
-    grayMode = img.getMenuItem("Metallic", "gray", this);
-    mintMode = img.getMenuItem("Mint", "mint", this);
-    classicMode = img.getMenuItem("Classic", "classic", this);
+    JMenu mode = resources.getMenu("UI", "mode");
+    darkMode = resources.getMenuItem("Dark", "dark", this);
+    textureMode = resources.getMenuItem("Texture", "texture", this);
+    macMode = resources.getMenuItem("Mac OS", "mac", this);
+    grayMode = resources.getMenuItem("Metallic", "gray", this);
+    mintMode = resources.getMenuItem("Mint", "mint", this);
+    classicMode = resources.getMenuItem("Classic", "classic", this);
 
     mode.add(classicMode);
     mode.addSeparator();
@@ -397,7 +398,7 @@ public class Index extends JFrame implements ActionListener {
     window.setMaximumSize(new Dimension(1295, 820));
     window.setLocationRelativeTo(this);
     window.setTitle("Numbers");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
     window.setVisible(true);
   }
@@ -408,9 +409,9 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Estructuras de Datos");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
-    img.cr.instruccionesEstructuras();
+    resources.cr.instruccionesEstructuras();
     window.setVisible(true);
   }
 
@@ -420,9 +421,9 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Player vs Player");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
-    img.cr.instruccionesTriqui();
+    resources.cr.instruccionesTriqui();
     window.setVisible(true);
   }
 
@@ -432,9 +433,9 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Player vs CPU (beta)");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
-    img.cr.instruccionesTriqui();
+    resources.cr.instruccionesTriqui();
     window.setVisible(true);
   }
 
@@ -444,7 +445,7 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Compraventa");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
     window.setVisible(true);
   }
@@ -456,7 +457,7 @@ public class Index extends JFrame implements ActionListener {
     window.setMinimumSize(new Dimension(530, 330));
     window.setMaximumSize(new Dimension(1280, 720));
     window.setTitle("Text Editor");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
     window.setVisible(true);
   }
@@ -467,7 +468,7 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Send Commentary");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
     window.setVisible(true);
   }
@@ -478,20 +479,8 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Send Email");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
-    window.setVisible(true);
-  }
-
-  public void DadosAP() {
-    Dados window = new Dados(this, true);
-    window.setSize(450, 400);
-    window.setResizable(false);
-    window.setLocationRelativeTo(this);
-    window.setTitle("Juego de Dados ?L?nzalos!");
-    img.cr.fadeIn(window);
-    setVisible(false);
-    img.cr.instruccionesDados();
     window.setVisible(true);
   }
 
@@ -501,9 +490,9 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Level Easy");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
-    img.cr.instruccionesRompe();
+    resources.cr.instruccionesRompe();
     window.setVisible(true);
   }
 
@@ -513,9 +502,9 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Level Medium");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
-    img.cr.instruccionesRompe();
+    resources.cr.instruccionesRompe();
     window.setVisible(true);
   }
 
@@ -525,9 +514,9 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Level Hard");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
-    img.cr.instruccionesRompe();
+    resources.cr.instruccionesRompe();
     window.setVisible(true);
   }
 
@@ -537,7 +526,7 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Developed by");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
     window.setVisible(true);
   }
@@ -548,9 +537,9 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(this);
     window.setTitle("Calcular Notas");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
-    img.cr.instruccionesNotas();
+    resources.cr.instruccionesNotas();
     window.setVisible(true);
   }
 
@@ -558,17 +547,17 @@ public class Index extends JFrame implements ActionListener {
 
     try {
 
-      img.cr.fadeIn(this);
+      resources.cr.fadeIn(this);
       setVisible(false);
       ((JPanel) getContentPane()).setOpaque(false);
-      welcome.setIcon(new ImageIcon(img.getImage(nombre)));
+      welcome.setIcon(new ImageIcon(resources.getImage(nombre)));
       welcome.setSize(ancho, largo);
       setSize(ancho, largo + 80);
       setLocationRelativeTo(null);
       isWork = false;
 
       for (JMenuItem image : images) {
-        image.setForeground(img.cr.AZUL);
+        image.setForeground(resources.cr.AZUL);
       }
 
     } catch (Exception ignored) {
@@ -580,10 +569,10 @@ public class Index extends JFrame implements ActionListener {
     guessNumberTable.cleanTable();
 
     try {
-      img.db.readTable(guessNumberTable.guessNumberTab,
+      resources.db.readTable(guessNumberTable.viewTable,
           Querys.getAllData(Format.tableName(GUESS_NUMBER)), true);
     } catch (Exception e1) {
-      img.cr.exception(e1);
+      resources.cr.exception(e1);
     }
 
     guessNumberTable.setSize(830, 400);
@@ -591,7 +580,7 @@ public class Index extends JFrame implements ActionListener {
     guessNumberTable.setMinimumSize(new Dimension(830, 400));
     guessNumberTable.setMaximumSize(new Dimension(1280, 720));
     guessNumberTable.setTitle(GUESS_NUMBER + " Information");
-    img.cr.fadeIn(guessNumberTable);
+    resources.cr.fadeIn(guessNumberTable);
     guessNumberTable.setVisible(true);
   }
 
@@ -599,9 +588,9 @@ public class Index extends JFrame implements ActionListener {
     hangmanTable.cleanTable();
 
     try {
-      img.db.readTable(hangmanTable.hangmanTab, Querys.getAllData(HANGMAN), true);
+      resources.db.readTable(hangmanTable.viewTable, Querys.getAllData(Format.tableName(HANGMAN)), true);
     } catch (Exception e1) {
-      img.cr.exception(e1);
+      resources.cr.exception(e1);
     }
 
     hangmanTable.setSize(830, 400);
@@ -609,19 +598,19 @@ public class Index extends JFrame implements ActionListener {
     hangmanTable.setMinimumSize(new Dimension(830, 400));
     hangmanTable.setMaximumSize(new Dimension(1280, 720));
     hangmanTable.setTitle(HANGMAN+" Information");
-    img.cr.fadeIn(hangmanTable);
+    resources.cr.fadeIn(hangmanTable);
     hangmanTable.setVisible(true);
   }
 
-  public boolean DadosTableAP() {
+  public boolean dicesTableAP() {
     boolean aux = false;
 
-    dicesTable.limpiarTabla();
+    dicesTable.cleanTable();
 
     try {
-      aux = img.db.readTable(dicesTable.dadosTab, "select * from dados", true);
+      aux = resources.db.readTable(dicesTable.viewTable, Querys.getAllData(DICES), true);
     } catch (Exception e1) {
-      img.cr.exception(e1);
+      Alerts.error(e1, DICES);
     }
 
     if (aux) {
@@ -630,8 +619,8 @@ public class Index extends JFrame implements ActionListener {
       dicesTable.setLocationRelativeTo(null);
       dicesTable.setMinimumSize(new Dimension(830, 400));
       dicesTable.setMaximumSize(new Dimension(1280, 720));
-      dicesTable.setTitle("Dados Information");
-      img.cr.fadeIn(dicesTable);
+      dicesTable.setTitle(DICES+" Information");
+      resources.cr.fadeIn(dicesTable);
       dicesTable.setVisible(true);
     }
 
@@ -642,9 +631,9 @@ public class Index extends JFrame implements ActionListener {
     notesTable.limpiarTabla();
 
     try {
-      img.db.readTable(notesTable.notasTab, "select * from notas", true);
+      resources.db.readTable(notesTable.notasTab, "select * from notas", true);
     } catch (Exception e1) {
-      img.cr.exception(e1);
+      resources.cr.exception(e1);
     }
 
     notesTable.setSize(830, 400);
@@ -652,7 +641,7 @@ public class Index extends JFrame implements ActionListener {
     notesTable.setMinimumSize(new Dimension(830, 400));
     notesTable.setMaximumSize(new Dimension(1280, 720));
     notesTable.setTitle("Notes Information");
-    img.cr.fadeIn(notesTable);
+    resources.cr.fadeIn(notesTable);
     notesTable.setVisible(true);
   }
 
@@ -660,9 +649,9 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.limpiarTabla();
 
     try {
-      img.db.readTable(puzzleTable.rompeTab, "select * from rompecabezas", true);
+      resources.db.readTable(puzzleTable.rompeTab, "select * from rompecabezas", true);
     } catch (Exception e1) {
-      img.cr.exception(e1);
+      resources.cr.exception(e1);
     }
 
     puzzleTable.setSize(830, 400);
@@ -671,31 +660,31 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.setMaximumSize(new Dimension(1280, 720));
     puzzleTable.setTitle("Rompecabezas Information");
     setVisible(false);
-    img.cr.fadeIn(puzzleTable);
+    resources.cr.fadeIn(puzzleTable);
     puzzleTable.setVisible(true);
   }
 
   public void paintBackground(ActionEvent e) {
 
     IntStream.range(0, images.length).filter(i -> e.getSource() == images[i]).forEach(i -> {
-      if (images[i].getForeground() != img.cr.ROJO) {
+      if (images[i].getForeground() != resources.cr.ROJO) {
         ImgAP(PATH_IMAGES[i], WIDTH_IMAGES[i], LONG_IMAGES[i]);
-        images[i].setForeground(img.cr.ROJO);
+        images[i].setForeground(resources.cr.ROJO);
         background = i + 1;
         setVisible(true);
       } else {
-        img.cr.miraWe(false);
+        resources.cr.miraWe(false);
       }
     });
   }
 
   public void paintUI() {
-    darkMode.setForeground(img.cr.AZUL);
-    textureMode.setForeground(img.cr.ROJO);
-    mintMode.setForeground(img.cr.AZUL);
-    classicMode.setForeground(img.cr.AZUL);
-    macMode.setForeground(img.cr.AZUL);
-    grayMode.setForeground(img.cr.AZUL);
+    darkMode.setForeground(resources.cr.AZUL);
+    textureMode.setForeground(resources.cr.ROJO);
+    mintMode.setForeground(resources.cr.AZUL);
+    classicMode.setForeground(resources.cr.AZUL);
+    macMode.setForeground(resources.cr.AZUL);
+    grayMode.setForeground(resources.cr.AZUL);
   }
 
   public void getUI(String selectedUI) {
@@ -710,14 +699,14 @@ public class Index extends JFrame implements ActionListener {
           UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
 
           UIManager.put("ComboBox.foreground", new Color(0, 0, 0));
-          UIManager.put("MenuItem.foreground", img.cr.AZUL);
-          UIManager.put("Menu.foreground", img.cr.ROJO);
+          UIManager.put("MenuItem.foreground", resources.cr.AZUL);
+          UIManager.put("Menu.foreground", resources.cr.ROJO);
           UIManager.put("Button.foreground", new Color(0, 0, 0));
 
-          UIManager.put("Table.focusCellHighlightBorder", img.cr.MEDIO);
-          UIManager.put("TableHeader.foreground", img.cr.ROJO);
-          UIManager.put("Table.foreground", img.cr.AZUL);
-          UIManager.put("OptionPane.messageForeground", img.cr.AZUL);
+          UIManager.put("Table.focusCellHighlightBorder", resources.cr.MEDIO);
+          UIManager.put("TableHeader.foreground", resources.cr.ROJO);
+          UIManager.put("Table.foreground", resources.cr.AZUL);
+          UIManager.put("OptionPane.messageForeground", resources.cr.AZUL);
 
           setVisible(false);
           Index window = new Index();
@@ -731,14 +720,14 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(img.cr.getTitle());
-          window.images[background - 1].setForeground(img.cr.ROJO);
-          window.grayMode.setForeground(img.cr.ROJO);
-          img.cr.fadeIn(window);
+          window.setTitle(resources.cr.getTitle());
+          window.images[background - 1].setForeground(resources.cr.ROJO);
+          window.grayMode.setForeground(resources.cr.ROJO);
+          resources.cr.fadeIn(window);
           window.setVisible(true);
 
           JOptionPane.showMessageDialog(null,
-              "<html>" + img.cr.styleJOption()
+              "<html>" + resources.cr.styleJOption()
                   + "<strong><center>Changes Saved</center></strong><br>"
                   + "Modified UI, enjoy the metallic aspect!</html>",
               "New Look!", JOptionPane.PLAIN_MESSAGE);
@@ -755,12 +744,12 @@ public class Index extends JFrame implements ActionListener {
         try {
           UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 
-          UIManager.put("MenuItem.foreground", img.cr.AZUL);
-          UIManager.put("Menu.foreground", img.cr.ROJO);
+          UIManager.put("MenuItem.foreground", resources.cr.AZUL);
+          UIManager.put("Menu.foreground", resources.cr.ROJO);
 
-          UIManager.put("ComboBox.foreground", img.cr.AZUL);
-          UIManager.put("Table.foreground", img.cr.AZUL);
-          UIManager.put("OptionPane.messageForeground", img.cr.AZUL);
+          UIManager.put("ComboBox.foreground", resources.cr.AZUL);
+          UIManager.put("Table.foreground", resources.cr.AZUL);
+          UIManager.put("OptionPane.messageForeground", resources.cr.AZUL);
           UIManager.put("Button.foreground", Color.BLACK);
 
           setVisible(false);
@@ -775,14 +764,14 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(img.cr.getTitle());
-          window.images[background - 1].setForeground(img.cr.ROJO);
-          window.textureMode.setForeground(img.cr.ROJO);
-          img.cr.fadeIn(window);
+          window.setTitle(resources.cr.getTitle());
+          window.images[background - 1].setForeground(resources.cr.ROJO);
+          window.textureMode.setForeground(resources.cr.ROJO);
+          resources.cr.fadeIn(window);
           window.setVisible(true);
 
           JOptionPane.showMessageDialog(null,
-              "<html>" + img.cr.styleJOption()
+              "<html>" + resources.cr.styleJOption()
                   + "<strong><center>Changes Saved</center></strong><br>"
                   + "Modified UI, enjoy the textured aspect!</html>",
               "New Look!", JOptionPane.PLAIN_MESSAGE);
@@ -799,14 +788,14 @@ public class Index extends JFrame implements ActionListener {
         try {
           UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
 
-          UIManager.put("MenuItem.foreground", img.cr.AZUL);
-          UIManager.put("Menu.foreground", img.cr.ROJO);
+          UIManager.put("MenuItem.foreground", resources.cr.AZUL);
+          UIManager.put("Menu.foreground", resources.cr.ROJO);
 
           UIManager.put("ComboBox.foreground", Color.WHITE);
           UIManager.put("Table.foreground", Color.WHITE);
           UIManager.put("OptionPane.messageForeground", Color.WHITE);
           UIManager.put("Button.foreground", Color.WHITE);
-          UIManager.put("MenuItem.foreground", img.cr.AZUL);
+          UIManager.put("MenuItem.foreground", resources.cr.AZUL);
 
           setVisible(false);
           Index window = new Index();
@@ -820,14 +809,14 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(img.cr.getTitle());
-          window.images[background - 1].setForeground(img.cr.ROJO);
-          window.darkMode.setForeground(img.cr.ROJO);
-          img.cr.fadeIn(window);
+          window.setTitle(resources.cr.getTitle());
+          window.images[background - 1].setForeground(resources.cr.ROJO);
+          window.darkMode.setForeground(resources.cr.ROJO);
+          resources.cr.fadeIn(window);
           window.setVisible(true);
 
           JOptionPane.showMessageDialog(null,
-              "<html>" + img.cr.styleJOption()
+              "<html>" + resources.cr.styleJOption()
                   + "<strong><center>Changes Saved</center></strong><br>"
                   + "Modified UI, enjoy the dark aspect!</html>",
               "New Look!", JOptionPane.PLAIN_MESSAGE);
@@ -844,12 +833,12 @@ public class Index extends JFrame implements ActionListener {
         try {
           UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
 
-          UIManager.put("MenuItem.foreground", img.cr.AZUL);
-          UIManager.put("Menu.foreground", img.cr.ROJO);
+          UIManager.put("MenuItem.foreground", resources.cr.AZUL);
+          UIManager.put("Menu.foreground", resources.cr.ROJO);
 
-          UIManager.put("ComboBox.foreground", img.cr.AZUL);
-          UIManager.put("Table.foreground", img.cr.AZUL);
-          UIManager.put("OptionPane.messageForeground", img.cr.AZUL);
+          UIManager.put("ComboBox.foreground", resources.cr.AZUL);
+          UIManager.put("Table.foreground", resources.cr.AZUL);
+          UIManager.put("OptionPane.messageForeground", resources.cr.AZUL);
           UIManager.put("Button.foreground", Color.BLACK);
 
           setVisible(false);
@@ -864,14 +853,14 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(img.cr.getTitle());
-          window.images[background - 1].setForeground(img.cr.ROJO);
-          window.macMode.setForeground(img.cr.ROJO);
-          img.cr.fadeIn(window);
+          window.setTitle(resources.cr.getTitle());
+          window.images[background - 1].setForeground(resources.cr.ROJO);
+          window.macMode.setForeground(resources.cr.ROJO);
+          resources.cr.fadeIn(window);
           window.setVisible(true);
 
           JOptionPane.showMessageDialog(null,
-              "<html>" + img.cr.styleJOption()
+              "<html>" + resources.cr.styleJOption()
                   + "<strong><center>Changes Saved</center></strong><br>"
                   + "Modified UI, enjoy the Mac OS aspect!</html>",
               "New Look!", JOptionPane.PLAIN_MESSAGE);
@@ -890,15 +879,15 @@ public class Index extends JFrame implements ActionListener {
 
           UIManager.put("ComboBox.foreground", Color.BLACK);
 
-          UIManager.put("MenuItem.foreground", img.cr.AZUL);
-          UIManager.put("Menu.foreground", img.cr.ROJO);
+          UIManager.put("MenuItem.foreground", resources.cr.AZUL);
+          UIManager.put("Menu.foreground", resources.cr.ROJO);
 
           UIManager.put("Button.foreground", Color.BLACK);
 
-          UIManager.put("Table.focusCellHighlightBorder", img.cr.MEDIO);
-          UIManager.put("TableHeader.foreground", img.cr.ROJO);
-          UIManager.put("Table.foreground", img.cr.AZUL);
-          UIManager.put("OptionPane.messageForeground", img.cr.AZUL);
+          UIManager.put("Table.focusCellHighlightBorder", resources.cr.MEDIO);
+          UIManager.put("TableHeader.foreground", resources.cr.ROJO);
+          UIManager.put("Table.foreground", resources.cr.AZUL);
+          UIManager.put("OptionPane.messageForeground", resources.cr.AZUL);
 
           setVisible(false);
           Index window = new Index();
@@ -912,14 +901,14 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(img.cr.getTitle());
-          window.images[background - 1].setForeground(img.cr.ROJO);
-          window.mintMode.setForeground(img.cr.ROJO);
-          img.cr.fadeIn(window);
+          window.setTitle(resources.cr.getTitle());
+          window.images[background - 1].setForeground(resources.cr.ROJO);
+          window.mintMode.setForeground(resources.cr.ROJO);
+          resources.cr.fadeIn(window);
           window.setVisible(true);
 
           JOptionPane.showMessageDialog(null,
-              "<html>" + img.cr.styleJOption()
+              "<html>" + resources.cr.styleJOption()
                   + "<strong><center>Changes Saved</center></strong><br>"
                   + "Modified UI, enjoy the mint aspect!</html>",
               "New Look!", JOptionPane.PLAIN_MESSAGE);
@@ -940,13 +929,13 @@ public class Index extends JFrame implements ActionListener {
 
           UIManager.put("Button.foreground", Color.BLACK);
 
-          UIManager.put("MenuItem.foreground", img.cr.AZUL);
-          UIManager.put("Menu.foreground", img.cr.ROJO);
+          UIManager.put("MenuItem.foreground", resources.cr.AZUL);
+          UIManager.put("Menu.foreground", resources.cr.ROJO);
 
-          UIManager.put("Table.focusCellHighlightBorder", img.cr.MEDIO);
-          UIManager.put("TableHeader.foreground", img.cr.ROJO);
-          UIManager.put("Table.foreground", img.cr.AZUL);
-          UIManager.put("OptionPane.messageForeground", img.cr.AZUL);
+          UIManager.put("Table.focusCellHighlightBorder", resources.cr.MEDIO);
+          UIManager.put("TableHeader.foreground", resources.cr.ROJO);
+          UIManager.put("Table.foreground", resources.cr.AZUL);
+          UIManager.put("OptionPane.messageForeground", resources.cr.AZUL);
 
           setVisible(false);
           Index window = new Index();
@@ -960,14 +949,14 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(img.cr.getTitle());
-          window.images[background - 1].setForeground(img.cr.ROJO);
-          window.classicMode.setForeground(img.cr.ROJO);
-          img.cr.fadeIn(window);
+          window.setTitle(resources.cr.getTitle());
+          window.images[background - 1].setForeground(resources.cr.ROJO);
+          window.classicMode.setForeground(resources.cr.ROJO);
+          resources.cr.fadeIn(window);
           window.setVisible(true);
 
           JOptionPane.showMessageDialog(null,
-              "<html>" + img.cr.styleJOption()
+              "<html>" + resources.cr.styleJOption()
                   + "<strong><center>Changes Saved</center></strong><br>"
                   + "Modified UI, enjoy the classic aspect!</html>",
               "New Look!", JOptionPane.PLAIN_MESSAGE);
@@ -987,7 +976,7 @@ public class Index extends JFrame implements ActionListener {
     window.setResizable(false);
     window.setLocationRelativeTo(null);
     window.setTitle("Timesheet Entry");
-    img.cr.fadeIn(window);
+    resources.cr.fadeIn(window);
     setVisible(false);
     window.setVisible(true);
   }
@@ -1000,7 +989,7 @@ public class Index extends JFrame implements ActionListener {
     paintBackground(e);
 
     if (e.getSource() == yes_exit) {
-      img.cr.fadeOut(this);
+      resources.cr.fadeOut(this);
 
     } else if (e.getSource() == timesheet) {
 
@@ -1009,50 +998,50 @@ public class Index extends JFrame implements ActionListener {
 
     } else if (e.getSource() == grayMode) {
 
-      if (grayMode.getForeground() != img.cr.ROJO) {
+      if (grayMode.getForeground() != resources.cr.ROJO) {
         getUI("Gray");
       } else {
-        img.cr.miraWe(true);
+        resources.cr.miraWe(true);
       }
 
     } else if (e.getSource() == darkMode) {
 
-      if (darkMode.getForeground() != img.cr.ROJO) {
+      if (darkMode.getForeground() != resources.cr.ROJO) {
         getUI("Dark");
       } else {
-        img.cr.miraWe(true);
+        resources.cr.miraWe(true);
       }
 
     } else if (e.getSource() == textureMode) {
 
-      if (textureMode.getForeground() != img.cr.ROJO) {
+      if (textureMode.getForeground() != resources.cr.ROJO) {
         getUI("Texture");
       } else {
-        img.cr.miraWe(true);
+        resources.cr.miraWe(true);
       }
 
     } else if (e.getSource() == macMode) {
 
-      if (macMode.getForeground() != img.cr.ROJO) {
+      if (macMode.getForeground() != resources.cr.ROJO) {
         getUI("Mac");
       } else {
-        img.cr.miraWe(true);
+        resources.cr.miraWe(true);
       }
 
     } else if (e.getSource() == mintMode) {
 
-      if (mintMode.getForeground() != img.cr.ROJO) {
+      if (mintMode.getForeground() != resources.cr.ROJO) {
         getUI("Mint");
       } else {
-        img.cr.miraWe(true);
+        resources.cr.miraWe(true);
       }
 
     } else if (e.getSource() == classicMode) {
 
-      if (classicMode.getForeground() != img.cr.ROJO) {
+      if (classicMode.getForeground() != resources.cr.ROJO) {
         getUI("Classic");
       } else {
-        img.cr.miraWe(true);
+        resources.cr.miraWe(true);
       }
 
     } else if (e.getSource() == email) {
@@ -1095,7 +1084,7 @@ public class Index extends JFrame implements ActionListener {
       structuresAP();
       setVisible(true);
     } else if (e.getSource() == dices) {
-      DadosAP();
+      new Dices(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == notes) {
 
@@ -1112,17 +1101,17 @@ public class Index extends JFrame implements ActionListener {
       CardAP();
       setVisible(true);
 
-    } else if (img.cr.comprobarConexion("?Con?ctate para ver m?s!", isWork)) {
+    } else if (resources.cr.comprobarConexion("?Con?ctate para ver m?s!", isWork)) {
 
       if (e.getSource() == roulette) {
 
-        img.cr.instruccionesRuleta();
+        resources.cr.instruccionesRuleta();
 
         try {
           Desktop.getDesktop()
               .browse(new URL("https://mypackapps.000webhostapp.com/ruleta.php").toURI());
         } catch (Exception ex) {
-          img.cr.exception(ex);
+          resources.cr.exception(ex);
         }
 
       } else if (e.getSource() == moreSystems) {
@@ -1151,7 +1140,7 @@ public class Index extends JFrame implements ActionListener {
 
       } else if (e.getSource() == tables) {
 
-        if (DadosTableAP()) {
+        if (dicesTableAP()) {
           setVisible(true);
         }
 
@@ -1159,7 +1148,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           guessNumberTable.cleanTable();
-          img.cr.txt(guessNumberTable.guessNumberTab, "select * from adivinar", ".txt");
+          resources.cr.txt(guessNumberTable.viewTable, Querys.getAllData(Format.tableName(GUESS_NUMBER)), ".txt");
         } catch (Exception ex) {
         }
 
@@ -1167,7 +1156,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           hangmanTable.cleanTable();
-          img.cr.txt(hangmanTable.hangmanTab, "select * from ahorcado", ".txt");
+          resources.cr.txt(hangmanTable.viewTable, Querys.getAllData(Format.tableName(HANGMAN)), ".txt");
         } catch (Exception ex) {
         }
 
@@ -1175,7 +1164,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           purchasesTable.limpiarTabla();
-          img.cr.txt(purchasesTable.comprasTab,
+          resources.cr.txt(purchasesTable.comprasTab,
               "select IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total from compras",
               ".txt");
         } catch (Exception ex) {
@@ -1186,7 +1175,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           salesTable.limpiarTabla();
-          img.cr.txt(salesTable.ventasTab,
+          resources.cr.txt(salesTable.ventasTab,
               "select IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total from ventas",
               ".txt");
         } catch (Exception ex) {
@@ -1196,8 +1185,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == dicesTXT) {
 
         try {
-          dicesTable.limpiarTabla();
-          img.cr.txt(dicesTable.dadosTab, "select * from dados", ".txt");
+          dicesTable.cleanTable();
+          resources.cr.txt(dicesTable.viewTable, "select * from dados", ".txt");
         } catch (Exception ex) {
 
         }
@@ -1206,7 +1195,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           notesTable.limpiarTabla();
-          img.cr.txt(notesTable.notasTab, "select * from notas", ".txt");
+          resources.cr.txt(notesTable.notasTab, "select * from notas", ".txt");
         } catch (Exception ex) {
 
         }
@@ -1215,7 +1204,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           puzzleTable.limpiarTabla();
-          img.cr.txt(puzzleTable.rompeTab, "select * from rompecabezas", ".txt");
+          resources.cr.txt(puzzleTable.rompeTab, "select * from rompecabezas", ".txt");
         } catch (Exception ex) {
 
         }
@@ -1223,7 +1212,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           inventoryTable.limpiarTabla();
-          img.cr.txt(inventoryTable.inventarioTab, "select * from inventario", ".txt");
+          resources.cr.txt(inventoryTable.inventarioTab, "select * from inventario", ".txt");
         } catch (Exception ex) {
 
         }
@@ -1231,7 +1220,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           cashRegisterTable.limpiarTabla();
-          img.cr.txt(cashRegisterTable.registradoraTab,
+          resources.cr.txt(cashRegisterTable.registradoraTab,
               "select Usuario, Productos_Vendidos,Total_Ventas,Productos_Comprados,Total_Compras from registros",
               ".txt");
         } catch (Exception ex) {
@@ -1241,7 +1230,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           loansTable.limpiarTabla();
-          img.cr.txt(loansTable.prestamosTab,
+          resources.cr.txt(loansTable.prestamosTab,
               "select Usuario, Nombre, Documento, Referencia, Tel?fono, Plazo, Valor from pr?stamos",
               ".txt");
         } catch (Exception ex) {
@@ -1252,7 +1241,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           guessNumberTable.cleanTable();
-          img.cr.pdf(guessNumberTable.guessNumberTab, "Adivinar N?mero", "select * from adivinar",
+          resources.cr.pdf(guessNumberTable.viewTable, "Adivinar N?mero", "select * from adivinar",
               ".pdf");
         } catch (Exception ex) {
 
@@ -1262,7 +1251,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           hangmanTable.cleanTable();
-          img.cr.pdf(hangmanTable.hangmanTab, "Ahorcadito", "select * from ahorcado", ".pdf");
+          resources.cr.pdf(hangmanTable.viewTable, "Ahorcadito", "select * from ahorcado", ".pdf");
         } catch (Exception ex) {
 
         }
@@ -1271,7 +1260,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           purchasesTable.limpiarTabla();
-          img.cr.pdf(purchasesTable.comprasTab, "Compras",
+          resources.cr.pdf(purchasesTable.comprasTab, "Compras",
               "select IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total from compras",
               ".pdf");
         } catch (Exception ex) {
@@ -1282,7 +1271,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           salesTable.limpiarTabla();
-          img.cr.pdf(salesTable.ventasTab, "Ventas",
+          resources.cr.pdf(salesTable.ventasTab, "Ventas",
               "select IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total from ventas",
               ".pdf");
         } catch (Exception ex) {
@@ -1292,8 +1281,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == dicesPDF) {
 
         try {
-          dicesTable.limpiarTabla();
-          img.cr.pdf(dicesTable.dadosTab, "Juego de Dados", "select * from dados", ".pdf");
+          dicesTable.cleanTable();
+          resources.cr.pdf(dicesTable.viewTable, "Juego de Dados", "select * from dados", ".pdf");
         } catch (Exception ex) {
 
         }
@@ -1302,7 +1291,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           notesTable.limpiarTabla();
-          img.cr.pdf(notesTable.notasTab, "Notas", "select * from notas", ".pdf");
+          resources.cr.pdf(notesTable.notasTab, "Notas", "select * from notas", ".pdf");
         } catch (Exception ex) {
 
         }
@@ -1311,7 +1300,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           puzzleTable.limpiarTabla();
-          img.cr.pdf(puzzleTable.rompeTab, "Rompecabezas", "select * from rompecabezas", ".pdf");
+          resources.cr.pdf(puzzleTable.rompeTab, "Rompecabezas", "select * from rompecabezas", ".pdf");
         } catch (Exception ex) {
 
         }
@@ -1319,7 +1308,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           inventoryTable.limpiarTabla();
-          img.cr
+          resources.cr
               .pdf(inventoryTable.inventarioTab, "Inventario", "select * from inventario", ".pdf");
         } catch (Exception ex) {
 
@@ -1328,7 +1317,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           cashRegisterTable.limpiarTabla();
-          img.cr.pdf(cashRegisterTable.registradoraTab, "Registradora",
+          resources.cr.pdf(cashRegisterTable.registradoraTab, "Registradora",
               "select Usuario, Productos_Vendidos,Total_Ventas,Productos_Comprados,Total_Compras from registros",
               ".pdf");
         } catch (Exception ex) {
@@ -1338,7 +1327,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           loansTable.limpiarTabla();
-          img.cr.pdf(loansTable.prestamosTab, "Pr?stamos",
+          resources.cr.pdf(loansTable.prestamosTab, "Pr?stamos",
               "select Usuario, Nombre, Documento, Referencia, Tel?fono, Plazo, Valor from pr?stamos",
               ".pdf");
         } catch (Exception ex) {
@@ -1348,7 +1337,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           guessNumberTable.cleanTable();
-          img.cr.excel(guessNumberTable.guessNumberTab, "select * from adivinar", ".xls");
+          resources.cr.excel(guessNumberTable.viewTable, "select * from adivinar", ".xls");
         } catch (Exception ex) {
 
         }
@@ -1357,7 +1346,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           hangmanTable.cleanTable();
-          img.cr.excel(hangmanTable.hangmanTab, "select * from ahorcado", ".xls");
+          resources.cr.excel(hangmanTable.viewTable, "select * from ahorcado", ".xls");
         } catch (Exception ex) {
 
         }
@@ -1366,7 +1355,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           purchasesTable.limpiarTabla();
-          img.cr.excel(purchasesTable.comprasTab,
+          resources.cr.excel(purchasesTable.comprasTab,
               "select IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total from compras",
               ".xls");
         } catch (Exception ex) {
@@ -1377,7 +1366,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           salesTable.limpiarTabla();
-          img.cr.excel(salesTable.ventasTab,
+          resources.cr.excel(salesTable.ventasTab,
               "select IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total from ventas",
               ".xls");
         } catch (Exception ex) {
@@ -1387,8 +1376,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == dicesEXCEL) {
 
         try {
-          dicesTable.limpiarTabla();
-          img.cr.excel(dicesTable.dadosTab, "select * from dados", ".xls");
+          dicesTable.cleanTable();
+          resources.cr.excel(dicesTable.viewTable, "select * from dados", ".xls");
         } catch (Exception ex) {
 
         }
@@ -1397,7 +1386,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           notesTable.limpiarTabla();
-          img.cr.excel(notesTable.notasTab, "select * from notas", ".xls");
+          resources.cr.excel(notesTable.notasTab, "select * from notas", ".xls");
         } catch (Exception ex) {
 
         }
@@ -1406,7 +1395,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           puzzleTable.limpiarTabla();
-          img.cr.excel(puzzleTable.rompeTab, "select * from rompecabezas", ".xls");
+          resources.cr.excel(puzzleTable.rompeTab, "select * from rompecabezas", ".xls");
         } catch (Exception ex) {
 
         }
@@ -1414,7 +1403,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           inventoryTable.limpiarTabla();
-          img.cr.excel(inventoryTable.inventarioTab, "select * from inventario", ".xls");
+          resources.cr.excel(inventoryTable.inventarioTab, "select * from inventario", ".xls");
         } catch (Exception ex) {
 
         }
@@ -1422,7 +1411,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           cashRegisterTable.limpiarTabla();
-          img.cr.excel(cashRegisterTable.registradoraTab,
+          resources.cr.excel(cashRegisterTable.registradoraTab,
               "select Usuario, Productos_Vendidos,Total_Ventas,Productos_Comprados,Total_Compras from registros",
               ".xls");
         } catch (Exception ex) {
@@ -1432,7 +1421,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           loansTable.limpiarTabla();
-          img.cr.excel(loansTable.prestamosTab,
+          resources.cr.excel(loansTable.prestamosTab,
               "select Usuario, Nombre, Documento, Referencia, Teléfono, Plazo, Valor from préstamos",
               ".xls");
         } catch (Exception ex) {

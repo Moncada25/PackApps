@@ -569,7 +569,7 @@ public class Core {
     return (int) Math.floor(Math.random() * (min - max + 1) + max);
   }
 
-  public String styleJOption() {
+  public static String styleJOption() {
     return
         "<style type='text/css'>" +
             "	strong {" +

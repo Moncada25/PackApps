@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -313,7 +312,7 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
             new Index().hangmanTableAP();
         } else if (e.getSource() == tablas[2]) {
             setVisible(false);
-            new Index().DadosTableAP();
+            new Index().dicesTableAP();
         } else if (e.getSource() == tablas[3]) {
             JOptionPane.showMessageDialog(null, "<html><em><strong>You're here!</strong><br></em></html>",
                     "Usuario, cámate po favo", JOptionPane.PLAIN_MESSAGE);
