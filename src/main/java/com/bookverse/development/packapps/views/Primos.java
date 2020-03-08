@@ -32,16 +32,16 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
 
         setLayout(null);// Permite el posicionamiento absoluto de los componentes
 
-        btnplay = h.getButton("Show", h.cr.AZUL, this, this);
+        btnplay = h.getButton("Show", h.core.AZUL, this, this);
         btnplay.setBounds(315, 195, 75, 25);
 
-        primero = h.getLabel("<html><strong>Buscar rango</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        primero = h.getLabel("<html><strong>Buscar rango</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         primero.setBounds(25, 70, 120, 30);
 
-        btnstart = h.getButton("Show", h.cr.AZUL, this, this);
+        btnstart = h.getButton("Show", h.core.AZUL, this, this);
         btnstart.setBounds(315, 75, 75, 25);
 
-        segundo = h.getLabel("<html><strong>Verificar</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        segundo = h.getLabel("<html><strong>Verificar</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         segundo.setBounds(25, 130, 100, 30);
 
         txtverificar = new JTextField();
@@ -58,9 +58,9 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
             private void txtVerificarKeyPressed(KeyEvent e) {
 
                 if (e.getKeyCode() == KeyEvent.VK_ENTER && txtverificar.getText().length() > 0) {
-                    h.cr.verificarPrimo(Integer.parseInt(txtverificar.getText()));
+                    h.core.verificarPrimo(Integer.parseInt(txtverificar.getText()));
                 } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    h.cr.campoVacio();
+                    h.core.campoVacio();
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     dispose();
                 }
@@ -71,11 +71,11 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
             }
 
             private void txtVerificarKeyTyped(KeyEvent e) {
-                h.cr.solonumeros(e.getKeyChar(), e, txtverificar.getText(), 6);
+                h.core.solonumeros(e.getKeyChar(), e, txtverificar.getText(), 6);
             }
         });
 
-        btnstart2 = h.getButton("Show", h.cr.AZUL, this, this);
+        btnstart2 = h.getButton("Show", h.core.AZUL, this, this);
         btnstart2.setBounds(315, 135, 75, 25);
 
         txtdesde = new JTextField();
@@ -101,11 +101,11 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
             }
 
             private void txtDesdeKeyTyped(KeyEvent e) {
-                h.cr.solonumeros(e.getKeyChar(), e, txtdesde.getText(), 4);
+                h.core.solonumeros(e.getKeyChar(), e, txtdesde.getText(), 4);
             }
         });
 
-        desde = h.getLabel("<html><strong>Desde</strong></html>", h.cr.AZUL, this, h.cr.SMALL);
+        desde = h.getLabel("<html><strong>Desde</strong></html>", h.core.AZUL, this, h.core.SMALL);
         desde.setBounds(160, 90, 60, 30);
 
         txthasta = new JTextField();
@@ -131,20 +131,20 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
             }
 
             private void txtHastaKeyTyped(KeyEvent e) {
-                h.cr.solonumeros(e.getKeyChar(), e, txthasta.getText(), 4);
+                h.core.solonumeros(e.getKeyChar(), e, txthasta.getText(), 4);
             }
         });
 
-        hasta = h.getLabel("<html><strong>Hasta</strong></html>", h.cr.AZUL, this, h.cr.SMALL);
+        hasta = h.getLabel("<html><strong>Hasta</strong></html>", h.core.AZUL, this, h.core.SMALL);
         hasta.setBounds(220, 90, 60, 30);
 
-        tercero = h.getLabel("<html><strong>Cronómetro</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        tercero = h.getLabel("<html><strong>Cronómetro</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         tercero.setBounds(25, 190, 130, 30);
 
-        crono = h.getLabel("00:00:000", h.cr.AZUL, this, h.cr.MEDIUM);
+        crono = h.getLabel("00:00:000", h.core.AZUL, this, h.core.MEDIUM);
         crono.setBounds(160, 190, 100, 30);
 
-        mensaje = h.getLabel("<html><em><strong>Números Primos</strong></em></html>", h.cr.ROJO, this, h.cr.BIG);
+        mensaje = h.getLabel("<html><em><strong>Números Primos</strong></em></html>", h.core.ROJO, this, h.core.BIG);
         mensaje.addMouseListener(this);
         mensaje.setBounds(100, 15, 280, 40);
     }
@@ -228,7 +228,7 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>" + e.getMessage() + "</strong></html>", "Mensaje",
+                    "<html>" + h.core.styleJOption() + "<strong>" + e.getMessage() + "</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
         }
     }
@@ -241,17 +241,17 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
         } else if (e.getSource() == btnstart) {
 
             if (txtdesde.getText().length() > 0 && txthasta.getText().length() > 0) {
-                h.cr.buscarPrimos(Integer.parseInt(txtdesde.getText()), Integer.parseInt(txthasta.getText()));
+                h.core.buscarPrimos(Integer.parseInt(txtdesde.getText()), Integer.parseInt(txthasta.getText()));
             } else {
-                h.cr.campoVacio();
+                h.core.campoVacio();
             }
 
         } else if (e.getSource() == btnstart2) {
 
             if (txtverificar.getText().length() > 0) {
-                h.cr.verificarPrimo(Integer.parseInt(txtverificar.getText()));
+                h.core.verificarPrimo(Integer.parseInt(txtverificar.getText()));
             } else {
-                h.cr.campoVacio();
+                h.core.campoVacio();
             }
         } else if (e.getSource() == btnplay) {
             iniciarCronometro();
@@ -262,7 +262,7 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
     public void mouseClicked(MouseEvent e) {
 
         if (e.getSource() == mensaje) {
-            h.cr.fadeOut(this);
+            h.core.fadeOut(this);
         }
     }
 

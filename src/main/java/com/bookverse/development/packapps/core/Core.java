@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.core;
 
 import com.bookverse.development.packapps.models.Database;
+import com.bookverse.development.packapps.utils.WindowEffect;
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
@@ -95,6 +96,15 @@ public class Core {
   private double phi;
   private double totalCompra = 0, totalVenta = 0, totalPrestamo = 2;
   private int contProd = 0;
+
+  public static String styleJOption() {
+    return
+        "<style type='text/css'>" +
+            "	strong {" +
+            " 		color:rgb(220, 12, 12);" +
+            " 	} " +
+            "</style>";
+  }
 
   public void soloUnPunto(char num, KeyEvent evt,
       String datos) { // Valida que solo se ingrese un punto
@@ -486,7 +496,7 @@ public class Core {
     return save;
   }
 
-  public String ingreseNickname(String request, int longitud) {
+  public static String enterNickname(String request, int length) {
 
     boolean canContinue = false;
     String aux;
@@ -494,12 +504,12 @@ public class Core {
     do {
 
       aux = JOptionPane.showInputDialog(null,
-          "<html>" + styleJOption() + "<strong>" + request + "</strong></html>", "Mensaje",
+          "<html>" + styleJOption() + "<strong>" + request + "</strong></html>", "Message",
           JOptionPane.PLAIN_MESSAGE);
 
       if (aux != null && !aux.trim().equals("") && Pattern.matches("^[a-zA-Z]*$", aux)) {
 
-        if (aux.length() <= longitud) {
+        if (aux.length() <= length) {
           canContinue = true;
         } else {
           JOptionPane.showMessageDialog(null,
@@ -509,7 +519,7 @@ public class Core {
 
       } else {
         JOptionPane.showMessageDialog(null,
-            "<html>" + styleJOption() + "<strong>Texto inválido</strong></html>", "Mensaje",
+            "<html>" + styleJOption() + "<strong>Texto inválido</strong></html>", "Message",
             JOptionPane.PLAIN_MESSAGE);
         canContinue = false;
       }
@@ -519,7 +529,7 @@ public class Core {
     return aux;
   }
 
-  public String ingreseNumero(String request, int cantidad) {
+  public static String enterNumber(String request, int length) {
 
     boolean canContinue = false;
     String txt;
@@ -528,13 +538,13 @@ public class Core {
     do {
 
       txt = JOptionPane.showInputDialog(null,
-          "<html>" + styleJOption() + "<strong>" + request + "</strong></html>", "Mensaje",
+          "<html>" + styleJOption() + "<strong>" + request + "</strong></html>", "Message",
           JOptionPane.PLAIN_MESSAGE);
 
       try {
         num = Integer.parseInt(txt);
 
-        if (txt.length() <= cantidad) {
+        if (txt.length() <= length) {
           canContinue = true;
         } else {
           JOptionPane.showMessageDialog(null,
@@ -544,7 +554,7 @@ public class Core {
 
       } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(null,
-            "<html>" + styleJOption() + "<strong>Only numbers less than " + cantidad
+            "<html>" + styleJOption() + "<strong>Only numbers less than " + length
                 + " digits</strong></html>", "Error",
             JOptionPane.PLAIN_MESSAGE);
         canContinue = false;
@@ -569,24 +579,8 @@ public class Core {
     return (int) Math.floor(Math.random() * (min - max + 1) + max);
   }
 
-  public static String styleJOption() {
-    return
-        "<style type='text/css'>" +
-            "	strong {" +
-            " 		color:rgb(220, 12, 12);" +
-            " 	} " +
-            "</style>";
-  }
-
   public void mostrarMensaje(String titulo, String mensaje) {
     JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public void emptyTable() {
-    JOptionPane.showMessageDialog(null,
-        "<html>" + styleJOption() + "<u><strong><center>Empty Table</center></strong></u><br>"
-            + "La búsqueda realizada no arrojó ningún resultado.</html>",
-        "!No se han encontrado registros!", JOptionPane.PLAIN_MESSAGE);
   }
 
   public String Encriptar(String texto, boolean isEmail) {
@@ -666,7 +660,8 @@ public class Core {
         canContinue = true;
       } else {
         JOptionPane.showMessageDialog(null,
-            "<html>" + styleJOption() + "<strong>Invalid text or length too short.</strong></html>", "Warnings",
+            "<html>" + styleJOption() + "<strong>Invalid text or length too short.</strong></html>",
+            "Warnings",
             JOptionPane.PLAIN_MESSAGE);
         canContinue = false;
       }
@@ -778,19 +773,19 @@ public class Core {
   }
 
   public void fadeIn(JDialog ventana) {
-    Fade.JDialogFadeIn(0f, 1f, 0.2f, 50, ventana);
+    WindowEffect.JDialogFadeIn(0f, 1f, 0.2f, 50, ventana);
   }
 
   public void fadeOut(JDialog ventana) {
-    Fade.JDialogFadeOut(1f, 0f, 0.2f, 50, ventana, Fade.DISPOSE);
+    WindowEffect.JDialogFadeOut(1f, 0f, 0.2f, 50, ventana, WindowEffect.DISPOSE);
   }
 
   public void fadeIn(JFrame ventana) {
-    Fade.JFrameFadeIn(0f, 1f, 0.2f, 50, ventana);
+    WindowEffect.JFrameFadeIn(0f, 1f, 0.2f, 50, ventana);
   }
 
   public void fadeOut(JFrame ventana) {
-    Fade.JFrameFadeOut(1f, 0f, 0.2f, 50, ventana, Fade.EXIT);
+    WindowEffect.JFrameFadeOut(1f, 0f, 0.2f, 50, ventana, WindowEffect.EXIT);
   }
 
   public double getPhi() {

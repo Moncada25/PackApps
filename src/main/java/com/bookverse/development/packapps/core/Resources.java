@@ -14,48 +14,40 @@ import javax.swing.JMenuItem;
 
 public class Resources {
 
-    public Core cr = new Core();
-    public Database db = new Database();
-    public static Object generalObject;
+  public static Object generalObject;
+  public Core core = new Core();
+  public Database database = new Database();
 
-    public URL getImage(String image) {
-        return this.getClass().getResource("/"+image);
-    }
+  public URL getImage(String image) {
+    return this.getClass().getResource("/" + image);
+  }
 
-    public JMenuItem getMenuItem(String name, String image, ActionListener listener) {
+  public JMenuItem getMenuItem(String name, String image, ActionListener listener) {
+    JMenuItem item = new JMenuItem(name);
+    item.setIcon(new ImageIcon(getImage(image + ".png")));
+    item.addActionListener(listener);
+    return item;
+  }
 
-        JMenuItem item = new JMenuItem(name);
-        item.setIcon(new ImageIcon(getImage(image + ".png")));
-        item.addActionListener(listener);
+  public JMenu getMenu(String name, String image) {
+    JMenu menu = new JMenu(name);
+    menu.setIcon(new ImageIcon(getImage(image + ".png")));
+    return menu;
+  }
 
-        return item;
-    }
+  public JButton getButton(String name, Color color, ActionListener listener, Container container) {
+    JButton button = new JButton(name);
+    button.setBackground(color);
+    container.add(button);
+    button.addActionListener(listener);
+    return button;
+  }
 
-    public JMenu getMenu(String name, String image) {
-
-        JMenu menu = new JMenu(name);
-        menu.setIcon(new ImageIcon(getImage(image + ".png")));
-
-        return menu;
-    }
-
-    public JButton getButton(String name, Color color, ActionListener listener, Container container) {
-
-        JButton button = new JButton(name);
-        button.setBackground(color);
-        container.add(button);
-        button.addActionListener(listener);
-
-        return button;
-    }
-
-    public JLabel getLabel(String text, Color color, Container container, Font font) {
-
-        JLabel label = new JLabel(text);
-        label.setForeground(color);
-        label.setFont(font);
-        container.add(label);
-
-        return label;
-    }
+  public JLabel getLabel(String text, Color color, Container container, Font font) {
+    JLabel label = new JLabel(text);
+    label.setForeground(color);
+    label.setFont(font);
+    container.add(label);
+    return label;
+  }
 }

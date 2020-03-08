@@ -14,4 +14,11 @@ public class Alerts {
         "<html>" + Core.styleJOption() + "<strong>" + message +"</strong></html>",
         tittle, JOptionPane.PLAIN_MESSAGE);
   }
+
+  public static void emptyTable() {
+    JOptionPane.showMessageDialog(null,
+        "<html>" + Core.styleJOption() + "<u><strong><center>Empty Table</center></strong></u><br>"
+            + "The search did not return any results.</html>",
+        "No records found!", JOptionPane.PLAIN_MESSAGE);
+  }
 }

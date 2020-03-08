@@ -36,7 +36,7 @@ public class Card extends JDialog implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         if (e.getSource() == card) {
-            img.cr.fadeOut(this);
+            img.core.fadeOut(this);
         }
     }
 

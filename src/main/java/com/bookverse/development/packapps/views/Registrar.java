@@ -38,16 +38,16 @@ public class Registrar extends JDialog implements ActionListener {
         setIconImage(new ImageIcon(img.getImage("añadir_usuario.png")).getImage());
         setDefaultCloseOperation(0);
 
-        btnregistro = img.getButton("Registrar", img.cr.AZUL, this, this);
+        btnregistro = img.getButton("Registrar", img.core.AZUL, this, this);
         btnregistro.setBounds(60, 215, 100, 30);
 
-        btncancelar = img.getButton("Return", img.cr.ROJO, this, this);
+        btncancelar = img.getButton("Return", img.core.ROJO, this, this);
         btncancelar.setBounds(300, 215, 86, 30);
 
-        registrarse = img.getLabel("<html><strong><em>Registrarse</em></strong></html>", img.cr.ROJO, this, img.cr.BIG);
+        registrarse = img.getLabel("<html><strong><em>Registrarse</em></strong></html>", img.core.ROJO, this, img.core.BIG);
         registrarse.setBounds(150, 5, 200, 40);
 
-        usuario = img.getLabel("<html><strong>Username</strong></html>", img.cr.AZUL, this, img.cr.MEDIUM);
+        usuario = img.getLabel("<html><strong>Username</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
         usuario.setBounds(30, 60, 180, 30);
 
         txtUsuario = new JTextField();
@@ -62,11 +62,11 @@ public class Registrar extends JDialog implements ActionListener {
             }
 
             private void txtUsuarioKeyTyped(KeyEvent evt) {
-                img.cr.soloAlfa(evt.getKeyChar(), evt, txtUsuario.getText(), 12);
+                img.core.soloAlfa(evt.getKeyChar(), evt, txtUsuario.getText(), 12);
             }
         });
 
-        pass = img.getLabel("<html><strong>Password</strong></html>", img.cr.AZUL, this, img.cr.MEDIUM);
+        pass = img.getLabel("<html><strong>Password</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
         pass.setBounds(30, 110, 120, 30);
 
         txtPass = new JPasswordField();
@@ -81,11 +81,11 @@ public class Registrar extends JDialog implements ActionListener {
             }
 
             private void txtCodKeyTyped(KeyEvent evt) {
-                img.cr.soloAlfa(evt.getKeyChar(), evt, String.valueOf(txtPass.getPassword()), 20);
+                img.core.soloAlfa(evt.getKeyChar(), evt, String.valueOf(txtPass.getPassword()), 20);
             }
         });
 
-        codEncargado = img.getLabel("<html><strong>Manager Key</strong></html>", img.cr.AZUL, this, img.cr.MEDIUM);
+        codEncargado = img.getLabel("<html><strong>Manager Key</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
         codEncargado.setBounds(30, 160, 180, 30);
 
         txtCodProp = new JPasswordField();
@@ -101,7 +101,8 @@ public class Registrar extends JDialog implements ActionListener {
             }
 
             private void txtCodKeyTyped(KeyEvent evt) {
-                img.cr.soloAlfa(evt.getKeyChar(), evt, String.valueOf(txtCodProp.getPassword()), 20);
+                img.core
+                    .soloAlfa(evt.getKeyChar(), evt, String.valueOf(txtCodProp.getPassword()), 20);
             }
         });
     }
@@ -118,41 +119,41 @@ public class Registrar extends JDialog implements ActionListener {
         txtCodProp.setText("");
         txtUsuario.setEnabled(true);
         txtPass.setEnabled(true);
-        img.cr.fadeOut(this);
+        img.core.fadeOut(this);
     }
 
     public void btnRegistroAP() {
 
         try {
 
-            if (!img.db.userExist(txtUsuario.getText())) {
+            if (!img.database.userExist(txtUsuario.getText())) {
 
-                if (String.valueOf(txtCodProp.getPassword()).equals(img.cr.getCodProp())) {
+                if (String.valueOf(txtCodProp.getPassword()).equals(img.core.getCodProp())) {
                     txtUsuario.setEnabled(true);
                     txtPass.setEnabled(true);
 
-                    if (img.cr.usuarioPass(txtUsuario.getText())
-                            && img.cr.usuarioPass(String.valueOf(txtPass.getPassword()))) {
+                    if (img.core.usuarioPass(txtUsuario.getText())
+                            && img.core.usuarioPass(String.valueOf(txtPass.getPassword()))) {
 
-                        String[] datos = {"usuarios", txtUsuario.getText(), img.cr.Encriptar(String.valueOf(txtPass.getPassword()), true),
+                        String[] datos = {"usuarios", txtUsuario.getText(), img.core.Encriptar(String.valueOf(txtPass.getPassword()), true),
                                 "Offline"};
 
-                        img.db.insertData(datos);
+                        img.database.insertData(datos);
 
-                        JOptionPane.showMessageDialog(null, "<html>" + img.cr.styleJOption() + "<strong>¡Usuario registrado!</strong></html>", "Mensaje",
+                        JOptionPane.showMessageDialog(null, "<html>" + img.core.styleJOption() + "<strong>¡Usuario registrado!</strong></html>", "Mensaje",
                                 JOptionPane.PLAIN_MESSAGE);
                         txtUsuario.setText("");
                         txtPass.setText("");
                         txtCodProp.setText("");
-                        img.cr.fadeOut(this);
+                        img.core.fadeOut(this);
                     } else {
                         JOptionPane.showMessageDialog(null,
-                                "<html>" + img.cr.styleJOption() + "<strong>El nombre de usuario y/o la contraseña son demasiado débiles, inténtalo nuevamente.</strong></html>", "Mensaje",
+                                "<html>" + img.core.styleJOption() + "<strong>El nombre de usuario y/o la contraseña son demasiado débiles, inténtalo nuevamente.</strong></html>", "Mensaje",
                                 JOptionPane.PLAIN_MESSAGE);
                     }
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "<html>" + img.cr.styleJOption() + "<strong>Código de gerente incorrecto, inténtelo de nuevo.</strong></html>", "Mensaje",
+                    JOptionPane.showMessageDialog(null, "<html>" + img.core.styleJOption() + "<strong>Código de gerente incorrecto, inténtelo de nuevo.</strong></html>", "Mensaje",
                             JOptionPane.PLAIN_MESSAGE);
                     txtUsuario.setEnabled(false);
                     txtPass.setEnabled(false);
@@ -161,9 +162,9 @@ public class Registrar extends JDialog implements ActionListener {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "<html>" + img.cr.styleJOption() + "<strong>El usuario ya existe, intente iniciando sesión.</strong></html>", "Mensaje",
+                JOptionPane.showMessageDialog(null, "<html>" + img.core.styleJOption() + "<strong>El usuario ya existe, intente iniciando sesión.</strong></html>", "Mensaje",
                         JOptionPane.PLAIN_MESSAGE);
-                img.cr.fadeOut(this);
+                img.core.fadeOut(this);
             }
 
         } catch (SQLException e) {

@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.core.Resources;
 import java.awt.Color;
 import java.awt.Font;
@@ -23,8 +24,8 @@ public class Rompecabezas extends JDialog implements Runnable, ActionListener {
   // private Thread hiloMP3;
   private boolean cronometroActivo;
   private int tam, lado, time;
-  private Color color = h.cr.AZUL;
-  private Color rojo = h.cr.ROJO;
+  private Color color = h.core.AZUL;
+  private Color rojo = h.core.ROJO;
 
   public Rompecabezas(JFrame parent, boolean modal, int cuadrado, int lado, int minutos) {
 
@@ -46,17 +47,17 @@ public class Rompecabezas extends JDialog implements Runnable, ActionListener {
     setDefaultCloseOperation(0);
     setIconImage(new ImageIcon(h.getImage("rompecabezas.png")).getImage());
 
-    btnsalir = h.getButton("Return", h.cr.ROJO, this, this);
+    btnsalir = h.getButton("Return", h.core.ROJO, this, this);
     btnsalir.setBounds(330, 300, 86, 30);
 
-    btnplay = h.getButton("Play", h.cr.AZUL, this, this);
+    btnplay = h.getButton("Play", h.core.AZUL, this, this);
     btnplay.setBounds(70, 300, 86, 30);
 
-    btnreset = h.getButton("Stop", h.cr.ROJO, this, this);
+    btnreset = h.getButton("Stop", h.core.ROJO, this, this);
     btnreset.setBounds(200, 300, 86, 30);
     btnreset.setEnabled(false);
 
-    txtturno = h.getLabel("", rojo, this, h.cr.MEDIUM);
+    txtturno = h.getLabel("", rojo, this, h.core.MEDIUM);
     txtturno.setBounds(335, 90, 200, 100);
 
     tiempo = h.getLabel("", rojo, this, new Font("Times New Roman", 0, 45));
@@ -210,12 +211,12 @@ public class Rompecabezas extends JDialog implements Runnable, ActionListener {
 
   private void insertar(String state) {
 
-    if (h.cr.comprobarConexion("Datos no guardados", true) && h.cr.saveGame()) {
+    if (h.core.comprobarConexion("Datos no guardados", true) && h.core.saveGame()) {
 
-      String data[] = {"rompecabezas", h.cr.ingreseNickname("Ingrese un Nickname", 20), state,
-          getLevel(), String.valueOf(movimientos), h.cr.obtenerDate()};
+      String data[] = {"rompecabezas", Core.enterNickname("Enter a Nickname", 20), state,
+          getLevel(), String.valueOf(movimientos), h.core.obtenerDate()};
 
-      h.db.insertData(data);
+      h.database.insertData(data);
     }
   }
 
@@ -342,7 +343,7 @@ public class Rompecabezas extends JDialog implements Runnable, ActionListener {
     if (e.getSource() == btnplay) {
       btnPlayAP();
     } else if (e.getSource() == btnsalir) {
-      h.cr.fadeOut(this);
+      h.core.fadeOut(this);
     } else if (e.getSource() == btnreset) {
       btnResetAP();
     }
@@ -418,7 +419,7 @@ public class Rompecabezas extends JDialog implements Runnable, ActionListener {
 
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null,
-          "<html>" + h.cr.styleJOption() + "<strong>" + e.getMessage() + "</strong></html>");
+          "<html>" + h.core.styleJOption() + "<strong>" + e.getMessage() + "</strong></html>");
     }
   }
 }

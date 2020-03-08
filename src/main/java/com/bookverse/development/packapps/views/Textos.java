@@ -35,26 +35,26 @@ public class Textos extends JDialog implements MouseListener {
     public JPanel getPanel() {
 
         JPanel panel = new JPanel(new FlowLayout());
-        panel.setBorder(h.cr.bordeAzul("Select Action"));
+        panel.setBorder(h.core.bordeAzul("Select Action"));
 
-        encriptar = h.getLabel("  Encrypt  ", h.cr.AZUL, panel, h.cr.MEDIUM);
-        encriptar.setBorder(h.cr.MEDIO);
+        encriptar = h.getLabel("  Encrypt  ", h.core.AZUL, panel, h.core.MEDIUM);
+        encriptar.setBorder(h.core.MEDIO);
         encriptar.addMouseListener(this);
 
-        mayus = h.getLabel("  UpperCase  ", h.cr.AZUL, panel, h.cr.MEDIUM);
-        mayus.setBorder(h.cr.MEDIO);
+        mayus = h.getLabel("  UpperCase  ", h.core.AZUL, panel, h.core.MEDIUM);
+        mayus.setBorder(h.core.MEDIO);
         mayus.addMouseListener(this);
 
-        salir = h.getLabel("  Return  ", h.cr.ROJO, panel, h.cr.MEDIUM);
-        salir.setBorder(h.cr.HARD);
+        salir = h.getLabel("  Return  ", h.core.ROJO, panel, h.core.MEDIUM);
+        salir.setBorder(h.core.HARD);
         salir.addMouseListener(this);
 
-        minus = h.getLabel("  LowerCase  ", h.cr.AZUL, panel, h.cr.MEDIUM);
-        minus.setBorder(h.cr.MEDIO);
+        minus = h.getLabel("  LowerCase  ", h.core.AZUL, panel, h.core.MEDIUM);
+        minus.setBorder(h.core.MEDIO);
         minus.addMouseListener(this);
 
-        desencriptar = h.getLabel("  Decrypt  ", h.cr.AZUL, panel, h.cr.MEDIUM);
-        desencriptar.setBorder(h.cr.MEDIO);
+        desencriptar = h.getLabel("  Decrypt  ", h.core.AZUL, panel, h.core.MEDIUM);
+        desencriptar.setBorder(h.core.MEDIO);
         desencriptar.addMouseListener(this);
 
         return panel;
@@ -65,7 +65,7 @@ public class Textos extends JDialog implements MouseListener {
 
         setDefaultCloseOperation(0);
 
-        mensaje = h.getLabel("<html><strong>Write Text...</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        mensaje = h.getLabel("<html><strong>Write Text...</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         mensaje.setBounds(30, 15, 370, 50);
         add(mensaje, BorderLayout.NORTH);
 
@@ -105,7 +105,7 @@ public class Textos extends JDialog implements MouseListener {
                 texto.setText(texto.getText().toUpperCase());
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.cr.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
+                        "<html>" + h.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
                         JOptionPane.PLAIN_MESSAGE);
             }
 
@@ -115,32 +115,32 @@ public class Textos extends JDialog implements MouseListener {
                 texto.setText(texto.getText().toLowerCase());
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.cr.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
+                        "<html>" + h.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
                         JOptionPane.PLAIN_MESSAGE);
             }
 
         } else if (e.getSource() == encriptar) {
 
             if (!texto.getText().equals("")) {
-                texto.setText(h.cr.Encriptar(texto.getText(), false));
+                texto.setText(h.core.Encriptar(texto.getText(), false));
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.cr.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
+                        "<html>" + h.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
                         JOptionPane.PLAIN_MESSAGE);
             }
 
         } else if (e.getSource() == desencriptar) {
 
             if (!texto.getText().equals("")) {
-                texto.setText(h.cr.Desencriptar(texto.getText(), false));
+                texto.setText(h.core.Desencriptar(texto.getText(), false));
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.cr.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
+                        "<html>" + h.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
                         JOptionPane.PLAIN_MESSAGE);
             }
 
         } else if (e.getSource() == salir) {
-            h.cr.fadeOut(this);
+            h.core.fadeOut(this);
         }
     }
 
@@ -148,15 +148,15 @@ public class Textos extends JDialog implements MouseListener {
     public void mouseEntered(MouseEvent e) {
 
         if (e.getSource() == mayus) {
-            mayus.setCursor(h.cr.MANO);
+            mayus.setCursor(h.core.MANO);
         } else if (e.getSource() == minus) {
-            minus.setCursor(h.cr.MANO);
+            minus.setCursor(h.core.MANO);
         } else if (e.getSource() == encriptar) {
-            encriptar.setCursor(h.cr.MANO);
+            encriptar.setCursor(h.core.MANO);
         } else if (e.getSource() == desencriptar) {
-            desencriptar.setCursor(h.cr.MANO);
+            desencriptar.setCursor(h.core.MANO);
         } else if (e.getSource() == salir) {
-            salir.setCursor(h.cr.MANO);
+            salir.setCursor(h.core.MANO);
         }
     }
 

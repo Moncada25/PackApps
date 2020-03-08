@@ -106,7 +106,7 @@ public class Opciones extends JDialog implements ActionListener {
     compra.setResizable(false);
     compra.setLocationRelativeTo(null);
     compra.setTitle("Comprar");
-    img.cr.fadeIn(compra);
+    img.core.fadeIn(compra);
     setVisible(false);
     compra.setVisible(true);
   }
@@ -117,7 +117,7 @@ public class Opciones extends JDialog implements ActionListener {
     vent.setResizable(false);
     vent.setLocationRelativeTo(null);
     vent.setTitle("Vender");
-    img.cr.fadeIn(vent);
+    img.core.fadeIn(vent);
     setVisible(false);
     vent.setVisible(true);
   }
@@ -128,7 +128,7 @@ public class Opciones extends JDialog implements ActionListener {
     pres.setResizable(false);
     pres.setLocationRelativeTo(null);
     pres.setTitle("Prestar");
-    img.cr.fadeIn(pres);
+    img.core.fadeIn(pres);
     setVisible(false);
     pres.setVisible(true);
   }
@@ -141,7 +141,7 @@ public class Opciones extends JDialog implements ActionListener {
 
     // importa los registros desde sql
     try {
-      img.db.readTable(tab.registradoraTab,
+      img.database.readTable(tab.registradoraTab,
           "select Usuario, Productos_Vendidos,Total_Ventas,Productos_Comprados,Total_Compras, Total_Prestamos from registros",
           true);
     } catch (Exception e1) {
@@ -153,7 +153,7 @@ public class Opciones extends JDialog implements ActionListener {
     tab.setMaximumSize(new Dimension(1280, 720));
     tab.setLocationRelativeTo(null);
     tab.setTitle("Registradora");
-    img.cr.fadeIn(tab);
+    img.core.fadeIn(tab);
     setVisible(false);
     tab.setVisible(true);
   }
@@ -166,7 +166,7 @@ public class Opciones extends JDialog implements ActionListener {
 
     // importa el inventario desde sql
     try {
-      img.db.readTable(inv.inventarioTab, "select * from inventario", true);
+      img.database.readTable(inv.inventarioTab, "select * from inventario", true);
     } catch (Exception e1) {
       e1.printStackTrace();
     }
@@ -176,7 +176,7 @@ public class Opciones extends JDialog implements ActionListener {
     inv.setMaximumSize(new Dimension(1280, 720));
     inv.setLocationRelativeTo(null);
     inv.setTitle("Productos");
-    img.cr.fadeIn(inv);
+    img.core.fadeIn(inv);
     setVisible(false);
     inv.setVisible(true);
   }
@@ -189,7 +189,7 @@ public class Opciones extends JDialog implements ActionListener {
 
     // importa los préstamos desde sql
     try {
-      img.db.readTable(tabP.prestamosTab,
+      img.database.readTable(tabP.prestamosTab,
           "select Usuario, Nombre, Documento, Referencia, Teléfono, Plazo, Valor from préstamos",
           true);
     } catch (Exception e1) {
@@ -201,7 +201,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.setMaximumSize(new Dimension(1280, 720));
     tabP.setLocationRelativeTo(null);
     tabP.setTitle("Préstamos");
-    img.cr.fadeIn(tabP);
+    img.core.fadeIn(tabP);
     setVisible(false);
     tabP.setVisible(true);
   }
@@ -213,7 +213,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.limpiarTabla();
 
     try {
-      img.db.readTable(tabP.comprasTab,
+      img.database.readTable(tabP.comprasTab,
           "select IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total from compras",
           true);
     } catch (Exception e1) {
@@ -225,7 +225,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.setMaximumSize(new Dimension(1280, 720));
     tabP.setLocationRelativeTo(null);
     tabP.setTitle("Compras");
-    img.cr.fadeIn(tabP);
+    img.core.fadeIn(tabP);
     setVisible(false);
     tabP.setVisible(true);
   }
@@ -237,7 +237,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.limpiarTabla();
 
     try {
-      img.db.readTable(tabP.ventasTab,
+      img.database.readTable(tabP.ventasTab,
           "select IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total from ventas",
           true);
     } catch (Exception e1) {
@@ -249,7 +249,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.setMaximumSize(new Dimension(1280, 720));
     tabP.setLocationRelativeTo(null);
     tabP.setTitle("Ventas");
-    img.cr.fadeIn(tabP);
+    img.core.fadeIn(tabP);
     setVisible(false);
     tabP.setVisible(true);
   }
@@ -261,7 +261,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.limpiarTabla();
 
     try {
-      img.db.readTable(tabP.usuariosTab, "select User_Name, Status from usuarios", true);
+      img.database.readTable(tabP.usuariosTab, "select User_Name, Status from usuarios", true);
     } catch (Exception e1) {
       e1.printStackTrace();
     }
@@ -271,7 +271,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.setMaximumSize(new Dimension(1280, 720));
     tabP.setLocationRelativeTo(null);
     tabP.setTitle("Usuarios Registrados");
-    img.cr.fadeIn(tabP);
+    img.core.fadeIn(tabP);
     setVisible(false);
     tabP.setVisible(true);
   }
@@ -279,12 +279,12 @@ public class Opciones extends JDialog implements ActionListener {
   public void loguot() {
 
     try {
-      img.db.login("Offline", img.db.returnUser("Online"));
+      img.database.login("Offline", img.database.returnUser("Online"));
     } catch (SQLException e1) {
       e1.printStackTrace();
     }
 
-    img.cr.fadeOut(this);
+    img.core.fadeOut(this);
   }
 
   // Eventos al presionar un botón
@@ -295,7 +295,7 @@ public class Opciones extends JDialog implements ActionListener {
       loguot();
     } else {
 
-      if (img.cr.comprobarConexion("No disponible sin conexión", true)) {
+      if (img.core.comprobarConexion("No disponible sin conexión", true)) {
 
         if (e.getSource() == comprar) {
           btnComprarAP();

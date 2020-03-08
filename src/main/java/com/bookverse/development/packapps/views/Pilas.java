@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.core.Resources;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -40,7 +41,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
         String[] imgs = {"push.png", "pop.png", "peek.png", "contar.png", "sumar.png", "promedio.png", "pares.png",
                 "vaciar.png"};
 
-        panel.setBorder(h.cr.bordeAzul("Select Action"));
+        panel.setBorder(h.core.bordeAzul("Select Action"));
 
         /* ICONOS */
         for (int i = 0; i < botones.length; i++) {
@@ -64,7 +65,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
             pila[j] = h.getButton("", null, this, this);
             pila[j].setBounds(x, y, 80, 40);
-            pila[j].setForeground(h.cr.ROJO);
+            pila[j].setForeground(h.core.ROJO);
             pila[j].setVisible(false);
             y -= 40;
 
@@ -80,10 +81,10 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
         getPanel();
 
-        titulo = h.getLabel("", h.cr.ROJO, this, h.cr.BIG);
+        titulo = h.getLabel("", h.core.ROJO, this, h.core.BIG);
         titulo.setBounds(550, 70, 600, 200);
 
-        mensaje = h.getLabel("", h.cr.ROJO, this, h.cr.BIG);
+        mensaje = h.getLabel("", h.core.ROJO, this, h.core.BIG);
         mensaje.setBounds(620, 480, 200, 85);
     }
 
@@ -94,7 +95,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
         if (pila.length > i) {
 
             do {
-                num = Integer.parseInt(h.cr.ingreseNumero("Ingresa un número", 6));
+                num = Integer.parseInt(Core.enterNumber("Ingresa un número", 6));
 
                 Push(num);
             } while (JOptionPane.showConfirmDialog(null, "¿Desea ingresar más datos?", "Ingreso de datos",
@@ -104,7 +105,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
         } else {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>La pila está llena</strong></html>", "Mensaje",
+                    "<html>" + h.core.styleJOption() + "<strong>La pila está llena</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
         }
     }
@@ -118,7 +119,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
             titulo.setText("<html><strong>Se desapiló ? " + Pop(pila, i) + "</strong></html>");
 
-            if (pila[i - 1].getBackground() == h.cr.AZUL) {
+            if (pila[i - 1].getBackground() == h.core.AZUL) {
                 con--;
                 sum -= Double.parseDouble((pila[i - 1].getText()));
                 pila[i - 1].setBackground(getBackground());
@@ -128,7 +129,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
             i--;
         } else {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
+                    "<html>" + h.core.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
             reset();
         }
@@ -140,7 +141,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
             titulo.setText("<html><strong>Próximo dato ? " + Peek() + "</strong></html>");
         } else {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
+                    "<html>" + h.core.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
         }
     }
@@ -178,7 +179,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
         } else {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
+                    "<html>" + h.core.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
             reset();
         }
@@ -188,7 +189,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
         if (i == 0) {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
+                    "<html>" + h.core.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
         } else {
             titulo.setText("<html><strong>Hay " + i + " elementos en la pila</strong></html>");
@@ -200,7 +201,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
         if (i == 0) {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
+                    "<html>" + h.core.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
         } else {
 
@@ -220,7 +221,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
         if (i == 0) {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
+                    "<html>" + h.core.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
         } else {
             titulo.setText(
@@ -245,14 +246,14 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
         if (i == 0) {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
+                    "<html>" + h.core.styleJOption() + "<strong>La pila está vacía</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
         } else if (cont == 0) {
             titulo.setText("<html><strong>No hay pares en la pila</strong></html>");
         } else {
             titulo.setText("<html><strong>Cantidad de pares ? " + cont + "</strong></html>");
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>Números pares de la pila</strong></html><br>" + cadena,
+                    "<html>" + h.core.styleJOption() + "<strong>Números pares de la pila</strong></html><br>" + cadena,
                     "Resultado", JOptionPane.PLAIN_MESSAGE);
         }
 
@@ -302,28 +303,28 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
     public void mouseEntered(MouseEvent e) {
 
         if (e.getSource() == botones[0]) {
-            botones[0].setCursor(h.cr.MANO);
+            botones[0].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Push( )</strong></html>");
         } else if (e.getSource() == botones[1]) {
-            botones[1].setCursor(h.cr.MANO);
+            botones[1].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Pop( )</strong></html>");
         } else if (e.getSource() == botones[2]) {
-            botones[2].setCursor(h.cr.MANO);
+            botones[2].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Peek( )</strong></html>");
         } else if (e.getSource() == botones[3]) {
-            botones[3].setCursor(h.cr.MANO);
+            botones[3].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Contar</strong></html>");
         } else if (e.getSource() == botones[4]) {
-            botones[4].setCursor(h.cr.MANO);
+            botones[4].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Sumar</strong></html>");
         } else if (e.getSource() == botones[5]) {
-            botones[5].setCursor(h.cr.MANO);
+            botones[5].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Promediar</strong></html>");
         } else if (e.getSource() == botones[6]) {
-            botones[6].setCursor(h.cr.MANO);
+            botones[6].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Números Pares</strong></html>");
         } else if (e.getSource() == botones[7]) {
-            botones[7].setCursor(h.cr.MANO);
+            botones[7].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Vaciar</strong></html>");
         }
     }
@@ -367,12 +368,12 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
             if (e.getSource() == pila[j]) {
 
-                if (pila[j].getBackground() == h.cr.AZUL) {
+                if (pila[j].getBackground() == h.core.AZUL) {
                     pila[j].setBackground(getBackground());
                     con--;
                     sum -= Double.parseDouble(pila[j].getText());
                 } else {
-                    pila[j].setBackground(h.cr.AZUL);
+                    pila[j].setBackground(h.core.AZUL);
                     con++;
                     sum += Double.parseDouble(pila[j].getText());
                 }

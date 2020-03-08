@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.AppsConstants.DICES;
+import static com.bookverse.development.packapps.utils.TableConstants.DICES;
 
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -44,13 +44,13 @@ public class Dices extends JDialog implements ActionListener {
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("dado.png")).getImage());
 
-    btnExit = resources.getButton("Return", resources.cr.ROJO, this, this);
+    btnExit = resources.getButton("Return", resources.core.ROJO, this, this);
     btnExit.setBounds(330, 320, 86, 30);
 
-    btnThrow = resources.getButton("Throw", resources.cr.AZUL, this, this);
+    btnThrow = resources.getButton("Throw", resources.core.AZUL, this, this);
     btnThrow.setBounds(25, 320, 86, 30);
 
-    btnReset = resources.getButton("Reset", resources.cr.AZUL, this, this);
+    btnReset = resources.getButton("Reset", resources.core.AZUL, this, this);
     btnReset.setBounds(185, 320, 86, 30);
     btnReset.setEnabled(false);
 
@@ -75,11 +75,11 @@ public class Dices extends JDialog implements ActionListener {
       }
 
       private void player1KeyTyped(KeyEvent e) {
-        resources.cr.soloTexto(e.getKeyChar(), e, player1.getText(), 10);
+        resources.core.soloTexto(e.getKeyChar(), e, player1.getText(), 10);
       }
     });
 
-    lblPoints1 = resources.getLabel("", resources.cr.ROJO, this, resources.cr.MEDIUM);
+    lblPoints1 = resources.getLabel("", resources.core.ROJO, this, resources.core.MEDIUM);
     lblPoints1.setBounds(45, 185, 120, 60);
 
     player2 = new JTextField("Player 2");
@@ -94,11 +94,11 @@ public class Dices extends JDialog implements ActionListener {
       }
 
       private void player2KeyTyped(KeyEvent e) {
-        resources.cr.soloTexto(e.getKeyChar(), e, player2.getText(), 10);
+        resources.core.soloTexto(e.getKeyChar(), e, player2.getText(), 10);
       }
     });
 
-    lblPoints2 = resources.getLabel("", resources.cr.ROJO, this, resources.cr.MEDIUM);
+    lblPoints2 = resources.getLabel("", resources.core.ROJO, this, resources.core.MEDIUM);
     lblPoints2.setBounds(195, 189, 120, 60);
 
     player3 = new JTextField("Player 3");
@@ -113,11 +113,11 @@ public class Dices extends JDialog implements ActionListener {
       }
 
       private void player3KeyTyped(KeyEvent e) {
-        resources.cr.soloTexto(e.getKeyChar(), e, player3.getText(), 10);
+        resources.core.soloTexto(e.getKeyChar(), e, player3.getText(), 10);
       }
     });
 
-    lblPoints3 = resources.getLabel("", resources.cr.ROJO, this, resources.cr.MEDIUM);
+    lblPoints3 = resources.getLabel("", resources.core.ROJO, this, resources.core.MEDIUM);
     lblPoints3.setBounds(340, 185, 120, 60);
   }
 
@@ -130,9 +130,9 @@ public class Dices extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DICES + ", throw them!");
-    resources.cr.fadeIn(this);
+    resources.core.fadeIn(this);
     parent.setVisible(false);
-    resources.cr.instruccionesDados();
+    resources.core.instruccionesDados();
     setVisible(true);
   }
 
@@ -141,9 +141,9 @@ public class Dices extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DICES + ", throw them!");
-    resources.cr.fadeIn(this);
+    resources.core.fadeIn(this);
     parent.setVisible(false);
-    resources.cr.instruccionesDados();
+    resources.core.instruccionesDados();
     setVisible(true);
   }
 
@@ -160,7 +160,7 @@ public class Dices extends JDialog implements ActionListener {
         dice3.setIcon(new ImageIcon(resources.getImage("03.gif")));
 
         btnThrow.setText("Stop");
-        btnThrow.setBackground(resources.cr.ROJO);
+        btnThrow.setBackground(resources.core.ROJO);
 
         btnExit.setEnabled(false);
         player1.setEnabled(false);
@@ -267,7 +267,7 @@ public class Dices extends JDialog implements ActionListener {
 
         if (round < 6) {
           btnThrow.setText("Throw");
-          btnThrow.setBackground(resources.cr.AZUL);
+          btnThrow.setBackground(resources.core.AZUL);
         } else if (!winner) {
           round--;
           highestScore();
@@ -318,10 +318,10 @@ public class Dices extends JDialog implements ActionListener {
 
   private void insertResults(String name, String win) {
 
-    if (resources.cr.comprobarConexion("Data don't saved", true) && resources.cr.saveGame()) {
+    if (resources.core.comprobarConexion("Data don't saved", true) && resources.core.saveGame()) {
       try {
-        String[] data = {Format.tableName(DICES), name, win, String.valueOf(round), resources.cr.obtenerDate()};
-        resources.db.insertData(data);
+        String[] data = {DICES, name, win, String.valueOf(round), resources.core.obtenerDate()};
+        resources.database.insertData(data);
       } catch (Exception e) {
         Alerts.error(e, DICES);
       }
@@ -335,7 +335,7 @@ public class Dices extends JDialog implements ActionListener {
     winner = false;
     setTitle(DICES + ", throw them!");
     btnThrow.setText("Throw");
-    btnThrow.setBackground(resources.cr.AZUL);
+    btnThrow.setBackground(resources.core.AZUL);
     btnThrow.setEnabled(true);
     btnReset.setEnabled(false);
     btnExit.setEnabled(true);
@@ -365,7 +365,7 @@ public class Dices extends JDialog implements ActionListener {
     }
 
     if (e.getSource() == btnExit) {
-      resources.cr.fadeOut(this);
+      resources.core.fadeOut(this);
     }
 
     if (e.getSource() == btnReset) {

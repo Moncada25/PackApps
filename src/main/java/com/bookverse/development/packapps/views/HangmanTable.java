@@ -1,10 +1,10 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.AppsConstants.DICES;
-import static com.bookverse.development.packapps.utils.AppsConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.AppsConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.AppsConstants.NOTES;
-import static com.bookverse.development.packapps.utils.AppsConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.TableConstants.DICES;
+import static com.bookverse.development.packapps.utils.TableConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.TableConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.TableConstants.NOTES;
+import static com.bookverse.development.packapps.utils.TableConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.core.Resources;
@@ -63,16 +63,16 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
     JPanel row = new JPanel(new FlowLayout());
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(resources.cr.bordeAzul("Select Table"));
+    panel.setBorder(resources.core.bordeAzul("Select Table"));
 
     tittle = new JLabel();
-    tittle.setFont(resources.cr.BIG);
-    tittle.setForeground(resources.cr.ROJO);
+    tittle.setFont(resources.core.BIG);
+    tittle.setForeground(resources.core.ROJO);
     tittle.addMouseListener(this);
 
     message = new JLabel();
-    message.setFont(resources.cr.BIG);
-    message.setForeground(resources.cr.AZUL);
+    message.setFont(resources.core.BIG);
+    message.setForeground(resources.core.AZUL);
     message.addMouseListener(this);
 
     IntStream.range(0, tables.length).forEach(i -> {
@@ -191,8 +191,8 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (resources.cr.loginDBA()) {
-          resources.db.updateData(resources.cr.ingreseNickname("Enter a Nickname", 20),
+        if (resources.core.loginDBA()) {
+          resources.database.updateData(Core.enterNickname("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(HANGMAN));
 
           dispose();
@@ -216,8 +216,8 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
         int[] rows = viewTable.getSelectedRows();
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0))).toArray(String[]::new);
 
-        if (resources.cr.loginDBA()) {
-          resources.db.deleteData(IDs, Format.tableName(HANGMAN));
+        if (resources.core.loginDBA()) {
+          resources.database.deleteData(IDs, Format.tableName(HANGMAN));
           dispose();
           new Index().hangmanTableAP();
         }
@@ -236,7 +236,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
     try {
 
-      if (resources.db.readTable(table.tabResult, sql, false)) {
+      if (resources.database.readTable(table.tabResult, sql, false)) {
         table.setBounds(0, 0, 780, alto);
         table.setResizable(false);
         table.setLocationRelativeTo(null);
@@ -289,20 +289,20 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == tables[0]) {
-      tables[0].setCursor(resources.cr.MIRA);
+      tables[0].setCursor(resources.core.MIRA);
       tittle.setText("    " + GUESS_NUMBER);
     } else if (e.getSource() == tables[1]) {
-      tables[1].setCursor(resources.cr.CARGAR);
+      tables[1].setCursor(resources.core.CARGAR);
       tittle.setText("    " + HANGMAN);
       message.setText("       You're here");
     } else if (e.getSource() == tables[2]) {
-      tables[2].setCursor(resources.cr.REDI);
+      tables[2].setCursor(resources.core.REDI);
       tittle.setText("    " + DICES);
     } else if (e.getSource() == tables[3]) {
-      tables[3].setCursor(resources.cr.TEXT);
+      tables[3].setCursor(resources.core.TEXT);
       tittle.setText("    " + NOTES);
     } else if (e.getSource() == tables[4]) {
-      tables[4].setCursor(resources.cr.MANO);
+      tables[4].setCursor(resources.core.MANO);
       tittle.setText("    " + PUZZLE);
     }
   }

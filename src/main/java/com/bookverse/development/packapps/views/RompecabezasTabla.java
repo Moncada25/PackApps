@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.models.Table;
 import java.awt.BorderLayout;
@@ -58,16 +59,16 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
 
     String[] imgs = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(img.cr.bordeAzul("Select Table"));
+    panel.setBorder(img.core.bordeAzul("Select Table"));
 
     titulo = new JLabel();
-    titulo.setFont(img.cr.BIG);
-    titulo.setForeground(img.cr.ROJO);
+    titulo.setFont(img.core.BIG);
+    titulo.setForeground(img.core.ROJO);
     titulo.addMouseListener(this);
 
     men = new JLabel();
-    men.setFont(img.cr.BIG);
-    men.setForeground(img.cr.AZUL);
+    men.setFont(img.core.BIG);
+    men.setForeground(img.core.AZUL);
     men.addMouseListener(this);
 
     /* ICONOS */
@@ -174,7 +175,7 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
       Object opcion = null;
 
       opcion = JOptionPane.showInputDialog(null,
-          "<html>" + img.cr.styleJOption() + "<strong><em>¿Qué busca?</em></strong></html>",
+          "<html>" + img.core.styleJOption() + "<strong><em>¿Qué busca?</em></strong></html>",
           "Buscar registros", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"ID", "Nickname"},
           "ID");
 
@@ -184,13 +185,13 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
 
           if (opcion.toString().equals("ID")) {
             String sql =
-                "select * from rompecabezas where ID ='" + img.cr.ingreseNumero("Ingresa un ID", 6)
+                "select * from rompecabezas where ID ='" + Core.enterNumber("Ingresa un ID", 6)
                     + "'";
             resultadoBusqueda(90, sql);
             setVisible(true);
           } else if (opcion.toString().equals("Nickname")) {
             String sql = "select * from rompecabezas where Nickname ='"
-                + img.cr.ingreseNickname("Ingrese un Nickname", 20) + "'";
+                + Core.enterNickname("Ingrese un Nickname", 20) + "'";
             resultadoBusqueda(250, sql);
             setVisible(true);
           }
@@ -219,9 +220,9 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
 
       } else {
 
-        if (img.cr.loginDBA()) {
+        if (img.core.loginDBA()) {
 
-          img.db.updateData(img.cr.ingreseNickname("Ingrese un Nickname", 20),
+          img.database.updateData(Core.enterNickname("Ingrese un Nickname", 20),
               String.valueOf(modelo.getValueAt(filaseleccionada, 0)), "rompecabezas");
 
           dispose();
@@ -252,8 +253,8 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
           IDs[i] = String.valueOf(modelo.getValueAt(rows[i], 0));
         }
 
-        if (img.cr.loginDBA()) {
-          img.db.deleteData(IDs, "rompecabezas");
+        if (img.core.loginDBA()) {
+          img.database.deleteData(IDs, "rompecabezas");
 
           dispose();
           new Index().RompecabezasTableAP();
@@ -269,7 +270,7 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
 
     Object opcion = null;
 
-    opcion = JOptionPane.showInputDialog(null, "<html>" + img.cr.styleJOption()
+    opcion = JOptionPane.showInputDialog(null, "<html>" + img.core.styleJOption()
             + "<strong><em>Seleccionar dificultad</em></strong></html>",
         "Nivel de dificultad", JOptionPane.PLAIN_MESSAGE, null,
         new Object[]{"Easy", "Medium", "Hard"},
@@ -299,7 +300,7 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
 
     try {
 
-      if (img.db.readTable(resultado.tabResult, sql, false)) {
+      if (img.database.readTable(resultado.tabResult, sql, false)) {
         resultado.setBounds(0, 0, 780, alto);
         resultado.setResizable(false);
         resultado.setLocationRelativeTo(null);
@@ -353,19 +354,19 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == tablas[0]) {
-      tablas[0].setCursor(img.cr.MIRA);
+      tablas[0].setCursor(img.core.MIRA);
       titulo.setText("    Adivinar Número");
     } else if (e.getSource() == tablas[1]) {
-      tablas[1].setCursor(img.cr.CARGAR);
+      tablas[1].setCursor(img.core.CARGAR);
       titulo.setText("    Ahorcadito");
     } else if (e.getSource() == tablas[2]) {
-      tablas[2].setCursor(img.cr.REDI);
+      tablas[2].setCursor(img.core.REDI);
       titulo.setText("    Juego de Dados");
     } else if (e.getSource() == tablas[3]) {
-      tablas[3].setCursor(img.cr.TEXT);
+      tablas[3].setCursor(img.core.TEXT);
       titulo.setText("    Notas");
     } else if (e.getSource() == tablas[4]) {
-      tablas[4].setCursor(img.cr.MANO);
+      tablas[4].setCursor(img.core.MANO);
       titulo.setText("    Rompecabezas");
       men.setText("       You're here");
     }

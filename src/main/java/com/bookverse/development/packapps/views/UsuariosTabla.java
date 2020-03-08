@@ -57,15 +57,15 @@ public class UsuariosTabla extends JDialog implements MouseListener {
 
     String[] imgs = {"añadir_usuario.png", "editar_usuario.png", "eliminar_usuario.png"};
 
-    panel.setBorder(img.cr.bordeAzul("Select Action"));
+    panel.setBorder(img.core.bordeAzul("Select Action"));
 
     titulo = new JLabel();
-    titulo.setFont(img.cr.BIG);
-    titulo.setForeground(img.cr.ROJO);
+    titulo.setFont(img.core.BIG);
+    titulo.setForeground(img.core.ROJO);
 
     men = new JLabel();
-    men.setFont(img.cr.BIG);
-    men.setForeground(img.cr.AZUL);
+    men.setFont(img.core.BIG);
+    men.setForeground(img.core.AZUL);
 
     /* ICONOS */
     for (int i = 0; i < tablas.length; i++) {
@@ -167,12 +167,12 @@ public class UsuariosTabla extends JDialog implements MouseListener {
 
           try {
 
-            if (img.db.buscarEmpleado(user, img.cr.Encriptar(img.cr.loginUser(), true))) {
+            if (img.database.buscarEmpleado(user, img.core.Encriptar(img.core.loginUser(), true))) {
 
               Object opcion = null;
 
               opcion = JOptionPane.showInputDialog(null,
-                  "<html>" + img.cr.styleJOption()
+                  "<html>" + img.core.styleJOption()
                       + "<strong><em>¿Qué quiere actualizar?</em></strong></html>",
                   "Update Data", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Password"},
                   "Password");
@@ -180,9 +180,9 @@ public class UsuariosTabla extends JDialog implements MouseListener {
               if (opcion != null) {
 
                 if (opcion.toString().equals("Password")) {
-                  img.db.updatePassword(user, img.cr.Encriptar(img.cr.newPassword(), true));
+                  img.database.updatePassword(user, img.core.Encriptar(img.core.newPassword(), true));
                   JOptionPane.showMessageDialog(null,
-                      "<html>" + img.cr.styleJOption()
+                      "<html>" + img.core.styleJOption()
                           + "<strong>Contraseña actualizada</strong></html>",
                       "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
                 }
@@ -190,7 +190,7 @@ public class UsuariosTabla extends JDialog implements MouseListener {
 
             } else {
               JOptionPane.showMessageDialog(null,
-                  "<html>" + img.cr.styleJOption()
+                  "<html>" + img.core.styleJOption()
                       + "<strong>Contraseña incorrecta</strong></html>",
                   "Error", JOptionPane.PLAIN_MESSAGE);
             }
@@ -240,14 +240,14 @@ public class UsuariosTabla extends JDialog implements MouseListener {
           for (int i = 0; i < rows.length; i++) {
             try {
               IDs[i] = String
-                  .valueOf(img.db.getIDUser(String.valueOf(modelo.getValueAt(rows[i], 0))));
+                  .valueOf(img.database.getIDUser(String.valueOf(modelo.getValueAt(rows[i], 0))));
             } catch (SQLException e) {
               e.printStackTrace();
             }
           }
 
-          if (img.cr.loginDBA()) {
-            img.db.deleteData(IDs, "usuarios");
+          if (img.core.loginDBA()) {
+            img.database.deleteData(IDs, "usuarios");
 
             dispose();
             new Opciones().btnUsuariosAP();
@@ -283,13 +283,13 @@ public class UsuariosTabla extends JDialog implements MouseListener {
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == tablas[0]) {
-      tablas[0].setCursor(img.cr.MANO);
+      tablas[0].setCursor(img.core.MANO);
       titulo.setText("Add User");
     } else if (e.getSource() == tablas[1]) {
-      tablas[1].setCursor(img.cr.MANO);
+      tablas[1].setCursor(img.core.MANO);
       titulo.setText("Edit User");
     } else if (e.getSource() == tablas[2]) {
-      tablas[2].setCursor(img.cr.MANO);
+      tablas[2].setCursor(img.core.MANO);
       titulo.setText("Delete User");
     }
   }

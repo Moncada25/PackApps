@@ -26,7 +26,7 @@ public class TimesheetStepDefinitions {
     @Before
     public void config() {
         setTheStage(new Cast());
-        theActorCalled("PackApssUser");
+        theActorCalled("PackAppsUser");
         theActorInTheSpotlight().can(BrowseTheWeb.with(DriverChrome.web().inTheWebPage(ultimatixData.getUrl())));
     }
 
