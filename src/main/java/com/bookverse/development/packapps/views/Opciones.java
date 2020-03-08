@@ -141,7 +141,7 @@ public class Opciones extends JDialog implements ActionListener {
 
     // importa los registros desde sql
     try {
-      img.db.importarTabla(tab.registradoraTab,
+      img.db.readTable(tab.registradoraTab,
           "select Usuario, Productos_Vendidos,Total_Ventas,Productos_Comprados,Total_Compras, Total_Prestamos from registros",
           true);
     } catch (Exception e1) {
@@ -166,7 +166,7 @@ public class Opciones extends JDialog implements ActionListener {
 
     // importa el inventario desde sql
     try {
-      img.db.importarTabla(inv.inventarioTab, "select * from inventario", true);
+      img.db.readTable(inv.inventarioTab, "select * from inventario", true);
     } catch (Exception e1) {
       e1.printStackTrace();
     }
@@ -189,7 +189,7 @@ public class Opciones extends JDialog implements ActionListener {
 
     // importa los préstamos desde sql
     try {
-      img.db.importarTabla(tabP.prestamosTab,
+      img.db.readTable(tabP.prestamosTab,
           "select Usuario, Nombre, Documento, Referencia, Teléfono, Plazo, Valor from préstamos",
           true);
     } catch (Exception e1) {
@@ -213,7 +213,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.limpiarTabla();
 
     try {
-      img.db.importarTabla(tabP.comprasTab,
+      img.db.readTable(tabP.comprasTab,
           "select IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total from compras",
           true);
     } catch (Exception e1) {
@@ -237,7 +237,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.limpiarTabla();
 
     try {
-      img.db.importarTabla(tabP.ventasTab,
+      img.db.readTable(tabP.ventasTab,
           "select IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total from ventas",
           true);
     } catch (Exception e1) {
@@ -261,7 +261,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.limpiarTabla();
 
     try {
-      img.db.importarTabla(tabP.usuariosTab, "select User_Name, Status from usuarios", true);
+      img.db.readTable(tabP.usuariosTab, "select User_Name, Status from usuarios", true);
     } catch (Exception e1) {
       e1.printStackTrace();
     }

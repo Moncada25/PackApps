@@ -1162,7 +1162,7 @@ public class Core {
 
     if (!pdfNewFile.equals(file)) {
 
-      if (new Database().importarTabla(jTable, query, false)) {
+      if (new Database().readTable(jTable, query, false)) {
 
         try {
 
@@ -1241,7 +1241,7 @@ public class Core {
 
     if (!rutaArchivo.equals(file)) {
 
-      if (new Database().importarTabla(jTable1, query, false)) {
+      if (new Database().readTable(jTable1, query, false)) {
 
         int cantFila = jTable1.getRowCount();
         int cantColumna = jTable1.getColumnCount();
@@ -1287,7 +1287,7 @@ public class Core {
 
     if (!rutaArchivo.equals(file)) {
 
-      if (new Database().importarTabla(table, query, false)) {
+      if (new Database().readTable(table, query, false)) {
 
         try {
 

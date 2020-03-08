@@ -399,7 +399,7 @@ public class Ventas extends JDialog implements ActionListener {
 
         // importa el inventario desde sql
         try {
-            img.db.importarTabla(inv.inventarioTab, "select * from inventario", true);
+            img.db.readTable(inv.inventarioTab, "select * from inventario", true);
         } catch (Exception e1) {
             e1.printStackTrace();
         }

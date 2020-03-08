@@ -1,10 +1,13 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.utils.AppsConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.ArrayData.LONG_IMAGES;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_IMAGES;
 import static com.bookverse.development.packapps.utils.ArrayData.WIDTH_IMAGES;
 
 import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.Querys;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -33,7 +36,7 @@ public class Index extends JFrame implements ActionListener {
 
   private static JLabel welcome;
   public AhorcadoTabla hangmanTable = new AhorcadoTabla(this, true);
-  public AdivinarTabla guessTable = new AdivinarTabla(this, true);
+  public GuessNumberTable guessNumberTable = new GuessNumberTable(this, true);
   public RompecabezasTabla puzzleTable = new RompecabezasTabla(this, true);
   public DadosTabla dicesTable = new DadosTabla(this, true);
   public NotasTabla notesTable = new NotasTabla(this, true);
@@ -636,30 +639,30 @@ public class Index extends JFrame implements ActionListener {
     }
   }
 
-  public void AdivinarTableAP() {
+  public void guessNumberTableAP() {
 
-    guessTable.limpiarTabla();
+    guessNumberTable.cleanTable();
 
     try {
-      img.db.importarTabla(guessTable.adivinarTab, "select * from adivinar", true);
+      img.db.readTable(guessNumberTable.guessNumberTab, Querys.getAllData(Format.tableName(GUESS_NUMBER)), true);
     } catch (Exception e1) {
       img.cr.exception(e1);
     }
 
-    guessTable.setSize(830, 400);
-    guessTable.setLocationRelativeTo(null);
-    guessTable.setMinimumSize(new Dimension(830, 400));
-    guessTable.setMaximumSize(new Dimension(1280, 720));
-    guessTable.setTitle("Adivinar Information");
-    img.cr.fadeIn(guessTable);
-    guessTable.setVisible(true);
+    guessNumberTable.setSize(830, 400);
+    guessNumberTable.setLocationRelativeTo(null);
+    guessNumberTable.setMinimumSize(new Dimension(830, 400));
+    guessNumberTable.setMaximumSize(new Dimension(1280, 720));
+    guessNumberTable.setTitle(GUESS_NUMBER+" Information");
+    img.cr.fadeIn(guessNumberTable);
+    guessNumberTable.setVisible(true);
   }
 
   public void ahorcadoTableAP() {
     hangmanTable.limpiarTabla();
 
     try {
-      img.db.importarTabla(hangmanTable.ahorcadoTab, "select * from ahorcado", true);
+      img.db.readTable(hangmanTable.ahorcadoTab, "select * from ahorcado", true);
     } catch (Exception e1) {
       img.cr.exception(e1);
     }
@@ -679,7 +682,7 @@ public class Index extends JFrame implements ActionListener {
     dicesTable.limpiarTabla();
 
     try {
-      aux = img.db.importarTabla(dicesTable.dadosTab, "select * from dados", true);
+      aux = img.db.readTable(dicesTable.dadosTab, "select * from dados", true);
     } catch (Exception e1) {
       img.cr.exception(e1);
     }
@@ -702,7 +705,7 @@ public class Index extends JFrame implements ActionListener {
     notesTable.limpiarTabla();
 
     try {
-      img.db.importarTabla(notesTable.notasTab, "select * from notas", true);
+      img.db.readTable(notesTable.notasTab, "select * from notas", true);
     } catch (Exception e1) {
       img.cr.exception(e1);
     }
@@ -720,7 +723,7 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.limpiarTabla();
 
     try {
-      img.db.importarTabla(puzzleTable.rompeTab, "select * from rompecabezas", true);
+      img.db.readTable(puzzleTable.rompeTab, "select * from rompecabezas", true);
     } catch (Exception e1) {
       img.cr.exception(e1);
     }
@@ -1218,8 +1221,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == guessTXT) {
 
         try {
-          guessTable.limpiarTabla();
-          img.cr.txt(guessTable.adivinarTab, "select * from adivinar", ".txt");
+          guessNumberTable.cleanTable();
+          img.cr.txt(guessNumberTable.guessNumberTab, "select * from adivinar", ".txt");
         } catch (Exception ex) {
         }
 
@@ -1311,8 +1314,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == guessPDF) {
 
         try {
-          guessTable.limpiarTabla();
-          img.cr.pdf(guessTable.adivinarTab, "Adivinar N?mero", "select * from adivinar", ".pdf");
+          guessNumberTable.cleanTable();
+          img.cr.pdf(guessNumberTable.guessNumberTab, "Adivinar N?mero", "select * from adivinar", ".pdf");
         } catch (Exception ex) {
 
         }
@@ -1406,8 +1409,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == guessEXCEL) {
 
         try {
-          guessTable.limpiarTabla();
-          img.cr.excel(guessTable.adivinarTab, "select * from adivinar", ".xls");
+          guessNumberTable.cleanTable();
+          img.cr.excel(guessNumberTable.guessNumberTab, "select * from adivinar", ".xls");
         } catch (Exception ex) {
 
         }

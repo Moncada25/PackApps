@@ -259,7 +259,7 @@ public class AhorcadoTabla extends JDialog implements ActionListener, MouseListe
 
         try {
 
-            if (img.db.importarTabla(resultado.resultadoTab, sql, false)) {
+            if (img.db.readTable(resultado.resultadoTab, sql, false)) {
                 resultado.setBounds(0, 0, 780, alto);
                 resultado.setResizable(false);
                 resultado.setLocationRelativeTo(null);
@@ -293,7 +293,7 @@ public class AhorcadoTabla extends JDialog implements ActionListener, MouseListe
 
         if (e.getSource() == tablas[0]) {
             setVisible(false);
-            new Index().AdivinarTableAP();
+            new Index().guessNumberTableAP();
         } else if (e.getSource() == tablas[1]) {
             img.cr.mostrarMensaje("Message", "You're here!");
         } else if (e.getSource() == tablas[2]) {

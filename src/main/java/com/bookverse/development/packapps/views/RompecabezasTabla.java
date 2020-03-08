@@ -300,7 +300,7 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
 
         try {
 
-            if (img.db.importarTabla(resultado.resultadoTab, sql, false)) {
+            if (img.db.readTable(resultado.resultadoTab, sql, false)) {
                 resultado.setBounds(0, 0, 780, alto);
                 resultado.setResizable(false);
                 resultado.setLocationRelativeTo(null);
@@ -334,7 +334,7 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
 
         if (e.getSource() == tablas[0]) {
             setVisible(false);
-            new Index().AdivinarTableAP();
+            new Index().guessNumberTableAP();
         } else if (e.getSource() == tablas[1]) {
             setVisible(false);
             new Index().ahorcadoTableAP();

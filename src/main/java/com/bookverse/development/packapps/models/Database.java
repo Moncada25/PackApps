@@ -1,12 +1,16 @@
 package com.bookverse.development.packapps.models;
 
+import static com.bookverse.development.packapps.utils.AppsConstants.GUESS_NUMBER;
+
 import com.bookverse.development.packapps.core.Core;
+import com.bookverse.development.packapps.utils.Format;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 import javax.sql.DataSource;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -22,127 +26,127 @@ public class Database {
     private DataSourceService data = new DataSourceService();
 
     /* CREATE */
-    public boolean insertData(String[] datos) throws SQLException {
+    public boolean insertData(String[] data) throws SQLException {
 
         try {
-            dataSource = data.getDataSource();
+            dataSource = this.data.getDataSource();
             conexion = dataSource.getConnection();
 
-            if (datos[0].equals("adivinar")) {
+            if (data[0].equals(Format.tableName(GUESS_NUMBER))) {
                 stm = conexion
-                        .prepareStatement("insert into adivinar (Nickname,Limite,Intentos,Date) values (?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setInt(2, Integer.parseInt(datos[2]));
-                stm.setString(3, datos[3]);
-                stm.setString(4, datos[4]);
+                        .prepareStatement("INSERT INTO "+Format.tableName(GUESS_NUMBER)+" (Nickname,Limitation,Level,Date) VALUES (?,?,?,?)");
+                stm.setString(1, data[1]);
+                stm.setInt(2, Integer.parseInt(data[2]));
+                stm.setString(3, data[3]);
+                stm.setString(4, data[4]);
                 stm.execute();
-            } else if (datos[0].equals("ahorcado")) {
+            } else if (data[0].equals("ahorcado")) {
                 stm = conexion.prepareStatement(
                         "insert into ahorcado (Nickname,Mistakes,State, Category, Date) values (?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setInt(2, Integer.parseInt(datos[2]));
-                stm.setString(3, datos[3]);
-                stm.setString(4, datos[4]);
-                stm.setString(5, datos[5]);
+                stm.setString(1, data[1]);
+                stm.setInt(2, Integer.parseInt(data[2]));
+                stm.setString(3, data[3]);
+                stm.setString(4, data[4]);
+                stm.setString(5, data[5]);
                 stm.execute();
-            } else if (datos[0].equals("dados")) {
+            } else if (data[0].equals("dados")) {
                 stm = conexion.prepareStatement("insert into dados (Nickname,Winner,Round,Date) values (?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setInt(3, Integer.parseInt(datos[3]));
-                stm.setString(4, datos[4]);
+                stm.setString(1, data[1]);
+                stm.setString(2, data[2]);
+                stm.setInt(3, Integer.parseInt(data[3]));
+                stm.setString(4, data[4]);
                 stm.execute();
-            } else if (datos[0].equals("rompecabezas")) {
+            } else if (data[0].equals("rompecabezas")) {
                 stm = conexion.prepareStatement(
                         "insert into rompecabezas (Nickname,State,Tiempo,Jugadas,Date) values (?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
-                stm.setInt(4, Integer.parseInt(datos[4]));
-                stm.setString(5, datos[5]);
+                stm.setString(1, data[1]);
+                stm.setString(2, data[2]);
+                stm.setString(3, data[3]);
+                stm.setInt(4, Integer.parseInt(data[4]));
+                stm.setString(5, data[5]);
                 stm.execute();
-            } else if (datos[0].equals("notas")) {
+            } else if (data[0].equals("notas")) {
                 stm = conexion.prepareStatement(
                         "insert into notas (Nickname,Scale,Percent,Note,State,Date) values (?,?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setInt(3, Integer.parseInt(datos[3]));
-                stm.setString(4, datos[4]);
-                stm.setString(5, datos[5]);
-                stm.setString(6, datos[6]);
+                stm.setString(1, data[1]);
+                stm.setString(2, data[2]);
+                stm.setInt(3, Integer.parseInt(data[3]));
+                stm.setString(4, data[4]);
+                stm.setString(5, data[5]);
+                stm.setString(6, data[6]);
                 stm.execute();
-            } else if (datos[0].equals("feedback")) {
+            } else if (data[0].equals("feedback")) {
                 stm = conexion.prepareStatement("insert into feedback (Username,Mensaje,Date) values (?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
+                stm.setString(1, data[1]);
+                stm.setString(2, data[2]);
+                stm.setString(3, data[3]);
                 stm.execute();
-            } else if (datos[0].equals("inventario")) {
+            } else if (data[0].equals("inventario")) {
                 stm = conexion
                         .prepareStatement("insert into inventario (ID, Estado, Precio, Cantidad) values (?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setDouble(3, Double.parseDouble(datos[3]));
-                stm.setInt(4, Integer.parseInt(datos[4]));
+                stm.setString(1, data[1]);
+                stm.setString(2, data[2]);
+                stm.setDouble(3, Double.parseDouble(data[3]));
+                stm.setInt(4, Integer.parseInt(data[4]));
                 stm.execute();
-            } else if (datos[0].equals("registros")) {
+            } else if (data[0].equals("registros")) {
                 stm = conexion.prepareStatement(
                         "insert into registros (Usuario, Productos_Vendidos,Total_Ventas,Productos_Comprados,Total_Compras, Total_Prestamos) values (?,?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setInt(2, Integer.parseInt(datos[2]));
-                stm.setDouble(3, Double.parseDouble(datos[3]));
-                stm.setInt(4, Integer.parseInt(datos[4]));
-                stm.setDouble(5, Double.parseDouble(datos[5]));
-                stm.setDouble(6, Double.parseDouble(datos[6]));
+                stm.setString(1, data[1]);
+                stm.setInt(2, Integer.parseInt(data[2]));
+                stm.setDouble(3, Double.parseDouble(data[3]));
+                stm.setInt(4, Integer.parseInt(data[4]));
+                stm.setDouble(5, Double.parseDouble(data[5]));
+                stm.setDouble(6, Double.parseDouble(data[6]));
                 stm.execute();
-            } else if (datos[0].equals("prestamos")) {
+            } else if (data[0].equals("prestamos")) {
                 stm = conexion.prepareStatement(
-                        "insert into préstamos (Usuario, Nombre,Documento,Referencia,Teléfono,Plazo,Valor) values (?,?,?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
-                stm.setString(4, datos[4]);
-                stm.setString(5, datos[5]);
-                stm.setString(6, datos[6]);
-                stm.setDouble(7, Double.parseDouble(datos[7]));
+                        "insert into pr?stamos (Usuario, Nombre,Documento,Referencia,Tel?fono,Plazo,Valor) values (?,?,?,?,?,?,?)");
+                stm.setString(1, data[1]);
+                stm.setString(2, data[2]);
+                stm.setString(3, data[3]);
+                stm.setString(4, data[4]);
+                stm.setString(5, data[5]);
+                stm.setString(6, data[6]);
+                stm.setDouble(7, Double.parseDouble(data[7]));
                 stm.execute();
-            } else if (datos[0].equals("usuarios")) {
+            } else if (data[0].equals("usuarios")) {
 
                 stm = conexion.prepareStatement("insert into usuarios (User_Name, Password, Status) values (?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
+                stm.setString(1, data[1]);
+                stm.setString(2, data[2]);
+                stm.setString(3, data[3]);
                 stm.execute();
-            } else if (datos[0].equals("compras")) {
+            } else if (data[0].equals("compras")) {
 
                 stm = conexion.prepareStatement(
                         "insert into compras (IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total) values (?,?,?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
-                stm.setString(4, datos[4]);
-                stm.setString(5, datos[5]);
-                stm.setInt(6, Integer.parseInt(datos[6]));
-                stm.setDouble(7, Double.parseDouble(datos[7]));
+                stm.setString(1, data[1]);
+                stm.setString(2, data[2]);
+                stm.setString(3, data[3]);
+                stm.setString(4, data[4]);
+                stm.setString(5, data[5]);
+                stm.setInt(6, Integer.parseInt(data[6]));
+                stm.setDouble(7, Double.parseDouble(data[7]));
                 stm.execute();
-            } else if (datos[0].equals("ventas")) {
+            } else if (data[0].equals("ventas")) {
                 // hacer que IDUSUARIO sea USUARIO
                 stm = conexion.prepareStatement(
                         "insert into ventas (IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total) values (?,?,?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
-                stm.setString(4, datos[4]);
-                stm.setString(5, datos[5]);
-                stm.setInt(6, Integer.parseInt(datos[6]));
-                stm.setDouble(7, Double.parseDouble(datos[7]));
+                stm.setString(1, data[1]);
+                stm.setString(2, data[2]);
+                stm.setString(3, data[3]);
+                stm.setString(4, data[4]);
+                stm.setString(5, data[5]);
+                stm.setInt(6, Integer.parseInt(data[6]));
+                stm.setDouble(7, Double.parseDouble(data[7]));
                 stm.execute();
             }
 
             return true;
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             return false;
         } finally {
 
@@ -151,13 +155,13 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }
 
     /* READ */
-    public boolean importarTabla(JTable tabla, String query, boolean isMain) {
+    public boolean readTable(JTable tabla, String query, boolean isMain) {
 
         try {
             dataSource = data.getDataSource();
@@ -169,9 +173,8 @@ public class Database {
             ArrayList<Object[]> datos = new ArrayList<>();
             while (rs.next()) {
                 Object[] filas = new Object[rsm.getColumnCount()];
-                for (int i = 0; i < filas.length; i++) {
+                for (int i = 0; i < filas.length; i++)
                     filas[i] = rs.getObject(i + 1);
-                }
                 datos.add(filas);
             }
 
@@ -182,14 +185,12 @@ public class Database {
                 return false;
             } else {
                 modelo = (DefaultTableModel) tabla.getModel();
-                for (int i = 0; i < datos.size(); i++) {
-                    modelo.addRow(datos.get(i));
-                }
+                IntStream.range(0, datos.size()).forEach(i -> modelo.addRow(datos.get(i)));
                 return true;
             }
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -197,7 +198,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
         return false;
@@ -214,7 +215,7 @@ public class Database {
                     .prepareStatement("UPDATE " + table + " SET Nickname='" + nickname + "' WHERE ID='" + ID + "'");
             stm.executeUpdate();
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -222,7 +223,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }
@@ -240,7 +241,7 @@ public class Database {
             }
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -248,7 +249,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }
@@ -266,7 +267,7 @@ public class Database {
             stm.executeUpdate();
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -274,7 +275,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }
@@ -291,7 +292,7 @@ public class Database {
             stm.executeUpdate();
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -299,7 +300,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }
@@ -315,7 +316,7 @@ public class Database {
             stm.executeUpdate();
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -323,7 +324,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }
@@ -339,7 +340,7 @@ public class Database {
             stm.executeUpdate();
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -347,7 +348,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }
@@ -369,7 +370,7 @@ public class Database {
             }
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -377,7 +378,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }
@@ -393,7 +394,7 @@ public class Database {
             stm.executeUpdate();
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -401,7 +402,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }
@@ -423,7 +424,7 @@ public class Database {
             }
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -431,7 +432,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
 
@@ -454,14 +455,14 @@ public class Database {
             }
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
             try {
                 if (null != conexion) {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
 
@@ -487,7 +488,7 @@ public class Database {
             }
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -495,7 +496,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
 
@@ -518,7 +519,7 @@ public class Database {
             }
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -526,7 +527,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
 
@@ -548,7 +549,7 @@ public class Database {
 
         } catch (SQLException e) {
             // e.printStackTrace();
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -556,7 +557,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
 
@@ -578,7 +579,7 @@ public class Database {
             }
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -586,7 +587,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
 
@@ -604,7 +605,7 @@ public class Database {
             stm.executeUpdate();
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -612,7 +613,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }
@@ -628,7 +629,7 @@ public class Database {
             stm.executeUpdate();
 
         } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
         } finally {
 
             try {
@@ -636,7 +637,7 @@ public class Database {
                     conexion.close();
                 }
             } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
+                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, int?ntalo m?s tarde.");
             }
         }
     }

@@ -4,6 +4,7 @@ import static com.bookverse.development.packapps.utils.AppsConstants.GUESS_NUMBE
 
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -17,7 +18,7 @@ import javax.swing.JTextField;
 
 public class GuessNumber extends JDialog implements ActionListener {
 
-  public Resources resources = new Resources();
+  private Resources resources = new Resources();
   private JButton btnPlay, btnReturn;
   private JLabel message, response, help, question;
   private JTextField txtNumber;
@@ -38,7 +39,7 @@ public class GuessNumber extends JDialog implements ActionListener {
     createComponents();
   }
 
-  public void createComponents() {
+  private void createComponents() {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -126,7 +127,7 @@ public class GuessNumber extends JDialog implements ActionListener {
     }
   }
 
-  public void btnPlayAP() {
+  private void btnPlayAP() {
 
     high = Integer.parseInt(resources.cr.ingreseNumero("Maximum number to guess", 6));
 
@@ -225,7 +226,7 @@ public class GuessNumber extends JDialog implements ActionListener {
         }
 
         try {
-          String[] data = {"adivinar", resources.cr.ingreseNickname("Enter a Nickname", 20),
+          String[] data = {Format.tableName(GUESS_NUMBER), resources.cr.ingreseNickname("Enter a Nickname", 20),
               String.valueOf(high), level + " - " + attempts,
               resources.cr.obtenerDate()};
           resources.db.insertData(data);
