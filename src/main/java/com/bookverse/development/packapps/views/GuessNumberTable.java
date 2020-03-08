@@ -7,7 +7,6 @@ import static com.bookverse.development.packapps.utils.TableConstants.NOTES;
 import static com.bookverse.development.packapps.utils.TableConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.Core;
-import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.models.Table;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -214,7 +213,8 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
       } else {
 
         int[] rows = viewTable.getSelectedRows();
-        String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0))).toArray(String[]::new);
+        String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
+            .toArray(String[]::new);
 
         if (resources.core.loginDBA()) {
           resources.database.deleteData(IDs, Format.tableName(GUESS_NUMBER));
