@@ -2,9 +2,8 @@ package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.utils.TableConstants.DICES;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;

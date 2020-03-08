@@ -1,5 +1,6 @@
-package com.bookverse.development.packapps.core;
+package com.bookverse.development.packapps.models;
 
+import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.models.Database;
 import java.awt.Color;
 import java.awt.Container;

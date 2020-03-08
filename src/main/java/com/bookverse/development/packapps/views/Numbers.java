@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

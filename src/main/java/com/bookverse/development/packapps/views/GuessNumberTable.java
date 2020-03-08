@@ -7,6 +7,7 @@ import static com.bookverse.development.packapps.utils.TableConstants.NOTES;
 import static com.bookverse.development.packapps.utils.TableConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.Core;
+import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -39,6 +40,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
 
 public class GuessNumberTable extends JDialog implements ActionListener, MouseListener {
 

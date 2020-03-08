@@ -3,7 +3,7 @@ package com.bookverse.development.packapps.views;
 import static com.bookverse.development.packapps.utils.TableConstants.GUESS_NUMBER;
 
 import com.bookverse.development.packapps.core.Core;
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

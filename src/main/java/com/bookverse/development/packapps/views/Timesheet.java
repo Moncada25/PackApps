@@ -6,7 +6,7 @@ import static javax.swing.SwingConstants.CENTER;
 import com.bookverse.development.packapps.automation.models.UltimatixData;
 import com.bookverse.development.packapps.automation.stepdefinitions.TimesheetStepDefinitions;
 import com.bookverse.development.packapps.automation.utils.TextUtility;
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;

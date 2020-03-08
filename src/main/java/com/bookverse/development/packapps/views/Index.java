@@ -7,7 +7,7 @@ import static com.bookverse.development.packapps.utils.ArrayData.LONG_IMAGES;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_IMAGES;
 import static com.bookverse.development.packapps.utils.ArrayData.WIDTH_IMAGES;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.Querys;
