@@ -64,7 +64,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
 
             cola[j] = h.getButton("", null, this, this);
             cola[j].setBounds(x, y, 80, 40);
-            cola[j].setForeground(h.core.ROJO);
+            cola[j].setForeground(h.core.MAIN_COLOR);
             cola[j].setVisible(false);
 
             if (sw) {
@@ -98,10 +98,10 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
         puerta.setVisible(false);
         add(puerta);
 
-        titulo = h.getLabel("", h.core.ROJO, this, h.core.BIG);
+        titulo = h.getLabel("", h.core.MAIN_COLOR, this, h.core.BIG);
         titulo.setBounds(50, 0, 900, 150);
 
-        mensaje = h.getLabel("", h.core.ROJO, this, h.core.BIG);
+        mensaje = h.getLabel("", h.core.MAIN_COLOR, this, h.core.BIG);
         mensaje.setBounds(620, 480, 200, 85);
     }
 
@@ -225,7 +225,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
 
         i--;
 
-        if (cola[0].getBackground() == h.core.AZUL) {
+        if (cola[0].getBackground() == h.core.TEXT_COLOR) {
             con--;
             sum -= Double.parseDouble((cola[0].getText()));
             cola[0].setBackground(getBackground());
@@ -389,12 +389,12 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
 
             if (e.getSource() == cola[j]) {
 
-                if (cola[j].getBackground() == h.core.AZUL) {
+                if (cola[j].getBackground() == h.core.TEXT_COLOR) {
                     cola[j].setBackground(getBackground());
                     con--;
                     sum -= Double.parseDouble(cola[j].getText());
                 } else {
-                    cola[j].setBackground(h.core.AZUL);
+                    cola[j].setBackground(h.core.TEXT_COLOR);
                     con++;
                     sum += Double.parseDouble(cola[j].getText());
                 }

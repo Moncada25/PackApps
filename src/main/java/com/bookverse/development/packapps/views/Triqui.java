@@ -30,18 +30,28 @@ public class Triqui extends JDialog implements ActionListener {
     public int pO = 0;
     private boolean win = false;
 
-    Resources h = new Resources();
-    public Color colorO = h.core.ROJO;
-    public Color colorX = h.core.AZUL;
+    Resources resources = new Resources();
+    public Color colorO = resources.core.MAIN_COLOR;
+    public Color colorX = resources.core.TEXT_COLOR;
     public Color color = new Color(100, 220, 0);
     public boolean vsCPU;
 
     // Constructor que recibe la ventana padre y el valor modal
     public Triqui(JFrame parent, boolean modal, boolean vsCPU) {
-
         super(parent, modal);
         this.vsCPU = vsCPU;
         componentes();
+    }
+
+    public void start(JFrame parent) {
+        setSize(450, 400);
+        setResizable(false);
+        setLocationRelativeTo(parent);
+        setTitle("Player vs Player");
+        resources.core.fadeIn(this);
+        parent.setVisible(false);
+        resources.core.instruccionesTriqui();
+        setVisible(true);
     }
 
     // Se crean los componentes de la ventana
@@ -51,14 +61,14 @@ public class Triqui extends JDialog implements ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(new Resources().getImage("triqui.png")).getImage());
 
-        btnsalir = h.getButton("Return", h.core.ROJO, this, this);
+        btnsalir = resources.getButton("Return", resources.core.MAIN_COLOR, this, this);
         btnsalir.setBounds(310, 300, 86, 30);
 
-        btnreset = h.getButton("Reset", h.core.AZUL, this, this);
+        btnreset = resources.getButton("Reset", resources.core.TEXT_COLOR, this, this);
         btnreset.setEnabled(false);
         btnreset.setBounds(180, 300, 86, 30);
 
-        btnplay = h.getButton("Play", h.core.AZUL, this, this);
+        btnplay = resources.getButton("Play", resources.core.TEXT_COLOR, this, this);
         btnplay.setBounds(50, 300, 86, 30);
 
         tablero = new JButton[3][3];
@@ -67,7 +77,7 @@ public class Triqui extends JDialog implements ActionListener {
 
         for (int f = 0; f < 3; f++) {
             for (int c = 0; c < 3; c++) {
-                tablero[f][c] = h.getButton("", null, this, this);
+                tablero[f][c] = resources.getButton("", null, this, this);
                 tablero[f][c].setBounds(x, y, 70, 70);
                 tablero[f][c].setFont(new Font("Times New Roman", 0, 45));
                 tablero[f][c].setOpaque(true);
@@ -77,27 +87,30 @@ public class Triqui extends JDialog implements ActionListener {
             y = y + 70;
         }
 
-        txtnom1 = h.getLabel("<html><em><strong>Player X</strong></em></html>", colorX, this, h.core.MEDIUM);
+        txtnom1 = resources
+            .getLabel("<html><em><strong>Player X</strong></em></html>", colorX, this, resources.core.MEDIUM);
         txtnom1.setBounds(50, 10, 100, 30);
 
-        pointsX = h.getLabel("", color, this, h.core.BIG);
+        pointsX = resources.getLabel("", color, this, resources.core.BIG);
         pointsX.setBounds(130, 10, 100, 30);
 
         if (!vsCPU) {
-            txtnom2 = h.getLabel("<html><em><strong>Player O</strong></em></html>", colorO, this, h.core.MEDIUM);
+            txtnom2 = resources
+                .getLabel("<html><em><strong>Player O</strong></em></html>", colorO, this, resources.core.MEDIUM);
             txtnom2.setBounds(260, 10, 100, 30);
         } else {
-            txtnom2 = h.getLabel("<html><em><strong>CPU O</strong></em></html>", colorO, this, h.core.MEDIUM);
+            txtnom2 = resources
+                .getLabel("<html><em><strong>CPU O</strong></em></html>", colorO, this, resources.core.MEDIUM);
             txtnom2.setBounds(273, 10, 100, 30);
         }
 
-        pointsO = h.getLabel("", color, this, h.core.BIG);
+        pointsO = resources.getLabel("", color, this, resources.core.BIG);
         pointsO.setBounds(340, 10, 100, 30);
 
-        txtturno = h.getLabel("", null, this, h.core.MEDIUM);
+        txtturno = resources.getLabel("", null, this, resources.core.MEDIUM);
         txtturno.setBounds(270, 200, 200, 100);
 
-        img = h.getLabel("", null, this, null);
+        img = resources.getLabel("", null, this, null);
         img.setBounds(300, 90, 96, 96);
 
         nombre1 = new JTextField("X");
@@ -581,7 +594,7 @@ public class Triqui extends JDialog implements ActionListener {
 
         int[][] puntos = getPoints();
 
-        int aux = h.core.enteroAleatorio(0, 2);
+        int aux = resources.core.enteroAleatorio(0, 2);
 
         pos[0] = puntos[aux][0];
         pos[1] = puntos[aux][1];
@@ -669,7 +682,7 @@ public class Triqui extends JDialog implements ActionListener {
         } else if (e.getSource() == btnreset) {
             btnResetAP();
         } else if (e.getSource() == btnsalir) {
-            h.core.fadeOut(this);
+            resources.core.fadeOut(this);
         } else {
             btnTableroAP(e);
         }

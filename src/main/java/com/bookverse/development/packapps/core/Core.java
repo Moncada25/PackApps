@@ -81,10 +81,10 @@ public class Core {
 
   //EXPORTAR
   public static int n = 1;
-  public final Color AZUL = new Color(21, 87, 163);
-  public final Color ROJO = new Color(220, 12, 12);
-  public final Border MEDIO = BorderFactory.createLineBorder(AZUL, 2, true);
-  public final Border HARD = BorderFactory.createLineBorder(ROJO, 2, true);
+  public static final Color TEXT_COLOR = new Color(21, 87, 163);
+  public static final Color MAIN_COLOR = new Color(220, 12, 12);
+  public final Border MEDIO = BorderFactory.createLineBorder(TEXT_COLOR, 2, true);
+  public final Border HARD = BorderFactory.createLineBorder(MAIN_COLOR, 2, true);
   public final Cursor MIRA = new Cursor(Cursor.CROSSHAIR_CURSOR);
   public final Cursor CARGAR = new Cursor(Cursor.WAIT_CURSOR);
   public final Cursor REDI = new Cursor(Cursor.NE_RESIZE_CURSOR);
@@ -748,7 +748,7 @@ public class Core {
 
     TitledBorder titulo = BorderFactory.createTitledBorder(MEDIO, title);
 
-    titulo.setTitleColor(ROJO);
+    titulo.setTitleColor(MAIN_COLOR);
     titulo.setTitleFont(MEDIUM);
     titulo.setTitleJustification(TitledBorder.CENTER);
 
@@ -1085,18 +1085,7 @@ public class Core {
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
-  public void miraWe(boolean isUI) {
 
-    if (isUI) {
-      JOptionPane.showMessageDialog(null,
-          "Ésta UI ya está aplicada, inténtalo con otra.",
-          "UI aplicada", JOptionPane.PLAIN_MESSAGE);
-    } else {
-      JOptionPane.showMessageDialog(null,
-          "Ésta imagen ya está aplicada, inténtalo con otra.",
-          "Imagen aplicada", JOptionPane.PLAIN_MESSAGE);
-    }
-  }
 
   public String elegirRuta(String file) {
 
@@ -1232,9 +1221,9 @@ public class Core {
 
   public void excel(JTable jTable1, String query, String file) throws IOException {
 
-    String rutaArchivo = validarExist(file);
+    String filePath = validarExist(file);
 
-    if (!rutaArchivo.equals(file)) {
+    if (!filePath.equals(file)) {
 
       if (new Database().readTable(jTable1, query, false)) {
 
@@ -1251,7 +1240,7 @@ public class Core {
             Cell celda = fila.createCell(j);
 
             celda.setCellValue(String.valueOf(jTable1.getColumnName(j)));
-            wb.write(new FileOutputStream(rutaArchivo));
+            wb.write(new FileOutputStream(filePath));
           }
         }
 
@@ -1262,14 +1251,14 @@ public class Core {
             Cell celda = fila.createCell(j);
 
             celda.setCellValue(String.valueOf(jTable1.getValueAt(i, j)));
-            wb.write(new FileOutputStream(rutaArchivo));
+            wb.write(new FileOutputStream(filePath));
           }
         }
 
         JOptionPane.showMessageDialog(null,
             "<html>" + styleJOption() + "<strong><center>Exportación</center></strong><br>"
                 + "Se ha exportado exitosamente<br>" + "<strong>Guardado en: </strong>"
-                + rutaArchivo
+                + filePath
                 + "</html>",
             "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
       }

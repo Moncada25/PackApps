@@ -1,17 +1,17 @@
 package com.bookverse.development.packapps.models;
 
-import static com.bookverse.development.packapps.utils.TableConstants.DICES;
-import static com.bookverse.development.packapps.utils.TableConstants.FEEDBACK;
-import static com.bookverse.development.packapps.utils.TableConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.TableConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.TableConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.TableConstants.LOANS;
-import static com.bookverse.development.packapps.utils.TableConstants.NOTES;
-import static com.bookverse.development.packapps.utils.TableConstants.PURCHASES;
-import static com.bookverse.development.packapps.utils.TableConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.TableConstants.RECORDS;
-import static com.bookverse.development.packapps.utils.TableConstants.SALES;
-import static com.bookverse.development.packapps.utils.TableConstants.USERS;
+import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
+import static com.bookverse.development.packapps.utils.ViewConstants.FEEDBACK;
+import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.ViewConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.ViewConstants.LOANS;
+import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
+import static com.bookverse.development.packapps.utils.ViewConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.ViewConstants.RECORDS;
+import static com.bookverse.development.packapps.utils.ViewConstants.SALES;
+import static com.bookverse.development.packapps.utils.ViewConstants.USERS;
 
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Querys;

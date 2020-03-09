@@ -35,22 +35,22 @@ public class Otros extends JDialog implements ActionListener, MouseListener {
 
         setLayout(null);// Permite el posicionamiento absoluto de los componentes
 
-        btnstart1 = h.getButton("Show", h.core.AZUL, this, this);
+        btnstart1 = h.getButton("Show", h.core.TEXT_COLOR, this, this);
         btnstart1.setBounds(330, 125, 75, 25);
 
-        btnstart3 = h.getButton("Show", h.core.AZUL, this, this);
+        btnstart3 = h.getButton("Show", h.core.TEXT_COLOR, this, this);
         btnstart3.setBounds(330, 225, 75, 25);
 
-        btnstart2 = h.getButton("Show", h.core.AZUL, this, this);
+        btnstart2 = h.getButton("Show", h.core.TEXT_COLOR, this, this);
         btnstart2.setBounds(330, 175, 75, 25);
 
-        primero = h.getLabel("<html><strong>Generar RGB</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        primero = h.getLabel("<html><strong>Generar RGB</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         primero.setBounds(25, 70, 280, 30);
 
         btncolor = h.getButton("Color", null, this, this);
         btncolor.setBounds(350, 75, 70, 25);
 
-        red = h.getLabel("<html><strong>Red</strong></html>", h.core.ROJO, this, null);
+        red = h.getLabel("<html><strong>Red</strong></html>", h.core.MAIN_COLOR, this, null);
         red.setBounds(170, 95, 50, 20);
 
         redcom = new JComboBox<String>();
@@ -70,7 +70,7 @@ public class Otros extends JDialog implements ActionListener, MouseListener {
         }
         add(greencom);
 
-        blue = h.getLabel("<html><strong>Blue</strong></html>", h.core.AZUL, this, null);
+        blue = h.getLabel("<html><strong>Blue</strong></html>", h.core.TEXT_COLOR, this, null);
         blue.setBounds(290, 95, 50, 20);
 
         bluecom = new JComboBox<String>();
@@ -80,13 +80,13 @@ public class Otros extends JDialog implements ActionListener, MouseListener {
         }
         add(bluecom);
 
-        forma1 = h.getLabel("<html><strong>Entero ? Binario</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        forma1 = h.getLabel("<html><strong>Entero ? Binario</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         forma1.setBounds(25, 120, 200, 30);
 
-        segundo = h.getLabel("<html><strong>Invertir cifras</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        segundo = h.getLabel("<html><strong>Invertir cifras</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         segundo.setBounds(25, 220, 260, 30);
 
-        forma2 = h.getLabel("<html><strong>Binario ? Entero</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        forma2 = h.getLabel("<html><strong>Binario ? Entero</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         forma2.setBounds(25, 170, 280, 30);
 
         txt1 = new JTextField();
@@ -186,7 +186,7 @@ public class Otros extends JDialog implements ActionListener, MouseListener {
             }
         });
 
-        mensaje = h.getLabel("<html><em><strong>Otras cositas...</strong></em></html>", h.core.ROJO, this, h.core.BIG);
+        mensaje = h.getLabel("<html><em><strong>Otras cositas...</strong></em></html>", h.core.MAIN_COLOR, this, h.core.BIG);
         mensaje.addMouseListener(this);
         mensaje.setBounds(120, 20, 200, 30);
     }

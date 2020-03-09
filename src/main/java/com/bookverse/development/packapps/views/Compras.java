@@ -47,19 +47,19 @@ public class Compras extends JDialog implements ActionListener {
         setIconImage(new ImageIcon(img.getImage("comprar.png")).getImage());
         setDefaultCloseOperation(0);
 
-        btnsalir = img.getButton("Return", img.core.ROJO, this, this);
+        btnsalir = img.getButton("Return", img.core.MAIN_COLOR, this, this);
         btnsalir.setBounds(310, 320, 95, 30);
 
-        btningresar = img.getButton("Comprar", img.core.AZUL, this, this);
+        btningresar = img.getButton("Comprar", img.core.TEXT_COLOR, this, this);
         btningresar.setBounds(30, 320, 95, 30);
 
-        btnbuscar = img.getButton("Buscar", img.core.AZUL, this, this);
+        btnbuscar = img.getButton("Buscar", img.core.TEXT_COLOR, this, this);
         btnbuscar.setBounds(340, 65, 86, 25);
 
-        titulo = img.getLabel("<html><strong><em>Registrar Compra</em></strong></html>", img.core.ROJO, this, img.core.BIG);
+        titulo = img.getLabel("<html><strong><em>Registrar Compra</em></strong></html>", img.core.MAIN_COLOR, this, img.core.BIG);
         titulo.setBounds(110, 5, 300, 40);
 
-        referencia = img.getLabel("<html><strong>Referencia</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        referencia = img.getLabel("<html><strong>Referencia</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         referencia.setBounds(30, 60, 100, 30);
 
         txtRef = new JTextField();
@@ -78,16 +78,16 @@ public class Compras extends JDialog implements ActionListener {
             }
         });
 
-        producto = img.getLabel("<html><strong>Estado</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        producto = img.getLabel("<html><strong>Estado</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         producto.setBounds(30, 100, 140, 30);
 
         nuevo = new JRadioButton("<html><strong>Nuevo</strong></html>");
-        nuevo.setForeground(img.core.AZUL);
+        nuevo.setForeground(img.core.TEXT_COLOR);
         nuevo.setBounds(175, 100, 78, 30);
         add(nuevo);
 
         usado = new JRadioButton("<html><strong>Usado</strong></html>");
-        usado.setForeground(img.core.AZUL);
+        usado.setForeground(img.core.TEXT_COLOR);
         usado.setBounds(255, 100, 75, 30);
         usado.setSelected(true);
         add(usado);
@@ -96,7 +96,7 @@ public class Compras extends JDialog implements ActionListener {
         btnGroup.add(nuevo);
         btnGroup.add(usado);
 
-        documento = img.getLabel("<html><strong>Documento</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        documento = img.getLabel("<html><strong>Documento</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         documento.setBounds(30, 140, 130, 30);
 
         txtDoc = new JTextField();
@@ -115,7 +115,7 @@ public class Compras extends JDialog implements ActionListener {
             }
         });
 
-        tel = img.getLabel("<html><strong>Teléfono</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        tel = img.getLabel("<html><strong>Teléfono</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         tel.setBounds(30, 180, 130, 30);
 
         txtTel = new JTextField();
@@ -135,13 +135,13 @@ public class Compras extends JDialog implements ActionListener {
 
         });
 
-        unid = img.getLabel("<html><strong>Unidades</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        unid = img.getLabel("<html><strong>Unidades</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         unid.setBounds(30, 220, 130, 30);
 
-        txtUnid = img.getLabel("1", img.core.AZUL, this, img.core.BIG);
+        txtUnid = img.getLabel("1", img.core.TEXT_COLOR, this, img.core.BIG);
         txtUnid.setBounds(213, 230, 30, 20);
 
-        mas = img.getLabel("<html><strong>+</strong></html>", img.core.ROJO, this, img.core.BIG);
+        mas = img.getLabel("<html><strong>+</strong></html>", img.core.MAIN_COLOR, this, img.core.BIG);
         mas.setBounds(260, 225, 25, 25);
 
         // Permite hacer clic en la etiqueta "+"
@@ -173,7 +173,7 @@ public class Compras extends JDialog implements ActionListener {
 
         });
 
-        menos = img.getLabel("<html><strong>-</strong></html>", img.core.ROJO, this, img.core.BIG);
+        menos = img.getLabel("<html><strong>-</strong></html>", img.core.MAIN_COLOR, this, img.core.BIG);
         menos.setBounds(180, 224, 25, 25);
 
         // Permite hacer clic en la etiqueta "-"
@@ -208,7 +208,7 @@ public class Compras extends JDialog implements ActionListener {
 
         });
 
-        precio = img.getLabel("<html><strong>Precio</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        precio = img.getLabel("<html><strong>Precio</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         precio.setBounds(30, 260, 130, 30);
 
         txtPrecio = new JTextField("0");

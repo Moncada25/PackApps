@@ -67,12 +67,12 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
 
         titulo = new JLabel();
         titulo.setFont(img.core.BIG);
-        titulo.setForeground(img.core.ROJO);
+        titulo.setForeground(img.core.MAIN_COLOR);
         titulo.addMouseListener(this);
 
         men = new JLabel();
         men.setFont(img.core.BIG);
-        men.setForeground(img.core.AZUL);
+        men.setForeground(img.core.TEXT_COLOR);
         men.addMouseListener(this);
 
         /* ICONOS */
@@ -225,7 +225,7 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
                             String.valueOf(modelo.getValueAt(filaseleccionada, 0)), "notas");
 
                     dispose();
-                    new Index().NotasTableAP();
+                    new Index().notesTableAP();
                 }
             }
 
@@ -256,7 +256,7 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
                     img.database.deleteData(IDs, "notas");
 
                     dispose();
-                    new Index().NotasTableAP();
+                    new Index().notesTableAP();
                 }
             }
 
@@ -298,7 +298,7 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
             btnConsultAP();
         } else if (e.getSource() == create) {
             setVisible(false);
-            new Index().NotasAP();
+            new Notes(this, true).start(this);
         }
     }
 
@@ -319,7 +319,7 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
                     "Usuario, cámate po favo", JOptionPane.PLAIN_MESSAGE);
         } else if (e.getSource() == tablas[4]) {
             setVisible(false);
-            new Index().RompecabezasTableAP();
+            new Index().puzzleTableAP();
         }
     }
 

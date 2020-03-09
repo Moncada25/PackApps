@@ -38,16 +38,16 @@ public class Registrar extends JDialog implements ActionListener {
         setIconImage(new ImageIcon(img.getImage("añadir_usuario.png")).getImage());
         setDefaultCloseOperation(0);
 
-        btnregistro = img.getButton("Registrar", img.core.AZUL, this, this);
+        btnregistro = img.getButton("Registrar", img.core.TEXT_COLOR, this, this);
         btnregistro.setBounds(60, 215, 100, 30);
 
-        btncancelar = img.getButton("Return", img.core.ROJO, this, this);
+        btncancelar = img.getButton("Return", img.core.MAIN_COLOR, this, this);
         btncancelar.setBounds(300, 215, 86, 30);
 
-        registrarse = img.getLabel("<html><strong><em>Registrarse</em></strong></html>", img.core.ROJO, this, img.core.BIG);
+        registrarse = img.getLabel("<html><strong><em>Registrarse</em></strong></html>", img.core.MAIN_COLOR, this, img.core.BIG);
         registrarse.setBounds(150, 5, 200, 40);
 
-        usuario = img.getLabel("<html><strong>Username</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        usuario = img.getLabel("<html><strong>Username</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         usuario.setBounds(30, 60, 180, 30);
 
         txtUsuario = new JTextField();
@@ -66,7 +66,7 @@ public class Registrar extends JDialog implements ActionListener {
             }
         });
 
-        pass = img.getLabel("<html><strong>Password</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        pass = img.getLabel("<html><strong>Password</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         pass.setBounds(30, 110, 120, 30);
 
         txtPass = new JPasswordField();
@@ -85,7 +85,7 @@ public class Registrar extends JDialog implements ActionListener {
             }
         });
 
-        codEncargado = img.getLabel("<html><strong>Manager Key</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        codEncargado = img.getLabel("<html><strong>Manager Key</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         codEncargado.setBounds(30, 160, 180, 30);
 
         txtCodProp = new JPasswordField();

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-01-2019 a las 21:42:36
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.11
+-- Tiempo de generación: 09-03-2020 a las 05:13:52
+-- Versión del servidor: 10.4.6-MariaDB
+-- Versión de PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,115 +19,45 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `mipc_23093085_appsimples`
+-- Base de datos: `packapps`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `adivinar`
+-- Estructura de tabla para la tabla `cashregister`
 --
 
-CREATE TABLE `adivinar` (
+CREATE TABLE `cashregister` (
   `ID` int(10) NOT NULL,
-  `Nickname` text COLLATE ucs2_spanish2_ci NOT NULL,
-  `Limite` int(10) NOT NULL,
-  `Intentos` text COLLATE ucs2_spanish2_ci NOT NULL,
-  `Date` text COLLATE ucs2_spanish2_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=ucs2 COLLATE=ucs2_spanish2_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ahorcado`
---
-
-CREATE TABLE `ahorcado` (
-  `ID` int(10) NOT NULL,
-  `Nickname` text COLLATE utf16_spanish2_ci NOT NULL,
-  `Mistakes` int(10) NOT NULL,
-  `State` text COLLATE utf16_spanish2_ci NOT NULL,
-  `Category` text COLLATE utf16_spanish2_ci,
-  `Date` text COLLATE utf16_spanish2_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
-
---
--- Volcado de datos para la tabla `ahorcado`
---
-
-INSERT INTO `ahorcado` (`ID`, `Nickname`, `Mistakes`, `State`, `Category`, `Date`) VALUES
-(65, 'dffdgdgf', 7, 'Loser', 'Colores', '30/12/2018 - 2:19'),
-(64, 'admin', 7, 'Loser', 'Deportes', '28/12/2018 - 14:24');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `compras`
---
-
-CREATE TABLE `compras` (
-  `ID` int(10) NOT NULL,
-  `IDPRODUCTO` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
-  `Usuario` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
-  `Documento` varchar(11) NOT NULL,
-  `Telefono` varchar(11) NOT NULL,
-  `Date` text NOT NULL,
-  `Unidades` int(11) NOT NULL,
-  `Total` double NOT NULL
+  `User` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
+  `SoldProducts` int(11) NOT NULL,
+  `TotalSales` double NOT NULL,
+  `PurchasedProducts` int(11) NOT NULL,
+  `TotalPurchases` double NOT NULL,
+  `TotalLoans` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `compras`
+-- Volcado de datos para la tabla `cashregister`
 --
 
-INSERT INTO `compras` (`ID`, `IDPRODUCTO`, `Usuario`, `Documento`, `Telefono`, `Date`, `Unidades`, `Total`) VALUES
-(1, 'Celular', 'root', '1235468978', '4567898', '7/01/2019 - 22:34', 6, 1500000),
-(2, 'Celular', 'root', '1231231231', '1231232', '16/01/2019 - 22:38', 10, 2500000),
-(3, 'Celular', 'root', '534534534', '5345345334', '16/01/2019 - 22:41', 3, 750000);
+INSERT INTO `cashregister` (`ID`, `User`, `SoldProducts`, `TotalSales`, `PurchasedProducts`, `TotalPurchases`, `TotalLoans`) VALUES
+(1, 'root', 19, 4750000, 19, 4750000, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `dados`
+-- Estructura de tabla para la tabla `dices`
 --
 
-CREATE TABLE `dados` (
+CREATE TABLE `dices` (
   `ID` int(10) NOT NULL,
   `Nickname` text NOT NULL,
   `Winner` text NOT NULL,
   `Round` int(10) NOT NULL,
   `Date` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `dados`
---
-
-INSERT INTO `dados` (`ID`, `Nickname`, `Winner`, `Round`, `Date`) VALUES
-(95, 'Third', '49 points', 5, '11/01/2019 - 0:14'),
-(94, 'Third', '¡Dados iguales!', 5, '30/12/2018 - 19:35'),
-(93, 'Third', '63 points', 5, '30/12/2018 - 19:33'),
-(92, 'First', '64 points', 5, '30/12/2018 - 19:33'),
-(91, 'Third', '¡Dados iguales!', 4, '30/12/2018 - 19:33'),
-(89, 'First', '¡Dados iguales!', 3, '30/12/2018 - 2:15'),
-(90, 'Second', '65 points', 5, '30/12/2018 - 19:33'),
-(88, 'First & Third', '47 points', 5, '30/12/2018 - 2:15'),
-(87, 'Second', '51 points', 5, '30/12/2018 - 2:15'),
-(86, 'First', '63 points', 5, '30/12/2018 - 2:15'),
-(85, 'Third', '56 points', 5, '30/12/2018 - 2:15'),
-(84, 'First', '¡Dados iguales!', 1, '30/12/2018 - 2:15'),
-(83, 'Third', '¡Dados iguales!', 2, '30/12/2018 - 2:15'),
-(82, 'Third', '¡Dados iguales!', 2, '30/12/2018 - 2:15'),
-(81, 'Third', '¡Dados iguales!', 2, '30/12/2018 - 2:15'),
-(80, 'First & Second', '52 points', 5, '30/12/2018 - 2:15'),
-(77, 'Third', '55 points', 5, '30/12/2018 - 2:13'),
-(78, 'Third', '58 points', 5, '30/12/2018 - 2:13'),
-(79, 'Third', '67 points', 5, '30/12/2018 - 2:13'),
-(76, 'Second & Third', '59 points', 5, '30/12/2018 - 2:13'),
-(75, 'First', '56 points', 5, '30/12/2018 - 2:13'),
-(73, 'Third', '55 points', 5, '30/12/2018 - 2:12'),
-(74, 'Third', '60 points', 5, '30/12/2018 - 2:12'),
-(72, 'First & Third', '60 points', 5, '30/12/2018 - 2:12');
 
 -- --------------------------------------------------------
 
@@ -138,39 +68,85 @@ INSERT INTO `dados` (`ID`, `Nickname`, `Winner`, `Round`, `Date`) VALUES
 CREATE TABLE `feedback` (
   `ID` int(10) NOT NULL,
   `Username` varchar(255) NOT NULL,
-  `Mensaje` text NOT NULL,
+  `Message` text NOT NULL,
   `Date` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `inventario`
+-- Estructura de tabla para la tabla `guessnumber`
 --
 
-CREATE TABLE `inventario` (
+CREATE TABLE `guessnumber` (
+  `ID` int(10) NOT NULL,
+  `Nickname` text COLLATE ucs2_spanish2_ci NOT NULL,
+  `Limitation` int(10) NOT NULL,
+  `Level` text COLLATE ucs2_spanish2_ci NOT NULL,
+  `Date` text COLLATE ucs2_spanish2_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=ucs2 COLLATE=ucs2_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `hangman`
+--
+
+CREATE TABLE `hangman` (
+  `ID` int(10) NOT NULL,
+  `Nickname` text COLLATE utf16_spanish2_ci NOT NULL,
+  `Mistakes` int(10) NOT NULL,
+  `State` text COLLATE utf16_spanish2_ci NOT NULL,
+  `Category` text COLLATE utf16_spanish2_ci DEFAULT NULL,
+  `Date` text COLLATE utf16_spanish2_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inventory`
+--
+
+CREATE TABLE `inventory` (
   `ID` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
-  `Estado` text CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
-  `Precio` double NOT NULL,
-  `Cantidad` int(11) NOT NULL
+  `State` text CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
+  `Price` double NOT NULL,
+  `Quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `inventario`
+-- Volcado de datos para la tabla `inventory`
 --
 
-INSERT INTO `inventario` (`ID`, `Estado`, `Precio`, `Cantidad`) VALUES
-('Celular', 'Usado', 250000, 13),
+INSERT INTO `inventory` (`ID`, `State`, `Price`, `Quantity`) VALUES
+('Celular', 'Usado', 250000, 0),
 ('Coca Cola', 'Nuevo', 2000, 0),
 ('Pelota', 'Nuevo', 5600, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `notas`
+-- Estructura de tabla para la tabla `loans`
 --
 
-CREATE TABLE `notas` (
+CREATE TABLE `loans` (
+  `ID` int(10) NOT NULL,
+  `User` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
+  `Name` text NOT NULL,
+  `Document` text NOT NULL,
+  `Reference` varchar(20) NOT NULL,
+  `Phone` text NOT NULL,
+  `TimeLimit` text NOT NULL,
+  `Value` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `notes`
+--
+
+CREATE TABLE `notes` (
   `ID` int(10) NOT NULL,
   `Nickname` text NOT NULL,
   `Scale` text NOT NULL,
@@ -183,138 +159,114 @@ CREATE TABLE `notas` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `préstamos`
+-- Estructura de tabla para la tabla `purchases`
 --
 
-CREATE TABLE `préstamos` (
+CREATE TABLE `purchases` (
   `ID` int(10) NOT NULL,
-  `Usuario` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
-  `Nombre` text NOT NULL,
-  `Documento` text NOT NULL,
-  `Referencia` varchar(20) NOT NULL,
-  `Teléfono` text NOT NULL,
-  `Plazo` text NOT NULL,
-  `Valor` double NOT NULL
+  `IdProduct` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
+  `User` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
+  `Document` varchar(11) NOT NULL,
+  `Phone` varchar(11) NOT NULL,
+  `Date` text NOT NULL,
+  `Units` int(11) NOT NULL,
+  `Total` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `purchases`
+--
+
+INSERT INTO `purchases` (`ID`, `IdProduct`, `User`, `Document`, `Phone`, `Date`, `Units`, `Total`) VALUES
+(1, 'Celular', 'root', '1235468978', '4567898', '7/01/2019 - 22:34', 6, 1500000),
+(2, 'Celular', 'root', '1231231231', '1231232', '16/01/2019 - 22:38', 10, 2500000),
+(3, 'Celular', 'root', '534534534', '5345345334', '16/01/2019 - 22:41', 3, 750000);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `registros`
+-- Estructura de tabla para la tabla `puzzle`
 --
 
-CREATE TABLE `registros` (
-  `ID` int(10) NOT NULL,
-  `Usuario` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
-  `Productos_Vendidos` int(11) NOT NULL,
-  `Total_Ventas` double NOT NULL,
-  `Productos_Comprados` int(11) NOT NULL,
-  `Total_Compras` double NOT NULL,
-  `Total_Prestamos` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `registros`
---
-
-INSERT INTO `registros` (`ID`, `Usuario`, `Productos_Vendidos`, `Total_Ventas`, `Productos_Comprados`, `Total_Compras`, `Total_Prestamos`) VALUES
-(1, 'root', 6, 1500000, 19, 4750000, 0);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `rompecabezas`
---
-
-CREATE TABLE `rompecabezas` (
+CREATE TABLE `puzzle` (
   `ID` int(10) NOT NULL,
   `Nickname` text COLLATE utf16_spanish2_ci NOT NULL,
   `State` text COLLATE utf16_spanish2_ci NOT NULL,
-  `Tiempo` text COLLATE utf16_spanish2_ci NOT NULL,
-  `Jugadas` int(10) NOT NULL,
+  `Time` text COLLATE utf16_spanish2_ci NOT NULL,
+  `Attempts` int(10) NOT NULL,
   `Date` text COLLATE utf16_spanish2_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf16 COLLATE=utf16_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `rompecabezas`
+-- Volcado de datos para la tabla `puzzle`
 --
 
-INSERT INTO `rompecabezas` (`ID`, `Nickname`, `State`, `Tiempo`, `Jugadas`, `Date`) VALUES
-(54, 'santiago', 'Loser', 'Easy - 02:55', 11, '1/01/2019 - 16:1');
+INSERT INTO `puzzle` (`ID`, `Nickname`, `State`, `Time`, `Attempts`, `Date`) VALUES
+(55, 'perdedor', 'Loser', 'Easy - 00:00', 247, 'Nov 28, 2019 - 17:25'),
+(56, 'Santiago', 'Winner', 'Easy - 00:32', 275, 'Jan 14, 2020 - 10:22');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Estructura de tabla para la tabla `sales`
 --
 
-CREATE TABLE `usuarios` (
+CREATE TABLE `sales` (
+  `ID` int(10) NOT NULL,
+  `IdProduct` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
+  `User` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
+  `Document` varchar(10) NOT NULL,
+  `Phone` varchar(10) NOT NULL,
+  `Date` text NOT NULL,
+  `Units` int(10) NOT NULL,
+  `Total` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sales`
+--
+
+INSERT INTO `sales` (`ID`, `IdProduct`, `User`, `Document`, `Phone`, `Date`, `Units`, `Total`) VALUES
+(1, 'Celular', 'root', '123546879', '4567898', '7/01/2019 - 22:35', 6, 1500000),
+(2, 'Celular', 'root', '3213211212', '1231231212', 'Dec 9, 2019 - 11:22', 13, 3250000);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE `users` (
   `ID` int(11) NOT NULL,
-  `User_Name` varchar(20) COLLATE ucs2_spanish2_ci NOT NULL,
+  `Username` varchar(20) COLLATE ucs2_spanish2_ci NOT NULL,
   `Password` text COLLATE ucs2_spanish2_ci NOT NULL,
   `Status` text COLLATE ucs2_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ucs2 COLLATE=ucs2_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `usuarios` (`ID`, `User_Name`, `Password`, `Status`) VALUES
+INSERT INTO `users` (`ID`, `Username`, `Password`, `Status`) VALUES
 (4, 'root', 'AiMXHgSmJDo=', 'Offline'),
-(6, 'Santiago', 'MRt7tAdZ5k9kZw+ssciRsQ==', 'Offline');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ventas`
---
-
-CREATE TABLE `ventas` (
-  `ID` int(10) NOT NULL,
-  `IDPRODUCTO` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
-  `Usuario` varchar(20) CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci NOT NULL,
-  `Documento` varchar(10) NOT NULL,
-  `Telefono` varchar(10) NOT NULL,
-  `Date` text NOT NULL,
-  `Unidades` int(10) NOT NULL,
-  `Total` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ventas`
---
-
-INSERT INTO `ventas` (`ID`, `IDPRODUCTO`, `Usuario`, `Documento`, `Telefono`, `Date`, `Unidades`, `Total`) VALUES
-(1, 'Celular', 'root', '123546879', '4567898', '7/01/2019 - 22:35', 6, 1500000);
+(7, 'santiago', 'MRt7tAdZ5k9kZw+ssciRsQ==', 'Offline'),
+(8, 'yoyoyohjhu', 'J3lUKjFV6CZwW9vWrZei3Q==', 'Offline');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `adivinar`
+-- Indices de la tabla `cashregister`
 --
-ALTER TABLE `adivinar`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indices de la tabla `ahorcado`
---
-ALTER TABLE `ahorcado`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indices de la tabla `compras`
---
-ALTER TABLE `compras`
+ALTER TABLE `cashregister`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDPRODUCTO` (`IDPRODUCTO`),
-  ADD KEY `Usuario` (`Usuario`);
+  ADD KEY `Usuario` (`User`);
 
 --
--- Indices de la tabla `dados`
+-- Indices de la tabla `dices`
 --
-ALTER TABLE `dados`
+ALTER TABLE `dices`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -324,81 +276,82 @@ ALTER TABLE `feedback`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `inventario`
+-- Indices de la tabla `guessnumber`
 --
-ALTER TABLE `inventario`
+ALTER TABLE `guessnumber`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `notas`
+-- Indices de la tabla `hangman`
 --
-ALTER TABLE `notas`
+ALTER TABLE `hangman`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `préstamos`
+-- Indices de la tabla `inventory`
 --
-ALTER TABLE `préstamos`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `Usuario` (`Usuario`),
-  ADD KEY `Usuario_2` (`Usuario`),
-  ADD KEY `Usuario_3` (`Usuario`);
-
---
--- Indices de la tabla `registros`
---
-ALTER TABLE `registros`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `Usuario` (`Usuario`);
-
---
--- Indices de la tabla `rompecabezas`
---
-ALTER TABLE `rompecabezas`
+ALTER TABLE `inventory`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indices de la tabla `loans`
 --
-ALTER TABLE `usuarios`
+ALTER TABLE `loans`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `User_Name` (`User_Name`);
+  ADD KEY `Usuario` (`User`),
+  ADD KEY `Usuario_2` (`User`),
+  ADD KEY `Usuario_3` (`User`);
 
 --
--- Indices de la tabla `ventas`
+-- Indices de la tabla `notes`
 --
-ALTER TABLE `ventas`
+ALTER TABLE `notes`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `purchases`
+--
+ALTER TABLE `purchases`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `IDPRODUCTO` (`IDPRODUCTO`),
-  ADD KEY `IDUSUARIO` (`Usuario`);
+  ADD KEY `IDPRODUCTO` (`IdProduct`),
+  ADD KEY `Usuario` (`User`);
+
+--
+-- Indices de la tabla `puzzle`
+--
+ALTER TABLE `puzzle`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `sales`
+--
+ALTER TABLE `sales`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDPRODUCTO` (`IdProduct`),
+  ADD KEY `IDUSUARIO` (`User`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `User_Name` (`Username`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `adivinar`
+-- AUTO_INCREMENT de la tabla `cashregister`
 --
-ALTER TABLE `adivinar`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+ALTER TABLE `cashregister`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `ahorcado`
+-- AUTO_INCREMENT de la tabla `dices`
 --
-ALTER TABLE `ahorcado`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
-
---
--- AUTO_INCREMENT de la tabla `compras`
---
-ALTER TABLE `compras`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `dados`
---
-ALTER TABLE `dados`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+ALTER TABLE `dices`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT de la tabla `feedback`
@@ -407,73 +360,85 @@ ALTER TABLE `feedback`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `notas`
+-- AUTO_INCREMENT de la tabla `guessnumber`
 --
-ALTER TABLE `notas`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `guessnumber`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
--- AUTO_INCREMENT de la tabla `préstamos`
+-- AUTO_INCREMENT de la tabla `hangman`
 --
-ALTER TABLE `préstamos`
+ALTER TABLE `hangman`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+
+--
+-- AUTO_INCREMENT de la tabla `loans`
+--
+ALTER TABLE `loans`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `registros`
+-- AUTO_INCREMENT de la tabla `notes`
 --
-ALTER TABLE `registros`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `notes`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `rompecabezas`
+-- AUTO_INCREMENT de la tabla `purchases`
 --
-ALTER TABLE `rompecabezas`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+ALTER TABLE `purchases`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT de la tabla `puzzle`
 --
-ALTER TABLE `usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `puzzle`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
--- AUTO_INCREMENT de la tabla `ventas`
+-- AUTO_INCREMENT de la tabla `sales`
 --
-ALTER TABLE `ventas`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `sales`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `compras`
+-- Filtros para la tabla `cashregister`
 --
-ALTER TABLE `compras`
-  ADD CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`IDPRODUCTO`) REFERENCES `inventario` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `compras_ibfk_3` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`User_Name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `compras_ibfk_4` FOREIGN KEY (`Usuario`) REFERENCES `registros` (`Usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `cashregister`
+  ADD CONSTRAINT `cashregister_ibfk_1` FOREIGN KEY (`User`) REFERENCES `users` (`UserName`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `préstamos`
+-- Filtros para la tabla `loans`
 --
-ALTER TABLE `préstamos`
-  ADD CONSTRAINT `préstamos_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`User_Name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `préstamos_ibfk_2` FOREIGN KEY (`Usuario`) REFERENCES `registros` (`Usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `loans`
+  ADD CONSTRAINT `loans_ibfk_1` FOREIGN KEY (`User`) REFERENCES `users` (`UserName`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `loans_ibfk_2` FOREIGN KEY (`User`) REFERENCES `cashregister` (`User`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `registros`
+-- Filtros para la tabla `purchases`
 --
-ALTER TABLE `registros`
-  ADD CONSTRAINT `registros_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`User_Name`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `purchases`
+  ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`IdProduct`) REFERENCES `inventory` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `purchases_ibfk_3` FOREIGN KEY (`User`) REFERENCES `users` (`UserName`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `purchases_ibfk_4` FOREIGN KEY (`User`) REFERENCES `cashregister` (`User`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `ventas`
+-- Filtros para la tabla `sales`
 --
-ALTER TABLE `ventas`
-  ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`IDPRODUCTO`) REFERENCES `inventario` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`User_Name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ventas_ibfk_4` FOREIGN KEY (`Usuario`) REFERENCES `registros` (`Usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sales`
+  ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`IdProduct`) REFERENCES `inventory` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`User`) REFERENCES `users` (`UserName`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sales_ibfk_4` FOREIGN KEY (`User`) REFERENCES `cashregister` (`User`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

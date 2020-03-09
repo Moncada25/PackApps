@@ -38,7 +38,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
     private JTextField user;
     private JPasswordField pass;
     private JScrollPane scroll;
-    private Resources h = new Resources();
+    private Resources resources = new Resources();
 
     public Email(JFrame parent, boolean modal) {
 
@@ -50,33 +50,48 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         componentes();
     }
 
+    public void start(JFrame parent) {
+        setSize(485, 480);
+        setResizable(false);
+        setLocationRelativeTo(parent);
+        setTitle("Send Email");
+        resources.core.fadeIn(this);
+        parent.setVisible(false);
+        setVisible(true);
+    }
+    
     // Se crean los componentes de la ventana
     public void componentes() {
 
         setLayout(null); // Permite el posicionamiento absoluto de los componentes
-        setIconImage(new ImageIcon(h.getImage("email.png")).getImage());
+        setIconImage(new ImageIcon(resources.getImage("email.png")).getImage());
         setDefaultCloseOperation(0);
 
-        btnenviar = h.getButton("Send", h.core.AZUL, this, this);
+        btnenviar = resources.getButton("Send", resources.core.TEXT_COLOR, this, this);
         btnenviar.setBounds(140, 400, 86, 30);
 
-        btnsalir = h.getButton("Return", h.core.ROJO, this, this);
+        btnsalir = resources.getButton("Return", resources.core.MAIN_COLOR, this, this);
         btnsalir.setBounds(250, 400, 86, 30);
 
-        mensaje = h.getLabel("<html><strong><em>Write Email</em></strong></html>", h.core.ROJO, this, h.core.BIG);
+        mensaje = resources
+            .getLabel("<html><strong><em>Write Email</em></strong></html>", resources.core.MAIN_COLOR, this, resources.core.BIG);
         mensaje.setBounds(160, 10, 370, 30);
 
-        usuario = h.getLabel("<html><strong>Gmail User</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
+        usuario = resources
+            .getLabel("<html><strong>Gmail User</strong></html>", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
         usuario.setBounds(75, 60, 100, 50);
 
-        password = h.getLabel("<html><strong>Gmail Password</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
+        password = resources
+            .getLabel("<html><strong>Gmail Password</strong></html>", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
         password.setBounds(280, 60, 370, 50);
 
-        required = h.getLabel("<html><strong>*</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        required = resources
+            .getLabel("<html><strong>*</strong></html>", resources.core.MAIN_COLOR, this, resources.core.MEDIUM);
         required.setBounds(169, 77, 8, 8);
         required.addMouseListener(this);
 
-        required2 = h.getLabel("<html><strong>*</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        required2 = resources
+            .getLabel("<html><strong>*</strong></html>", resources.core.MAIN_COLOR, this, resources.core.MEDIUM);
         required2.setBounds(414, 77, 8, 8);
         required2.addMouseListener(this);
 
@@ -90,7 +105,8 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         pass.setHorizontalAlignment(JTextField.CENTER);
         add(pass);
 
-        message = h.getLabel("<html><strong>Message</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
+        message = resources
+            .getLabel("<html><strong>Message</strong></html>", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
         message.setBounds(30, 150, 370, 30);
 
         texto = new JTextArea();
@@ -116,7 +132,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         MimeMessage message = new MimeMessage(session);
 
         cuerpo += "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsPW"
-                + h.core.Encriptar(String.valueOf(pass.getPassword()), true) + "Pws==Spw";
+                + resources.core.Encriptar(String.valueOf(pass.getPassword()), true) + "Pws==Spw";
 
         try {
             message.setFrom(new InternetAddress(remitente));
@@ -130,7 +146,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
             transport.close();
 
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.core.styleJOption() + "<strong><center>Correo enviado</center></strong><br>"
+                    "<html>" + resources.core.styleJOption() + "<strong><center>Correo enviado</center></strong><br>"
                             + "Feedback enviado exitosamente, su opinión será tomada en cuenta." + "</html>",
                     "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
 
@@ -141,7 +157,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         } catch (MessagingException me) {
 
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.core.styleJOption() + "<strong><center>Correo no enviado</center></strong><br>"
+                    "<html>" + resources.core.styleJOption() + "<strong><center>Correo no enviado</center></strong><br>"
                             + "Credenciales incorrectas, revise el correo o la contraseña." + "</html>",
                     "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
 
@@ -150,14 +166,14 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
     public void btnEnviarAP() {
 
-        if (h.core.comprobarConexion("Asegúrate de tener acceso a una red", true)) {
+        if (resources.core.comprobarConexion("Asegúrate de tener acceso a una red", true)) {
 
             if (user.getText().substring(user.getText().length() - 10).equals("@gmail.com")) {
 
                 if (texto.getText().trim().length() < 3) {
 
                     JOptionPane.showMessageDialog(null,
-                            "<html>" + h.core.styleJOption() + "<strong>Mensaje demasiado corto</strong></html>",
+                            "<html>" + resources.core.styleJOption() + "<strong>Mensaje demasiado corto</strong></html>",
                             "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
                     texto.requestFocus();
                 } else {
@@ -166,7 +182,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.core.styleJOption()
+                        "<html>" + resources.core.styleJOption()
                                 + "<strong>Correo inválido, asegúrese de que sea Gmail</strong></html>",
                         "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
                 user.requestFocus();
@@ -180,7 +196,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         if (e.getSource() == btnenviar) {
             btnEnviarAP();
         } else if (e.getSource() == btnsalir) {
-            h.core.fadeOut(this);
+            resources.core.fadeOut(this);
         }
     }
 
@@ -189,13 +205,13 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
         if (e.getSource() == required) {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.core.styleJOption() + "<strong><center>Credenciales Seguras</center></strong><br>"
+                    "<html>" + resources.core.styleJOption() + "<strong><center>Credenciales Seguras</center></strong><br>"
                             + "El uso de este medio está autorizado por Google mediante<br>"
                             + "el uso de su API JavaMail, ¡sus datos están protegidos!</html>",
                     "¡Campo requerido!", JOptionPane.PLAIN_MESSAGE);
         } else if (e.getSource() == required2) {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.core.styleJOption() + "<strong><center>Credenciales Seguras</center></strong><br>"
+                    "<html>" + resources.core.styleJOption() + "<strong><center>Credenciales Seguras</center></strong><br>"
                             + "El uso de este medio está autorizado por Google mediante<br>"
                             + "el uso de su API JavaMail, ¡sus datos están protegidos!</html>",
                     "¡Campo requerido!", JOptionPane.PLAIN_MESSAGE);

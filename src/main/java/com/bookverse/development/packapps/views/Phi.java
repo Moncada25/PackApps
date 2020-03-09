@@ -30,13 +30,13 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
 
         setLayout(null);
 
-        primero = h.getLabel("<html><strong>Serie de Fibonacci</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        primero = h.getLabel("<html><strong>Serie de Fibonacci</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         primero.setBounds(25, 70, 260, 30);
 
-        forma1 = h.getLabel("<html><strong>Enésimo número de Fibonacci</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        forma1 = h.getLabel("<html><strong>Enésimo número de Fibonacci</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         forma1.setBounds(25, 120, 260, 30);
 
-        btnstart = h.getButton("Show", h.core.AZUL, this, this);
+        btnstart = h.getButton("Show", h.core.TEXT_COLOR, this, this);
         btnstart.setBounds(360, 75, 70, 25);
 
         txt1 = new JTextField();
@@ -71,19 +71,19 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
             }
         });
 
-        segundo = h.getLabel("<html><strong>Valor aproximado</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        segundo = h.getLabel("<html><strong>Valor aproximado</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         segundo.setBounds(25, 220, 260, 30);
 
-        valor = h.getLabel("", h.core.AZUL, this, h.core.MEDIUM);
+        valor = h.getLabel("", h.core.TEXT_COLOR, this, h.core.MEDIUM);
         valor.setBounds(200, 220, 280, 30);
 
-        forma2 = h.getLabel("<html><strong>Proporción áurea</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        forma2 = h.getLabel("<html><strong>Proporción áurea</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         forma2.setBounds(25, 170, 280, 30);
 
-        btnstart3 = h.getButton("Show", h.core.AZUL, this, this);
+        btnstart3 = h.getButton("Show", h.core.TEXT_COLOR, this, this);
         btnstart3.setBounds(360, 175, 70, 25);
 
-        btnstart2 = h.getButton("Show", h.core.AZUL, this, this);
+        btnstart2 = h.getButton("Show", h.core.TEXT_COLOR, this, this);
         btnstart2.setBounds(360, 125, 70, 25);
 
         txt2 = new JTextField();
@@ -152,7 +152,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
             }
         });
 
-        mensaje = h.getLabel("<html><em><strong>Aproximarse a ?</strong></em></html>", h.core.ROJO, this, h.core.BIG);
+        mensaje = h.getLabel("<html><em><strong>Aproximarse a ?</strong></em></html>", h.core.MAIN_COLOR, this, h.core.BIG);
         mensaje.addMouseListener(this);
         mensaje.setBounds(100, 20, 250, 30);
     }

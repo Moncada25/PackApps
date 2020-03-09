@@ -118,7 +118,7 @@ public class Calculadora extends JDialog implements ActionListener {
         div = img.getButton("/", null, this, this);
         div.setBounds(179, 100, 43, 43);
 
-        igual = img.getButton("=", img.core.AZUL, this, this);
+        igual = img.getButton("=", img.core.TEXT_COLOR, this, this);
         igual.setBounds(222, 186, 43, 86);
 
         raiz = img.getButton("?", null, this, this);
@@ -127,7 +127,7 @@ public class Calculadora extends JDialog implements ActionListener {
         poten = img.getButton("^", null, this, this);
         poten.setBounds(222, 100, 43, 43);
 
-        borrar = img.getButton("?", img.core.ROJO, this, this);
+        borrar = img.getButton("?", img.core.MAIN_COLOR, this, this);
         borrar.setBounds(179, 57, 86, 43);
 
         vaciar = img.getButton("C", null, this, this);

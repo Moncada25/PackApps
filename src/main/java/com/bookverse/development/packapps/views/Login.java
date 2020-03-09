@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 public class Login extends JDialog implements ActionListener {
 
-  Resources img = new Resources();
+  Resources resources = new Resources();
 
   private JLabel ingreso, usuario, contrasena, men;
   private JButton btningresar, btnsalir, btnregistrar;
@@ -35,32 +35,43 @@ public class Login extends JDialog implements ActionListener {
     componentes();
   }
 
+  public void start(JFrame parent) {
+    setSize(375, 400);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Buy and Sell");
+    resources.core.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
+  }
+  
   public void componentes() {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(img.getImage("compraventa.png")).getImage());
+    setIconImage(new ImageIcon(resources.getImage("compraventa.png")).getImage());
 
-    btnsalir = img.getButton("Return", img.core.ROJO, this, this);
+    btnsalir = resources.getButton("Return", resources.core.MAIN_COLOR, this, this);
     btnsalir.setBounds(200, 225, 90, 30);
 
-    men = img.getLabel("<html><strong>¿No estás registrado?</strong></html>", img.core.ROJO, this,
-        img.core.SMALL);
+    men = resources
+        .getLabel("<html><strong>¿No estás registrado?</strong></html>", resources.core.MAIN_COLOR, this,
+        resources.core.SMALL);
     men.setBounds(112, 260, 300, 50);
 
-    btnregistrar = img.getButton("Regístrate", img.core.AZUL, this, this);
+    btnregistrar = resources.getButton("Regístrate", resources.core.TEXT_COLOR, this, this);
     btnregistrar.setBounds(130, 300, 110, 30);
 
-    btningresar = img.getButton("Ingresar", img.core.AZUL, this, this);
+    btningresar = resources.getButton("Ingresar", resources.core.TEXT_COLOR, this, this);
     btningresar.setBounds(80, 225, 90, 30);
 
-    ingreso = img
-        .getLabel("<html><strong><em>Iniciar Sesión</em></strong></html>", img.core.ROJO, this,
-            img.core.BIG);
+    ingreso = resources
+        .getLabel("<html><strong><em>Iniciar Sesión</em></strong></html>", resources.core.MAIN_COLOR, this,
+            resources.core.BIG);
     ingreso.setBounds(100, 5, 200, 40);
 
-    usuario = img
-        .getLabel("<html><strong>Username</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+    usuario = resources
+        .getLabel("<html><strong>Username</strong></html>", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
     usuario.setBounds(145, 60, 100, 30);
 
     txtUsuario = new JTextField();
@@ -90,12 +101,12 @@ public class Login extends JDialog implements ActionListener {
       }
 
       private void txtUsuarioKeyTyped(KeyEvent evt) {
-        img.core.soloAlfa(evt.getKeyChar(), evt, txtUsuario.getText(), 12);
+        resources.core.soloAlfa(evt.getKeyChar(), evt, txtUsuario.getText(), 12);
       }
     });
 
-    contrasena = img
-        .getLabel("<html><strong>Password</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+    contrasena = resources
+        .getLabel("<html><strong>Password</strong></html>", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
     contrasena.setBounds(145, 135, 120, 30);
 
     txtPass = new JPasswordField();
@@ -125,7 +136,7 @@ public class Login extends JDialog implements ActionListener {
       }
 
       private void txtCodKeyTyped(KeyEvent evt) {
-        img.core.soloAlfa(evt.getKeyChar(), evt, String.valueOf(txtPass.getPassword()), 20);
+        resources.core.soloAlfa(evt.getKeyChar(), evt, String.valueOf(txtPass.getPassword()), 20);
       }
     });
   }
@@ -134,29 +145,29 @@ public class Login extends JDialog implements ActionListener {
 
     if (txtUsuario.getText().trim().equals("") || String.valueOf(txtPass.getPassword()).trim()
         .equals("")) {
-      img.core.mostrarMensaje("Advertencia", "Rellene los campos solicitados");
+      resources.core.mostrarMensaje("Advertencia", "Rellene los campos solicitados");
     } else {
 
       Opciones op = new Opciones(this, true);
 
       try {
-        if (img.database.buscarEmpleado(txtUsuario.getText(),
-            img.core.Encriptar(String.valueOf(txtPass.getPassword()), true))) {
+        if (resources.database.buscarEmpleado(txtUsuario.getText(),
+            resources.core.Encriptar(String.valueOf(txtPass.getPassword()), true))) {
 
-          img.database.login("Online", txtUsuario.getText());
+          resources.database.login("Online", txtUsuario.getText());
 
           op.setSize(620, 380);
           op.setResizable(false);
           op.setLocationRelativeTo(null);
           op.setTitle("¡Bienvenido " + txtUsuario.getText() + "!");
-          img.core.fadeIn(op);
+          resources.core.fadeIn(op);
           setVisible(false);
           op.setVisible(true);
           txtPass.setText("");
           txtUsuario.setText("");
 
         } else {
-          img.core.mostrarMensaje("Advertencia", "Datos incorrectos, inténtelo de nuevo.");
+          resources.core.mostrarMensaje("Advertencia", "Datos incorrectos, inténtelo de nuevo.");
           txtPass.setText("");
           txtUsuario.setText("");
           txtUsuario.requestFocus();
@@ -175,7 +186,7 @@ public class Login extends JDialog implements ActionListener {
     reg.setResizable(false);
     reg.setLocationRelativeTo(null);
     reg.setTitle("Añadir Usuario");
-    img.core.fadeIn(reg);
+    resources.core.fadeIn(reg);
     setVisible(false);
     reg.setVisible(true);
     txtPass.setText("");
@@ -186,8 +197,8 @@ public class Login extends JDialog implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnsalir) {
-      img.core.fadeOut(this);
-    } else if (img.core.comprobarConexion("Conéctate para continuar", true)) {
+      resources.core.fadeOut(this);
+    } else if (resources.core.comprobarConexion("Conéctate para continuar", true)) {
 
       if (e.getSource() == btningresar) {
         btnIngresarAP();

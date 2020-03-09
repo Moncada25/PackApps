@@ -63,12 +63,12 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
 
     titulo = new JLabel();
     titulo.setFont(img.core.BIG);
-    titulo.setForeground(img.core.ROJO);
+    titulo.setForeground(img.core.MAIN_COLOR);
     titulo.addMouseListener(this);
 
     men = new JLabel();
     men.setFont(img.core.BIG);
-    men.setForeground(img.core.AZUL);
+    men.setForeground(img.core.TEXT_COLOR);
     men.addMouseListener(this);
 
     /* ICONOS */
@@ -226,7 +226,7 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
               String.valueOf(modelo.getValueAt(filaseleccionada, 0)), "rompecabezas");
 
           dispose();
-          new Index().RompecabezasTableAP();
+          new Index().puzzleTableAP();
         }
       }
 
@@ -257,7 +257,7 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
           img.database.deleteData(IDs, "rompecabezas");
 
           dispose();
-          new Index().RompecabezasTableAP();
+          new Index().puzzleTableAP();
         }
       }
 
@@ -278,17 +278,22 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
 
     if (opcion != null) {
 
-      if (opcion.toString().equals("Easy")) {
-        setVisible(false);
-        new Index().Rompecabezas4x4AP();
-      } else if (opcion.toString().equals("Medium")) {
-        setVisible(false);
-        new Index().Rompecabezas5x5AP();
-      } else if (opcion.toString().equals("Hard")) {
-        setVisible(false);
-        new Index().Rompecabezas6x6AP();
+      switch (opcion.toString()) {
+        case "Easy":
+          setVisible(false);
+          new Puzzle(this, true, 4, 55, 3).start(this);
+          break;
+        case "Medium":
+          setVisible(false);
+          new Puzzle(this, true, 5, 50, 6).start(this);
+          break;
+        case "Hard":
+          setVisible(false);
+          new Puzzle(this, true, 6, 45, 10).start(this);
+          break;
+        default:
+          throw new IllegalStateException("Unexpected value: " + opcion.toString());
       }
-
     }
   }
 
@@ -343,7 +348,7 @@ public class RompecabezasTabla extends JDialog implements ActionListener, MouseL
       new Index().dicesTableAP();
     } else if (e.getSource() == tablas[3]) {
       setVisible(false);
-      new Index().NotasTableAP();
+      new Index().notesTableAP();
     } else if (e.getSource() == tablas[4]) {
       JOptionPane.showMessageDialog(null,
           "<html><em>" + "<strong>You're here!</strong><br>" + "</em></html>",

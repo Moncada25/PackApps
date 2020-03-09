@@ -61,11 +61,11 @@ public class UsuariosTabla extends JDialog implements MouseListener {
 
     titulo = new JLabel();
     titulo.setFont(img.core.BIG);
-    titulo.setForeground(img.core.ROJO);
+    titulo.setForeground(img.core.MAIN_COLOR);
 
     men = new JLabel();
     men.setFont(img.core.BIG);
-    men.setForeground(img.core.AZUL);
+    men.setForeground(img.core.TEXT_COLOR);
 
     /* ICONOS */
     for (int i = 0; i < tablas.length; i++) {

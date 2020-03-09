@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.TableConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
 
 import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.models.Resources;
@@ -45,10 +45,10 @@ public class GuessNumber extends JDialog implements ActionListener {
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("adivinar.png")).getImage());
 
-    btnReturn = resources.getButton("Return", resources.core.ROJO, this, this);
+    btnReturn = resources.getButton("Return", resources.core.MAIN_COLOR, this, this);
     btnReturn.setBounds(310, 245, 86, 30);
 
-    btnPlay = resources.getButton("Play", resources.core.AZUL, this, this);
+    btnPlay = resources.getButton("Play", resources.core.TEXT_COLOR, this, this);
     btnPlay.setBounds(310, 200, 86, 30);
 
     txtNumber = new JTextField();
@@ -104,13 +104,13 @@ public class GuessNumber extends JDialog implements ActionListener {
       }
     });
 
-    message = resources.getLabel("", resources.core.ROJO, this, resources.core.BIG);
+    message = resources.getLabel("", resources.core.MAIN_COLOR, this, resources.core.BIG);
     message.setBounds(90, 5, 320, 100);
 
-    response = resources.getLabel("", resources.core.AZUL, this, resources.core.MEDIUM);
+    response = resources.getLabel("", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
     response.setBounds(90, 110, 300, 70);
 
-    help = resources.getLabel("", resources.core.AZUL, this, resources.core.MEDIUM);
+    help = resources.getLabel("", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
     help.setBounds(90, 110, 300, 70);
 
     question = resources.getLabel("", null, this, null);

@@ -23,7 +23,7 @@ import org.junit.runner.JUnitCore;
 
 public class Timesheet extends JDialog implements ActionListener {
 
-  Resources img = new Resources();
+  Resources resources = new Resources();
 
   private JLabel tittle, user, password, hours;
   private JTextField txtUser, txtHours;
@@ -37,24 +37,35 @@ public class Timesheet extends JDialog implements ActionListener {
     componentes();
   }
 
+  public void start(JFrame parent) {
+    setSize(460, 300);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Timesheet Entry");
+    resources.core.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
+  }
+
   // Se crean los componentes de la ventana
   private void componentes() {
 
     setLayout(null);
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-    btnRun = img.getButton("Run", img.core.AZUL, this, this);
+    btnRun = resources.getButton("Run", resources.core.TEXT_COLOR, this, this);
     btnRun.setBounds(60, 215, 100, 30);
 
-    btnCancel = img.getButton("Return", img.core.ROJO, this, this);
+    btnCancel = resources.getButton("Return", resources.core.MAIN_COLOR, this, this);
     btnCancel.setBounds(300, 215, 86, 30);
 
-    tittle = img
-        .getLabel("<html><strong><em>Timesheet Entry</em></strong></html>", img.core.ROJO, this,
-            img.core.BIG);
+    tittle = resources
+        .getLabel("<html><strong><em>Timesheet Entry</em></strong></html>", resources.core.MAIN_COLOR, this,
+            resources.core.BIG);
     tittle.setBounds(120, 5, 250, 40);
 
-    user = img.getLabel("<html><strong>Username</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+    user = resources
+        .getLabel("<html><strong>Username</strong></html>", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
     user.setBounds(30, 60, 180, 30);
 
     txtUser = new JTextField();
@@ -68,12 +79,12 @@ public class Timesheet extends JDialog implements ActionListener {
       }
 
       private void txtUsuarioKeyTyped(KeyEvent evt) {
-        img.core.soloAlfa(evt.getKeyChar(), evt, txtUser.getText(), 20);
+        resources.core.soloAlfa(evt.getKeyChar(), evt, txtUser.getText(), 20);
       }
     });
 
-    password = img
-        .getLabel("<html><strong>Password</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+    password = resources
+        .getLabel("<html><strong>Password</strong></html>", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
     password.setBounds(30, 110, 120, 30);
 
     txtPassword = new JPasswordField();
@@ -91,7 +102,8 @@ public class Timesheet extends JDialog implements ActionListener {
       }
     });
 
-    hours = img.getLabel("<html><strong>Hours</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+    hours = resources
+        .getLabel("<html><strong>Hours</strong></html>", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
     hours.setBounds(30, 160, 180, 30);
 
     txtHours = new JTextField();
@@ -106,7 +118,7 @@ public class Timesheet extends JDialog implements ActionListener {
       }
 
       private void txtHoursTyped(KeyEvent evt) {
-        img.core.solonumeros(evt.getKeyChar(), evt, txtHours.getText(), 20);
+        resources.core.solonumeros(evt.getKeyChar(), evt, txtHours.getText(), 20);
       }
 
       public void keyPressed(KeyEvent evt) {
@@ -132,7 +144,7 @@ public class Timesheet extends JDialog implements ActionListener {
     txtHours.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
-    img.core.fadeOut(this);
+    resources.core.fadeOut(this);
   }
 
   private void btnRunAP() {
@@ -146,7 +158,7 @@ public class Timesheet extends JDialog implements ActionListener {
       Resources.generalObject = data;
       JUnitCore.runClasses(TimesheetStepDefinitions.class);
     } else {
-      img.core.mostrarMensaje("Error", "Campos requeridos incompletos");
+      resources.core.mostrarMensaje("Error", "Campos requeridos incompletos");
     }
   }
 

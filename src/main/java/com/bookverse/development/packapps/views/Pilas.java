@@ -65,7 +65,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
             pila[j] = h.getButton("", null, this, this);
             pila[j].setBounds(x, y, 80, 40);
-            pila[j].setForeground(h.core.ROJO);
+            pila[j].setForeground(h.core.MAIN_COLOR);
             pila[j].setVisible(false);
             y -= 40;
 
@@ -81,10 +81,10 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
         getPanel();
 
-        titulo = h.getLabel("", h.core.ROJO, this, h.core.BIG);
+        titulo = h.getLabel("", h.core.MAIN_COLOR, this, h.core.BIG);
         titulo.setBounds(550, 70, 600, 200);
 
-        mensaje = h.getLabel("", h.core.ROJO, this, h.core.BIG);
+        mensaje = h.getLabel("", h.core.MAIN_COLOR, this, h.core.BIG);
         mensaje.setBounds(620, 480, 200, 85);
     }
 
@@ -119,7 +119,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
             titulo.setText("<html><strong>Se desapiló ? " + Pop(pila, i) + "</strong></html>");
 
-            if (pila[i - 1].getBackground() == h.core.AZUL) {
+            if (pila[i - 1].getBackground() == h.core.TEXT_COLOR) {
                 con--;
                 sum -= Double.parseDouble((pila[i - 1].getText()));
                 pila[i - 1].setBackground(getBackground());
@@ -368,12 +368,12 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
 
             if (e.getSource() == pila[j]) {
 
-                if (pila[j].getBackground() == h.core.AZUL) {
+                if (pila[j].getBackground() == h.core.TEXT_COLOR) {
                     pila[j].setBackground(getBackground());
                     con--;
                     sum -= Double.parseDouble(pila[j].getText());
                 } else {
-                    pila[j].setBackground(h.core.AZUL);
+                    pila[j].setBackground(h.core.TEXT_COLOR);
                     con++;
                     sum += Double.parseDouble(pila[j].getText());
                 }

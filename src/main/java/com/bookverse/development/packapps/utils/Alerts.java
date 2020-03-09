@@ -21,4 +21,25 @@ public class Alerts {
             + "The search did not return any results.</html>",
         "No records found!", JOptionPane.PLAIN_MESSAGE);
   }
+
+  public static void changeUI(String aspect){
+    JOptionPane.showMessageDialog(null,
+        "<html>" + Core.styleJOption()
+            + "<strong><center>Changes Saved</center></strong><br>"
+            + "Modified UI, enjoy the "+aspect+" aspect!</html>",
+        "New Look!", JOptionPane.PLAIN_MESSAGE);
+  }
+
+  public static void miraWe(boolean isUI) {
+
+    if (isUI) {
+      JOptionPane.showMessageDialog(null,
+          "This UI is already applied, try another.",
+          "UI applied", JOptionPane.PLAIN_MESSAGE);
+    } else {
+      JOptionPane.showMessageDialog(null,
+          "This background is already applied, try another.",
+          "Background applied", JOptionPane.PLAIN_MESSAGE);
+    }
+  }
 }

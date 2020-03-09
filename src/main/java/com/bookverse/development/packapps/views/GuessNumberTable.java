@@ -1,10 +1,10 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.TableConstants.DICES;
-import static com.bookverse.development.packapps.utils.TableConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.TableConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.TableConstants.NOTES;
-import static com.bookverse.development.packapps.utils.TableConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
+import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
+import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.models.Resources;
@@ -69,11 +69,11 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
     tittle = new JLabel();
     tittle.setFont(resources.core.BIG);
-    tittle.setForeground(resources.core.ROJO);
+    tittle.setForeground(resources.core.MAIN_COLOR);
 
     message = new JLabel();
     message.setFont(resources.core.BIG);
-    message.setForeground(resources.core.AZUL);
+    message.setForeground(resources.core.TEXT_COLOR);
 
     IntStream.range(0, tables.length).forEach(i -> {
       tables[i] = new JLabel();
@@ -300,10 +300,10 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
       new Index().dicesTableAP();
     } else if (e.getSource() == tables[3]) {
       setVisible(false);
-      new Index().NotasTableAP();
+      new Index().notesTableAP();
     } else if (e.getSource() == tables[4]) {
       setVisible(false);
-      new Index().RompecabezasTableAP();
+      new Index().puzzleTableAP();
     }
   }
 

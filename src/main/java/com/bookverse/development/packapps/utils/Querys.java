@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.utils;
 
-import static com.bookverse.development.packapps.utils.TableConstants.*;
+import static com.bookverse.development.packapps.utils.ViewConstants.*;
 
 import com.bookverse.development.packapps.core.Core;
 

@@ -32,16 +32,16 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
 
         setLayout(null);// Permite el posicionamiento absoluto de los componentes
 
-        btnplay = h.getButton("Show", h.core.AZUL, this, this);
+        btnplay = h.getButton("Show", h.core.TEXT_COLOR, this, this);
         btnplay.setBounds(315, 195, 75, 25);
 
-        primero = h.getLabel("<html><strong>Buscar rango</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        primero = h.getLabel("<html><strong>Buscar rango</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         primero.setBounds(25, 70, 120, 30);
 
-        btnstart = h.getButton("Show", h.core.AZUL, this, this);
+        btnstart = h.getButton("Show", h.core.TEXT_COLOR, this, this);
         btnstart.setBounds(315, 75, 75, 25);
 
-        segundo = h.getLabel("<html><strong>Verificar</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        segundo = h.getLabel("<html><strong>Verificar</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         segundo.setBounds(25, 130, 100, 30);
 
         txtverificar = new JTextField();
@@ -75,7 +75,7 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
             }
         });
 
-        btnstart2 = h.getButton("Show", h.core.AZUL, this, this);
+        btnstart2 = h.getButton("Show", h.core.TEXT_COLOR, this, this);
         btnstart2.setBounds(315, 135, 75, 25);
 
         txtdesde = new JTextField();
@@ -105,7 +105,7 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
             }
         });
 
-        desde = h.getLabel("<html><strong>Desde</strong></html>", h.core.AZUL, this, h.core.SMALL);
+        desde = h.getLabel("<html><strong>Desde</strong></html>", h.core.TEXT_COLOR, this, h.core.SMALL);
         desde.setBounds(160, 90, 60, 30);
 
         txthasta = new JTextField();
@@ -135,16 +135,16 @@ public class Primos extends JDialog implements Runnable, ActionListener, MouseLi
             }
         });
 
-        hasta = h.getLabel("<html><strong>Hasta</strong></html>", h.core.AZUL, this, h.core.SMALL);
+        hasta = h.getLabel("<html><strong>Hasta</strong></html>", h.core.TEXT_COLOR, this, h.core.SMALL);
         hasta.setBounds(220, 90, 60, 30);
 
-        tercero = h.getLabel("<html><strong>Cronómetro</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        tercero = h.getLabel("<html><strong>Cronómetro</strong></html>", h.core.MAIN_COLOR, this, h.core.MEDIUM);
         tercero.setBounds(25, 190, 130, 30);
 
-        crono = h.getLabel("00:00:000", h.core.AZUL, this, h.core.MEDIUM);
+        crono = h.getLabel("00:00:000", h.core.TEXT_COLOR, this, h.core.MEDIUM);
         crono.setBounds(160, 190, 100, 30);
 
-        mensaje = h.getLabel("<html><em><strong>Números Primos</strong></em></html>", h.core.ROJO, this, h.core.BIG);
+        mensaje = h.getLabel("<html><em><strong>Números Primos</strong></em></html>", h.core.MAIN_COLOR, this, h.core.BIG);
         mensaje.addMouseListener(this);
         mensaje.setBounds(100, 15, 280, 40);
     }

@@ -16,45 +16,56 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class Textos extends JDialog implements MouseListener {
+public class Texts extends JDialog implements MouseListener {
 
     private JLabel mensaje, encriptar, desencriptar, mayus, minus, salir;
     private JTextArea texto;
     private JScrollPane scroll;
-    private Resources h = new Resources();
+    private Resources resources = new Resources();
 
-    public Textos(JFrame parent, boolean modal) {
+    public Texts(JFrame parent, boolean modal) {
         super(parent, modal);
         componentes();
     }
 
-    public Textos() {
+    public Texts() {
         componentes();
     }
 
+    public void start(JFrame parent) {
+        setSize(530, 330);
+        setLocationRelativeTo(parent);
+        setMinimumSize(new Dimension(530, 330));
+        setMaximumSize(new Dimension(1280, 720));
+        setTitle("Text Editor");
+        resources.core.fadeIn(this);
+        parent.setVisible(false);
+        setVisible(true);
+    }
+    
     public JPanel getPanel() {
 
         JPanel panel = new JPanel(new FlowLayout());
-        panel.setBorder(h.core.bordeAzul("Select Action"));
+        panel.setBorder(resources.core.bordeAzul("Select Action"));
 
-        encriptar = h.getLabel("  Encrypt  ", h.core.AZUL, panel, h.core.MEDIUM);
-        encriptar.setBorder(h.core.MEDIO);
+        encriptar = resources.getLabel("  Encrypt  ", resources.core.TEXT_COLOR, panel, resources.core.MEDIUM);
+        encriptar.setBorder(resources.core.MEDIO);
         encriptar.addMouseListener(this);
 
-        mayus = h.getLabel("  UpperCase  ", h.core.AZUL, panel, h.core.MEDIUM);
-        mayus.setBorder(h.core.MEDIO);
+        mayus = resources.getLabel("  UpperCase  ", resources.core.TEXT_COLOR, panel, resources.core.MEDIUM);
+        mayus.setBorder(resources.core.MEDIO);
         mayus.addMouseListener(this);
 
-        salir = h.getLabel("  Return  ", h.core.ROJO, panel, h.core.MEDIUM);
-        salir.setBorder(h.core.HARD);
+        salir = resources.getLabel("  Return  ", resources.core.MAIN_COLOR, panel, resources.core.MEDIUM);
+        salir.setBorder(resources.core.HARD);
         salir.addMouseListener(this);
 
-        minus = h.getLabel("  LowerCase  ", h.core.AZUL, panel, h.core.MEDIUM);
-        minus.setBorder(h.core.MEDIO);
+        minus = resources.getLabel("  LowerCase  ", resources.core.TEXT_COLOR, panel, resources.core.MEDIUM);
+        minus.setBorder(resources.core.MEDIO);
         minus.addMouseListener(this);
 
-        desencriptar = h.getLabel("  Decrypt  ", h.core.AZUL, panel, h.core.MEDIUM);
-        desencriptar.setBorder(h.core.MEDIO);
+        desencriptar = resources.getLabel("  Decrypt  ", resources.core.TEXT_COLOR, panel, resources.core.MEDIUM);
+        desencriptar.setBorder(resources.core.MEDIO);
         desencriptar.addMouseListener(this);
 
         return panel;
@@ -65,7 +76,8 @@ public class Textos extends JDialog implements MouseListener {
 
         setDefaultCloseOperation(0);
 
-        mensaje = h.getLabel("<html><strong>Write Text...</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
+        mensaje = resources
+            .getLabel("<html><strong>Write Text...</strong></html>", resources.core.MAIN_COLOR, this, resources.core.MEDIUM);
         mensaje.setBounds(30, 15, 370, 50);
         add(mensaje, BorderLayout.NORTH);
 
@@ -105,7 +117,7 @@ public class Textos extends JDialog implements MouseListener {
                 texto.setText(texto.getText().toUpperCase());
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
+                        "<html>" + resources.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
                         JOptionPane.PLAIN_MESSAGE);
             }
 
@@ -115,32 +127,32 @@ public class Textos extends JDialog implements MouseListener {
                 texto.setText(texto.getText().toLowerCase());
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
+                        "<html>" + resources.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
                         JOptionPane.PLAIN_MESSAGE);
             }
 
         } else if (e.getSource() == encriptar) {
 
             if (!texto.getText().equals("")) {
-                texto.setText(h.core.Encriptar(texto.getText(), false));
+                texto.setText(resources.core.Encriptar(texto.getText(), false));
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
+                        "<html>" + resources.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
                         JOptionPane.PLAIN_MESSAGE);
             }
 
         } else if (e.getSource() == desencriptar) {
 
             if (!texto.getText().equals("")) {
-                texto.setText(h.core.Desencriptar(texto.getText(), false));
+                texto.setText(resources.core.Desencriptar(texto.getText(), false));
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
+                        "<html>" + resources.core.styleJOption() + "<strong>Texto vacío</strong></html>", "¡Verifique!",
                         JOptionPane.PLAIN_MESSAGE);
             }
 
         } else if (e.getSource() == salir) {
-            h.core.fadeOut(this);
+            resources.core.fadeOut(this);
         }
     }
 
@@ -148,15 +160,15 @@ public class Textos extends JDialog implements MouseListener {
     public void mouseEntered(MouseEvent e) {
 
         if (e.getSource() == mayus) {
-            mayus.setCursor(h.core.MANO);
+            mayus.setCursor(resources.core.MANO);
         } else if (e.getSource() == minus) {
-            minus.setCursor(h.core.MANO);
+            minus.setCursor(resources.core.MANO);
         } else if (e.getSource() == encriptar) {
-            encriptar.setCursor(h.core.MANO);
+            encriptar.setCursor(resources.core.MANO);
         } else if (e.getSource() == desencriptar) {
-            desencriptar.setCursor(h.core.MANO);
+            desencriptar.setCursor(resources.core.MANO);
         } else if (e.getSource() == salir) {
-            salir.setCursor(h.core.MANO);
+            salir.setCursor(resources.core.MANO);
         }
     }
 

@@ -44,16 +44,16 @@ public class Prestamos extends JDialog implements ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(img.getImage("prestar.png")).getImage());
 
-        btnsalir = img.getButton("Return", img.core.ROJO, this, this);
+        btnsalir = img.getButton("Return", img.core.MAIN_COLOR, this, this);
         btnsalir.setBounds(330, 320, 86, 30);
 
-        btnprestar = img.getButton("Prestar", img.core.AZUL, this, this);
+        btnprestar = img.getButton("Prestar", img.core.TEXT_COLOR, this, this);
         btnprestar.setBounds(30, 320, 86, 30);
 
-        titulo = img.getLabel("<html><strong><em>Registrar Préstamo</em></strong></html>", img.core.ROJO, this, img.core.BIG);
+        titulo = img.getLabel("<html><strong><em>Registrar Préstamo</em></strong></html>", img.core.MAIN_COLOR, this, img.core.BIG);
         titulo.setBounds(100, 5, 300, 40);
 
-        producto = img.getLabel("<html><strong>A nombre de</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        producto = img.getLabel("<html><strong>A nombre de</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         producto.setBounds(30, 60, 140, 30);
 
         txtnombre = new JTextField();
@@ -73,7 +73,7 @@ public class Prestamos extends JDialog implements ActionListener {
 
         });
 
-        documento = img.getLabel("<html><strong>Documento</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        documento = img.getLabel("<html><strong>Documento</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         documento.setBounds(30, 100, 140, 30);
 
         txtDoc = new JTextField();
@@ -92,7 +92,7 @@ public class Prestamos extends JDialog implements ActionListener {
             }
         });
 
-        referencia = img.getLabel("<html><strong>Referencia</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        referencia = img.getLabel("<html><strong>Referencia</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         referencia.setBounds(30, 140, 130, 30);
 
         txtRef = new JTextField();
@@ -111,7 +111,7 @@ public class Prestamos extends JDialog implements ActionListener {
             }
         });
 
-        tel = img.getLabel("<html><strong>Teléfono</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        tel = img.getLabel("<html><strong>Teléfono</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         tel.setBounds(30, 180, 130, 30);
 
         txtTel = new JTextField();
@@ -131,7 +131,7 @@ public class Prestamos extends JDialog implements ActionListener {
 
         });
 
-        tiempo = img.getLabel("<html><strong>Tiempo</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        tiempo = img.getLabel("<html><strong>Tiempo</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         tiempo.setBounds(30, 220, 130, 30);
 
         semanas = new JComboBox<String>();
@@ -144,7 +144,7 @@ public class Prestamos extends JDialog implements ActionListener {
         meses.setModel(new DefaultComboBoxModel<>(new String[]{"Meses", "1", "2", "3", "4", "5", "6"}));
         add(meses);
 
-        precio = img.getLabel("<html><strong>Préstamo de</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
+        precio = img.getLabel("<html><strong>Préstamo de</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
         precio.setBounds(30, 260, 130, 30);
 
         txtPrecio = new JTextField("0");
