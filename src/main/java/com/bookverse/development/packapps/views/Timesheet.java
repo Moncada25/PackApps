@@ -6,7 +6,7 @@ import static javax.swing.SwingConstants.CENTER;
 import com.bookverse.development.packapps.automation.models.UltimatixData;
 import com.bookverse.development.packapps.automation.stepdefinitions.TimesheetStepDefinitions;
 import com.bookverse.development.packapps.automation.utils.TextUtility;
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -43,18 +43,18 @@ public class Timesheet extends JDialog implements ActionListener {
     setLayout(null);
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-    btnRun = img.getBoton("Run", img.cr.AZUL, this, this);
+    btnRun = img.getButton("Run", img.core.AZUL, this, this);
     btnRun.setBounds(60, 215, 100, 30);
 
-    btnCancel = img.getBoton("Return", img.cr.ROJO, this, this);
+    btnCancel = img.getButton("Return", img.core.ROJO, this, this);
     btnCancel.setBounds(300, 215, 86, 30);
 
     tittle = img
-        .getLabel("<html><strong><em>Timesheet Entry</em></strong></html>", img.cr.ROJO, this,
-            img.cr.BIG);
+        .getLabel("<html><strong><em>Timesheet Entry</em></strong></html>", img.core.ROJO, this,
+            img.core.BIG);
     tittle.setBounds(120, 5, 250, 40);
 
-    user = img.getLabel("<html><strong>Username</strong></html>", img.cr.AZUL, this, img.cr.MEDIUM);
+    user = img.getLabel("<html><strong>Username</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
     user.setBounds(30, 60, 180, 30);
 
     txtUser = new JTextField();
@@ -68,12 +68,12 @@ public class Timesheet extends JDialog implements ActionListener {
       }
 
       private void txtUsuarioKeyTyped(KeyEvent evt) {
-        img.cr.soloAlfa(evt.getKeyChar(), evt, txtUser.getText(), 20);
+        img.core.soloAlfa(evt.getKeyChar(), evt, txtUser.getText(), 20);
       }
     });
 
     password = img
-        .getLabel("<html><strong>Password</strong></html>", img.cr.AZUL, this, img.cr.MEDIUM);
+        .getLabel("<html><strong>Password</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
     password.setBounds(30, 110, 120, 30);
 
     txtPassword = new JPasswordField();
@@ -91,7 +91,7 @@ public class Timesheet extends JDialog implements ActionListener {
       }
     });
 
-    hours = img.getLabel("<html><strong>Hours</strong></html>", img.cr.AZUL, this, img.cr.MEDIUM);
+    hours = img.getLabel("<html><strong>Hours</strong></html>", img.core.AZUL, this, img.core.MEDIUM);
     hours.setBounds(30, 160, 180, 30);
 
     txtHours = new JTextField();
@@ -106,7 +106,7 @@ public class Timesheet extends JDialog implements ActionListener {
       }
 
       private void txtHoursTyped(KeyEvent evt) {
-        img.cr.solonumeros(evt.getKeyChar(), evt, txtHours.getText(), 20);
+        img.core.solonumeros(evt.getKeyChar(), evt, txtHours.getText(), 20);
       }
 
       public void keyPressed(KeyEvent evt) {
@@ -132,7 +132,7 @@ public class Timesheet extends JDialog implements ActionListener {
     txtHours.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
-    img.cr.fadeOut(this);
+    img.core.fadeOut(this);
   }
 
   private void btnRunAP() {
@@ -146,7 +146,7 @@ public class Timesheet extends JDialog implements ActionListener {
       Resources.generalObject = data;
       JUnitCore.runClasses(TimesheetStepDefinitions.class);
     } else {
-      img.cr.mostrarMensaje("Error", "Campos requeridos incompletos");
+      img.core.mostrarMensaje("Error", "Campos requeridos incompletos");
     }
   }
 

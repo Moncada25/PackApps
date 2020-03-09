@@ -9,7 +9,7 @@ import com.bookverse.development.packapps.automation.models.UltimatixData;
 import com.bookverse.development.packapps.automation.tasks.Login;
 import com.bookverse.development.packapps.automation.tasks.Regiter;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.Cast;
@@ -26,7 +26,7 @@ public class TimesheetStepDefinitions {
     @Before
     public void config() {
         setTheStage(new Cast());
-        theActorCalled("PackApssUser");
+        theActorCalled("PackAppsUser");
         theActorInTheSpotlight().can(BrowseTheWeb.with(DriverChrome.web().inTheWebPage(ultimatixData.getUrl())));
     }
 

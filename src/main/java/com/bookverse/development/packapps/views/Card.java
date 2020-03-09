@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -36,7 +36,7 @@ public class Card extends JDialog implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         if (e.getSource() == card) {
-            img.cr.fadeOut(this);
+            img.core.fadeOut(this);
         }
     }
 

@@ -1,13 +1,12 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -44,19 +43,19 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
         setIconImage(new ImageIcon(h.getImage("coment.png")).getImage());
         setDefaultCloseOperation(0);
 
-        btnenviar = h.getBoton("Send", h.cr.AZUL, this, this);
+        btnenviar = h.getButton("Send", h.core.AZUL, this, this);
         btnenviar.setBounds(140, 400, 86, 30);
 
-        btnsalir = h.getBoton("Return", h.cr.ROJO, this, this);
+        btnsalir = h.getButton("Return", h.core.ROJO, this, this);
         btnsalir.setBounds(250, 400, 86, 30);
 
-        mensaje = h.getLabel("<html><strong><em>Write Commentary</em></strong></html>", h.cr.ROJO, this, h.cr.BIG);
+        mensaje = h.getLabel("<html><strong><em>Write Commentary</em></strong></html>", h.core.ROJO, this, h.core.BIG);
         mensaje.setBounds(130, 10, 370, 50);
 
-        usuario = h.getLabel("<html><strong>User</strong></html>", h.cr.AZUL, this, h.cr.MEDIUM);
+        usuario = h.getLabel("<html><strong>User</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
         usuario.setBounds(100, 60, 100, 50);
 
-        required = h.getLabel("<html><strong>*</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        required = h.getLabel("<html><strong>*</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         required.setBounds(139, 79, 8, 8);
         required.addMouseListener(this);
 
@@ -72,11 +71,11 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
             }
 
             private void userKeyTyped(KeyEvent e) {
-                h.cr.soloAlfa(e.getKeyChar(), e, user.getText(), 20);
+                h.core.soloAlfa(e.getKeyChar(), e, user.getText(), 20);
             }
         });
 
-        message = h.getLabel("<html><strong>Message</strong></html>", h.cr.AZUL, this, h.cr.MEDIUM);
+        message = h.getLabel("<html><strong>Message</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
         message.setBounds(30, 150, 370, 30);
 
         texto = new JTextArea();
@@ -87,26 +86,21 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
 
     public void enviarComentario(String username, String commentary) {
 
-        if (h.cr.comprobarConexion("Asegúrate de estar conectado a una red", true)) {
+        if (h.core.comprobarConexion("Asegúrate de estar conectado a una red", true)) {
 
-            try {
+            String data[] = {"feedback", username, commentary, h.core.obtenerDate()};
 
-                String data[] = {"feedback", username, commentary, h.cr.obtenerDate()};
+            if (h.database.insertData(data)) {
 
-                if (h.db.insertData(data)) {
+                JOptionPane.showMessageDialog(null,
+                        "<html>" + h.core.styleJOption() + "<strong><center>Comentario enviado</center></strong><br>"
+                                + "Feedback enviado exitosamente, su opinión será tomada en cuenta." + "</html>",
+                        "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
 
-                    JOptionPane.showMessageDialog(null,
-                            "<html>" + h.cr.styleJOption() + "<strong><center>Comentario enviado</center></strong><br>"
-                                    + "Feedback enviado exitosamente, su opinión será tomada en cuenta." + "</html>",
-                            "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
-
-                    user.setText("");
-                    texto.setText("");
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+                user.setText("");
+                texto.setText("");
             }
+
         }
     }
 
@@ -114,7 +108,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
 
         if (user.getText().equals("")) {
 
-            JOptionPane.showMessageDialog(null, "<html>" + h.cr.styleJOption() + "<strong>Username empty</strong></html>", "¡Verifique!",
+            JOptionPane.showMessageDialog(null, "<html>" + h.core.styleJOption() + "<strong>Username empty</strong></html>", "¡Verifique!",
                     JOptionPane.PLAIN_MESSAGE);
             user.requestFocus();
 
@@ -122,7 +116,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
 
             if (texto.getText().trim().length() < 3) {
 
-                JOptionPane.showMessageDialog(null, "<html>" + h.cr.styleJOption() + "<strong>Mensaje demasiado corto</strong></html>",
+                JOptionPane.showMessageDialog(null, "<html>" + h.core.styleJOption() + "<strong>Mensaje demasiado corto</strong></html>",
                         "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
                 texto.requestFocus();
             } else {
@@ -137,7 +131,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
         if (e.getSource() == btnenviar) {
             btnEnviarAP();
         } else if (e.getSource() == btnsalir) {
-            h.cr.fadeOut(this);
+            h.core.fadeOut(this);
         }
     }
 
@@ -146,7 +140,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
 
         if (e.getSource() == required) {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong><center>Completa este campo</center></strong><br>"
+                    "<html>" + h.core.styleJOption() + "<strong><center>Completa este campo</center></strong><br>"
                             + "Username necesario para almacenar su mensaje,<br>"
                             + "el comentario podrá ser leído por el desarrollador.</html>",
                     "¡Campo requerido!", JOptionPane.PLAIN_MESSAGE);

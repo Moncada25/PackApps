@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.core.Core;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,7 +42,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
         String[] imgs = {"push.png", "pop.png", "peek.png", "contar.png", "sumar.png", "promedio.png", "pares.png",
                 "vaciar.png"};
 
-        panel.setBorder(h.cr.bordeAzul("Select Action"));
+        panel.setBorder(h.core.bordeAzul("Select Action"));
 
         /* ICONOS */
         for (int i = 0; i < botones.length; i++) {
@@ -61,9 +62,9 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
 
         for (int j = 0; j < cola.length; j++) {
 
-            cola[j] = h.getBoton("", null, this, this);
+            cola[j] = h.getButton("", null, this, this);
             cola[j].setBounds(x, y, 80, 40);
-            cola[j].setForeground(h.cr.ROJO);
+            cola[j].setForeground(h.core.ROJO);
             cola[j].setVisible(false);
 
             if (sw) {
@@ -97,10 +98,10 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
         puerta.setVisible(false);
         add(puerta);
 
-        titulo = h.getLabel("", h.cr.ROJO, this, h.cr.BIG);
+        titulo = h.getLabel("", h.core.ROJO, this, h.core.BIG);
         titulo.setBounds(50, 0, 900, 150);
 
-        mensaje = h.getLabel("", h.cr.ROJO, this, h.cr.BIG);
+        mensaje = h.getLabel("", h.core.ROJO, this, h.core.BIG);
         mensaje.setBounds(620, 480, 200, 85);
     }
 
@@ -112,9 +113,9 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
     public void btnMostrar() {
 
         if (i > 0) {
-            titulo.setText("<html>" + h.cr.styleJOption() + "<strong>Próximo dato ? " + Peek() + "</strong></html>");
+            titulo.setText("<html>" + h.core.styleJOption() + "<strong>Próximo dato ? " + Peek() + "</strong></html>");
         } else {
-            h.cr.mostrarMensaje("Message", "La cola está vacía");
+            h.core.mostrarMensaje("Message", "La cola está vacía");
         }
     }
 
@@ -147,7 +148,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
             titulo.setText("<html><strong>Queue Empty</strong></html>");
 
         } else {
-            h.cr.mostrarMensaje("Message", "La cola está vacía");
+            h.core.mostrarMensaje("Message", "La cola está vacía");
             reset();
         }
     }
@@ -168,12 +169,12 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
         }
 
         if (i == 0) {
-            h.cr.mostrarMensaje("Message", "La cola está vacía");
+            h.core.mostrarMensaje("Message", "La cola está vacía");
         } else if (cont == 0) {
-            titulo.setText("<html>" + h.cr.styleJOption() + "<strong>No hay pares en la cola</strong></html>");
+            titulo.setText("<html>" + h.core.styleJOption() + "<strong>No hay pares en la cola</strong></html>");
         } else {
-            titulo.setText("<html>" + h.cr.styleJOption() + "<strong>Cantidad de pares ? " + cont + "</strong></html>");
-            h.cr.mostrarMensaje("Resultado", "<html>" + h.cr.styleJOption() + "<strong>Números pares de la cola</strong></html><br>" + cadena);
+            titulo.setText("<html>" + h.core.styleJOption() + "<strong>Cantidad de pares ? " + cont + "</strong></html>");
+            h.core.mostrarMensaje("Resultado", "<html>" + h.core.styleJOption() + "<strong>Números pares de la cola</strong></html><br>" + cadena);
         }
 
         cont = 0;
@@ -183,9 +184,9 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
     private void Promediar() {
 
         if (i == 0) {
-            h.cr.mostrarMensaje("Message", "La cola está vacía");
+            h.core.mostrarMensaje("Message", "La cola está vacía");
         } else {
-            titulo.setText("<html>" + h.cr.styleJOption() + "<strong>Promedio de la cola ? " + String.format("%.2f", Sumar() / Contar())
+            titulo.setText("<html>" + h.core.styleJOption() + "<strong>Promedio de la cola ? " + String.format("%.2f", Sumar() / Contar())
                     + "</strong></html>");
         }
     }
@@ -193,14 +194,14 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
     private double Sumar() {
 
         if (i == 0) {
-            h.cr.mostrarMensaje("Message", "La cola está vacía");
+            h.core.mostrarMensaje("Message", "La cola está vacía");
         } else {
 
             for (int n = 0; n < i; n++) {
 
                 suma += Double.parseDouble(cola[n].getText());
             }
-            titulo.setText("<html>" + h.cr.styleJOption() + "<strong>Los elementos de la cola suman ? " + (int) suma + "</strong></html>");
+            titulo.setText("<html>" + h.core.styleJOption() + "<strong>Los elementos de la cola suman ? " + (int) suma + "</strong></html>");
 
             sumaT = suma;
             suma = 0;
@@ -211,7 +212,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
     private int Contar() {
 
         if (i == 0) {
-            h.cr.mostrarMensaje("Message", "La cola está vacía");
+            h.core.mostrarMensaje("Message", "La cola está vacía");
         } else {
             titulo.setText("<html><strong>Hay " + i + " elementos en la cola</strong></html>");
         }
@@ -224,7 +225,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
 
         i--;
 
-        if (cola[0].getBackground() == h.cr.AZUL) {
+        if (cola[0].getBackground() == h.core.AZUL) {
             con--;
             sum -= Double.parseDouble((cola[0].getText()));
             cola[0].setBackground(getBackground());
@@ -253,7 +254,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
             titulo.setText("<html><strong>Se desencoló ? " + Pop() + "</strong></html>");
 
         } else {
-            h.cr.mostrarMensaje("Message", "La cola está vacía");
+            h.core.mostrarMensaje("Message", "La cola está vacía");
             reset();
         }
     }
@@ -273,7 +274,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
 
         if (i < cola.length) {
             do {
-                num = Integer.parseInt(h.cr.ingreseNumero("Ingresa un número", 6));
+                num = Integer.parseInt(Core.enterNumber("Ingresa un número", 6));
 
                 Push(num);
 
@@ -286,7 +287,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
             titulo.setText("");
 
         } else {
-            h.cr.mostrarMensaje("Message", "La cola está llena");
+            h.core.mostrarMensaje("Message", "La cola está llena");
         }
     }
 
@@ -310,7 +311,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
         } else if (e.getSource() == botones[7]) {
             Vaciar();
         } else if (e.getSource() == puerta) {
-            h.cr.mostrarMensaje("Message", "Te la creíste, no hay bonus :(");
+            h.core.mostrarMensaje("Message", "Te la creíste, no hay bonus :(");
         }
     }
 
@@ -318,31 +319,31 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
     public void mouseEntered(MouseEvent e) {
 
         if (e.getSource() == botones[0]) {
-            botones[0].setCursor(h.cr.MANO);
+            botones[0].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Push( )</strong></html>");
         } else if (e.getSource() == botones[1]) {
-            botones[1].setCursor(h.cr.MANO);
+            botones[1].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Pop( )</strong></html>");
         } else if (e.getSource() == botones[2]) {
-            botones[2].setCursor(h.cr.MANO);
+            botones[2].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Peek( )</strong></html>");
         } else if (e.getSource() == botones[3]) {
-            botones[3].setCursor(h.cr.MANO);
+            botones[3].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Contar</strong></html>");
         } else if (e.getSource() == botones[4]) {
-            botones[4].setCursor(h.cr.MANO);
+            botones[4].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Sumar</strong></html>");
         } else if (e.getSource() == botones[5]) {
-            botones[5].setCursor(h.cr.MANO);
+            botones[5].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Promediar</strong></html>");
         } else if (e.getSource() == botones[6]) {
-            botones[6].setCursor(h.cr.MANO);
+            botones[6].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Números Pares</strong></html>");
         } else if (e.getSource() == botones[7]) {
-            botones[7].setCursor(h.cr.MANO);
+            botones[7].setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Vaciar</strong></html>");
         } else if (e.getSource() == puerta) {
-            puerta.setCursor(h.cr.MANO);
+            puerta.setCursor(h.core.MANO);
             mensaje.setText("<html><strong>Bonus</strong></html>");
         }
     }
@@ -388,12 +389,12 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
 
             if (e.getSource() == cola[j]) {
 
-                if (cola[j].getBackground() == h.cr.AZUL) {
+                if (cola[j].getBackground() == h.core.AZUL) {
                     cola[j].setBackground(getBackground());
                     con--;
                     sum -= Double.parseDouble(cola[j].getText());
                 } else {
-                    cola[j].setBackground(h.cr.AZUL);
+                    cola[j].setBackground(h.core.AZUL);
                     con++;
                     sum += Double.parseDouble(cola[j].getText());
                 }

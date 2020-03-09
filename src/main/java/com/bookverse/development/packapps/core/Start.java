@@ -13,7 +13,6 @@ package com.bookverse.development.packapps.core;
 import com.bookverse.development.packapps.views.Index;
 
 public class Start {
-
   public static void main(String[] args) {
     Index.main(args);
   }

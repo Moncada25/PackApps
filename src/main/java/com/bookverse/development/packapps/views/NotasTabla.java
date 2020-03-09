@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.core.Core;
+import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -63,16 +63,16 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
 
         String[] imgs = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-        panel.setBorder(img.cr.bordeAzul("Select Table"));
+        panel.setBorder(img.core.bordeAzul("Select Table"));
 
         titulo = new JLabel();
-        titulo.setFont(img.cr.BIG);
-        titulo.setForeground(img.cr.ROJO);
+        titulo.setFont(img.core.BIG);
+        titulo.setForeground(img.core.ROJO);
         titulo.addMouseListener(this);
 
         men = new JLabel();
-        men.setFont(img.cr.BIG);
-        men.setForeground(img.cr.AZUL);
+        men.setFont(img.core.BIG);
+        men.setForeground(img.core.AZUL);
         men.addMouseListener(this);
 
         /* ICONOS */
@@ -178,7 +178,7 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
 
             Object opcion = null;
 
-            opcion = JOptionPane.showInputDialog(null, "<html>" + img.cr.styleJOption() + "<strong><em>¿Qué busca?</em></strong></html>",
+            opcion = JOptionPane.showInputDialog(null, "<html>" + img.core.styleJOption() + "<strong><em>¿Qué busca?</em></strong></html>",
                     "Buscar registros", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"ID", "Nickname"}, "ID");
 
             if (opcion != null) {
@@ -186,12 +186,12 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
                 try {
 
                     if (opcion.toString().equals("ID")) {
-                        String sql = "select * from notas where ID ='" + img.cr.ingreseNumero("Ingresa un ID", 6) + "'";
+                        String sql = "select * from notas where ID ='" + Core.enterNumber("Ingresa un ID", 6) + "'";
                         resultadoBusqueda(90, sql);
                         setVisible(true);
                     } else if (opcion.toString().equals("Nickname")) {
                         String sql = "select * from notas where Nickname ='"
-                                + img.cr.ingreseNickname("Ingrese un Nickname", 20) + "'";
+                                + Core.enterNickname("Ingrese un Nickname", 20) + "'";
                         resultadoBusqueda(250, sql);
                         setVisible(true);
                     }
@@ -219,14 +219,10 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
 
             } else {
 
-                if (img.cr.loginDBA()) {
+                if (img.core.loginDBA()) {
 
-                    try {
-                        img.db.updateData(img.cr.ingreseNickname("Ingrese un Nickname", 20),
-                                String.valueOf(modelo.getValueAt(filaseleccionada, 0)), "notas");
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                    img.database.updateData(Core.enterNickname("Ingrese un Nickname", 20),
+                            String.valueOf(modelo.getValueAt(filaseleccionada, 0)), "notas");
 
                     dispose();
                     new Index().NotasTableAP();
@@ -256,12 +252,8 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
                     IDs[i] = String.valueOf(modelo.getValueAt(rows[i], 0));
                 }
 
-                if (img.cr.loginDBA()) {
-                    try {
-                        img.db.deleteData(IDs, "notas");
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                if (img.core.loginDBA()) {
+                    img.database.deleteData(IDs, "notas");
 
                     dispose();
                     new Index().NotasTableAP();
@@ -275,13 +267,13 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
 
     public void resultadoBusqueda(int alto, String sql) {
 
-        ResultadoTabla resultado = new ResultadoTabla(this, true, columnas);
+        TableResult resultado = new TableResult(this, true, columnas);
 
-        resultado.limpiarTabla((DefaultTableModel) resultado.resultadoTab.getModel());
+        resultado.cleanTable((DefaultTableModel) resultado.tabResult.getModel());
 
         try {
 
-            if (img.db.importarTabla(resultado.resultadoTab, sql, false)) {
+            if (img.database.readTable(resultado.tabResult, sql, false)) {
                 resultado.setBounds(0, 0, 780, alto);
                 resultado.setResizable(false);
                 resultado.setLocationRelativeTo(null);
@@ -315,13 +307,13 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
 
         if (e.getSource() == tablas[0]) {
             setVisible(false);
-            new Index().AdivinarTableAP();
+            new Index().guessNumberTableAP();
         } else if (e.getSource() == tablas[1]) {
             setVisible(false);
-            new Index().ahorcadoTableAP();
+            new Index().hangmanTableAP();
         } else if (e.getSource() == tablas[2]) {
             setVisible(false);
-            new Index().DadosTableAP();
+            new Index().dicesTableAP();
         } else if (e.getSource() == tablas[3]) {
             JOptionPane.showMessageDialog(null, "<html><em><strong>You're here!</strong><br></em></html>",
                     "Usuario, cámate po favo", JOptionPane.PLAIN_MESSAGE);
@@ -334,20 +326,20 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
     public void mouseEntered(MouseEvent e) {
 
         if (e.getSource() == tablas[0]) {
-            tablas[0].setCursor(img.cr.MIRA);
+            tablas[0].setCursor(img.core.MIRA);
             titulo.setText("    Adivinar Número");
         } else if (e.getSource() == tablas[1]) {
-            tablas[1].setCursor(img.cr.CARGAR);
+            tablas[1].setCursor(img.core.CARGAR);
             titulo.setText("    Ahorcadito");
         } else if (e.getSource() == tablas[2]) {
-            tablas[2].setCursor(img.cr.REDI);
+            tablas[2].setCursor(img.core.REDI);
             titulo.setText("    Juego de Dados");
         } else if (e.getSource() == tablas[3]) {
-            tablas[3].setCursor(img.cr.TEXT);
+            tablas[3].setCursor(img.core.TEXT);
             titulo.setText("    Notas");
             men.setText("       You're here");
         } else if (e.getSource() == tablas[4]) {
-            tablas[4].setCursor(img.cr.MANO);
+            tablas[4].setCursor(img.core.MANO);
             titulo.setText("    Rompecabezas");
         }
     }

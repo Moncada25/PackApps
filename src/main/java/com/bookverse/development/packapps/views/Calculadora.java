@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -78,8 +78,8 @@ public class Calculadora extends JDialog implements ActionListener {
             }
 
             private void txtResulKeyTyped(KeyEvent e) {
-                img.cr.solonumerosCalc(e.getKeyChar(), e, resul.getText(), 15);
-                img.cr.soloUnPunto(e.getKeyChar(), e, resul.getText());
+                img.core.solonumerosCalc(e.getKeyChar(), e, resul.getText(), 15);
+                img.core.soloUnPunto(e.getKeyChar(), e, resul.getText());
             }
         });
 
@@ -90,7 +90,7 @@ public class Calculadora extends JDialog implements ActionListener {
 
         for (int f = 0; f < 3; f++) {
             for (int c = 0; c < 3; c++) {
-                num[f][c] = img.getBoton(resul.getText() + String.valueOf(n), null, this, this);
+                num[f][c] = img.getButton(resul.getText() + String.valueOf(n), null, this, this);
                 num[f][c].setBounds(x, y, 43, 43);
                 n++;
                 x = x + 43;
@@ -100,43 +100,43 @@ public class Calculadora extends JDialog implements ActionListener {
             y = y + 43;
         }
 
-        cero = img.getBoton("0", null, this, this);
+        cero = img.getButton("0", null, this, this);
         cero.setBounds(50, 229, 86, 43);
 
-        punto = img.getBoton(".", null, this, this);
+        punto = img.getButton(".", null, this, this);
         punto.setBounds(136, 229, 43, 43);
 
-        mas = img.getBoton("+", null, this, this);
+        mas = img.getButton("+", null, this, this);
         mas.setBounds(179, 229, 43, 43);
 
-        menos = img.getBoton("-", null, this, this);
+        menos = img.getButton("-", null, this, this);
         menos.setBounds(179, 186, 43, 43);
 
-        multi = img.getBoton("*", null, this, this);
+        multi = img.getButton("*", null, this, this);
         multi.setBounds(179, 143, 43, 43);
 
-        div = img.getBoton("/", null, this, this);
+        div = img.getButton("/", null, this, this);
         div.setBounds(179, 100, 43, 43);
 
-        igual = img.getBoton("=", img.cr.AZUL, this, this);
+        igual = img.getButton("=", img.core.AZUL, this, this);
         igual.setBounds(222, 186, 43, 86);
 
-        raiz = img.getBoton("?", null, this, this);
+        raiz = img.getButton("?", null, this, this);
         raiz.setBounds(222, 143, 43, 43);
 
-        poten = img.getBoton("^", null, this, this);
+        poten = img.getButton("^", null, this, this);
         poten.setBounds(222, 100, 43, 43);
 
-        borrar = img.getBoton("?", img.cr.ROJO, this, this);
+        borrar = img.getButton("?", img.core.ROJO, this, this);
         borrar.setBounds(179, 57, 86, 43);
 
-        vaciar = img.getBoton("C", null, this, this);
+        vaciar = img.getButton("C", null, this, this);
         vaciar.setBounds(136, 57, 43, 43);
 
-        euler = img.getBoton("e^", null, this, this);
+        euler = img.getButton("e^", null, this, this);
         euler.setBounds(93, 57, 43, 43);
 
-        nega = img.getBoton("±", null, this, this);
+        nega = img.getButton("±", null, this, this);
         nega.setBounds(50, 57, 43, 43);
     }
 
@@ -226,7 +226,7 @@ public class Calculadora extends JDialog implements ActionListener {
             }
 
         } catch (Exception e) {
-            img.cr.mostrarMensaje("Error", "Operación inválida.");
+            img.core.mostrarMensaje("Error", "Operación inválida.");
         }
     }
 
@@ -242,7 +242,7 @@ public class Calculadora extends JDialog implements ActionListener {
             }
 
         } catch (Exception e) {
-            img.cr.mostrarMensaje("Error", "Operación inválida.");
+            img.core.mostrarMensaje("Error", "Operación inválida.");
         }
     }
 
@@ -283,7 +283,7 @@ public class Calculadora extends JDialog implements ActionListener {
             }
 
         } catch (Exception e) {
-            img.cr.mostrarMensaje("Error", "Operación inválida.");
+            img.core.mostrarMensaje("Error", "Operación inválida.");
         }
     }
 
@@ -299,7 +299,7 @@ public class Calculadora extends JDialog implements ActionListener {
             }
 
         } catch (Exception e) {
-            img.cr.mostrarMensaje("Error", "Operación inválida.");
+            img.core.mostrarMensaje("Error", "Operación inválida.");
         }
     }
 
@@ -340,7 +340,7 @@ public class Calculadora extends JDialog implements ActionListener {
             }
 
         } catch (Exception e) {
-            img.cr.mostrarMensaje("Error", "Operación inválida.");
+            img.core.mostrarMensaje("Error", "Operación inválida.");
         }
     }
 
@@ -357,7 +357,7 @@ public class Calculadora extends JDialog implements ActionListener {
             }
 
         } catch (Exception e) {
-            img.cr.mostrarMensaje("Error", "Operación inválida.");
+            img.core.mostrarMensaje("Error", "Operación inválida.");
         }
     }
 

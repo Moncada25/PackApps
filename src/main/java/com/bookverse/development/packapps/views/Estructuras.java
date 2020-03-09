@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
@@ -30,22 +30,22 @@ public class Estructuras extends JDialog implements MouseListener {
     public JPanel getPanel() {
 
         JPanel panel = new JPanel(new FlowLayout());
-        panel.setBorder(h.cr.bordeAzul("Select"));
+        panel.setBorder(h.core.bordeAzul("Select"));
 
-        btnpilas = h.getLabel("  Pilas  ", h.cr.AZUL, panel, h.cr.MEDIUM);
-        btnpilas.setBorder(h.cr.MEDIO);
+        btnpilas = h.getLabel("  Pilas  ", h.core.AZUL, panel, h.core.MEDIUM);
+        btnpilas.setBorder(h.core.MEDIO);
         btnpilas.addMouseListener(this);
 
-        btncolas = h.getLabel("  Colas  ", h.cr.AZUL, panel, h.cr.MEDIUM);
-        btncolas.setBorder(h.cr.MEDIO);
+        btncolas = h.getLabel("  Colas  ", h.core.AZUL, panel, h.core.MEDIUM);
+        btncolas.setBorder(h.core.MEDIO);
         btncolas.addMouseListener(this);
 
-        btnmatrices = h.getLabel("  Matrices  ", h.cr.AZUL, panel, h.cr.MEDIUM);
-        btnmatrices.setBorder(h.cr.MEDIO);
+        btnmatrices = h.getLabel("  Matrices  ", h.core.AZUL, panel, h.core.MEDIUM);
+        btnmatrices.setBorder(h.core.MEDIO);
         btnmatrices.addMouseListener(this);
 
-        btnsalir = h.getLabel("  Return  ", h.cr.ROJO, panel, h.cr.MEDIUM);
-        btnsalir.setBorder(h.cr.HARD);
+        btnsalir = h.getLabel("  Return  ", h.core.ROJO, panel, h.core.MEDIUM);
+        btnsalir.setBorder(h.core.HARD);
         btnsalir.addMouseListener(this);
 
         return panel;
@@ -72,7 +72,7 @@ public class Estructuras extends JDialog implements MouseListener {
         pilas.setResizable(false);
         pilas.setLocationRelativeTo(null);
         pilas.setTitle("Pilas");
-        h.cr.fadeIn(pilas);
+        h.core.fadeIn(pilas);
         setVisible(false);
         pilas.setVisible(true);
     }
@@ -83,7 +83,7 @@ public class Estructuras extends JDialog implements MouseListener {
         colas.setResizable(false);
         colas.setLocationRelativeTo(null);
         colas.setTitle("Colas");
-        h.cr.fadeIn(colas);
+        h.core.fadeIn(colas);
         setVisible(false);
         colas.setVisible(true);
     }
@@ -94,7 +94,7 @@ public class Estructuras extends JDialog implements MouseListener {
         matrices.setResizable(false);
         matrices.setLocationRelativeTo(null);
         matrices.setTitle("Matrices");
-        h.cr.fadeIn(matrices);
+        h.core.fadeIn(matrices);
         setVisible(false);
         matrices.setVisible(true);
     }
@@ -103,7 +103,7 @@ public class Estructuras extends JDialog implements MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         if (e.getSource() == btnsalir) {
-            h.cr.fadeOut(this);
+            h.core.fadeOut(this);
         } else if (e.getSource() == btnpilas) {
             PilasAP();
             setVisible(true);
@@ -120,13 +120,13 @@ public class Estructuras extends JDialog implements MouseListener {
     public void mouseEntered(MouseEvent e) {
 
         if (e.getSource() == btnsalir) {
-            btnsalir.setCursor(h.cr.MANO);
+            btnsalir.setCursor(h.core.MANO);
         } else if (e.getSource() == btnpilas) {
-            btnpilas.setCursor(h.cr.MANO);
+            btnpilas.setCursor(h.core.MANO);
         } else if (e.getSource() == btncolas) {
-            btncolas.setCursor(h.cr.MANO);
+            btncolas.setCursor(h.core.MANO);
         } else if (e.getSource() == btnmatrices) {
-            btnmatrices.setCursor(h.cr.MANO);
+            btnmatrices.setCursor(h.core.MANO);
         }
     }
 

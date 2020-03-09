@@ -1,780 +1,799 @@
 package com.bookverse.development.packapps.models;
 
-import com.bookverse.development.packapps.core.Core;
+import static com.bookverse.development.packapps.utils.TableConstants.DICES;
+import static com.bookverse.development.packapps.utils.TableConstants.FEEDBACK;
+import static com.bookverse.development.packapps.utils.TableConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.TableConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.TableConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.TableConstants.LOANS;
+import static com.bookverse.development.packapps.utils.TableConstants.NOTES;
+import static com.bookverse.development.packapps.utils.TableConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.TableConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.TableConstants.RECORDS;
+import static com.bookverse.development.packapps.utils.TableConstants.SALES;
+import static com.bookverse.development.packapps.utils.TableConstants.USERS;
+
+import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.Querys;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 import javax.sql.DataSource;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class Database {
 
-    private Connection conexion = null;
-    private ResultSet rs;
-    private PreparedStatement stm;
-    private ResultSetMetaData rsm;
-    private DefaultTableModel modelo;
-    private DataSource dataSource;
-    private DataSourceService data = new DataSourceService();
+  private Connection connection = null;
+  private ResultSet resultSet;
+  private PreparedStatement preparedStatement;
+  private DefaultTableModel tableModel;
+  private DataSource dataSource;
+  private DataSourceService dataSourceService = new DataSourceService();
+  private String ref, est, doc, tel, fecha, usuario, userLogin, pass, status;
+  private Double precio, totalVen, totalCom, totalPres;
+  private int disp, prodVen, prodCom;
 
-    /* CREATE */
-    public boolean insertData(String[] datos) throws SQLException {
+  public boolean insertData(String[] data) {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            if (datos[0].equals("adivinar")) {
-                stm = conexion
-                        .prepareStatement("insert into adivinar (Nickname,Limite,Intentos,Date) values (?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setInt(2, Integer.parseInt(datos[2]));
-                stm.setString(3, datos[3]);
-                stm.setString(4, datos[4]);
-                stm.execute();
-            } else if (datos[0].equals("ahorcado")) {
-                stm = conexion.prepareStatement(
-                        "insert into ahorcado (Nickname,Mistakes,State, Category, Date) values (?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setInt(2, Integer.parseInt(datos[2]));
-                stm.setString(3, datos[3]);
-                stm.setString(4, datos[4]);
-                stm.setString(5, datos[5]);
-                stm.execute();
-            } else if (datos[0].equals("dados")) {
-                stm = conexion.prepareStatement("insert into dados (Nickname,Winner,Round,Date) values (?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setInt(3, Integer.parseInt(datos[3]));
-                stm.setString(4, datos[4]);
-                stm.execute();
-            } else if (datos[0].equals("rompecabezas")) {
-                stm = conexion.prepareStatement(
-                        "insert into rompecabezas (Nickname,State,Tiempo,Jugadas,Date) values (?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
-                stm.setInt(4, Integer.parseInt(datos[4]));
-                stm.setString(5, datos[5]);
-                stm.execute();
-            } else if (datos[0].equals("notas")) {
-                stm = conexion.prepareStatement(
-                        "insert into notas (Nickname,Scale,Percent,Note,State,Date) values (?,?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setInt(3, Integer.parseInt(datos[3]));
-                stm.setString(4, datos[4]);
-                stm.setString(5, datos[5]);
-                stm.setString(6, datos[6]);
-                stm.execute();
-            } else if (datos[0].equals("feedback")) {
-                stm = conexion.prepareStatement("insert into feedback (Username,Mensaje,Date) values (?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
-                stm.execute();
-            } else if (datos[0].equals("inventario")) {
-                stm = conexion
-                        .prepareStatement("insert into inventario (ID, Estado, Precio, Cantidad) values (?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setDouble(3, Double.parseDouble(datos[3]));
-                stm.setInt(4, Integer.parseInt(datos[4]));
-                stm.execute();
-            } else if (datos[0].equals("registros")) {
-                stm = conexion.prepareStatement(
-                        "insert into registros (Usuario, Productos_Vendidos,Total_Ventas,Productos_Comprados,Total_Compras, Total_Prestamos) values (?,?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setInt(2, Integer.parseInt(datos[2]));
-                stm.setDouble(3, Double.parseDouble(datos[3]));
-                stm.setInt(4, Integer.parseInt(datos[4]));
-                stm.setDouble(5, Double.parseDouble(datos[5]));
-                stm.setDouble(6, Double.parseDouble(datos[6]));
-                stm.execute();
-            } else if (datos[0].equals("prestamos")) {
-                stm = conexion.prepareStatement(
-                        "insert into préstamos (Usuario, Nombre,Documento,Referencia,Teléfono,Plazo,Valor) values (?,?,?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
-                stm.setString(4, datos[4]);
-                stm.setString(5, datos[5]);
-                stm.setString(6, datos[6]);
-                stm.setDouble(7, Double.parseDouble(datos[7]));
-                stm.execute();
-            } else if (datos[0].equals("usuarios")) {
+      switch (data[0]) {
+        case GUESS_NUMBER:
+          preparedStatement = connection.prepareStatement(Querys.insertGuessNumber());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setInt(2, Integer.parseInt(data[2]));
+          preparedStatement.setString(3, data[3]);
+          preparedStatement.setString(4, data[4]);
+          preparedStatement.execute();
+          break;
+        case HANGMAN:
+          preparedStatement = connection.prepareStatement(Querys.insertHangman());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setInt(2, Integer.parseInt(data[2]));
+          preparedStatement.setString(3, data[3]);
+          preparedStatement.setString(4, data[4]);
+          preparedStatement.setString(5, data[5]);
+          preparedStatement.execute();
+          break;
+        case DICES:
+          preparedStatement = connection.prepareStatement(Querys.insertDices());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setString(2, data[2]);
+          preparedStatement.setInt(3, Integer.parseInt(data[3]));
+          preparedStatement.setString(4, data[4]);
+          preparedStatement.execute();
+          break;
+        case PUZZLE:
+          preparedStatement = connection.prepareStatement(Querys.insertPuzzle());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setString(2, data[2]);
+          preparedStatement.setString(3, data[3]);
+          preparedStatement.setInt(4, Integer.parseInt(data[4]));
+          preparedStatement.setString(5, data[5]);
+          preparedStatement.execute();
+          break;
+        case NOTES:
+          preparedStatement = connection.prepareStatement(Querys.insertNote());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setString(2, data[2]);
+          preparedStatement.setInt(3, Integer.parseInt(data[3]));
+          preparedStatement.setString(4, data[4]);
+          preparedStatement.setString(5, data[5]);
+          preparedStatement.setString(6, data[6]);
+          preparedStatement.execute();
+          break;
+        case FEEDBACK:
+          preparedStatement = connection.prepareStatement(Querys.insertFeedback());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setString(2, data[2]);
+          preparedStatement.setString(3, data[3]);
+          preparedStatement.execute();
+          break;
+        case INVENTORY:
+          preparedStatement = connection.prepareStatement(Querys.insertInventory());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setString(2, data[2]);
+          preparedStatement.setDouble(3, Double.parseDouble(data[3]));
+          preparedStatement.setInt(4, Integer.parseInt(data[4]));
+          preparedStatement.execute();
+          break;
+        case RECORDS:
+          preparedStatement = connection.prepareStatement(Querys.insertRecord());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setInt(2, Integer.parseInt(data[2]));
+          preparedStatement.setDouble(3, Double.parseDouble(data[3]));
+          preparedStatement.setInt(4, Integer.parseInt(data[4]));
+          preparedStatement.setDouble(5, Double.parseDouble(data[5]));
+          preparedStatement.setDouble(6, Double.parseDouble(data[6]));
+          preparedStatement.execute();
+          break;
+        case LOANS:
+          preparedStatement = connection.prepareStatement(Querys.insertLoan());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setString(2, data[2]);
+          preparedStatement.setString(3, data[3]);
+          preparedStatement.setString(4, data[4]);
+          preparedStatement.setString(5, data[5]);
+          preparedStatement.setString(6, data[6]);
+          preparedStatement.setDouble(7, Double.parseDouble(data[7]));
+          preparedStatement.execute();
+          break;
+        case USERS:
+          preparedStatement = connection.prepareStatement(Querys.insertUser());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setString(2, data[2]);
+          preparedStatement.setString(3, data[3]);
+          preparedStatement.execute();
+          break;
+        case PURCHASES:
+          preparedStatement = connection.prepareStatement(Querys.insertPurchase());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setString(2, data[2]);
+          preparedStatement.setString(3, data[3]);
+          preparedStatement.setString(4, data[4]);
+          preparedStatement.setString(5, data[5]);
+          preparedStatement.setInt(6, Integer.parseInt(data[6]));
+          preparedStatement.setDouble(7, Double.parseDouble(data[7]));
+          preparedStatement.execute();
+          break;
+        case SALES:
+          preparedStatement = connection.prepareStatement(Querys.insertSale());
+          preparedStatement.setString(1, data[1]);
+          preparedStatement.setString(2, data[2]);
+          preparedStatement.setString(3, data[3]);
+          preparedStatement.setString(4, data[4]);
+          preparedStatement.setString(5, data[5]);
+          preparedStatement.setInt(6, Integer.parseInt(data[6]));
+          preparedStatement.setDouble(7, Double.parseDouble(data[7]));
+          preparedStatement.execute();
+          break;
+        default:
+          Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
 
-                stm = conexion.prepareStatement("insert into usuarios (User_Name, Password, Status) values (?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
-                stm.execute();
-            } else if (datos[0].equals("compras")) {
+      return true;
 
-                stm = conexion.prepareStatement(
-                        "insert into compras (IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total) values (?,?,?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
-                stm.setString(4, datos[4]);
-                stm.setString(5, datos[5]);
-                stm.setInt(6, Integer.parseInt(datos[6]));
-                stm.setDouble(7, Double.parseDouble(datos[7]));
-                stm.execute();
-            } else if (datos[0].equals("ventas")) {
-                // hacer que IDUSUARIO sea USUARIO
-                stm = conexion.prepareStatement(
-                        "insert into ventas (IDPRODUCTO, Usuario, Documento, Telefono, Date, Unidades, Total) values (?,?,?,?,?,?,?)");
-                stm.setString(1, datos[1]);
-                stm.setString(2, datos[2]);
-                stm.setString(3, datos[3]);
-                stm.setString(4, datos[4]);
-                stm.setString(5, datos[5]);
-                stm.setInt(6, Integer.parseInt(datos[6]));
-                stm.setDouble(7, Double.parseDouble(datos[7]));
-                stm.execute();
-            }
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      return false;
+    } finally {
 
-            return true;
-
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            return false;
-        } finally {
-
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    /* READ */
-    public boolean importarTabla(JTable tabla, String query, boolean isMain) {
+  public boolean readTable(JTable tabla, String query, boolean isMain) {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            stm = conexion.prepareStatement(query);
-            rs = stm.executeQuery();
-            rsm = rs.getMetaData();
-            ArrayList<Object[]> datos = new ArrayList<>();
-            while (rs.next()) {
-                Object[] filas = new Object[rsm.getColumnCount()];
-                for (int i = 0; i < filas.length; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                datos.add(filas);
-            }
-
-            if (datos.isEmpty() && !isMain) {
-
-                V.emptyTable();
-
-                return false;
-            } else {
-                modelo = (DefaultTableModel) tabla.getModel();
-                for (int i = 0; i < datos.size(); i++) {
-                    modelo.addRow(datos.get(i));
-                }
-                return true;
-            }
-
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
-
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      preparedStatement = connection.prepareStatement(query);
+      resultSet = preparedStatement.executeQuery();
+      ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+      ArrayList<Object[]> data = new ArrayList<>();
+      while (resultSet.next()) {
+        Object[] rows = new Object[resultSetMetaData.getColumnCount()];
+        for (int i = 0; i < rows.length; i++) {
+          rows[i] = resultSet.getObject(i + 1);
         }
+        data.add(rows);
+      }
+
+      if (data.isEmpty() && !isMain) {
+        Alerts.emptyTable();
         return false;
-    }
+      } else {
+        tableModel = (DefaultTableModel) tabla.getModel();
+        IntStream.range(0, data.size()).forEach(i -> tableModel.addRow(data.get(i)));
+        return true;
+      }
 
-    /* UPDATE */
-    public void updateData(String nickname, String ID, String table) throws SQLException {
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
-
-            stm = conexion
-                    .prepareStatement("UPDATE " + table + " SET Nickname='" + nickname + "' WHERE ID='" + ID + "'");
-            stm.executeUpdate();
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
-
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+    return false;
+  }
 
-    /* DELETE */
-    public void deleteData(String[] rows, String table) throws SQLException {
+  public void updateData(String nickname, String id, String table) {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            for (int i = 0; i < rows.length; i++) {
-                stm = conexion.prepareStatement("delete from " + table + " where ID ='" + rows[i] + "'");
-                stm.executeUpdate();
-            }
+      preparedStatement = connection.prepareStatement(Querys.updateNickname(nickname, id, table));
+      preparedStatement.executeUpdate();
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
-
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    /* DATA COMPRAVENTA */
-    public void registrarVentas(String usuario, int producVend, Double totalVentas) throws SQLException {
+  public void deleteData(String[] rows, String table) {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            stm = (PreparedStatement) conexion.prepareStatement(
-                    "UPDATE registros SET Productos_Vendidos='" + (producVend + getProdVen()) + "', Total_Ventas='"
-                            + (totalVentas + getTotalVen()) + "' WHERE Usuario='" + usuario + "'");
-            stm.executeUpdate();
+      for (String row : rows) {
+        preparedStatement = connection.prepareStatement(Querys.deleteDataByID(row, table));
+        preparedStatement.executeUpdate();
+      }
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    public void registrarCompras(String usuario, int producComp, Double totalCompr) throws SQLException {
+  /* DATA COMPRAVENTA */
+  public void registrarVentas(String usuario, int producVend, Double totalVentas)
+      throws SQLException {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            stm = (PreparedStatement) conexion.prepareStatement(
-                    "UPDATE registros SET Productos_Comprados='" + (producComp + getProdCom()) + "', Total_Compras='"
-                            + (totalCompr + getTotalCom()) + "' WHERE Usuario='" + usuario + "'");
-            stm.executeUpdate();
+      preparedStatement = (PreparedStatement) connection.prepareStatement(
+          "UPDATE registros SET Productos_Vendidos='" + (producVend + getProdVen())
+              + "', Total_Ventas='"
+              + (totalVentas + getTotalVen()) + "' WHERE Usuario='" + usuario + "'");
+      preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    public void registrarPrestamos(String usuario, Double prestamo) throws SQLException {
+  public void registrarCompras(String usuario, int producComp, Double totalCompr)
+      throws SQLException {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            stm = (PreparedStatement) conexion.prepareStatement("UPDATE registros SET Total_Prestamos='"
-                    + (prestamo + getTotalPres()) + "' WHERE Usuario='" + usuario + "'");
-            stm.executeUpdate();
+      preparedStatement = (PreparedStatement) connection.prepareStatement(
+          "UPDATE registros SET Productos_Comprados='" + (producComp + getProdCom())
+              + "', Total_Compras='"
+              + (totalCompr + getTotalCom()) + "' WHERE Usuario='" + usuario + "'");
+      preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    public void acumularInventario(int cant, String ref) throws SQLException {
+  public void registrarPrestamos(String usuario, Double prestamo) throws SQLException {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            stm = (PreparedStatement) conexion.prepareStatement(
-                    "UPDATE inventario SET Cantidad='" + (cant + getDisp()) + "' WHERE ID='" + ref + "'");
-            stm.executeUpdate();
+      preparedStatement = (PreparedStatement) connection
+          .prepareStatement("UPDATE registros SET Total_Prestamos='"
+              + (prestamo + getTotalPres()) + "' WHERE Usuario='" + usuario + "'");
+      preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    public void importarDatos(String refer) throws SQLException {
+  public void acumularInventario(int cant, String ref) throws SQLException {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            stm = conexion.prepareStatement("select * from inventario where ID ='" + refer + "'");
-            rs = stm.executeQuery();
+      preparedStatement = (PreparedStatement) connection.prepareStatement(
+          "UPDATE inventario SET Cantidad='" + (cant + getDisp()) + "' WHERE ID='" + ref + "'");
+      preparedStatement.executeUpdate();
 
-            while (rs.next()) {
-                setRef(rs.getString("ID"));
-                setEst(rs.getString("Estado"));
-                setPrecio(rs.getDouble("Precio"));
-                setDisp(rs.getInt("Cantidad"));
-            }
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
-
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    public void login(String status, String user) throws SQLException {
+  public void importarDatos(String refer) {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            stm = (PreparedStatement) conexion
-                    .prepareStatement("UPDATE usuarios SET Status='" + status + "' WHERE User_Name='" + user + "'");
-            stm.executeUpdate();
+      preparedStatement = connection
+          .prepareStatement("select * from inventario where ID ='" + refer + "'");
+      resultSet = preparedStatement.executeQuery();
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+      while (resultSet.next()) {
+        setRef(resultSet.getString("ID"));
+        setEst(resultSet.getString("Estado"));
+        setPrecio(resultSet.getDouble("Precio"));
+        setDisp(resultSet.getInt("Cantidad"));
+      }
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    public boolean buscarRef(String refer) throws SQLException {
+  public void login(String status, String user) {
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            stm = conexion.prepareStatement("select * from inventario where ID ='" + refer + "'");
-            rs = stm.executeQuery();
+      preparedStatement = (PreparedStatement) connection
+          .prepareStatement(
+              "UPDATE usuarios SET Status='" + status + "' WHERE User_Name='" + user + "'");
+      preparedStatement.executeUpdate();
 
-            while (rs.next()) {
-                setRef(rs.getString("ID"));
-                setEst(rs.getString("Estado"));
-                setPrecio(rs.getDouble("Precio"));
-                setDisp(rs.getInt("Cantidad"));
-            }
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
-
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      try {
+        if (null != connection) {
+          connection.close();
         }
-
-        return refer.equals(getRef());
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    public int getIDUser(String user) throws SQLException {
+  public boolean buscarRef(String refer) throws SQLException {
 
-        int ID = 0;
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+      preparedStatement = connection
+          .prepareStatement("select * from inventario where ID ='" + refer + "'");
+      resultSet = preparedStatement.executeQuery();
 
-            stm = conexion.prepareStatement("select ID from usuarios where User_Name ='" + user + "'");
-            rs = stm.executeQuery();
+      while (resultSet.next()) {
+        setRef(resultSet.getString("ID"));
+        setEst(resultSet.getString("Estado"));
+        setPrecio(resultSet.getDouble("Precio"));
+        setDisp(resultSet.getInt("Cantidad"));
+      }
 
-            while (rs.next()) {
-                ID = rs.getInt("ID");
-            }
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      try {
+        if (null != connection) {
+          connection.close();
         }
-
-        return ID;
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
 
-    public boolean buscarUser(String user) throws SQLException {
+    return refer.equals(getRef());
+  }
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+  public int getIDUser(String user) throws SQLException {
 
-            stm = conexion.prepareStatement("select * from registros where Usuario ='" + user + "'");
-            rs = stm.executeQuery();
+    int ID = 0;
 
-            while (rs.next()) {
-                setUsuario(rs.getString("Usuario"));
-                setProdVen(rs.getInt("Productos_Vendidos"));
-                setTotalVen(rs.getDouble("Total_Ventas"));
-                setProdCom(rs.getInt("Productos_Comprados"));
-                setTotalCom(rs.getDouble("Total_Compras"));
-                setTotalPres(rs.getDouble("Total_Prestamos"));
-            }
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+      preparedStatement = connection
+          .prepareStatement("select ID from usuarios where User_Name ='" + user + "'");
+      resultSet = preparedStatement.executeQuery();
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      while (resultSet.next()) {
+        ID = resultSet.getInt("ID");
+      }
+
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+      try {
+        if (null != connection) {
+          connection.close();
         }
-
-        return user.equals(getUsuario());
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
 
-    public String returnUser(String stat) throws SQLException {
+    return ID;
+  }
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+  public boolean buscarUser(String user) throws SQLException {
 
-            stm = conexion.prepareStatement("select * from usuarios where Status ='" + stat + "'");
-            rs = stm.executeQuery();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            while (rs.next()) {
-                setUserLogin(rs.getString("User_Name"));
-                setPass(rs.getString("Password"));
-                setStatus(rs.getString("Status"));
-            }
+      preparedStatement = connection
+          .prepareStatement("select * from registros where Usuario ='" + user + "'");
+      resultSet = preparedStatement.executeQuery();
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+      while (resultSet.next()) {
+        setUsuario(resultSet.getString("Usuario"));
+        setProdVen(resultSet.getInt("Productos_Vendidos"));
+        setTotalVen(resultSet.getDouble("Total_Ventas"));
+        setProdCom(resultSet.getInt("Productos_Comprados"));
+        setTotalCom(resultSet.getDouble("Total_Compras"));
+        setTotalPres(resultSet.getDouble("Total_Prestamos"));
+      }
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+
+      try {
+        if (null != connection) {
+          connection.close();
         }
-
-        return getUserLogin();
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
 
-    public boolean userExist(String user) throws SQLException {
+    return user.equals(getUsuario());
+  }
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+  public String returnUser(String stat) throws SQLException {
 
-            stm = conexion.prepareStatement("select * from usuarios where User_Name ='" + user + "'");
-            rs = stm.executeQuery();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            while (rs.next()) {
-                return true;
-            }
+      preparedStatement = connection
+          .prepareStatement("select * from usuarios where Status ='" + stat + "'");
+      resultSet = preparedStatement.executeQuery();
 
-        } catch (SQLException e) {
-            // e.printStackTrace();
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+      while (resultSet.next()) {
+        setUserLogin(resultSet.getString("User_Name"));
+        setPass(resultSet.getString("Password"));
+        setStatus(resultSet.getString("Status"));
+      }
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+
+      try {
+        if (null != connection) {
+          connection.close();
         }
-
-        return false;
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
 
-    public boolean buscarEmpleado(String user, String secretpassword) throws SQLException {
+    return getUserLogin();
+  }
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+  public boolean userExist(String user) throws SQLException {
 
-            stm = conexion.prepareStatement(
-                    "SELECT * FROM usuarios WHERE User_Name='" + user + "' AND password='" + secretpassword + "'");
-            rs = stm.executeQuery();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-            while (rs.next()) {
-                return true;
-            }
+      preparedStatement = connection
+          .prepareStatement("select * from usuarios where User_Name ='" + user + "'");
+      resultSet = preparedStatement.executeQuery();
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+      while (resultSet.next()) {
+        return true;
+      }
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+
+      try {
+        if (null != connection) {
+          connection.close();
         }
-
-        return false;
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
 
-    public void updatePassword(String User, String newPassword) throws SQLException {
+    return false;
+  }
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+  public boolean buscarEmpleado(String user, String secretpassword) throws SQLException {
 
-            stm = conexion.prepareStatement(
-                    "UPDATE usuarios SET Password='" + newPassword + "' WHERE User_Name='" + User + "'");
-            stm.executeUpdate();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+      preparedStatement = connection.prepareStatement(
+          "SELECT * FROM usuarios WHERE User_Name='" + user + "' AND password='" + secretpassword
+              + "'");
+      resultSet = preparedStatement.executeQuery();
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+      while (resultSet.next()) {
+        return true;
+      }
+
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
 
-    public void updateCantidad(int cantidad, String ID, String table) throws SQLException {
+    return false;
+  }
 
-        try {
-            dataSource = data.getDataSource();
-            conexion = dataSource.getConnection();
+  public void updatePassword(String User, String newPassword) throws SQLException {
 
-            stm = conexion
-                    .prepareStatement("UPDATE " + table + " SET Cantidad='" + cantidad + "' WHERE ID='" + ID + "'");
-            stm.executeUpdate();
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
 
-        } catch (SQLException e) {
-            V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-        } finally {
+      preparedStatement = connection.prepareStatement(
+          "UPDATE usuarios SET Password='" + newPassword + "' WHERE User_Name='" + User + "'");
+      preparedStatement.executeUpdate();
 
-            try {
-                if (null != conexion) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                V.mostrarMensaje("Datebase not found", "Lo sentimos, ha ocurrido un error, inténtalo más tarde.");
-            }
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+
+      try {
+        if (null != connection) {
+          connection.close();
         }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    private String ref, est, doc, tel, fecha, usuario, userLogin, pass, status;
-    private Double precio, totalVen, totalCom, totalPres;
-    private int disp, prodVen, prodCom;
-    private Core V = new Core();
+  public void updateCantidad(int cantidad, String ID, String table) throws SQLException {
 
-    public Double getTotalPres() {
-        return totalPres;
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
+
+      preparedStatement = connection
+          .prepareStatement(
+              "UPDATE " + table + " SET Cantidad='" + cantidad + "' WHERE ID='" + ID + "'");
+      preparedStatement.executeUpdate();
+
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+
+      try {
+        if (null != connection) {
+          connection.close();
+        }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
     }
+  }
 
-    public void setTotalPres(Double totalPres) {
-        this.totalPres = totalPres;
-    }
+  public Double getTotalPres() {
+    return totalPres;
+  }
 
-    public String returnPass(String user) {
-        return user;
-    }
+  public void setTotalPres(Double totalPres) {
+    this.totalPres = totalPres;
+  }
 
-    public String getPass() {
-        return pass;
-    }
+  public String returnPass(String user) {
+    return user;
+  }
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
+  public String getPass() {
+    return pass;
+  }
 
-    public String getStatus() {
-        return status;
-    }
+  public void setPass(String pass) {
+    this.pass = pass;
+  }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+  public String getStatus() {
+    return status;
+  }
 
-    public String getDoc() {
-        return doc;
-    }
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
-    public String getUserLogin() {
-        return userLogin;
-    }
+  public String getDoc() {
+    return doc;
+  }
 
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
-    }
+  public void setDoc(String doc) {
+    this.doc = doc;
+  }
 
-    public void setDoc(String doc) {
-        this.doc = doc;
-    }
+  public String getUserLogin() {
+    return userLogin;
+  }
 
-    public String getTel() {
-        return tel;
-    }
+  public void setUserLogin(String userLogin) {
+    this.userLogin = userLogin;
+  }
 
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
+  public String getTel() {
+    return tel;
+  }
 
-    public String getFecha() {
-        return fecha;
-    }
+  public void setTel(String tel) {
+    this.tel = tel;
+  }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
+  public String getFecha() {
+    return fecha;
+  }
 
-    public String getRef() {
-        return ref;
-    }
+  public void setFecha(String fecha) {
+    this.fecha = fecha;
+  }
 
-    public void setRef(String ref) {
-        this.ref = ref;
-    }
+  public String getRef() {
+    return ref;
+  }
 
-    public String getEst() {
-        return est;
-    }
+  public void setRef(String ref) {
+    this.ref = ref;
+  }
 
-    public void setEst(String est) {
-        this.est = est;
-    }
+  public String getEst() {
+    return est;
+  }
 
-    public Double getPrecio() {
-        return precio;
-    }
+  public void setEst(String est) {
+    this.est = est;
+  }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
+  public Double getPrecio() {
+    return precio;
+  }
 
-    public int getDisp() {
-        return disp;
-    }
+  public void setPrecio(Double precio) {
+    this.precio = precio;
+  }
 
-    public void setDisp(int disp) {
-        this.disp = disp;
-    }
+  public int getDisp() {
+    return disp;
+  }
 
-    public String getUsuario() {
-        return usuario;
-    }
+  public void setDisp(int disp) {
+    this.disp = disp;
+  }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
+  public String getUsuario() {
+    return usuario;
+  }
 
-    public Double getTotalVen() {
-        return totalVen;
-    }
+  public void setUsuario(String usuario) {
+    this.usuario = usuario;
+  }
 
-    public void setTotalVen(Double totalVen) {
-        this.totalVen = totalVen;
-    }
+  public Double getTotalVen() {
+    return totalVen;
+  }
 
-    public Double getTotalCom() {
-        return totalCom;
-    }
+  public void setTotalVen(Double totalVen) {
+    this.totalVen = totalVen;
+  }
 
-    public void setTotalCom(Double totalCom) {
-        this.totalCom = totalCom;
-    }
+  public Double getTotalCom() {
+    return totalCom;
+  }
 
-    public int getProdVen() {
-        return prodVen;
-    }
+  public void setTotalCom(Double totalCom) {
+    this.totalCom = totalCom;
+  }
 
-    public void setProdVen(int prodVen) {
-        this.prodVen = prodVen;
-    }
+  public int getProdVen() {
+    return prodVen;
+  }
 
-    public int getProdCom() {
-        return prodCom;
-    }
+  public void setProdVen(int prodVen) {
+    this.prodVen = prodVen;
+  }
 
-    public void setProdCom(int prodCom) {
-        this.prodCom = prodCom;
-    }
+  public int getProdCom() {
+    return prodCom;
+  }
+
+  public void setProdCom(int prodCom) {
+    this.prodCom = prodCom;
+  }
 }

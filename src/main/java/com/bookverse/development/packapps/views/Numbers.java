@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,20 +15,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Numeritos extends JDialog implements MouseListener {
+public class Numbers extends JDialog implements MouseListener {
 
     private JLabel btnprimos, btncalcular, btnphi, btnpi, btnotros, welcome;
 
     private Resources img = new Resources();
 
-    public Numeritos(JFrame parent, boolean modal) {
+    public Numbers(JFrame parent, boolean modal) {
 
         super(parent, modal);
 
         Componentes();
     }
 
-    public Numeritos() {
+    public Numbers() {
         Componentes();
     }
 
@@ -36,26 +36,26 @@ public class Numeritos extends JDialog implements MouseListener {
 
         JPanel panel = new JPanel(new FlowLayout());
         panel.setBackground(new Color(0, 0, 0));
-        panel.setBorder(img.cr.bordeAzul("Select Number"));
+        panel.setBorder(img.core.bordeAzul("Select Number"));
 
-        btnphi = img.getLabel("  Phi ?  ", img.cr.AZUL, panel, img.cr.MEDIUM);
-        btnphi.setBorder(img.cr.MEDIO);
+        btnphi = img.getLabel("  Phi ?  ", img.core.AZUL, panel, img.core.MEDIUM);
+        btnphi.setBorder(img.core.MEDIO);
         btnphi.addMouseListener(this);
 
-        btnpi = img.getLabel("  Pi ?  ", img.cr.AZUL, panel, img.cr.MEDIUM);
-        btnpi.setBorder(img.cr.MEDIO);
+        btnpi = img.getLabel("  Pi ?  ", img.core.AZUL, panel, img.core.MEDIUM);
+        btnpi.setBorder(img.core.MEDIO);
         btnpi.addMouseListener(this);
 
-        btncalcular = img.getLabel("  Calculadora  ", img.cr.ROJO, panel, img.cr.MEDIUM);
-        btncalcular.setBorder(img.cr.HARD);
+        btncalcular = img.getLabel("  Calculadora  ", img.core.ROJO, panel, img.core.MEDIUM);
+        btncalcular.setBorder(img.core.HARD);
         btncalcular.addMouseListener(this);
 
-        btnprimos = img.getLabel("  Primo  ", img.cr.AZUL, panel, img.cr.MEDIUM);
-        btnprimos.setBorder(img.cr.MEDIO);
+        btnprimos = img.getLabel("  Primo  ", img.core.AZUL, panel, img.core.MEDIUM);
+        btnprimos.setBorder(img.core.MEDIO);
         btnprimos.addMouseListener(this);
 
-        btnotros = img.getLabel("  Otros  ", img.cr.AZUL, panel, img.cr.MEDIUM);
-        btnotros.setBorder(img.cr.MEDIO);
+        btnotros = img.getLabel("  Otros  ", img.core.AZUL, panel, img.core.MEDIUM);
+        btnotros.setBorder(img.core.MEDIO);
         btnotros.addMouseListener(this);
 
         return panel;
@@ -83,7 +83,7 @@ public class Numeritos extends JDialog implements MouseListener {
         jd.setResizable(false);
         jd.setLocationRelativeTo(null);
         jd.setTitle("Pi ?");
-        img.cr.fadeIn(jd);
+        img.core.fadeIn(jd);
         setVisible(false);
         jd.setVisible(true);
     }
@@ -95,7 +95,7 @@ public class Numeritos extends JDialog implements MouseListener {
         jd.setResizable(false);
         jd.setLocationRelativeTo(null);
         jd.setTitle("Phi ?");
-        img.cr.fadeIn(jd);
+        img.core.fadeIn(jd);
         setVisible(false);
         jd.setVisible(true);
     }
@@ -107,7 +107,7 @@ public class Numeritos extends JDialog implements MouseListener {
         jd.setResizable(false);
         jd.setLocationRelativeTo(null);
         jd.setTitle("Calculadora Estándar");
-        img.cr.fadeIn(jd);
+        img.core.fadeIn(jd);
         setVisible(false);
         jd.setVisible(true);
     }
@@ -118,7 +118,7 @@ public class Numeritos extends JDialog implements MouseListener {
         jd.setResizable(false);
         jd.setLocationRelativeTo(null);
         jd.setTitle("Primos");
-        img.cr.fadeIn(jd);
+        img.core.fadeIn(jd);
         setVisible(false);
         jd.setVisible(true);
     }
@@ -130,7 +130,7 @@ public class Numeritos extends JDialog implements MouseListener {
         jd.setResizable(false);
         jd.setLocationRelativeTo(null);
         jd.setTitle("Trucazos");
-        img.cr.fadeIn(jd);
+        img.core.fadeIn(jd);
         setVisible(false);
         jd.setVisible(true);
     }
@@ -171,7 +171,7 @@ public class Numeritos extends JDialog implements MouseListener {
             btnOtrosAP();
             setVisible(true);
         } else if (e.getSource() == welcome) {
-            img.cr.fadeOut(this);
+            img.core.fadeOut(this);
         }
     }
 
@@ -179,15 +179,15 @@ public class Numeritos extends JDialog implements MouseListener {
     public void mouseEntered(MouseEvent e) {
 
         if (e.getSource() == btnphi) {
-            btnphi.setCursor(img.cr.MANO);
+            btnphi.setCursor(img.core.MANO);
         } else if (e.getSource() == btnotros) {
-            btnotros.setCursor(img.cr.MANO);
+            btnotros.setCursor(img.core.MANO);
         } else if (e.getSource() == btncalcular) {
-            btncalcular.setCursor(img.cr.MANO);
+            btncalcular.setCursor(img.core.MANO);
         } else if (e.getSource() == btnpi) {
-            btnpi.setCursor(img.cr.MANO);
+            btnpi.setCursor(img.core.MANO);
         } else if (e.getSource() == btnprimos) {
-            btnprimos.setCursor(img.cr.MANO);
+            btnprimos.setCursor(img.core.MANO);
         }
     }
 

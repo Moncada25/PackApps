@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.views;
 
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -31,13 +31,13 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
 
         setLayout(null);// Permite el posicionamiento absoluto de los componentes
 
-        primero = h.getLabel("<html><strong>Primera suma de series</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        primero = h.getLabel("<html><strong>Primera suma de series</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         primero.setBounds(25, 70, 280, 30);
 
-        forma1 = h.getLabel("? = 4/1 - 4/3 + 4/5 - 4/7 + 4/9...", h.cr.AZUL, this, h.cr.MEDIUM);
+        forma1 = h.getLabel("? = 4/1 - 4/3 + 4/5 - 4/7 + 4/9...", h.core.AZUL, this, h.core.MEDIUM);
         forma1.setBounds(25, 90, 280, 60);
 
-        btnstart = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart = h.getButton("Show", h.core.AZUL, this, this);
         btnstart.setBounds(315, 110, 75, 25);
 
         txt1 = new JTextField();
@@ -54,9 +54,9 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
             private void txt1KeyPressed(KeyEvent e) {
 
                 if (e.getKeyCode() == KeyEvent.VK_ENTER && txt1.getText().length() > 0) {
-                    h.cr.calcularPi(Double.parseDouble(txt1.getText()));
+                    h.core.calcularPi(Double.parseDouble(txt1.getText()));
                 } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    h.cr.campoVacio();
+                    h.core.campoVacio();
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     dispose();
                 }
@@ -67,17 +67,17 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
             }
 
             private void txt1KeyTyped(KeyEvent e) {
-                h.cr.solonumeros(e.getKeyChar(), e, txt1.getText(), 9);
+                h.core.solonumeros(e.getKeyChar(), e, txt1.getText(), 9);
             }
         });
 
-        segundo = h.getLabel("<html><strong>Segunda suma de series</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        segundo = h.getLabel("<html><strong>Segunda suma de series</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         segundo.setBounds(25, 160, 280, 30);
 
-        forma2 = h.getLabel("?²/6 = 1/1² + 1/2² + 1/3² + 1/4²...", h.cr.AZUL, this, h.cr.MEDIUM);
+        forma2 = h.getLabel("?²/6 = 1/1² + 1/2² + 1/3² + 1/4²...", h.core.AZUL, this, h.core.MEDIUM);
         forma2.setBounds(25, 180, 280, 60);
 
-        btnstart2 = h.getBoton("Show", h.cr.AZUL, this, this);
+        btnstart2 = h.getButton("Show", h.core.AZUL, this, this);
         btnstart2.setBounds(315, 200, 75, 25);
 
         txt2 = new JTextField();
@@ -95,10 +95,10 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
 
                 if (e.getKeyCode() == KeyEvent.VK_ENTER && txt2.getText().length() > 0) {
 
-                    h.cr.calcularPi2(Double.parseDouble(txt2.getText()));
+                    h.core.calcularPi2(Double.parseDouble(txt2.getText()));
 
                 } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    h.cr.campoVacio();
+                    h.core.campoVacio();
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     dispose();
                 }
@@ -109,11 +109,11 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
             }
 
             private void txt2KeyTyped(KeyEvent e) {
-                h.cr.solonumeros(e.getKeyChar(), e, txt2.getText(), 9);
+                h.core.solonumeros(e.getKeyChar(), e, txt2.getText(), 9);
             }
         });
 
-        mensaje = h.getLabel("<html><em><strong>Aproximarse a ?</strong></em></html>", h.cr.ROJO, this, h.cr.BIG);
+        mensaje = h.getLabel("<html><em><strong>Aproximarse a ?</strong></em></html>", h.core.ROJO, this, h.core.BIG);
         mensaje.addMouseListener(this);
         mensaje.setBounds(100, 20, 250, 30);
     }
@@ -126,17 +126,17 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
         } else if (e.getSource() == btnstart) {
 
             if (txt1.getText().length() > 0) {
-                h.cr.calcularPi(Double.parseDouble(txt1.getText()));
+                h.core.calcularPi(Double.parseDouble(txt1.getText()));
             } else {
-                h.cr.campoVacio();
+                h.core.campoVacio();
             }
 
         } else if (e.getSource() == btnstart2) {
 
             if (txt2.getText().length() > 0) {
-                h.cr.calcularPi2(Double.parseDouble(txt2.getText()));
+                h.core.calcularPi2(Double.parseDouble(txt2.getText()));
             } else {
-                h.cr.campoVacio();
+                h.core.campoVacio();
             }
         }
     }
@@ -145,7 +145,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
     public void mouseClicked(MouseEvent e) {
 
         if (e.getSource() == mensaje) {
-            h.cr.fadeOut(this);
+            h.core.fadeOut(this);
         }
     }
 

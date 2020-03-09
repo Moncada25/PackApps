@@ -14,5 +14,4 @@ public class TextUtility {
       evt.consume();
     }
   }
-
 }

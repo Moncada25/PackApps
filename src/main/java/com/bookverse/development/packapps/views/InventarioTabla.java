@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,9 +10,6 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -64,15 +61,15 @@ public class InventarioTabla extends JDialog implements MouseListener {
 
     String[] imgs = {"eliminar.png", "select.png", "read.png", "refresh.png"};
 
-    panel.setBorder(img.cr.bordeAzul("Select Action"));
+    panel.setBorder(img.core.bordeAzul("Select Action"));
 
     titulo = new JLabel();
-    titulo.setFont(img.cr.BIG);
-    titulo.setForeground(img.cr.ROJO);
+    titulo.setFont(img.core.BIG);
+    titulo.setForeground(img.core.ROJO);
 
     men = new JLabel();
-    men.setFont(img.cr.BIG);
-    men.setForeground(img.cr.AZUL);
+    men.setFont(img.core.BIG);
+    men.setForeground(img.core.AZUL);
 
     /* ICONOS */
     for (int i = 0; i < actions.length; i++) {
@@ -189,7 +186,7 @@ public class InventarioTabla extends JDialog implements MouseListener {
 
   public void btnBuscarAP() {
 
-    String busqueda = img.cr.buscarProducto();
+    String busqueda = img.core.buscarProducto();
 
     if (!busqueda.equals("")) {
       ordenar.setRowFilter(RowFilter.regexFilter(busqueda, 0));
@@ -209,7 +206,7 @@ public class InventarioTabla extends JDialog implements MouseListener {
 
     } else {
 
-      if (img.cr.loginDBA()) {
+      if (img.core.loginDBA()) {
 
         int[] rows = inventarioTab.getSelectedRows();
         String[] IDs = new String[rows.length];
@@ -218,13 +215,9 @@ public class InventarioTabla extends JDialog implements MouseListener {
           IDs[i] = String.valueOf(modelo.getValueAt(rows[i], 0));
         }
 
-        try {
-          img.db.deleteData(IDs, "inventario");
-          dispose();
-          new Opciones().btnInventarioAP(false);
-        } catch (SQLException ex) {
-          Logger.getLogger(InventarioTabla.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        img.database.deleteData(IDs, "inventario");
+        dispose();
+        new Opciones().btnInventarioAP(false);
       }
     }
   }
@@ -252,16 +245,16 @@ public class InventarioTabla extends JDialog implements MouseListener {
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
-      actions[0].setCursor(img.cr.MANO);
+      actions[0].setCursor(img.core.MANO);
       titulo.setText("Eliminar Producto");
     } else if (e.getSource() == actions[1]) {
-      actions[1].setCursor(img.cr.MANO);
+      actions[1].setCursor(img.core.MANO);
       titulo.setText("Seleccionar Producto");
     } else if (e.getSource() == actions[2]) {
-      actions[2].setCursor(img.cr.MANO);
+      actions[2].setCursor(img.core.MANO);
       titulo.setText("Buscar Referencia");
     } else if (e.getSource() == actions[3]) {
-      actions[3].setCursor(img.cr.MANO);
+      actions[3].setCursor(img.core.MANO);
       titulo.setText("Actualizar Tabla");
     }
   }

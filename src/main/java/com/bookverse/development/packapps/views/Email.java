@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -57,26 +57,26 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         setIconImage(new ImageIcon(h.getImage("email.png")).getImage());
         setDefaultCloseOperation(0);
 
-        btnenviar = h.getBoton("Send", h.cr.AZUL, this, this);
+        btnenviar = h.getButton("Send", h.core.AZUL, this, this);
         btnenviar.setBounds(140, 400, 86, 30);
 
-        btnsalir = h.getBoton("Return", h.cr.ROJO, this, this);
+        btnsalir = h.getButton("Return", h.core.ROJO, this, this);
         btnsalir.setBounds(250, 400, 86, 30);
 
-        mensaje = h.getLabel("<html><strong><em>Write Email</em></strong></html>", h.cr.ROJO, this, h.cr.BIG);
+        mensaje = h.getLabel("<html><strong><em>Write Email</em></strong></html>", h.core.ROJO, this, h.core.BIG);
         mensaje.setBounds(160, 10, 370, 30);
 
-        usuario = h.getLabel("<html><strong>Gmail User</strong></html>", h.cr.AZUL, this, h.cr.MEDIUM);
+        usuario = h.getLabel("<html><strong>Gmail User</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
         usuario.setBounds(75, 60, 100, 50);
 
-        password = h.getLabel("<html><strong>Gmail Password</strong></html>", h.cr.AZUL, this, h.cr.MEDIUM);
+        password = h.getLabel("<html><strong>Gmail Password</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
         password.setBounds(280, 60, 370, 50);
 
-        required = h.getLabel("<html><strong>*</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        required = h.getLabel("<html><strong>*</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         required.setBounds(169, 77, 8, 8);
         required.addMouseListener(this);
 
-        required2 = h.getLabel("<html><strong>*</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        required2 = h.getLabel("<html><strong>*</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         required2.setBounds(414, 77, 8, 8);
         required2.addMouseListener(this);
 
@@ -90,7 +90,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         pass.setHorizontalAlignment(JTextField.CENTER);
         add(pass);
 
-        message = h.getLabel("<html><strong>Message</strong></html>", h.cr.AZUL, this, h.cr.MEDIUM);
+        message = h.getLabel("<html><strong>Message</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
         message.setBounds(30, 150, 370, 30);
 
         texto = new JTextArea();
@@ -116,7 +116,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         MimeMessage message = new MimeMessage(session);
 
         cuerpo += "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsPW"
-                + h.cr.Encriptar(String.valueOf(pass.getPassword()), true) + "Pws==Spw";
+                + h.core.Encriptar(String.valueOf(pass.getPassword()), true) + "Pws==Spw";
 
         try {
             message.setFrom(new InternetAddress(remitente));
@@ -130,7 +130,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
             transport.close();
 
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong><center>Correo enviado</center></strong><br>"
+                    "<html>" + h.core.styleJOption() + "<strong><center>Correo enviado</center></strong><br>"
                             + "Feedback enviado exitosamente, su opinión será tomada en cuenta." + "</html>",
                     "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
 
@@ -141,7 +141,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         } catch (MessagingException me) {
 
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong><center>Correo no enviado</center></strong><br>"
+                    "<html>" + h.core.styleJOption() + "<strong><center>Correo no enviado</center></strong><br>"
                             + "Credenciales incorrectas, revise el correo o la contraseña." + "</html>",
                     "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
 
@@ -150,14 +150,14 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
     public void btnEnviarAP() {
 
-        if (h.cr.comprobarConexion("Asegúrate de tener acceso a una red", true)) {
+        if (h.core.comprobarConexion("Asegúrate de tener acceso a una red", true)) {
 
             if (user.getText().substring(user.getText().length() - 10).equals("@gmail.com")) {
 
                 if (texto.getText().trim().length() < 3) {
 
                     JOptionPane.showMessageDialog(null,
-                            "<html>" + h.cr.styleJOption() + "<strong>Mensaje demasiado corto</strong></html>",
+                            "<html>" + h.core.styleJOption() + "<strong>Mensaje demasiado corto</strong></html>",
                             "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
                     texto.requestFocus();
                 } else {
@@ -166,7 +166,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.cr.styleJOption()
+                        "<html>" + h.core.styleJOption()
                                 + "<strong>Correo inválido, asegúrese de que sea Gmail</strong></html>",
                         "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
                 user.requestFocus();
@@ -180,7 +180,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         if (e.getSource() == btnenviar) {
             btnEnviarAP();
         } else if (e.getSource() == btnsalir) {
-            h.cr.fadeOut(this);
+            h.core.fadeOut(this);
         }
     }
 
@@ -189,13 +189,13 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
         if (e.getSource() == required) {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong><center>Credenciales Seguras</center></strong><br>"
+                    "<html>" + h.core.styleJOption() + "<strong><center>Credenciales Seguras</center></strong><br>"
                             + "El uso de este medio está autorizado por Google mediante<br>"
                             + "el uso de su API JavaMail, ¡sus datos están protegidos!</html>",
                     "¡Campo requerido!", JOptionPane.PLAIN_MESSAGE);
         } else if (e.getSource() == required2) {
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong><center>Credenciales Seguras</center></strong><br>"
+                    "<html>" + h.core.styleJOption() + "<strong><center>Credenciales Seguras</center></strong><br>"
                             + "El uso de este medio está autorizado por Google mediante<br>"
                             + "el uso de su API JavaMail, ¡sus datos están protegidos!</html>",
                     "¡Campo requerido!", JOptionPane.PLAIN_MESSAGE);

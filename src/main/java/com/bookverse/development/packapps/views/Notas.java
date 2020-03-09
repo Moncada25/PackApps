@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.models.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -45,20 +45,20 @@ public class Notas extends JDialog implements ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(h.getImage("notas.png")).getImage());
 
-        btnsalir = h.getBoton("Return", h.cr.ROJO, this, this);
+        btnsalir = h.getButton("Return", h.core.ROJO, this, this);
         btnsalir.setBounds(248, 330, 86, 30);
 
-        btncalcular = h.getBoton("Show", h.cr.AZUL, this, this);
+        btncalcular = h.getButton("Show", h.core.AZUL, this, this);
         btncalcular.setBounds(200, 280, 86, 30);
 
-        btnaddNote = h.getBoton("Add", h.cr.AZUL, this, this);
+        btnaddNote = h.getButton("Add", h.core.AZUL, this, this);
         btnaddNote.setBounds(200, 220, 86, 30);
 
-        btndeleteNote = h.getBoton("Delete", h.cr.ROJO, this, this);
+        btndeleteNote = h.getButton("Delete", h.core.ROJO, this, this);
         btndeleteNote.setBounds(300, 220, 86, 30);
         btndeleteNote.setEnabled(false);
 
-        btnreset = h.getBoton("Reset", h.cr.ROJO, this, this);
+        btnreset = h.getButton("Reset", h.core.ROJO, this, this);
         btnreset.setBounds(300, 280, 86, 30);
         btnreset.setEnabled(false);
 
@@ -85,8 +85,8 @@ public class Notas extends JDialog implements ActionListener {
                 }
 
                 public void txtNumKeyTyped(KeyEvent e) {
-                    h.cr.solonumerosYpunto(e.getKeyChar(), e, notitas[j].getText(), 3);
-                    h.cr.PuntoMedio(e.getKeyChar(), e, notitas[j].getText());
+                    h.core.solonumerosYpunto(e.getKeyChar(), e, notitas[j].getText(), 3);
+                    h.core.PuntoMedio(e.getKeyChar(), e, notitas[j].getText());
                 }
             });
             y += 40;
@@ -111,13 +111,13 @@ public class Notas extends JDialog implements ActionListener {
             y += 40;
         }
 
-        notas = h.getLabel("<html><strong>Notes</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        notas = h.getLabel("<html><strong>Notes</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         notas.setBounds(30, 30, 100, 30);
 
-        porc = h.getLabel("<html><strong>%</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        porc = h.getLabel("<html><strong>%</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         porc.setBounds(145, 30, 100, 30);
 
-        name = h.getLabel("<html><strong>Name</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        name = h.getLabel("<html><strong>Name</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         name.setBounds(270, 30, 100, 30);
 
         nombre = new JTextField();
@@ -132,11 +132,11 @@ public class Notas extends JDialog implements ActionListener {
             }
 
             public void txtNumKeyTyped(KeyEvent e) {
-                h.cr.soloAlfa(e.getKeyChar(), e, nombre.getText(), 20);
+                h.core.soloAlfa(e.getKeyChar(), e, nombre.getText(), 20);
             }
         });
 
-        scale = h.getLabel("<html><strong>Scale</strong></html>", h.cr.ROJO, this, h.cr.MEDIUM);
+        scale = h.getLabel("<html><strong>Scale</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
         scale.setBounds(270, 110, 100, 30);
 
         btngroup = new ButtonGroup();
@@ -144,14 +144,14 @@ public class Notas extends JDialog implements ActionListener {
         scale1 = new JRadioButton("<html><strong>0 o 5</strong></html>");
         scale1.setBounds(200, 140, 100, 30);
         scale1.addActionListener(this);
-        scale1.setForeground(h.cr.AZUL);
+        scale1.setForeground(h.core.AZUL);
         add(scale1);
         btngroup.add(scale1);
         scale1.setSelected(true);
 
         scale2 = new JRadioButton("<html><strong>0 o 10</strong></html>");
         scale2.setBounds(300, 140, 100, 30);
-        scale2.setForeground(h.cr.AZUL);
+        scale2.setForeground(h.core.AZUL);
         scale2.addActionListener(this);
         add(scale2);
         btngroup.add(scale2);
@@ -234,7 +234,7 @@ public class Notas extends JDialog implements ActionListener {
 
     public void insertar(String state) {
 
-        if (h.cr.comprobarConexion("Datos no guardados", true) && h.cr.saveGame()) {
+        if (h.core.comprobarConexion("Datos no guardados", true) && h.core.saveGame()) {
 
             try {
 
@@ -247,8 +247,8 @@ public class Notas extends JDialog implements ActionListener {
                 }
 
                 String data[] = {"notas", nombre.getText(), op, String.format("%.0f", porcTotal),
-                        String.format("%.2f", notaTotal), state, h.cr.obtenerDate()};
-                h.db.insertData(data);
+                        String.format("%.2f", notaTotal), state, h.core.obtenerDate()};
+                h.database.insertData(data);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -278,7 +278,7 @@ public class Notas extends JDialog implements ActionListener {
                 }
 
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.cr.styleJOption() + "<strong>Name: </strong>" + nombre.getText() + "<br>" + "<strong>Nota: </strong>"
+                        "<html>" + h.core.styleJOption() + "<strong>Name: </strong>" + nombre.getText() + "<br>" + "<strong>Nota: </strong>"
                                 + String.format("%.2f", notaTotal) + "</html>",
                         "Definitiva", JOptionPane.PLAIN_MESSAGE);
 
@@ -290,7 +290,7 @@ public class Notas extends JDialog implements ActionListener {
 
             } else if (porcTotal > 100) {
 
-                JOptionPane.showMessageDialog(null, "<html>" + h.cr.styleJOption() + "<strong>Porcentaje excedido</strong></html>", "¡Verifica!",
+                JOptionPane.showMessageDialog(null, "<html>" + h.core.styleJOption() + "<strong>Porcentaje excedido</strong></html>", "¡Verifica!",
                         JOptionPane.PLAIN_MESSAGE);
 
             } else if (notaFalta > notaMaxima) {
@@ -298,7 +298,7 @@ public class Notas extends JDialog implements ActionListener {
                 img.setIcon(new ImageIcon(h.getImage("dead.png")));
 
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.cr.styleJOption() + "<strong>No hay nada que hacer, ya mejor cancela...</strong><br><br>"
+                        "<html>" + h.core.styleJOption() + "<strong>No hay nada que hacer, ya mejor cancela...</strong><br><br>"
                                 + "<strong>Nota acumulada: </strong>" + String.format("%.2f", notaTotal) + "<br>"
                                 + "<strong>Necesitarías sacar " + String.format("%.2f", notaFalta) + " en el " + String.format("%.0f", 100 - porcTotal) + "% restante</strong></html>",
                         "Ay :(", JOptionPane.PLAIN_MESSAGE);
@@ -310,7 +310,7 @@ public class Notas extends JDialog implements ActionListener {
                 if (notaTotal >= 0 && notaTotal < notaMinima) {
 
                     JOptionPane.showMessageDialog(null,
-                            "<html>" + h.cr.styleJOption() + "<strong>Name: </strong>" + nombre.getText() + "<br>"
+                            "<html>" + h.core.styleJOption() + "<strong>Name: </strong>" + nombre.getText() + "<br>"
                                     + "<strong>Nota necesaria para ganar: </strong>" + String.format("%.2f", notaFalta) + "<br>"
                                     + "<strong>Porcentaje restante: </strong>" + String.format("%.0f", 100 - porcTotal)
                                     + "%" + "</html>",
@@ -323,7 +323,7 @@ public class Notas extends JDialog implements ActionListener {
                     img.setIcon(new ImageIcon(h.getImage("win.png")));
 
                     JOptionPane.showMessageDialog(null,
-                            "<html>" + h.cr.styleJOption() + "<strong>¡Felicidades, ya has aprovado!</strong><br><br>"
+                            "<html>" + h.core.styleJOption() + "<strong>¡Felicidades, ya has aprovado!</strong><br><br>"
                                     + "<strong>ID: </strong>" + nombre.getText()
                                     + "<br>" + "<strong>Nota acumulada: </strong>" + String.format("%.2f", notaTotal)
                                     + "</html>",
@@ -335,7 +335,7 @@ public class Notas extends JDialog implements ActionListener {
         } else {
 
             JOptionPane.showMessageDialog(null,
-                    "<html>" + h.cr.styleJOption() + "<strong>Revisa los siguientes datos</strong><br><br>"
+                    "<html>" + h.core.styleJOption() + "<strong>Revisa los siguientes datos</strong><br><br>"
                             + "<strong>Notas: </strong>menor o igual a " + notaMaxima + "<br>"
                             + "<strong>Campos: </strong>vacíos" + "</html>",
                     "¡Verifica!", JOptionPane.PLAIN_MESSAGE);
@@ -373,7 +373,7 @@ public class Notas extends JDialog implements ActionListener {
         } else if (e.getSource() == btnreset) {
             btnResetAP();
         } else if (e.getSource() == btnsalir) {
-            h.cr.fadeOut(this);
+            h.core.fadeOut(this);
         }
     }
 }
