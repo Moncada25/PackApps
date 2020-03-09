@@ -21,15 +21,12 @@ public class Card extends JDialog implements MouseListener {
     setIconImage(new ImageIcon(resources.getImage("about.png")).getImage());
 
     ((JPanel) getContentPane()).setOpaque(false);
-    ImageIcon imagen = new ImageIcon(resources.getImage("carta.png"));
+    ImageIcon imagen = new ImageIcon(resources.getImage("business.png"));
     card = new JLabel();
     card.setIcon(imagen);
     card.setSize(517, 244);
     card.addMouseListener(this);
     add(card, BorderLayout.CENTER);
-  }
-
-  public Card() {
   }
 
   public void start(JFrame parent) {
