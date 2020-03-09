@@ -24,6 +24,7 @@ hs_err_pid*
 /build/
 /.gradle/
 /.idea/
+/out/
 
 # Not ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !EcuColombia/gradle/wrapper/gradle-wrapper.jar
