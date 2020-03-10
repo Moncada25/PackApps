@@ -1,27 +1,10 @@
 package com.bookverse.development.packapps.core;
 
-import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.utils.WindowEffect;
-import com.itextpdf.text.Anchor;
-import com.itextpdf.text.Chapter;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Section;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
 import java.security.MessageDigest;
@@ -35,20 +18,12 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 
 /*
 Date 23/12/18
@@ -79,10 +54,9 @@ Date 10/06/19
 
 public class Core {
 
-  //EXPORTAR
-  public static int n = 1;
   public static final Color TEXT_COLOR = new Color(21, 87, 163);
   public static final Color MAIN_COLOR = new Color(220, 12, 12);
+  //EXPORTAR
   public final Border MEDIO = BorderFactory.createLineBorder(TEXT_COLOR, 2, true);
   public final Border HARD = BorderFactory.createLineBorder(MAIN_COLOR, 2, true);
   public final Cursor MIRA = new Cursor(Cursor.CROSSHAIR_CURSOR);
@@ -104,6 +78,74 @@ public class Core {
             " 		color:rgb(220, 12, 12);" +
             " 	} " +
             "</style>";
+  }
+
+  public static String inputText(String request, int length) {
+
+    boolean canContinue = false;
+    String aux;
+
+    do {
+
+      aux = JOptionPane.showInputDialog(null,
+          "<html>" + styleJOption() + "<strong>" + request + "</strong></html>", "Message",
+          JOptionPane.PLAIN_MESSAGE);
+
+      if (aux != null && !aux.trim().equals("") && Pattern.matches("^[a-zA-Z]*$", aux)) {
+
+        if (aux.length() <= length) {
+          canContinue = true;
+        } else {
+          JOptionPane.showMessageDialog(null,
+              "<html>" + styleJOption() + "<strong>Too large text</strong></html>", "Message",
+              JOptionPane.PLAIN_MESSAGE);
+        }
+
+      } else {
+        JOptionPane.showMessageDialog(null,
+            "<html>" + styleJOption() + "<strong>Texto inválido</strong></html>", "Message",
+            JOptionPane.PLAIN_MESSAGE);
+        canContinue = false;
+      }
+
+    } while (!canContinue);
+
+    return aux;
+  }
+
+  public static String inputNumber(String request, int length) {
+
+    boolean canContinue = false;
+    String txt;
+    int num = 0;
+
+    do {
+
+      txt = JOptionPane.showInputDialog(null,
+          "<html>" + styleJOption() + "<strong>" + request + "</strong></html>", "Message",
+          JOptionPane.PLAIN_MESSAGE);
+
+      try {
+        num = Integer.parseInt(txt);
+
+        if (txt.length() <= length) {
+          canContinue = true;
+        } else {
+          JOptionPane.showMessageDialog(null,
+              "<html>" + styleJOption() + "<strong>Too large number</strong></html>", "Message",
+              JOptionPane.PLAIN_MESSAGE);
+        }
+
+      } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null,
+            "<html>" + styleJOption() + "<strong>Only numbers less than " + length
+                + " digits</strong></html>", "Error",
+            JOptionPane.PLAIN_MESSAGE);
+        canContinue = false;
+      }
+    } while (!canContinue);
+
+    return String.valueOf(num);
   }
 
   public void soloUnPunto(char num, KeyEvent evt,
@@ -494,74 +536,6 @@ public class Core {
     }
 
     return save;
-  }
-
-  public static String inputText(String request, int length) {
-
-    boolean canContinue = false;
-    String aux;
-
-    do {
-
-      aux = JOptionPane.showInputDialog(null,
-          "<html>" + styleJOption() + "<strong>" + request + "</strong></html>", "Message",
-          JOptionPane.PLAIN_MESSAGE);
-
-      if (aux != null && !aux.trim().equals("") && Pattern.matches("^[a-zA-Z]*$", aux)) {
-
-        if (aux.length() <= length) {
-          canContinue = true;
-        } else {
-          JOptionPane.showMessageDialog(null,
-              "<html>" + styleJOption() + "<strong>Too large text</strong></html>", "Message",
-              JOptionPane.PLAIN_MESSAGE);
-        }
-
-      } else {
-        JOptionPane.showMessageDialog(null,
-            "<html>" + styleJOption() + "<strong>Texto inválido</strong></html>", "Message",
-            JOptionPane.PLAIN_MESSAGE);
-        canContinue = false;
-      }
-
-    } while (!canContinue);
-
-    return aux;
-  }
-
-  public static String inputNumber(String request, int length) {
-
-    boolean canContinue = false;
-    String txt;
-    int num = 0;
-
-    do {
-
-      txt = JOptionPane.showInputDialog(null,
-          "<html>" + styleJOption() + "<strong>" + request + "</strong></html>", "Message",
-          JOptionPane.PLAIN_MESSAGE);
-
-      try {
-        num = Integer.parseInt(txt);
-
-        if (txt.length() <= length) {
-          canContinue = true;
-        } else {
-          JOptionPane.showMessageDialog(null,
-              "<html>" + styleJOption() + "<strong>Too large number</strong></html>", "Message",
-              JOptionPane.PLAIN_MESSAGE);
-        }
-
-      } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null,
-            "<html>" + styleJOption() + "<strong>Only numbers less than " + length
-                + " digits</strong></html>", "Error",
-            JOptionPane.PLAIN_MESSAGE);
-        canContinue = false;
-      }
-    } while (!canContinue);
-
-    return String.valueOf(num);
   }
 
   public String obtenerDate() {
@@ -971,13 +945,7 @@ public class Core {
         "!Referencia encontrada!", JOptionPane.PLAIN_MESSAGE);
   }
 
-  public boolean reemplazarArchivo() {
 
-    return JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(null,
-        "<html>" + styleJOption() + "<strong>¿Desea reemplazarlo?</strong></html>",
-        "¡El archivo ya existe!",
-        JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-  }
 
   public void exception(Exception e) {
     JOptionPane.showMessageDialog(null,
@@ -1083,249 +1051,5 @@ public class Core {
             + "y entérate si tienes esperanza para pasarla o si ya<br>"
             + "mejor la cancelas... puedes agregar hasta 10 notas.<br>" + "</html>",
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
-  }
-
-
-
-  public String elegirRuta(String file) {
-
-    JFileChooser chooser = new JFileChooser();
-
-    switch (file) {
-
-      case ".pdf":
-        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Documento PDF (.pdf)", "pdf"));
-        break;
-
-      case ".xls":
-        chooser.addChoosableFileFilter(new FileNameExtensionFilter("Libro de Excel (.xls)", "xls"));
-        break;
-
-      case ".txt":
-        chooser
-            .addChoosableFileFilter(new FileNameExtensionFilter("Archivo de Texto (.txt)", "txt"));
-        break;
-    }
-
-    chooser.setAcceptAllFileFilterUsed(false);
-
-    String ruta = "";
-    try {
-
-      if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-        ruta = chooser.getSelectedFile().getAbsolutePath();
-      }
-
-    } catch (Exception ex) {
-      exception(ex);
-    }
-    return ruta + file;
-  }
-
-  public String validarExist(String file) {
-
-    String rutaArchivo = elegirRuta(file);
-
-    if (!rutaArchivo.equals(file)) {
-
-      if (new File(rutaArchivo).exists()) {
-
-        if (reemplazarArchivo()) {
-          rutaArchivo =
-              rutaArchivo.substring(0, rutaArchivo.length() - 4) + "(" + (n++) + ")" + file;
-        }
-      }
-    }
-
-    return rutaArchivo;
-  }
-
-  public void pdf(JTable jTable, String title, String query, String file) {
-
-    String pdfNewFile = validarExist(file);
-
-    if (!pdfNewFile.equals(file)) {
-
-      if (new Database().readTable(jTable, query, false)) {
-
-        try {
-
-          // Creamos el documento e indicamos el nombre del fichero.
-          Document document = new Document();
-
-          try {
-            PdfWriter.getInstance(document, new FileOutputStream(pdfNewFile));
-          } catch (FileNotFoundException e) {
-            e.printStackTrace();
-          }
-
-          document.open();
-
-          // Añadimos los metadatos del PDF
-          document.addTitle(title);
-          document.addSubject("Made in PackApps");
-          document.addKeywords("Java, PDF, PackApps");
-          document.addAuthor("SMONCADA");
-          document.addCreator("PackApps");
-
-          // Primera página
-          Anchor anchor = new Anchor(title + " - PackApps");
-          anchor.setName(title);
-
-          // El segundo parámetro es el número del capítulo).
-          Chapter catPart = new Chapter(new Paragraph(anchor), 1);
-
-          Paragraph subPara = new Paragraph();
-          Section subCatPart = catPart.addSection(subPara);
-
-          // Creamos la tabla
-          PdfPTable table = new PdfPTable(jTable.getColumnCount());
-
-          // Ahora llenamos las filas de PdfPTable
-          PdfPCell columnHeader;
-
-          // Rellenamos las cabeceras de las columnas de la tabla.
-          for (int column = 0; column < jTable.getColumnCount(); column++) {
-            columnHeader = new PdfPCell(new Phrase(jTable.getColumnName(column)));
-            columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
-            table.addCell(columnHeader);
-          }
-          table.setHeaderRows(1);
-          // rellenamos las filas de la tabla
-          for (int row = 0; row < jTable.getRowCount(); row++) {
-            for (int column = 0; column < jTable.getColumnCount(); column++) {
-              table.addCell(jTable.getValueAt(row, column).toString());
-            }
-          }
-          subCatPart.add(table);
-
-          document.add(catPart);
-
-          document.close();
-
-          JOptionPane.showMessageDialog(null,
-              "<html>" + styleJOption() + "<strong><center>Exportación</center></strong><br>"
-                  + "Se ha exportado exitosamente<br>" + "<strong>Guardado en: </strong>"
-                  + pdfNewFile + "</html>",
-              "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
-
-        } catch (DocumentException documentException) {
-          JOptionPane.showMessageDialog(null,
-              "<html>" + styleJOption() + "<strong><center>Exportación</center></strong><br><br>"
-                  + "Ha ocurrido un error al exportar</html>",
-              "¡Error!", JOptionPane.PLAIN_MESSAGE);
-        }
-      }
-    }
-  }
-
-  public void excel(JTable jTable1, String query, String file) throws IOException {
-
-    String filePath = validarExist(file);
-
-    if (!filePath.equals(file)) {
-
-      if (new Database().readTable(jTable1, query, false)) {
-
-        int cantFila = jTable1.getRowCount();
-        int cantColumna = jTable1.getColumnCount();
-        Workbook wb;
-        wb = new HSSFWorkbook();
-        Sheet hoja = wb.createSheet(" ");
-
-        // títulos de columnas
-        for (int i = 0; i < 2; i++) {
-          Row fila = hoja.createRow(i);
-          for (int j = 0; j < cantColumna; j++) {
-            Cell celda = fila.createCell(j);
-
-            celda.setCellValue(String.valueOf(jTable1.getColumnName(j)));
-            wb.write(new FileOutputStream(filePath));
-          }
-        }
-
-        // registros
-        for (int i = 0; i < cantFila; i++) {
-          Row fila = hoja.createRow(i + 1);
-          for (int j = 0; j < cantColumna; j++) {
-            Cell celda = fila.createCell(j);
-
-            celda.setCellValue(String.valueOf(jTable1.getValueAt(i, j)));
-            wb.write(new FileOutputStream(filePath));
-          }
-        }
-
-        JOptionPane.showMessageDialog(null,
-            "<html>" + styleJOption() + "<strong><center>Exportación</center></strong><br>"
-                + "Se ha exportado exitosamente<br>" + "<strong>Guardado en: </strong>"
-                + filePath
-                + "</html>",
-            "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
-      }
-    }
-  }
-
-  public void txt(JTable table, String query, String file) {
-
-    String rutaArchivo = validarExist(file);
-
-    if (!rutaArchivo.equals(file)) {
-
-      if (new Database().readTable(table, query, false)) {
-
-        try {
-
-          BufferedWriter bfw = new BufferedWriter(new FileWriter(rutaArchivo));
-
-          bfw.write("{");
-          for (int k = 0; k < table.getColumnCount(); k++) {
-            bfw.write(table.getColumnName(k));
-
-            if (k < table.getColumnCount()
-                - 1) { // agrega separador "," si no es el ultimo elemento de la
-              // fila.
-              bfw.write(", ");
-            }
-          }
-          bfw.write("} ? Columnas");
-
-          bfw.newLine();
-          bfw.newLine();
-
-          for (int i = 0; i < table.getRowCount(); i++) { // realiza un barrido por filas.
-
-            bfw.write("[");
-
-            for (int j = 0; j < table.getColumnCount(); j++) { // realiza un barrido por columnas.
-
-              bfw.write(String.valueOf((table.getValueAt(i, j))));
-
-              if (j < table.getColumnCount()
-                  - 1) { // agrega separador "," si no es el ultimo elemento de
-                // la
-                // fila.
-                bfw.write(", ");
-              }
-            }
-            bfw.write("]");
-            bfw.newLine(); // inserta nueva linea.
-          }
-
-          bfw.close(); // cierra archivo!
-
-          JOptionPane.showMessageDialog(null,
-              "<html>" + styleJOption() + "<strong><center>Exportación</center></strong><br>"
-                  + "Se ha exportado exitosamente<br>" + "<strong>Guardado en: </strong>"
-                  + rutaArchivo + "</html>",
-              "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
-        } catch (IOException e) {
-
-          JOptionPane.showMessageDialog(null,
-              "<html>" + styleJOption() + "<strong><center>Exportación</center></strong><br><br>"
-                  + "Ha ocurrido un error al exportar</html>",
-              "¡Error!", JOptionPane.PLAIN_MESSAGE);
-        }
-      }
-    }
   }
 }

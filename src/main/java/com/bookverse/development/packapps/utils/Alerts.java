@@ -59,4 +59,19 @@ public class Alerts {
         "Text empty!",
         JOptionPane.PLAIN_MESSAGE);
   }
+
+  public static void export(String file){
+    JOptionPane.showMessageDialog(null,
+        "<html>" + styleJOption() + "<strong><center>Export successfully</center><br></strong>"+
+            "<strong>Saved in: </strong>"
+            + file + "</html>",
+        "Done!", JOptionPane.PLAIN_MESSAGE);
+  }
+
+  public static boolean replaceFile() {
+    return JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(null,
+        "<html>" + styleJOption() + "<strong>Do you want to replace it?</strong></html>",
+        "The file already exist!",
+        JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+  }
 }
