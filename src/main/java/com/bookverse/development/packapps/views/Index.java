@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_IMAGES;
 import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
 import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
@@ -29,7 +29,6 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
-import javafx.scene.control.Alert;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -39,6 +38,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.jetbrains.annotations.NotNull;
 
 public class Index extends JFrame implements ActionListener {
 
@@ -547,7 +547,7 @@ public class Index extends JFrame implements ActionListener {
     });
   }
 
-  private void setUI(String selectedUI) {
+  private void setUI(@NotNull String selectedUI) {
 
     paintUI();
 
@@ -955,7 +955,8 @@ public class Index extends JFrame implements ActionListener {
         }
 
       } else if (e.getSource() == moreBacklog) {
-        Alerts.message("Recuerdaaaa", "Poner la app de backlog en un servidor y poner acá el link!! XD");
+        Alerts.message("Recuerdaaaa",
+            "Poner la app de backlog en un servidor y poner acá el link!! XD");
       } else if (e.getSource() == tables) {
 
         if (dicesTableAP()) {
@@ -1123,7 +1124,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           notesTable.cleanTable();
-          resources.core.pdf(notesTable.viewTable, NOTES, Querys.getAllData(Format.tableName(NOTES)),
+          resources.core.pdf(notesTable.viewTable, NOTES, Querys
+                  .getAllData(Format.tableName(NOTES)),
               ".pdf");
         } catch (Exception ex) {
           Alerts.error(ex, NOTES);

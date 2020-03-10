@@ -141,12 +141,12 @@ public class Triqui extends JDialog implements ActionListener {
 
         if (board[f][c].getText().equals(winner)) {
 
-            if ("X".equals(winner)) {
-                board[f][c].setBackground(colorX);
-            } else {
-                board[f][c].setBackground(colorO);
-            }
-            board[f][c].setForeground(getForeground());
+          if ("X".equals(winner)) {
+            board[f][c].setBackground(colorX);
+          } else {
+            board[f][c].setBackground(colorO);
+          }
+          board[f][c].setForeground(getForeground());
         }
       }
     }
@@ -225,14 +225,22 @@ public class Triqui extends JDialog implements ActionListener {
 
   private void winner() {
 
-    if ((board[0][0].getText().equals("X") && board[0][1].getText().equals("X") && board[0][2].getText().equals("X"))
-    || (board[1][0].getText().equals("X") && board[1][1].getText().equals("X") && board[1][2].getText().equals("X"))
-    || (board[2][0].getText().equals("X") && board[2][1].getText().equals("X") && board[2][2].getText().equals("X"))
-    || (board[0][0].getText().equals("X") && board[1][0].getText().equals("X") && board[2][0].getText().equals("X"))
-    || (board[0][1].getText().equals("X") && board[1][1].getText().equals("X") && board[2][1].getText().equals("X"))
-    || (board[0][2].getText().equals("X") && board[1][2].getText().equals("X") && board[2][2].getText().equals("X"))
-    || (board[0][0].getText().equals("X") && board[1][1].getText().equals("X") && board[2][2].getText().equals("X"))
-    || (board[0][2].getText().equals("X") && board[1][1].getText().equals("X") && board[2][0].getText().equals("X"))) {
+    if ((board[0][0].getText().equals("X") && board[0][1].getText().equals("X") && board[0][2]
+        .getText().equals("X"))
+        || (board[1][0].getText().equals("X") && board[1][1].getText().equals("X") && board[1][2]
+        .getText().equals("X"))
+        || (board[2][0].getText().equals("X") && board[2][1].getText().equals("X") && board[2][2]
+        .getText().equals("X"))
+        || (board[0][0].getText().equals("X") && board[1][0].getText().equals("X") && board[2][0]
+        .getText().equals("X"))
+        || (board[0][1].getText().equals("X") && board[1][1].getText().equals("X") && board[2][1]
+        .getText().equals("X"))
+        || (board[0][2].getText().equals("X") && board[1][2].getText().equals("X") && board[2][2]
+        .getText().equals("X"))
+        || (board[0][0].getText().equals("X") && board[1][1].getText().equals("X") && board[2][2]
+        .getText().equals("X"))
+        || (board[0][2].getText().equals("X") && board[1][1].getText().equals("X") && board[2][0]
+        .getText().equals("X"))) {
 
       lblTurn.setText("<html><em><strong>¡Winner " + txtName1.getText() + "!</strong></em></html>");
       lblTurn.setForeground(colorX);
@@ -240,14 +248,23 @@ public class Triqui extends JDialog implements ActionListener {
 
       countPoints("X");
       blockTab("X");
-    } else if ((board[0][0].getText().equals("O") && board[0][1].getText().equals("O") && board[0][2].getText().equals("O"))
-        || (board[1][0].getText().equals("O") && board[1][1].getText().equals("O") && board[1][2].getText().equals("O"))
-        || (board[2][0].getText().equals("O") && board[2][1].getText().equals("O") && board[2][2].getText().equals("O"))
-        || (board[0][0].getText().equals("O") && board[1][0].getText().equals("O") && board[2][0].getText().equals("O"))
-        || (board[0][1].getText().equals("O") && board[1][1].getText().equals("O") && board[2][1].getText().equals("O"))
-        || (board[0][2].getText().equals("O") && board[1][2].getText().equals("O") && board[2][2].getText().equals("O"))
-        || (board[0][0].getText().equals("O") && board[1][1].getText().equals("O") && board[2][2].getText().equals("O"))
-        || (board[0][2].getText().equals("O") && board[1][1].getText().equals("O") && board[2][0].getText().equals("O"))) {
+    } else if (
+        (board[0][0].getText().equals("O") && board[0][1].getText().equals("O") && board[0][2]
+            .getText().equals("O"))
+            || (board[1][0].getText().equals("O") && board[1][1].getText().equals("O")
+            && board[1][2].getText().equals("O"))
+            || (board[2][0].getText().equals("O") && board[2][1].getText().equals("O")
+            && board[2][2].getText().equals("O"))
+            || (board[0][0].getText().equals("O") && board[1][0].getText().equals("O")
+            && board[2][0].getText().equals("O"))
+            || (board[0][1].getText().equals("O") && board[1][1].getText().equals("O")
+            && board[2][1].getText().equals("O"))
+            || (board[0][2].getText().equals("O") && board[1][2].getText().equals("O")
+            && board[2][2].getText().equals("O"))
+            || (board[0][0].getText().equals("O") && board[1][1].getText().equals("O")
+            && board[2][2].getText().equals("O"))
+            || (board[0][2].getText().equals("O") && board[1][1].getText().equals("O")
+            && board[2][0].getText().equals("O"))) {
 
       lblTurn.setText("<html><em><strong>¡Winner " + txtName2.getText() + "!</strong></em></html>");
       lblTurn.setForeground(colorO);
@@ -581,7 +598,8 @@ class CPU {
 
     boolean thereIsDanger = false;
 
-    if (Triqui.board[0][0].getText().equals(player) && Triqui.board[0][1].getText().equals(player)) {
+    if (Triqui.board[0][0].getText().equals(player) && Triqui.board[0][1].getText()
+        .equals(player)) {
 
       positions[0] = 0;
       positions[1] = 2;
@@ -617,7 +635,8 @@ class CPU {
       }
     }
 
-    if (Triqui.board[1][0].getText().equals(player) && Triqui.board[1][1].getText().equals(player)) {
+    if (Triqui.board[1][0].getText().equals(player) && Triqui.board[1][1].getText()
+        .equals(player)) {
 
       positions[0] = 1;
       positions[1] = 2;
@@ -653,7 +672,8 @@ class CPU {
       }
     }
 
-    if (Triqui.board[2][0].getText().equals(player) && Triqui.board[2][1].getText().equals(player)) {
+    if (Triqui.board[2][0].getText().equals(player) && Triqui.board[2][1].getText()
+        .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 2;
@@ -689,7 +709,8 @@ class CPU {
       }
     }
 
-    if (Triqui.board[0][0].getText().equals(player) && Triqui.board[1][0].getText().equals(player)) {
+    if (Triqui.board[0][0].getText().equals(player) && Triqui.board[1][0].getText()
+        .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 0;
@@ -725,7 +746,8 @@ class CPU {
       }
     }
 
-    if (Triqui.board[0][1].getText().equals(player) && Triqui.board[1][1].getText().equals(player)) {
+    if (Triqui.board[0][1].getText().equals(player) && Triqui.board[1][1].getText()
+        .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 1;
@@ -761,7 +783,8 @@ class CPU {
       }
     }
 
-    if (Triqui.board[0][2].getText().equals(player) && Triqui.board[1][2].getText().equals(player)) {
+    if (Triqui.board[0][2].getText().equals(player) && Triqui.board[1][2].getText()
+        .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 2;
@@ -797,7 +820,8 @@ class CPU {
       }
     }
 
-    if (Triqui.board[0][0].getText().equals(player) && Triqui.board[1][1].getText().equals(player)) {
+    if (Triqui.board[0][0].getText().equals(player) && Triqui.board[1][1].getText()
+        .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 2;
@@ -833,7 +857,8 @@ class CPU {
       }
     }
 
-    if (Triqui.board[2][0].getText().equals(player) && Triqui.board[1][1].getText().equals(player)) {
+    if (Triqui.board[2][0].getText().equals(player) && Triqui.board[1][1].getText()
+        .equals(player)) {
 
       positions[0] = 0;
       positions[1] = 2;

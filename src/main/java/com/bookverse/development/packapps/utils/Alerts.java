@@ -1,5 +1,7 @@
 package com.bookverse.development.packapps.utils;
 
+import static com.bookverse.development.packapps.core.Core.styleJOption;
+
 import com.bookverse.development.packapps.core.Core;
 import javax.swing.JOptionPane;
 
@@ -48,6 +50,13 @@ public class Alerts {
   public static Object searchRecords() {
     return JOptionPane.showInputDialog(null, "<html>" + Core.styleJOption()
             + "<strong><em>What are you looking for?</em></strong></html>",
-        "Search records", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"ID", "Nickname"}, "ID");
+        "Search records", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"ID", "Nickname" }, "ID");
+  }
+
+  public static void inputSomethingText() {
+    JOptionPane.showMessageDialog(null,
+        "<html>" + styleJOption() + "<strong>Input something text...</strong></html>",
+        "Text empty!",
+        JOptionPane.PLAIN_MESSAGE);
   }
 }
