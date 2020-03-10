@@ -46,7 +46,7 @@ public class Index extends JFrame implements ActionListener {
   private static JLabel welcome;
   protected HangmanTable hangmanTable = new HangmanTable(this, true);
   protected GuessNumberTable guessNumberTable = new GuessNumberTable(this, true);
-  protected RompecabezasTabla puzzleTable = new RompecabezasTabla(this, true);
+  protected PuzzleTable puzzleTable = new PuzzleTable(this, true);
   protected DicesTable dicesTable = new DicesTable(this, true);
   protected NotasTabla notesTable = new NotasTabla(this, true);
   protected InventarioTabla inventoryTable = new InventarioTabla(this, true);
@@ -504,11 +504,11 @@ public class Index extends JFrame implements ActionListener {
   }
 
   protected void puzzleTableAP() {
-    puzzleTable.limpiarTabla();
+    puzzleTable.cleanTable();
 
     try {
       resources.database
-          .readTable(puzzleTable.rompeTab, Querys.getAllData(Format.tableName(PUZZLE)), true);
+          .readTable(puzzleTable.viewTable, Querys.getAllData(Format.tableName(PUZZLE)), true);
     } catch (Exception e1) {
       Alerts.error(e1, PUZZLE);
     }
@@ -541,7 +541,7 @@ public class Index extends JFrame implements ActionListener {
         background = i + 1;
         setVisible(true);
       } else {
-        Alerts.miraWe(false);
+        Alerts.elementApplied(false);
       }
     });
   }
@@ -830,7 +830,7 @@ public class Index extends JFrame implements ActionListener {
       if (grayMode.getForeground() != MAIN_COLOR) {
         setUI("Gray");
       } else {
-        Alerts.miraWe(true);
+        Alerts.elementApplied(true);
       }
 
     } else if (e.getSource() == darkMode) {
@@ -838,7 +838,7 @@ public class Index extends JFrame implements ActionListener {
       if (darkMode.getForeground() != MAIN_COLOR) {
         setUI("Dark");
       } else {
-        Alerts.miraWe(true);
+        Alerts.elementApplied(true);
       }
 
     } else if (e.getSource() == textureMode) {
@@ -846,7 +846,7 @@ public class Index extends JFrame implements ActionListener {
       if (textureMode.getForeground() != MAIN_COLOR) {
         setUI("Texture");
       } else {
-        Alerts.miraWe(true);
+        Alerts.elementApplied(true);
       }
 
     } else if (e.getSource() == macMode) {
@@ -854,7 +854,7 @@ public class Index extends JFrame implements ActionListener {
       if (macMode.getForeground() != MAIN_COLOR) {
         setUI("Mac");
       } else {
-        Alerts.miraWe(true);
+        Alerts.elementApplied(true);
       }
 
     } else if (e.getSource() == mintMode) {
@@ -862,7 +862,7 @@ public class Index extends JFrame implements ActionListener {
       if (mintMode.getForeground() != MAIN_COLOR) {
         setUI("Mint");
       } else {
-        Alerts.miraWe(true);
+        Alerts.elementApplied(true);
       }
 
     } else if (e.getSource() == classicMode) {
@@ -870,7 +870,7 @@ public class Index extends JFrame implements ActionListener {
       if (classicMode.getForeground() != MAIN_COLOR) {
         setUI("Classic");
       } else {
-        Alerts.miraWe(true);
+        Alerts.elementApplied(true);
       }
 
     } else if (e.getSource() == email) {
@@ -1033,9 +1033,9 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == puzzleTXT) {
 
         try {
-          puzzleTable.limpiarTabla();
+          puzzleTable.cleanTable();
           resources.core
-              .txt(puzzleTable.rompeTab, Querys.getAllData(Format.tableName(PUZZLE)), ".txt");
+              .txt(puzzleTable.viewTable, Querys.getAllData(Format.tableName(PUZZLE)), ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, PUZZLE);
         }
@@ -1137,8 +1137,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == puzzlePDF) {
 
         try {
-          puzzleTable.limpiarTabla();
-          resources.core.pdf(puzzleTable.rompeTab, PUZZLE,
+          puzzleTable.cleanTable();
+          resources.core.pdf(puzzleTable.viewTable, PUZZLE,
               Querys.getAllData(Format.tableName(PUZZLE)), ".pdf");
         } catch (Exception ex) {
           Alerts.error(ex, PUZZLE);
@@ -1239,9 +1239,9 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == puzzleEXCEL) {
 
         try {
-          puzzleTable.limpiarTabla();
+          puzzleTable.cleanTable();
           resources.core
-              .excel(puzzleTable.rompeTab, Querys.getAllData(Format.tableName(PUZZLE)), ".xls");
+              .excel(puzzleTable.viewTable, Querys.getAllData(Format.tableName(PUZZLE)), ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, PUZZLE);
         }

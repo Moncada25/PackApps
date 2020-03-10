@@ -187,9 +187,8 @@ public class Database {
       ArrayList<Object[]> data = new ArrayList<>();
       while (resultSet.next()) {
         Object[] rows = new Object[resultSetMetaData.getColumnCount()];
-        for (int i = 0; i < rows.length; i++) {
+        for (int i = 0; i < rows.length; i++)
           rows[i] = resultSet.getObject(i + 1);
-        }
         data.add(rows);
       }
 

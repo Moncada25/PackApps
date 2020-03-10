@@ -95,7 +95,7 @@ public class Pilas extends JDialog implements MouseListener, ActionListener {
         if (pila.length > i) {
 
             do {
-                num = Integer.parseInt(Core.enterNumber("Ingresa un número", 6));
+                num = Integer.parseInt(Core.inputNumber("Ingresa un número", 6));
 
                 Push(num);
             } while (JOptionPane.showConfirmDialog(null, "¿Desea ingresar más datos?", "Ingreso de datos",

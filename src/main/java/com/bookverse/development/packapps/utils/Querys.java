@@ -7,11 +7,11 @@ import com.bookverse.development.packapps.core.Core;
 public class Querys {
 
   public static String getDataByID(String table){
-    return "SELECT * FROM "+table+" WHERE ID ='" + Core.enterNumber("Enter a ID", 6) + "'";
+    return "SELECT * FROM "+table+" WHERE ID ='" + Core.inputNumber("Enter a ID", 6) + "'";
   }
 
   public static String getDataByNickname(String table){
-    return "SELECT * FROM "+table+" WHERE Nickname ='" + Core.enterNickname("Enter a Nickname", 20) + "'";
+    return "SELECT * FROM "+table+" WHERE Nickname ='" + Core.inputText("Enter a Nickname", 20) + "'";
   }
 
   public static String getAllData(String table){

@@ -2,10 +2,6 @@ package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
-import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
 import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.Core;
@@ -33,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -42,27 +39,28 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-public class HangmanTable extends JDialog implements ActionListener, MouseListener {
+public class PuzzleTable extends JDialog implements ActionListener, MouseListener {
 
   public JTable viewTable;
-  Table model = new Table();
-  TableRowSorter<TableModel> rowSorter;
+  public Table model = new Table();
   private JLabel tittle, message;
-  private JLabel[] tables = new JLabel[5];
   private JMenuItem create, read, delete, update;
-  private String[] columns = {"ID", "NICKNAME", "MISTAKES", "STATE", "CATEGORY", "DATE"};
+  private String[] columns = {"ID", "NICKNAME", "STATE", "LEVEL", "MOVES", "DATE"};
   private Resources resources = new Resources();
+  private JLabel[] tables = new JLabel[5];
 
-  public HangmanTable(JFrame parent, boolean modal) {
+  public PuzzleTable(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
 
-  public JPanel getPanel() {
+  private JPanel getPanel() {
 
     JPanel panel = new JPanel(new GridLayout());
-    JPanel row = new JPanel(new FlowLayout());
-    String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
+
+    JPanel fila = new JPanel(new FlowLayout());
+
+    String[] imgs = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
     panel.setBorder(resources.core.bordeAzul("Select Table"));
 
@@ -78,13 +76,13 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
     IntStream.range(0, tables.length).forEach(i -> {
       tables[i] = new JLabel();
-      tables[i].setIcon(new ImageIcon(resources.getImage(images[i])));
+      tables[i].setIcon(new ImageIcon(resources.getImage(imgs[i])));
       tables[i].addMouseListener(this);
-      row.add(tables[i]);
+      fila.add(tables[i]);
     });
 
     panel.add(tittle, BorderLayout.EAST);
-    panel.add(row, BorderLayout.CENTER);
+    panel.add(fila, BorderLayout.CENTER);
     panel.add(message, BorderLayout.WEST);
 
     return panel;
@@ -92,18 +90,21 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
   private void createComponents() {
 
+    setIconImage(new ImageIcon(resources.getImage("rompecabezas.png")).getImage());
     add(getPanel(), BorderLayout.SOUTH);
-    setIconImage(new ImageIcon(resources.getImage("ahorcado.png")).getImage());
 
-    IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
+    for (String column : columns) {
+      model.addColumn(column);
+    }
 
     viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
     JScrollPane scroll = new JScrollPane(viewTable);
-    add(scroll, BorderLayout.CENTER);
+    getContentPane().add(scroll, BorderLayout.CENTER);
 
-    int[] sizes = {20, 170, 40, 20, 75, 100};
-    IntStream.range(0, viewTable.getColumnCount()).forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
+    int[] sizes = {20, 150, 30, 100, 30, 100};
+    IntStream.range(0, viewTable.getColumnCount())
+        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
     JMenuBar menuBar = new JMenuBar();
 
@@ -128,7 +129,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
     pack();
 
-    rowSorter = new TableRowSorter<>(model);
+    TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(model);
     viewTable.setRowSorter(rowSorter);
 
     IntStream.range(0, columns.length).forEach(i -> {
@@ -138,6 +139,23 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
     });
 
     repaint();
+  }
+
+  @Override
+  public void paint(Graphics g) {
+    Dimension d = getSize();
+    Dimension m = getMaximumSize();
+    boolean resize = d.width > m.width || d.height > m.height;
+    d.width = Math.min(m.width, d.width);
+    d.height = Math.min(m.height, d.height);
+    if (resize) {
+      Point p = getLocation();
+      setVisible(false);
+      setSize(d);
+      setLocation(p);
+      setVisible(true);
+    }
+    super.paint(g);
   }
 
   public void cleanTable() {
@@ -158,15 +176,15 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
         try {
 
           if (option.toString().equals("ID")) {
-            searchResult(90, Querys.getDataByID(Format.tableName(HANGMAN)));
+            searchResult(90, Querys.getDataByID(Format.tableName(PUZZLE)));
             setVisible(true);
           } else if (option.toString().equals("Nickname")) {
-            searchResult(250, Querys.getDataByNickname(Format.tableName(HANGMAN)));
+            searchResult(250, Querys.getDataByNickname(Format.tableName(PUZZLE)));
             setVisible(true);
           }
 
         } catch (Exception e) {
-          Alerts.error(e, HANGMAN);
+          Alerts.error(e, PUZZLE);
         }
       }
 
@@ -187,10 +205,10 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
         if (resources.core.loginDBA()) {
           resources.database.updateData(Core.inputText("Enter a Nickname", 20),
-              String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(HANGMAN));
+              String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(PUZZLE));
 
           dispose();
-          new Index().hangmanTableAP();
+          new Index().puzzleTableAP();
         }
       }
 
@@ -208,17 +226,47 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
       } else {
 
         int[] rows = viewTable.getSelectedRows();
-        String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0))).toArray(String[]::new);
+        String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
+            .toArray(String[]::new);
 
         if (resources.core.loginDBA()) {
-          resources.database.deleteData(IDs, Format.tableName(HANGMAN));
+          resources.database.deleteData(IDs, Format.tableName(PUZZLE));
+
           dispose();
-          new Index().hangmanTableAP();
+          new Index().puzzleTableAP();
         }
       }
 
     } else {
-      Alerts.message("Delete", "Empty table");
+      JOptionPane.showMessageDialog(null, "Tabla vacía", "Delete", JOptionPane.PLAIN_MESSAGE);
+    }
+  }
+
+  public void btnCreateAP() {
+
+    Object option = JOptionPane.showInputDialog(null, "<html>" + Core.styleJOption()
+            + "<strong><em>Select difficulty</em></strong></html>",
+        "Difficulty level", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Easy", "Medium", "Hard"},
+        "Easy");
+
+    if (option != null) {
+
+      switch (option.toString()) {
+        case "Easy":
+          setVisible(false);
+          new Puzzle(this, true, 4, 55, 3).start(this);
+          break;
+        case "Medium":
+          setVisible(false);
+          new Puzzle(this, true, 5, 50, 6).start(this);
+          break;
+        case "Hard":
+          setVisible(false);
+          new Puzzle(this, true, 6, 45, 10).start(this);
+          break;
+        default:
+          throw new IllegalStateException("Unexpected value: " + option.toString());
+      }
     }
   }
 
@@ -239,7 +287,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
       }
 
     } catch (Exception e1) {
-      Alerts.error(e1, HANGMAN);
+      Alerts.error(e1, PUZZLE);
     }
   }
 
@@ -253,8 +301,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
     } else if (e.getSource() == read) {
       btnConsultAP();
     } else if (e.getSource() == create) {
-      setVisible(false);
-      new Hangman(this, true).start(this);
+      btnCreateAP();
     }
   }
 
@@ -265,7 +312,8 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
       setVisible(false);
       new Index().guessNumberTableAP();
     } else if (e.getSource() == tables[1]) {
-      Alerts.message("Message", "You're here!");
+      setVisible(false);
+      new Index().hangmanTableAP();
     } else if (e.getSource() == tables[2]) {
       setVisible(false);
       new Index().dicesTableAP();
@@ -273,30 +321,30 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
       setVisible(false);
       new Index().notesTableAP();
     } else if (e.getSource() == tables[4]) {
-      setVisible(false);
-      new Index().puzzleTableAP();
+      JOptionPane.showMessageDialog(null,
+          "<html><em>" + "<strong>You're here!</strong><br>" + "</em></html>",
+          "Usuario, cámate po favo", JOptionPane.PLAIN_MESSAGE);
     }
   }
 
-  @Override
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == tables[0]) {
       tables[0].setCursor(resources.core.MIRA);
-      tittle.setText("    " + GUESS_NUMBER);
+      tittle.setText("    Adivinar Número");
     } else if (e.getSource() == tables[1]) {
       tables[1].setCursor(resources.core.CARGAR);
-      tittle.setText("    " + HANGMAN);
-      message.setText("       You're here");
+      tittle.setText("    Ahorcadito");
     } else if (e.getSource() == tables[2]) {
       tables[2].setCursor(resources.core.REDI);
-      tittle.setText("    " + DICES);
+      tittle.setText("    Juego de Dados");
     } else if (e.getSource() == tables[3]) {
       tables[3].setCursor(resources.core.TEXT);
-      tittle.setText("    " + NOTES);
+      tittle.setText("    Notas");
     } else if (e.getSource() == tables[4]) {
       tables[4].setCursor(resources.core.MANO);
-      tittle.setText("    " + PUZZLE);
+      tittle.setText("    Rompecabezas");
+      message.setText("       You're here");
     }
   }
 
@@ -306,7 +354,6 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
     if (e.getSource() == tables[0]) {
       tittle.setText("");
     } else if (e.getSource() == tables[1]) {
-      message.setText("");
       tittle.setText("");
     } else if (e.getSource() == tables[2]) {
       tittle.setText("");
@@ -314,6 +361,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
       tittle.setText("");
     } else if (e.getSource() == tables[4]) {
       tittle.setText("");
+      message.setText("");
     }
   }
 
@@ -323,22 +371,5 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
   @Override
   public void mouseReleased(MouseEvent e) {
-  }
-
-  @Override
-  public void paint(Graphics g) {
-    Dimension d = getSize();
-    Dimension m = getMaximumSize();
-    boolean resize = d.width > m.width || d.height > m.height;
-    d.width = Math.min(m.width, d.width);
-    d.height = Math.min(m.height, d.height);
-    if (resize) {
-      Point p = getLocation();
-      setVisible(false);
-      setSize(d);
-      setLocation(p);
-      setVisible(true);
-    }
-    super.paint(g);
   }
 }

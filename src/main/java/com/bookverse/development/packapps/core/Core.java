@@ -496,7 +496,7 @@ public class Core {
     return save;
   }
 
-  public static String enterNickname(String request, int length) {
+  public static String inputText(String request, int length) {
 
     boolean canContinue = false;
     String aux;
@@ -529,7 +529,7 @@ public class Core {
     return aux;
   }
 
-  public static String enterNumber(String request, int length) {
+  public static String inputNumber(String request, int length) {
 
     boolean canContinue = false;
     String txt;

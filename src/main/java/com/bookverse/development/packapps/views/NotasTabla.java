@@ -3,6 +3,7 @@ package com.bookverse.development.packapps.views;
 import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
+import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -176,22 +177,19 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
 
         if (notasTab.getRowCount() != 0) {
 
-            Object opcion = null;
+            Object option = Alerts.searchRecords();
 
-            opcion = JOptionPane.showInputDialog(null, "<html>" + img.core.styleJOption() + "<strong><em>¿Qué busca?</em></strong></html>",
-                    "Buscar registros", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"ID", "Nickname"}, "ID");
-
-            if (opcion != null) {
+            if (option != null) {
 
                 try {
 
-                    if (opcion.toString().equals("ID")) {
-                        String sql = "select * from notas where ID ='" + Core.enterNumber("Ingresa un ID", 6) + "'";
+                    if (option.toString().equals("ID")) {
+                        String sql = "select * from notas where ID ='" + Core.inputNumber("Ingresa un ID", 6) + "'";
                         resultadoBusqueda(90, sql);
                         setVisible(true);
-                    } else if (opcion.toString().equals("Nickname")) {
+                    } else if (option.toString().equals("Nickname")) {
                         String sql = "select * from notas where Nickname ='"
-                                + Core.enterNickname("Ingrese un Nickname", 20) + "'";
+                                + Core.inputText("Ingrese un Nickname", 20) + "'";
                         resultadoBusqueda(250, sql);
                         setVisible(true);
                     }
@@ -221,7 +219,7 @@ public class NotasTabla extends JDialog implements ActionListener, MouseListener
 
                 if (img.core.loginDBA()) {
 
-                    img.database.updateData(Core.enterNickname("Ingrese un Nickname", 20),
+                    img.database.updateData(Core.inputText("Ingrese un Nickname", 20),
                             String.valueOf(modelo.getValueAt(filaseleccionada, 0)), "notas");
 
                     dispose();

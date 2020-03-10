@@ -129,7 +129,7 @@ public class GuessNumber extends JDialog implements ActionListener {
 
   private void btnPlayAP() {
 
-    high = Integer.parseInt(Core.enterNumber("Maximum number to guess", 6));
+    high = Integer.parseInt(Core.inputNumber("Maximum number to guess", 6));
 
     int minimum = 1;
     numberRandom = resources.core.enteroAleatorio(minimum, high);
@@ -227,7 +227,7 @@ public class GuessNumber extends JDialog implements ActionListener {
 
         try {
           String[] data = {GUESS_NUMBER,
-              Core.enterNickname("Enter a Nickname", 20),
+              Core.inputText("Enter a Nickname", 20),
               String.valueOf(high), level + " - " + attempts,
               resources.core.obtenerDate()};
           resources.database.insertData(data);

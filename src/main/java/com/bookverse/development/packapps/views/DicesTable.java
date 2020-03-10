@@ -31,7 +31,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -69,12 +68,12 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     tittle = new JLabel();
     tittle.setFont(resources.core.BIG);
-    tittle.setForeground(resources.core.MAIN_COLOR);
+    tittle.setForeground(Core.MAIN_COLOR);
     tittle.addMouseListener(this);
 
     message = new JLabel();
     message.setFont(resources.core.BIG);
-    message.setForeground(resources.core.TEXT_COLOR);
+    message.setForeground(Core.TEXT_COLOR);
     message.addMouseListener(this);
 
     IntStream.range(0, tables.length).forEach(i -> {
@@ -172,13 +171,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     if (viewTable.getRowCount() != 0) {
 
-      Object option;
-
-      option = JOptionPane.showInputDialog(null,
-          "<html>" + Core.styleJOption()
-              + "<strong><em>What are you looking for?</em></strong></html>",
-          "Search records", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"ID", "Nickname"},
-          "ID");
+      Object option = Alerts.searchRecords();
 
       if (option != null) {
 
@@ -213,7 +206,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
       } else {
 
         if (resources.core.loginDBA()) {
-          resources.database.updateData(Core.enterNickname("Enter a Nickname", 20),
+          resources.database.updateData(Core.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(DICES));
 
           dispose();

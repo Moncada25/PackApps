@@ -1,5 +1,7 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
+
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -269,7 +271,7 @@ public class Notes extends JDialog implements ActionListener {
 
   public void insertar(String state) {
 
-    if (resources.core.comprobarConexion("Datos no guardados", true) && resources.core.saveGame()) {
+    if (resources.core.comprobarConexion("Data don't saved", true) && resources.core.saveGame()) {
 
       try {
 
@@ -281,7 +283,7 @@ public class Notes extends JDialog implements ActionListener {
           op = "1 to 9";
         }
 
-        String data[] = {"notas", nombre.getText(), op, String.format("%.0f", porcTotal),
+        String[] data = {NOTES, nombre.getText(), op, String.format("%.0f", porcTotal),
             String.format("%.2f", notaTotal), state, resources.core.obtenerDate()};
         resources.database.insertData(data);
       } catch (Exception e) {

@@ -199,7 +199,7 @@ public class Matrices extends JDialog implements ActionListener {
                     case "Un escalar":
 
                         int escalar = Integer.parseInt(
-                                Core.enterNumber("Ingrese el escalar por el cual desea multiplicar la matriz", 2));
+                                Core.inputNumber("Ingrese el escalar por el cual desea multiplicar la matriz", 2));
 
                         for (int i = 0; i < Integer.parseInt(txtFilas.getText()); i++) {
                             for (int j = 0; j < Integer.parseInt(txtColumnas.getText()); j++) {
@@ -239,7 +239,7 @@ public class Matrices extends JDialog implements ActionListener {
                     case "Una matriz":
 
                         int columnasB = Integer
-                                .parseInt(h.core.enterNumber("Ingrese el número de columnas que tendrá la matriz B", 1));
+                                .parseInt(h.core.inputNumber("Ingrese el número de columnas que tendrá la matriz B", 1));
 
                         int f = Integer.parseInt(txtFilas.getText());
                         int c = Integer.parseInt(txtColumnas.getText());
@@ -374,7 +374,7 @@ public class Matrices extends JDialog implements ActionListener {
             for (int j = 0; j < c; j++) {
 
                 if (e.getSource() == matriz[i][j]) {
-                    matriz[i][j].setText(Core.enterNumber("Ingrese el valor de la posición [" + (i + 1) + "][" + (j + 1) + "]", 2));
+                    matriz[i][j].setText(Core.inputNumber("Ingrese el valor de la posición [" + (i + 1) + "][" + (j + 1) + "]", 2));
                 }
             }
         }

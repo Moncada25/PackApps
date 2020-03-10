@@ -1,10 +1,12 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
+import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Core.inputText;
 import static com.bookverse.development.packapps.utils.ArrayData.WORD_LIST;
+import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
 import static java.awt.Font.PLAIN;
 
-import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.Font;
@@ -56,25 +58,25 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("ahorcado.png")).getImage());
 
-    btnPlay = resources.getButton("Play", resources.core.TEXT_COLOR, this, this);
+    btnPlay = resources.getButton("Play", TEXT_COLOR, this, this);
     btnPlay.setBounds(30, 160, 86, 30);
 
-    btnExit = resources.getButton("Return", resources.core.MAIN_COLOR, this, this);
+    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(140, 160, 86, 30);
 
     JLabel tittle = resources.getLabel("<html>"
         + "<strong><em>Category</em></strong>" +
-        "</html>", resources.core.MAIN_COLOR, this, resources.core.BIG);
+        "</html>", MAIN_COLOR, this, resources.core.BIG);
     tittle.setBounds(30, 10, 120, 35);
 
-    attempts = resources.getLabel("", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
+    attempts = resources.getLabel("", TEXT_COLOR, this, resources.core.MEDIUM);
     attempts.setBounds(30, 200, 250, 30);
 
-    time = resources.getLabel("", resources.core.MAIN_COLOR, this, new Font("Times New Roman",
+    time = resources.getLabel("", MAIN_COLOR, this, new Font("Times New Roman",
         PLAIN, 50));
     time.setBounds(75, 220, 200, 120);
 
-    lyricsPressed = resources.getLabel("", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
+    lyricsPressed = resources.getLabel("", TEXT_COLOR, this, resources.core.MEDIUM);
     lyricsPressed.setBounds(30, 400, 600, 40);
 
     options = new JComboBox<>();
@@ -96,7 +98,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     txtWord.setBounds(30, 100, 220, 40);
     add(txtWord);
 
-    lyricsNumber = resources.getLabel("", resources.core.TEXT_COLOR, this, resources.core.MEDIUM);
+    lyricsNumber = resources.getLabel("", TEXT_COLOR, this, resources.core.MEDIUM);
     lyricsNumber.setBounds(260, 100, 130, 60);
 
     addKeyListener(this);
@@ -325,7 +327,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
     if (resources.core.comprobarConexion("Data don't saved", true) && resources.core.saveGame()) {
 
-      String[] data = {HANGMAN, Core.enterNickname("Enter a Nickname", 20),
+      String[] data = {HANGMAN, inputText("Enter a Nickname", 20),
           String.valueOf(countAttempts), state,
           Objects.requireNonNull(options.getSelectedItem()).toString(),
           resources.core.obtenerDate()};
@@ -389,61 +391,61 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
   public void paint(Graphics g) {
     super.paint(g);
     if (countAttempts == 0) {
-      g.setColor(resources.core.TEXT_COLOR);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
     } else if (countAttempts == 1) {
-      g.setColor(resources.core.TEXT_COLOR);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.MAIN_COLOR);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
     } else if (countAttempts == 2) {
-      g.setColor(resources.core.TEXT_COLOR);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.MAIN_COLOR);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
       g.drawLine(650, 270, 550, 250);
     } else if (countAttempts == 3) {
-      g.setColor(resources.core.TEXT_COLOR);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.MAIN_COLOR);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
       g.drawLine(650, 270, 550, 250);
       g.drawLine(450, 270, 550, 250);
     } else if (countAttempts == 4) {
-      g.setColor(resources.core.TEXT_COLOR);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.MAIN_COLOR);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
       g.drawLine(650, 270, 550, 250);
       g.drawLine(450, 270, 550, 250);
       g.drawLine(550, 320, 550, 250);
     } else if (countAttempts == 5) {
-      g.setColor(resources.core.TEXT_COLOR);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.MAIN_COLOR);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
       g.drawLine(650, 270, 550, 250);
       g.drawLine(450, 270, 550, 250);
       g.drawLine(550, 320, 550, 250);
       g.drawLine(600, 420, 550, 320);
     } else if (countAttempts == 6) {
-      g.setColor(resources.core.TEXT_COLOR);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.MAIN_COLOR);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
       g.drawLine(650, 270, 550, 250);
       g.drawLine(450, 270, 550, 250);

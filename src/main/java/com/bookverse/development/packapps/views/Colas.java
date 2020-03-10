@@ -274,7 +274,7 @@ public class Colas extends JDialog implements ActionListener, MouseListener {
 
         if (i < cola.length) {
             do {
-                num = Integer.parseInt(Core.enterNumber("Ingresa un número", 6));
+                num = Integer.parseInt(Core.inputNumber("Ingresa un número", 6));
 
                 Push(num);
 

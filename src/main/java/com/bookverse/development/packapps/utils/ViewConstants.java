@@ -1,7 +1,6 @@
 package com.bookverse.development.packapps.utils;
 
 public class ViewConstants {
-
   public static final String GUESS_NUMBER = "Guess Number";
   public static final String HANGMAN = "Hangman";
   public static final String DICES = "Dices";
@@ -14,6 +13,4 @@ public class ViewConstants {
   public static final String USERS = "Users";
   public static final String PURCHASES = "Purchases";
   public static final String SALES = "Sales";
-
-
 }

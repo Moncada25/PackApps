@@ -1,10 +1,12 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Core.*;
+import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Core.inputText;
 import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
 
 import com.bookverse.development.packapps.models.Resources;
-import java.awt.Color;
+import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,48 +15,43 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 public class Puzzle extends JDialog implements Runnable, ActionListener {
 
   Resources resources = new Resources();
-  private JButton[][] tablero;
-  private JLabel tiempo, txtturno;
-  private JButton btnsalir, btnplay, btnreset;
-  private int movimientos = 0;
-  private Thread hiloTime;
-  // private Thread hiloMP3;
-  private boolean cronometroActivo;
-  private int size, lado, minutes;
-  private Color color = TEXT_COLOR;
-  private Color rojo = MAIN_COLOR;
+  private JButton[][] board;
+  private JLabel time, lblTurn;
+  private JButton btnExit, btnPlay, btnReset;
+  private int moves = 0;
+  private boolean chronometerActive;
+  private int size, side, minutes;
 
-  public Puzzle(JFrame parent, boolean modal, int cuadrado, int lado, int minutos) {
-    super(parent, modal);
-    this.size = cuadrado;
-    this.minutes = minutos;
-    this.lado = lado;
-    componentes();
-  }
-
-  public Puzzle(JDialog parent, boolean modal, int size, int lado, int minutes) {
+  public Puzzle(JFrame parent, boolean modal, int size, int side, int minutes) {
     super(parent, modal);
     this.size = size;
     this.minutes = minutes;
-    this.lado = lado;
-    componentes();
+    this.side = side;
+    createComponents();
+  }
+
+  public Puzzle(JDialog parent, boolean modal, int size, int side, int minutes) {
+    super(parent, modal);
+    this.size = size;
+    this.minutes = minutes;
+    this.side = side;
+    createComponents();
   }
 
   public void start(JFrame parent) {
     setSize(490, 380);
     setResizable(false);
     setLocationRelativeTo(parent);
-    if(size == 4){
-      setTitle(PUZZLE+" - Level Easy");
-    }else if(size == 5){
-      setTitle(PUZZLE+" - Level Medium");
-    }else{
-      setTitle(PUZZLE+" - Level Hard");
+    if (size == 4) {
+      setTitle(PUZZLE + " - Level Easy");
+    } else if (size == 5) {
+      setTitle(PUZZLE + " - Level Medium");
+    } else {
+      setTitle(PUZZLE + " - Level Hard");
     }
     resources.core.fadeIn(this);
     parent.setVisible(false);
@@ -66,90 +63,90 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     setSize(490, 380);
     setResizable(false);
     setLocationRelativeTo(parent);
-    if(size == 4){
-      setTitle(PUZZLE+" - Level Easy");
-    }else if(size == 5){
-      setTitle(PUZZLE+" - Level Medium");
-    }else{
-      setTitle(PUZZLE+" - Level Hard");
-    }    resources.core.fadeIn(this);
+    if (size == 4) {
+      setTitle(PUZZLE + " - Level Easy");
+    } else if (size == 5) {
+      setTitle(PUZZLE + " - Level Medium");
+    } else {
+      setTitle(PUZZLE + " - Level Hard");
+    }
+    resources.core.fadeIn(this);
     parent.setVisible(false);
     resources.core.instruccionesRompe();
     setVisible(true);
   }
-  
-  // Se crean los componentes de la ventana
-  public void componentes() {
+
+  private void createComponents() {
 
     setLayout(null);
-    setDefaultCloseOperation(0);
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("rompecabezas.png")).getImage());
 
-    btnsalir = resources.getButton("Return", resources.core.MAIN_COLOR, this, this);
-    btnsalir.setBounds(330, 300, 86, 30);
+    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit.setBounds(330, 300, 86, 30);
 
-    btnplay = resources.getButton("Play", resources.core.TEXT_COLOR, this, this);
-    btnplay.setBounds(70, 300, 86, 30);
+    btnPlay = resources.getButton("Play", TEXT_COLOR, this, this);
+    btnPlay.setBounds(70, 300, 86, 30);
 
-    btnreset = resources.getButton("Stop", resources.core.MAIN_COLOR, this, this);
-    btnreset.setBounds(200, 300, 86, 30);
-    btnreset.setEnabled(false);
+    btnReset = resources.getButton("Stop", MAIN_COLOR, this, this);
+    btnReset.setBounds(200, 300, 86, 30);
+    btnReset.setEnabled(false);
 
-    txtturno = resources.getLabel("", rojo, this, resources.core.MEDIUM);
-    txtturno.setBounds(335, 90, 200, 100);
+    lblTurn = resources.getLabel("", MAIN_COLOR, this, resources.core.MEDIUM);
+    lblTurn.setBounds(335, 90, 200, 100);
 
-    tiempo = resources.getLabel("", rojo, this, new Font("Times New Roman", 0, 45));
-    tiempo.setBounds(335, 5, 200, 60);
+    time = resources.getLabel("", MAIN_COLOR, this, new Font("Times New Roman", Font.PLAIN, 45));
+    time.setBounds(335, 5, 200, 60);
 
-    tablero = new JButton[size][size];
+    board = new JButton[size][size];
 
     int x = 15;
     int y = 15;
 
-    for (int f = 0; f < tablero.length; f++) {
-      for (int c = 0; c < tablero.length; c++) {
-        tablero[f][c] = resources.getButton(".", null, this, this);
-        tablero[f][c].setBounds(x, y, lado, lado);
-        tablero[f][c].setEnabled(false);
+    for (int f = 0; f < board.length; f++) {
+      for (int c = 0; c < board.length; c++) {
+        board[f][c] = resources.getButton(".", null, this, this);
+        board[f][c].setBounds(x, y, side, side);
+        board[f][c].setEnabled(false);
 
-        x = x + lado;
+        x = x + side;
       }
       x = 15;
-      y = y + lado;
+      y = y + side;
     }
   }
 
-  public void btnResetAP() {
+  private void btnResetAP() {
 
-    pararCronometro();
-    btnplay.setEnabled(true);
-    btnreset.setEnabled(false);
-    btnsalir.setEnabled(true);
+    stopChronometer();
+    btnPlay.setEnabled(true);
+    btnReset.setEnabled(false);
+    btnExit.setEnabled(true);
 
-    insertar("Loser");
+    insert("Loser");
 
-    txtturno.setText("");
-    tiempo.setText("");
+    lblTurn.setText("");
+    time.setText("");
 
-    for (int i = 0; i < tablero.length; i++) {
-      for (int j = 0; j < tablero.length; j++) {
-        tablero[i][j].setEnabled(false);
-        tablero[i][j].setText(".");
+    for (JButton[] jButtons : board) {
+      for (int j = 0; j < board.length; j++) {
+        jButtons[j].setEnabled(false);
+        jButtons[j].setText(".");
       }
     }
   }
 
-  public void btnPlayAP() {
+  private void btnPlayAP() {
 
     int n = (int) Math.pow(size, 2) - 1;
 
-    tablero[(int) (Math.random() * size)][(int) (Math.random() * size)].setText("");
+    board[(int) (Math.random() * size)][(int) (Math.random() * size)].setText("");
 
-    for (int f = 0; f < tablero.length; f++) {
-      for (int c = 0; c < tablero.length; c++) {
+    for (JButton[] jButtons : board) {
+      for (int c = 0; c < board.length; c++) {
 
-        if (!tablero[f][c].getText().equals("")) {
-          tablero[f][c].setText(String.valueOf(n));
+        if (!jButtons[c].getText().equals("")) {
+          jButtons[c].setText(String.valueOf(n));
           n--;
         }
       }
@@ -157,31 +154,30 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
 
     unlock();
 
-    txtturno.setText("");
-    movimientos = 0;
+    lblTurn.setText("");
+    moves = 0;
 
-    btnreset.setEnabled(true);
-    btnplay.setEnabled(false);
-    btnsalir.setEnabled(false);
+    btnReset.setEnabled(true);
+    btnPlay.setEnabled(false);
+    btnExit.setEnabled(false);
 
-    iniciarCronometro();
+    startChronometer();
   }
 
-  //Valida si el tablero está ordenado
-  public boolean validaVictoria() {
+  private boolean validateVictory() {
 
     int n = 1;
     boolean win = true;
 
-    for (int f = 0; f < tablero.length; f++) {
+    for (JButton[] jButtons : board) {
 
-      for (int c = 0; c < tablero.length; c++) {
+      for (int c = 0; c < board.length; c++) {
 
         if (n >= size * size) {
           break;
         }
 
-        if (!tablero[f][c].getText().equals(String.valueOf(n))) {
+        if (!jButtons[c].getText().equals(String.valueOf(n))) {
           win = false;
         }
 
@@ -189,50 +185,44 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
       }
     }
 
-    if (win) {
-      return true;
-    } else {
-      return false;
-    }
+    return win;
   }
 
-  // verifica cuando se gana
-  public void getWinner() {
+  private void getWinner() {
 
-    txtturno.setText("Moves: " + movimientos);
+    lblTurn.setText("Moves: " + moves);
 
-    if (validaVictoria()) {
+    if (validateVictory()) {
 
-      pararCronometro();
+      stopChronometer();
 
-      txtturno.setText("<html>"
-          + "<center><strong>¡Has ganado!</strong></center>"
-          + "<center>En " + movimientos + " jugadas</center>"
+      lblTurn.setText("<html>"
+          + "<center><strong>You won!</strong></center>"
+          + "<center>With " + moves + " moves</center>"
           + "</html>");
-      txtturno.setForeground(rojo);
+      lblTurn.setForeground(MAIN_COLOR);
 
-      insertar("Winner");
+      insert("Winner");
 
-      txtturno.setText("");
-      tiempo.setText("");
+      lblTurn.setText("");
+      time.setText("");
 
-      for (int i = 0; i < tablero.length; i++) {
-        for (int j = 0; j < tablero.length; j++) {
-          tablero[i][j].setEnabled(false);
-          tablero[i][j].setText(".");
+      for (JButton[] jButtons : board) {
+        for (int j = 0; j < board.length; j++) {
+          jButtons[j].setEnabled(false);
+          jButtons[j].setText(".");
         }
       }
 
-      //btnreset.setEnabled(false);
-      btnsalir.setEnabled(true);
-      btnplay.setEnabled(true);
-      btnreset.setEnabled(false);
-      txtturno.setText("");
-      tiempo.setText("");
+      btnExit.setEnabled(true);
+      btnPlay.setEnabled(true);
+      btnReset.setEnabled(false);
+      lblTurn.setText("");
+      time.setText("");
     }
   }
 
-  public String getLevel() {
+  private String getLevel() {
 
     String level = "";
 
@@ -244,133 +234,127 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
       level = "Hard";
     }
 
-    return level + " - " + tiempo.getText();
+    return level + " - " + time.getText();
   }
 
-  private void insertar(String state) {
+  private void insert(String state) {
 
-    if (resources.core.comprobarConexion("Datos no guardados", true) && resources.core.saveGame()) {
+    if (resources.core.comprobarConexion("Data don't saved", true) && resources.core.saveGame()) {
 
-      String data[] = {"rompecabezas", enterNickname("Enter a Nickname", 20), state,
-          getLevel(), String.valueOf(movimientos), resources.core.obtenerDate()};
+      String[] data = {PUZZLE, inputText("Enter a Nickname", 20), state,
+          getLevel(), String.valueOf(moves), resources.core.obtenerDate()};
 
       resources.database.insertData(data);
     }
   }
 
-  // Se inicia el cronómetro
-  public void iniciarCronometro() {
-    cronometroActivo = true;
-    hiloTime = new Thread((Runnable) this);
-    hiloTime.start();
-
-    // hiloMP3 = new hiloMP3();
-    // hiloMP3.start();
+  private void startChronometer() {
+    chronometerActive = true;
+    Thread timeThread = new Thread(this);
+    timeThread.start();
   }
 
-  // Esto es para parar el temporizador
-  public void pararCronometro() {
-    cronometroActivo = false;
+  private void stopChronometer() {
+    chronometerActive = false;
   }
 
-  //desbloquea los posibles moviminetos a medida que se juega
-  public void unlock() {
+  private void unlock() {
 
-    for (int i = 0; i < tablero.length; i++) {
-      for (int j = 0; j < tablero.length; j++) {
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board.length; j++) {
 
-        if (tablero[i][j].getText().equals("")) {
+        if (board[i][j].getText().equals("")) {
 
           if ((i == 0 && j == 0)) {
-            tablero[0][1].setEnabled(true);
-            tablero[0][1].setBackground(color);
+            board[0][1].setEnabled(true);
+            board[0][1].setBackground(TEXT_COLOR);
 
-            tablero[1][0].setEnabled(true);
-            tablero[1][0].setBackground(color);
-          } else if (i == tablero.length - 1 && j == tablero.length - 1) {
-            tablero[tablero.length - 2][tablero.length - 1].setEnabled(true);
-            tablero[tablero.length - 2][tablero.length - 1].setBackground(color);
+            board[1][0].setEnabled(true);
+            board[1][0].setBackground(TEXT_COLOR);
+          } else if (i == board.length - 1 && j == board.length - 1) {
+            board[board.length - 2][board.length - 1].setEnabled(true);
+            board[board.length - 2][board.length - 1].setBackground(TEXT_COLOR);
 
-            tablero[tablero.length - 1][tablero.length - 2].setEnabled(true);
-            tablero[tablero.length - 1][tablero.length - 2].setBackground(color);
-          } else if (i == 0 && j == tablero.length - 1) {
-            tablero[0][tablero.length - 2].setEnabled(true);
-            tablero[0][tablero.length - 2].setBackground(color);
+            board[board.length - 1][board.length - 2].setEnabled(true);
+            board[board.length - 1][board.length - 2].setBackground(TEXT_COLOR);
+          } else if (i == 0 && j == board.length - 1) {
+            board[0][board.length - 2].setEnabled(true);
+            board[0][board.length - 2].setBackground(TEXT_COLOR);
 
-            tablero[1][tablero.length - 1].setEnabled(true);
-            tablero[1][tablero.length - 1].setBackground(color);
-          } else if (i == tablero.length - 1 && j == 0) {
-            tablero[tablero.length - 2][0].setEnabled(true);
-            tablero[tablero.length - 2][0].setBackground(color);
+            board[1][board.length - 1].setEnabled(true);
+            board[1][board.length - 1].setBackground(TEXT_COLOR);
+          } else if (i == board.length - 1 && j == 0) {
+            board[board.length - 2][0].setEnabled(true);
+            board[board.length - 2][0].setBackground(TEXT_COLOR);
 
-            tablero[tablero.length - 1][1].setEnabled(true);
-            tablero[tablero.length - 1][1].setBackground(color);
-          } else if (i == 0 && j != 0 && j != tablero.length - 1) {
-            tablero[0][j - 1].setEnabled(true);
-            tablero[0][j - 1].setBackground(color);
+            board[board.length - 1][1].setEnabled(true);
+            board[board.length - 1][1].setBackground(TEXT_COLOR);
+          } else if (i == 0 && j != 0 && j != board.length - 1) {
+            board[0][j - 1].setEnabled(true);
+            board[0][j - 1].setBackground(TEXT_COLOR);
 
-            tablero[0][j + 1].setEnabled(true);
-            tablero[0][j + 1].setBackground(color);
+            board[0][j + 1].setEnabled(true);
+            board[0][j + 1].setBackground(TEXT_COLOR);
 
-            tablero[1][j].setEnabled(true);
-            tablero[1][j].setBackground(color);
-          } else if (j == tablero.length - 1 && i != 0 && i != tablero.length - 1) {
-            tablero[i - 1][j].setEnabled(true);
-            tablero[i - 1][j].setBackground(color);
+            board[1][j].setEnabled(true);
+            board[1][j].setBackground(TEXT_COLOR);
+          } else if (j == board.length - 1 && i != 0 && i != board.length - 1) {
+            board[i - 1][j].setEnabled(true);
+            board[i - 1][j].setBackground(TEXT_COLOR);
 
-            tablero[i + 1][j].setEnabled(true);
-            tablero[i + 1][j].setBackground(color);
+            board[i + 1][j].setEnabled(true);
+            board[i + 1][j].setBackground(TEXT_COLOR);
 
-            tablero[i][tablero.length - 2].setEnabled(true);
-            tablero[i][tablero.length - 2].setBackground(color);
-          } else if (i == tablero.length - 1 && j != 0 && j != tablero.length - 1) {
-            tablero[tablero.length - 1][j - 1].setEnabled(true);
-            tablero[tablero.length - 1][j - 1].setBackground(color);
+            board[i][board.length - 2].setEnabled(true);
+            board[i][board.length - 2].setBackground(TEXT_COLOR);
+          } else if (i == board.length - 1 && j != 0 && j != board.length - 1) {
+            board[board.length - 1][j - 1].setEnabled(true);
+            board[board.length - 1][j - 1].setBackground(TEXT_COLOR);
 
-            tablero[tablero.length - 1][j + 1].setEnabled(true);
-            tablero[tablero.length - 1][j + 1].setBackground(color);
+            board[board.length - 1][j + 1].setEnabled(true);
+            board[board.length - 1][j + 1].setBackground(TEXT_COLOR);
 
-            tablero[tablero.length - 2][j].setEnabled(true);
-            tablero[tablero.length - 2][j].setBackground(color);
-          } else if (j == 0 && i != 0 && i != tablero.length - 1) {
-            tablero[i - 1][j].setEnabled(true);
-            tablero[i - 1][j].setBackground(color);
+            board[board.length - 2][j].setEnabled(true);
+            board[board.length - 2][j].setBackground(TEXT_COLOR);
+          } else if (j == 0 && i != 0 && i != board.length - 1) {
+            board[i - 1][j].setEnabled(true);
+            board[i - 1][j].setBackground(TEXT_COLOR);
 
-            tablero[i + 1][j].setEnabled(true);
-            tablero[i + 1][j].setBackground(color);
+            board[i + 1][j].setEnabled(true);
+            board[i + 1][j].setBackground(TEXT_COLOR);
 
-            tablero[i][j + 1].setEnabled(true);
-            tablero[i][j + 1].setBackground(color);
+            board[i][j + 1].setEnabled(true);
+            board[i][j + 1].setBackground(TEXT_COLOR);
           } else {
-            tablero[i - 1][j].setEnabled(true);
-            tablero[i - 1][j].setBackground(color);
+            board[i - 1][j].setEnabled(true);
+            board[i - 1][j].setBackground(TEXT_COLOR);
 
-            tablero[i + 1][j].setEnabled(true);
-            tablero[i + 1][j].setBackground(color);
+            board[i + 1][j].setEnabled(true);
+            board[i + 1][j].setBackground(TEXT_COLOR);
 
-            tablero[i][j + 1].setEnabled(true);
-            tablero[i][j + 1].setBackground(color);
+            board[i][j + 1].setEnabled(true);
+            board[i][j + 1].setBackground(TEXT_COLOR);
 
-            tablero[i][j - 1].setEnabled(true);
-            tablero[i][j - 1].setBackground(color);
+            board[i][j - 1].setEnabled(true);
+            board[i][j - 1].setBackground(TEXT_COLOR);
           }
         }
       }
     }
   }
 
-  public void mover(int f, int c) {
+  private void mover(int f, int c) {
 
-    for (int i = 0; i < tablero.length; i++) {
-      for (int j = 0; j < tablero.length; j++) {
+    for (JButton[] jButtons : board) {
+      for (int j = 0; j < board.length; j++) {
 
-        if (tablero[i][j].getText().equals("")) {
-          tablero[i][j].setText(tablero[f][c].getText());
-          tablero[i][j].setEnabled(true);
-          tablero[f][c].setEnabled(false);
-          tablero[f][c].setText("");
+        if (jButtons[j].getText().equals("")) {
+          jButtons[j].setText(board[f][c].getText());
+          jButtons[j].setEnabled(true);
+          board[f][c].setEnabled(false);
+          board[f][c].setText("");
         }
-        tablero[i][j].setEnabled(false);
+        jButtons[j].setEnabled(false);
       }
     }
   }
@@ -378,19 +362,19 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
 
-    if (e.getSource() == btnplay) {
+    if (e.getSource() == btnPlay) {
       btnPlayAP();
-    } else if (e.getSource() == btnsalir) {
+    } else if (e.getSource() == btnExit) {
       resources.core.fadeOut(this);
-    } else if (e.getSource() == btnreset) {
+    } else if (e.getSource() == btnReset) {
       btnResetAP();
     }
 
-    for (int f = 0; f < tablero.length; f++) {
-      for (int c = 0; c < tablero.length; c++) {
+    for (int f = 0; f < board.length; f++) {
+      for (int c = 0; c < board.length; c++) {
 
-        if (e.getSource() == tablero[f][c]) {
-          movimientos++;
+        if (e.getSource() == board[f][c]) {
+          moves++;
           mover(f, c);
           unlock();
           getWinner();
@@ -402,62 +386,49 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
   @Override
   public void run() {
 
-    Integer minutos = minutes - 1, segundos = 59, milesimas = 1000;
-    // min es minutos, seg es segundos y mil es milesimas de segundo
-    String min = "", seg = "";
+    int newMinutes = minutes - 1, second = 59, thousandths = 1000;
+    String min, seg;
 
     try {
-      // Mientras cronometroActivo sea verdadero entonces seguira
-      // aumentando el tiempo
-      while (cronometroActivo) {
-        Thread.sleep(
-            4); // recibe la cantidad de milisegundos de pausa que se har? cada que se ejecute
-        // el hilo
-        // Decrementamos 4 milesimas de segundo
-        milesimas -= 4;
 
-        // Cuando llega a 0 osea 1 segundo, disminuye 1 segundo
-        // y las milesimas de segundo de nuevo a 1000
-        if (milesimas == 0) {
-          milesimas = 1000;
-          segundos -= 1;
-          // Si los segundos llegan a 0 entonces disminuye 1 los minutos
-          // y los segundos vuelven a 59
-          if (segundos == 0) {
+      while (chronometerActive) {
+        Thread.sleep(4);
+        thousandths -= 4;
 
-            if (minutos > 0) {
-              segundos = 59;
-              minutos--;
+        if (thousandths == 0) {
+          thousandths = 1000;
+          second -= 1;
+
+          if (second == 0) {
+
+            if (newMinutes > 0) {
+              second = 59;
+              newMinutes--;
             }
           }
         }
 
-        // Esto solamente es estetica para que siempre este en formato
-        // 00:00
-        if (minutos < 10) {
-          min = "0" + minutos;
+        if (newMinutes < 10) {
+          min = "0" + newMinutes;
         } else {
-          min = minutos.toString();
+          min = Integer.toString(newMinutes);
         }
 
-        if (segundos < 10) {
-          seg = "0" + segundos;
+        if (second < 10) {
+          seg = "0" + second;
         } else {
-          seg = segundos.toString();
+          seg = String.valueOf(second);
         }
 
-        // Colocamos en la etiqueta la informacion
+        time.setText(min + ":" + seg);
 
-        tiempo.setText(min + ":" + seg);
-
-        if (minutos <= 0 && segundos <= 0) {
+        if (newMinutes <= 0 && second <= 0) {
           btnResetAP();
         }
       }
 
     } catch (Exception e) {
-      JOptionPane.showMessageDialog(null,
-          "<html>" + resources.core.styleJOption() + "<strong>" + e.getMessage() + "</strong></html>");
+      Alerts.error(e, PUZZLE);
     }
   }
 }
