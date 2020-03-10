@@ -1,12 +1,17 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
 
+import com.bookverse.development.packapps.core.Core;
 import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.stream.IntStream;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,102 +25,100 @@ import javax.swing.JTextField;
 
 public class Notes extends JDialog implements ActionListener {
 
-  private static final int CANTIDAD_NOTAS = 10;
-  private int notaMaxima, notaMinima;
-  private JLabel notas, porc, name, scale, img;
-  private JTextField nombre;
-  private JButton btncalcular, btnaddNote, btndeleteNote, btnreset, btnsalir;
+  private int numberOfNotes = 10;
+  private int maxNote, minNote;
+  private JLabel image;
+  private JTextField txtName;
+  private JButton btnCalculate, btnAddNote, btnDeleteNote, btnReset, btnExit;
   private Resources resources = new Resources();
-  private float[] porcent = new float[CANTIDAD_NOTAS];
-  private float[] notes = new float[CANTIDAD_NOTAS];
-  private float notaTotal = 0, porcTotal = 0, notaFalta = 0;
-  private JTextField[] notitas = new JTextField[CANTIDAD_NOTAS];
-  private JComboBox<String>[] porcentajes = new JComboBox[CANTIDAD_NOTAS];
+  private float[] percentagesNumbers = new float[numberOfNotes];
+  private float[] notesNumbers = new float[numberOfNotes];
+  private float totalNote = 0, totalPercentage = 0, missingNote = 0;
+  private JTextField[] notesFields = new JTextField[numberOfNotes];
+  private JComboBox<String>[] percentagesBoxes = new JComboBox[numberOfNotes];
   private JRadioButton scale1, scale2;
-  private ButtonGroup btngroup;
-  private int notasHay = 1;
+  private int thereAreNotes = 1;
 
   public Notes(JFrame parent, boolean modal) {
     super(parent, modal);
-    Componentes();
+    createComponents();
   }
 
-    public Notes(JDialog parent, boolean modal) {
-        super(parent, modal);
-        Componentes();
-    }
+  public Notes(JDialog parent, boolean modal) {
+    super(parent, modal);
+    createComponents();
+  }
 
   public void start(JFrame parent) {
     setSize(400, 500);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Calcular Notas");
+    setTitle(NOTES);
     resources.core.fadeIn(this);
     parent.setVisible(false);
     resources.core.instruccionesNotas();
     setVisible(true);
   }
 
-    public void start(JDialog parent) {
-        setSize(400, 500);
-        setResizable(false);
-        setLocationRelativeTo(parent);
-        setTitle("Calcular Notas");
-        resources.core.fadeIn(this);
-        parent.setVisible(false);
-        resources.core.instruccionesNotas();
-        setVisible(true);
-    }
+  public void start(JDialog parent) {
+    setSize(400, 500);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle(NOTES);
+    resources.core.fadeIn(this);
+    parent.setVisible(false);
+    resources.core.instruccionesNotas();
+    setVisible(true);
+  }
 
-  @SuppressWarnings("unchecked")
-  public void Componentes() {
+  private void createComponents() {
 
     setLayout(null);
-    setDefaultCloseOperation(0);
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("notas.png")).getImage());
 
-    btnsalir = resources.getButton("Return", resources.core.MAIN_COLOR, this, this);
-    btnsalir.setBounds(248, 330, 86, 30);
+    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit.setBounds(248, 330, 86, 30);
 
-    btncalcular = resources.getButton("Show", resources.core.TEXT_COLOR, this, this);
-    btncalcular.setBounds(200, 280, 86, 30);
+    btnCalculate = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnCalculate.setBounds(200, 280, 86, 30);
 
-    btnaddNote = resources.getButton("Add", resources.core.TEXT_COLOR, this, this);
-    btnaddNote.setBounds(200, 220, 86, 30);
+    btnAddNote = resources.getButton("Add", TEXT_COLOR, this, this);
+    btnAddNote.setBounds(200, 220, 86, 30);
 
-    btndeleteNote = resources.getButton("Delete", resources.core.MAIN_COLOR, this, this);
-    btndeleteNote.setBounds(300, 220, 86, 30);
-    btndeleteNote.setEnabled(false);
+    btnDeleteNote = resources.getButton("Delete", MAIN_COLOR, this, this);
+    btnDeleteNote.setBounds(300, 220, 86, 30);
+    btnDeleteNote.setEnabled(false);
 
-    btnreset = resources.getButton("Reset", resources.core.MAIN_COLOR, this, this);
-    btnreset.setBounds(300, 280, 86, 30);
-    btnreset.setEnabled(false);
+    btnReset = resources.getButton("Reset", MAIN_COLOR, this, this);
+    btnReset.setBounds(300, 280, 86, 30);
+    btnReset.setEnabled(false);
 
     int x = 30;
     int y = 60;
 
-    for (int i = 0; i < notitas.length; i++) {
+    for (int i = 0; i < notesFields.length; i++) {
 
-      notitas[i] = new JTextField();
-      notitas[i].setBounds(x, y, 50, 25);
-      notitas[i].setHorizontalAlignment(JTextField.CENTER);
-      add(notitas[i]);
+      notesFields[i] = new JTextField();
+      notesFields[i].setBounds(x, y, 50, 25);
+      notesFields[i].setHorizontalAlignment(JTextField.CENTER);
+      add(notesFields[i]);
 
       if (i != 0) {
-        notitas[i].setVisible(false);
+        notesFields[i].setVisible(false);
       }
 
       int j = i;
 
-      notitas[i].addKeyListener(new KeyAdapter() {
+      notesFields[i].addKeyListener(new KeyAdapter() {
 
         public void keyTyped(KeyEvent e) {
           txtNumKeyTyped(e);
         }
 
         public void txtNumKeyTyped(KeyEvent e) {
-          resources.core.solonumerosYpunto(e.getKeyChar(), e, notitas[j].getText(), 3);
-          resources.core.PuntoMedio(e.getKeyChar(), e, notitas[j].getText());
+          resources.core.solonumerosYpunto(e.getKeyChar(), e, notesFields[j].getText(), 3);
+          resources.core.PuntoMedio(e.getKeyChar(), e, notesFields[j].getText());
         }
       });
       y += 40;
@@ -124,301 +127,293 @@ public class Notes extends JDialog implements ActionListener {
     x = 130;
     y = 60;
 
-    for (int i = 0; i < porcentajes.length; i++) {
-      porcentajes[i] = new JComboBox<String>();
-      porcentajes[i].setBounds(x, y, 58, 25);
+    for (int i = 0; i < percentagesBoxes.length; i++) {
+      percentagesBoxes[i] = new JComboBox<>();
+      percentagesBoxes[i].setBounds(x, y, 58, 25);
       for (int j = 1; j <= 100; j++) {
-        porcentajes[i].addItem(String.valueOf(j));
+        percentagesBoxes[i].addItem(String.valueOf(j));
       }
-      add(porcentajes[i]);
-      porcentajes[i].setSelectedIndex(19);
+      add(percentagesBoxes[i]);
+      percentagesBoxes[i].setSelectedIndex(19);
 
       if (i != 0) {
-        porcentajes[i].setVisible(false);
+        percentagesBoxes[i].setVisible(false);
       }
 
       y += 40;
     }
 
-    notas = resources
-        .getLabel("<html><strong>Notes</strong></html>", resources.core.MAIN_COLOR, this,
+    JLabel lblNotes = resources
+        .getLabel("<html><strong>Notes</strong></html>", MAIN_COLOR, this,
             resources.core.MEDIUM);
-    notas.setBounds(30, 30, 100, 30);
+    lblNotes.setBounds(30, 30, 100, 30);
 
-    porc = resources
-        .getLabel("<html><strong>%</strong></html>", resources.core.MAIN_COLOR, this,
+    JLabel lblPercentages = resources
+        .getLabel("<html><strong>%</strong></html>", MAIN_COLOR, this,
             resources.core.MEDIUM);
-    porc.setBounds(145, 30, 100, 30);
+    lblPercentages.setBounds(145, 30, 100, 30);
 
-    name = resources
-        .getLabel("<html><strong>Name</strong></html>", resources.core.MAIN_COLOR, this,
+    JLabel name = resources
+        .getLabel("<html><strong>Name</strong></html>", MAIN_COLOR, this,
             resources.core.MEDIUM);
     name.setBounds(270, 30, 100, 30);
 
-    nombre = new JTextField();
-    nombre.setBounds(200, 60, 186, 25);
-    nombre.setHorizontalAlignment(JTextField.CENTER);
-    add(nombre);
+    txtName = new JTextField();
+    txtName.setBounds(200, 60, 186, 25);
+    txtName.setHorizontalAlignment(JTextField.CENTER);
+    add(txtName);
 
-    nombre.addKeyListener(new KeyAdapter() {
+    txtName.addKeyListener(new KeyAdapter() {
 
       public void keyTyped(KeyEvent e) {
         txtNumKeyTyped(e);
       }
 
       public void txtNumKeyTyped(KeyEvent e) {
-        resources.core.soloAlfa(e.getKeyChar(), e, nombre.getText(), 20);
+        resources.core.soloAlfa(e.getKeyChar(), e, txtName.getText(), 20);
       }
     });
 
-    scale = resources
-        .getLabel("<html><strong>Scale</strong></html>", resources.core.MAIN_COLOR, this,
+    JLabel scale = resources
+        .getLabel("<html><strong>Scale</strong></html>", MAIN_COLOR, this,
             resources.core.MEDIUM);
     scale.setBounds(270, 110, 100, 30);
 
-    btngroup = new ButtonGroup();
+    ButtonGroup buttonGroup = new ButtonGroup();
 
-    scale1 = new JRadioButton("<html><strong>0 o 5</strong></html>");
+    scale1 = new JRadioButton("<html><strong>0 to 5</strong></html>");
     scale1.setBounds(200, 140, 100, 30);
     scale1.addActionListener(this);
-    scale1.setForeground(resources.core.TEXT_COLOR);
+    scale1.setForeground(TEXT_COLOR);
     add(scale1);
-    btngroup.add(scale1);
+    buttonGroup.add(scale1);
     scale1.setSelected(true);
 
-    scale2 = new JRadioButton("<html><strong>0 o 10</strong></html>");
+    scale2 = new JRadioButton("<html><strong>0 to 10</strong></html>");
     scale2.setBounds(300, 140, 100, 30);
-    scale2.setForeground(resources.core.TEXT_COLOR);
+    scale2.setForeground(TEXT_COLOR);
     scale2.addActionListener(this);
     add(scale2);
-    btngroup.add(scale2);
+    buttonGroup.add(scale2);
 
-    img = resources.getLabel("", null, this, null);
-    img.setBounds(240, 360, 96, 96);
+    image = resources.getLabel("", null, this, null);
+    image.setBounds(240, 360, 96, 96);
   }
 
-  public void ajustarEscala() {
+  private void adjustScale() {
 
     if (scale1.isSelected()) {
-      notaMaxima = 5;
-      notaMinima = 3;
+      maxNote = 5;
+      minNote = 3;
     } else if (scale2.isSelected()) {
-      notaMaxima = 10;
-      notaMinima = 5;
+      maxNote = 10;
+      minNote = 5;
     }
   }
 
-  public boolean revisarCampos() {
-
-    for (int i = 0; i < notasHay; i++) {
-
-      if (notitas[i].getText().equals("") || Float.parseFloat(notitas[i].getText()) > notaMaxima
-          || nombre.getText().trim().equals("")) {
-        return false;
-      }
-    }
-    return true;
+  private boolean validateFields() {
+    return IntStream.range(0, thereAreNotes).noneMatch(i -> notesFields[i].getText().equals("")
+        || Float.parseFloat(notesFields[i].getText()) > maxNote
+        || txtName.getText().trim().equals(""));
   }
 
-  public void btnAddAP() {
+  private void btnAddAP() {
 
-    notitas[notasHay].setVisible(true);
-    porcentajes[notasHay].setVisible(true);
-    btnreset.setEnabled(true);
-    btndeleteNote.setEnabled(true);
+    notesFields[thereAreNotes].setVisible(true);
+    percentagesBoxes[thereAreNotes].setVisible(true);
+    btnReset.setEnabled(true);
+    btnDeleteNote.setEnabled(true);
 
-    notasHay++;
+    thereAreNotes++;
 
-    if (notasHay == 10) {
-      btnaddNote.setEnabled(false);
+    if (thereAreNotes == 10) {
+      btnAddNote.setEnabled(false);
     }
   }
 
-  public void btnDeleteAP() {
+  private void btnDeleteAP() {
 
-    notitas[notasHay - 1].setVisible(false);
-    porcentajes[notasHay - 1].setVisible(false);
-    notitas[notasHay - 1].setText("");
-    porcentajes[notasHay - 1].setSelectedIndex(19);
-    btnaddNote.setEnabled(true);
+    notesFields[thereAreNotes - 1].setVisible(false);
+    percentagesBoxes[thereAreNotes - 1].setVisible(false);
+    notesFields[thereAreNotes - 1].setText("");
+    percentagesBoxes[thereAreNotes - 1].setSelectedIndex(19);
+    btnAddNote.setEnabled(true);
 
-    notasHay--;
+    thereAreNotes--;
 
-    if (notasHay == 1) {
-      btnreset.setEnabled(false);
-      btndeleteNote.setEnabled(false);
+    if (thereAreNotes == 1) {
+      btnReset.setEnabled(false);
+      btnDeleteNote.setEnabled(false);
     }
   }
 
-  public void pasarDatos() {
-
-    for (int i = 0; i < notasHay; i++) {
-      porcent[i] = Integer.parseInt(porcentajes[i].getSelectedItem().toString());
-      notes[i] = Float.parseFloat(notitas[i].getText());
-    }
+  private void parseData() {
+    IntStream.range(0, thereAreNotes).forEach(i -> {
+      percentagesNumbers[i] = Integer.parseInt(percentagesBoxes[i].getSelectedItem().toString());
+      notesNumbers[i] = Float.parseFloat(notesFields[i].getText());
+    });
   }
 
-  public void sumarNotas() {
+  private void addNotes() {
 
-    for (int i = 0; i < notasHay; i++) {
+    IntStream.range(0, thereAreNotes).forEach(i -> {
+      totalPercentage += percentagesNumbers[i];
+      totalNote += (notesNumbers[i] * percentagesNumbers[i]) / 100;
+    });
 
-      porcTotal += porcent[i];
-      notaTotal += (notes[i] * porcent[i]) / 100;
-    }
-
-    notaFalta = (notaMinima - notaTotal) / ((100 - porcTotal) / 100);
+    missingNote = (minNote - totalNote) / ((100 - totalPercentage) / 100);
   }
 
-  public void insertar(String state) {
+  private void insert(String state) {
 
     if (resources.core.comprobarConexion("Data don't saved", true) && resources.core.saveGame()) {
 
       try {
 
-        String op = "";
+        String option = "";
 
         if (scale1.isSelected()) {
-          op = "0 to 5";
+          option = "0 to 5";
         } else if (scale2.isSelected()) {
-          op = "1 to 9";
+          option = "1 to 9";
         }
 
-        String[] data = {NOTES, nombre.getText(), op, String.format("%.0f", porcTotal),
-            String.format("%.2f", notaTotal), state, resources.core.obtenerDate()};
+        String[] data = {NOTES, txtName.getText(), option, String.format("%.0f", totalPercentage),
+            String.format("%.2f", totalNote), state, resources.core.obtenerDate()};
         resources.database.insertData(data);
       } catch (Exception e) {
-        e.printStackTrace();
+        Alerts.error(e, NOTES);
       }
     }
     btnResetAP();
   }
 
-  public void btnCalculateAP() {
+  private void btnCalculateAP() {
 
-    ajustarEscala();
+    adjustScale();
 
-    if (revisarCampos()) {
+    if (validateFields()) {
 
-      notaTotal = 0;
-      porcTotal = 0;
+      totalNote = 0;
+      totalPercentage = 0;
 
-      pasarDatos();
+      parseData();
 
-      sumarNotas();
+      addNotes();
 
-      if (porcTotal == 100) {
+      if (totalPercentage == 100) {
 
-        if (notaTotal < notaMinima) {
-          img.setIcon(new ImageIcon(resources.getImage("dead.png")));
+        if (totalNote < minNote) {
+          image.setIcon(new ImageIcon(resources.getImage("dead.png")));
         } else {
-          img.setIcon(new ImageIcon(resources.getImage("win.png")));
+          image.setIcon(new ImageIcon(resources.getImage("win.png")));
         }
 
         JOptionPane.showMessageDialog(null,
-            "<html>" + resources.core.styleJOption() + "<strong>Name: </strong>" + nombre.getText()
-                + "<br>" + "<strong>Nota: </strong>"
-                + String.format("%.2f", notaTotal) + "</html>",
-            "Definitiva", JOptionPane.PLAIN_MESSAGE);
+            "<html>" + Core.styleJOption() + "<strong>Name: </strong>" + txtName.getText()
+                + "<br>" + "<strong>Note: </strong>"
+                + String.format("%.2f", totalNote) + "</html>",
+            "Definitive", JOptionPane.PLAIN_MESSAGE);
 
-        if (notaTotal < notaMinima) {
-          insertar("Reproved");
+        if (totalNote < minNote) {
+          insert("Reproved");
         } else {
-          insertar("Approved");
+          insert("Approved");
         }
 
-      } else if (porcTotal > 100) {
+      } else if (totalPercentage > 100) {
 
-        JOptionPane.showMessageDialog(null, "<html>" + resources.core.styleJOption()
-                + "<strong>Porcentaje excedido</strong></html>", "¡Verifica!",
+        JOptionPane.showMessageDialog(null, "<html>" + Core.styleJOption()
+                + "<strong>Percentage exceeded</strong></html>", "Verify!",
             JOptionPane.PLAIN_MESSAGE);
 
-      } else if (notaFalta > notaMaxima) {
+      } else if (missingNote > maxNote) {
 
-        img.setIcon(new ImageIcon(resources.getImage("dead.png")));
+        image.setIcon(new ImageIcon(resources.getImage("dead.png")));
 
         JOptionPane.showMessageDialog(null,
-            "<html>" + resources.core.styleJOption()
-                + "<strong>No hay nada que hacer, ya mejor cancela...</strong><br><br>"
-                + "<strong>Nota acumulada: </strong>" + String.format("%.2f", notaTotal) + "<br>"
-                + "<strong>Necesitarías sacar " + String.format("%.2f", notaFalta) + " en el "
-                + String.format("%.0f", 100 - porcTotal) + "% restante</strong></html>",
+            "<html>" + Core.styleJOption()
+                + "<strong>There is nothing to do, better cancel...</strong><br><br>"
+                + "<strong>Accumulated note: </strong>" + String.format("%.2f", totalNote) + "<br>"
+                + "<strong>You would have to get " + String.format("%.2f", missingNote) + " in the "
+                + String.format("%.0f", 100 - totalPercentage) + " % remaining</strong></html>",
             "Ay :(", JOptionPane.PLAIN_MESSAGE);
 
-        insertar("Reproved");
+        insert("Reproved");
 
       } else {
 
-        if (notaTotal >= 0 && notaTotal < notaMinima) {
+        if (totalNote >= 0 && totalNote < minNote) {
 
           JOptionPane.showMessageDialog(null,
-              "<html>" + resources.core.styleJOption() + "<strong>Name: </strong>" + nombre
+              "<html>" + Core.styleJOption() + "<strong>Name: </strong>" + txtName
                   .getText() + "<br>"
-                  + "<strong>Nota necesaria para ganar: </strong>" + String
-                  .format("%.2f", notaFalta) + "<br>"
-                  + "<strong>Porcentaje restante: </strong>" + String
-                  .format("%.0f", 100 - porcTotal)
+                  + "<strong>Note necessary to win: </strong>" + String
+                  .format("%.2f", missingNote) + "<br>"
+                  + "<strong>Remaining percentage: </strong>" + String
+                  .format("%.0f", 100 - totalPercentage)
                   + "%" + "</html>",
-              "Resultado", JOptionPane.PLAIN_MESSAGE);
+              "Result", JOptionPane.PLAIN_MESSAGE);
 
-          insertar("Maybe");
+          insert("Maybe");
 
-        } else if (notaTotal >= notaMinima) {
+        } else if (totalNote >= minNote) {
 
-          img.setIcon(new ImageIcon(resources.getImage("win.png")));
+          image.setIcon(new ImageIcon(resources.getImage("win.png")));
 
           JOptionPane.showMessageDialog(null,
-              "<html>" + resources.core.styleJOption()
-                  + "<strong>¡Felicidades, ya has aprovado!</strong><br><br>"
-                  + "<strong>ID: </strong>" + nombre.getText()
-                  + "<br>" + "<strong>Nota acumulada: </strong>" + String.format("%.2f", notaTotal)
+              "<html>" + Core.styleJOption()
+                  + "<strong>Congratulations, you've already approved it!</strong><br><br>"
+                  + "<strong>Name: </strong>" + txtName.getText()
+                  + "<br>" + "<strong>Accumulated note: </strong>" + String.format("%.2f", totalNote)
                   + "</html>",
-              "¡Ganaste!", JOptionPane.PLAIN_MESSAGE);
-          insertar("Approved");
+              "You won!", JOptionPane.PLAIN_MESSAGE);
+          insert("Approved");
         }
       }
 
     } else {
 
       JOptionPane.showMessageDialog(null,
-          "<html>" + resources.core.styleJOption()
-              + "<strong>Revisa los siguientes datos</strong><br><br>"
-              + "<strong>Notas: </strong>menor o igual a " + notaMaxima + "<br>"
-              + "<strong>Campos: </strong>vacíos" + "</html>",
-          "¡Verifica!", JOptionPane.PLAIN_MESSAGE);
+          "<html>" + Core.styleJOption()
+              + "<strong>Review the following data</strong><br><br>"
+              + "<strong>Notes: </strong>less than or equal to " + maxNote + "<br>"
+              + "<strong>Fields: </strong>empty" + "</html>",
+          "Verify!", JOptionPane.PLAIN_MESSAGE);
     }
   }
 
-  public void btnResetAP() {
+  private void btnResetAP() {
 
-    for (int i = 1; i < notasHay; i++) {
-      notitas[i].setVisible(false);
-      porcentajes[i].setVisible(false);
-      notitas[i].setText("");
-      porcentajes[i].setSelectedIndex(19);
-    }
+    IntStream.range(1, thereAreNotes).forEach(i -> {
+      notesFields[i].setVisible(false);
+      percentagesBoxes[i].setVisible(false);
+      notesFields[i].setText("");
+      percentagesBoxes[i].setSelectedIndex(19);
+    });
 
-    nombre.setText("");
-    notitas[0].setText("");
-    porcentajes[0].setSelectedIndex(19);
-    notasHay = 1;
-    img.setIcon(null);
-    btnaddNote.setEnabled(true);
-    btndeleteNote.setEnabled(false);
-    btnreset.setEnabled(false);
+    txtName.setText("");
+    notesFields[0].setText("");
+    percentagesBoxes[0].setSelectedIndex(19);
+    thereAreNotes = 1;
+    image.setIcon(null);
+    btnAddNote.setEnabled(true);
+    btnDeleteNote.setEnabled(false);
+    btnReset.setEnabled(false);
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
 
-    if (e.getSource() == btnaddNote) {
+    if (e.getSource() == btnAddNote) {
       btnAddAP();
-    } else if (e.getSource() == btndeleteNote) {
+    } else if (e.getSource() == btnDeleteNote) {
       btnDeleteAP();
-    } else if (e.getSource() == btncalcular) {
+    } else if (e.getSource() == btnCalculate) {
       btnCalculateAP();
-    } else if (e.getSource() == btnreset) {
+    } else if (e.getSource() == btnReset) {
       btnResetAP();
-    } else if (e.getSource() == btnsalir) {
+    } else if (e.getSource() == btnExit) {
       resources.core.fadeOut(this);
     }
   }

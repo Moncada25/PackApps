@@ -2,6 +2,10 @@ package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
+import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
 import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.Core;
@@ -58,9 +62,9 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
 
     JPanel panel = new JPanel(new GridLayout());
 
-    JPanel fila = new JPanel(new FlowLayout());
+    JPanel row = new JPanel(new FlowLayout());
 
-    String[] imgs = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
+    String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
     panel.setBorder(resources.core.bordeAzul("Select Table"));
 
@@ -76,13 +80,13 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
 
     IntStream.range(0, tables.length).forEach(i -> {
       tables[i] = new JLabel();
-      tables[i].setIcon(new ImageIcon(resources.getImage(imgs[i])));
+      tables[i].setIcon(new ImageIcon(resources.getImage(images[i])));
       tables[i].addMouseListener(this);
-      fila.add(tables[i]);
+      row.add(tables[i]);
     });
 
     panel.add(tittle, BorderLayout.EAST);
-    panel.add(fila, BorderLayout.CENTER);
+    panel.add(row, BorderLayout.CENTER);
     panel.add(message, BorderLayout.WEST);
 
     return panel;
@@ -238,7 +242,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
       }
 
     } else {
-      JOptionPane.showMessageDialog(null, "Tabla vacía", "Delete", JOptionPane.PLAIN_MESSAGE);
+      Alerts.message("Delete", "Empty table");
     }
   }
 
@@ -321,9 +325,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
       setVisible(false);
       new Index().notesTableAP();
     } else if (e.getSource() == tables[4]) {
-      JOptionPane.showMessageDialog(null,
-          "<html><em>" + "<strong>You're here!</strong><br>" + "</em></html>",
-          "Usuario, cámate po favo", JOptionPane.PLAIN_MESSAGE);
+      Alerts.message("Message", "You're here!");
     }
   }
 
@@ -331,19 +333,19 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
 
     if (e.getSource() == tables[0]) {
       tables[0].setCursor(resources.core.MIRA);
-      tittle.setText("    Adivinar Número");
+      tittle.setText("    " + GUESS_NUMBER);
     } else if (e.getSource() == tables[1]) {
       tables[1].setCursor(resources.core.CARGAR);
-      tittle.setText("    Ahorcadito");
+      tittle.setText("    " + HANGMAN);
     } else if (e.getSource() == tables[2]) {
       tables[2].setCursor(resources.core.REDI);
-      tittle.setText("    Juego de Dados");
+      tittle.setText("    " + DICES);
     } else if (e.getSource() == tables[3]) {
       tables[3].setCursor(resources.core.TEXT);
-      tittle.setText("    Notas");
+      tittle.setText("    " + NOTES);
     } else if (e.getSource() == tables[4]) {
       tables[4].setCursor(resources.core.MANO);
-      tittle.setText("    Rompecabezas");
+      tittle.setText("    " + PUZZLE);
       message.setText("       You're here");
     }
   }

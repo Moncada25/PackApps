@@ -103,7 +103,8 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
     add(scroll, BorderLayout.CENTER);
 
     int[] sizes = {20, 170, 40, 20, 75, 100};
-    IntStream.range(0, viewTable.getColumnCount()).forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
+    IntStream.range(0, viewTable.getColumnCount())
+        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
     JMenuBar menuBar = new JMenuBar();
 
@@ -208,7 +209,8 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
       } else {
 
         int[] rows = viewTable.getSelectedRows();
-        String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0))).toArray(String[]::new);
+        String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
+            .toArray(String[]::new);
 
         if (resources.core.loginDBA()) {
           resources.database.deleteData(IDs, Format.tableName(HANGMAN));

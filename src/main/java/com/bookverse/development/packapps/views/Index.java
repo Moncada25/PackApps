@@ -48,7 +48,7 @@ public class Index extends JFrame implements ActionListener {
   protected GuessNumberTable guessNumberTable = new GuessNumberTable(this, true);
   protected PuzzleTable puzzleTable = new PuzzleTable(this, true);
   protected DicesTable dicesTable = new DicesTable(this, true);
-  protected NotasTabla notesTable = new NotasTabla(this, true);
+  protected NotesTable notesTable = new NotesTable(this, true);
   protected InventarioTabla inventoryTable = new InventarioTabla(this, true);
   protected RegistradoraTabla cashRegisterTable = new RegistradoraTabla(this, true);
   protected PrestamosTabla loansTable = new PrestamosTabla(this, true);
@@ -485,11 +485,11 @@ public class Index extends JFrame implements ActionListener {
   }
 
   protected void notesTableAP() {
-    notesTable.limpiarTabla();
+    notesTable.cleanTable();
 
     try {
       resources.database
-          .readTable(notesTable.notasTab, Querys.getAllData(Format.tableName(NOTES)), true);
+          .readTable(notesTable.viewTable, Querys.getAllData(Format.tableName(NOTES)), true);
     } catch (Exception e1) {
       Alerts.error(e1, NOTES);
     }
@@ -1023,9 +1023,9 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == notesTXT) {
 
         try {
-          notesTable.limpiarTabla();
+          notesTable.cleanTable();
           resources.core
-              .txt(notesTable.notasTab, Querys.getAllData(Format.tableName(NOTES)), ".txt");
+              .txt(notesTable.viewTable, Querys.getAllData(Format.tableName(NOTES)), ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, NOTES);
         }
@@ -1127,8 +1127,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == notesPDF) {
 
         try {
-          notesTable.limpiarTabla();
-          resources.core.pdf(notesTable.notasTab, NOTES, Querys.getAllData(Format.tableName(NOTES)),
+          notesTable.cleanTable();
+          resources.core.pdf(notesTable.viewTable, NOTES, Querys.getAllData(Format.tableName(NOTES)),
               ".pdf");
         } catch (Exception ex) {
           Alerts.error(ex, NOTES);
@@ -1229,9 +1229,9 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == notesEXCEL) {
 
         try {
-          notesTable.limpiarTabla();
+          notesTable.cleanTable();
           resources.core
-              .excel(notesTable.notasTab, Querys.getAllData(Format.tableName(NOTES)), ".xls");
+              .excel(notesTable.viewTable, Querys.getAllData(Format.tableName(NOTES)), ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, NOTES);
         }
