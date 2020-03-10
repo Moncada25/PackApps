@@ -180,14 +180,13 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
             searchResult(90, Querys.getDataByID(Format.tableName(NOTES)));
             setVisible(true);
           } else if (option.toString().equals("Nickname")) {
-            searchResult(250, Querys.getDataByNickname(Format.tableName(PUZZLE)));
+            searchResult(250, Querys.getDataByNickname(Format.tableName(NOTES)));
             setVisible(true);
           }
 
         } catch (Exception e) {
           Alerts.error(e, NOTES);
         }
-
       }
 
     } else {

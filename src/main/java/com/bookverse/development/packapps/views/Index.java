@@ -29,6 +29,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
+import javafx.scene.control.Alert;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -56,7 +57,7 @@ public class Index extends JFrame implements ActionListener {
   protected VentasTabla salesTable = new VentasTabla(this, true);
   protected JMenuItem[] wallpapers = new JMenuItem[14];
   protected JMenu changeBackground;
-  protected JMenuItem moreProfiles, moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,
+  protected JMenuItem moreBacklog, moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,
       texts, guessNumber, guessNumberHard, hangman, structures, dices, buyAndSell, numbers, puzzle4x4, puzzle5x5, puzzle6x6,
       roulette, triquiPvsP, triquiPvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
       inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
@@ -149,12 +150,12 @@ public class Index extends JFrame implements ActionListener {
 
     JMenu more = resources.getMenu("See More", "more");
     moreSystems = resources.getMenuItem("My Systems", "mysystems", this);
-    moreProfiles = resources.getMenuItem("Profiles", "profiles", this);
+    moreBacklog = resources.getMenuItem("Backlog", "profiles", this);
     moreBookverse = resources.getMenuItem("Bookverse", "books", this);
 
     more.add(moreBookverse);
     more.addSeparator();
-    more.add(moreProfiles);
+    more.add(moreBacklog);
     more.addSeparator();
     more.add(moreSystems);
 
@@ -953,14 +954,8 @@ public class Index extends JFrame implements ActionListener {
           Alerts.error(ex, "Opening URL");
         }
 
-      } else if (e.getSource() == moreProfiles) {
-
-        try {
-          Desktop.getDesktop().browse(new URL("http://perfilesitm.mipropia.com").toURI());
-        } catch (Exception ex) {
-          Alerts.error(ex, "Opening URL");
-        }
-
+      } else if (e.getSource() == moreBacklog) {
+        Alerts.message("Recuerdaaaa", "Poner la app de backlog en un servidor y poner acá el link!! XD");
       } else if (e.getSource() == tables) {
 
         if (dicesTableAP()) {

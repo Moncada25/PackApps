@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+@SuppressWarnings("unchecked")
 public class Notes extends JDialog implements ActionListener {
 
   private int numberOfNotes = 10;
@@ -365,7 +366,8 @@ public class Notes extends JDialog implements ActionListener {
               "<html>" + Core.styleJOption()
                   + "<strong>Congratulations, you've already approved it!</strong><br><br>"
                   + "<strong>Name: </strong>" + txtName.getText()
-                  + "<br>" + "<strong>Accumulated note: </strong>" + String.format("%.2f", totalNote)
+                  + "<br>" + "<strong>Accumulated note: </strong>" + String
+                  .format("%.2f", totalNote)
                   + "</html>",
               "You won!", JOptionPane.PLAIN_MESSAGE);
           insert("Approved");
