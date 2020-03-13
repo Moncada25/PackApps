@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -36,26 +37,26 @@ public class Numbers extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
     panel.setBackground(new Color(0, 0, 0));
-    panel.setBorder(resources.core.bordeAzul("Select Number"));
+    panel.setBorder(resources.appConfig.getBorder("Select Number"));
 
-    btnphi = resources.getLabel("  Phi ?  ", resources.core.TEXT_COLOR, panel, resources.core.MEDIUM);
-    btnphi.setBorder(resources.core.MEDIO);
+    btnphi = resources.getLabel("  Phi ?  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
+    btnphi.setBorder(resources.appConfig.BORDER_BLUE);
     btnphi.addMouseListener(this);
 
-    btnpi = resources.getLabel("  Pi ?  ", resources.core.TEXT_COLOR, panel, resources.core.MEDIUM);
-    btnpi.setBorder(resources.core.MEDIO);
+    btnpi = resources.getLabel("  Pi ?  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
+    btnpi.setBorder(resources.appConfig.BORDER_BLUE);
     btnpi.addMouseListener(this);
 
-    btncalcular = resources.getLabel("  Calculadora  ", resources.core.MAIN_COLOR, panel, resources.core.MEDIUM);
-    btncalcular.setBorder(resources.core.HARD);
+    btncalcular = resources.getLabel("  Calculadora  ", resources.appConfig.MAIN_COLOR, panel, resources.appConfig.MEDIUM);
+    btncalcular.setBorder(resources.appConfig.BORDER_RED);
     btncalcular.addMouseListener(this);
 
-    btnprimos = resources.getLabel("  Primo  ", resources.core.TEXT_COLOR, panel, resources.core.MEDIUM);
-    btnprimos.setBorder(resources.core.MEDIO);
+    btnprimos = resources.getLabel("  Primo  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
+    btnprimos.setBorder(resources.appConfig.BORDER_BLUE);
     btnprimos.addMouseListener(this);
 
-    btnotros = resources.getLabel("  Otros  ", resources.core.TEXT_COLOR, panel, resources.core.MEDIUM);
-    btnotros.setBorder(resources.core.MEDIO);
+    btnotros = resources.getLabel("  Otros  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
+    btnotros.setBorder(resources.appConfig.BORDER_BLUE);
     btnotros.addMouseListener(this);
 
     return panel;
@@ -67,7 +68,7 @@ public class Numbers extends JDialog implements MouseListener {
     setMaximumSize(new Dimension(1295, 820));
     setLocationRelativeTo(parent);
     setTitle("Numbers");
-    resources.core.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -94,7 +95,7 @@ public class Numbers extends JDialog implements MouseListener {
     jd.setResizable(false);
     jd.setLocationRelativeTo(null);
     jd.setTitle("Pi ?");
-    resources.core.fadeIn(jd);
+    resources.appConfig.fadeIn(jd);
     setVisible(false);
     jd.setVisible(true);
   }
@@ -106,30 +107,30 @@ public class Numbers extends JDialog implements MouseListener {
     jd.setResizable(false);
     jd.setLocationRelativeTo(null);
     jd.setTitle("Phi ?");
-    resources.core.fadeIn(jd);
+    resources.appConfig.fadeIn(jd);
     setVisible(false);
     jd.setVisible(true);
   }
 
   private void btnCalculadoraAP() {
 
-    Calculadora jd = new Calculadora(this, true);
+    Calculator jd = new Calculator(this, true);
     jd.setBounds(0, 0, 320, 320);
     jd.setResizable(false);
     jd.setLocationRelativeTo(null);
     jd.setTitle("Calculadora Estándar");
-    resources.core.fadeIn(jd);
+    resources.appConfig.fadeIn(jd);
     setVisible(false);
     jd.setVisible(true);
   }
 
   private void btnPrimosAP() {
-    Primos jd = new Primos(this, true);
+    PrimeNumber jd = new PrimeNumber(this, true);
     jd.setBounds(0, 0, 430, 270);
     jd.setResizable(false);
     jd.setLocationRelativeTo(null);
     jd.setTitle("Primos");
-    resources.core.fadeIn(jd);
+    resources.appConfig.fadeIn(jd);
     setVisible(false);
     jd.setVisible(true);
   }
@@ -141,7 +142,7 @@ public class Numbers extends JDialog implements MouseListener {
     jd.setResizable(false);
     jd.setLocationRelativeTo(null);
     jd.setTitle("Trucazos");
-    resources.core.fadeIn(jd);
+    resources.appConfig.fadeIn(jd);
     setVisible(false);
     jd.setVisible(true);
   }
@@ -182,7 +183,7 @@ public class Numbers extends JDialog implements MouseListener {
       btnOtrosAP();
       setVisible(true);
     } else if (e.getSource() == welcome) {
-      resources.core.fadeOut(this);
+      resources.appConfig.fadeOut(this);
     }
   }
 
@@ -190,15 +191,15 @@ public class Numbers extends JDialog implements MouseListener {
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == btnphi) {
-      btnphi.setCursor(resources.core.MANO);
+      btnphi.setCursor(resources.appConfig.HAND);
     } else if (e.getSource() == btnotros) {
-      btnotros.setCursor(resources.core.MANO);
+      btnotros.setCursor(resources.appConfig.HAND);
     } else if (e.getSource() == btncalcular) {
-      btncalcular.setCursor(resources.core.MANO);
+      btncalcular.setCursor(resources.appConfig.HAND);
     } else if (e.getSource() == btnpi) {
-      btnpi.setCursor(resources.core.MANO);
+      btnpi.setCursor(resources.appConfig.HAND);
     } else if (e.getSource() == btnprimos) {
-      btnprimos.setCursor(resources.core.MANO);
+      btnprimos.setCursor(resources.appConfig.HAND);
     }
   }
 

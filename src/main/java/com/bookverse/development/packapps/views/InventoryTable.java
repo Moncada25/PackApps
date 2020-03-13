@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-public class InventarioTabla extends JDialog implements MouseListener {
+public class InventoryTable extends JDialog implements MouseListener {
 
   public JLabel[] actions = new JLabel[4];
   public JTable inventarioTab;
@@ -38,15 +38,14 @@ public class InventarioTabla extends JDialog implements MouseListener {
   private Resources img = new Resources();
   private boolean buscar;
 
-  public InventarioTabla(JDialog parent, boolean modal, boolean buscar) {
-
+  public InventoryTable(JDialog parent, boolean modal, boolean buscar) {
     super(parent, modal);
     this.buscar = buscar;
     componentes();
   }
 
   // Constructor que recibe la ventana padre y el valor modal
-  public InventarioTabla(JFrame parent, boolean modal) {
+  public InventoryTable(JFrame parent, boolean modal) {
 
     super(parent, modal);
 
@@ -61,15 +60,15 @@ public class InventarioTabla extends JDialog implements MouseListener {
 
     String[] imgs = {"eliminar.png", "select.png", "read.png", "refresh.png"};
 
-    panel.setBorder(img.core.bordeAzul("Select Action"));
+    panel.setBorder(img.appConfig.getBorder("Select Action"));
 
     titulo = new JLabel();
-    titulo.setFont(img.core.BIG);
-    titulo.setForeground(img.core.MAIN_COLOR);
+    titulo.setFont(img.appConfig.BIG);
+    titulo.setForeground(img.appConfig.MAIN_COLOR);
 
     men = new JLabel();
-    men.setFont(img.core.BIG);
-    men.setForeground(img.core.TEXT_COLOR);
+    men.setFont(img.appConfig.BIG);
+    men.setForeground(img.appConfig.TEXT_COLOR);
 
     /* ICONOS */
     for (int i = 0; i < actions.length; i++) {
@@ -186,7 +185,7 @@ public class InventarioTabla extends JDialog implements MouseListener {
 
   public void btnBuscarAP() {
 
-    String busqueda = img.core.buscarProducto();
+    String busqueda = img.appConfig.buscarProducto();
 
     if (!busqueda.equals("")) {
       ordenar.setRowFilter(RowFilter.regexFilter(busqueda, 0));
@@ -206,7 +205,7 @@ public class InventarioTabla extends JDialog implements MouseListener {
 
     } else {
 
-      if (img.core.loginDBA()) {
+      if (img.appConfig.loginDBA()) {
 
         int[] rows = inventarioTab.getSelectedRows();
         String[] IDs = new String[rows.length];
@@ -245,16 +244,16 @@ public class InventarioTabla extends JDialog implements MouseListener {
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
-      actions[0].setCursor(img.core.MANO);
+      actions[0].setCursor(img.appConfig.HAND);
       titulo.setText("Eliminar Producto");
     } else if (e.getSource() == actions[1]) {
-      actions[1].setCursor(img.core.MANO);
+      actions[1].setCursor(img.appConfig.HAND);
       titulo.setText("Seleccionar Producto");
     } else if (e.getSource() == actions[2]) {
-      actions[2].setCursor(img.core.MANO);
+      actions[2].setCursor(img.appConfig.HAND);
       titulo.setText("Buscar Referencia");
     } else if (e.getSource() == actions[3]) {
-      actions[3].setCursor(img.core.MANO);
+      actions[3].setCursor(img.appConfig.HAND);
       titulo.setText("Actualizar Tabla");
     }
   }

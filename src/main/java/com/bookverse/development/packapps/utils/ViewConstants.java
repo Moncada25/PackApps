@@ -8,7 +8,7 @@ public class ViewConstants {
   public static final String NOTES = "Notes";
   public static final String FEEDBACK = "Feedback";
   public static final String INVENTORY = "Inventory";
-  public static final String RECORDS = "Cash Register";
+  public static final String CASH_REGISTER = "Cash Register";
   public static final String LOANS = "Loans";
   public static final String USERS = "Users";
   public static final String PURCHASES = "Purchases";

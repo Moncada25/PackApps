@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.Color;
@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import org.jetbrains.annotations.NotNull;
 
-public class Triqui extends JDialog implements ActionListener {
+public class TicTacToe extends JDialog implements ActionListener {
 
   public static JButton[][] board;
   public JTextField txtName1, txtName2;
@@ -42,7 +42,7 @@ public class Triqui extends JDialog implements ActionListener {
   private boolean win = false;
   private boolean moveMade = false;
 
-  public Triqui(JFrame parent, boolean modal, boolean vsCPU) {
+  public TicTacToe(JFrame parent, boolean modal, boolean vsCPU) {
     super(parent, modal);
     this.vsCPU = vsCPU;
     createComponents();
@@ -57,9 +57,9 @@ public class Triqui extends JDialog implements ActionListener {
     } else {
       setTitle("Player vs Player");
     }
-    resources.core.fadeIn(this);
+    resources.appConfig.fadeIn(this);
     parent.setVisible(false);
-    resources.core.instruccionesTriqui();
+    resources.appConfig.instruccionesTriqui();
     setVisible(true);
   }
 
@@ -97,29 +97,29 @@ public class Triqui extends JDialog implements ActionListener {
 
     JLabel lblName1 = resources
         .getLabel("<html><em><strong>Player X</strong></em></html>", colorX, this,
-            resources.core.MEDIUM);
+            resources.appConfig.MEDIUM);
     lblName1.setBounds(50, 10, 100, 30);
 
-    pointsX = resources.getLabel("", color, this, resources.core.BIG);
+    pointsX = resources.getLabel("", color, this, resources.appConfig.BIG);
     pointsX.setBounds(130, 10, 100, 30);
 
     JLabel lblName2;
     if (!vsCPU) {
       lblName2 = resources
           .getLabel("<html><em><strong>Player O</strong></em></html>", colorO, this,
-              resources.core.MEDIUM);
+              resources.appConfig.MEDIUM);
       lblName2.setBounds(260, 10, 100, 30);
     } else {
       lblName2 = resources
           .getLabel("<html><em><strong>CPU O</strong></em></html>", colorO, this,
-              resources.core.MEDIUM);
+              resources.appConfig.MEDIUM);
       lblName2.setBounds(273, 10, 100, 30);
     }
 
-    pointsO = resources.getLabel("", color, this, resources.core.BIG);
+    pointsO = resources.getLabel("", color, this, resources.appConfig.BIG);
     pointsO.setBounds(340, 10, 100, 30);
 
-    lblTurn = resources.getLabel("", null, this, resources.core.MEDIUM);
+    lblTurn = resources.getLabel("", null, this, resources.appConfig.MEDIUM);
     lblTurn.setBounds(270, 200, 200, 100);
 
     image = resources.getLabel("", null, this, null);
@@ -499,7 +499,7 @@ public class Triqui extends JDialog implements ActionListener {
 
     int[][] points = getPoints();
 
-    int aux = resources.core.enteroAleatorio(0, 2);
+    int aux = resources.appConfig.intRandom(0, 2);
 
     position[0] = points[aux][0];
     position[1] = points[aux][1];
@@ -583,7 +583,7 @@ public class Triqui extends JDialog implements ActionListener {
     } else if (e.getSource() == btnReset) {
       btnResetAP();
     } else if (e.getSource() == btnExit) {
-      resources.core.fadeOut(this);
+      resources.appConfig.fadeOut(this);
     } else {
       btnBoardAP(e);
     }
@@ -598,295 +598,295 @@ class CPU {
 
     boolean thereIsDanger = false;
 
-    if (Triqui.board[0][0].getText().equals(player) && Triqui.board[0][1].getText()
+    if (TicTacToe.board[0][0].getText().equals(player) && TicTacToe.board[0][1].getText()
         .equals(player)) {
 
       positions[0] = 0;
       positions[1] = 2;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[0][0].getText().equals(player) && Triqui.board[0][2].getText()
+    } else if (TicTacToe.board[0][0].getText().equals(player) && TicTacToe.board[0][2].getText()
         .equals(player)) {
 
       positions[0] = 0;
       positions[1] = 1;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[0][1].getText().equals(player) && Triqui.board[0][2].getText()
+    } else if (TicTacToe.board[0][1].getText().equals(player) && TicTacToe.board[0][2].getText()
         .equals(player)) {
 
       positions[0] = 0;
       positions[1] = 0;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
     }
 
-    if (Triqui.board[1][0].getText().equals(player) && Triqui.board[1][1].getText()
+    if (TicTacToe.board[1][0].getText().equals(player) && TicTacToe.board[1][1].getText()
         .equals(player)) {
 
       positions[0] = 1;
       positions[1] = 2;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[1][0].getText().equals(player) && Triqui.board[1][2].getText()
+    } else if (TicTacToe.board[1][0].getText().equals(player) && TicTacToe.board[1][2].getText()
         .equals(player)) {
 
       positions[0] = 1;
       positions[1] = 1;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[1][1].getText().equals(player) && Triqui.board[1][2].getText()
+    } else if (TicTacToe.board[1][1].getText().equals(player) && TicTacToe.board[1][2].getText()
         .equals(player)) {
 
       positions[0] = 1;
       positions[1] = 0;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
     }
 
-    if (Triqui.board[2][0].getText().equals(player) && Triqui.board[2][1].getText()
+    if (TicTacToe.board[2][0].getText().equals(player) && TicTacToe.board[2][1].getText()
         .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 2;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[2][0].getText().equals(player) && Triqui.board[2][2].getText()
+    } else if (TicTacToe.board[2][0].getText().equals(player) && TicTacToe.board[2][2].getText()
         .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 1;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[2][1].getText().equals(player) && Triqui.board[2][2].getText()
+    } else if (TicTacToe.board[2][1].getText().equals(player) && TicTacToe.board[2][2].getText()
         .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 0;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
     }
 
-    if (Triqui.board[0][0].getText().equals(player) && Triqui.board[1][0].getText()
+    if (TicTacToe.board[0][0].getText().equals(player) && TicTacToe.board[1][0].getText()
         .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 0;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[0][0].getText().equals(player) && Triqui.board[2][0].getText()
+    } else if (TicTacToe.board[0][0].getText().equals(player) && TicTacToe.board[2][0].getText()
         .equals(player)) {
 
       positions[0] = 1;
       positions[1] = 0;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[1][0].getText().equals(player) && Triqui.board[2][0].getText()
+    } else if (TicTacToe.board[1][0].getText().equals(player) && TicTacToe.board[2][0].getText()
         .equals(player)) {
 
       positions[0] = 0;
       positions[1] = 0;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
     }
 
-    if (Triqui.board[0][1].getText().equals(player) && Triqui.board[1][1].getText()
+    if (TicTacToe.board[0][1].getText().equals(player) && TicTacToe.board[1][1].getText()
         .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 1;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[0][1].getText().equals(player) && Triqui.board[2][1].getText()
+    } else if (TicTacToe.board[0][1].getText().equals(player) && TicTacToe.board[2][1].getText()
         .equals(player)) {
 
       positions[0] = 1;
       positions[1] = 1;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[1][1].getText().equals(player) && Triqui.board[2][1].getText()
+    } else if (TicTacToe.board[1][1].getText().equals(player) && TicTacToe.board[2][1].getText()
         .equals(player)) {
 
       positions[0] = 0;
       positions[1] = 1;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
     }
 
-    if (Triqui.board[0][2].getText().equals(player) && Triqui.board[1][2].getText()
+    if (TicTacToe.board[0][2].getText().equals(player) && TicTacToe.board[1][2].getText()
         .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 2;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[0][2].getText().equals(player) && Triqui.board[2][2].getText()
+    } else if (TicTacToe.board[0][2].getText().equals(player) && TicTacToe.board[2][2].getText()
         .equals(player)) {
 
       positions[0] = 1;
       positions[1] = 2;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[1][2].getText().equals(player) && Triqui.board[2][2].getText()
+    } else if (TicTacToe.board[1][2].getText().equals(player) && TicTacToe.board[2][2].getText()
         .equals(player)) {
 
       positions[0] = 0;
       positions[1] = 2;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
     }
 
-    if (Triqui.board[0][0].getText().equals(player) && Triqui.board[1][1].getText()
+    if (TicTacToe.board[0][0].getText().equals(player) && TicTacToe.board[1][1].getText()
         .equals(player)) {
 
       positions[0] = 2;
       positions[1] = 2;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[0][0].getText().equals(player) && Triqui.board[2][2].getText()
+    } else if (TicTacToe.board[0][0].getText().equals(player) && TicTacToe.board[2][2].getText()
         .equals(player)) {
 
       positions[0] = 1;
       positions[1] = 1;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[1][1].getText().equals(player) && Triqui.board[2][2].getText()
+    } else if (TicTacToe.board[1][1].getText().equals(player) && TicTacToe.board[2][2].getText()
         .equals(player)) {
 
       positions[0] = 0;
       positions[1] = 0;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
     }
 
-    if (Triqui.board[2][0].getText().equals(player) && Triqui.board[1][1].getText()
+    if (TicTacToe.board[2][0].getText().equals(player) && TicTacToe.board[1][1].getText()
         .equals(player)) {
 
       positions[0] = 0;
       positions[1] = 2;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[2][0].getText().equals(player) && Triqui.board[0][2].getText()
+    } else if (TicTacToe.board[2][0].getText().equals(player) && TicTacToe.board[0][2].getText()
         .equals(player)) {
 
       positions[0] = 1;
       positions[1] = 1;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;
       }
 
-    } else if (Triqui.board[1][1].getText().equals(player) && Triqui.board[0][2].getText()
+    } else if (TicTacToe.board[1][1].getText().equals(player) && TicTacToe.board[0][2].getText()
         .equals(player)) {
       positions[0] = 2;
       positions[1] = 0;
 
-      if (Triqui.board[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.board[positions[0]][positions[1]].getText().equals("")) {
         thereIsDanger = true;
 
         return thereIsDanger;

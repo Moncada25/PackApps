@@ -1,12 +1,15 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.Core.inputText;
+import static com.bookverse.development.packapps.core.AppConfig.BIG;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ArrayData.WORD_LIST;
 import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
 import static java.awt.Font.PLAIN;
 
+import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.Font;
@@ -66,22 +69,22 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
     JLabel tittle = resources.getLabel("<html>"
         + "<strong><em>Category</em></strong>" +
-        "</html>", MAIN_COLOR, this, resources.core.BIG);
+        "</html>", MAIN_COLOR, this, BIG);
     tittle.setBounds(30, 10, 120, 35);
 
-    attempts = resources.getLabel("", TEXT_COLOR, this, resources.core.MEDIUM);
+    attempts = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     attempts.setBounds(30, 200, 250, 30);
 
     time = resources.getLabel("", MAIN_COLOR, this, new Font("Times New Roman",
         PLAIN, 50));
     time.setBounds(75, 220, 200, 120);
 
-    lyricsPressed = resources.getLabel("", TEXT_COLOR, this, resources.core.MEDIUM);
+    lyricsPressed = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     lyricsPressed.setBounds(30, 400, 600, 40);
 
     options = new JComboBox<>();
     options.setBounds(30, 50, 220, 30);
-    options.setFont(resources.core.MEDIUM);
+    options.setFont(MEDIUM);
     add(options);
 
     options.addItem("Fruits");
@@ -98,7 +101,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     txtWord.setBounds(30, 100, 220, 40);
     add(txtWord);
 
-    lyricsNumber = resources.getLabel("", TEXT_COLOR, this, resources.core.MEDIUM);
+    lyricsNumber = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     lyricsNumber.setBounds(260, 100, 130, 60);
 
     addKeyListener(this);
@@ -115,9 +118,9 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(HANGMAN);
-    resources.core.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
-    resources.core.instruccionesAhorcado();
+    AppConfig.instruccionesAhorcado();
     setVisible(true);
   }
 
@@ -126,9 +129,9 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(HANGMAN);
-    resources.core.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
-    resources.core.instruccionesAhorcado();
+    AppConfig.instruccionesAhorcado();
     setVisible(true);
   }
 
@@ -264,7 +267,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
       image.setIcon(new ImageIcon(resources.getImage("dead.png")));
 
-      resources.core.mostrarMensaje("You lose", "Correct word: " + results);
+      Alerts.message("You lose", "Correct word: " + results);
 
       insert("Loser");
 
@@ -325,14 +328,14 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
   private void insert(String state) {
 
-    if (resources.core.comprobarConexion("Data don't saved", true) && resources.core.saveGame()) {
+    if (AppConfig.verifyConnection("Data don't saved", true) && AppConfig.saveGame()) {
 
-      String[] data = {HANGMAN, inputText("Enter a Nickname", 20),
+      String[] data = {HANGMAN, AppConfig.inputText("Enter a Nickname", 20),
           String.valueOf(countAttempts), state,
           Objects.requireNonNull(options.getSelectedItem()).toString(),
-          resources.core.obtenerDate()};
+          AppConfig.getDate()};
 
-      resources.database.insertData(data);
+      Database.insertData(data);
     }
   }
 
@@ -471,7 +474,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     if (e.getSource() == btnPlay) {
       btnPlayAP();
     } else if (e.getSource() == btnExit) {
-      resources.core.fadeOut(this);
+      AppConfig.fadeOut(this);
     }
   }
 

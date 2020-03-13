@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Core;
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,37 +51,37 @@ public class Matrices extends JDialog implements ActionListener {
             y = y + 45;
         }
 
-        welcome = h.getLabel("<html><em><strong>Operaciones Con Matrices</strong></em></html>", h.core.MAIN_COLOR, this, h.core.BIG);
+        welcome = h.getLabel("<html><em><strong>Operaciones Con Matrices</strong></em></html>", h.appConfig.MAIN_COLOR, this, h.appConfig.BIG);
         welcome.setBounds(280, 10, 500, 40);
 
-        btnaction = h.getButton("Show", h.core.TEXT_COLOR, this, this);
+        btnaction = h.getButton("Show", h.appConfig.TEXT_COLOR, this, this);
         btnaction.setBounds(20, 190, 70, 25);
 
-        btnautofill = h.getButton("Autofill", h.core.TEXT_COLOR, this, this);
+        btnautofill = h.getButton("Autofill", h.appConfig.TEXT_COLOR, this, this);
         btnautofill.setBounds(120, 100, 90, 25);
         btnautofill.setEnabled(false);
 
-        btnempty = h.getButton("Empty", h.core.MAIN_COLOR, this, this);
+        btnempty = h.getButton("Empty", h.appConfig.MAIN_COLOR, this, this);
         btnempty.setBounds(120, 150, 90, 25);
         btnempty.setEnabled(false);
 
-        btntranspuesta = h.getButton("Transponer", h.core.TEXT_COLOR, this, this);
+        btntranspuesta = h.getButton("Transponer", h.appConfig.TEXT_COLOR, this, this);
         btntranspuesta.setBounds(720, 100, 120, 25);
         btntranspuesta.setEnabled(false);
 
-        btnmultiplicar = h.getButton("Multiplicar", h.core.TEXT_COLOR, this, this);
+        btnmultiplicar = h.getButton("Multiplicar", h.appConfig.TEXT_COLOR, this, this);
         btnmultiplicar.setBounds(720, 200, 120, 25);
         btnmultiplicar.setEnabled(false);
 
-        btndeterminante = h.getButton("|A|", h.core.TEXT_COLOR, this, this);
+        btndeterminante = h.getButton("|A|", h.appConfig.TEXT_COLOR, this, this);
         btndeterminante.setBounds(720, 250, 120, 25);
         btndeterminante.setEnabled(false);
 
-        btndiagonales = h.getButton("Diagonales", h.core.TEXT_COLOR, this, this);
+        btndiagonales = h.getButton("Diagonales", h.appConfig.TEXT_COLOR, this, this);
         btndiagonales.setBounds(720, 150, 120, 25);
         btndiagonales.setEnabled(false);
 
-        filas = h.getLabel("<html><em>Filas</em></html>", h.core.TEXT_COLOR, this, h.core.SMALL);
+        filas = h.getLabel("<html><em>Filas</em></html>", h.appConfig.TEXT_COLOR, this, h.appConfig.SMALL);
         filas.setBounds(40, 80, 100, 25);
 
         txtFilas = new JTextField();
@@ -96,11 +96,11 @@ public class Matrices extends JDialog implements ActionListener {
             }
 
             public void txtNumKeyTyped(KeyEvent e) {
-                h.core.solonumeros(e.getKeyChar(), e, txtFilas.getText(), 1);
+                h.appConfig.solonumeros(e.getKeyChar(), e, txtFilas.getText(), 1);
             }
         });
 
-        columnas = h.getLabel("<html><em>Columnas</em></html>", h.core.TEXT_COLOR, this, h.core.SMALL);
+        columnas = h.getLabel("<html><em>Columnas</em></html>", h.appConfig.TEXT_COLOR, this, h.appConfig.SMALL);
         columnas.setBounds(25, 130, 100, 25);
 
         txtColumnas = new JTextField();
@@ -128,7 +128,7 @@ public class Matrices extends JDialog implements ActionListener {
             }
 
             public void txtNumKeyTyped(KeyEvent e) {
-                h.core.solonumeros(e.getKeyChar(), e, txtColumnas.getText(), 1);
+                h.appConfig.solonumeros(e.getKeyChar(), e, txtColumnas.getText(), 1);
             }
         });
     }
@@ -167,7 +167,7 @@ public class Matrices extends JDialog implements ActionListener {
             if (esCuadrada(f, c)) {
 
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.core.styleJOption() + "<strong><center>|A| = "
+                        "<html>" + h.appConfig.styleJOption() + "<strong><center>|A| = "
                                 + Determinante.getDeterminante(matriz, f, c) + "</center></strong></html>",
                         "Determinante de la matriz", JOptionPane.PLAIN_MESSAGE);
             }
@@ -187,7 +187,7 @@ public class Matrices extends JDialog implements ActionListener {
             Object opcion = null;
 
             opcion = JOptionPane.showInputDialog(null,
-                    "<html>" + h.core.styleJOption()
+                    "<html>" + h.appConfig.styleJOption()
                             + "<strong><em>¿Con qué desea multiplicar la matriz?</em></strong></html>",
                     "Producto de Matrices", JOptionPane.PLAIN_MESSAGE, null,
                     new Object[]{"Un escalar", "Un vector", "Una matriz"}, "Un escalar");
@@ -199,7 +199,7 @@ public class Matrices extends JDialog implements ActionListener {
                     case "Un escalar":
 
                         int escalar = Integer.parseInt(
-                                Core.inputNumber("Ingrese el escalar por el cual desea multiplicar la matriz", 2));
+                                AppConfig.inputNumber("Ingrese el escalar por el cual desea multiplicar la matriz", 2));
 
                         for (int i = 0; i < Integer.parseInt(txtFilas.getText()); i++) {
                             for (int j = 0; j < Integer.parseInt(txtColumnas.getText()); j++) {
@@ -207,11 +207,11 @@ public class Matrices extends JDialog implements ActionListener {
                                 if (matriz[i][j].getText().length() == 1) {
                                     matriz[i][j]
                                             .setText(String.valueOf(Integer.parseInt(matriz[i][j].getText()) * escalar));
-                                    matriz[i][j].setFont(h.core.MEDIUM);
+                                    matriz[i][j].setFont(h.appConfig.MEDIUM);
                                 } else if (matriz[i][j].getText().length() == 2) {
                                     matriz[i][j]
                                             .setText(String.valueOf(Integer.parseInt(matriz[i][j].getText()) * escalar));
-                                    matriz[i][j].setFont(h.core.SMALL);
+                                    matriz[i][j].setFont(h.appConfig.SMALL);
                                 }
                             }
                         }
@@ -239,7 +239,7 @@ public class Matrices extends JDialog implements ActionListener {
                     case "Una matriz":
 
                         int columnasB = Integer
-                                .parseInt(h.core.inputNumber("Ingrese el número de columnas que tendrá la matriz B", 1));
+                                .parseInt(h.appConfig.inputNumber("Ingrese el número de columnas que tendrá la matriz B", 1));
 
                         int f = Integer.parseInt(txtFilas.getText());
                         int c = Integer.parseInt(txtColumnas.getText());
@@ -279,7 +279,7 @@ public class Matrices extends JDialog implements ActionListener {
                 matrizResult[f][c] = new JButton();
                 matrizResult[f][c].setBounds(x, y, 45, 45);
                 matrizResult[f][c].setText(String.valueOf(matrizC[f][c]));
-                matrizResult[f][c].setFont(h.core.SMALL);
+                matrizResult[f][c].setFont(h.appConfig.SMALL);
                 result.add(matrizResult[f][c]);
                 x = x + 45;
             }
@@ -315,12 +315,12 @@ public class Matrices extends JDialog implements ActionListener {
 
                         if (i == j) {
                             principal += "[" + matriz[i][j].getText() + "]";
-                            matriz[i][j].setBackground(h.core.MAIN_COLOR);
+                            matriz[i][j].setBackground(h.appConfig.MAIN_COLOR);
                         }
 
                         if (i + j == f - 1) {
                             secundaria += "[" + matriz[i][j].getText() + "]";
-                            matriz[i][j].setBackground(h.core.TEXT_COLOR);
+                            matriz[i][j].setBackground(h.appConfig.TEXT_COLOR);
                         }
                     }
                 }
@@ -343,7 +343,7 @@ public class Matrices extends JDialog implements ActionListener {
                 }
 
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.core.styleJOption() + "<strong><center>Resultado</center></strong><br>"
+                        "<html>" + h.appConfig.styleJOption() + "<strong><center>Resultado</center></strong><br>"
                                 + "Diagonal principal ? " + principal + "<br>" + "Suma del triángulo superior ? "
                                 + sumaSuperior + "<br><br>" + "Diagonal secundaria ? " + secundaria + "<br>"
                                 + "Suma del triángulo inferior ? " + sumaInferior + "</html>",
@@ -358,7 +358,7 @@ public class Matrices extends JDialog implements ActionListener {
 
             JOptionPane
                     .showMessageDialog(null,
-                            "<html>" + h.core.styleJOption() + "<strong><center>Matriz inválida</center></strong><br>"
+                            "<html>" + h.appConfig.styleJOption() + "<strong><center>Matriz inválida</center></strong><br>"
                                     + "La matriz actual no es cuadrada." + "</html>",
                             "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
 
@@ -374,7 +374,8 @@ public class Matrices extends JDialog implements ActionListener {
             for (int j = 0; j < c; j++) {
 
                 if (e.getSource() == matriz[i][j]) {
-                    matriz[i][j].setText(Core.inputNumber("Ingrese el valor de la posición [" + (i + 1) + "][" + (j + 1) + "]", 2));
+                    matriz[i][j].setText(AppConfig
+                        .inputNumber("Ingrese el valor de la posición [" + (i + 1) + "][" + (j + 1) + "]", 2));
                 }
             }
         }
@@ -417,7 +418,7 @@ public class Matrices extends JDialog implements ActionListener {
                     }
                 });
 
-                matrizResult[f][c].setFont(h.core.MEDIUM);
+                matrizResult[f][c].setFont(h.appConfig.MEDIUM);
                 result.add(matrizResult[f][c]);
                 x = x + 45;
             }
@@ -427,7 +428,7 @@ public class Matrices extends JDialog implements ActionListener {
         }
 
         JButton btnsend = new JButton("Finished");
-        btnsend.setBackground(h.core.MAIN_COLOR);
+        btnsend.setBackground(h.appConfig.MAIN_COLOR);
         btnsend.setBounds(250, 455, 120, 25);
         result.add(btnsend);
         btnsend.addActionListener(new ActionListener() {
@@ -447,7 +448,7 @@ public class Matrices extends JDialog implements ActionListener {
         });
 
         JButton btnauto = new JButton("Autofill");
-        btnauto.setBackground(h.core.TEXT_COLOR);
+        btnauto.setBackground(h.appConfig.TEXT_COLOR);
         btnauto.setBounds(100, 455, 120, 25);
         result.add(btnauto);
         btnauto.addActionListener(new ActionListener() {
@@ -491,7 +492,7 @@ public class Matrices extends JDialog implements ActionListener {
                 for (int c = 0; c < ci; c++) {
                     matrizResult[f][c] = new JButton();
                     matrizResult[f][c].setBounds(x, y, 45, 45);
-                    matrizResult[f][c].setFont(h.core.MEDIUM);
+                    matrizResult[f][c].setFont(h.appConfig.MEDIUM);
                     matrizResult[f][c].setText(matriz[c][f].getText());
                     result.add(matrizResult[f][c]);
                     x = x + 45;
@@ -517,7 +518,7 @@ public class Matrices extends JDialog implements ActionListener {
                 if (matriz[i][j].getText().equals("")) {
 
                     JOptionPane.showMessageDialog(null,
-                            "<html>" + h.core.styleJOption() + "<strong><center>Entradas indefinidas</center></strong><br>"
+                            "<html>" + h.appConfig.styleJOption() + "<strong><center>Entradas indefinidas</center></strong><br>"
                                     + "Alguna de las entradas está indefinida, por favor introduzca un valor."
                                     + "</html>",
                             "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
@@ -536,7 +537,7 @@ public class Matrices extends JDialog implements ActionListener {
             for (int j = 0; j < Integer.parseInt(txtColumnas.getText()); j++) {
                 matriz[i][j].setText("");
                 matriz[i][j].setBackground(getBackground());
-                matriz[i][j].setFont(h.core.MEDIUM);
+                matriz[i][j].setFont(h.appConfig.MEDIUM);
             }
         }
     }
@@ -545,9 +546,9 @@ public class Matrices extends JDialog implements ActionListener {
 
         for (int i = 0; i < f; i++) {
             for (int j = 0; j < c; j++) {
-                matriz[i][j].setText(String.valueOf(h.core.enteroAleatorio(0, 9)));
+                matriz[i][j].setText(String.valueOf(h.appConfig.intRandom(0, 9)));
                 matriz[i][j].setBackground(getBackground());
-                matriz[i][j].setFont(h.core.MEDIUM);
+                matriz[i][j].setFont(h.appConfig.MEDIUM);
             }
         }
     }
@@ -558,7 +559,7 @@ public class Matrices extends JDialog implements ActionListener {
 
             if (txtFilas.getText().equals("") || txtColumnas.getText().equals("")) {
                 JOptionPane.showMessageDialog(null,
-                        "<html>" + h.core.styleJOption() + "<strong><center>Campos vacíos</center></strong><br>"
+                        "<html>" + h.appConfig.styleJOption() + "<strong><center>Campos vacíos</center></strong><br>"
                                 + "Alguno de los campos está vacío, por favor introduzca un valor." + "</html>",
                         "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
 
@@ -589,7 +590,7 @@ public class Matrices extends JDialog implements ActionListener {
                 txtColumnas.setEnabled(false);
 
                 btnaction.setText("New");
-                btnaction.setBackground(h.core.MAIN_COLOR);
+                btnaction.setBackground(h.appConfig.MAIN_COLOR);
             }
 
         } else if (btnaction.getText().equals("New")) {
@@ -611,7 +612,7 @@ public class Matrices extends JDialog implements ActionListener {
                 txtColumnas.setEnabled(true);
 
                 btnaction.setText("Show");
-                btnaction.setBackground(h.core.TEXT_COLOR);
+                btnaction.setBackground(h.appConfig.TEXT_COLOR);
             }
         }
     }
@@ -623,7 +624,7 @@ public class Matrices extends JDialog implements ActionListener {
                 matriz[i][j].setVisible(false);
                 matriz[i][j].setText("");
                 matriz[i][j].setBackground(getBackground());
-                matriz[i][j].setFont(h.core.MEDIUM);
+                matriz[i][j].setFont(h.appConfig.MEDIUM);
             }
         }
     }

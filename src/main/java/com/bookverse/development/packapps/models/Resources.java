@@ -1,6 +1,5 @@
 package com.bookverse.development.packapps.models;
 
-import com.bookverse.development.packapps.core.Core;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
@@ -11,12 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import org.jetbrains.annotations.NotNull;
 
 public class Resources {
 
   public static Object generalObject;
-  public Core core = new Core();
-  public Database database = new Database();
 
   public URL getImage(String image) {
     return this.getClass().getResource("/" + image);
@@ -35,7 +33,8 @@ public class Resources {
     return menu;
   }
 
-  public JButton getButton(String name, Color color, ActionListener listener, Container container) {
+  public JButton getButton(String name, Color color, ActionListener listener,
+      @NotNull Container container) {
     JButton button = new JButton(name);
     button.setBackground(color);
     container.add(button);
@@ -43,7 +42,7 @@ public class Resources {
     return button;
   }
 
-  public JLabel getLabel(String text, Color color, Container container, Font font) {
+  public JLabel getLabel(String text, Color color, @NotNull Container container, Font font) {
     JLabel label = new JLabel(text);
     label.setForeground(color);
     label.setFont(font);

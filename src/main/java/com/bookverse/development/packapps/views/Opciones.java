@@ -15,7 +15,7 @@ import javax.swing.JMenuItem;
 
 public class Opciones extends JDialog implements ActionListener {
 
-  public Compras compra = new Compras();
+  public Purchases compra = new Purchases();
   public RegistradoraTabla tabla = new RegistradoraTabla();
   Prestamos pres = new Prestamos();
   Resources img = new Resources();
@@ -101,12 +101,12 @@ public class Opciones extends JDialog implements ActionListener {
   }
 
   public void btnComprarAP() {
-    Compras compra = new Compras(this, true);
+    Purchases compra = new Purchases(this, true);
     compra.setSize(440, 400);
     compra.setResizable(false);
     compra.setLocationRelativeTo(null);
     compra.setTitle("Comprar");
-    img.core.fadeIn(compra);
+    img.appConfig.fadeIn(compra);
     setVisible(false);
     compra.setVisible(true);
   }
@@ -117,7 +117,7 @@ public class Opciones extends JDialog implements ActionListener {
     vent.setResizable(false);
     vent.setLocationRelativeTo(null);
     vent.setTitle("Vender");
-    img.core.fadeIn(vent);
+    img.appConfig.fadeIn(vent);
     setVisible(false);
     vent.setVisible(true);
   }
@@ -128,7 +128,7 @@ public class Opciones extends JDialog implements ActionListener {
     pres.setResizable(false);
     pres.setLocationRelativeTo(null);
     pres.setTitle("Prestar");
-    img.core.fadeIn(pres);
+    img.appConfig.fadeIn(pres);
     setVisible(false);
     pres.setVisible(true);
   }
@@ -153,7 +153,7 @@ public class Opciones extends JDialog implements ActionListener {
     tab.setMaximumSize(new Dimension(1280, 720));
     tab.setLocationRelativeTo(null);
     tab.setTitle("Registradora");
-    img.core.fadeIn(tab);
+    img.appConfig.fadeIn(tab);
     setVisible(false);
     tab.setVisible(true);
   }
@@ -176,7 +176,7 @@ public class Opciones extends JDialog implements ActionListener {
     inv.setMaximumSize(new Dimension(1280, 720));
     inv.setLocationRelativeTo(null);
     inv.setTitle("Productos");
-    img.core.fadeIn(inv);
+    img.appConfig.fadeIn(inv);
     setVisible(false);
     inv.setVisible(true);
   }
@@ -201,7 +201,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.setMaximumSize(new Dimension(1280, 720));
     tabP.setLocationRelativeTo(null);
     tabP.setTitle("Préstamos");
-    img.core.fadeIn(tabP);
+    img.appConfig.fadeIn(tabP);
     setVisible(false);
     tabP.setVisible(true);
   }
@@ -225,7 +225,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.setMaximumSize(new Dimension(1280, 720));
     tabP.setLocationRelativeTo(null);
     tabP.setTitle("Compras");
-    img.core.fadeIn(tabP);
+    img.appConfig.fadeIn(tabP);
     setVisible(false);
     tabP.setVisible(true);
   }
@@ -249,7 +249,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.setMaximumSize(new Dimension(1280, 720));
     tabP.setLocationRelativeTo(null);
     tabP.setTitle("Ventas");
-    img.core.fadeIn(tabP);
+    img.appConfig.fadeIn(tabP);
     setVisible(false);
     tabP.setVisible(true);
   }
@@ -271,7 +271,7 @@ public class Opciones extends JDialog implements ActionListener {
     tabP.setMaximumSize(new Dimension(1280, 720));
     tabP.setLocationRelativeTo(null);
     tabP.setTitle("Usuarios Registrados");
-    img.core.fadeIn(tabP);
+    img.appConfig.fadeIn(tabP);
     setVisible(false);
     tabP.setVisible(true);
   }
@@ -284,7 +284,7 @@ public class Opciones extends JDialog implements ActionListener {
       e1.printStackTrace();
     }
 
-    img.core.fadeOut(this);
+    img.appConfig.fadeOut(this);
   }
 
   // Eventos al presionar un botón
@@ -295,7 +295,7 @@ public class Opciones extends JDialog implements ActionListener {
       loguot();
     } else {
 
-      if (img.core.comprobarConexion("No disponible sin conexión", true)) {
+      if (img.appConfig.verifyConnection("No disponible sin conexión", true)) {
 
         if (e.getSource() == comprar) {
           btnComprarAP();

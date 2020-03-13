@@ -32,7 +32,7 @@ public class Ventas extends JDialog implements ActionListener {
     private ButtonGroup btnGroup;
     private JRadioButton nuevo, usado;
     private boolean refVal = false, telVal = false, docVal = false, canVal = false, preVal = false;
-    public InventarioTabla inv = new InventarioTabla(this, true, true);
+    public InventoryTable inv = new InventoryTable(this, true, true);
 
     public Ventas(JDialog parent, boolean modal) {
 
@@ -47,20 +47,20 @@ public class Ventas extends JDialog implements ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(img.getImage("vender.png")).getImage());
 
-        btnsalir = img.getButton("Return", img.core.MAIN_COLOR, this, this);
+        btnsalir = img.getButton("Return", img.appConfig.MAIN_COLOR, this, this);
         btnsalir.setBounds(310, 320, 86, 30);
 
-        btningresar = img.getButton("Vender", img.core.TEXT_COLOR, this, this);
+        btningresar = img.getButton("Vender", img.appConfig.TEXT_COLOR, this, this);
         btningresar.setBounds(30, 320, 86, 30);
         btningresar.setEnabled(false);
 
-        btnbuscar = img.getButton("Buscar", img.core.TEXT_COLOR, this, this);
+        btnbuscar = img.getButton("Buscar", img.appConfig.TEXT_COLOR, this, this);
         btnbuscar.setBounds(340, 65, 86, 25);
 
-        titulo = img.getLabel("<html><strong><em>Registrar Venta</em></strong></html>", img.core.MAIN_COLOR, this, img.core.BIG);
+        titulo = img.getLabel("<html><strong><em>Registrar Venta</em></strong></html>", img.appConfig.MAIN_COLOR, this, img.appConfig.BIG);
         titulo.setBounds(120, 5, 300, 40);
 
-        referencia = img.getLabel("<html><strong>Referencia</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        referencia = img.getLabel("<html><strong>Referencia</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         referencia.setBounds(30, 60, 100, 30);
 
         txtRef = new JTextField();
@@ -76,22 +76,22 @@ public class Ventas extends JDialog implements ActionListener {
             }
 
             private void txtRefKeyTyped(KeyEvent evt) {
-                img.core.soloAlfa(evt.getKeyChar(), evt, txtRef.getText(), 10);
+                img.appConfig.soloAlfa(evt.getKeyChar(), evt, txtRef.getText(), 10);
             }
         });
 
-        producto = img.getLabel("<html><strong>Estado</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        producto = img.getLabel("<html><strong>Estado</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         producto.setBounds(30, 100, 140, 30);
 
         nuevo = new JRadioButton("<html><strong>Nuevo</strong></html>");
         nuevo.setBounds(175, 100, 78, 30);
-        nuevo.setForeground(img.core.TEXT_COLOR);
+        nuevo.setForeground(img.appConfig.TEXT_COLOR);
         nuevo.setEnabled(false);
         add(nuevo);
 
         usado = new JRadioButton("<html><strong>Usado</strong></html>");
         usado.setBounds(255, 100, 75, 30);
-        usado.setForeground(img.core.TEXT_COLOR);
+        usado.setForeground(img.appConfig.TEXT_COLOR);
         usado.setEnabled(false);
         add(usado);
 
@@ -99,7 +99,7 @@ public class Ventas extends JDialog implements ActionListener {
         btnGroup.add(nuevo);
         btnGroup.add(usado);
 
-        documento = img.getLabel("<html><strong>Documento</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        documento = img.getLabel("<html><strong>Documento</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         documento.setBounds(30, 140, 130, 30);
 
         txtDoc = new JTextField();
@@ -114,11 +114,11 @@ public class Ventas extends JDialog implements ActionListener {
             }
 
             private void txtDocKeyTyped(KeyEvent evt) {
-                img.core.solonumeros(evt.getKeyChar(), evt, txtDoc.getText(), 10);
+                img.appConfig.solonumeros(evt.getKeyChar(), evt, txtDoc.getText(), 10);
             }
         });
 
-        tel = img.getLabel("<html><strong>Teléfono</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        tel = img.getLabel("<html><strong>Teléfono</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         tel.setBounds(30, 180, 130, 30);
 
         txtTel = new JTextField();
@@ -133,18 +133,18 @@ public class Ventas extends JDialog implements ActionListener {
             }
 
             private void txtTelKeyTyped(KeyEvent evt) {
-                img.core.solonumeros(evt.getKeyChar(), evt, txtTel.getText(), 10);
+                img.appConfig.solonumeros(evt.getKeyChar(), evt, txtTel.getText(), 10);
             }
 
         });
 
-        unid = img.getLabel("<html><strong>Unidades</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        unid = img.getLabel("<html><strong>Unidades</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         unid.setBounds(30, 220, 130, 30);
 
-        txtUnid = img.getLabel("1", img.core.TEXT_COLOR, this, img.core.BIG);
+        txtUnid = img.getLabel("1", img.appConfig.TEXT_COLOR, this, img.appConfig.BIG);
         txtUnid.setBounds(213, 230, 40, 20);
 
-        mas = img.getLabel("<html><strong>+</strong></html>", img.core.MAIN_COLOR, this, img.core.BIG);
+        mas = img.getLabel("<html><strong>+</strong></html>", img.appConfig.MAIN_COLOR, this, img.appConfig.BIG);
         mas.setBounds(260, 225, 25, 25);
 
         // Permite hacer clic en la etiqueta "+"
@@ -158,19 +158,19 @@ public class Ventas extends JDialog implements ActionListener {
                 if (!cantDisponible.getText().equals("")) {
 
                     if (Integer.parseInt(txtUnid.getText()) >= Integer.parseInt(cantDisponible.getText())) {
-                        JOptionPane.showMessageDialog(null, "<html>" + img.core.styleJOption() + "<strong>Stock insuficiente</strong></html>", "Mensaje", JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "<html>" + img.appConfig.styleJOption() + "<strong>Stock insuficiente</strong></html>", "Mensaje", JOptionPane.PLAIN_MESSAGE);
                     } else {
                         txtUnid.setText(String.valueOf(Integer.parseInt(txtUnid.getText()) + 1));
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "<html>" + img.core.styleJOption() + "<strong>Seleccione un producto del inventario</strong></html>", "Mensaje",
+                    JOptionPane.showMessageDialog(null, "<html>" + img.appConfig.styleJOption() + "<strong>Seleccione un producto del inventario</strong></html>", "Mensaje",
                             JOptionPane.PLAIN_MESSAGE);
                 }
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                mas.setCursor(img.core.MANO);
+                mas.setCursor(img.appConfig.HAND);
             }
 
             @Override
@@ -187,7 +187,7 @@ public class Ventas extends JDialog implements ActionListener {
 
         });
 
-        menos = img.getLabel("<html><strong>-</strong></html>", img.core.MAIN_COLOR, this, img.core.BIG);
+        menos = img.getLabel("<html><strong>-</strong></html>", img.appConfig.MAIN_COLOR, this, img.appConfig.BIG);
         menos.setBounds(180, 224, 25, 25);
 
         // Permite hacer clic en la etiqueta "-"
@@ -204,14 +204,14 @@ public class Ventas extends JDialog implements ActionListener {
                         txtUnid.setText(String.valueOf(Integer.parseInt(txtUnid.getText()) - 1));
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "<html>" + img.core.styleJOption() + "<strong>Seleccione un producto del inventario</strong></html>", "Mensaje",
+                    JOptionPane.showMessageDialog(null, "<html>" + img.appConfig.styleJOption() + "<strong>Seleccione un producto del inventario</strong></html>", "Mensaje",
                             JOptionPane.PLAIN_MESSAGE);
                 }
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                menos.setCursor(img.core.MANO);
+                menos.setCursor(img.appConfig.HAND);
             }
 
             @Override
@@ -228,14 +228,14 @@ public class Ventas extends JDialog implements ActionListener {
 
         });
 
-        disponibles = img.getLabel("<html><strong>Disp:</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        disponibles = img.getLabel("<html><strong>Disp:</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         disponibles.setBounds(340, 220, 130, 30);
         disponibles.setVisible(false);
 
-        cantDisponible = img.getLabel("", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        cantDisponible = img.getLabel("", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         cantDisponible.setBounds(390, 222, 130, 30);
 
-        precio = img.getLabel("<html><strong>Precio</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        precio = img.getLabel("<html><strong>Precio</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         precio.setBounds(30, 260, 130, 30);
 
         txtPrecio = new JTextField("0");
@@ -251,7 +251,7 @@ public class Ventas extends JDialog implements ActionListener {
             }
 
             private void txtPrecioKeyTyped(KeyEvent evt) {
-                img.core.solonumeros(evt.getKeyChar(), evt, txtPrecio.getText(), 9);
+                img.appConfig.solonumeros(evt.getKeyChar(), evt, txtPrecio.getText(), 9);
             }
 
         });
@@ -270,12 +270,12 @@ public class Ventas extends JDialog implements ActionListener {
         txtUnid.setText("1");
         cantDisponible.setText("");
         txtPrecio.setText("");
-        img.core.fadeOut(this);
+        img.appConfig.fadeOut(this);
     }
 
     public void btnIngresarAP() {
 
-        if (img.core.cantidadDigitos(txtRef.getText())) {
+        if (img.appConfig.cantidadDigitos(txtRef.getText())) {
             txtRef.requestFocus();
             refVal = false;
         } else {
@@ -283,7 +283,7 @@ public class Ventas extends JDialog implements ActionListener {
         }
 
         if (refVal) {
-            if (img.core.valDoc(txtDoc.getText())) {
+            if (img.appConfig.valDoc(txtDoc.getText())) {
                 txtDoc.requestFocus();
                 docVal = false;
             } else {
@@ -293,7 +293,7 @@ public class Ventas extends JDialog implements ActionListener {
 
         if (refVal && docVal) {
 
-            if (img.core.telefono(txtTel.getText())) {
+            if (img.appConfig.telefono(txtTel.getText())) {
                 telVal = true;
             } else {
                 txtTel.requestFocus();
@@ -304,7 +304,7 @@ public class Ventas extends JDialog implements ActionListener {
         if (refVal && telVal && docVal) {
 
             if (Integer.parseInt(txtUnid.getText()) > Integer.parseInt(cantDisponible.getText())) {
-                JOptionPane.showMessageDialog(null, "<html>" + img.core.styleJOption() + "<strong>No hay suficiente stock, revise las unidades introducidas.</strong></html>",
+                JOptionPane.showMessageDialog(null, "<html>" + img.appConfig.styleJOption() + "<strong>No hay suficiente stock, revise las unidades introducidas.</strong></html>",
                         "Mensaje", JOptionPane.PLAIN_MESSAGE);
                 txtUnid.requestFocus();
                 canVal = false;
@@ -315,7 +315,7 @@ public class Ventas extends JDialog implements ActionListener {
 
         if (refVal && telVal && docVal) {
 
-            if (img.core.validarValor(Double.parseDouble(txtPrecio.getText()))) {
+            if (img.appConfig.validarValor(Double.parseDouble(txtPrecio.getText()))) {
                 preVal = true;
             } else {
                 preVal = false;
@@ -324,8 +324,8 @@ public class Ventas extends JDialog implements ActionListener {
 
         if (refVal && telVal && docVal && canVal && preVal) {
 
-            img.core.setTotalVenta(Double.parseDouble(txtPrecio.getText()) * Integer.parseInt(txtUnid.getText()));
-            img.core.setContProd(Integer.parseInt(txtUnid.getText()));
+            img.appConfig.setTotalVenta(Double.parseDouble(txtPrecio.getText()) * Integer.parseInt(txtUnid.getText()));
+            img.appConfig.setContProd(Integer.parseInt(txtUnid.getText()));
 
             cantDisponible.setText(
                     String.valueOf(Integer.parseInt(cantDisponible.getText()) - Integer.parseInt(txtUnid.getText())));
@@ -350,11 +350,11 @@ public class Ventas extends JDialog implements ActionListener {
 
             try {
                 if (img.database.buscarUser(user)) {
-                    img.database.registrarVentas(user, img.core.getContProd(), img.core.getTotalVenta());
+                    img.database.registrarVentas(user, img.appConfig.getContProd(), img.appConfig.getTotalVenta());
                 } else {
 
-                    String[] datos = {"registros", user, String.valueOf(img.core.getContProd()),
-                            String.valueOf(img.core.getTotalVenta()), String.valueOf(0), String.valueOf(0.0),
+                    String[] datos = {"registros", user, String.valueOf(img.appConfig.getContProd()),
+                            String.valueOf(img.appConfig.getTotalVenta()), String.valueOf(0), String.valueOf(0.0),
                             String.valueOf(0.0)};
 
                     img.database.insertData(datos);
@@ -367,7 +367,7 @@ public class Ventas extends JDialog implements ActionListener {
             try {
 
                 String[] compra = {"ventas", txtRef.getText(), user, txtDoc.getText(),
-                        txtTel.getText(), img.core.obtenerDate(), String.valueOf(txtUnid.getText()),
+                        txtTel.getText(), img.appConfig.getDate(), String.valueOf(txtUnid.getText()),
                         String.valueOf(Double.parseDouble(txtPrecio.getText()) * Integer.parseInt(txtUnid.getText()))};
 
                 img.database.insertData(compra);
@@ -376,9 +376,9 @@ public class Ventas extends JDialog implements ActionListener {
                 e.printStackTrace();
             }
 
-            img.core.mostrarTotalVenta();
-            img.core.setContProd(0);
-            img.core.setTotalVenta(0);
+            img.appConfig.mostrarTotalVenta();
+            img.appConfig.setContProd(0);
+            img.appConfig.setTotalVenta(0);
 
             btningresar.setEnabled(false);
             disponibles.setVisible(false);
@@ -408,7 +408,7 @@ public class Ventas extends JDialog implements ActionListener {
         inv.setMinimumSize(new Dimension(830, 400));
         inv.setLocationRelativeTo(null);
         inv.setTitle("Productos disponibles");
-        img.core.fadeIn(inv);
+        img.appConfig.fadeIn(inv);
         setVisible(false);
         inv.setVisible(true);
     }
@@ -438,7 +438,7 @@ public class Ventas extends JDialog implements ActionListener {
             txtPrecio.setEnabled(false);
 
         } else if (inv.status == 2) {
-            JOptionPane.showMessageDialog(null, "<html>" + img.core.styleJOption() + "<strong>No existen unidades disponibles del producto seleccionado</strong></html>", "Mensaje",
+            JOptionPane.showMessageDialog(null, "<html>" + img.appConfig.styleJOption() + "<strong>No existen unidades disponibles del producto seleccionado</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
         }
     }

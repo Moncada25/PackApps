@@ -1,7 +1,9 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.BORDER_BLUE;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_IMAGES;
 import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
 import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
@@ -11,9 +13,11 @@ import static com.bookverse.development.packapps.utils.ViewConstants.LOANS;
 import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
 import static com.bookverse.development.packapps.utils.ViewConstants.PURCHASES;
 import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.ViewConstants.RECORDS;
+import static com.bookverse.development.packapps.utils.ViewConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.ViewConstants.SALES;
 
+import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.ArrayData;
@@ -51,7 +55,7 @@ public class Index extends JFrame implements ActionListener {
   protected PuzzleTable puzzleTable = new PuzzleTable(this, true);
   protected DicesTable dicesTable = new DicesTable(this, true);
   protected NotesTable notesTable = new NotesTable(this, true);
-  protected InventarioTabla inventoryTable = new InventarioTabla(this, true);
+  protected InventoryTable inventoryTable = new InventoryTable(this, true);
   protected RegistradoraTabla cashRegisterTable = new RegistradoraTabla(this, true);
   protected PrestamosTabla loansTable = new PrestamosTabla(this, true);
   protected ComprasTabla purchasesTable = new ComprasTabla(this, true);
@@ -60,7 +64,7 @@ public class Index extends JFrame implements ActionListener {
   protected JMenu changeBackground;
   protected JMenuItem moreBacklog, moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,
       texts, guessNumber, guessNumberHard, hangman, structures, dices, buyAndSell, numbers, puzzle4x4, puzzle5x5, puzzle6x6,
-      roulette, triquiPvsP, triquiPvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
+      roulette, ticTacToePvsP, ticTacToePvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
       inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
       inventoryEXCEL, purchasesEXCEL, salesEXCEL, cashRegisterEXCEL, loansEXCEL, puzzleEXCEL, guessNumberPDF, hangmanPDF, dicesPDF,
       notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet;
@@ -76,45 +80,45 @@ public class Index extends JFrame implements ActionListener {
 
       UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 
-      UIManager.put("PasswordField.border", resources.core.MEDIO);
-      UIManager.put("PasswordField.font", resources.core.MEDIUM);
+      UIManager.put("PasswordField.border", BORDER_BLUE);
+      UIManager.put("PasswordField.font", MEDIUM);
 
-      UIManager.put("TextField.border", resources.core.MEDIO);
-      UIManager.put("TextField.font", resources.core.MEDIUM);
+      UIManager.put("TextField.border", BORDER_BLUE);
+      UIManager.put("TextField.font", MEDIUM);
 
       UIManager.put("FileChooser.saveButtonText", "Save");
       UIManager.put("FileChooser.cancelButtonText", "Cancel");
 
-      UIManager.put("RadioButton.font", resources.core.MEDIUM);
+      UIManager.put("RadioButton.font", MEDIUM);
 
-      UIManager.put("TextArea.font", resources.core.MEDIUM);
+      UIManager.put("TextArea.font", MEDIUM);
 
-      UIManager.put("ComboBox.font", resources.core.MEDIUM);
+      UIManager.put("ComboBox.font", MEDIUM);
       UIManager.put("ComboBox.foreground", TEXT_COLOR);
 
-      UIManager.put("ScrollPane.border", resources.core.MEDIO);
+      UIManager.put("ScrollPane.border", BORDER_BLUE);
 
       UIManager.put("MenuItem.foreground", TEXT_COLOR);
-      UIManager.put("MenuItem.font", resources.core.MEDIUM);
+      UIManager.put("MenuItem.font", MEDIUM);
 
       UIManager.put("Menu.foreground", MAIN_COLOR);
-      UIManager.put("Menu.font", resources.core.MEDIUM);
+      UIManager.put("Menu.font", MEDIUM);
 
-      UIManager.put("Button.font", resources.core.MEDIUM);
+      UIManager.put("Button.font", MEDIUM);
       UIManager.put("Button.foreground", Color.BLACK);
 
-      UIManager.put("Table.focusCellHighlightBorder", resources.core.MEDIO);
+      UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
       UIManager.put("TableHeader.foreground", MAIN_COLOR);
-      UIManager.put("TableHeader.font", resources.core.MEDIUM);
-      UIManager.put("Table.font", resources.core.MEDIUM);
+      UIManager.put("TableHeader.font", MEDIUM);
+      UIManager.put("Table.font", MEDIUM);
       UIManager.put("Table.foreground", TEXT_COLOR);
 
       UIManager.put("OptionPane.okButtonText", "Done");
       UIManager.put("OptionPane.cancelButtonText", "No, thanks.");
       UIManager.put("OptionPane.yesButtonText", "Yes, it is okay.");
       UIManager.put("OptionPane.noButtonText", "No, thanks.");
-      UIManager.put("OptionPane.messageFont", resources.core.MEDIUM);
-      UIManager.put("OptionPane.buttonFont", resources.core.MEDIUM);
+      UIManager.put("OptionPane.messageFont", MEDIUM);
+      UIManager.put("OptionPane.buttonFont", MEDIUM);
       UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
 
     } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
@@ -133,10 +137,10 @@ public class Index extends JFrame implements ActionListener {
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
-    window.setTitle(resources.core.getTitle());
+    window.setTitle(AppConfig.getTitle());
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
     window.textureMode.setForeground(MAIN_COLOR);
-    resources.core.fadeIn(window);
+    AppConfig.fadeIn(window);
     window.setVisible(true);
   }
 
@@ -185,10 +189,10 @@ public class Index extends JFrame implements ActionListener {
     roulette = resources.getMenuItem("Roulette", "ruleta", this);
 
     JMenu guessNumberMenu = resources.getMenu(GUESS_NUMBER, "adivinar");
-    this.guessNumber = resources.getMenuItem("Easy", "easy", this);
+    guessNumber = resources.getMenuItem("Easy", "easy", this);
     guessNumberHard = resources.getMenuItem("Hard", "hard", this);
 
-    guessNumberMenu.add(this.guessNumber);
+    guessNumberMenu.add(guessNumber);
     guessNumberMenu.addSeparator();
     guessNumberMenu.add(guessNumberHard);
 
@@ -203,13 +207,13 @@ public class Index extends JFrame implements ActionListener {
     puzzle.addSeparator();
     puzzle.add(puzzle6x6);
 
-    JMenu triqui = resources.getMenu("Triqui", "triqui");
-    triquiPvsP = resources.getMenuItem("Player vs Player", "jvsj", this);
-    triquiPvsCPU = resources.getMenuItem("Player vs CPU (beta)", "jvscpu", this);
+    JMenu ticTacToe = resources.getMenu("Tic Tac Toe", "triqui");
+    ticTacToePvsP = resources.getMenuItem("Player vs Player", "jvsj", this);
+    ticTacToePvsCPU = resources.getMenuItem("Player vs CPU (beta)", "jvscpu", this);
 
-    triqui.add(triquiPvsP);
-    triqui.addSeparator();
-    triqui.add(triquiPvsCPU);
+    ticTacToe.add(ticTacToePvsP);
+    ticTacToe.addSeparator();
+    ticTacToe.add(ticTacToePvsCPU);
 
     apps.add(guessNumberMenu);
     apps.addSeparator();
@@ -221,7 +225,7 @@ public class Index extends JFrame implements ActionListener {
     apps.addSeparator();
     apps.add(roulette);
     apps.addSeparator();
-    apps.add(triqui);
+    apps.add(ticTacToe);
 
     JMenu scores = resources.getMenu("Data", "data");
     tables = resources.getMenuItem("Database", "tabla", this);
@@ -256,7 +260,7 @@ public class Index extends JFrame implements ActionListener {
     notesTXT = resources.getMenuItem(NOTES, "notas", this);
     puzzleTXT = resources.getMenuItem(PUZZLE, "rompecabezas", this);
     inventoryTXT = resources.getMenuItem(INVENTORY, "inventario", this);
-    cashRegisterTXT = resources.getMenuItem(RECORDS, "registradora", this);
+    cashRegisterTXT = resources.getMenuItem(CASH_REGISTER, "registradora", this);
     loansTXT = resources.getMenuItem(LOANS, "prestamos", this);
     salesTXT = resources.getMenuItem(SALES, "vender", this);
 
@@ -288,7 +292,7 @@ public class Index extends JFrame implements ActionListener {
     notesEXCEL = resources.getMenuItem(NOTES, "notas", this);
     puzzleEXCEL = resources.getMenuItem(PUZZLE, "rompecabezas", this);
     inventoryEXCEL = resources.getMenuItem(INVENTORY, "inventario", this);
-    cashRegisterEXCEL = resources.getMenuItem(RECORDS, "registradora", this);
+    cashRegisterEXCEL = resources.getMenuItem(CASH_REGISTER, "registradora", this);
     loansEXCEL = resources.getMenuItem(LOANS, "prestamos", this);
     salesEXCEL = resources.getMenuItem(SALES, "vender", this);
 
@@ -320,7 +324,7 @@ public class Index extends JFrame implements ActionListener {
     notesPDF = resources.getMenuItem(NOTES, "notas", this);
     puzzlePDF = resources.getMenuItem(PUZZLE, "rompecabezas", this);
     inventoryPDF = resources.getMenuItem(INVENTORY, "inventario", this);
-    cashRegisterPDF = resources.getMenuItem(RECORDS, "registradora", this);
+    cashRegisterPDF = resources.getMenuItem(CASH_REGISTER, "registradora", this);
     loansPDF = resources.getMenuItem(LOANS, "prestamos", this);
     salesPDF = resources.getMenuItem(SALES, "vender", this);
 
@@ -351,10 +355,10 @@ public class Index extends JFrame implements ActionListener {
     export.add(exportEXCEL);
 
     JMenu tasks = resources.getMenu("Tasks", "task");
-    timesheet = resources.getMenuItem("Timesheet Entry", "timesheet", this);
+    timesheet = resources.getMenuItem("Timesheet Entry (beta)", "timesheet", this);
     tasks.add(timesheet);
 
-    JMenu mode = resources.getMenu("UI", "mode");
+    JMenu mode = resources.getMenu("Theme", "mode");
     darkMode = resources.getMenuItem("Dark", "dark", this);
     textureMode = resources.getMenuItem("Texture", "texture", this);
     macMode = resources.getMenuItem("Mac OS", "mac", this);
@@ -401,10 +405,10 @@ public class Index extends JFrame implements ActionListener {
     add(menuBar, BorderLayout.NORTH);
   }
 
-  protected void changeBackgroundAP(String name, int width, int length) {
+  private void changeBackgroundAP(String name, int width, int length) {
 
     try {
-      resources.core.fadeIn(this);
+      AppConfig.fadeIn(this);
       setVisible(false);
       ((JPanel) getContentPane()).setOpaque(false);
       welcome.setIcon(new ImageIcon(resources.getImage(name)));
@@ -427,7 +431,7 @@ public class Index extends JFrame implements ActionListener {
     guessNumberTable.cleanTable();
 
     try {
-      resources.database.readTable(guessNumberTable.viewTable,
+      Database.readTable(guessNumberTable.viewTable,
           Querys.getAllData(Format.tableName(GUESS_NUMBER)), true);
     } catch (Exception e1) {
       Alerts.error(e1, GUESS_NUMBER);
@@ -438,7 +442,7 @@ public class Index extends JFrame implements ActionListener {
     guessNumberTable.setMinimumSize(new Dimension(830, 400));
     guessNumberTable.setMaximumSize(new Dimension(1280, 720));
     guessNumberTable.setTitle(GUESS_NUMBER + " Information");
-    resources.core.fadeIn(guessNumberTable);
+    AppConfig.fadeIn(guessNumberTable);
     guessNumberTable.setVisible(true);
   }
 
@@ -446,8 +450,7 @@ public class Index extends JFrame implements ActionListener {
     hangmanTable.cleanTable();
 
     try {
-      resources.database
-          .readTable(hangmanTable.viewTable, Querys.getAllData(Format.tableName(HANGMAN)), true);
+     Database.readTable(hangmanTable.viewTable, Querys.getAllData(Format.tableName(HANGMAN)), true);
     } catch (Exception e1) {
       Alerts.error(e1, HANGMAN);
     }
@@ -457,7 +460,7 @@ public class Index extends JFrame implements ActionListener {
     hangmanTable.setMinimumSize(new Dimension(830, 400));
     hangmanTable.setMaximumSize(new Dimension(1280, 720));
     hangmanTable.setTitle(HANGMAN + " Information");
-    resources.core.fadeIn(hangmanTable);
+    AppConfig.fadeIn(hangmanTable);
     hangmanTable.setVisible(true);
   }
 
@@ -467,7 +470,7 @@ public class Index extends JFrame implements ActionListener {
     dicesTable.cleanTable();
 
     try {
-      aux = resources.database.readTable(dicesTable.viewTable, Querys.getAllData(DICES), true);
+      aux = Database.readTable(dicesTable.viewTable, Querys.getAllData(DICES), true);
     } catch (Exception e1) {
       Alerts.error(e1, DICES);
     }
@@ -479,7 +482,7 @@ public class Index extends JFrame implements ActionListener {
       dicesTable.setMinimumSize(new Dimension(830, 400));
       dicesTable.setMaximumSize(new Dimension(1280, 720));
       dicesTable.setTitle(DICES + " Information");
-      resources.core.fadeIn(dicesTable);
+      AppConfig.fadeIn(dicesTable);
       dicesTable.setVisible(true);
     }
 
@@ -490,8 +493,7 @@ public class Index extends JFrame implements ActionListener {
     notesTable.cleanTable();
 
     try {
-      resources.database
-          .readTable(notesTable.viewTable, Querys.getAllData(Format.tableName(NOTES)), true);
+      Database.readTable(notesTable.viewTable, Querys.getAllData(Format.tableName(NOTES)), true);
     } catch (Exception e1) {
       Alerts.error(e1, NOTES);
     }
@@ -501,7 +503,7 @@ public class Index extends JFrame implements ActionListener {
     notesTable.setMinimumSize(new Dimension(830, 400));
     notesTable.setMaximumSize(new Dimension(1280, 720));
     notesTable.setTitle(NOTES + " Information");
-    resources.core.fadeIn(notesTable);
+    AppConfig.fadeIn(notesTable);
     notesTable.setVisible(true);
   }
 
@@ -509,8 +511,7 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.cleanTable();
 
     try {
-      resources.database
-          .readTable(puzzleTable.viewTable, Querys.getAllData(Format.tableName(PUZZLE)), true);
+      Database.readTable(puzzleTable.viewTable, Querys.getAllData(Format.tableName(PUZZLE)), true);
     } catch (Exception e1) {
       Alerts.error(e1, PUZZLE);
     }
@@ -521,7 +522,7 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.setMaximumSize(new Dimension(1280, 720));
     puzzleTable.setTitle(PUZZLE + " Information");
     setVisible(false);
-    resources.core.fadeIn(puzzleTable);
+    AppConfig.fadeIn(puzzleTable);
     puzzleTable.setVisible(true);
   }
 
@@ -564,7 +565,7 @@ public class Index extends JFrame implements ActionListener {
           UIManager.put("Menu.foreground", MAIN_COLOR);
           UIManager.put("Button.foreground", new Color(0, 0, 0));
 
-          UIManager.put("Table.focusCellHighlightBorder", resources.core.MEDIO);
+          UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
           UIManager.put("TableHeader.foreground", MAIN_COLOR);
           UIManager.put("Table.foreground", TEXT_COLOR);
           UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
@@ -583,10 +584,10 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(resources.core.getTitle());
+          window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.grayMode.setForeground(MAIN_COLOR);
-          resources.core.fadeIn(window);
+          AppConfig.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Gray");
 
@@ -624,10 +625,10 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(resources.core.getTitle());
+          window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.textureMode.setForeground(MAIN_COLOR);
-          resources.core.fadeIn(window);
+          AppConfig.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Texture");
 
@@ -666,10 +667,10 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(resources.core.getTitle());
+          window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.darkMode.setForeground(MAIN_COLOR);
-          resources.core.fadeIn(window);
+          AppConfig.fadeIn(window);
           window.setVisible(true);
 
           Alerts.changeUI("Dark");
@@ -709,10 +710,10 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(resources.core.getTitle());
+          window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.macMode.setForeground(MAIN_COLOR);
-          resources.core.fadeIn(window);
+          AppConfig.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Mac OS");
 
@@ -735,7 +736,7 @@ public class Index extends JFrame implements ActionListener {
 
           UIManager.put("Button.foreground", Color.BLACK);
 
-          UIManager.put("Table.focusCellHighlightBorder", resources.core.MEDIO);
+          UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
           UIManager.put("TableHeader.foreground", MAIN_COLOR);
           UIManager.put("Table.foreground", TEXT_COLOR);
           UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
@@ -754,10 +755,10 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(resources.core.getTitle());
+          window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.mintMode.setForeground(MAIN_COLOR);
-          resources.core.fadeIn(window);
+          AppConfig.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Mint");
 
@@ -780,7 +781,7 @@ public class Index extends JFrame implements ActionListener {
           UIManager.put("MenuItem.foreground", TEXT_COLOR);
           UIManager.put("Menu.foreground", MAIN_COLOR);
 
-          UIManager.put("Table.focusCellHighlightBorder", resources.core.MEDIO);
+          UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
           UIManager.put("TableHeader.foreground", MAIN_COLOR);
           UIManager.put("Table.foreground", TEXT_COLOR);
           UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
@@ -799,10 +800,10 @@ public class Index extends JFrame implements ActionListener {
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
           window.setLocationRelativeTo(null);
-          window.setTitle(resources.core.getTitle());
+          window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.classicMode.setForeground(MAIN_COLOR);
-          resources.core.fadeIn(window);
+          AppConfig.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Classic");
 
@@ -823,7 +824,7 @@ public class Index extends JFrame implements ActionListener {
     paintBackground(e);
 
     if (e.getSource() == yes_exit) {
-      resources.core.fadeOut(this);
+      AppConfig.fadeOut(this);
     } else if (e.getSource() == timesheet) {
       new Timesheet(this, true).start(this);
       setVisible(true);
@@ -890,11 +891,11 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == guessNumberHard) {
       new GuessNumber(this, true, true).start(this);
       setVisible(true);
-    } else if (e.getSource() == triquiPvsP) {
-      new Triqui(this, true, false).start(this);
+    } else if (e.getSource() == ticTacToePvsP) {
+      new TicTacToe(this, true, false).start(this);
       setVisible(true);
-    } else if (e.getSource() == triquiPvsCPU) {
-      new Triqui(this, true, true).start(this);
+    } else if (e.getSource() == ticTacToePvsCPU) {
+      new TicTacToe(this, true, true).start(this);
       setVisible(true);
     } else if (e.getSource() == hangman) {
       new Hangman(this, true).start(this);
@@ -926,11 +927,11 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == read) {
       new Card(this, true).start(this);
       setVisible(true);
-    } else if (resources.core.comprobarConexion("Connect to see more!", isWork)) {
+    } else if (AppConfig.verifyConnection("Connect to see more!", isWork)) {
 
       if (e.getSource() == roulette) {
 
-        resources.core.instruccionesRuleta();
+        AppConfig.instruccionesRuleta();
 
         try {
           Desktop.getDesktop()
@@ -969,7 +970,7 @@ public class Index extends JFrame implements ActionListener {
         try {
           guessNumberTable.cleanTable();
           Export.txt(guessNumberTable.viewTable, Querys.getAllData(Format.tableName(GUESS_NUMBER)),
-                  ".txt");
+              ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, GUESS_NUMBER);
         }
@@ -1036,7 +1037,7 @@ public class Index extends JFrame implements ActionListener {
         try {
           inventoryTable.limpiarTabla();
           Export.txt(inventoryTable.inventarioTab, Querys.getAllData(Format.tableName(INVENTORY)),
-                  ".txt");
+              ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, INVENTORY);
         }
@@ -1045,10 +1046,10 @@ public class Index extends JFrame implements ActionListener {
         try {
           cashRegisterTable.limpiarTabla();
           Export.txt(cashRegisterTable.registradoraTab,
-              Querys.getAllData(Format.tableName(RECORDS)),
+              Querys.getAllData(Format.tableName(CASH_REGISTER)),
               ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, RECORDS);
+          Alerts.error(ex, CASH_REGISTER);
         }
       } else if (e.getSource() == loansTXT) {
 
@@ -1077,7 +1078,7 @@ public class Index extends JFrame implements ActionListener {
         try {
           hangmanTable.cleanTable();
           Export.pdf(hangmanTable.viewTable, HANGMAN, Querys.getAllData(Format.tableName(HANGMAN)),
-                  ".pdf");
+              ".pdf");
         } catch (Exception ex) {
           Alerts.error(ex, HANGMAN);
         }
@@ -1139,7 +1140,7 @@ public class Index extends JFrame implements ActionListener {
         try {
           inventoryTable.limpiarTabla();
           Export.pdf(inventoryTable.inventarioTab, INVENTORY,
-                  Querys.getAllData(Format.tableName(INVENTORY)), ".pdf");
+              Querys.getAllData(Format.tableName(INVENTORY)), ".pdf");
         } catch (Exception ex) {
           Alerts.error(ex, INVENTORY);
         }
@@ -1147,11 +1148,11 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           cashRegisterTable.limpiarTabla();
-          Export.pdf(cashRegisterTable.registradoraTab, RECORDS,
-              Querys.getAllData(Format.tableName(RECORDS)),
+          Export.pdf(cashRegisterTable.registradoraTab, CASH_REGISTER,
+              Querys.getAllData(Format.tableName(CASH_REGISTER)),
               ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, RECORDS);
+          Alerts.error(ex, CASH_REGISTER);
         }
       } else if (e.getSource() == loansPDF) {
 
@@ -1167,7 +1168,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           guessNumberTable.cleanTable();
-          Export.excel(guessNumberTable.viewTable, Querys.getAllData(Format.tableName(GUESS_NUMBER)),
+          Export
+              .excel(guessNumberTable.viewTable, Querys.getAllData(Format.tableName(GUESS_NUMBER)),
                   ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, GUESS_NUMBER);
@@ -1177,7 +1179,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           hangmanTable.cleanTable();
-          Export.excel(hangmanTable.viewTable, Querys.getAllData(Format.tableName(HANGMAN)), ".xls");
+          Export
+              .excel(hangmanTable.viewTable, Querys.getAllData(Format.tableName(HANGMAN)), ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, HANGMAN);
         }
@@ -1235,7 +1238,7 @@ public class Index extends JFrame implements ActionListener {
         try {
           inventoryTable.limpiarTabla();
           Export.excel(inventoryTable.inventarioTab, Querys.getAllData(Format.tableName(INVENTORY)),
-                  ".xls");
+              ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, INVENTORY);
         }
@@ -1244,10 +1247,10 @@ public class Index extends JFrame implements ActionListener {
         try {
           cashRegisterTable.limpiarTabla();
           Export.excel(cashRegisterTable.registradoraTab,
-              Querys.getAllData(Format.tableName(RECORDS)),
+              Querys.getAllData(Format.tableName(CASH_REGISTER)),
               ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, RECORDS);
+          Alerts.error(ex, CASH_REGISTER);
         }
       } else if (e.getSource() == loansEXCEL) {
 

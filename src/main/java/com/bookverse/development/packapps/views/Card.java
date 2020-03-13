@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
@@ -12,21 +13,21 @@ import javax.swing.JPanel;
 
 public class Card extends JDialog implements MouseListener {
 
-  private Resources resources = new Resources();
-  private JLabel card = new JLabel();
+  private JLabel imageCard = new JLabel();
 
   public Card(JFrame parent, boolean modal) {
     super(parent, modal);
 
+    Resources resources = new Resources();
     setIconImage(new ImageIcon(resources.getImage("about.png")).getImage());
 
     ((JPanel) getContentPane()).setOpaque(false);
     ImageIcon image = new ImageIcon(resources.getImage("business.png"));
-    card = new JLabel();
-    card.setIcon(image);
-    card.setSize(1035, 505);
-    card.addMouseListener(this);
-    add(card, BorderLayout.CENTER);
+    imageCard = new JLabel();
+    imageCard.setIcon(image);
+    imageCard.setSize(1035, 505);
+    imageCard.addMouseListener(this);
+    add(imageCard, BorderLayout.CENTER);
   }
 
   public void start(JFrame parent) {
@@ -34,7 +35,7 @@ public class Card extends JDialog implements MouseListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Developed by");
-    resources.core.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -42,8 +43,8 @@ public class Card extends JDialog implements MouseListener {
   @Override
   public void mouseClicked(MouseEvent e) {
 
-    if (e.getSource() == card) {
-      resources.core.fadeOut(this);
+    if (e.getSource() == imageCard) {
+      AppConfig.fadeOut(this);
     }
   }
 

@@ -1,12 +1,19 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.core.AppConfig.BIG;
+import static com.bookverse.development.packapps.core.AppConfig.HAND;
+import static com.bookverse.development.packapps.core.AppConfig.LOADER;
+import static com.bookverse.development.packapps.core.AppConfig.POINT;
+import static com.bookverse.development.packapps.core.AppConfig.RESIZE;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT;
 import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
 import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
 import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
 
-import com.bookverse.development.packapps.core.Core;
+import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -64,16 +71,16 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(resources.core.bordeAzul("Select Table"));
+    panel.setBorder(AppConfig.getBorder("Select Table"));
 
     tittle = new JLabel();
-    tittle.setFont(resources.core.BIG);
-    tittle.setForeground(Core.MAIN_COLOR);
+    tittle.setFont(BIG);
+    tittle.setForeground(AppConfig.MAIN_COLOR);
     tittle.addMouseListener(this);
 
     message = new JLabel();
-    message.setFont(resources.core.BIG);
-    message.setForeground(Core.TEXT_COLOR);
+    message.setFont(BIG);
+    message.setForeground(AppConfig.TEXT_COLOR);
     message.addMouseListener(this);
 
     IntStream.range(0, tables.length).forEach(i -> {
@@ -205,8 +212,8 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (resources.core.loginDBA()) {
-          resources.database.updateData(Core.inputText("Enter a Nickname", 20),
+        if (AppConfig.loginDBA()) {
+          Database.updateData(AppConfig.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(DICES));
 
           dispose();
@@ -231,8 +238,8 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        if (resources.core.loginDBA()) {
-          resources.database.deleteData(IDs, Format.tableName(DICES));
+        if (AppConfig.loginDBA()) {
+          Database.deleteData(IDs, Format.tableName(DICES));
           dispose();
           new Index().dicesTableAP();
         }
@@ -250,7 +257,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     try {
 
-      if (resources.database.readTable(table.tabResult, query, false)) {
+      if (Database.readTable(table.tabResult, query, false)) {
         table.setBounds(0, 0, 780, size);
         table.setResizable(false);
         table.setLocationRelativeTo(null);
@@ -303,20 +310,20 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == tables[0]) {
-      tables[0].setCursor(resources.core.MIRA);
+      tables[0].setCursor(POINT);
       tittle.setText("    " + GUESS_NUMBER);
     } else if (e.getSource() == tables[1]) {
-      tables[1].setCursor(resources.core.CARGAR);
+      tables[1].setCursor(LOADER);
       tittle.setText("    " + HANGMAN);
     } else if (e.getSource() == tables[2]) {
-      tables[2].setCursor(resources.core.REDI);
+      tables[2].setCursor(RESIZE);
       tittle.setText("    " + DICES);
       message.setText("       You're here");
     } else if (e.getSource() == tables[3]) {
-      tables[3].setCursor(resources.core.TEXT);
+      tables[3].setCursor(TEXT);
       tittle.setText("    " + NOTES);
     } else if (e.getSource() == tables[4]) {
-      tables[4].setCursor(resources.core.MANO);
+      tables[4].setCursor(HAND);
       tittle.setText("    " + PUZZLE);
     }
   }

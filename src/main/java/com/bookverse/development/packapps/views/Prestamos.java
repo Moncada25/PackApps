@@ -44,16 +44,16 @@ public class Prestamos extends JDialog implements ActionListener {
         setDefaultCloseOperation(0);
         setIconImage(new ImageIcon(img.getImage("prestar.png")).getImage());
 
-        btnsalir = img.getButton("Return", img.core.MAIN_COLOR, this, this);
+        btnsalir = img.getButton("Return", img.appConfig.MAIN_COLOR, this, this);
         btnsalir.setBounds(330, 320, 86, 30);
 
-        btnprestar = img.getButton("Prestar", img.core.TEXT_COLOR, this, this);
+        btnprestar = img.getButton("Prestar", img.appConfig.TEXT_COLOR, this, this);
         btnprestar.setBounds(30, 320, 86, 30);
 
-        titulo = img.getLabel("<html><strong><em>Registrar Préstamo</em></strong></html>", img.core.MAIN_COLOR, this, img.core.BIG);
+        titulo = img.getLabel("<html><strong><em>Registrar Préstamo</em></strong></html>", img.appConfig.MAIN_COLOR, this, img.appConfig.BIG);
         titulo.setBounds(100, 5, 300, 40);
 
-        producto = img.getLabel("<html><strong>A nombre de</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        producto = img.getLabel("<html><strong>A nombre de</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         producto.setBounds(30, 60, 140, 30);
 
         txtnombre = new JTextField();
@@ -68,12 +68,12 @@ public class Prestamos extends JDialog implements ActionListener {
             }
 
             private void txtnombreKeyTyped(KeyEvent evt) {
-                img.core.soloTexto(evt.getKeyChar(), evt, txtnombre.getText(), 25);
+                img.appConfig.soloTexto(evt.getKeyChar(), evt, txtnombre.getText(), 25);
             }
 
         });
 
-        documento = img.getLabel("<html><strong>Documento</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        documento = img.getLabel("<html><strong>Documento</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         documento.setBounds(30, 100, 140, 30);
 
         txtDoc = new JTextField();
@@ -88,11 +88,11 @@ public class Prestamos extends JDialog implements ActionListener {
             }
 
             private void txtDocKeyTyped(KeyEvent evt) {
-                img.core.solonumeros(evt.getKeyChar(), evt, txtDoc.getText(), 10);
+                img.appConfig.solonumeros(evt.getKeyChar(), evt, txtDoc.getText(), 10);
             }
         });
 
-        referencia = img.getLabel("<html><strong>Referencia</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        referencia = img.getLabel("<html><strong>Referencia</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         referencia.setBounds(30, 140, 130, 30);
 
         txtRef = new JTextField();
@@ -107,11 +107,11 @@ public class Prestamos extends JDialog implements ActionListener {
             }
 
             private void txtRefKeyTyped(KeyEvent evt) {
-                img.core.soloAlfa(evt.getKeyChar(), evt, txtRef.getText(), 15);
+                img.appConfig.soloAlfa(evt.getKeyChar(), evt, txtRef.getText(), 15);
             }
         });
 
-        tel = img.getLabel("<html><strong>Teléfono</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        tel = img.getLabel("<html><strong>Teléfono</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         tel.setBounds(30, 180, 130, 30);
 
         txtTel = new JTextField();
@@ -126,12 +126,12 @@ public class Prestamos extends JDialog implements ActionListener {
             }
 
             private void txtTelKeyTyped(KeyEvent evt) {
-                img.core.solonumeros(evt.getKeyChar(), evt, txtTel.getText(), 10);
+                img.appConfig.solonumeros(evt.getKeyChar(), evt, txtTel.getText(), 10);
             }
 
         });
 
-        tiempo = img.getLabel("<html><strong>Tiempo</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        tiempo = img.getLabel("<html><strong>Tiempo</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         tiempo.setBounds(30, 220, 130, 30);
 
         semanas = new JComboBox<String>();
@@ -144,7 +144,7 @@ public class Prestamos extends JDialog implements ActionListener {
         meses.setModel(new DefaultComboBoxModel<>(new String[]{"Meses", "1", "2", "3", "4", "5", "6"}));
         add(meses);
 
-        precio = img.getLabel("<html><strong>Préstamo de</strong></html>", img.core.TEXT_COLOR, this, img.core.MEDIUM);
+        precio = img.getLabel("<html><strong>Préstamo de</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
         precio.setBounds(30, 260, 130, 30);
 
         txtPrecio = new JTextField("0");
@@ -159,7 +159,7 @@ public class Prestamos extends JDialog implements ActionListener {
             }
 
             private void txtPrecioKeyTyped(KeyEvent evt) {
-                img.core.solonumeros(evt.getKeyChar(), evt, txtPrecio.getText(), 9);
+                img.appConfig.solonumeros(evt.getKeyChar(), evt, txtPrecio.getText(), 9);
             }
 
         });
@@ -179,12 +179,12 @@ public class Prestamos extends JDialog implements ActionListener {
         txtTel.setEnabled(true);
         txtPrecio.setEnabled(true);
 
-        img.core.fadeOut(this);
+        img.appConfig.fadeOut(this);
     }
 
     public void btnPrestarAP() {
 
-        if (img.core.valDoc(txtDoc.getText())) {
+        if (img.appConfig.valDoc(txtDoc.getText())) {
             txtRef.setEnabled(false);
             txtTel.setEnabled(false);
             txtPrecio.setEnabled(false);
@@ -202,7 +202,7 @@ public class Prestamos extends JDialog implements ActionListener {
         }
 
         if (docVal) {
-            if (img.core.cantidadDigitos(txtRef.getText())) {
+            if (img.appConfig.cantidadDigitos(txtRef.getText())) {
                 txtTel.setEnabled(false);
                 txtPrecio.setEnabled(false);
                 semanas.setEnabled(false);
@@ -219,7 +219,7 @@ public class Prestamos extends JDialog implements ActionListener {
         }
 
         if (refVal && docVal) {
-            if (img.core.telefono(txtTel.getText())) {
+            if (img.appConfig.telefono(txtTel.getText())) {
                 if (!refVal) {
                     txtPrecio.setEnabled(false);
                     semanas.setEnabled(false);
@@ -241,7 +241,7 @@ public class Prestamos extends JDialog implements ActionListener {
 
         if (refVal && telVal && docVal) {
 
-            if (img.core.validarValor(Double.parseDouble(txtPrecio.getText()))) {
+            if (img.appConfig.validarValor(Double.parseDouble(txtPrecio.getText()))) {
                 preVal = true;
             } else {
                 preVal = false;
@@ -264,7 +264,7 @@ public class Prestamos extends JDialog implements ActionListener {
                 fecha.add(Calendar.MONTH, Integer.parseInt(String.valueOf(meses.getSelectedItem())));
             }
 
-            img.core.setTotalPrestamo(Double.parseDouble(txtPrecio.getText()));
+            img.appConfig.setTotalPrestamo(Double.parseDouble(txtPrecio.getText()));
 
             // actualizar registradora
             String nom = "";
@@ -278,12 +278,12 @@ public class Prestamos extends JDialog implements ActionListener {
             try {
 
                 if (img.database.buscarUser(nom)) {
-                    img.database.registrarPrestamos(nom, img.core.getTotalPrestamo());
+                    img.database.registrarPrestamos(nom, img.appConfig.getTotalPrestamo());
                 } else {
 
                     String[] datos = {"registros", nom, String.valueOf(0), String.valueOf(0.0),
                             String.valueOf(0), String.valueOf(0.0),
-                            String.valueOf(img.core.getTotalPrestamo())};
+                            String.valueOf(img.appConfig.getTotalPrestamo())};
 
                     img.database.insertData(datos);
                 }
@@ -303,9 +303,9 @@ public class Prestamos extends JDialog implements ActionListener {
                 e1.printStackTrace();
             }
 
-            img.core.setTotalPrestamo(Double.parseDouble(txtPrecio.getText()));
-            img.core.mostrarPrestamo(fechaFormat.format(fecha.getTime()), txtnombre.getText());
-            img.core.setTotalPrestamo(0);
+            img.appConfig.setTotalPrestamo(Double.parseDouble(txtPrecio.getText()));
+            img.appConfig.mostrarPrestamo(fechaFormat.format(fecha.getTime()), txtnombre.getText());
+            img.appConfig.setTotalPrestamo(0);
 
             txtnombre.setText("");
             txtRef.setText("");
@@ -318,7 +318,7 @@ public class Prestamos extends JDialog implements ActionListener {
         } else {
 
             if (refVal && telVal && docVal && preVal) {
-                JOptionPane.showMessageDialog(null, "<html>" + img.core.styleJOption() + "<strong>Tiempo no definido</strong></html>", "Mensaje", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "<html>" + img.appConfig.styleJOption() + "<strong>Tiempo no definido</strong></html>", "Mensaje", JOptionPane.PLAIN_MESSAGE);
             }
         }
     }

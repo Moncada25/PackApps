@@ -1,12 +1,14 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
 
-import com.bookverse.development.packapps.core.Core;
+import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -54,9 +56,9 @@ public class Notes extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(NOTES);
-    resources.core.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
-    resources.core.instruccionesNotas();
+    AppConfig.instruccionesNotas();
     setVisible(true);
   }
 
@@ -65,9 +67,9 @@ public class Notes extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(NOTES);
-    resources.core.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
-    resources.core.instruccionesNotas();
+    AppConfig.instruccionesNotas();
     setVisible(true);
   }
 
@@ -116,9 +118,9 @@ public class Notes extends JDialog implements ActionListener {
           txtNumKeyTyped(e);
         }
 
-        public void txtNumKeyTyped(KeyEvent e) {
-          resources.core.solonumerosYpunto(e.getKeyChar(), e, notesFields[j].getText(), 3);
-          resources.core.PuntoMedio(e.getKeyChar(), e, notesFields[j].getText());
+        public void txtNumKeyTyped(KeyEvent e) { 
+          Format.onlyNumbersAndPoint(e.getKeyChar(), e, notesFields[j].getText(), 3);
+          Format.middlePoint(e.getKeyChar(), e, notesFields[j].getText());
         }
       });
       y += 40;
@@ -145,17 +147,17 @@ public class Notes extends JDialog implements ActionListener {
 
     JLabel lblNotes = resources
         .getLabel("<html><strong>Notes</strong></html>", MAIN_COLOR, this,
-            resources.core.MEDIUM);
+            AppConfig.MEDIUM);
     lblNotes.setBounds(30, 30, 100, 30);
 
     JLabel lblPercentages = resources
         .getLabel("<html><strong>%</strong></html>", MAIN_COLOR, this,
-            resources.core.MEDIUM);
+            AppConfig.MEDIUM);
     lblPercentages.setBounds(145, 30, 100, 30);
 
     JLabel name = resources
         .getLabel("<html><strong>Name</strong></html>", MAIN_COLOR, this,
-            resources.core.MEDIUM);
+            AppConfig.MEDIUM);
     name.setBounds(270, 30, 100, 30);
 
     txtName = new JTextField();
@@ -170,13 +172,13 @@ public class Notes extends JDialog implements ActionListener {
       }
 
       public void txtNumKeyTyped(KeyEvent e) {
-        resources.core.soloAlfa(e.getKeyChar(), e, txtName.getText(), 20);
+        Format.onlyAlfa(e.getKeyChar(), e, txtName.getText(), 20);
       }
     });
 
     JLabel scale = resources
         .getLabel("<html><strong>Scale</strong></html>", MAIN_COLOR, this,
-            resources.core.MEDIUM);
+            AppConfig.MEDIUM);
     scale.setBounds(270, 110, 100, 30);
 
     ButtonGroup buttonGroup = new ButtonGroup();
@@ -266,7 +268,7 @@ public class Notes extends JDialog implements ActionListener {
 
   private void insert(String state) {
 
-    if (resources.core.comprobarConexion("Data don't saved", true) && resources.core.saveGame()) {
+    if (AppConfig.verifyConnection("Data don't saved", true) && AppConfig.saveGame()) {
 
       try {
 
@@ -279,8 +281,8 @@ public class Notes extends JDialog implements ActionListener {
         }
 
         String[] data = {NOTES, txtName.getText(), option, String.format("%.0f", totalPercentage),
-            String.format("%.2f", totalNote), state, resources.core.obtenerDate()};
-        resources.database.insertData(data);
+            String.format("%.2f", totalNote), state, AppConfig.getDate()};
+        Database.insertData(data);
       } catch (Exception e) {
         Alerts.error(e, NOTES);
       }
@@ -310,7 +312,7 @@ public class Notes extends JDialog implements ActionListener {
         }
 
         JOptionPane.showMessageDialog(null,
-            "<html>" + Core.styleJOption() + "<strong>Name: </strong>" + txtName.getText()
+            "<html>" + Format.style() + "<strong>Name: </strong>" + txtName.getText()
                 + "<br>" + "<strong>Note: </strong>"
                 + String.format("%.2f", totalNote) + "</html>",
             "Definitive", JOptionPane.PLAIN_MESSAGE);
@@ -323,7 +325,7 @@ public class Notes extends JDialog implements ActionListener {
 
       } else if (totalPercentage > 100) {
 
-        JOptionPane.showMessageDialog(null, "<html>" + Core.styleJOption()
+        JOptionPane.showMessageDialog(null, "<html>" + Format.style()
                 + "<strong>Percentage exceeded</strong></html>", "Verify!",
             JOptionPane.PLAIN_MESSAGE);
 
@@ -332,7 +334,7 @@ public class Notes extends JDialog implements ActionListener {
         image.setIcon(new ImageIcon(resources.getImage("dead.png")));
 
         JOptionPane.showMessageDialog(null,
-            "<html>" + Core.styleJOption()
+            "<html>" + Format.style()
                 + "<strong>There is nothing to do, better cancel...</strong><br><br>"
                 + "<strong>Accumulated note: </strong>" + String.format("%.2f", totalNote) + "<br>"
                 + "<strong>You would have to get " + String.format("%.2f", missingNote) + " in the "
@@ -346,7 +348,7 @@ public class Notes extends JDialog implements ActionListener {
         if (totalNote >= 0 && totalNote < minNote) {
 
           JOptionPane.showMessageDialog(null,
-              "<html>" + Core.styleJOption() + "<strong>Name: </strong>" + txtName
+              "<html>" + Format.style() + "<strong>Name: </strong>" + txtName
                   .getText() + "<br>"
                   + "<strong>Note necessary to win: </strong>" + String
                   .format("%.2f", missingNote) + "<br>"
@@ -362,7 +364,7 @@ public class Notes extends JDialog implements ActionListener {
           image.setIcon(new ImageIcon(resources.getImage("win.png")));
 
           JOptionPane.showMessageDialog(null,
-              "<html>" + Core.styleJOption()
+              "<html>" + Format.style()
                   + "<strong>Congratulations, you've already approved it!</strong><br><br>"
                   + "<strong>Name: </strong>" + txtName.getText()
                   + "<br>" + "<strong>Accumulated note: </strong>" + String
@@ -376,7 +378,7 @@ public class Notes extends JDialog implements ActionListener {
     } else {
 
       JOptionPane.showMessageDialog(null,
-          "<html>" + Core.styleJOption()
+          "<html>" + Format.style()
               + "<strong>Review the following data</strong><br><br>"
               + "<strong>Notes: </strong>less than or equal to " + maxNote + "<br>"
               + "<strong>Fields: </strong>empty" + "</html>",
@@ -415,7 +417,7 @@ public class Notes extends JDialog implements ActionListener {
     } else if (e.getSource() == btnReset) {
       btnResetAP();
     } else if (e.getSource() == btnExit) {
-      resources.core.fadeOut(this);
+      AppConfig.fadeOut(this);
     }
   }
 }

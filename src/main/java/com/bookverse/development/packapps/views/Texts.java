@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Core.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Core.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -37,7 +37,7 @@ public class Texts extends JDialog implements MouseListener {
     setMinimumSize(new Dimension(530, 330));
     setMaximumSize(new Dimension(1280, 720));
     setTitle("Text Editor");
-    resources.core.fadeIn(this);
+    resources.appConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -45,26 +45,26 @@ public class Texts extends JDialog implements MouseListener {
   public JPanel getPanel() {
 
     JPanel panel = new JPanel(new FlowLayout());
-    panel.setBorder(resources.core.bordeAzul("Select Action"));
+    panel.setBorder(resources.appConfig.getBorder("Select Action"));
 
-    encrypt = resources.getLabel("  Encrypt  ", TEXT_COLOR, panel, resources.core.MEDIUM);
-    encrypt.setBorder(resources.core.MEDIO);
+    encrypt = resources.getLabel("  Encrypt  ", TEXT_COLOR, panel, resources.appConfig.MEDIUM);
+    encrypt.setBorder(resources.appConfig.BORDER_BLUE);
     encrypt.addMouseListener(this);
 
-    upperCase = resources.getLabel("  UpperCase  ", TEXT_COLOR, panel, resources.core.MEDIUM);
-    upperCase.setBorder(resources.core.MEDIO);
+    upperCase = resources.getLabel("  UpperCase  ", TEXT_COLOR, panel, resources.appConfig.MEDIUM);
+    upperCase.setBorder(resources.appConfig.BORDER_BLUE);
     upperCase.addMouseListener(this);
 
-    exit = resources.getLabel("  Return  ", MAIN_COLOR, panel, resources.core.MEDIUM);
-    exit.setBorder(resources.core.HARD);
+    exit = resources.getLabel("  Return  ", MAIN_COLOR, panel, resources.appConfig.MEDIUM);
+    exit.setBorder(resources.appConfig.BORDER_RED);
     exit.addMouseListener(this);
 
-    lowerCase = resources.getLabel("  LowerCase  ", TEXT_COLOR, panel, resources.core.MEDIUM);
-    lowerCase.setBorder(resources.core.MEDIO);
+    lowerCase = resources.getLabel("  LowerCase  ", TEXT_COLOR, panel, resources.appConfig.MEDIUM);
+    lowerCase.setBorder(resources.appConfig.BORDER_BLUE);
     lowerCase.addMouseListener(this);
 
-    decrypt = resources.getLabel("  Decrypt  ", TEXT_COLOR, panel, resources.core.MEDIUM);
-    decrypt.setBorder(resources.core.MEDIO);
+    decrypt = resources.getLabel("  Decrypt  ", TEXT_COLOR, panel, resources.appConfig.MEDIUM);
+    decrypt.setBorder(resources.appConfig.BORDER_BLUE);
     decrypt.addMouseListener(this);
 
     return panel;
@@ -76,7 +76,7 @@ public class Texts extends JDialog implements MouseListener {
 
     JLabel tittle = resources
         .getLabel("<html><strong>Write Text...</strong></html>", MAIN_COLOR,
-            this, resources.core.MEDIUM);
+            this, resources.appConfig.MEDIUM);
     tittle.setBounds(30, 15, 370, 50);
     add(tittle, BorderLayout.NORTH);
 
@@ -129,7 +129,7 @@ public class Texts extends JDialog implements MouseListener {
     } else if (e.getSource() == encrypt) {
 
       if (!text.getText().equals("")) {
-        text.setText(resources.core.Encriptar(text.getText(), false));
+        text.setText(resources.appConfig.Encrypt(text.getText(), false));
       } else {
         Alerts.inputSomethingText();
       }
@@ -137,13 +137,13 @@ public class Texts extends JDialog implements MouseListener {
     } else if (e.getSource() == decrypt) {
 
       if (!text.getText().equals("")) {
-        text.setText(resources.core.Desencriptar(text.getText(), false));
+        text.setText(resources.appConfig.Decrypt(text.getText(), false));
       } else {
         Alerts.inputSomethingText();
       }
 
     } else if (e.getSource() == exit) {
-      resources.core.fadeOut(this);
+      resources.appConfig.fadeOut(this);
     }
   }
 
@@ -151,15 +151,15 @@ public class Texts extends JDialog implements MouseListener {
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == upperCase) {
-      upperCase.setCursor(resources.core.MANO);
+      upperCase.setCursor(resources.appConfig.HAND);
     } else if (e.getSource() == lowerCase) {
-      lowerCase.setCursor(resources.core.MANO);
+      lowerCase.setCursor(resources.appConfig.HAND);
     } else if (e.getSource() == encrypt) {
-      encrypt.setCursor(resources.core.MANO);
+      encrypt.setCursor(resources.appConfig.HAND);
     } else if (e.getSource() == decrypt) {
-      decrypt.setCursor(resources.core.MANO);
+      decrypt.setCursor(resources.appConfig.HAND);
     } else if (e.getSource() == exit) {
-      exit.setCursor(resources.core.MANO);
+      exit.setCursor(resources.appConfig.HAND);
     }
   }
 

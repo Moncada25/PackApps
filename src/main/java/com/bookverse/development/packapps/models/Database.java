@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.models;
 
+import static com.bookverse.development.packapps.utils.ViewConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
 import static com.bookverse.development.packapps.utils.ViewConstants.FEEDBACK;
 import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
@@ -9,7 +10,6 @@ import static com.bookverse.development.packapps.utils.ViewConstants.LOANS;
 import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
 import static com.bookverse.development.packapps.utils.ViewConstants.PURCHASES;
 import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.ViewConstants.RECORDS;
 import static com.bookverse.development.packapps.utils.ViewConstants.SALES;
 import static com.bookverse.development.packapps.utils.ViewConstants.USERS;
 
@@ -25,20 +25,19 @@ import java.util.stream.IntStream;
 import javax.sql.DataSource;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.jetbrains.annotations.NotNull;
 
 public class Database {
 
-  private Connection connection = null;
-  private ResultSet resultSet;
-  private PreparedStatement preparedStatement;
-  private DefaultTableModel tableModel;
-  private DataSource dataSource;
-  private DataSourceService dataSourceService = new DataSourceService();
-  private String ref, est, doc, tel, fecha, usuario, userLogin, pass, status;
-  private Double precio, totalVen, totalCom, totalPres;
-  private int disp, prodVen, prodCom;
+  public static Store store = new Store();
+  private static Connection connection = null;
+  private static ResultSet resultSet;
+  private static PreparedStatement preparedStatement;
+  private static DefaultTableModel tableModel;
+  private static DataSource dataSource;
+  private static DataSourceService dataSourceService = new DataSourceService();
 
-  public boolean insertData(String[] data) {
+  public static boolean insertData(@NotNull String[] data) {
 
     try {
       dataSource = dataSourceService.getDataSource();
@@ -104,7 +103,7 @@ public class Database {
           preparedStatement.setInt(4, Integer.parseInt(data[4]));
           preparedStatement.execute();
           break;
-        case RECORDS:
+        case CASH_REGISTER:
           preparedStatement = connection.prepareStatement(Querys.insertRecord());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setInt(2, Integer.parseInt(data[2]));
@@ -175,7 +174,7 @@ public class Database {
     }
   }
 
-  public boolean readTable(JTable tabla, String query, boolean isMain) {
+  public static boolean readTable(JTable tabla, String query, boolean isMain) {
 
     try {
       dataSource = dataSourceService.getDataSource();
@@ -187,8 +186,9 @@ public class Database {
       ArrayList<Object[]> data = new ArrayList<>();
       while (resultSet.next()) {
         Object[] rows = new Object[resultSetMetaData.getColumnCount()];
-        for (int i = 0; i < rows.length; i++)
+        for (int i = 0; i < rows.length; i++) {
           rows[i] = resultSet.getObject(i + 1);
+        }
         data.add(rows);
       }
 
@@ -216,7 +216,7 @@ public class Database {
     return false;
   }
 
-  public void updateData(String nickname, String id, String table) {
+  public static void updateData(String nickname, String id, String table) {
 
     try {
       dataSource = dataSourceService.getDataSource();
@@ -238,7 +238,7 @@ public class Database {
     }
   }
 
-  public void deleteData(String[] rows, String table) {
+  public static void deleteData(@NotNull String[] rows, String table) {
 
     try {
       dataSource = dataSourceService.getDataSource();
@@ -263,18 +263,14 @@ public class Database {
     }
   }
 
-  /* DATA COMPRAVENTA */
-  public void registrarVentas(String usuario, int producVend, Double totalVentas)
-      throws SQLException {
+  public static void updateInventory(int units, String reference) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = (PreparedStatement) connection.prepareStatement(
-          "UPDATE registros SET Productos_Vendidos='" + (producVend + getProdVen())
-              + "', Total_Ventas='"
-              + (totalVentas + getTotalVen()) + "' WHERE Usuario='" + usuario + "'");
+      preparedStatement = connection.prepareStatement(
+          Querys.updateInventory(reference, (units + store.getAvailableProducts())));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -291,17 +287,47 @@ public class Database {
     }
   }
 
-  public void registrarCompras(String usuario, int producComp, Double totalCompr)
-      throws SQLException {
+  public static boolean searchProductByReference(String reference, String table) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = (PreparedStatement) connection.prepareStatement(
-          "UPDATE registros SET Productos_Comprados='" + (producComp + getProdCom())
-              + "', Total_Compras='"
-              + (totalCompr + getTotalCom()) + "' WHERE Usuario='" + usuario + "'");
+      preparedStatement = connection.prepareStatement(Querys.getDataProduct(reference, table));
+      resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        store.setReference(resultSet.getString("ID"));
+        store.setProductState(resultSet.getString("State"));
+        store.setPrice(resultSet.getDouble("Price"));
+        store.setAvailableProducts(resultSet.getInt("Quantity"));
+      }
+
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+
+      try {
+        if (null != connection) {
+          connection.close();
+        }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
+    }
+
+    return reference.equals(store.getReference());
+  }
+
+  public static void updateSales(String user, int productsSold, Double totalSales) {
+
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
+
+      preparedStatement = connection.prepareStatement(Querys
+          .updateCashRegisterSales(user, (productsSold + store.getSoldProducts()),
+              (totalSales + store.getTotalSales())));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -318,15 +344,15 @@ public class Database {
     }
   }
 
-  public void registrarPrestamos(String usuario, Double prestamo) throws SQLException {
+  public static void updatePurchases(String user, int purchasedProducts, Double totalPurchases) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = (PreparedStatement) connection
-          .prepareStatement("UPDATE registros SET Total_Prestamos='"
-              + (prestamo + getTotalPres()) + "' WHERE Usuario='" + usuario + "'");
+      preparedStatement = connection.prepareStatement(Querys
+          .updateCashRegisterPurchases(user, (purchasedProducts + store.getPurchasedProducts()),
+              (totalPurchases + store.getTotalPurchases())));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -343,14 +369,13 @@ public class Database {
     }
   }
 
-  public void acumularInventario(int cant, String ref) throws SQLException {
+  public static void updateLoan(String user, Double loanValue) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = (PreparedStatement) connection.prepareStatement(
-          "UPDATE inventario SET Cantidad='" + (cant + getDisp()) + "' WHERE ID='" + ref + "'");
+      preparedStatement = connection.prepareStatement(Querys.updateCashRegisterLoan(user, (loanValue + store.getTotalLoans())));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -367,46 +392,13 @@ public class Database {
     }
   }
 
-  public void importarDatos(String refer) {
+  public static void recordLogin(String status, String user) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection
-          .prepareStatement("select * from inventario where ID ='" + refer + "'");
-      resultSet = preparedStatement.executeQuery();
-
-      while (resultSet.next()) {
-        setRef(resultSet.getString("ID"));
-        setEst(resultSet.getString("Estado"));
-        setPrecio(resultSet.getDouble("Precio"));
-        setDisp(resultSet.getInt("Cantidad"));
-      }
-
-    } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
-    }
-  }
-
-  public void login(String status, String user) {
-
-    try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
-
-      preparedStatement = (PreparedStatement) connection
-          .prepareStatement(
-              "UPDATE usuarios SET Status='" + status + "' WHERE User_Name='" + user + "'");
+      preparedStatement = connection.prepareStatement(Querys.recordLogin(status, user));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -423,21 +415,22 @@ public class Database {
     }
   }
 
-  public boolean buscarRef(String refer) throws SQLException {
+  public static boolean searchDataUser(String user) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection
-          .prepareStatement("select * from inventario where ID ='" + refer + "'");
+      preparedStatement = connection.prepareStatement(Querys.searchDataUser(user));
       resultSet = preparedStatement.executeQuery();
 
-      while (resultSet.next()) {
-        setRef(resultSet.getString("ID"));
-        setEst(resultSet.getString("Estado"));
-        setPrecio(resultSet.getDouble("Precio"));
-        setDisp(resultSet.getInt("Cantidad"));
+      if (resultSet.next()) {
+        store.setUser(resultSet.getString("User"));
+        store.setSoldProducts(resultSet.getInt("SoldProducts"));
+        store.setTotalSales(resultSet.getDouble("TotalSales"));
+        store.setPurchasedProducts(resultSet.getInt("PurchasedProducts"));
+        store.setTotalPurchases(resultSet.getDouble("TotalPurchases"));
+        store.setTotalLoans(resultSet.getDouble("TotalLoans"));
       }
 
     } catch (SQLException e) {
@@ -453,23 +446,20 @@ public class Database {
       }
     }
 
-    return refer.equals(getRef());
+    return user.equals(store.getUser());
   }
 
-  public int getIDUser(String user) throws SQLException {
-
-    int ID = 0;
+  public static int getIdUser(String user) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection
-          .prepareStatement("select ID from usuarios where User_Name ='" + user + "'");
+      preparedStatement = connection.prepareStatement(Querys.idUser(user));
       resultSet = preparedStatement.executeQuery();
 
-      while (resultSet.next()) {
-        ID = resultSet.getInt("ID");
+      if (resultSet.next()) {
+        return resultSet.getInt("ID");
       }
 
     } catch (SQLException e) {
@@ -484,26 +474,22 @@ public class Database {
       }
     }
 
-    return ID;
+    return 0;
   }
 
-  public boolean buscarUser(String user) throws SQLException {
+  public static String searchUserLogged(String status) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection
-          .prepareStatement("select * from registros where Usuario ='" + user + "'");
+      preparedStatement = connection.prepareStatement(Querys.searchUserLogged(status));
       resultSet = preparedStatement.executeQuery();
 
-      while (resultSet.next()) {
-        setUsuario(resultSet.getString("Usuario"));
-        setProdVen(resultSet.getInt("Productos_Vendidos"));
-        setTotalVen(resultSet.getDouble("Total_Ventas"));
-        setProdCom(resultSet.getInt("Productos_Comprados"));
-        setTotalCom(resultSet.getDouble("Total_Compras"));
-        setTotalPres(resultSet.getDouble("Total_Prestamos"));
+      if (resultSet.next()) {
+        store.setUser(resultSet.getString("Username"));
+        store.setPassword(resultSet.getString("Password"));
+        store.setUserStatus(resultSet.getString("Status"));
       }
 
     } catch (SQLException e) {
@@ -519,54 +505,19 @@ public class Database {
       }
     }
 
-    return user.equals(getUsuario());
+    return store.getUserLogged();
   }
 
-  public String returnUser(String stat) throws SQLException {
+  public static boolean searchUser(String user) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection
-          .prepareStatement("select * from usuarios where Status ='" + stat + "'");
+      preparedStatement = connection.prepareStatement(Querys.searchUser(user));
       resultSet = preparedStatement.executeQuery();
 
-      while (resultSet.next()) {
-        setUserLogin(resultSet.getString("User_Name"));
-        setPass(resultSet.getString("Password"));
-        setStatus(resultSet.getString("Status"));
-      }
-
-    } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
-    }
-
-    return getUserLogin();
-  }
-
-  public boolean userExist(String user) throws SQLException {
-
-    try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
-
-      preparedStatement = connection
-          .prepareStatement("select * from usuarios where User_Name ='" + user + "'");
-      resultSet = preparedStatement.executeQuery();
-
-      while (resultSet.next()) {
-        return true;
-      }
+      return resultSet.next();
 
     } catch (SQLException e) {
       Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
@@ -584,20 +535,16 @@ public class Database {
     return false;
   }
 
-  public boolean buscarEmpleado(String user, String secretpassword) throws SQLException {
+  public static boolean searchUserRegiter(String user, String password) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(
-          "SELECT * FROM usuarios WHERE User_Name='" + user + "' AND password='" + secretpassword
-              + "'");
+      preparedStatement = connection.prepareStatement(Querys.searchUserRegister(user, password));
       resultSet = preparedStatement.executeQuery();
 
-      while (resultSet.next()) {
-        return true;
-      }
+      return resultSet.next();
 
     } catch (SQLException e) {
       Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
@@ -615,14 +562,13 @@ public class Database {
     return false;
   }
 
-  public void updatePassword(String User, String newPassword) throws SQLException {
+  public static void updatePassword(String user, String newPassword) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(
-          "UPDATE usuarios SET Password='" + newPassword + "' WHERE User_Name='" + User + "'");
+      preparedStatement = connection.prepareStatement(Querys.updatePassword(user, newPassword));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -639,15 +585,13 @@ public class Database {
     }
   }
 
-  public void updateCantidad(int cantidad, String ID, String table) throws SQLException {
+  public static void updateQuantity(int quantity, String id, String table) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection
-          .prepareStatement(
-              "UPDATE " + table + " SET Cantidad='" + cantidad + "' WHERE ID='" + ID + "'");
+      preparedStatement = connection.prepareStatement(Querys.updateQuantity(quantity, id, table));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -662,137 +606,5 @@ public class Database {
         Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
       }
     }
-  }
-
-  public Double getTotalPres() {
-    return totalPres;
-  }
-
-  public void setTotalPres(Double totalPres) {
-    this.totalPres = totalPres;
-  }
-
-  public String returnPass(String user) {
-    return user;
-  }
-
-  public String getPass() {
-    return pass;
-  }
-
-  public void setPass(String pass) {
-    this.pass = pass;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  public String getDoc() {
-    return doc;
-  }
-
-  public void setDoc(String doc) {
-    this.doc = doc;
-  }
-
-  public String getUserLogin() {
-    return userLogin;
-  }
-
-  public void setUserLogin(String userLogin) {
-    this.userLogin = userLogin;
-  }
-
-  public String getTel() {
-    return tel;
-  }
-
-  public void setTel(String tel) {
-    this.tel = tel;
-  }
-
-  public String getFecha() {
-    return fecha;
-  }
-
-  public void setFecha(String fecha) {
-    this.fecha = fecha;
-  }
-
-  public String getRef() {
-    return ref;
-  }
-
-  public void setRef(String ref) {
-    this.ref = ref;
-  }
-
-  public String getEst() {
-    return est;
-  }
-
-  public void setEst(String est) {
-    this.est = est;
-  }
-
-  public Double getPrecio() {
-    return precio;
-  }
-
-  public void setPrecio(Double precio) {
-    this.precio = precio;
-  }
-
-  public int getDisp() {
-    return disp;
-  }
-
-  public void setDisp(int disp) {
-    this.disp = disp;
-  }
-
-  public String getUsuario() {
-    return usuario;
-  }
-
-  public void setUsuario(String usuario) {
-    this.usuario = usuario;
-  }
-
-  public Double getTotalVen() {
-    return totalVen;
-  }
-
-  public void setTotalVen(Double totalVen) {
-    this.totalVen = totalVen;
-  }
-
-  public Double getTotalCom() {
-    return totalCom;
-  }
-
-  public void setTotalCom(Double totalCom) {
-    this.totalCom = totalCom;
-  }
-
-  public int getProdVen() {
-    return prodVen;
-  }
-
-  public void setProdVen(int prodVen) {
-    this.prodVen = prodVen;
-  }
-
-  public int getProdCom() {
-    return prodCom;
-  }
-
-  public void setProdCom(int prodCom) {
-    this.prodCom = prodCom;
   }
 }
