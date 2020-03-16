@@ -5,6 +5,7 @@ import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_IMAGES;
+import static com.bookverse.development.packapps.utils.ViewConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
 import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
@@ -13,7 +14,6 @@ import static com.bookverse.development.packapps.utils.ViewConstants.LOANS;
 import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
 import static com.bookverse.development.packapps.utils.ViewConstants.PURCHASES;
 import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.ViewConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.ViewConstants.SALES;
 
 import com.bookverse.development.packapps.core.AppConfig;
@@ -450,7 +450,8 @@ public class Index extends JFrame implements ActionListener {
     hangmanTable.cleanTable();
 
     try {
-     Database.readTable(hangmanTable.viewTable, Querys.getAllData(Format.tableName(HANGMAN)), true);
+      Database
+          .readTable(hangmanTable.viewTable, Querys.getAllData(Format.tableName(HANGMAN)), true);
     } catch (Exception e1) {
       Alerts.error(e1, HANGMAN);
     }
@@ -958,7 +959,7 @@ public class Index extends JFrame implements ActionListener {
 
       } else if (e.getSource() == moreBacklog) {
         Alerts.message("Recuerdaaaa",
-            "Poner la app de backlog en un servidor y poner ac· el link!! XD");
+            "Poner la app de backlog en un servidor y poner ac√° el link!! XD");
       } else if (e.getSource() == tables) {
 
         if (dicesTableAP()) {

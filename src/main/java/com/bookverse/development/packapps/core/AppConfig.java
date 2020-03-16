@@ -8,6 +8,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.util.Arrays;
@@ -156,14 +157,14 @@ public class AppConfig {
     try {
 
       MessageDigest md = MessageDigest.getInstance("MD5");
-      byte[] digestOfPassword = md.digest(getSecretKey(isEmail).getBytes("utf-8"));
+      byte[] digestOfPassword = md.digest(getSecretKey(isEmail).getBytes(StandardCharsets.UTF_8));
       byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
 
       SecretKey key = new SecretKeySpec(keyBytes, "DESede");
       Cipher cipher = Cipher.getInstance("DESede");
       cipher.init(Cipher.ENCRYPT_MODE, key);
 
-      byte[] plainTextBytes = text.getBytes("utf-8");
+      byte[] plainTextBytes = text.getBytes(StandardCharsets.UTF_8);
       byte[] buf = cipher.doFinal(plainTextBytes);
       byte[] base64Bytes = Base64.encodeBase64(buf);
       base64EncryptedString = new String(base64Bytes);
@@ -179,9 +180,9 @@ public class AppConfig {
     String base64EncryptedString = "";
 
     try {
-      byte[] message = Base64.decodeBase64(text.getBytes("utf-8"));
+      byte[] message = Base64.decodeBase64(text.getBytes(StandardCharsets.UTF_8));
       MessageDigest md = MessageDigest.getInstance("MD5");
-      byte[] digestOfPassword = md.digest(getSecretKey(isEmail).getBytes("utf-8"));
+      byte[] digestOfPassword = md.digest(getSecretKey(isEmail).getBytes(StandardCharsets.UTF_8));
       byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
       SecretKey key = new SecretKeySpec(keyBytes, "DESede");
 
@@ -190,7 +191,7 @@ public class AppConfig {
 
       byte[] plainText = decipher.doFinal(message);
 
-      base64EncryptedString = new String(plainText, "UTF-8");
+      base64EncryptedString = new String(plainText, StandardCharsets.UTF_8);
 
     } catch (Exception ex) {
 
@@ -200,7 +201,7 @@ public class AppConfig {
 
       JOptionPane.showMessageDialog(null, "<html>" + Format.style()
               + "<strong>El texto introducido no tiene contenido encriptado o la llave es incorrecta.</strong></html>",
-          "°Verifique!", JOptionPane.PLAIN_MESSAGE);
+          "¬°Verifique!", JOptionPane.PLAIN_MESSAGE);
 
       return text;
     } else {
@@ -260,7 +261,7 @@ public class AppConfig {
             return true;
           } else {
             JOptionPane.showMessageDialog(null,
-                "<html>" + Format.style() + "<strong>ContraseÒa incorrecta</strong></html>",
+                "<html>" + Format.style() + "<strong>Contrase√±a incorrecta</strong></html>",
                 "Error", JOptionPane.PLAIN_MESSAGE);
             pass.setText("");
           }
@@ -293,7 +294,7 @@ public class AppConfig {
       if (show) {
         JOptionPane.showMessageDialog(null,
             "<html>" + Format.style() + "<strong>" + request + "</strong></html>",
-            "Sin conexiÛn a Internet", JOptionPane.PLAIN_MESSAGE);
+            "Sin conexi√≥n a Internet", JOptionPane.PLAIN_MESSAGE);
       }
 
     } finally {
@@ -361,13 +362,13 @@ public class AppConfig {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style() + "<strong><center>Ruleta</center></strong><br>"
             + "<strong>Jugadores: </strong>1-9<br><br>"
-            + "Al iniciar, se pedir· el n˙mero de jugadores<br>"
-            + "que participar·n. Luego, tendr· que ingresar<br>"
-            + "la informaciÛn de cada jugador (nombre y saldo).<br><br>"
-            + "Finalmente, empezar·n las apuestas pertinentes<br>"
+            + "Al iniciar, se pedir√° el n√∫mero de jugadores<br>"
+            + "que participar√°n. Luego, tendr√° que ingresar<br>"
+            + "la informaci√≥n de cada jugador (nombre y saldo).<br><br>"
+            + "Finalmente, empezar√°n las apuestas pertinentes<br>"
             + "teniendo en cuenta lo siguiente: de ganar se le<br>"
-            + "sumar· al saldo el doble del valor de la apuesta y<br>"
-            + "<strong>°apostar por el cero (0) implica perder x2 y ganar x4!</strong><br>"
+            + "sumar√° al saldo el doble del valor de la apuesta y<br>"
+            + "<strong>¬°apostar por el cero (0) implica perder x2 y ganar x4!</strong><br>"
             + "</html>",
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
@@ -384,10 +385,10 @@ public class AppConfig {
         "<html>" + Format.style() + "<strong><center>Juego de Dados</center></strong><br>"
             + "<strong>Jugadores: </strong>3<br><br>"
             + "El juego consta de 5 rondas, cada jugador<br>"
-            + "lanzar· tres dados para sumar sus puntos<br>"
-            + "pero si los saca iguales ganar· inmediatamente.<br>"
+            + "lanzar√° tres dados para sumar sus puntos<br>"
+            + "pero si los saca iguales ganar√° inmediatamente.<br>"
             + "Si al finalizar el juego, ninguno saca los tres<br>"
-            + "dados iguales, ganar· quien sume m·s puntos." + "</html>",
+            + "dados iguales, ganar√° quien sume m√°s puntos." + "</html>",
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
@@ -395,11 +396,11 @@ public class AppConfig {
     JOptionPane.showMessageDialog(null, "<html>" + Format.style()
             + "<strong><center>Rompecabezas</center></strong><br>"
             + "<strong>Jugadores: </strong>1<br><br>"
-            + "DespuÈs de seleccionar la dificultad, el<br>"
-            + "tablero iniciar· en orden aleatorio, se tendr·n<br>"
-            + "que ordenar los n˙meros de menor a mayor<br>"
+            + "Despu√©s de seleccionar la dificultad, el<br>"
+            + "tablero iniciar√° en orden aleatorio, se tendr√°n<br>"
+            + "que ordenar los n√∫meros de menor a mayor<br>"
             + "en la menor cantidad de intentos posible.<br><br>"
-            + "°Ap˙rate! habr· un tiempo lÌmite para ganar:<br><br>"
+            + "¬°Ap√∫rate! habr√° un tiempo l√≠mite para ganar:<br><br>"
             + "<strong>Level Easy:</strong> 3 min<br>"
             + "<strong>Level Medium:</strong> 6 min<br>" + "<strong>Level Hard:</strong> 10 min<br>"
             + "</html>",
@@ -408,12 +409,12 @@ public class AppConfig {
 
   public static void instruccionesAdivinar() {
     JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong><center>Adivinar N˙mero</center></strong><br>"
+        "<html>" + Format.style() + "<strong><center>Adivinar N√∫mero</center></strong><br>"
             + "<strong>Jugadores: </strong>1<br><br>"
-            + "DespuÈs de seleccionar la dificultad, se pedir·<br>"
-            + "el m·ximo rango a adivinar, Èste no puede ser<br>"
-            + "mayor de 6 dÌgitos. DespuÈs, simplemente tendr·s<br>"
-            + "que ir ingresando valores hasta adivinar el n˙mero<br>"
+            + "Despu√©s de seleccionar la dificultad, se pedir√°<br>"
+            + "el m√°ximo rango a adivinar, √©ste no puede ser<br>"
+            + "mayor de 6 d√≠gitos. Despu√©s, simplemente tendr√°s<br>"
+            + "que ir ingresando valores hasta adivinar el n√∫mero<br>"
             + "secreto en la menor cantidad de intentos." + "</html>",
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
@@ -422,11 +423,11 @@ public class AppConfig {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style() + "<strong><center>Triqui</center></strong><br>"
             + "<strong>Jugadores: </strong>1 o 2<br><br>"
-            + "Triqui cl·sico usuario vs usuario o usuario vs CPU.<br>"
-            + "En principio, cada uno tendr· tres movimientos.<br>"
-            + "DespuÈs de hacerlos, tendr·n que empezar a mover<br>"
+            + "Triqui cl√°sico usuario vs usuario o usuario vs CPU.<br>"
+            + "En principio, cada uno tendr√° tres movimientos.<br>"
+            + "Despu√©s de hacerlos, tendr√°n que empezar a mover<br>"
             + "las piezas ya puestas hasta lograr poner las tres en linea.<br>"
-            + "Cuando un jugador llegue a 5 puntos ganar· la partida." + "</html>",
+            + "Cuando un jugador llegue a 5 puntos ganar√° la partida." + "</html>",
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
@@ -434,11 +435,11 @@ public class AppConfig {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style()
             + "<strong><center>Estructuras de Datos</center></strong><br>"
-            + "SimulaciÛn funcional de estructuras tipo <strong>pilas, colas </strong><br> y <strong>matrices </strong>"
+            + "Simulaci√≥n funcional de estructuras tipo <strong>pilas, colas </strong><br> y <strong>matrices </strong>"
             + "con funciones de conteo, suma y promedio,<br>"
-            + "para las primeras, y multiplicaciÛn, transpuesta<br>"
+            + "para las primeras, y multiplicaci√≥n, transpuesta<br>"
             + "y determinantes para las opecaciones con matrices.<br>"
-            + "⁄til para entender el funcionamiento de estas estructuras." + "</html>",
+            + "√ötil para entender el funcionamiento de estas estructuras." + "</html>",
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
@@ -447,18 +448,18 @@ public class AppConfig {
         "<html>" + Format.style() + "<strong><center>Ahorcadito</center></strong><br>"
             + "<strong>Jugadores: </strong>1<br><br>"
             + "El juego empieza cuando se selecciona una<br>"
-            + "categorÌa de palabras para jugar. Tendr·s que ir<br>"
+            + "categor√≠a de palabras para jugar. Tendr√°s que ir<br>"
             + "digitando letra por letra la palabra secreta,<br>"
-            + "°pero no te tardes! tendr·s 60 segundo para ganar." + "</html>",
+            + "¬°pero no te tardes! tendr√°s 60 segundo para ganar." + "</html>",
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
   public static void instruccionesNotas() {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style() + "<strong><center>Notas</center></strong><br>"
-            + "<strong>øNo sabes cu·nto necesitas para ganar la materia?</strong><br><br>"
-            + "°Con esta aplicaciÛn podr·s saberlo! suma tus notas<br>"
-            + "y entÈrate si tienes esperanza para pasarla o si ya<br>"
+            + "<strong>¬øNo sabes cu√°nto necesitas para ganar la materia?</strong><br><br>"
+            + "¬°Con esta aplicaci√≥n podr√°s saberlo! suma tus notas<br>"
+            + "y ent√©rate si tienes esperanza para pasarla o si ya<br>"
             + "mejor la cancelas... puedes agregar hasta 10 notas.<br>" + "</html>",
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }

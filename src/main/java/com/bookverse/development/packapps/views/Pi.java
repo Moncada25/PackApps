@@ -94,7 +94,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
     lblSecond.setBounds(25, 160, 280, 30);
 
     JLabel secondFormula = resources
-        .getLabel("\u03c0²/6 = 1/1² + 1/2² + 1/3² + 1/4²...", TEXT_COLOR, this, MEDIUM);
+        .getLabel("\u03c0Â²/6 = 1/1Â² + 1/2Â² + 1/3Â² + 1/4Â²...", TEXT_COLOR, this, MEDIUM);
     secondFormula.setBounds(25, 180, 280, 60);
 
     btnCalculateSecond = resources.getButton("Show", TEXT_COLOR, this, this);

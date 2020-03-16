@@ -50,7 +50,7 @@ public class Sales extends JDialog implements ActionListener {
     componentes();
   }
 
-  // Constructor que no recibe par·metros
+  // Constructor que no recibe par√°metros
   public Sales() {
 
     componentes();
@@ -141,7 +141,7 @@ public class Sales extends JDialog implements ActionListener {
     });
 
     tel = resources
-        .getLabel("<html><strong>TelÈfono</strong></html>", TEXT_COLOR, this,
+        .getLabel("<html><strong>Tel√©fono</strong></html>", TEXT_COLOR, this,
         MEDIUM);
     tel.setBounds(30, 180, 130, 30);
 
@@ -150,7 +150,7 @@ public class Sales extends JDialog implements ActionListener {
     txtTel.setHorizontalAlignment(JTextField.CENTER);
     add(txtTel);
 
-    // Permite detectar lo que se escribe en el campo de telÈfono
+    // Permite detectar lo que se escribe en el campo de tel√©fono
     txtTel.addKeyListener(new KeyAdapter() {
       public void keyTyped(KeyEvent evt) {
         txtTelKeyTyped(evt);

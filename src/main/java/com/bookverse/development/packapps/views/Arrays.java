@@ -197,7 +197,7 @@ public class Arrays extends JDialog implements ActionListener {
 
       opcion = JOptionPane.showInputDialog(null,
           "<html>" + Format.style()
-              + "<strong><em>øCon quÈ desea multiplicar la matriz?</em></strong></html>",
+              + "<strong><em>¬øCon qu√© desea multiplicar la matriz?</em></strong></html>",
           "Producto de Matrices", JOptionPane.PLAIN_MESSAGE, null,
           new Object[]{"Un escalar", "Un vector", "Una matriz"}, "Un escalar");
 
@@ -250,7 +250,7 @@ public class Arrays extends JDialog implements ActionListener {
           case "Una matriz":
 
             int columnasB = Integer
-                .parseInt(inputNumber("Ingrese el n˙mero de columnas que tendr· la matriz B", 1));
+                .parseInt(inputNumber("Ingrese el n√∫mero de columnas que tendr√° la matriz B", 1));
 
             int f = Integer.parseInt(txtRows.getText());
             int c = Integer.parseInt(txtColumns.getText());
@@ -270,7 +270,7 @@ public class Arrays extends JDialog implements ActionListener {
 
           default:
             JOptionPane
-                .showMessageDialog(null, "OpciÛn inv·lida.", "Error", JOptionPane.PLAIN_MESSAGE);
+                .showMessageDialog(null, "Opci√≥n inv√°lida.", "Error", JOptionPane.PLAIN_MESSAGE);
         }
       }
     }
@@ -357,9 +357,9 @@ public class Arrays extends JDialog implements ActionListener {
 
         JOptionPane.showMessageDialog(null,
             "<html>" + Format.style() + "<strong><center>Resultado</center></strong><br>"
-                + "Diagonal principal ? " + principal + "<br>" + "Suma del tri·ngulo superior ? "
+                + "Diagonal principal ? " + principal + "<br>" + "Suma del tri√°ngulo superior ? "
                 + sumaSuperior + "<br><br>" + "Diagonal secundaria ? " + secundaria + "<br>"
-                + "Suma del tri·ngulo inferior ? " + sumaInferior + "</html>",
+                + "Suma del tri√°ngulo inferior ? " + sumaInferior + "</html>",
             "Diagonales de la Matriz", JOptionPane.PLAIN_MESSAGE);
       }
     }
@@ -371,9 +371,9 @@ public class Arrays extends JDialog implements ActionListener {
 
       JOptionPane
           .showMessageDialog(null,
-              "<html>" + Format.style() + "<strong><center>Matriz inv·lida</center></strong><br>"
+              "<html>" + Format.style() + "<strong><center>Matriz inv√°lida</center></strong><br>"
                   + "La matriz actual no es cuadrada." + "</html>",
-              "°Verifique!", JOptionPane.PLAIN_MESSAGE);
+              "¬°Verifique!", JOptionPane.PLAIN_MESSAGE);
 
       return false;
     }
@@ -388,7 +388,7 @@ public class Arrays extends JDialog implements ActionListener {
 
         if (e.getSource() == matriz[i][j]) {
           matriz[i][j].setText(
-              inputNumber("Ingrese el valor de la posiciÛn [" + (i + 1) + "][" + (j + 1) + "]", 2));
+              inputNumber("Ingrese el valor de la posici√≥n [" + (i + 1) + "][" + (j + 1) + "]", 2));
         }
       }
     }
@@ -400,7 +400,7 @@ public class Arrays extends JDialog implements ActionListener {
     for (int i = 0; i < a.length; i++) {
       for (int j = 0; j < b[0].length; j++) {
         for (int k = 0; k < a[0].length; k++) {
-          // aquÌ se multiplica la matriz
+          // aqu√≠ se multiplica la matriz
           c[i][j] += a[i][k] * b[k][j];
         }
       }
@@ -534,9 +534,9 @@ public class Arrays extends JDialog implements ActionListener {
           JOptionPane.showMessageDialog(null,
               "<html>" + Format.style()
                   + "<strong><center>Entradas indefinidas</center></strong><br>"
-                  + "Alguna de las entradas est· indefinida, por favor introduzca un valor."
+                  + "Alguna de las entradas est√° indefinida, por favor introduzca un valor."
                   + "</html>",
-              "°Verifique!", JOptionPane.PLAIN_MESSAGE);
+              "¬°Verifique!", JOptionPane.PLAIN_MESSAGE);
 
           return false;
         }
@@ -574,9 +574,9 @@ public class Arrays extends JDialog implements ActionListener {
 
       if (txtRows.getText().equals("") || txtColumns.getText().equals("")) {
         JOptionPane.showMessageDialog(null,
-            "<html>" + Format.style() + "<strong><center>Campos vacÌos</center></strong><br>"
-                + "Alguno de los campos est· vacÌo, por favor introduzca un valor." + "</html>",
-            "°Verifique!", JOptionPane.PLAIN_MESSAGE);
+            "<html>" + Format.style() + "<strong><center>Campos vac√≠os</center></strong><br>"
+                + "Alguno de los campos est√° vac√≠o, por favor introduzca un valor." + "</html>",
+            "¬°Verifique!", JOptionPane.PLAIN_MESSAGE);
 
         isWork = false;
 
@@ -658,16 +658,16 @@ class Determinante {
   public static double determinante(double[][] matriz) {
 
     /*
-     * Aunque se ponga assert, su ejecuciÛn es opcional con -ea. Podemos arrancar la
-     * aplicaciÛn en modo "detecciÛn de fallos" o en modo
-     * "haz lo que puedas, pero aguanta". Se detectan los fallos en la ejecuciÛn lo
-     * m·s pronto posible. De esta forma, si ejecutamos nuestro cÛdigo java de forma
-     * normal, ese assert es ignorado, por lo que es como si no hubiÈramos puesto
-     * nada. Nuestra aplicaciÛn funcionar· igual de mal que antes y no se caer·. Sin
-     * embargo, si ejecutamos con la opciÛn -ea (enable asserts posiblemente)
-     * entonces sÌ se hace caso de los assert y saltar· una excepciÛn inmediatamente
-     * si nuestro par·metro es null. En vez de ir evitando el error de un sitio a
-     * otro y ver que la aplicaciÛn no funciona, arrancando con -ea veremos
+     * Aunque se ponga assert, su ejecuci√≥n es opcional con -ea. Podemos arrancar la
+     * aplicaci√≥n en modo "detecci√≥n de fallos" o en modo
+     * "haz lo que puedas, pero aguanta". Se detectan los fallos en la ejecuci√≥n lo
+     * m√°s pronto posible. De esta forma, si ejecutamos nuestro c√≥digo java de forma
+     * normal, ese assert es ignorado, por lo que es como si no hubi√©ramos puesto
+     * nada. Nuestra aplicaci√≥n funcionar√° igual de mal que antes y no se caer√°. Sin
+     * embargo, si ejecutamos con la opci√≥n -ea (enable asserts posiblemente)
+     * entonces s√≠ se hace caso de los assert y saltar√° una excepci√≥n inmediatamente
+     * si nuestro par√°metro es null. En vez de ir evitando el error de un sitio a
+     * otro y ver que la aplicaci√≥n no funciona, arrancando con -ea veremos
      * inmediatamente cual es el primer sitio en el que falla algo.
      */
 
@@ -699,7 +699,7 @@ class Determinante {
 
   /**
    * Obtiene la matriz que resulta de eliminar la primera fila y la columna que se pasa como
-   * par·metro.
+   * par√°metro.
    *
    * @param matriz   Matriz original
    * @param filas    Numero de filas de la matriz original

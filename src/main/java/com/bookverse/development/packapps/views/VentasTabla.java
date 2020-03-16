@@ -22,7 +22,7 @@ public class VentasTabla extends JDialog {
   private JScrollPane scroll;
   private Table modelo = new Table();
   private TableRowSorter<TableModel> ordenar;
-  private String[] columnas = {"PRODUCTO", "USUARIO", "DOCUMENTO", "TELÉFONO", "FECHA", "UNIDADES",
+  private String[] columnas = {"PRODUCTO", "USUARIO", "DOCUMENTO", "TELÃ‰FONO", "FECHA", "UNIDADES",
       "TOTAL"};
 
   // Constructor que recibe la ventana padre y el valor modal
@@ -41,7 +41,7 @@ public class VentasTabla extends JDialog {
     componentes();
   }
 
-  // Constructor que no recibe parámetros
+  // Constructor que no recibe parÃ¡metros
   public VentasTabla() {
 
     componentes();

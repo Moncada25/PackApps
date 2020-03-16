@@ -208,7 +208,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     fi = (1 + Math.sqrt(5)) / 2;
 
     number = (1 / Math.sqrt(5)) * (Math.pow(fi, n) - (Math.pow(-1 / fi, n)));
-    Alerts.message("Result", "N° " + n + " in the Fibonacci's series is " + number);
+    Alerts.message("Result", "NÂ° " + n + " in the Fibonacci's series is " + number);
   }
 
   public void calculatePhi(double num1, double num2) {

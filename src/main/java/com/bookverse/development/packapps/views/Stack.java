@@ -249,7 +249,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
 
     elementsStack[i].setVisible(true);
     elementsStack[i].setText(String.valueOf(data));
-    tittle.setText("<html><strong>Se apiló ? " + elementsStack[i].getText() + "</strong></html>");
+    tittle.setText("<html><strong>Se apilÃ³ ? " + elementsStack[i].getText() + "</strong></html>");
     i++;
   }
 

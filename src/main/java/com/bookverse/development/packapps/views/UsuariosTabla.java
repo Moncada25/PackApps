@@ -54,7 +54,7 @@ public class UsuariosTabla extends JDialog implements MouseListener {
     componentes();
   }
 
-  // Constructor que no recibe parámetros
+  // Constructor que no recibe parÃ¡metros
   public UsuariosTabla() {
 
     componentes();
@@ -66,7 +66,7 @@ public class UsuariosTabla extends JDialog implements MouseListener {
 
     JPanel fila = new JPanel(new FlowLayout());
 
-    String[] imgs = {"añadir_usuario.png", "editar_usuario.png", "eliminar_usuario.png"};
+    String[] imgs = {"aÃ±adir_usuario.png", "editar_usuario.png", "eliminar_usuario.png"};
 
     panel.setBorder(getBorder("Select Action"));
 
@@ -169,7 +169,7 @@ public class UsuariosTabla extends JDialog implements MouseListener {
 
         if (filaseleccionada == -1) {
 
-          JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún usuario", "Update",
+          JOptionPane.showMessageDialog(null, "No se ha seleccionado ningÃºn usuario", "Update",
               JOptionPane.PLAIN_MESSAGE);
 
         } else {
@@ -184,7 +184,7 @@ public class UsuariosTabla extends JDialog implements MouseListener {
 
               opcion = JOptionPane.showInputDialog(null,
                   "<html>" + Format.style()
-                      + "<strong><em>¿Qué quiere actualizar?</em></strong></html>",
+                      + "<strong><em>Â¿QuÃ© quiere actualizar?</em></strong></html>",
                   "Update Data", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Password"},
                   "Password");
 
@@ -194,15 +194,15 @@ public class UsuariosTabla extends JDialog implements MouseListener {
                   Database.updatePassword(user, AppConfig.encrypt("", true));
                   JOptionPane.showMessageDialog(null,
                       "<html>" + Format.style()
-                          + "<strong>Contraseña actualizada</strong></html>",
-                      "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
+                          + "<strong>ContraseÃ±a actualizada</strong></html>",
+                      "Â¡Ã‰xito!", JOptionPane.PLAIN_MESSAGE);
                 }
               }
 
             } else {
               JOptionPane.showMessageDialog(null,
                   "<html>" + Format.style()
-                      + "<strong>Contraseña incorrecta</strong></html>",
+                      + "<strong>ContraseÃ±a incorrecta</strong></html>",
                   "Error", JOptionPane.PLAIN_MESSAGE);
             }
           } catch (HeadlessException e) {
@@ -216,7 +216,7 @@ public class UsuariosTabla extends JDialog implements MouseListener {
       }
 
     } else {
-      JOptionPane.showMessageDialog(null, "Tabla vacía", "Update", JOptionPane.PLAIN_MESSAGE);
+      JOptionPane.showMessageDialog(null, "Tabla vacÃ­a", "Update", JOptionPane.PLAIN_MESSAGE);
     }
   }
 
@@ -241,7 +241,7 @@ public class UsuariosTabla extends JDialog implements MouseListener {
 
         if (usuariosTab.getSelectedRow() == -1) {
 
-          JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún usuario", "Delete",
+          JOptionPane.showMessageDialog(null, "No se ha seleccionado ningÃºn usuario", "Delete",
               JOptionPane.PLAIN_MESSAGE);
 
         } else {
@@ -269,7 +269,7 @@ public class UsuariosTabla extends JDialog implements MouseListener {
       }
 
     } else {
-      JOptionPane.showMessageDialog(null, "Tabla vacía", "Delete", JOptionPane.PLAIN_MESSAGE);
+      JOptionPane.showMessageDialog(null, "Tabla vacÃ­a", "Delete", JOptionPane.PLAIN_MESSAGE);
     }
   }
 

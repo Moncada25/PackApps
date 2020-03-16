@@ -40,7 +40,7 @@ public class Registrar extends JDialog implements ActionListener {
     public void componentes() {
 
         setLayout(null);// Permite el posicionamiento absoluto de los componentes
-        setIconImage(new ImageIcon(resources.getImage("añadir_usuario.png")).getImage());
+        setIconImage(new ImageIcon(resources.getImage("aÃ±adir_usuario.png")).getImage());
         setDefaultCloseOperation(0);
 
         btnregistro = resources.getButton("Registrar", TEXT_COLOR, this, this);
@@ -113,7 +113,7 @@ public class Registrar extends JDialog implements ActionListener {
         });
     }
 
-    // Constructor que no recibe parámetros
+    // Constructor que no recibe parÃ¡metros
     public Registrar() {
         componentes();
     }
@@ -144,7 +144,7 @@ public class Registrar extends JDialog implements ActionListener {
 
                     Database.insertData(datos);
 
-                    JOptionPane.showMessageDialog(null, "<html>" + Format.style() + "<strong>¡Usuario registrado!</strong></html>", "Mensaje",
+                    JOptionPane.showMessageDialog(null, "<html>" + Format.style() + "<strong>Â¡Usuario registrado!</strong></html>", "Mensaje",
                             JOptionPane.PLAIN_MESSAGE);
                     txtUsuario.setText("");
                     txtPass.setText("");
@@ -152,12 +152,12 @@ public class Registrar extends JDialog implements ActionListener {
                     fadeOut(this);
                 } else {
                     JOptionPane.showMessageDialog(null,
-                            "<html>" + Format.style() + "<strong>El nombre de usuario y/o la contraseña son demasiado débiles, inténtalo nuevamente.</strong></html>", "Mensaje",
+                            "<html>" + Format.style() + "<strong>El nombre de usuario y/o la contraseÃ±a son demasiado dÃ©biles, intÃ©ntalo nuevamente.</strong></html>", "Mensaje",
                             JOptionPane.PLAIN_MESSAGE);
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "<html>" + Format.style() + "<strong>Código de gerente incorrecto, inténtelo de nuevo.</strong></html>", "Mensaje",
+                JOptionPane.showMessageDialog(null, "<html>" + Format.style() + "<strong>CÃ³digo de gerente incorrecto, intÃ©ntelo de nuevo.</strong></html>", "Mensaje",
                         JOptionPane.PLAIN_MESSAGE);
                 txtUsuario.setEnabled(false);
                 txtPass.setEnabled(false);
@@ -166,14 +166,14 @@ public class Registrar extends JDialog implements ActionListener {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "<html>" + Format.style() + "<strong>El usuario ya existe, intente iniciando sesión.</strong></html>", "Mensaje",
+            JOptionPane.showMessageDialog(null, "<html>" + Format.style() + "<strong>El usuario ya existe, intente iniciando sesiÃ³n.</strong></html>", "Mensaje",
                     JOptionPane.PLAIN_MESSAGE);
             fadeOut(this);
         }
 
     }
 
-    // Eventos al presionar un botón
+    // Eventos al presionar un botÃ³n
     @Override
     public void actionPerformed(ActionEvent e) {
 

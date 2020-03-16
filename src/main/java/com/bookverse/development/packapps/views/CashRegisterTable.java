@@ -22,7 +22,7 @@ public class CashRegisterTable extends JDialog {
     public JTable registradoraTab;
     private Table modelo = new Table();
     private TableRowSorter<TableModel> ordenar;
-    private String[] columnas = {"USUARIO", "VENTAS", "TOTAL VENTAS", "COMPRAS", "TOTAL COMPRAS", "TOTAL PRÉSTAMOS"};
+    private String[] columnas = {"USUARIO", "VENTAS", "TOTAL VENTAS", "COMPRAS", "TOTAL COMPRAS", "TOTAL PRÃ‰STAMOS"};
 
     public CashRegisterTable(JDialog parent, boolean modal) {
 
@@ -41,7 +41,7 @@ public class CashRegisterTable extends JDialog {
 
     }
 
-    // Constructor que no recibe parámetros
+    // Constructor que no recibe parÃ¡metros
     public CashRegisterTable() {
         componentes();
     }

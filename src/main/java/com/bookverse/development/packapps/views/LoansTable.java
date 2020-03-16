@@ -22,7 +22,7 @@ public class LoansTable extends JDialog {
   private JScrollPane scroll;
   private Table modelo = new Table();
   private TableRowSorter<TableModel> ordenar;
-  private String[] columnas = {"USUARIO", "NOMBRE", "DOCUMENTO", "REFERENCIA", "TELÉFONO", "PLAZO",
+  private String[] columnas = {"USUARIO", "NOMBRE", "DOCUMENTO", "REFERENCIA", "TELÃ‰FONO", "PLAZO",
       "VALOR"};
 
   // Constructor que recibe la ventana padre y el valor modal
@@ -41,7 +41,7 @@ public class LoansTable extends JDialog {
     componentes();
   }
 
-  // Constructor que no recibe parámetros
+  // Constructor que no recibe parÃ¡metros
   public LoansTable() {
 
     componentes();

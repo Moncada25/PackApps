@@ -203,17 +203,17 @@ public class Otros extends JDialog implements ActionListener, MouseListener {
         int numero = Integer.parseInt(num);
 
         int aux = numero;
-        long digito, decimal = 0; // será el equivalente en base decimal
+        long digito, decimal = 0; // serÃ¡ el equivalente en base decimal
         int exponente = 0;
 
         while (numero != 0) {
-            // se toma la última cifra
+            // se toma la Ãºltima cifra
             digito = numero % 10;
-            // se multiplica por la potencia de 2 correspondiente y se suma al número
+            // se multiplica por la potencia de 2 correspondiente y se suma al nÃºmero
             decimal = decimal + digito * (int) Math.pow(2, exponente);
             // se aumenta el exponente
             exponente++;
-            // se quita la última cifra para repetir el proceso
+            // se quita la Ãºltima cifra para repetir el proceso
             numero = numero / 10;
         }
 
@@ -225,20 +225,20 @@ public class Otros extends JDialog implements ActionListener, MouseListener {
 
     private void enteroBinario(int decimal) {
 
-        int cociente = decimal;// El cociente inicia con el valor del número decimal.
+        int cociente = decimal;// El cociente inicia con el valor del nÃºmero decimal.
 
         String binario = " ";// Inicio de la cifra binaria
 
         while (cociente > 1) {// Repetir mientras el cociente de dividir por 2 sea mayor a 1.
 
-            int digito = cociente % 2;// Obtener el residuo de dividir por 2, éste será el dígito binario.
+            int digito = cociente % 2;// Obtener el residuo de dividir por 2, Ã©ste serÃ¡ el dÃ­gito binario.
 
-            cociente = (cociente - digito) / 2;// Obtener el cociente de la división entera por 2
+            cociente = (cociente - digito) / 2;// Obtener el cociente de la divisiÃ³n entera por 2
 
-            binario = digito + binario;// Agregar el dígito binario a la cifra
+            binario = digito + binario;// Agregar el dÃ­gito binario a la cifra
         }
 
-        binario = cociente + binario;// Agregar el último cociente para completar la cifra.
+        binario = cociente + binario;// Agregar el Ãºltimo cociente para completar la cifra.
 
         JOptionPane.showMessageDialog(null,
             "<html>" + Format.style() + "<strong>" + decimal + " en binario</strong> ? "
@@ -260,7 +260,7 @@ public class Otros extends JDialog implements ActionListener, MouseListener {
         }
 
         JOptionPane.showMessageDialog(null,
-            "<html>" + Format.style() + "<strong>Número invertido</strong> ? " + numeroInvertido
+            "<html>" + Format.style() + "<strong>NÃºmero invertido</strong> ? " + numeroInvertido
                 + "</html>",
             "Resultado", JOptionPane.PLAIN_MESSAGE);
     }

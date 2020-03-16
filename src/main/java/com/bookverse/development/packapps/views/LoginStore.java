@@ -189,7 +189,7 @@ public class LoginStore extends JDialog implements ActionListener {
     reg.setSize(460, 300);
     reg.setResizable(false);
     reg.setLocationRelativeTo(null);
-    reg.setTitle("Añadir Usuario");
+    reg.setTitle("AÃ±adir Usuario");
     fadeIn(reg);
     setVisible(false);
     reg.setVisible(true);

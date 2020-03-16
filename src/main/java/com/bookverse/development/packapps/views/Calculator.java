@@ -131,7 +131,7 @@ public class Calculator extends JDialog implements ActionListener {
     btnEuler = resources.getButton("e^", null, this, this);
     btnEuler.setBounds(93, 57, 43, 43);
 
-    btnNegative = resources.getButton("±", null, this, this);
+    btnNegative = resources.getButton("Â±", null, this, this);
     btnNegative.setBounds(50, 57, 43, 43);
   }
 

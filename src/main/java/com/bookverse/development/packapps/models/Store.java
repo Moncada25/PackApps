@@ -1,7 +1,5 @@
 package com.bookverse.development.packapps.models;
 
-import com.bookverse.development.packapps.views.InventoryTable;
-
 public class Store {
 
   private String reference, productState, document, phone, date, user, userLogged, password, userStatus;
