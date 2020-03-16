@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-public class RegistradoraTabla extends JDialog {
+public class CashRegisterTable extends JDialog {
 
     private JScrollPane scroll;
     public JTable registradoraTab;
@@ -24,7 +24,7 @@ public class RegistradoraTabla extends JDialog {
     private TableRowSorter<TableModel> ordenar;
     private String[] columnas = {"USUARIO", "VENTAS", "TOTAL VENTAS", "COMPRAS", "TOTAL COMPRAS", "TOTAL PRÉSTAMOS"};
 
-    public RegistradoraTabla(JDialog parent, boolean modal) {
+    public CashRegisterTable(JDialog parent, boolean modal) {
 
         super(parent, modal);
 
@@ -33,7 +33,7 @@ public class RegistradoraTabla extends JDialog {
     }
 
     // Constructor que recibe la ventana padre y el valor modal
-    public RegistradoraTabla(JFrame parent, boolean modal) {
+    public CashRegisterTable(JFrame parent, boolean modal) {
 
         super(parent, modal);
 
@@ -42,7 +42,7 @@ public class RegistradoraTabla extends JDialog {
     }
 
     // Constructor que no recibe parámetros
-    public RegistradoraTabla() {
+    public CashRegisterTable() {
         componentes();
     }
 

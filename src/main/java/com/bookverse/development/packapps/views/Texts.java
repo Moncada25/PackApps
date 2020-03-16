@@ -3,6 +3,7 @@ package com.bookverse.development.packapps.views;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.BorderLayout;
@@ -37,7 +38,7 @@ public class Texts extends JDialog implements MouseListener {
     setMinimumSize(new Dimension(530, 330));
     setMaximumSize(new Dimension(1280, 720));
     setTitle("Text Editor");
-    resources.appConfig.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -45,26 +46,26 @@ public class Texts extends JDialog implements MouseListener {
   public JPanel getPanel() {
 
     JPanel panel = new JPanel(new FlowLayout());
-    panel.setBorder(resources.appConfig.getBorder("Select Action"));
+    panel.setBorder(AppConfig.getBorder("Select Action"));
 
-    encrypt = resources.getLabel("  Encrypt  ", TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    encrypt.setBorder(resources.appConfig.BORDER_BLUE);
+    encrypt = resources.getLabel("  Encrypt  ", TEXT_COLOR, panel, AppConfig.MEDIUM);
+    encrypt.setBorder(AppConfig.BORDER_BLUE);
     encrypt.addMouseListener(this);
 
-    upperCase = resources.getLabel("  UpperCase  ", TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    upperCase.setBorder(resources.appConfig.BORDER_BLUE);
+    upperCase = resources.getLabel("  UpperCase  ", TEXT_COLOR, panel, AppConfig.MEDIUM);
+    upperCase.setBorder(AppConfig.BORDER_BLUE);
     upperCase.addMouseListener(this);
 
-    exit = resources.getLabel("  Return  ", MAIN_COLOR, panel, resources.appConfig.MEDIUM);
-    exit.setBorder(resources.appConfig.BORDER_RED);
+    exit = resources.getLabel("  Return  ", MAIN_COLOR, panel, AppConfig.MEDIUM);
+    exit.setBorder(AppConfig.BORDER_RED);
     exit.addMouseListener(this);
 
-    lowerCase = resources.getLabel("  LowerCase  ", TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    lowerCase.setBorder(resources.appConfig.BORDER_BLUE);
+    lowerCase = resources.getLabel("  LowerCase  ", TEXT_COLOR, panel, AppConfig.MEDIUM);
+    lowerCase.setBorder(AppConfig.BORDER_BLUE);
     lowerCase.addMouseListener(this);
 
-    decrypt = resources.getLabel("  Decrypt  ", TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    decrypt.setBorder(resources.appConfig.BORDER_BLUE);
+    decrypt = resources.getLabel("  Decrypt  ", TEXT_COLOR, panel, AppConfig.MEDIUM);
+    decrypt.setBorder(AppConfig.BORDER_BLUE);
     decrypt.addMouseListener(this);
 
     return panel;
@@ -76,7 +77,7 @@ public class Texts extends JDialog implements MouseListener {
 
     JLabel tittle = resources
         .getLabel("<html><strong>Write Text...</strong></html>", MAIN_COLOR,
-            this, resources.appConfig.MEDIUM);
+            this, AppConfig.MEDIUM);
     tittle.setBounds(30, 15, 370, 50);
     add(tittle, BorderLayout.NORTH);
 
@@ -129,7 +130,7 @@ public class Texts extends JDialog implements MouseListener {
     } else if (e.getSource() == encrypt) {
 
       if (!text.getText().equals("")) {
-        text.setText(resources.appConfig.Encrypt(text.getText(), false));
+        text.setText(AppConfig.encrypt(text.getText(), false));
       } else {
         Alerts.inputSomethingText();
       }
@@ -137,13 +138,13 @@ public class Texts extends JDialog implements MouseListener {
     } else if (e.getSource() == decrypt) {
 
       if (!text.getText().equals("")) {
-        text.setText(resources.appConfig.Decrypt(text.getText(), false));
+        text.setText(AppConfig.decrypt(text.getText(), false));
       } else {
         Alerts.inputSomethingText();
       }
 
     } else if (e.getSource() == exit) {
-      resources.appConfig.fadeOut(this);
+      AppConfig.fadeOut(this);
     }
   }
 
@@ -151,15 +152,15 @@ public class Texts extends JDialog implements MouseListener {
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == upperCase) {
-      upperCase.setCursor(resources.appConfig.HAND);
+      upperCase.setCursor(AppConfig.HAND);
     } else if (e.getSource() == lowerCase) {
-      lowerCase.setCursor(resources.appConfig.HAND);
+      lowerCase.setCursor(AppConfig.HAND);
     } else if (e.getSource() == encrypt) {
-      encrypt.setCursor(resources.appConfig.HAND);
+      encrypt.setCursor(AppConfig.HAND);
     } else if (e.getSource() == decrypt) {
-      decrypt.setCursor(resources.appConfig.HAND);
+      decrypt.setCursor(AppConfig.HAND);
     } else if (e.getSource() == exit) {
-      exit.setCursor(resources.appConfig.HAND);
+      exit.setCursor(AppConfig.HAND);
     }
   }
 

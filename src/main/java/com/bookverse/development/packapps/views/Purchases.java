@@ -378,10 +378,10 @@ public class Purchases extends JDialog implements ActionListener {
 
   private void btnSearchAP() {
 
-    inventoryTable.limpiarTabla();
+    inventoryTable.cleanTable();
 
     try {
-      Database.readTable(inventoryTable.inventarioTab, Querys.getAllData(INVENTORY), true);
+      Database.readTable(inventoryTable.viewTable, Querys.getAllData(INVENTORY), true);
     } catch (Exception e1) {
       e1.printStackTrace();
     }
@@ -399,9 +399,9 @@ public class Purchases extends JDialog implements ActionListener {
 
     if (inventoryTable.status == 1 || inventoryTable.status == 2) {
 
-      Database.searchProductByReference(inventoryTable.referencia, INVENTORY);
+      Database.searchProductByReference(inventoryTable.reference, INVENTORY);
 
-      txtReference.setText(inventoryTable.referencia);
+      txtReference.setText(inventoryTable.reference);
 
       if (Database.store.getProductState().equals("New")) {
         radioNew.setSelected(true);
@@ -418,8 +418,18 @@ public class Purchases extends JDialog implements ActionListener {
     }
   }
 
+  public void start(JDialog parent) {
+    setSize(440, 400);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Buy");
+    AppConfig.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
+  }
+
   @Override
-  public void actionPerformed(ActionEvent e) {// Eventos al presionar un bot?n
+  public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnExit) {
       btnExitAP();

@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -30,23 +31,23 @@ public class Structures extends JDialog implements MouseListener {
   public JPanel getPanel() {
 
     JPanel panel = new JPanel(new FlowLayout());
-    panel.setBorder(resources.appConfig.getBorder("Select"));
+    panel.setBorder(AppConfig.getBorder("Select"));
 
-    btnpilas = resources.getLabel("  Pilas  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    btnpilas.setBorder(resources.appConfig.BORDER_BLUE);
+    btnpilas = resources.getLabel("  Pilas  ", AppConfig.TEXT_COLOR, panel, AppConfig.MEDIUM);
+    btnpilas.setBorder(AppConfig.BORDER_BLUE);
     btnpilas.addMouseListener(this);
 
-    btncolas = resources.getLabel("  Colas  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    btncolas.setBorder(resources.appConfig.BORDER_BLUE);
+    btncolas = resources.getLabel("  Colas  ", AppConfig.TEXT_COLOR, panel, AppConfig.MEDIUM);
+    btncolas.setBorder(AppConfig.BORDER_BLUE);
     btncolas.addMouseListener(this);
 
     btnmatrices = resources
-        .getLabel("  Matrices  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    btnmatrices.setBorder(resources.appConfig.BORDER_BLUE);
+        .getLabel("  Matrices  ", AppConfig.TEXT_COLOR, panel, AppConfig.MEDIUM);
+    btnmatrices.setBorder(AppConfig.BORDER_BLUE);
     btnmatrices.addMouseListener(this);
 
-    btnsalir = resources.getLabel("  Return  ", resources.appConfig.MAIN_COLOR, panel, resources.appConfig.MEDIUM);
-    btnsalir.setBorder(resources.appConfig.BORDER_RED);
+    btnsalir = resources.getLabel("  Return  ", AppConfig.MAIN_COLOR, panel, AppConfig.MEDIUM);
+    btnsalir.setBorder(AppConfig.BORDER_RED);
     btnsalir.addMouseListener(this);
 
     return panel;
@@ -57,9 +58,9 @@ public class Structures extends JDialog implements MouseListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Estructuras de Datos");
-    resources.appConfig.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
-    resources.appConfig.instruccionesEstructuras();
+    AppConfig.instruccionesEstructuras();
     setVisible(true);
   }
 
@@ -84,7 +85,7 @@ public class Structures extends JDialog implements MouseListener {
     pilas.setResizable(false);
     pilas.setLocationRelativeTo(null);
     pilas.setTitle("Pilas");
-    resources.appConfig.fadeIn(pilas);
+    AppConfig.fadeIn(pilas);
     setVisible(false);
     pilas.setVisible(true);
   }
@@ -95,18 +96,18 @@ public class Structures extends JDialog implements MouseListener {
     queue.setResizable(false);
     queue.setLocationRelativeTo(null);
     queue.setTitle("Colas");
-    resources.appConfig.fadeIn(queue);
+    AppConfig.fadeIn(queue);
     setVisible(false);
     queue.setVisible(true);
   }
 
   private void MatricesAP() {
-    Matrices matrices = new Matrices(this, true);
+    Arrays matrices = new Arrays(this, true);
     matrices.setBounds(0, 0, 900, 600);
     matrices.setResizable(false);
     matrices.setLocationRelativeTo(null);
     matrices.setTitle("Matrices");
-    resources.appConfig.fadeIn(matrices);
+    AppConfig.fadeIn(matrices);
     setVisible(false);
     matrices.setVisible(true);
   }
@@ -115,7 +116,7 @@ public class Structures extends JDialog implements MouseListener {
   public void mouseClicked(MouseEvent e) {
 
     if (e.getSource() == btnsalir) {
-      resources.appConfig.fadeOut(this);
+      AppConfig.fadeOut(this);
     } else if (e.getSource() == btnpilas) {
       PilasAP();
       setVisible(true);
@@ -132,13 +133,13 @@ public class Structures extends JDialog implements MouseListener {
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == btnsalir) {
-      btnsalir.setCursor(resources.appConfig.HAND);
+      btnsalir.setCursor(AppConfig.HAND);
     } else if (e.getSource() == btnpilas) {
-      btnpilas.setCursor(resources.appConfig.HAND);
+      btnpilas.setCursor(AppConfig.HAND);
     } else if (e.getSource() == btncolas) {
-      btncolas.setCursor(resources.appConfig.HAND);
+      btncolas.setCursor(AppConfig.HAND);
     } else if (e.getSource() == btnmatrices) {
-      btnmatrices.setCursor(resources.appConfig.HAND);
+      btnmatrices.setCursor(AppConfig.HAND);
     }
   }
 

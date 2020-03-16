@@ -92,7 +92,7 @@ public class Export {
 
     if (!filePath.equals(file)) {
 
-      if (new Database().readTable(jTable, query, false)) {
+      if (Database.readTable(jTable, query, false)) {
 
         try {
 
@@ -152,7 +152,7 @@ public class Export {
 
     if (!filePath.equals(file)) {
 
-      if (new Database().readTable(jTable1, query, false)) {
+      if (Database.readTable(jTable1, query, false)) {
 
         int rowCount = jTable1.getRowCount();
         int columnCount = jTable1.getColumnCount();
@@ -190,7 +190,7 @@ public class Export {
 
     if (!filePath.equals(file)) {
 
-      if (new Database().readTable(table, query, false)) {
+      if (Database.readTable(table, query, false)) {
 
         try {
 

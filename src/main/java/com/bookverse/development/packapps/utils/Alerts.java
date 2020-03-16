@@ -123,4 +123,12 @@ public class Alerts {
             + String.format("%.0f", totalPurchases) + "</strong></html>",
         "Success", JOptionPane.PLAIN_MESSAGE);
   }
+
+  public static void fieldMailRequired(){
+    JOptionPane.showMessageDialog(null,
+        "<html>" + Format.style() + "<strong><center>Secure credentials</center></strong><br>"
+            + "The use of this medium is authorized by Google through<br>"
+            + "the use of its JavaMail API, your data is protected!</html>",
+        "Required field!!", JOptionPane.PLAIN_MESSAGE);
+  }
 }

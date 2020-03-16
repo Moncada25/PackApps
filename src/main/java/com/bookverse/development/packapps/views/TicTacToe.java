@@ -1,8 +1,10 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.core.AppConfig.*;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.Color;
 import java.awt.Font;
@@ -57,9 +59,9 @@ public class TicTacToe extends JDialog implements ActionListener {
     } else {
       setTitle("Player vs Player");
     }
-    resources.appConfig.fadeIn(this);
+    fadeIn(this);
     parent.setVisible(false);
-    resources.appConfig.instruccionesTriqui();
+    instruccionesTriqui();
     setVisible(true);
   }
 
@@ -97,29 +99,29 @@ public class TicTacToe extends JDialog implements ActionListener {
 
     JLabel lblName1 = resources
         .getLabel("<html><em><strong>Player X</strong></em></html>", colorX, this,
-            resources.appConfig.MEDIUM);
+            MEDIUM);
     lblName1.setBounds(50, 10, 100, 30);
 
-    pointsX = resources.getLabel("", color, this, resources.appConfig.BIG);
+    pointsX = resources.getLabel("", color, this, BIG);
     pointsX.setBounds(130, 10, 100, 30);
 
     JLabel lblName2;
     if (!vsCPU) {
       lblName2 = resources
           .getLabel("<html><em><strong>Player O</strong></em></html>", colorO, this,
-              resources.appConfig.MEDIUM);
+              MEDIUM);
       lblName2.setBounds(260, 10, 100, 30);
     } else {
       lblName2 = resources
           .getLabel("<html><em><strong>CPU O</strong></em></html>", colorO, this,
-              resources.appConfig.MEDIUM);
+              MEDIUM);
       lblName2.setBounds(273, 10, 100, 30);
     }
 
-    pointsO = resources.getLabel("", color, this, resources.appConfig.BIG);
+    pointsO = resources.getLabel("", color, this, BIG);
     pointsO.setBounds(340, 10, 100, 30);
 
-    lblTurn = resources.getLabel("", null, this, resources.appConfig.MEDIUM);
+    lblTurn = resources.getLabel("", null, this, MEDIUM);
     lblTurn.setBounds(270, 200, 200, 100);
 
     image = resources.getLabel("", null, this, null);
@@ -499,7 +501,7 @@ public class TicTacToe extends JDialog implements ActionListener {
 
     int[][] points = getPoints();
 
-    int aux = resources.appConfig.intRandom(0, 2);
+    int aux = intRandom(0, 2);
 
     position[0] = points[aux][0];
     position[1] = points[aux][1];
@@ -583,7 +585,7 @@ public class TicTacToe extends JDialog implements ActionListener {
     } else if (e.getSource() == btnReset) {
       btnResetAP();
     } else if (e.getSource() == btnExit) {
-      resources.appConfig.fadeOut(this);
+      fadeOut(this);
     } else {
       btnBoardAP(e);
     }

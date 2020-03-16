@@ -1,12 +1,20 @@
 package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.automation.utils.Paths.ULTIMATIX;
+import static com.bookverse.development.packapps.core.AppConfig.BIG;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
+import static com.bookverse.development.packapps.core.AppConfig.fadeOut;
 import static javax.swing.SwingConstants.CENTER;
 
 import com.bookverse.development.packapps.automation.models.UltimatixData;
 import com.bookverse.development.packapps.automation.stepdefinitions.TimesheetStepDefinitions;
 import com.bookverse.development.packapps.automation.utils.TextUtility;
 import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -42,7 +50,7 @@ public class Timesheet extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Timesheet Entry");
-    resources.appConfig.fadeIn(this);
+    fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -53,19 +61,19 @@ public class Timesheet extends JDialog implements ActionListener {
     setLayout(null);
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-    btnRun = resources.getButton("Run", resources.appConfig.TEXT_COLOR, this, this);
+    btnRun = resources.getButton("Run", TEXT_COLOR, this, this);
     btnRun.setBounds(60, 215, 100, 30);
 
-    btnCancel = resources.getButton("Return", resources.appConfig.MAIN_COLOR, this, this);
+    btnCancel = resources.getButton("Return", MAIN_COLOR, this, this);
     btnCancel.setBounds(300, 215, 86, 30);
 
     tittle = resources
-        .getLabel("<html><strong><em>Timesheet Entry</em></strong></html>", resources.appConfig.MAIN_COLOR, this,
-            resources.appConfig.BIG);
+        .getLabel("<html><strong><em>Timesheet Entry</em></strong></html>", MAIN_COLOR, this,
+            BIG);
     tittle.setBounds(120, 5, 250, 40);
 
     user = resources
-        .getLabel("<html><strong>Username</strong></html>", resources.appConfig.TEXT_COLOR, this, resources.appConfig.MEDIUM);
+        .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
     user.setBounds(30, 60, 180, 30);
 
     txtUser = new JTextField();
@@ -79,12 +87,12 @@ public class Timesheet extends JDialog implements ActionListener {
       }
 
       private void txtUsuarioKeyTyped(KeyEvent evt) {
-        resources.appConfig.soloAlfa(evt.getKeyChar(), evt, txtUser.getText(), 20);
+        Format.onlyAlfa(evt.getKeyChar(), evt, txtUser.getText(), 20);
       }
     });
 
     password = resources
-        .getLabel("<html><strong>Password</strong></html>", resources.appConfig.TEXT_COLOR, this, resources.appConfig.MEDIUM);
+        .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
     password.setBounds(30, 110, 120, 30);
 
     txtPassword = new JPasswordField();
@@ -103,7 +111,7 @@ public class Timesheet extends JDialog implements ActionListener {
     });
 
     hours = resources
-        .getLabel("<html><strong>Hours</strong></html>", resources.appConfig.TEXT_COLOR, this, resources.appConfig.MEDIUM);
+        .getLabel("<html><strong>Hours</strong></html>", TEXT_COLOR, this, MEDIUM);
     hours.setBounds(30, 160, 180, 30);
 
     txtHours = new JTextField();
@@ -118,7 +126,7 @@ public class Timesheet extends JDialog implements ActionListener {
       }
 
       private void txtHoursTyped(KeyEvent evt) {
-        resources.appConfig.solonumeros(evt.getKeyChar(), evt, txtHours.getText(), 20);
+        Format.onlyNumbers(evt.getKeyChar(), evt, txtHours.getText(), 20);
       }
 
       public void keyPressed(KeyEvent evt) {
@@ -144,7 +152,7 @@ public class Timesheet extends JDialog implements ActionListener {
     txtHours.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
-    resources.appConfig.fadeOut(this);
+    fadeOut(this);
   }
 
   private void btnRunAP() {
@@ -158,7 +166,7 @@ public class Timesheet extends JDialog implements ActionListener {
       Resources.generalObject = data;
       JUnitCore.runClasses(TimesheetStepDefinitions.class);
     } else {
-      resources.appConfig.mostrarMensaje("Error", "Campos requeridos incompletos");
+      Alerts.inputSomethingText();
     }
   }
 

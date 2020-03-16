@@ -169,9 +169,9 @@ public class GuessNumber extends JDialog implements ActionListener {
     setSize(430, 330);
     setResizable(false);
     setLocationRelativeTo(parent);
-    fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
-    instruccionesAdivinar();
+    AppConfig.instruccionesAdivinar();
     setVisible(true);
   }
 

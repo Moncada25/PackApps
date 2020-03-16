@@ -6,6 +6,7 @@ import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.SMALL;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -225,7 +226,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
           }
         }
       }
-      Alerts.message("Quantity: " + quantity + " - Sum: " +sum, divisors);
+      Alerts.message("Quantity: " + quantity + " - Sum: " + sum, divisors);
     } else {
       Alerts.message("Illogical range", "Verify");
     }
@@ -247,6 +248,16 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
 
   private void stopChronometer() {
     chronometerActive = false;
+  }
+
+  public void start(JDialog parent) {
+    setBounds(0, 0, 430, 270);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Primos");
+    AppConfig.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
   }
 
   @Override
@@ -300,7 +311,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
   @Override
   public void actionPerformed(ActionEvent e) {
 
-      if (e.getSource() == btnSearchPrime) {
+    if (e.getSource() == btnSearchPrime) {
 
       if (txtSince.getText().length() > 0 && txtUntil.getText().length() > 0) {
         searchPrimeNumbers(Integer.parseInt(txtSince.getText()), Integer.parseInt(
@@ -325,7 +336,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
   public void mouseClicked(MouseEvent e) {
 
     if (e.getSource() == tittle) {
-      resources.appConfig.fadeOut(this);
+      AppConfig.fadeOut(this);
     }
   }
 

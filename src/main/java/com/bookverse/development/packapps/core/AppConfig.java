@@ -25,6 +25,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import org.apache.commons.codec.binary.Base64;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -68,9 +69,6 @@ public class AppConfig {
   public static final Font SMALL = new Font("Times New Roman", Font.PLAIN, 15);
   public static final Font MEDIUM = new Font("Times New Roman", Font.PLAIN, 20);
   public static final Font BIG = new Font("Times New Roman", Font.PLAIN, 30);
-
-  // MIGRAR
-  private double phi;
 
   public static String inputText(String request, int length) {
 
@@ -151,7 +149,7 @@ public class AppConfig {
     return (int) Math.floor(Math.random() * (min - max + 1) + max);
   }
 
-  public static String Encrypt(String text, boolean isEmail) {
+  public static String encrypt(String text, boolean isEmail) {
 
     String base64EncryptedString = "";
 
@@ -176,7 +174,7 @@ public class AppConfig {
     return base64EncryptedString;
   }
 
-  public static String Decrypt(String text, boolean isEmail) {
+  public static String decrypt(String text, boolean isEmail) {
 
     String base64EncryptedString = "";
 
@@ -325,6 +323,8 @@ public class AppConfig {
     return border;
   }
 
+  @NotNull
+  @Contract(pure = true)
   public static String getTitle() {
     return "PackApps";
   }
@@ -338,20 +338,22 @@ public class AppConfig {
     }
   }
 
+  @NotNull
+  @Contract(pure = true)
   public static String getPasswordDBA() {
     return "admin";
   }
 
-  public static void fadeIn(JDialog ventana) {
-    WindowEffect.JDialogFadeIn(0f, 1f, 0.2f, 50, ventana);
+  public static void fadeIn(JDialog window) {
+    WindowEffect.JDialogFadeIn(0f, 1f, 0.2f, 50, window);
   }
 
-  public static void fadeIn(JFrame ventana) {
-    WindowEffect.JFrameFadeIn(0f, 1f, 0.2f, 50, ventana);
+  public static void fadeIn(JFrame window) {
+    WindowEffect.JFrameFadeIn(0f, 1f, 0.2f, 50, window);
   }
 
-  public static void fadeOut(JFrame ventana) {
-    WindowEffect.JFrameFadeOut(1f, 0f, 0.2f, 50, ventana, WindowEffect.EXIT);
+  public static void fadeOut(JFrame window) {
+    WindowEffect.JFrameFadeOut(1f, 0f, 0.2f, 50, window, WindowEffect.EXIT);
   }
 
   public static void instruccionesRuleta() {
@@ -370,168 +372,9 @@ public class AppConfig {
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
-  public void calcularPi(double nsecue) {
-
-    double fra = 0, x = 4, n = 1, pi = 0, cont = 0;
-
-    while (cont < nsecue) {
-      fra = x / n;
-      pi = pi + fra;
-      x = x * (-1);
-      n = n + 2;
-      cont = cont + 1;
-    }
-    JOptionPane.showMessageDialog(null, pi + "...", "Resultado", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public void calcularPi2(double nsecue) {
-
-    double fra1 = 0, num = 1, den = 1, pi = 0, resul = 0, pot = 2, i;
-
-    for (i = 1; i <= nsecue; i++) {
-
-      fra1 = num / Math.pow(den, pot);
-      resul = resul + fra1;
-      den = den + 1;
-    }
-
-    pi = Math.sqrt(resul * 6);
-
-    JOptionPane.showMessageDialog(null, pi + "...", "Resultado", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public void generarFibonacci(int lim) {
-
-    String numeros = "";
-
-    double num1 = 0, num2 = 1, f = 0;
-
-    for (int i = 0; i < lim; i++) {
-
-      if (i % 10 == 0 && i != 0 && i != 1 && i != 2) {
-        numeros += "\n";
-      }
-
-      f = num1 + num2;
-      num2 = num1;
-      num1 = f;
-
-      numeros += "[" + String.format("%.0f", f) + "]";
-    }
-
-    JOptionPane.showMessageDialog(null, numeros, "Resultado", JOptionPane.PLAIN_MESSAGE);
-
-    CalcularPhi(num1, num2);
-  }
-
-  public void ObtenerFibonnaci(int n) {
-
-    double fi, numero;
-
-    fi = (1 + Math.sqrt(5)) / 2;
-
-    numero = (1 / Math.sqrt(5)) * (Math.pow(fi, n) - (Math.pow(-1 / fi, n)));
-
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong>N°" + n + " de la serie Fibonacci</strong> ?  "
-            + String.format("%.0f", numero) + "</html>", "Resultado", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public void CalcularPhi(double num1, double num2) {
-    setPhi(num1 / num2);
-  }
-
-  public void proporcionAurea(double longitud) {
-
-    double a, b;
-
-    a = longitud / ((1 + Math.sqrt(5)) / 2);
-    b = longitud - a;
-
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong>Porción A: </strong>" + String.format("%.2f", a)
-            + "<br>"
-            + "<strong>Porción B: </strong>" + String.format("%.2f", b) + "</html>",
-        "Resultado", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public void binarioEntero(String num) {
-
-    int numero = Integer.parseInt(num);
-
-    int aux = numero;
-    long digito, decimal = 0; // será el equivalente en base decimal
-    int exponente = 0;
-
-    while (numero != 0) {
-      // se toma la última cifra
-      digito = numero % 10;
-      // se multiplica por la potencia de 2 correspondiente y se suma al número
-      decimal = decimal + digito * (int) Math.pow(2, exponente);
-      // se aumenta el exponente
-      exponente++;
-      // se quita la última cifra para repetir el proceso
-      numero = numero / 10;
-    }
-
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong>" + aux + " en decimal</strong> ?  " + decimal
-            + "</html>",
-        "Resultado", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public void enteroBinario(int decimal) {
-
-    int cociente = decimal;// El cociente inicia con el valor del número decimal.
-
-    String binario = " ";// Inicio de la cifra binaria
-
-    while (cociente > 1) {// Repetir mientras el cociente de dividir por 2 sea mayor a 1.
-
-      int digito = cociente % 2;// Obtener el residuo de dividir por 2, éste será el dígito binario.
-
-      cociente = (cociente - digito) / 2;// Obtener el cociente de la división entera por 2
-
-      binario = digito + binario;// Agregar el dígito binario a la cifra
-    }
-
-    binario = cociente + binario;// Agregar el último cociente para completar la cifra.
-
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong>" + decimal + " en binario</strong> ? "
-            + binario
-            + "</html>", "Resultado",
-        JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public void invertirCifras(String num) {
-
-    String numeroInvertido = "";
-    int longitudNumero = 0;
-
-    longitudNumero = num.length();
-
-    while (longitudNumero != 0) {
-      numeroInvertido += num.substring(longitudNumero - 1, longitudNumero);
-      longitudNumero--;
-    }
-
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong>Número invertido</strong> ? " + numeroInvertido
-            + "</html>",
-        "Resultado", JOptionPane.PLAIN_MESSAGE);
-  }
 
   public static void fadeOut(JDialog ventana) {
     WindowEffect.JDialogFadeOut(1f, 0f, 0.2f, 50, ventana, WindowEffect.DISPOSE);
-  }
-
-  public double getPhi() {
-    return phi;
-  }
-
-  public void setPhi(double phi) {
-    this.phi = phi;
   }
 
   //INSTRUCCIONES

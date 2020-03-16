@@ -1,7 +1,17 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.core.AppConfig.BIG;
+import static com.bookverse.development.packapps.core.AppConfig.HAND;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.getBorder;
+import static com.bookverse.development.packapps.core.AppConfig.loginDBA;
+import static com.bookverse.development.packapps.utils.ViewConstants.INVENTORY;
+
+import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
+import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,11 +20,12 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
+import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,108 +34,99 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import org.jetbrains.annotations.NotNull;
 
 public class InventoryTable extends JDialog implements MouseListener {
 
   public JLabel[] actions = new JLabel[4];
-  public JTable inventarioTab;
-  public String referencia = "";
+  public JTable viewTable;
+  public String reference = "";
   public int status = 0;
-  private JLabel titulo, men;
-  private JScrollPane scroll;
-  private Table modelo = new Table();
-  private TableRowSorter<TableModel> ordenar;
-  private String[] columnas = {"REFERENCIA", "ESTADO", "PRECIO", "UNIDADES"};
-  private Resources img = new Resources();
-  private boolean buscar;
+  private JLabel tittle;
+  private Table model = new Table();
+  private TableRowSorter<TableModel> rowSorter;
+  private String[] columns = {"REFERENCE", "STATE", "PRICE", "QUANTITY"};
+  private Resources resources = new Resources();
+  private boolean search;
 
-  public InventoryTable(JDialog parent, boolean modal, boolean buscar) {
+  public InventoryTable(JDialog parent, boolean modal, boolean search) {
     super(parent, modal);
-    this.buscar = buscar;
-    componentes();
+    this.search = search;
+    createComponents();
   }
 
-  // Constructor que recibe la ventana padre y el valor modal
   public InventoryTable(JFrame parent, boolean modal) {
-
     super(parent, modal);
-
-    componentes();
+    createComponents();
   }
 
-  public JPanel getPanel() {
+  @NotNull
+  private JPanel getPanel() {
 
     JPanel panel = new JPanel(new GridLayout());
 
-    JPanel fila = new JPanel(new FlowLayout());
+    JPanel row = new JPanel(new FlowLayout());
 
-    String[] imgs = {"eliminar.png", "select.png", "read.png", "refresh.png"};
+    String[] images = {"eliminar.png", "select.png", "read.png", "refresh.png"};
 
-    panel.setBorder(img.appConfig.getBorder("Select Action"));
+    panel.setBorder(getBorder("Select Action"));
 
-    titulo = new JLabel();
-    titulo.setFont(img.appConfig.BIG);
-    titulo.setForeground(img.appConfig.MAIN_COLOR);
+    tittle = new JLabel();
+    tittle.setFont(BIG);
+    tittle.setForeground(MAIN_COLOR);
 
-    men = new JLabel();
-    men.setFont(img.appConfig.BIG);
-    men.setForeground(img.appConfig.TEXT_COLOR);
+    JLabel message = new JLabel();
+    message.setFont(BIG);
+    message.setForeground(TEXT_COLOR);
 
-    /* ICONOS */
-    for (int i = 0; i < actions.length; i++) {
-
+    IntStream.range(0, actions.length).forEach(i -> {
       actions[i] = new JLabel();
-      actions[i].setIcon(new ImageIcon(img.getImage(imgs[i])));
+      actions[i].setIcon(new ImageIcon(resources.getImage(images[i])));
       actions[i].addMouseListener(this);
-      fila.add(actions[i]);
-    }
+      row.add(actions[i]);
+    });
 
-    if (buscar) {
+    if (search) {
       actions[0].setVisible(false);
     } else {
       actions[1].setVisible(false);
     }
 
-    panel.add(titulo, BorderLayout.EAST);
-    panel.add(fila, BorderLayout.CENTER);
-    panel.add(men, BorderLayout.WEST);
+    panel.add(tittle, BorderLayout.EAST);
+    panel.add(row, BorderLayout.CENTER);
+    panel.add(message, BorderLayout.WEST);
 
     return panel;
   }
 
-  // Crea los componentes de la tabla
-  private void componentes() {
+  private void createComponents() {
 
-    setIconImage(new ImageIcon(img.getImage("inventario.png")).getImage());
+    setIconImage(new ImageIcon(resources.getImage("inventario.png")).getImage());
 
-    /* TABLA */
-    for (int i = 0; i < columnas.length; i++) {
-      modelo.addColumn(columnas[i]);
-    }
+    IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-    inventarioTab = new JTable(modelo);
-    inventarioTab.getTableHeader().setReorderingAllowed(false);
-    scroll = new JScrollPane(inventarioTab);
+    viewTable = new JTable(model);
+    viewTable.getTableHeader().setReorderingAllowed(false);
+    JScrollPane scroll = new JScrollPane(viewTable);
     add(scroll, BorderLayout.CENTER);
 
-    int[] anchos = {130, 80, 80, 40};
-    for (int i = 0; i < inventarioTab.getColumnCount(); i++) {
-      inventarioTab.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-    }
+    int[] sizes = {130, 80, 80, 40};
+    IntStream.range(0, viewTable.getColumnCount())
+        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
     add(getPanel(), BorderLayout.SOUTH);
 
     pack();
 
-    ordenar = new TableRowSorter<TableModel>(modelo);
-    inventarioTab.setRowSorter(ordenar);
+    rowSorter = new TableRowSorter<>(model);
+    viewTable.setRowSorter(rowSorter);
 
-    for (int i = 0; i < columnas.length; i++) {
+    for (int i = 0; i < columns.length; i++) {
       DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
       tcr.setHorizontalAlignment(SwingConstants.CENTER);
-      inventarioTab.getColumnModel().getColumn(i).setCellRenderer(tcr);
+      viewTable.getColumnModel().getColumn(i).setCellRenderer(tcr);
     }
 
     repaint();
@@ -147,94 +149,92 @@ public class InventoryTable extends JDialog implements MouseListener {
     super.paint(g);
   }
 
-  public void limpiarTabla() {
+  public void cleanTable() {
 
-    while (modelo.getRowCount() > 0) {
-      modelo.removeRow(0);
+    while (model.getRowCount() > 0) {
+      model.removeRow(0);
     }
   }
 
-  public void btnSelectAP() {
+  private void btnSelectAP() {
 
-    int filaseleccionada;
+    int selectedRow;
 
-    filaseleccionada = inventarioTab.getSelectedRow();
+    selectedRow = viewTable.getSelectedRow();
 
-    if (filaseleccionada == -1) {
-
-      JOptionPane.showMessageDialog(null, "No ha seleccionado ningún producto", "Mensaje",
-          JOptionPane.PLAIN_MESSAGE);
-
+    if (selectedRow == -1) {
+      Alerts.message("Message", "No record selected");
       status = 0;
-
     } else {
 
-      if (!String.valueOf(modelo.getValueAt(filaseleccionada, 3)).equals("0")) {
-        referencia = String.valueOf(modelo.getValueAt(filaseleccionada, 0));
-
+      if (!String.valueOf(model.getValueAt(selectedRow, 3)).equals("0")) {
+        reference = String.valueOf(model.getValueAt(selectedRow, 0));
         status = 1;
       } else {
-        referencia = String.valueOf(modelo.getValueAt(filaseleccionada, 0));
-
+        reference = String.valueOf(model.getValueAt(selectedRow, 0));
         status = 2;
       }
-
       dispose();
     }
   }
 
-  public void btnBuscarAP() {
+  private void btnSearchAP() {
 
-    String busqueda = img.appConfig.buscarProducto();
+    String search = searchProduct();
 
-    if (!busqueda.equals("")) {
-      ordenar.setRowFilter(RowFilter.regexFilter(busqueda, 0));
+    if (!search.equals("")) {
+      rowSorter.setRowFilter(RowFilter.regexFilter(search, 0));
     }
   }
 
-  public void btnEliminarAP() {
+  private void btnDeleteAP() {
 
-    int filaseleccionada;
+    int selectedRow;
 
-    filaseleccionada = inventarioTab.getSelectedRow();
+    selectedRow = viewTable.getSelectedRow();
 
-    if (filaseleccionada == -1) {
-
-      JOptionPane.showMessageDialog(null, "No ha seleccionado ningún producto", "Mensaje",
-          JOptionPane.PLAIN_MESSAGE);
-
+    if (selectedRow == -1) {
+      Alerts.message("Delete", "No record selected");
     } else {
 
-      if (img.appConfig.loginDBA()) {
+      if (loginDBA()) {
 
-        int[] rows = inventarioTab.getSelectedRows();
-        String[] IDs = new String[rows.length];
+        int[] rows = viewTable.getSelectedRows();
+        String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
+            .toArray(String[]::new);
 
-        for (int i = 0; i < rows.length; i++) {
-          IDs[i] = String.valueOf(modelo.getValueAt(rows[i], 0));
-        }
-
-        img.database.deleteData(IDs, "inventario");
+        Database.deleteData(IDs, INVENTORY);
         dispose();
-        new Opciones().btnInventarioAP(false);
+        new HomeStore().btnInventoryTableAP(false);
       }
     }
   }
 
-  public void btnRefreshAP() {
+  private void btnRefreshAP() {
     dispose();
-    new Opciones().btnInventarioAP(buscar);
+    new HomeStore().btnInventoryTableAP(search);
+  }
+
+  public String searchProduct() {
+
+    String aux = Alerts.inputText("What reference are you looking for?");
+
+    if (aux == null) {
+      aux = "";
+    }
+
+    return aux;
   }
 
   @Override
   public void mouseClicked(MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
-      btnEliminarAP();
+      btnDeleteAP();
     } else if (e.getSource() == actions[1]) {
       btnSelectAP();
     } else if (e.getSource() == actions[2]) {
-      btnBuscarAP();
+      btnSearchAP();
     } else if (e.getSource() == actions[3]) {
       btnRefreshAP();
     }
@@ -244,17 +244,17 @@ public class InventoryTable extends JDialog implements MouseListener {
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
-      actions[0].setCursor(img.appConfig.HAND);
-      titulo.setText("Eliminar Producto");
+      actions[0].setCursor(HAND);
+      tittle.setText("Eliminar Producto");
     } else if (e.getSource() == actions[1]) {
-      actions[1].setCursor(img.appConfig.HAND);
-      titulo.setText("Seleccionar Producto");
+      actions[1].setCursor(HAND);
+      tittle.setText("Seleccionar Producto");
     } else if (e.getSource() == actions[2]) {
-      actions[2].setCursor(img.appConfig.HAND);
-      titulo.setText("Buscar Referencia");
+      actions[2].setCursor(HAND);
+      tittle.setText("Buscar Referencia");
     } else if (e.getSource() == actions[3]) {
-      actions[3].setCursor(img.appConfig.HAND);
-      titulo.setText("Actualizar Tabla");
+      actions[3].setCursor(HAND);
+      tittle.setText("Actualizar Tabla");
     }
   }
 
@@ -262,13 +262,13 @@ public class InventoryTable extends JDialog implements MouseListener {
   public void mouseExited(MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
-      titulo.setText("");
+      tittle.setText("");
     } else if (e.getSource() == actions[1]) {
-      titulo.setText("");
+      tittle.setText("");
     } else if (e.getSource() == actions[2]) {
-      titulo.setText("");
+      tittle.setText("");
     } else if (e.getSource() == actions[3]) {
-      titulo.setText("");
+      tittle.setText("");
     }
   }
 

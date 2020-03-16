@@ -9,6 +9,7 @@ import static com.bookverse.development.packapps.utils.ViewConstants.FEEDBACK;
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -114,7 +115,8 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
         JOptionPane.showMessageDialog(null,
             "<html>" + Format.style()
                 + "<strong><center>Commentary sent</center></strong><br>"
-                + "Commentaries sent successfully, your opinion will be taken into account." + "</html>",
+                + "Commentaries sent successfully, your opinion will be taken into account."
+                + "</html>",
             "Successfully", JOptionPane.PLAIN_MESSAGE);
 
         txtUser.setText("");
@@ -136,10 +138,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
     } else {
 
       if (text.getText().trim().length() < 3) {
-
-        JOptionPane.showMessageDialog(null, "<html>" + Format.style()
-                + "<strong>Message too short</strong></html>",
-            "Verify!", JOptionPane.PLAIN_MESSAGE);
+        Alerts.message("Verify", "Message too short");
         text.requestFocus();
       } else {
         sendCommentary(txtUser.getText(), text.getText());

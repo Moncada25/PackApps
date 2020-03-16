@@ -16,25 +16,25 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-public class ComprasTabla extends JDialog {
+public class LoansTable extends JDialog {
 
-  public JTable comprasTab;
+  public JTable viewTable;
   private JScrollPane scroll;
   private Table modelo = new Table();
   private TableRowSorter<TableModel> ordenar;
-  private String[] columnas = {"PRODUCTO", "USUARIO", "DOCUMENTO", "TELÉFONO", "FECHA", "UNIDADES",
-      "TOTAL"};
+  private String[] columnas = {"USUARIO", "NOMBRE", "DOCUMENTO", "REFERENCIA", "TELÉFONO", "PLAZO",
+      "VALOR"};
 
   // Constructor que recibe la ventana padre y el valor modal
-  public ComprasTabla(JDialog parent, boolean modal) {
+  public LoansTable(JDialog parent, boolean modal) {
 
     super(parent, modal);
 
     componentes();
   }
 
-  //Constructor que recibe la ventana padre y el valor modal
-  public ComprasTabla(JFrame parent, boolean modal) {
+  // Constructor que recibe la ventana padre y el valor modal
+  public LoansTable(JFrame parent, boolean modal) {
 
     super(parent, modal);
 
@@ -42,7 +42,7 @@ public class ComprasTabla extends JDialog {
   }
 
   // Constructor que no recibe parámetros
-  public ComprasTabla() {
+  public LoansTable() {
 
     componentes();
   }
@@ -50,21 +50,21 @@ public class ComprasTabla extends JDialog {
   // Crea los componentes de la tabla
   private void componentes() {
 
-    setIconImage(new ImageIcon(new Resources().getImage("comprar.png")).getImage());
+    setIconImage(new ImageIcon(new Resources().getImage("prestar.png")).getImage());
 
     /* TABLA */
     for (int i = 0; i < columnas.length; i++) {
       modelo.addColumn(columnas[i]);
     }
 
-    comprasTab = new JTable(modelo);
-    comprasTab.getTableHeader().setReorderingAllowed(false);
-    scroll = new JScrollPane(comprasTab);
+    viewTable = new JTable(modelo);
+    viewTable.getTableHeader().setReorderingAllowed(false);
+    scroll = new JScrollPane(viewTable);
     getContentPane().add(scroll, BorderLayout.CENTER);
 
-    int[] anchos = {60, 35, 70, 50, 105, 50, 40};
-    for (int i = 0; i < comprasTab.getColumnCount(); i++) {
-      comprasTab.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+    int[] anchos = {40, 80, 70, 70, 70, 50, 40};
+    for (int i = 0; i < viewTable.getColumnCount(); i++) {
+      viewTable.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
     }
 
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -72,12 +72,12 @@ public class ComprasTabla extends JDialog {
     pack();
 
     ordenar = new TableRowSorter<TableModel>(modelo);
-    comprasTab.setRowSorter(ordenar);
+    viewTable.setRowSorter(ordenar);
 
     for (int i = 0; i < columnas.length; i++) {
       DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
       tcr.setHorizontalAlignment(SwingConstants.CENTER);
-      comprasTab.getColumnModel().getColumn(i).setCellRenderer(tcr);
+      viewTable.getColumnModel().getColumn(i).setCellRenderer(tcr);
     }
 
     repaint();

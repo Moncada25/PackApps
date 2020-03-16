@@ -1,5 +1,7 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.core.AppConfig.*;
+
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
@@ -15,49 +17,45 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import org.jetbrains.annotations.NotNull;
 
 public class Numbers extends JDialog implements MouseListener {
 
-  private JLabel btnprimos, btncalcular, btnphi, btnpi, btnotros, welcome;
+  private JLabel btnPrimeNumbers, btnCalculator, btnPhi, btnPi, btnOther, welcome;
 
   private Resources resources = new Resources();
 
   public Numbers(JFrame parent, boolean modal) {
-
     super(parent, modal);
-
-    Componentes();
+    createComponents();
   }
-
-  public Numbers() {
-    Componentes();
-  }
-
-  public JPanel getPanel() {
+  
+  @NotNull
+  private JPanel getPanel() {
 
     JPanel panel = new JPanel(new FlowLayout());
     panel.setBackground(new Color(0, 0, 0));
-    panel.setBorder(resources.appConfig.getBorder("Select Number"));
+    panel.setBorder(getBorder("Select Number"));
 
-    btnphi = resources.getLabel("  Phi ?  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    btnphi.setBorder(resources.appConfig.BORDER_BLUE);
-    btnphi.addMouseListener(this);
+    btnPhi = resources.getLabel("  Phi  ", TEXT_COLOR, panel, MEDIUM);
+    btnPhi.setBorder(BORDER_BLUE);
+    btnPhi.addMouseListener(this);
 
-    btnpi = resources.getLabel("  Pi ?  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    btnpi.setBorder(resources.appConfig.BORDER_BLUE);
-    btnpi.addMouseListener(this);
+    btnPi = resources.getLabel("  Pi  ", TEXT_COLOR, panel, MEDIUM);
+    btnPi.setBorder(BORDER_BLUE);
+    btnPi.addMouseListener(this);
 
-    btncalcular = resources.getLabel("  Calculadora  ", resources.appConfig.MAIN_COLOR, panel, resources.appConfig.MEDIUM);
-    btncalcular.setBorder(resources.appConfig.BORDER_RED);
-    btncalcular.addMouseListener(this);
+    btnCalculator = resources.getLabel("  Calculator  ", MAIN_COLOR, panel, MEDIUM);
+    btnCalculator.setBorder(BORDER_RED);
+    btnCalculator.addMouseListener(this);
 
-    btnprimos = resources.getLabel("  Primo  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    btnprimos.setBorder(resources.appConfig.BORDER_BLUE);
-    btnprimos.addMouseListener(this);
+    btnPrimeNumbers = resources.getLabel("  Prime Numbers  ", TEXT_COLOR, panel, MEDIUM);
+    btnPrimeNumbers.setBorder(BORDER_BLUE);
+    btnPrimeNumbers.addMouseListener(this);
 
-    btnotros = resources.getLabel("  Otros  ", resources.appConfig.TEXT_COLOR, panel, resources.appConfig.MEDIUM);
-    btnotros.setBorder(resources.appConfig.BORDER_BLUE);
-    btnotros.addMouseListener(this);
+    btnOther = resources.getLabel("  Others  ", TEXT_COLOR, panel, MEDIUM);
+    btnOther.setBorder(BORDER_BLUE);
+    btnOther.addMouseListener(this);
 
     return panel;
   }
@@ -73,78 +71,18 @@ public class Numbers extends JDialog implements MouseListener {
     setVisible(true);
   }
 
-  // Se crean los componentes de la ventana
-  public void Componentes() {
+  private void createComponents() {
 
     add(getPanel(), BorderLayout.SOUTH);
 
-    ImageIcon imagen = new ImageIcon(resources.getImage("math.jpg"));
+    ImageIcon image = new ImageIcon(resources.getImage("math.jpg"));
     welcome = new JLabel();
-    welcome.setIcon(imagen);
+    welcome.setIcon(image);
     welcome.setSize(1280, 720);
     welcome.addMouseListener(this);
     add(welcome, BorderLayout.CENTER);
 
     repaint();
-  }
-
-  private void btnPiAP() {
-
-    Pi jd = new Pi(this, true);
-    jd.setBounds(0, 0, 430, 280);
-    jd.setResizable(false);
-    jd.setLocationRelativeTo(null);
-    jd.setTitle("Pi ?");
-    resources.appConfig.fadeIn(jd);
-    setVisible(false);
-    jd.setVisible(true);
-  }
-
-  private void btnPhiAP() {
-
-    Phi jd = new Phi(this, true);
-    jd.setBounds(0, 0, 440, 300);
-    jd.setResizable(false);
-    jd.setLocationRelativeTo(null);
-    jd.setTitle("Phi ?");
-    resources.appConfig.fadeIn(jd);
-    setVisible(false);
-    jd.setVisible(true);
-  }
-
-  private void btnCalculadoraAP() {
-
-    Calculator jd = new Calculator(this, true);
-    jd.setBounds(0, 0, 320, 320);
-    jd.setResizable(false);
-    jd.setLocationRelativeTo(null);
-    jd.setTitle("Calculadora Estándar");
-    resources.appConfig.fadeIn(jd);
-    setVisible(false);
-    jd.setVisible(true);
-  }
-
-  private void btnPrimosAP() {
-    PrimeNumber jd = new PrimeNumber(this, true);
-    jd.setBounds(0, 0, 430, 270);
-    jd.setResizable(false);
-    jd.setLocationRelativeTo(null);
-    jd.setTitle("Primos");
-    resources.appConfig.fadeIn(jd);
-    setVisible(false);
-    jd.setVisible(true);
-  }
-
-  private void btnOtrosAP() {
-
-    Otros jd = new Otros(this, true);
-    jd.setBounds(0, 0, 430, 300);
-    jd.setResizable(false);
-    jd.setLocationRelativeTo(null);
-    jd.setTitle("Trucazos");
-    resources.appConfig.fadeIn(jd);
-    setVisible(false);
-    jd.setVisible(true);
   }
 
   @Override
@@ -165,41 +103,41 @@ public class Numbers extends JDialog implements MouseListener {
   }
 
   @Override
-  public void mouseClicked(MouseEvent e) {
+  public void mouseClicked(@NotNull MouseEvent e) {
 
-    if (e.getSource() == btnprimos) {
-      btnPrimosAP();
+    if (e.getSource() == btnPrimeNumbers) {
+      new PrimeNumber(this, true).start(this);
       setVisible(true);
-    } else if (e.getSource() == btncalcular) {
-      btnCalculadoraAP();
+    } else if (e.getSource() == btnCalculator) {
+      new Calculator(this, true).start(this);
       setVisible(true);
-    } else if (e.getSource() == btnphi) {
-      btnPhiAP();
+    } else if (e.getSource() == btnPhi) {
+      new Phi(this, true).start(this);
       setVisible(true);
-    } else if (e.getSource() == btnpi) {
-      btnPiAP();
+    } else if (e.getSource() == btnPi) {
+      new Pi(this, true).start(this);
       setVisible(true);
-    } else if (e.getSource() == btnotros) {
-      btnOtrosAP();
+    } else if (e.getSource() == btnOther) {
+      new Otros(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == welcome) {
-      resources.appConfig.fadeOut(this);
+      fadeOut(this);
     }
   }
 
   @Override
-  public void mouseEntered(MouseEvent e) {
+  public void mouseEntered(@NotNull MouseEvent e) {
 
-    if (e.getSource() == btnphi) {
-      btnphi.setCursor(resources.appConfig.HAND);
-    } else if (e.getSource() == btnotros) {
-      btnotros.setCursor(resources.appConfig.HAND);
-    } else if (e.getSource() == btncalcular) {
-      btncalcular.setCursor(resources.appConfig.HAND);
-    } else if (e.getSource() == btnpi) {
-      btnpi.setCursor(resources.appConfig.HAND);
-    } else if (e.getSource() == btnprimos) {
-      btnprimos.setCursor(resources.appConfig.HAND);
+    if (e.getSource() == btnPhi) {
+      btnPhi.setCursor(HAND);
+    } else if (e.getSource() == btnOther) {
+      btnOther.setCursor(HAND);
+    } else if (e.getSource() == btnCalculator) {
+      btnCalculator.setCursor(HAND);
+    } else if (e.getSource() == btnPi) {
+      btnPi.setCursor(HAND);
+    } else if (e.getSource() == btnPrimeNumbers) {
+      btnPrimeNumbers.setCursor(HAND);
     }
   }
 

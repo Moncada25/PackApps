@@ -363,6 +363,16 @@ public class Calculator extends JDialog implements ActionListener {
     }
   }
 
+  public void start(JDialog parent) {
+    setBounds(0, 0, 320, 320);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Estandar Calculator");
+    AppConfig.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
+  }
+
   @Override
   public void actionPerformed(ActionEvent e) {
 

@@ -1,6 +1,11 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.core.AppConfig.*;
+
+import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -16,8 +21,8 @@ import javax.swing.JTextField;
 
 public class Registrar extends JDialog implements ActionListener {
 
-    Resources img = new Resources();
-    public Opciones op = new Opciones();
+    Resources resources = new Resources();
+    public HomeStore op = new HomeStore();
 
     private JLabel registrarse, usuario, pass, codEncargado;
     private JTextField txtUsuario;
@@ -35,19 +40,21 @@ public class Registrar extends JDialog implements ActionListener {
     public void componentes() {
 
         setLayout(null);// Permite el posicionamiento absoluto de los componentes
-        setIconImage(new ImageIcon(img.getImage("añadir_usuario.png")).getImage());
+        setIconImage(new ImageIcon(resources.getImage("añadir_usuario.png")).getImage());
         setDefaultCloseOperation(0);
 
-        btnregistro = img.getButton("Registrar", img.appConfig.TEXT_COLOR, this, this);
+        btnregistro = resources.getButton("Registrar", TEXT_COLOR, this, this);
         btnregistro.setBounds(60, 215, 100, 30);
 
-        btncancelar = img.getButton("Return", img.appConfig.MAIN_COLOR, this, this);
+        btncancelar = resources.getButton("Return", MAIN_COLOR, this, this);
         btncancelar.setBounds(300, 215, 86, 30);
 
-        registrarse = img.getLabel("<html><strong><em>Registrarse</em></strong></html>", img.appConfig.MAIN_COLOR, this, img.appConfig.BIG);
+        registrarse = resources
+            .getLabel("<html><strong><em>Registrarse</em></strong></html>", MAIN_COLOR, this, BIG);
         registrarse.setBounds(150, 5, 200, 40);
 
-        usuario = img.getLabel("<html><strong>Username</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
+        usuario = resources
+            .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
         usuario.setBounds(30, 60, 180, 30);
 
         txtUsuario = new JTextField();
@@ -62,11 +69,12 @@ public class Registrar extends JDialog implements ActionListener {
             }
 
             private void txtUsuarioKeyTyped(KeyEvent evt) {
-                img.appConfig.soloAlfa(evt.getKeyChar(), evt, txtUsuario.getText(), 12);
+                Format.onlyAlfa(evt.getKeyChar(), evt, txtUsuario.getText(), 12);
             }
         });
 
-        pass = img.getLabel("<html><strong>Password</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
+        pass = resources
+            .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
         pass.setBounds(30, 110, 120, 30);
 
         txtPass = new JPasswordField();
@@ -74,19 +82,17 @@ public class Registrar extends JDialog implements ActionListener {
         txtPass.setBounds(250, 115, 150, 30);
         add(txtPass);
 
-        // Permite detectar lo que se escribe en el campo de contraseña
         txtPass.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent evt) {
                 txtCodKeyTyped(evt);
             }
 
             private void txtCodKeyTyped(KeyEvent evt) {
-                img.appConfig
-                    .soloAlfa(evt.getKeyChar(), evt, String.valueOf(txtPass.getPassword()), 20);
+                Format.onlyAlfa(evt.getKeyChar(), evt, String.valueOf(txtPass.getPassword()), 20);
             }
         });
 
-        codEncargado = img.getLabel("<html><strong>Manager Key</strong></html>", img.appConfig.TEXT_COLOR, this, img.appConfig.MEDIUM);
+        codEncargado = resources.getLabel("<html><strong>Manager Key</strong></html>", TEXT_COLOR, this, MEDIUM);
         codEncargado.setBounds(30, 160, 180, 30);
 
         txtCodProp = new JPasswordField();
@@ -102,8 +108,7 @@ public class Registrar extends JDialog implements ActionListener {
             }
 
             private void txtCodKeyTyped(KeyEvent evt) {
-                img.appConfig
-                    .soloAlfa(evt.getKeyChar(), evt, String.valueOf(txtCodProp.getPassword()), 20);
+                Format.onlyAlfa(evt.getKeyChar(), evt, String.valueOf(txtCodProp.getPassword()), 20);
             }
         });
     }
@@ -120,57 +125,52 @@ public class Registrar extends JDialog implements ActionListener {
         txtCodProp.setText("");
         txtUsuario.setEnabled(true);
         txtPass.setEnabled(true);
-        img.appConfig.fadeOut(this);
+        fadeOut(this);
     }
 
     public void btnRegistroAP() {
 
-        try {
+        if (!Database.searchUser(txtUsuario.getText())) {
 
-            if (!img.database.userExist(txtUsuario.getText())) {
+            if (String.valueOf(txtCodProp.getPassword()).equals("123")) {
+                txtUsuario.setEnabled(true);
+                txtPass.setEnabled(true);
 
-                if (String.valueOf(txtCodProp.getPassword()).equals(img.appConfig.getCodProp())) {
-                    txtUsuario.setEnabled(true);
-                    txtPass.setEnabled(true);
+                if (Format.verifyDocument(txtUsuario.getText())
+                        && Format.verifyDocument(String.valueOf(txtPass.getPassword()))) {
 
-                    if (img.appConfig.usuarioPass(txtUsuario.getText())
-                            && img.appConfig.usuarioPass(String.valueOf(txtPass.getPassword()))) {
+                    String[] datos = {"usuarios", txtUsuario.getText(), AppConfig.encrypt(String.valueOf(txtPass.getPassword()), true),
+                            "Offline"};
 
-                        String[] datos = {"usuarios", txtUsuario.getText(), img.appConfig.Encrypt(String.valueOf(txtPass.getPassword()), true),
-                                "Offline"};
+                    Database.insertData(datos);
 
-                        img.database.insertData(datos);
-
-                        JOptionPane.showMessageDialog(null, "<html>" + img.appConfig.styleJOption() + "<strong>¡Usuario registrado!</strong></html>", "Mensaje",
-                                JOptionPane.PLAIN_MESSAGE);
-                        txtUsuario.setText("");
-                        txtPass.setText("");
-                        txtCodProp.setText("");
-                        img.appConfig.fadeOut(this);
-                    } else {
-                        JOptionPane.showMessageDialog(null,
-                                "<html>" + img.appConfig.styleJOption() + "<strong>El nombre de usuario y/o la contraseña son demasiado débiles, inténtalo nuevamente.</strong></html>", "Mensaje",
-                                JOptionPane.PLAIN_MESSAGE);
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "<html>" + img.appConfig.styleJOption() + "<strong>Código de gerente incorrecto, inténtelo de nuevo.</strong></html>", "Mensaje",
+                    JOptionPane.showMessageDialog(null, "<html>" + Format.style() + "<strong>¡Usuario registrado!</strong></html>", "Mensaje",
                             JOptionPane.PLAIN_MESSAGE);
-                    txtUsuario.setEnabled(false);
-                    txtPass.setEnabled(false);
+                    txtUsuario.setText("");
+                    txtPass.setText("");
                     txtCodProp.setText("");
-                    txtCodProp.requestFocus();
+                    fadeOut(this);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "<html>" + Format.style() + "<strong>El nombre de usuario y/o la contraseña son demasiado débiles, inténtalo nuevamente.</strong></html>", "Mensaje",
+                            JOptionPane.PLAIN_MESSAGE);
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "<html>" + img.appConfig.styleJOption() + "<strong>El usuario ya existe, intente iniciando sesión.</strong></html>", "Mensaje",
+                JOptionPane.showMessageDialog(null, "<html>" + Format.style() + "<strong>Código de gerente incorrecto, inténtelo de nuevo.</strong></html>", "Mensaje",
                         JOptionPane.PLAIN_MESSAGE);
-                img.appConfig.fadeOut(this);
+                txtUsuario.setEnabled(false);
+                txtPass.setEnabled(false);
+                txtCodProp.setText("");
+                txtCodProp.requestFocus();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } else {
+            JOptionPane.showMessageDialog(null, "<html>" + Format.style() + "<strong>El usuario ya existe, intente iniciando sesión.</strong></html>", "Mensaje",
+                    JOptionPane.PLAIN_MESSAGE);
+            fadeOut(this);
         }
+
     }
 
     // Eventos al presionar un botón
