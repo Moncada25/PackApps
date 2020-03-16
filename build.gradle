@@ -22,13 +22,22 @@ buildscript {
     }
 }
 tasks.withType(JavaCompile) {
-    options.encoding = 'ISO-8859-1'
+    options.encoding = 'UTF-8'
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'net.serenity-bdd.aggregator'
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'com.bookverse.development.packapps.core.Start'
+        )
+    }
+}
 
 ext {
     serenityCoreVersion = "2.0.49"

@@ -341,7 +341,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
   private void onlyLyrics(char lyric, KeyEvent evt) {
     if ((lyric < 'a' || lyric > 'z') && (lyric != KeyEvent.VK_BACK_SPACE || lyric != ' ')
-        && lyric != 'ñ') {
+        && lyric != 'Ã±') {
       Alerts.message("Warning", "Only lowercase letters are allowed");
       evt.consume();
     } else {

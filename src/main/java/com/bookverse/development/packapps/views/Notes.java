@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+@SuppressWarnings("unchecked")
 public class Notes extends JDialog implements ActionListener {
 
   private int numberOfNotes = 10;

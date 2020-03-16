@@ -28,9 +28,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class Dices extends JDialog implements ActionListener {
 
-  Dado d1 = new Dado();
-  Dado d2 = new Dado();
-  Dado d3 = new Dado();
+  Dice d1 = new Dice();
+  Dice d2 = new Dice();
+  Dice d3 = new Dice();
   private JLabel dice1, dice2, dice3, lblPoints1, lblPoints2, lblPoints3;
   private JButton btnExit, btnThrow, btnReset;
   private JTextField player1, player2, player3;
@@ -387,7 +387,7 @@ public class Dices extends JDialog implements ActionListener {
   }
 }
 
-class Dado {
+class Dice {
 
   private int valor;
 
