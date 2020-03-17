@@ -4,7 +4,6 @@ import static com.bookverse.development.packapps.core.AppConfig.*;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 
-import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.Color;
 import java.awt.Font;

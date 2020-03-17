@@ -2,17 +2,11 @@ group 'com.bookverse.development.packapps'
 version '1.0-SNAPSHOT'
 
 repositories {
-    /*maven {
-        url "https://artifactory.apps.bancolombia.com/maven-bancolombia"
-    }*/
     mavenLocal()
     jcenter()
 }
 buildscript {
     repositories {
-        /*maven {
-            url "https://artifactory.apps.bancolombia.com/maven-bancolombia"
-        }*/
         mavenLocal()
         jcenter()
 
@@ -21,6 +15,7 @@ buildscript {
         }
     }
 }
+
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
@@ -33,10 +28,14 @@ apply plugin: 'net.serenity-bdd.aggregator'
 jar {
     manifest {
         attributes(
-                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
                 'Main-Class': 'com.bookverse.development.packapps.core.Start'
         )
     }
+}
+
+sourceSets {
+    main.java.srcDir "src/main/java"
+    main.resources.srcDir "src/main/resources"
 }
 
 ext {
@@ -61,6 +60,8 @@ dependencies {
     implementation group: 'com.jtattoo', name: 'JTattoo', version: '1.6.12'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.22'
     implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
+    implementation group: 'net.sourceforge.tess4j', name: 'tess4j', version: '3.2.1'
+
 }
 
 gradle.startParameter.continueOnFailure = true

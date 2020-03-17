@@ -5,7 +5,6 @@ import static com.bookverse.development.packapps.utils.ViewConstants.CASH_REGIST
 import static com.bookverse.development.packapps.utils.ViewConstants.INVENTORY;
 import static com.bookverse.development.packapps.utils.ViewConstants.SALES;
 
-import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -17,10 +16,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.chart.XYChart.Data;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

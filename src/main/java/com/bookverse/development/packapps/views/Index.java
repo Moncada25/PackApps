@@ -23,6 +23,7 @@ import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.ArrayData;
 import com.bookverse.development.packapps.utils.Export;
 import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.OCR;
 import com.bookverse.development.packapps.utils.Querys;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -67,7 +68,7 @@ public class Index extends JFrame implements ActionListener {
       roulette, ticTacToePvsP, ticTacToePvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
       inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
       inventoryEXCEL, purchasesEXCEL, salesEXCEL, cashRegisterEXCEL, loansEXCEL, puzzleEXCEL, guessNumberPDF, hangmanPDF, dicesPDF,
-      notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet;
+      notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet, OCRTask;
   private boolean isWork = true;
 
   public Index() {
@@ -358,6 +359,9 @@ public class Index extends JFrame implements ActionListener {
     timesheet = resources.getMenuItem("Timesheet Entry (beta)", "timesheet", this);
     tasks.add(timesheet);
 
+    OCRTask = resources.getMenuItem("OCR", "ocr", this);
+    tasks.add(OCRTask);
+
     JMenu mode = resources.getMenu("Theme", "mode");
     darkMode = resources.getMenuItem("Dark", "dark", this);
     textureMode = resources.getMenuItem("Texture", "texture", this);
@@ -447,6 +451,7 @@ public class Index extends JFrame implements ActionListener {
   }
 
   protected void hangmanTableAP() {
+
     hangmanTable.cleanTable();
 
     try {
@@ -821,13 +826,15 @@ public class Index extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     isWork = true;
-
     paintBackground(e);
 
     if (e.getSource() == yes_exit) {
       AppConfig.fadeOut(this);
     } else if (e.getSource() == timesheet) {
       new Timesheet(this, true).start(this);
+      setVisible(true);
+    } else if (e.getSource() == OCRTask) {
+      new OCR(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == grayMode) {
 

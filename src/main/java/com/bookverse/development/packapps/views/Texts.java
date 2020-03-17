@@ -22,8 +22,7 @@ import javax.swing.JTextArea;
 
 public class Texts extends JDialog implements MouseListener {
 
-  private JLabel encrypt, decrypt, upperCase, lowerCase;
-  private JLabel exit;
+  private JLabel encrypt, decrypt, upperCase, lowerCase, exit;
   private JTextArea text;
   private Resources resources = new Resources();
 

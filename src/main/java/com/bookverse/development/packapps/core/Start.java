@@ -20,7 +20,8 @@ public class Start {
     try {
       Index.main(args);
     } catch (Exception e) {
-      Alerts.message("Error", "Corrupt package");
+      e.printStackTrace();
+      Alerts.message("Corrupt package", "Error - " + e.getMessage());
     }
   }
 }
