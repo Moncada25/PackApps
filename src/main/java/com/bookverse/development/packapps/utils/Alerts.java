@@ -14,7 +14,7 @@ public class Alerts {
 
   public static void message(String tittle, String message) {
     JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong>" + message + "</strong></html>",
+        "<html>" + Format.style() + "<strong>" + message ,
         tittle, JOptionPane.PLAIN_MESSAGE);
   }
 
@@ -129,6 +129,6 @@ public class Alerts {
         "<html>" + Format.style() + "<strong><center>Secure credentials</center></strong><br>"
             + "The use of this medium is authorized by Google through<br>"
             + "the use of its JavaMail API, your data is protected!</html>",
-        "Required field!!", JOptionPane.PLAIN_MESSAGE);
+        "Required field!", JOptionPane.PLAIN_MESSAGE);
   }
 }

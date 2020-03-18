@@ -227,10 +227,9 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
     if (i == 0) {
       Alerts.message("Message", "The stack is empty");
     } else if (countPairs == 0) {
-      tittle.setText(
-          "<html>" + Format.style() + "<strong>There is not pairs in the stack</strong></html>");
+      tittle.setText("<html>" + Format.style() + "<strong>There is not pairs in the stack</strong></html>");
     } else {
-      Alerts.message("Result", "Numbers pairs in the stack <br> " + result);
+      Alerts.message("Result", "Numbers pairs in the stack " + result);
     }
 
     countPairs = 0;

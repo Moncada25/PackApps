@@ -35,13 +35,13 @@ public class Numbers extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
     panel.setBackground(new Color(0, 0, 0));
-    panel.setBorder(getBorder("Select Number"));
+    panel.setBorder(getBorder("Select"));
 
-    btnPhi = resources.getLabel("  Phi  ", TEXT_COLOR, panel, MEDIUM);
+    btnPhi = resources.getLabel("  Phi φ  ", TEXT_COLOR, panel, MEDIUM);
     btnPhi.setBorder(BORDER_BLUE);
     btnPhi.addMouseListener(this);
 
-    btnPi = resources.getLabel("  Pi  ", TEXT_COLOR, panel, MEDIUM);
+    btnPi = resources.getLabel("  Pi π  ", TEXT_COLOR, panel, MEDIUM);
     btnPi.setBorder(BORDER_BLUE);
     btnPi.addMouseListener(this);
 
@@ -49,7 +49,7 @@ public class Numbers extends JDialog implements MouseListener {
     btnCalculator.setBorder(BORDER_RED);
     btnCalculator.addMouseListener(this);
 
-    btnPrimeNumbers = resources.getLabel("  Prime Numbers  ", TEXT_COLOR, panel, MEDIUM);
+    btnPrimeNumbers = resources.getLabel("  Primes  ", TEXT_COLOR, panel, MEDIUM);
     btnPrimeNumbers.setBorder(BORDER_BLUE);
     btnPrimeNumbers.addMouseListener(this);
 

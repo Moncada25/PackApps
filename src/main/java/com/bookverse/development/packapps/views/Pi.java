@@ -38,7 +38,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
     setBounds(0, 0, 430, 280);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Pi \u03c0");
+    setTitle("Pi π");
     fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
@@ -52,7 +52,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
     lblFirst.setBounds(25, 70, 280, 30);
 
     JLabel firstFormula = resources
-        .getLabel("\u03c0 = 4/1 - 4/3 + 4/5 - 4/7 + 4/9...", TEXT_COLOR, this, MEDIUM);
+        .getLabel("π = 4/1 - 4/3 + 4/5 - 4/7 + 4/9...", TEXT_COLOR, this, MEDIUM);
     firstFormula.setBounds(25, 90, 280, 60);
 
     btnCalculateFirst = resources.getButton("Calculate", TEXT_COLOR, this, this);
@@ -94,7 +94,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
     lblSecond.setBounds(25, 160, 280, 30);
 
     JLabel secondFormula = resources
-        .getLabel("\u03c0²/6 = 1/1² + 1/2² + 1/3² + 1/4²...", TEXT_COLOR, this, MEDIUM);
+        .getLabel("π²/6 = 1/1² + 1/2² + 1/3² + 1/4²...", TEXT_COLOR, this, MEDIUM);
     secondFormula.setBounds(25, 180, 280, 60);
 
     btnCalculateSecond = resources.getButton("Show", TEXT_COLOR, this, this);
@@ -132,7 +132,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
     });
 
     message = resources
-        .getLabel("<html><em><strong>Approach to \u03c0</strong></em></html>", MAIN_COLOR, this,
+        .getLabel("<html><em><strong>Approach to π</strong></em></html>", MAIN_COLOR, this,
             BIG);
     message.addMouseListener(this);
     message.setBounds(100, 20, 250, 30);

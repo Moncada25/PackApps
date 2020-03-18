@@ -23,6 +23,7 @@ hs_err_pid*
 
 /build/
 /.gradle/
+/target/
 /.idea/
 /out/
 

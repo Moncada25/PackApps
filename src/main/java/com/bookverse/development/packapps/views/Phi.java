@@ -162,7 +162,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     });
 
     message = resources
-        .getLabel("<html><em><strong>Approach to \u03a6</strong></em></html>", MAIN_COLOR, this,
+        .getLabel("<html><em><strong>Approach to φ</strong></em></html>", MAIN_COLOR, this,
             BIG);
     message.addMouseListener(this);
     message.setBounds(100, 20, 250, 30);
@@ -173,7 +173,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     setBounds(0, 0, 440, 300);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Phi \u03a6");
+    setTitle("Phi φ");
     AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);

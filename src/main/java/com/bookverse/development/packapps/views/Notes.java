@@ -186,7 +186,6 @@ public class Notes extends JDialog implements ActionListener {
 
     scale1 = new JRadioButton("<html><strong>0 to 5</strong></html>");
     scale1.setBounds(200, 140, 100, 30);
-    scale1.addActionListener(this);
     scale1.setForeground(TEXT_COLOR);
     add(scale1);
     buttonGroup.add(scale1);
@@ -195,7 +194,6 @@ public class Notes extends JDialog implements ActionListener {
     scale2 = new JRadioButton("<html><strong>0 to 10</strong></html>");
     scale2.setBounds(300, 140, 100, 30);
     scale2.setForeground(TEXT_COLOR);
-    scale2.addActionListener(this);
     add(scale2);
     buttonGroup.add(scale2);
 
