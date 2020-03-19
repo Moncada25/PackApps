@@ -11,44 +11,39 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import org.jetbrains.annotations.NotNull;
 
 public class Structures extends JDialog implements MouseListener {
 
   Resources resources = new Resources();
-  private JLabel btnpilas, btncolas, btnsalir, btnmatrices, welcome;
+  private JLabel btnStack, btnQueue, btnExit, btnArrays;
 
   public Structures(JFrame parent, boolean modal) {
-
     super(parent, modal);
-    Componentes();
+    createComponents();
   }
 
-  public Structures() {
-
-    Componentes();
-  }
-
-  public JPanel getPanel() {
+  @NotNull
+  private JPanel getPanel() {
 
     JPanel panel = new JPanel(new FlowLayout());
-    panel.setBorder(AppConfig.getBorder("Select"));
+    panel.setBorder(AppConfig.getBorder("Select structure"));
 
-    btnpilas = resources.getLabel("  Pilas  ", AppConfig.TEXT_COLOR, panel, AppConfig.MEDIUM);
-    btnpilas.setBorder(AppConfig.BORDER_BLUE);
-    btnpilas.addMouseListener(this);
+    btnStack = resources.getLabel("  Stack  ", AppConfig.TEXT_COLOR, panel, AppConfig.MEDIUM);
+    btnStack.setBorder(AppConfig.BORDER_BLUE);
+    btnStack.addMouseListener(this);
 
-    btncolas = resources.getLabel("  Colas  ", AppConfig.TEXT_COLOR, panel, AppConfig.MEDIUM);
-    btncolas.setBorder(AppConfig.BORDER_BLUE);
-    btncolas.addMouseListener(this);
+    btnQueue = resources.getLabel("  Queue  ", AppConfig.TEXT_COLOR, panel, AppConfig.MEDIUM);
+    btnQueue.setBorder(AppConfig.BORDER_BLUE);
+    btnQueue.addMouseListener(this);
 
-    btnmatrices = resources
-        .getLabel("  Matrices  ", AppConfig.TEXT_COLOR, panel, AppConfig.MEDIUM);
-    btnmatrices.setBorder(AppConfig.BORDER_BLUE);
-    btnmatrices.addMouseListener(this);
+    btnArrays = resources.getLabel("  Arrays  ", AppConfig.TEXT_COLOR, panel, AppConfig.MEDIUM);
+    btnArrays.setBorder(AppConfig.BORDER_BLUE);
+    btnArrays.addMouseListener(this);
 
-    btnsalir = resources.getLabel("  Return  ", AppConfig.MAIN_COLOR, panel, AppConfig.MEDIUM);
-    btnsalir.setBorder(AppConfig.BORDER_RED);
-    btnsalir.addMouseListener(this);
+    btnExit = resources.getLabel("  Return  ", AppConfig.MAIN_COLOR, panel, AppConfig.MEDIUM);
+    btnExit.setBorder(AppConfig.BORDER_RED);
+    btnExit.addMouseListener(this);
 
     return panel;
   }
@@ -57,74 +52,40 @@ public class Structures extends JDialog implements MouseListener {
     setSize(717, 380);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Estructuras de Datos");
+    setTitle("Structures of data");
     AppConfig.fadeIn(this);
     parent.setVisible(false);
     AppConfig.instruccionesEstructuras();
     setVisible(true);
   }
 
-  // Se crean los componentes de la ventana
-  public void Componentes() {
+  private void createComponents() {
 
-    setDefaultCloseOperation(0);
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("estructuras.png")).getImage());
 
     add(getPanel(), BorderLayout.SOUTH);
 
-    ImageIcon imagen = new ImageIcon(resources.getImage("estructuras_datos.jpg"));
-    welcome = new JLabel();
-    welcome.setIcon(imagen);
-    welcome.setSize(711, 284);
-    add(welcome, BorderLayout.CENTER);
-  }
-
-  private void PilasAP() {
-    Stack pilas = new Stack(this, true);
-    pilas.setBounds(0, 0, 900, 600);
-    pilas.setResizable(false);
-    pilas.setLocationRelativeTo(null);
-    pilas.setTitle("Pilas");
-    AppConfig.fadeIn(pilas);
-    setVisible(false);
-    pilas.setVisible(true);
-  }
-
-  private void ColasAP() {
-    Queue queue = new Queue(this, true);
-    queue.setBounds(0, 0, 900, 600);
-    queue.setResizable(false);
-    queue.setLocationRelativeTo(null);
-    queue.setTitle("Colas");
-    AppConfig.fadeIn(queue);
-    setVisible(false);
-    queue.setVisible(true);
-  }
-
-  private void MatricesAP() {
-    Arrays matrices = new Arrays(this, true);
-    matrices.setBounds(0, 0, 900, 600);
-    matrices.setResizable(false);
-    matrices.setLocationRelativeTo(null);
-    matrices.setTitle("Matrices");
-    AppConfig.fadeIn(matrices);
-    setVisible(false);
-    matrices.setVisible(true);
+    ImageIcon image = new ImageIcon(resources.getImage("estructuras_datos.jpg"));
+    JLabel wallpaper = new JLabel();
+    wallpaper.setIcon(image);
+    wallpaper.setSize(711, 284);
+    add(wallpaper, BorderLayout.CENTER);
   }
 
   @Override
   public void mouseClicked(MouseEvent e) {
 
-    if (e.getSource() == btnsalir) {
+    if (e.getSource() == btnExit) {
       AppConfig.fadeOut(this);
-    } else if (e.getSource() == btnpilas) {
-      PilasAP();
+    } else if (e.getSource() == btnStack) {
+      new Stack(this, true).start(this);
       setVisible(true);
-    } else if (e.getSource() == btncolas) {
-      ColasAP();
+    } else if (e.getSource() == btnQueue) {
+      new Queue(this, true).start(this);
       setVisible(true);
-    } else if (e.getSource() == btnmatrices) {
-      MatricesAP();
+    } else if (e.getSource() == btnArrays) {
+      new Arrays(this, true).start(this);
       setVisible(true);
     }
   }
@@ -132,14 +93,14 @@ public class Structures extends JDialog implements MouseListener {
   @Override
   public void mouseEntered(MouseEvent e) {
 
-    if (e.getSource() == btnsalir) {
-      btnsalir.setCursor(AppConfig.HAND);
-    } else if (e.getSource() == btnpilas) {
-      btnpilas.setCursor(AppConfig.HAND);
-    } else if (e.getSource() == btncolas) {
-      btncolas.setCursor(AppConfig.HAND);
-    } else if (e.getSource() == btnmatrices) {
-      btnmatrices.setCursor(AppConfig.HAND);
+    if (e.getSource() == btnExit) {
+      btnExit.setCursor(AppConfig.HAND);
+    } else if (e.getSource() == btnStack) {
+      btnStack.setCursor(AppConfig.HAND);
+    } else if (e.getSource() == btnQueue) {
+      btnQueue.setCursor(AppConfig.HAND);
+    } else if (e.getSource() == btnArrays) {
+      btnArrays.setCursor(AppConfig.HAND);
     }
   }
 

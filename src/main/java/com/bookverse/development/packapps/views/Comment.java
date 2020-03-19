@@ -73,9 +73,9 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
     lblUser.setBounds(100, 60, 100, 50);
 
     required = resources
-        .getLabel("<html><strong>*</strong></html>", MAIN_COLOR, this,
+        .getLabel("*", MAIN_COLOR, this,
             MEDIUM);
-    required.setBounds(139, 79, 8, 8);
+    required.setBounds(140, 76, 20, 20);
     required.addMouseListener(this);
 
     txtUser = new JTextField();

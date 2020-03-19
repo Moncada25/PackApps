@@ -160,7 +160,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
     tittle = resources
         .getLabel("<html><em><strong>Prime Numbers</strong></em></html>", MAIN_COLOR, this, BIG);
     tittle.addMouseListener(this);
-    tittle.setBounds(100, 15, 280, 40);
+    tittle.setBounds(110, 15, 280, 40);
   }
 
   private void verifyPrimeNumber(int num) {
@@ -254,7 +254,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
     setBounds(0, 0, 430, 270);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Primos");
+    setTitle("Prime Numbers");
     AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);

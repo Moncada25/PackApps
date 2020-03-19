@@ -47,7 +47,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
         .getLabel("<html><strong>Nth Fibonacci number</strong></html>", MAIN_COLOR, this, MEDIUM);
     firstFormula.setBounds(25, 120, 260, 30);
 
-    btnCalculateFirst = resources.getButton("Calculate", TEXT_COLOR, this, this);
+    btnCalculateFirst = resources.getButton("Show", TEXT_COLOR, this, this);
     btnCalculateFirst.setBounds(360, 75, 70, 25);
 
     txtFirst = new JTextField();
@@ -93,10 +93,10 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
         .getLabel("<html><strong>Golden ratio</strong></html>", MAIN_COLOR, this, MEDIUM);
     secondFormula.setBounds(25, 170, 280, 30);
 
-    btnProportion = resources.getButton("Calculate", TEXT_COLOR, this, this);
+    btnProportion = resources.getButton("Show", TEXT_COLOR, this, this);
     btnProportion.setBounds(360, 175, 70, 25);
 
-    btnCalculateSecond = resources.getButton("Calculate", TEXT_COLOR, this, this);
+    btnCalculateSecond = resources.getButton("Show", TEXT_COLOR, this, this);
     btnCalculateSecond.setBounds(360, 125, 70, 25);
 
     txtSecond = new JTextField();
@@ -165,7 +165,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
         .getLabel("<html><em><strong>Approach to φ</strong></em></html>", MAIN_COLOR, this,
             BIG);
     message.addMouseListener(this);
-    message.setBounds(100, 20, 250, 30);
+    message.setBounds(120, 20, 250, 30);
   }
 
   public void start(JDialog parent) {
@@ -179,7 +179,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     setVisible(true);
   }
 
-  public void generateFibonacci(int lim) {
+  private void generateFibonacci(int lim) {
 
     String numbers = "";
 
@@ -201,7 +201,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     Alerts.message("Result", numbers);
   }
 
-  public void getFibonacci(int n) {
+  private void getFibonacci(int n) {
 
     double fi, number;
 
@@ -211,11 +211,11 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     Alerts.message("Result", "N° " + n + " in the Fibonacci's series is " + number);
   }
 
-  public void calculatePhi(double num1, double num2) {
+  private void calculatePhi(double num1, double num2) {
     phi = num1 / num2;
   }
 
-  public void proportionAurea(double length) {
+  private void proportionAurea(double length) {
 
     double a, b;
 

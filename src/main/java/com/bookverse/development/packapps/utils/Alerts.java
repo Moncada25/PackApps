@@ -55,9 +55,9 @@ public class Alerts {
 
   public static void inputSomethingText() {
     JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong>Input something text...</strong></html>",
-        "Text empty!",
-        JOptionPane.PLAIN_MESSAGE);
+        "<html>" + Format.style() + "<strong><center>Empty fields</center></strong><br>"
+            + "Some of the fields are empty, please enter a value." + "</html>",
+        "Verify!", JOptionPane.PLAIN_MESSAGE);
   }
 
   public static void export(String file) {

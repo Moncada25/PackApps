@@ -8,6 +8,7 @@ import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.inputNumber;
 import static com.bookverse.development.packapps.core.AppConfig.intRandom;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -20,6 +21,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import org.jetbrains.annotations.NotNull;
 
 public class Arrays extends JDialog implements ActionListener {
 
@@ -129,7 +131,7 @@ public class Arrays extends JDialog implements ActionListener {
       public void txtNumKeyPressed(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-          generarMatrizAP();
+          getMatrixAP();
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
           dispose();
         }
@@ -141,22 +143,32 @@ public class Arrays extends JDialog implements ActionListener {
     });
   }
 
+  public void start(JDialog parent) {
+    setBounds(0, 0, 900, 600);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Arrays");
+    AppConfig.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
+  }
+
   @Override
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnAction) {
-      generarMatrizAP();
+      getMatrixAP();
     } else if (e.getSource() == btnAuto) {
       autoFillAP(arrayBoard, Integer.parseInt(txtRows.getText()),
           Integer.parseInt(txtColumns.getText()));
     } else if (e.getSource() == btnClean) {
       emptyAP();
     } else if (e.getSource() == btnTransposed) {
-      transpuestaAP();
+      transposedAP();
     } else if (e.getSource() == btnDiagonals) {
-      diagonalesAP();
+      diagonalsAP();
     } else if (e.getSource() == btnMultiply) {
-      multiplicarAP();
+      multiplyAP();
     } else if (e.getSource() == btnDeterminant) {
       determinantAP();
     }
@@ -169,22 +181,22 @@ public class Arrays extends JDialog implements ActionListener {
 
   private void determinantAP() {
 
-    if (entradasFull(arrayBoard, Integer.parseInt(txtRows.getText()),
+    if (fullInputs(arrayBoard, Integer.parseInt(txtRows.getText()),
         Integer.parseInt(txtColumns.getText()))) {
 
       int f = Integer.parseInt(txtRows.getText());
       int c = Integer.parseInt(txtColumns.getText());
 
-      if (esCuadrada(f, c)) {
+      if (isSquared(f, c)) {
         Alerts.message("Determinant of the matrix",
-            "|A| = " + Determinante.getDeterminante(arrayBoard, f, c));
+            "|A| = " + Determinant.getDeterminant(arrayBoard, f, c));
       }
     }
   }
 
-  private void multiplicarAP() {
+  private void multiplyAP() {
 
-    if (entradasFull(arrayBoard, Integer.parseInt(txtRows.getText()),
+    if (fullInputs(arrayBoard, Integer.parseInt(txtRows.getText()),
         Integer.parseInt(txtColumns.getText()))) {
 
       for (int i = 0; i < Integer.parseInt(txtRows.getText()); i++) {
@@ -193,22 +205,20 @@ public class Arrays extends JDialog implements ActionListener {
         }
       }
 
-      Object opcion = null;
-
-      opcion = JOptionPane.showInputDialog(null,
+      Object option = JOptionPane.showInputDialog(null,
           "<html>" + Format.style()
-              + "<strong><em>¿Con qué desea multiplicar la matriz?</em></strong></html>",
-          "Producto de Matrices", JOptionPane.PLAIN_MESSAGE, null,
-          new Object[]{"Un escalar", "Un vector", "Una matriz"}, "Un escalar");
+              + "<strong><em>What do you want to multiply the matrix with?</em></strong></html>",
+          "Matrix product", JOptionPane.PLAIN_MESSAGE, null,
+          new Object[]{"A scalar", "A vector", "A matrix"}, "A scalar");
 
-      if (opcion != null) {
+      if (option != null) {
 
-        switch (opcion.toString()) {
+        switch (option.toString()) {
 
-          case "Un escalar":
+          case "A scalar":
 
-            int escalar = Integer.parseInt(
-                inputNumber("Ingrese el escalar por el cual desea multiplicar la matriz", 2));
+            int scalar = Integer.parseInt(
+                inputNumber("Enter the scalar by which you want to multiply the matrix", 2));
 
             for (int i = 0; i < Integer.parseInt(txtRows.getText()); i++) {
               for (int j = 0; j < Integer.parseInt(txtColumns.getText()); j++) {
@@ -216,12 +226,12 @@ public class Arrays extends JDialog implements ActionListener {
                 if (arrayBoard[i][j].getText().length() == 1) {
                   arrayBoard[i][j]
                       .setText(
-                          String.valueOf(Integer.parseInt(arrayBoard[i][j].getText()) * escalar));
+                          String.valueOf(Integer.parseInt(arrayBoard[i][j].getText()) * scalar));
                   arrayBoard[i][j].setFont(MEDIUM);
                 } else if (arrayBoard[i][j].getText().length() == 2) {
                   arrayBoard[i][j]
                       .setText(
-                          String.valueOf(Integer.parseInt(arrayBoard[i][j].getText()) * escalar));
+                          String.valueOf(Integer.parseInt(arrayBoard[i][j].getText()) * scalar));
                   arrayBoard[i][j].setFont(SMALL);
                 }
               }
@@ -229,13 +239,13 @@ public class Arrays extends JDialog implements ActionListener {
 
             break;
 
-          case "Un vector":
+          case "A vector":
 
             int fv = Integer.parseInt(txtRows.getText());
             int cv = Integer.parseInt(txtColumns.getText());
 
             double[][] matrizO = new double[fv][cv];
-            double[][] vectorB = getMatrizB(cv, 1);
+            double[][] vectorB = getMatrixB(cv, 1);
 
             for (int i = 0; i < fv; i++) {
               for (int j = 0; j < cv; j++) {
@@ -243,54 +253,54 @@ public class Arrays extends JDialog implements ActionListener {
               }
             }
 
-            showMatrizC(matrizxmatriz(matrizO, vectorB), fv, 1);
+            showMatrixC(multiplyMatrix(matrizO, vectorB), fv, 1);
 
             break;
 
-          case "Una matriz":
+          case "A matrix":
 
-            int columnasB = Integer
-                .parseInt(inputNumber("Ingrese el número de columnas que tendrá la matriz B", 1));
+            int columnsB = Integer
+                .parseInt(inputNumber("Enter the number of columns that matrix B will have", 1));
 
             int f = Integer.parseInt(txtRows.getText());
             int c = Integer.parseInt(txtColumns.getText());
 
-            double[][] matrizA = new double[f][c];
-            double[][] matrizB = getMatrizB(c, columnasB);
+            double[][] matrixA = new double[f][c];
+            double[][] matrixB = getMatrixB(c, columnsB);
 
             for (int i = 0; i < f; i++) {
               for (int j = 0; j < c; j++) {
-                matrizA[i][j] = Double.parseDouble(arrayBoard[i][j].getText());
+                matrixA[i][j] = Double.parseDouble(arrayBoard[i][j].getText());
               }
             }
 
-            showMatrizC(matrizxmatriz(matrizA, matrizB), f, columnasB);
+            showMatrixC(multiplyMatrix(matrixA, matrixB), f, columnsB);
 
             break;
 
           default:
             JOptionPane
-                .showMessageDialog(null, "Opción inválida.", "Error", JOptionPane.PLAIN_MESSAGE);
+                .showMessageDialog(null, "Invalid option", "Error", JOptionPane.PLAIN_MESSAGE);
         }
       }
     }
   }
 
-  private void showMatrizC(int[][] matrizC, int filas, int columnas) {
+  private void showMatrixC(int[][] matrixC, int rows, int columns) {
 
     JDialog result = new JDialog(this, true);
     result.setLayout(null);
 
-    JButton[][] matrizResult = new JButton[filas][columnas];
+    JButton[][] matrizResult = new JButton[rows][columns];
 
     int x = 30;
     int y = 30;
 
-    for (int f = 0; f < filas; f++) {
-      for (int c = 0; c < columnas; c++) {
+    for (int f = 0; f < rows; f++) {
+      for (int c = 0; c < columns; c++) {
         matrizResult[f][c] = new JButton();
         matrizResult[f][c].setBounds(x, y, 45, 45);
-        matrizResult[f][c].setText(String.valueOf(matrizC[f][c]));
+        matrizResult[f][c].setText(String.valueOf(matrixC[f][c]));
         matrizResult[f][c].setFont(SMALL);
         result.add(matrizResult[f][c]);
         x = x + 45;
@@ -302,21 +312,21 @@ public class Arrays extends JDialog implements ActionListener {
 
     result.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     result.setSize(480, 480);
-    result.setTitle("Resultado de multiplicar A x B");
+    result.setTitle("Result of multiplying A x B");
     result.setResizable(false);
     result.setLocationRelativeTo(null);
     result.setVisible(true);
   }
 
-  private void diagonalesAP() {
+  private void diagonalsAP() {
 
-    if (entradasFull(arrayBoard, Integer.parseInt(txtRows.getText()),
+    if (fullInputs(arrayBoard, Integer.parseInt(txtRows.getText()),
         Integer.parseInt(txtColumns.getText()))) {
 
       int f = Integer.parseInt(txtRows.getText());
       int c = Integer.parseInt(txtColumns.getText());
 
-      if (esCuadrada(f, c)) {
+      if (isSquared(f, c)) {
 
         String principal = "";
         String secundaria = "";
@@ -356,24 +366,24 @@ public class Arrays extends JDialog implements ActionListener {
         }
 
         JOptionPane.showMessageDialog(null,
-            "<html>" + Format.style() + "<strong><center>Resultado</center></strong><br>"
-                + "Diagonal principal ? " + principal + "<br>" + "Suma del triángulo superior ? "
-                + sumaSuperior + "<br><br>" + "Diagonal secundaria ? " + secundaria + "<br>"
-                + "Suma del triángulo inferior ? " + sumaInferior + "</html>",
-            "Diagonales de la Matriz", JOptionPane.PLAIN_MESSAGE);
+            "<html>" + Format.style() + "<strong><center>Result</center></strong><br>"
+                + "Main diagonal → " + principal + "<br>" + "Sum of the upper triangle → "
+                + sumaSuperior + "<br><br>" + "Secondary diagonal → " + secundaria + "<br>"
+                + "Sum of the lower triangle → " + sumaInferior + "</html>",
+            "Matrix diagonals", JOptionPane.PLAIN_MESSAGE);
       }
     }
   }
 
-  private boolean esCuadrada(int f, int c) {
+  private boolean isSquared(int f, int c) {
 
     if (f != c) {
 
       JOptionPane
           .showMessageDialog(null,
-              "<html>" + Format.style() + "<strong><center>Matriz inválida</center></strong><br>"
-                  + "La matriz actual no es cuadrada." + "</html>",
-              "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
+              "<html>" + Format.style() + "<strong><center>Invalid matrix</center></strong><br>"
+                  + "The current matrix is not square." + "</html>",
+              "Verify!", JOptionPane.PLAIN_MESSAGE);
 
       return false;
     }
@@ -381,26 +391,26 @@ public class Arrays extends JDialog implements ActionListener {
     return true;
   }
 
-  private void manualFill(ActionEvent e, JButton[][] matriz, int f, int c) {
+  private void manualFill(ActionEvent e, JButton[][] matrix, int f, int c) {
 
     for (int i = 0; i < f; i++) {
       for (int j = 0; j < c; j++) {
 
-        if (e.getSource() == matriz[i][j]) {
-          matriz[i][j].setText(
-              inputNumber("Ingrese el valor de la posición [" + (i + 1) + "][" + (j + 1) + "]", 2));
+        if (e.getSource() == matrix[i][j]) {
+          matrix[i][j].setText(
+              inputNumber("Enter the value of the position [" + (i + 1) + "][" + (j + 1) + "]", 2));
         }
       }
     }
   }
 
-  public int[][] matrizxmatriz(double[][] a, double[][] b) {
+  @NotNull
+  private int[][] multiplyMatrix(double[][] a, double[][] b) {
     int[][] c = new int[a.length][b[0].length];
 
     for (int i = 0; i < a.length; i++) {
       for (int j = 0; j < b[0].length; j++) {
         for (int k = 0; k < a[0].length; k++) {
-          // aquí se multiplica la matriz
           c[i][j] += a[i][k] * b[k][j];
         }
       }
@@ -409,7 +419,8 @@ public class Arrays extends JDialog implements ActionListener {
     return c;
   }
 
-  public double[][] getMatrizB(int filas, int columnas) {
+  @NotNull
+  private double[][] getMatrixB(int filas, int columnas) {
 
     JDialog result = new JDialog(this, true);
     result.setLayout(null);
@@ -425,11 +436,7 @@ public class Arrays extends JDialog implements ActionListener {
         matrizResult[f][c] = new JButton();
         matrizResult[f][c].setBounds(x, y, 45, 45);
 
-        matrizResult[f][c].addActionListener(new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            manualFill(e, matrizResult, filas, columnas);
-          }
-        });
+        matrizResult[f][c].addActionListener(e -> manualFill(e, matrizResult, filas, columnas));
 
         matrizResult[f][c].setFont(MEDIUM);
         result.add(matrizResult[f][c]);
@@ -444,31 +451,25 @@ public class Arrays extends JDialog implements ActionListener {
     btnsend.setBackground(MAIN_COLOR);
     btnsend.setBounds(250, 455, 120, 25);
     result.add(btnsend);
-    btnsend.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
+    btnsend.addActionListener(e -> {
 
-        if (entradasFull(matrizResult, filas, columnas)) {
+      if (fullInputs(matrizResult, filas, columnas)) {
 
-          for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-              matrizB[i][j] = Double.parseDouble(matrizResult[i][j].getText());
-            }
+        for (int i = 0; i < filas; i++) {
+          for (int j = 0; j < columnas; j++) {
+            matrizB[i][j] = Double.parseDouble(matrizResult[i][j].getText());
           }
-
-          result.dispose();
         }
+
+        result.dispose();
       }
     });
 
-    JButton btnauto = new JButton("Autofill");
-    btnauto.setBackground(TEXT_COLOR);
-    btnauto.setBounds(100, 455, 120, 25);
-    result.add(btnauto);
-    btnauto.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        autoFillAP(matrizResult, filas, columnas);
-      }
-    });
+    JButton btnAuto = new JButton("Auto fill");
+    btnAuto.setBackground(TEXT_COLOR);
+    btnAuto.setBounds(100, 455, 120, 25);
+    result.add(btnAuto);
+    btnAuto.addActionListener(e -> autoFillAP(matrizResult, filas, columnas));
 
     result.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     result.setSize(480, 530);
@@ -480,9 +481,9 @@ public class Arrays extends JDialog implements ActionListener {
     return matrizB;
   }
 
-  private void transpuestaAP() {
+  private void transposedAP() {
 
-    if (entradasFull(arrayBoard, Integer.parseInt(txtRows.getText()),
+    if (fullInputs(arrayBoard, Integer.parseInt(txtRows.getText()),
         Integer.parseInt(txtColumns.getText()))) {
 
       for (int i = 0; i < Integer.parseInt(txtRows.getText()); i++) {
@@ -518,14 +519,14 @@ public class Arrays extends JDialog implements ActionListener {
 
       result.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
       result.setSize(480, 480);
-      result.setTitle("Resultado de Matriz Transpuesta");
+      result.setTitle("Transposed matrix result");
       result.setResizable(false);
       result.setLocationRelativeTo(null);
       result.setVisible(true);
     }
   }
 
-  private boolean entradasFull(JButton[][] matriz, int f, int c) {
+  private boolean fullInputs(JButton[][] matriz, int f, int c) {
 
     for (int i = 0; i < f; i++) {
       for (int j = 0; j < c; j++) {
@@ -533,10 +534,10 @@ public class Arrays extends JDialog implements ActionListener {
 
           JOptionPane.showMessageDialog(null,
               "<html>" + Format.style()
-                  + "<strong><center>Entradas indefinidas</center></strong><br>"
-                  + "Alguna de las entradas está indefinida, por favor introduzca un valor."
+                  + "<strong><center>Undefined values</center></strong><br>"
+                  + "Some of the values are not undefined, please enter a value."
                   + "</html>",
-              "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
+              "Verify!", JOptionPane.PLAIN_MESSAGE);
 
           return false;
         }
@@ -557,29 +558,24 @@ public class Arrays extends JDialog implements ActionListener {
     }
   }
 
-  private void autoFillAP(JButton[][] matriz, int f, int c) {
+  private void autoFillAP(JButton[][] matrix, int f, int c) {
 
     for (int i = 0; i < f; i++) {
       for (int j = 0; j < c; j++) {
-        matriz[i][j].setText(String.valueOf(intRandom(0, 9)));
-        matriz[i][j].setBackground(getBackground());
-        matriz[i][j].setFont(MEDIUM);
+        matrix[i][j].setText(String.valueOf(intRandom(0, 9)));
+        matrix[i][j].setBackground(getBackground());
+        matrix[i][j].setFont(MEDIUM);
       }
     }
   }
 
-  private void generarMatrizAP() {
+  private void getMatrixAP() {
 
     if (btnAction.getText().equals("Show")) {
 
       if (txtRows.getText().equals("") || txtColumns.getText().equals("")) {
-        JOptionPane.showMessageDialog(null,
-            "<html>" + Format.style() + "<strong><center>Campos vacíos</center></strong><br>"
-                + "Alguno de los campos está vacío, por favor introduzca un valor." + "</html>",
-            "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
-
+        Alerts.inputSomethingText();
         isWork = false;
-
       } else {
 
         isWork = true;
@@ -634,104 +630,67 @@ public class Arrays extends JDialog implements ActionListener {
 
   private void deleteAll() {
 
-    for (int i = 0; i < arrayBoard.length; i++) {
+    for (JButton[] jButtons : arrayBoard) {
       for (int j = 0; j < arrayBoard.length; j++) {
-        arrayBoard[i][j].setVisible(false);
-        arrayBoard[i][j].setText("");
-        arrayBoard[i][j].setBackground(getBackground());
-        arrayBoard[i][j].setFont(MEDIUM);
+        jButtons[j].setVisible(false);
+        jButtons[j].setText("");
+        jButtons[j].setBackground(getBackground());
+        jButtons[j].setFont(MEDIUM);
       }
     }
   }
 }
 
-class Determinante {
+class Determinant {
 
-  /**
-   * Calcula el determinante de la matriz. Para ello coge la primera fila y se va multiplicando cada
-   * coeficiente por el determinante de la matriz de orden n-1 que resulta de suprimir la fila y
-   * columna del coeficiente. Hay que ir alternando los signos. Ver http://www.marcevm.com/determinantes/determinantes_def.php
-   *
-   * @param matriz
-   * @return
-   */
-  public static double determinante(double[][] matriz) {
+  public static double determinant(@NotNull double[][] matrix) {
 
-    /*
-     * Aunque se ponga assert, su ejecución es opcional con -ea. Podemos arrancar la
-     * aplicación en modo "detección de fallos" o en modo
-     * "haz lo que puedas, pero aguanta". Se detectan los fallos en la ejecución lo
-     * más pronto posible. De esta forma, si ejecutamos nuestro código java de forma
-     * normal, ese assert es ignorado, por lo que es como si no hubiéramos puesto
-     * nada. Nuestra aplicación funcionará igual de mal que antes y no se caerá. Sin
-     * embargo, si ejecutamos con la opción -ea (enable asserts posiblemente)
-     * entonces sí se hace caso de los assert y saltará una excepción inmediatamente
-     * si nuestro parámetro es null. En vez de ir evitando el error de un sitio a
-     * otro y ver que la aplicación no funciona, arrancando con -ea veremos
-     * inmediatamente cual es el primer sitio en el que falla algo.
-     */
+    double determinantValue = 0.0;
 
-    assert matriz != null;
-    assert matriz.length > 0;
-    assert matriz.length == matriz[0].length;
+    int rows = matrix.length;
+    int columns = matrix[0].length;
 
-    double determinante = 0.0;
+    if (rows == 1 && columns == 1) {
+      return matrix[0][0];
+    }
 
-    int filas = matriz.length;
-    int columnas = matriz[0].length;
+    int sign = 1;
 
-    // Si la matriz es 1x1, el determinante es el elemento de la matriz
-      if ((filas == 1) && (columnas == 1)) {
-          return matriz[0][0];
+    for (int column = 0; column < columns; column++) {
+      double[][] subMatrix = getSubMatrix(matrix, rows, columns, column);
+      determinantValue = determinantValue + sign * matrix[0][column] * determinant(subMatrix);
+      sign *= -1;
+    }
+
+    return determinantValue;
+  }
+
+  @NotNull
+  public static double[][] getSubMatrix(double[][] matrix, int rows, int columns, int column) {
+    double[][] subMatrix = new double[rows - 1][columns - 1];
+    int count = 0;
+    for (int j = 0; j < columns; j++) {
+      if (j == column) {
+        continue;
       }
-
-    int signo = 1;
-
-    for (int columna = 0; columna < columnas; columna++) {
-      // Obtiene el adjunto de fila=0, columna=columna, pero sin el signo.
-      double[][] submatriz = getSubmatriz(matriz, filas, columnas, columna);
-      determinante = determinante + signo * matriz[0][columna] * determinante(submatriz);
-      signo *= -1;
+      for (int i = 1; i < rows; i++) {
+        subMatrix[i - 1][count] = matrix[i][j];
+      }
+      count++;
     }
-
-    return determinante;
+    return subMatrix;
   }
 
-  /**
-   * Obtiene la matriz que resulta de eliminar la primera fila y la columna que se pasa como
-   * parámetro.
-   *
-   * @param matriz   Matriz original
-   * @param filas    Numero de filas de la matriz original
-   * @param columnas Numero de columnas de la matriz original
-   * @param columna  Columna que se quiere eliminar, junto con la fila=0
-   * @return Una matriz de N-1 x N-1 elementos
-   */
-  public static double[][] getSubmatriz(double[][] matriz, int filas, int columnas, int columna) {
-    double[][] submatriz = new double[filas - 1][columnas - 1];
-    int contador = 0;
-    for (int j = 0; j < columnas; j++) {
-        if (j == columna) {
-            continue;
-        }
-        for (int i = 1; i < filas; i++) {
-            submatriz[i - 1][contador] = matriz[i][j];
-        }
-      contador++;
-    }
-    return submatriz;
-  }
+  public static double getDeterminant(JButton[][] matrix, int f, int c) {
 
-  public static double getDeterminante(JButton[][] matriz, int f, int c) {
-
-    double[][] matrizAux = new double[f][c];
+    double[][] matrixAux = new double[f][c];
 
     for (int i = 0; i < f; i++) {
       for (int j = 0; j < c; j++) {
-        matrizAux[i][j] = Double.parseDouble(matriz[i][j].getText());
+        matrixAux[i][j] = Double.parseDouble(matrix[i][j].getText());
       }
     }
 
-    return determinante(matrizAux);
+    return determinant(matrixAux);
   }
 }

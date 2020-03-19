@@ -7,6 +7,7 @@ import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.getBorder;
 import static com.bookverse.development.packapps.core.AppConfig.inputNumber;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -36,6 +37,16 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
   public Queue(JDialog parent, boolean modal) {
     super(parent, modal);
     createComponents();
+  }
+
+  public void start(JDialog parent) {
+    setBounds(0, 0, 900, 600);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Colas");
+    AppConfig.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
   }
 
   private void setPanel() {
@@ -102,7 +113,7 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
     add(bonus);
 
     tittle = resources.getLabel("", MAIN_COLOR, this, BIG);
-    tittle.setBounds(50, 0, 900, 150);
+    tittle.setBounds(50, 0, 900, 160);
 
     message = resources.getLabel("", MAIN_COLOR, this, BIG);
     message.setBounds(620, 480, 200, 85);
@@ -116,7 +127,7 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
 
     if (i > 0) {
       tittle
-          .setText("<html>" + Format.style() + "<strong>Next data: " + peek() + "</strong></html>");
+          .setText("<html>" + Format.style() + "<strong>Next data → " + peek() + "</strong></html>");
     } else {
       Alerts.message("Message", "The queue is empty");
     }
@@ -143,7 +154,7 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
       bonus.setVisible(false);
       reset();
 
-      tittle.setText("<html><strong>Queue Empty</strong></html>");
+      tittle.setText("<html><strong>Queue empty</strong></html>");
 
     } else {
       Alerts.message("Message", "The queue is empty");
@@ -169,9 +180,10 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
     if (i == 0) {
       Alerts.message("Message", "The queue is empty");
     } else if (countPairs == 0) {
-      tittle.setText("<html>" + Format.style() + "<strong>There is not pairs in the queue</strong></html>");
+      tittle.setText(
+          "<html>" + Format.style() + "<strong>There is not pairs in the queue</strong></html>");
     } else {
-      tittle.setText("<html>" + Format.style() + "<strong>Number of pairs: " + countPairs
+      tittle.setText("<html>" + Format.style() + "<strong>Number of pairs → " + countPairs
           + "</strong></html>");
       Alerts.message("Result", "Numbers pairs in the queue <br> " + result);
     }
@@ -185,7 +197,7 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
     if (i == 0) {
       Alerts.message("Message", "The queue is empty");
     } else {
-      tittle.setText("<html>" + Format.style() + "<strong>Average of the queue: " + String
+      tittle.setText("<html>" + Format.style() + "<strong>Average of the queue → " + String
           .format("%.2f", btnAdd() / btnCount()) + "</strong></html>");
     }
   }
@@ -200,7 +212,8 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
         add += Double.parseDouble(elementsQueue[n].getText());
       }
 
-      tittle.setText("<html>" + Format.style() + "<strong>Queue items add up: " + add + "</strong></html>");
+      tittle.setText(
+          "<html>" + Format.style() + "<strong>Queue items add up → " + add + "</strong></html>");
 
       totalAdd = add;
       add = 0;
@@ -249,7 +262,7 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
     tittle.setText("");
 
     if (i > 0) {
-      tittle.setText("<html><strong>Decouples: " + pop() + "</strong></html>");
+      tittle.setText("<html><strong>Decouples → " + pop() + "</strong></html>");
     } else {
       Alerts.message("Message", "The queue is empty");
       reset();
@@ -261,7 +274,7 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
     elementsQueue[i].setVisible(true);
     elementsQueue[i].setBackground(getBackground());
     elementsQueue[i].setText(String.valueOf(data));
-    tittle.setText("<html><strong>Is coupled: " + elementsQueue[i].getText() + "</strong></html>");
+    tittle.setText("<html><strong>Is coupled → " + elementsQueue[i].getText() + "</strong></html>");
   }
 
   private void btnPushAP() {
@@ -274,7 +287,8 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
         push(num);
         i++;
 
-      } while (Alerts.requestResponse("Do you want to enter more data?", "Enter data") && i < elementsQueue.length);
+      } while (Alerts.requestResponse("Do you want to enter more data?", "Enter data")
+          && i < elementsQueue.length);
 
       tittle.setText("");
 
@@ -392,8 +406,8 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
         }
 
         if (selectedDate > 0) {
-          tittle.setText("<html><strong>Selected data: " + selectedDate + "<br>" + "Sum: " + sum
-              + "<br>" + "Average: " + String.format("%.2f", sum / selectedDate)
+          tittle.setText("<html><strong>Selected data → " + selectedDate + "<br>" + "Sum → " + sum
+              + "<br>" + "Average → " + String.format("%.2f", sum / selectedDate)
               + "</strong></html>");
         } else {
           tittle.setText("<html><strong>Nothing selected</strong></html>");

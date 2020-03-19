@@ -82,12 +82,12 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
     password.setBounds(310, 60, 370, 50);
 
-    required1 = resources.getLabel("<html><strong>*</strong></html>", MAIN_COLOR, this, MEDIUM);
-    required1.setBounds(153, 77, 8, 8);
+    required1 = resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
+    required1.setBounds(153, 74, 20, 20);
     required1.addMouseListener(this);
 
-    required2 = resources.getLabel("<html><strong>*</strong></html>", MAIN_COLOR, this, MEDIUM);
-    required2.setBounds(391, 77, 8, 8);
+    required2 = resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
+    required2.setBounds(390, 74, 20, 20);
     required2.addMouseListener(this);
 
     JLabel lblReceiver = resources
@@ -176,18 +176,17 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
     if (AppConfig.verifyConnection("Make sure you are connected to a network", true)) {
 
-      if (txtUser.getText().substring(txtUser.getText().length() - 10).equals("@gmail.com")) {
-
-        if (text.getText().trim().length() < 3) {
-          Alerts.message("Verify", "Message too short");
-          text.requestFocus();
-        } else {
-          sendMail(txtUser.getText(), String.valueOf(password.getPassword()), text.getText());
-        }
-
+      if (text.getText().trim().length() < 5 || txtUser.getText().trim().length() < 10) {
+        Alerts.message("Verify", "Fields too short");
+        text.requestFocus();
       } else {
-        Alerts.message("Verify!", "Invalid email, make sure it's Gmail.");
-        txtUser.requestFocus();
+
+        if (txtUser.getText().substring(txtUser.getText().length() - 10).equals("@gmail.com")) {
+          sendMail(txtUser.getText(), String.valueOf(password.getPassword()), text.getText());
+        } else {
+          Alerts.message("Verify!", "Invalid email, make sure it's Gmail.");
+          txtUser.requestFocus();
+        }
       }
     }
   }

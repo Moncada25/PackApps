@@ -1,6 +1,5 @@
 package com.bookverse.development.packapps.views;
 
-
 import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
@@ -44,7 +43,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
     setVisible(true);
   }
 
-  public void createComponents() {
+  private void createComponents() {
 
     setLayout(null);
 
@@ -55,7 +54,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
         .getLabel("π = 4/1 - 4/3 + 4/5 - 4/7 + 4/9...", TEXT_COLOR, this, MEDIUM);
     firstFormula.setBounds(25, 90, 280, 60);
 
-    btnCalculateFirst = resources.getButton("Calculate", TEXT_COLOR, this, this);
+    btnCalculateFirst = resources.getButton("Show", TEXT_COLOR, this, this);
     btnCalculateFirst.setBounds(315, 110, 75, 25);
 
     txtFirst = new JTextField();
@@ -135,7 +134,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
         .getLabel("<html><em><strong>Approach to π</strong></em></html>", MAIN_COLOR, this,
             BIG);
     message.addMouseListener(this);
-    message.setBounds(100, 20, 250, 30);
+    message.setBounds(120, 20, 250, 30);
   }
 
   private void secondCalculate(double numberElements) {

@@ -7,6 +7,7 @@ import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.getBorder;
 import static com.bookverse.development.packapps.core.AppConfig.inputNumber;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -21,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import org.jetbrains.annotations.NotNull;
 
 public class Stack extends JDialog implements MouseListener, ActionListener {
 
@@ -90,6 +92,16 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
     message.setBounds(620, 480, 200, 85);
   }
 
+  public void start(JDialog parent) {
+    setBounds(0, 0, 900, 600);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Stack");
+    AppConfig.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
+  }
+
   private void btnPushAP() {
 
     tittle.setText("");
@@ -100,7 +112,8 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
         int num = Integer.parseInt(inputNumber("Enter a numeric data", 6));
 
         push(num);
-      } while (Alerts.requestResponse("Do you want to enter more data?", "Enter data") && elementsStack.length > i);
+      } while (Alerts.requestResponse("Do you want to enter more data?", "Enter data")
+          && elementsStack.length > i);
       tittle.setText("");
     } else {
       Alerts.message("Message", "The stack is full");
@@ -114,7 +127,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
     if (i > 0) {
       elementsStack[i - 1].setVisible(false);
 
-      tittle.setText("<html><strong>Unstacked: " + pop(elementsStack, i) + "</strong></html>");
+      tittle.setText("<html><strong>Unstacked → " + pop(elementsStack, i) + "</strong></html>");
 
       if (elementsStack[i - 1].getBackground() == TEXT_COLOR) {
         con--;
@@ -133,7 +146,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
   private void btnPeekAP() {
 
     if (i > 0) {
-      tittle.setText("<html><strong>Next data: " + peek() + "</strong></html>");
+      tittle.setText("<html><strong>Next data → " + peek() + "</strong></html>");
     } else {
       Alerts.message("Message", "The stack is empty");
     }
@@ -174,7 +187,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
     if (i == 0) {
       Alerts.message("Message", "The stack is empty");
     } else {
-      tittle.setText("<html><strong>There are " + i + " items in the stack</strong></html>");
+      tittle.setText("<html><strong>There are " + i + " items</strong></html>");
     }
     return i;
   }
@@ -190,7 +203,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
         add += Double.parseDouble(elementsStack[n].getText());
       }
       tittle.setText(
-          "<html>" + Format.style() + "<strong>Stack items add up: " + add + "</strong></html>");
+          "<html>" + Format.style() + "<strong>The items add up → " + add + "</strong></html>");
 
       addTotal = add;
       add = 0;
@@ -204,7 +217,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
       Alerts.message("Message", "The stack is empty");
     } else {
       tittle.setText(
-          "<html><strong>Average: " + String.format("%.2f", btnAdd() / btnCount())
+          "<html><strong>Average → " + String.format("%.2f", btnAdd() / btnCount())
               + "</strong></html>");
     }
   }
@@ -227,7 +240,8 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
     if (i == 0) {
       Alerts.message("Message", "The stack is empty");
     } else if (countPairs == 0) {
-      tittle.setText("<html>" + Format.style() + "<strong>There is not pairs in the stack</strong></html>");
+      tittle.setText(
+          "<html>" + Format.style() + "<strong>There is not pairs</strong></html>");
     } else {
       Alerts.message("Result", "Numbers pairs in the stack " + result);
     }
@@ -236,7 +250,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
     result = "";
   }
 
-  private Object pop(JButton[] p1, int i) {
+  private Object pop(@NotNull JButton[] p1, int i) {
     return p1[i - 1].getText();
   }
 
@@ -248,12 +262,12 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
 
     elementsStack[i].setVisible(true);
     elementsStack[i].setText(String.valueOf(data));
-    tittle.setText("<html><strong>Se apiló ? " + elementsStack[i].getText() + "</strong></html>");
+    tittle.setText("<html><strong>Stacked → " + elementsStack[i].getText() + "</strong></html>");
     i++;
   }
 
   @Override
-  public void mouseClicked(MouseEvent e) {
+  public void mouseClicked(@NotNull MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
       btnPushAP();
@@ -275,7 +289,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
   }
 
   @Override
-  public void mouseEntered(MouseEvent e) {
+  public void mouseEntered(@NotNull MouseEvent e) {
     if (e.getSource() == actions[0]) {
       actions[0].setCursor(HAND);
       message.setText("<html><strong>Push( )</strong></html>");
@@ -304,7 +318,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
   }
 
   @Override
-  public void mouseExited(MouseEvent e) {
+  public void mouseExited(@NotNull MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
       message.setText("");
@@ -354,11 +368,11 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
 
         if (con > 0) {
           tittle.setText(
-              "<html><strong>Datos seleccionados ? " + con + "<br>" + "Suman ? " + (int) sum
-                  + "<br>" + "Promedian ? " + String.format("%.2f", sum / con)
+              "<html><strong>Data selected → " + con + "<br>" + "Sum up → " + (int) sum
+                  + "<br>" + "Average → " + String.format("%.2f", sum / con)
                   + "</strong></html>");
         } else {
-          tittle.setText("<html><strong>Ningun dato seleccionado</strong></html>");
+          tittle.setText("<html><strong>No data selected</strong></html>");
         }
       }
     }

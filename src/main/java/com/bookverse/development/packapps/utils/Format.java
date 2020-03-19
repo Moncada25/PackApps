@@ -132,8 +132,11 @@ public class Format {
     return
         "<style type='text/css'>" +
             "	strong {" +
-            " 		color:rgb(220, 12, 12);" +
-            " 	} " +
+            " 		color:rgb(21, 87, 163);" +
+            " 	} "
+            + "center{" +
+                  "text-decoration: underline"
+            + "}"+
             "</style>";
   }
 

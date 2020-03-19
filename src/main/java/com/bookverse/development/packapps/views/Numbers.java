@@ -118,10 +118,10 @@ public class Numbers extends JDialog implements MouseListener {
       new Pi(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == btnOther) {
-      new Otros(this, true).start(this);
+      new OtherThings(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == welcome) {
-      fadeOut(this);
+      AppConfig.fadeOut(this);
     }
   }
 

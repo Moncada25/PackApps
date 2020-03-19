@@ -116,13 +116,13 @@ public class Calculator extends JDialog implements ActionListener {
     btnEqual = resources.getButton("=", AppConfig.TEXT_COLOR, this, this);
     btnEqual.setBounds(222, 186, 43, 86);
 
-    btnRoot = resources.getButton("?", null, this, this);
+    btnRoot = resources.getButton("√", null, this, this);
     btnRoot.setBounds(222, 143, 43, 43);
 
     btnPower = resources.getButton("^", null, this, this);
     btnPower.setBounds(222, 100, 43, 43);
 
-    btnDelete = resources.getButton("?", AppConfig.MAIN_COLOR, this, this);
+    btnDelete = resources.getButton("←", AppConfig.MAIN_COLOR, this, this);
     btnDelete.setBounds(179, 57, 86, 43);
 
     btnClean = resources.getButton("C", null, this, this);
