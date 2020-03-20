@@ -374,7 +374,7 @@ public class Sales extends JDialog implements ActionListener {
       // actualizar registradora
       String user = "";
 
-      user = Database.searchUserLogged("Online");
+      user = Database.searchUserLogged("Online", HomeStore.userLogged);
 
       if (Database.searchUser(user)) {
         Database.updateSales(user, Database.store.getAvailableProducts(), Database.store.getTotalSales());

@@ -6,7 +6,7 @@ import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
-import static com.bookverse.development.packapps.core.AppConfig.getDate;
+import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
 import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
 
@@ -41,11 +41,6 @@ public class Purchases extends JDialog implements ActionListener {
   private JButton btnSubmit, btnExit, btnSearch;
   private JTextField txtReference, txtDocument, txtPhone, txtPrice;
   private JRadioButton radioNew, radioUsed;
-  private boolean validPhone = false, validDocument = false, validPrice = false;
-
-  public Purchases() {
-    createComponents();
-  }
 
   public Purchases(JDialog parent, boolean modal) {
     super(parent, modal);
@@ -73,7 +68,7 @@ public class Purchases extends JDialog implements ActionListener {
     tittle.setBounds(110, 5, 300, 40);
 
     JLabel reference = resources
-        .getLabel("<html><strong>Referencia</strong></html>", TEXT_COLOR,
+        .getLabel("<html><strong>Reference</strong></html>", TEXT_COLOR,
             this, MEDIUM);
     reference.setBounds(30, 60, 100, 30);
 
@@ -260,118 +255,96 @@ public class Purchases extends JDialog implements ActionListener {
 
   private void btnSubmitAP() {
 
-    boolean validReference = false;
-
-    if (Format.verifyReference(txtReference.getText())) {
+    if (!Format.verifyReference(txtReference.getText())) {
+      Alerts.message("Verify!", "Input a valid reference.");
       txtReference.requestFocus();
-      validReference = false;
     } else {
-      validReference = true;
-    }
 
-    if (validReference) {
-      if (Format.verifyDocument(txtDocument.getText())) {
+      if (!Format.verifyDocument(txtDocument.getText())) {
+        Alerts.message("Verify!", "Input a valid document.");
         txtDocument.requestFocus();
-        validDocument = false;
       } else {
-        validDocument = true;
-      }
-    }
 
-    if (validReference && validDocument) {
-
-      if (Format.verifyPhone(txtPhone.getText())) {
-        validPhone = true;
-      } else {
-        txtPhone.requestFocus();
-        validPhone = false;
-      }
-    }
-
-    if (validReference && validPhone && validDocument) {
-
-      if (Format.verifyPrice(Double.parseDouble(txtPrice.getText()))) {
-        validPrice = true;
-      } else {
-        txtPhone.requestFocus();
-        validPrice = false;
-      }
-    }
-
-    if (validReference && validPhone && validDocument && validPrice) {
-
-      double totalPurchase =
-          Double.parseDouble(txtPrice.getText()) * Integer.parseInt(lblUnits.getText());
-      int productCount = Integer.parseInt(lblUnits.getText());
-
-      String state = "";
-      boolean existProduct = false;
-
-      if (radioUsed.isSelected()) {
-        state = "Used";
-      } else {
-        state = "New";
-      }
-
-      if (Database.searchProductByReference(txtReference.getText(), INVENTORY)) {
-
-        if (state.equals(Database.store.getProductState())
-            && Double.parseDouble(txtPrice.getText()) == Database.store.getPrice()) {
-          Database.updateInventory(Integer.parseInt(lblUnits.getText()), txtReference.getText());
+        if (!Format.verifyPhone(txtPhone.getText())) {
+          Alerts.message("Verify!", "Input a valid phone.");
+          txtPhone.requestFocus();
         } else {
-          Alerts.existProduct();
-          existProduct = true;
+
+          if (!Format.verifyPrice(Double.parseDouble(txtPrice.getText()))) {
+            Alerts.message("Verify!", "Input a valid price.");
+            txtPrice.requestFocus();
+          } else {
+
+            double totalPurchase =
+                Double.parseDouble(txtPrice.getText()) * Integer.parseInt(lblUnits.getText());
+            int productCount = Integer.parseInt(lblUnits.getText());
+
+            String stateProduct = "";
+            boolean existProduct = false;
+
+            if (radioUsed.isSelected()) {
+              stateProduct = "Used";
+            } else if (radioNew.isSelected()) {
+              stateProduct = "New";
+            }
+
+            if (Database.searchProductByReference(txtReference.getText(), INVENTORY)) {
+
+              if (stateProduct.equals(Database.store.getProductState())
+                  && Double.parseDouble(txtPrice.getText()) == Database.store.getPrice()) {
+                Database
+                    .updateInventory(Integer.parseInt(lblUnits.getText()), txtReference.getText());
+              } else {
+                Alerts.existProduct();
+                existProduct = true;
+              }
+
+            } else {
+              String[] data = {INVENTORY, txtReference.getText(), stateProduct,
+                  String.valueOf(Double.parseDouble(txtPrice.getText())), lblUnits.getText()};
+              Database.insertData(data);
+            }
+
+            if (!existProduct) {
+              String user = HomeStore.userLogged;
+
+              if (Database.searchDataUserInCashRegister(user)) {
+                Database.updatePurchases(user, productCount, totalPurchase);
+              } else {
+                String[] data = {CASH_REGISTER, user, String.valueOf(0), String.valueOf(0.0),
+                    String.valueOf(productCount), String.valueOf(totalPurchase),
+                    String.valueOf(0.0)};
+                Database.insertData(data);
+              }
+
+              try {
+
+                String[] purchase = {PURCHASES, txtReference.getText(), user, txtDocument.getText(),
+                    txtPhone.getText(), AppConfig.getDate(), String.valueOf(lblUnits.getText()),
+                    String.valueOf(totalPurchase)};
+
+                Database.insertData(purchase);
+
+              } catch (Exception e) {
+                Alerts.error(e, PURCHASES);
+              }
+
+              Alerts.actionSuccessfully("purchased", lblUnits.getText(), totalPurchase);
+              Database.store.setAvailableProducts(0);
+              Database.store.setTotalPurchases(0.0);
+
+              txtReference.setEnabled(true);
+              radioNew.setEnabled(true);
+              radioUsed.setEnabled(true);
+              txtPrice.setEnabled(true);
+              txtReference.setText("");
+              txtDocument.setText("");
+              txtPhone.setText("");
+              lblUnits.setText("1");
+              txtPrice.setText("0");
+            }
+          }
         }
-
-      } else {
-
-        String[] data = {INVENTORY, txtReference.getText(), state,
-            String.valueOf(Double.parseDouble(txtPrice.getText())), lblUnits.getText()};
-
-        Database.insertData(data);
-      }
-
-      if (!existProduct) {
-
-        String user = "";
-
-        user = Database.searchUserLogged("Online");
-
-        if (Database.searchDataUser(user)) {
-          Database.updatePurchases(user, productCount, totalPurchase);
-        } else {
-          String[] data = {PURCHASES, user, String.valueOf(0), String.valueOf(0.0),
-              String.valueOf(productCount), String.valueOf(totalPurchase), String.valueOf(0.0)};
-
-          Database.insertData(data);
-        }
-
-        try {
-
-          String[] purchase = {PURCHASES, txtReference.getText(), user, txtDocument.getText(),
-              txtPhone.getText(), getDate(), String.valueOf(
-              lblUnits.getText()), String.valueOf(
-              Double.parseDouble(txtPrice.getText()) * Integer.parseInt(lblUnits.getText()))};
-
-          Database.insertData(purchase);
-
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-
-        Alerts.actionSuccessfully("Purchased ", lblUnits.getText(), totalPurchase);
-        Database.store.setAvailableProducts(0);
-        Database.store.setTotalPurchases(0.0);
-
-        txtReference.setEnabled(true);
-        radioNew.setEnabled(true);
-        radioUsed.setEnabled(true);
-        txtPrice.setEnabled(true);
-        txtReference.setText("");
-        txtDocument.setText("");
-        txtPhone.setText("");
-        lblUnits.setText("1");
-        txtPrice.setText("");
       }
     }
   }

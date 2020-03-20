@@ -24,8 +24,8 @@ import javax.swing.JMenuItem;
 
 public class HomeStore extends JDialog implements ActionListener {
 
+  public static String userLogged;
   Resources resources = new Resources();
-
   private JMenuItem sell, buy, lend, cashRegister, inventory, loans, purchases, sales, users, exit;
 
   public HomeStore(JDialog parent, boolean modal) {
@@ -90,6 +90,17 @@ public class HomeStore extends JDialog implements ActionListener {
     menuBar.add(exit);
 
     add(menuBar, BorderLayout.NORTH);
+  }
+
+  public void start(JDialog parent, String user) {
+    userLogged = user;
+    setSize(620, 380);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Welcome " + userLogged + "!");
+    AppConfig.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
   }
 
   private void btnCashRegistersAP() {
@@ -225,7 +236,7 @@ public class HomeStore extends JDialog implements ActionListener {
   }
 
   private void logout() {
-    Database.recordLogin("Offline", Database.searchUserLogged("Online"));
+    Database.recordLogin("Offline", userLogged);
     AppConfig.fadeOut(this);
   }
 

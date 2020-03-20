@@ -375,7 +375,8 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.updateCashRegisterLoan(user, (loanValue + store.getTotalLoans())));
+      preparedStatement = connection.prepareStatement(
+          Querys.updateCashRegisterLoan(user, (loanValue + store.getTotalLoans())));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -415,13 +416,13 @@ public class Database {
     }
   }
 
-  public static boolean searchDataUser(String user) {
+  public static boolean searchDataUserInCashRegister(String user) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.searchDataUser(user));
+      preparedStatement = connection.prepareStatement(Querys.searchDataUserInCashRegister(user));
       resultSet = preparedStatement.executeQuery();
 
       if (resultSet.next()) {
@@ -477,13 +478,13 @@ public class Database {
     return 0;
   }
 
-  public static String searchUserLogged(String status) {
+  public static String searchUserLogged(String status, String user) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.searchUserLogged(status));
+      preparedStatement = connection.prepareStatement(Querys.searchUserLogged(status, user));
       resultSet = preparedStatement.executeQuery();
 
       if (resultSet.next()) {

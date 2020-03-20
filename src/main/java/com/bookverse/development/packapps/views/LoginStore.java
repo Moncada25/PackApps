@@ -147,20 +147,12 @@ public class LoginStore extends JDialog implements ActionListener {
       Alerts.inputSomethingText();
     } else {
 
-      HomeStore homeStore = new HomeStore(this, true);
-
       if (Database.searchUserRegiter(txtUser.getText(),
           AppConfig.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
 
         Database.recordLogin("Online", txtUser.getText());
+        new HomeStore(this, true).start(this, txtUser.getText());
 
-        homeStore.setSize(620, 380);
-        homeStore.setResizable(false);
-        homeStore.setLocationRelativeTo(null);
-        homeStore.setTitle("Welcome " + txtUser.getText() + "!");
-        AppConfig.fadeIn(homeStore);
-        setVisible(false);
-        homeStore.setVisible(true);
         txtPassword.setText("");
         txtUser.setText("");
 

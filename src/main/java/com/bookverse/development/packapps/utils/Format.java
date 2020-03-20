@@ -144,7 +144,7 @@ public class Format {
   }
 
   public static boolean verifyReference(@NotNull String reference) {
-    return reference.length() < 5 || reference.length() > 15;
+    return reference.length() >= 5 && reference.length() <= 15;
   }
 
   public static boolean verifyPhone(String phone) {

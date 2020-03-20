@@ -275,7 +275,7 @@ public class Loans extends JDialog implements ActionListener {
       Database.store.setTotalLoans(Double.parseDouble(txtPrice.getText()));
       String nom = "";
 
-      nom = Database.searchUserLogged("Online");
+      nom = Database.searchUserLogged("Online", HomeStore.userLogged);
 
       if (Database.searchUser(nom)) {
         Database.updateLoan(nom, Database.store.getTotalLoans());
@@ -288,7 +288,7 @@ public class Loans extends JDialog implements ActionListener {
         Database.insertData(data);
       }
 
-      String[] data = {LOANS, Database.searchUserLogged("Online"), txtName.getText(),
+      String[] data = {LOANS, Database.searchUserLogged("Online", HomeStore.userLogged), txtName.getText(),
           txtDocument.getText(),
           txtReference.getText(), txtPhone.getText(), dateFormat.format(date.getTime()),
           txtPrice.getText()};

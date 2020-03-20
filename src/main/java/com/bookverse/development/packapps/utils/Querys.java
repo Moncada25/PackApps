@@ -152,12 +152,12 @@ public class Querys {
     return "SELECT ID FROM "+Format.tableName(USERS)+" WHERE Username ='" + user + "'";
   }
 
-  public static String searchDataUser(String user){
-    return "SELECT * FROM "+Format.tableName(USERS)+" WHERE User='" + user + "'";
+  public static String searchDataUserInCashRegister(String user){
+    return "SELECT * FROM "+Format.tableName(CASH_REGISTER)+" WHERE User='" + user + "'";
   }
 
-  public static String searchUserLogged(String status){
-    return "SELECT * FROM "+Format.tableName(USERS)+" WHERE Status ='" + status + "'";
+  public static String searchUserLogged(String status, String user){
+    return "SELECT * FROM "+Format.tableName(USERS)+" WHERE Status ='" + status + "' AND Username = '"+user+"'";
   }
 
   public static String searchUser(String user){
