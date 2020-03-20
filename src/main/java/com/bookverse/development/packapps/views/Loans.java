@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.ViewConstants.LOANS;
+import static com.bookverse.development.packapps.utils.AppConstants.LOANS;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

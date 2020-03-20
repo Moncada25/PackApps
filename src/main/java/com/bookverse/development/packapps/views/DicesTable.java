@@ -6,11 +6,11 @@ import static com.bookverse.development.packapps.core.AppConfig.LOADER;
 import static com.bookverse.development.packapps.core.AppConfig.POINT;
 import static com.bookverse.development.packapps.core.AppConfig.RESIZE;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT;
-import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
-import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
-import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.AppConstants.DICES;
+import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
+import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

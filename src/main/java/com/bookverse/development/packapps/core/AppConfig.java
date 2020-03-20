@@ -1,5 +1,7 @@
 package com.bookverse.development.packapps.core;
 
+import static com.bookverse.development.packapps.utils.AppConstants.PASSWORD_DBA;
+
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.WindowEffect;
@@ -26,7 +28,6 @@ import javax.swing.JPasswordField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import org.apache.commons.codec.binary.Base64;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -257,7 +258,7 @@ public class AppConfig {
 
         if (aux.length() != 0) {
 
-          if (getPasswordDBA().equals(aux)) {
+          if (PASSWORD_DBA.equals(aux)) {
             return true;
           } else {
             JOptionPane.showMessageDialog(null,
@@ -324,12 +325,6 @@ public class AppConfig {
     return border;
   }
 
-  @NotNull
-  @Contract(pure = true)
-  public static String getTitle() {
-    return "PackApps";
-  }
-
   public static String getSecretKey(boolean isEmail) {
 
     if (!isEmail) {
@@ -337,12 +332,6 @@ public class AppConfig {
     } else {
       return "Akatsuki25";
     }
-  }
-
-  @NotNull
-  @Contract(pure = true)
-  public static String getPasswordDBA() {
-    return "admin";
   }
 
   public static void fadeIn(JDialog window) {
@@ -356,6 +345,12 @@ public class AppConfig {
   public static void fadeOut(JFrame window) {
     WindowEffect.JFrameFadeOut(1f, 0f, 0.2f, 50, window, WindowEffect.EXIT);
   }
+
+  public static void fadeOut(JDialog ventana) {
+    WindowEffect.JDialogFadeOut(1f, 0f, 0.2f, 50, ventana, WindowEffect.DISPOSE);
+  }
+
+  //INSTRUCCIONES
 
   public static void instruccionesRuleta() {
 
@@ -373,12 +368,6 @@ public class AppConfig {
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
-
-  public static void fadeOut(JDialog ventana) {
-    WindowEffect.JDialogFadeOut(1f, 0f, 0.2f, 50, ventana, WindowEffect.DISPOSE);
-  }
-
-  //INSTRUCCIONES
 
   public static void instruccionesDados() {
     JOptionPane.showMessageDialog(null,

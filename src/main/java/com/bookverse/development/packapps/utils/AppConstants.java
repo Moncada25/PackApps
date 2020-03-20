@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.utils;
 
-public class ViewConstants {
+public class AppConstants {
+
   public static final String GUESS_NUMBER = "Guess Number";
   public static final String HANGMAN = "Hangman";
   public static final String DICES = "Dices";
@@ -13,4 +14,8 @@ public class ViewConstants {
   public static final String USERS = "Users";
   public static final String PURCHASES = "Purchases";
   public static final String SALES = "Sales";
+
+  public static final String TITLE = "PackApps";
+  public static final String PASSWORD_DBA = "admin";
+  public static final String STORE_MANAGER_KEY = "123";
 }

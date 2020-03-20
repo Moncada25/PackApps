@@ -83,15 +83,14 @@ public class Email extends JDialog implements ActionListener, MouseListener {
     password.setBounds(310, 60, 370, 50);
 
     required1 = resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
-    required1.setBounds(153, 74, 20, 20);
+    required1.setBounds(152, 74, 12, 12);
     required1.addMouseListener(this);
 
     required2 = resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
-    required2.setBounds(390, 74, 20, 20);
+    required2.setBounds(389, 74, 12, 12);
     required2.addMouseListener(this);
 
-    JLabel lblReceiver = resources
-        .getLabel("<html><strong>Receiver: </strong></html>", MAIN_COLOR, this, SMALL);
+    JLabel lblReceiver = resources.getLabel("<html><strong>Receiver: </strong></html>", MAIN_COLOR, this, SMALL);
     lblReceiver.setBounds(30, 135, 65, 30);
     add(lblReceiver);
 

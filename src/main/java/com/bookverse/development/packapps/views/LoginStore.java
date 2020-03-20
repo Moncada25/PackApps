@@ -5,7 +5,6 @@ import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.SMALL;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
@@ -37,16 +36,12 @@ public class LoginStore extends JDialog implements ActionListener {
     createComponents();
   }
 
-  public LoginStore() {
-    createComponents();
-  }
-
   public void start(JFrame parent) {
     setSize(375, 400);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Buy and Sell");
-    fadeIn(this);
+    setTitle("Buy & Sell");
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -61,22 +56,18 @@ public class LoginStore extends JDialog implements ActionListener {
     btnExit.setBounds(200, 225, 90, 30);
 
     JLabel alreadyRegister = resources
-        .getLabel("<html><strong>Are you not registered?</strong></html>",
-            MAIN_COLOR, this,
-            SMALL);
-    alreadyRegister.setBounds(112, 260, 300, 50);
+        .getLabel("<html><strong>Are you not registered?</strong></html>", MAIN_COLOR, this, SMALL);
+    alreadyRegister.setBounds(110, 260, 300, 50);
 
     btnRegister = resources.getButton("Sign up", TEXT_COLOR, this, this);
-    btnRegister.setBounds(130, 300, 110, 30);
+    btnRegister.setBounds(135, 300, 100, 30);
 
     btnLogin = resources.getButton("Enter", TEXT_COLOR, this, this);
     btnLogin.setBounds(80, 225, 90, 30);
 
     JLabel tittle = resources
-        .getLabel("<html><strong><em>Login store</em></strong></html>",
-            MAIN_COLOR, this,
-            BIG);
-    tittle.setBounds(100, 5, 200, 40);
+        .getLabel("<html><strong><em>Login store</em></strong></html>", MAIN_COLOR, this, BIG);
+    tittle.setBounds(115, 5, 200, 40);
 
     JLabel user = resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this,
@@ -174,26 +165,12 @@ public class LoginStore extends JDialog implements ActionListener {
         txtUser.setText("");
 
       } else {
-        Alerts.message("Warning", "Incorrect data, try again.");
+        Alerts.message("Verify!", "Incorrect data, try again.");
         txtPassword.setText("");
         txtUser.setText("");
         txtUser.requestFocus();
       }
     }
-  }
-
-  public void btnRegistrarAP() {
-
-    Registrar reg = new Registrar(this, true);
-
-    reg.setSize(460, 300);
-    reg.setResizable(false);
-    reg.setLocationRelativeTo(null);
-    reg.setTitle("Añadir Usuario");
-    fadeIn(reg);
-    setVisible(false);
-    reg.setVisible(true);
-    txtPassword.setText("");
   }
 
   @Override
@@ -207,7 +184,7 @@ public class LoginStore extends JDialog implements ActionListener {
         btnEnterAP();
         setVisible(true);
       } else if (e.getSource() == btnRegister) {
-        btnRegistrarAP();
+        new SignUp(this, true).start(this);
         setVisible(true);
       }
     }

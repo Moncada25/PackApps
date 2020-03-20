@@ -2,7 +2,7 @@ package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
+import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

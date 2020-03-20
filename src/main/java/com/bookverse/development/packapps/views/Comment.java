@@ -4,7 +4,7 @@ import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.ViewConstants.FEEDBACK;
+import static com.bookverse.development.packapps.utils.AppConstants.FEEDBACK;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
@@ -72,10 +72,8 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
             MEDIUM);
     lblUser.setBounds(100, 60, 100, 50);
 
-    required = resources
-        .getLabel("*", MAIN_COLOR, this,
-            MEDIUM);
-    required.setBounds(140, 76, 20, 20);
+    required = resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
+    required.setBounds(139, 78, 12, 12);
     required.addMouseListener(this);
 
     txtUser = new JTextField();

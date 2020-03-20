@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.AppConfig.*;
-import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

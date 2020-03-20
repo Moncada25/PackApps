@@ -1,7 +1,6 @@
 package com.bookverse.development.packapps.utils;
 
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -135,43 +134,24 @@ public class Format {
             " 		color:rgb(21, 87, 163);" +
             " 	} "
             + "center{" +
-                  "text-decoration: underline"
-            + "}"+
+            "text-decoration: underline"
+            + "}" +
             "</style>";
   }
 
   public static boolean verifyDocument(String document) {
-
-    if (document.length() < 8 || document.length() > 10) {
-      Alerts.message("Verify", "Input a valid document");
-      return true;
-    }
-    return false;
+    return document.length() >= 8 && document.length() <= 10;
   }
 
   public static boolean verifyReference(@NotNull String reference) {
-
-    if ((reference.length() < 5 || reference.length() > 15)) {
-      Alerts.message("Verify", "Input a valid reference");
-      return true;
-    }
-    return false;
+    return reference.length() < 5 || reference.length() > 15;
   }
 
   public static boolean verifyPhone(String phone) {
-    if (phone.length() != 10 && phone.length() != 7) {
-      Alerts.message("Verify", "Input a valid phone");
-      return false;
-    }
-    return true;
+    return phone.length() == 10 || phone.length() == 7;
   }
 
   public static boolean verifyPrice(double price) {
-
-    if (price < 1) {
-      Alerts.message("Verify", "No value has been entered, please do so!");
-      return false;
-    }
-    return true;
+    return price > 10;
   }
 }

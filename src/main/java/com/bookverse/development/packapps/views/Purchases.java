@@ -7,8 +7,8 @@ import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
 import static com.bookverse.development.packapps.core.AppConfig.getDate;
-import static com.bookverse.development.packapps.utils.ViewConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.ViewConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

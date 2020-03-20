@@ -86,13 +86,13 @@ public class Export {
     return filePath;
   }
 
-  public static void pdf(JTable jTable, String title, String query, String file) {
+  public static void pdf(JTable table, String title, String query, String file) {
 
     filePath = verifyExist(file);
 
     if (!filePath.equals(file)) {
 
-      if (Database.readTable(jTable, query, false)) {
+      if (Database.readTable(table, query, false)) {
 
         try {
 
@@ -118,22 +118,22 @@ public class Export {
           Chapter catPart = new Chapter(new Paragraph(anchor), 1);
           Paragraph subPara = new Paragraph();
           Section subCatPart = catPart.addSection(subPara);
-          PdfPTable table = new PdfPTable(jTable.getColumnCount());
+          PdfPTable pdfPTable = new PdfPTable(table.getColumnCount());
           PdfPCell columnHeader;
 
-          for (int column = 0; column < jTable.getColumnCount(); column++) {
-            columnHeader = new PdfPCell(new Phrase(jTable.getColumnName(column)));
+          for (int column = 0; column < table.getColumnCount(); column++) {
+            columnHeader = new PdfPCell(new Phrase(table.getColumnName(column)));
             columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
-            table.addCell(columnHeader);
+            pdfPTable.addCell(columnHeader);
           }
-          table.setHeaderRows(1);
+          pdfPTable.setHeaderRows(1);
 
-          for (int row = 0; row < jTable.getRowCount(); row++) {
-            for (int column = 0; column < jTable.getColumnCount(); column++) {
-              table.addCell(jTable.getValueAt(row, column).toString());
+          for (int row = 0; row < table.getRowCount(); row++) {
+            for (int column = 0; column < table.getColumnCount(); column++) {
+              pdfPTable.addCell(table.getValueAt(row, column).toString());
             }
           }
-          subCatPart.add(table);
+          subCatPart.add(pdfPTable);
           document.add(catPart);
           document.close();
 
@@ -146,16 +146,16 @@ public class Export {
     }
   }
 
-  public static void excel(JTable jTable1, String query, String file) throws IOException {
+  public static void excel(JTable table, String query, String file) throws IOException {
 
     filePath = verifyExist(file);
 
     if (!filePath.equals(file)) {
 
-      if (Database.readTable(jTable1, query, false)) {
+      if (Database.readTable(table, query, false)) {
 
-        int rowCount = jTable1.getRowCount();
-        int columnCount = jTable1.getColumnCount();
+        int rowCount = table.getRowCount();
+        int columnCount = table.getColumnCount();
         Workbook wb;
         wb = new HSSFWorkbook();
         Sheet sheet = wb.createSheet(" ");
@@ -165,7 +165,7 @@ public class Export {
           for (int j = 0; j < columnCount; j++) {
             Cell cell = row.createCell(j);
 
-            cell.setCellValue(String.valueOf(jTable1.getColumnName(j)));
+            cell.setCellValue(String.valueOf(table.getColumnName(j)));
             wb.write(new FileOutputStream(filePath));
           }
         }
@@ -175,7 +175,7 @@ public class Export {
           for (int j = 0; j < columnCount; j++) {
             Cell cell = row.createCell(j);
 
-            cell.setCellValue(String.valueOf(jTable1.getValueAt(i, j)));
+            cell.setCellValue(String.valueOf(table.getValueAt(i, j)));
             wb.write(new FileOutputStream(filePath));
           }
         }

@@ -1,9 +1,9 @@
 package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.AppConfig.*;
-import static com.bookverse.development.packapps.utils.ViewConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.ViewConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.ViewConstants.SALES;
+import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.AppConstants.SALES;
 
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;

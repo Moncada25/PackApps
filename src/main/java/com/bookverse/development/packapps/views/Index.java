@@ -4,17 +4,18 @@ import static com.bookverse.development.packapps.core.AppConfig.BORDER_BLUE;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.AppConstants.DICES;
+import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.AppConstants.LOANS;
+import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
+import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.AppConstants.SALES;
+import static com.bookverse.development.packapps.utils.AppConstants.TITLE;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_IMAGES;
-import static com.bookverse.development.packapps.utils.ViewConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.ViewConstants.DICES;
-import static com.bookverse.development.packapps.utils.ViewConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.ViewConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.ViewConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.ViewConstants.LOANS;
-import static com.bookverse.development.packapps.utils.ViewConstants.NOTES;
-import static com.bookverse.development.packapps.utils.ViewConstants.PURCHASES;
-import static com.bookverse.development.packapps.utils.ViewConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.ViewConstants.SALES;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
@@ -138,7 +139,7 @@ public class Index extends JFrame implements ActionListener {
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
-    window.setTitle(AppConfig.getTitle());
+    window.setTitle(TITLE);
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
     window.textureMode.setForeground(MAIN_COLOR);
     AppConfig.fadeIn(window);
@@ -234,7 +235,7 @@ public class Index extends JFrame implements ActionListener {
     scores.add(tables);
 
     JMenu tools = resources.getMenu("Tools", "tools");
-    buyAndSell = resources.getMenuItem("Buy and Sell", "compraventa", this);
+    buyAndSell = resources.getMenuItem("Buy & Sell", "compraventa", this);
     structures = resources.getMenuItem("Structures", "estructuras", this);
     numbers = resources.getMenuItem("Numbers", "numeritos", this);
     notes = resources.getMenuItem(NOTES, "notas", this);

@@ -1,11 +1,11 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.ViewConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.ViewConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.ViewConstants.LOANS;
-import static com.bookverse.development.packapps.utils.ViewConstants.PURCHASES;
-import static com.bookverse.development.packapps.utils.ViewConstants.SALES;
-import static com.bookverse.development.packapps.utils.ViewConstants.USERS;
+import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.AppConstants.LOANS;
+import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.AppConstants.SALES;
+import static com.bookverse.development.packapps.utils.AppConstants.USERS;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
