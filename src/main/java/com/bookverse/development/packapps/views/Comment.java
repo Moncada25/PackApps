@@ -63,7 +63,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
     btnExit.setBounds(250, 400, 86, 30);
 
     JLabel tittle = resources
-        .getLabel("<html><strong><em>Write Commentary</em></strong></html>",
+        .getLabel("<html><strong><em>Write commentary</em></strong></html>",
             MAIN_COLOR, this, BIG);
     tittle.setBounds(130, 10, 370, 50);
 

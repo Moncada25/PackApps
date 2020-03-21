@@ -177,7 +177,7 @@ public class UsuariosTabla extends JDialog implements MouseListener {
 
           try {
 
-            if (Database.searchUserRegiter(user, AppConfig.encrypt("", true))) {
+            if (Database.searchUserRegister(user, AppConfig.encrypt("", true))) {
 
               Object opcion = null;
 

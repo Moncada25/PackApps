@@ -156,10 +156,6 @@ public class Querys {
     return "SELECT * FROM "+Format.tableName(CASH_REGISTER)+" WHERE User='" + user + "'";
   }
 
-  public static String searchUserLogged(String status, String user){
-    return "SELECT * FROM "+Format.tableName(USERS)+" WHERE Status ='" + status + "' AND Username = '"+user+"'";
-  }
-
   public static String searchUser(String user){
     return "SELECT * FROM "+Format.tableName(USERS)+" WHERE Username ='" + user + "'";
   }

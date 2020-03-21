@@ -72,7 +72,7 @@ public class LoginStore extends JDialog implements ActionListener {
     JLabel user = resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this,
             MEDIUM);
-    user.setBounds(145, 60, 100, 30);
+    user.setBounds(145, 68, 100, 30);
 
     txtUser = new JTextField();
     txtUser.setBounds(110, 100, 150, 30);
@@ -107,7 +107,7 @@ public class LoginStore extends JDialog implements ActionListener {
     JLabel password = resources
         .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this,
             MEDIUM);
-    password.setBounds(145, 135, 120, 30);
+    password.setBounds(145, 143, 120, 30);
 
     txtPassword = new JPasswordField();
     txtPassword.setBounds(110, 175, 150, 30);
@@ -147,7 +147,7 @@ public class LoginStore extends JDialog implements ActionListener {
       Alerts.inputSomethingText();
     } else {
 
-      if (Database.searchUserRegiter(txtUser.getText(),
+      if (Database.searchUserRegister(txtUser.getText(),
           AppConfig.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
 
         Database.recordLogin("Online", txtUser.getText());

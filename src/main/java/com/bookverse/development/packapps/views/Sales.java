@@ -38,7 +38,7 @@ public class Sales extends JDialog implements ActionListener {
   private InventoryTable inventoryTable = new InventoryTable(this, true, true);
   private JButton btnSearch, btnSubmit, btReturn;
   private Resources resources = new Resources();
-  private JLabel lblUnits, available, more, less, unitsAvailable, unitsActual;
+  private JLabel available, more, less, unitsAvailable, unitsActual;
   private ButtonGroup btnGroup;
   private JRadioButton radioNew, radioUsed;
 
@@ -138,7 +138,7 @@ public class Sales extends JDialog implements ActionListener {
       }
     });
 
-    lblUnits = resources
+    JLabel lblUnits = resources
         .getLabel("<html><strong>Units</strong></html>", TEXT_COLOR, this,
             MEDIUM);
     lblUnits.setBounds(30, 220, 130, 30);
@@ -282,19 +282,17 @@ public class Sales extends JDialog implements ActionListener {
 
         String formatUnitsAvailable = unitsAvailable.getText().replace("<html><strong>", "").replace("</strong></html>", "");
 
-        Database.store.setTotalSales(Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText()));
-        Database.store.setUnitsActual(Integer.parseInt(unitsActual.getText()));
         Database.updateInventory(Integer.parseInt(formatUnitsAvailable), txtReference.getText(), false);
 
         String user = HomeStore.userLogged;
 
         if (Database.searchDataUserInCashRegister(user)) {
-          Database.updateSales(user, Database.store.getUnitsActual(), Database.store.getTotalSales());
+          Database.updateSales(user, Integer.parseInt(unitsActual.getText()), Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText()));
         } else {
 
           String[] data = {CASH_REGISTER, user,
-              String.valueOf(Database.store.getUnitsActual()),
-              String.valueOf(Database.store.getTotalSales()), String.valueOf(0),
+              String.valueOf(Integer.parseInt(unitsActual.getText())),
+              String.valueOf(Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText())), String.valueOf(0),
               String.valueOf(0.0),
               String.valueOf(0.0)};
 

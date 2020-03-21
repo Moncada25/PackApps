@@ -71,7 +71,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
     btnExit.setBounds(250, 400, 86, 30);
 
     JLabel tittle = resources
-        .getLabel("<html><strong><em>Write Email</em></strong></html>", MAIN_COLOR, this, BIG);
+        .getLabel("<html><strong><em>Write email</em></strong></html>", MAIN_COLOR, this, BIG);
     tittle.setBounds(160, 10, 370, 30);
 
     JLabel username = resources

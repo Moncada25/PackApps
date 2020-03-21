@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.AppConstants.LOANS;
 
 import com.bookverse.development.packapps.core.AppConfig;
@@ -26,9 +27,8 @@ public class Loans extends JDialog implements ActionListener {
 
   Resources resources = new Resources();
   private JButton btnLoan, btnExit;
-  private JTextField txtReference, txtDocument, txtPhone, txtPrice, txtName;
+  private JTextField txtReference, txtDocument, txtPhone, txtValue, txtName;
   private JComboBox<String> weeks, months;
-  private boolean validReference = false, validPrice = false;
 
   public Loans(JDialog parent, boolean modal) {
     super(parent, modal);
@@ -39,7 +39,7 @@ public class Loans extends JDialog implements ActionListener {
     setSize(450, 400);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle(LOANS);
+    setTitle("Lend");
     AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
@@ -59,7 +59,7 @@ public class Loans extends JDialog implements ActionListener {
 
     JLabel tittle = resources.getLabel("<html><strong><em>Register loan</em></strong></html>",
         AppConfig.MAIN_COLOR, this, AppConfig.BIG);
-    tittle.setBounds(100, 5, 300, 40);
+    tittle.setBounds(135, 5, 300, 40);
 
     JLabel product = resources
         .getLabel("<html><strong>Client</strong></html>", AppConfig.TEXT_COLOR,
@@ -77,7 +77,7 @@ public class Loans extends JDialog implements ActionListener {
       }
 
       private void txtnombreKeyTyped(KeyEvent evt) {
-          Format.onlyText(evt.getKeyChar(), evt, txtName.getText(), 25);
+        Format.onlyText(evt.getKeyChar(), evt, txtName.getText(), 25);
       }
 
     });
@@ -164,18 +164,18 @@ public class Loans extends JDialog implements ActionListener {
             this, AppConfig.MEDIUM);
     price.setBounds(30, 260, 130, 30);
 
-    txtPrice = new JTextField("0");
-    txtPrice.setBounds(180, 265, 200, 30);
-    txtPrice.setHorizontalAlignment(JTextField.CENTER);
-    add(txtPrice);
+    txtValue = new JTextField("0");
+    txtValue.setBounds(180, 265, 200, 30);
+    txtValue.setHorizontalAlignment(JTextField.CENTER);
+    add(txtValue);
 
-    txtPrice.addKeyListener(new KeyAdapter() {
+    txtValue.addKeyListener(new KeyAdapter() {
       public void keyTyped(KeyEvent evt) {
-        txtPrecioKeyTyped(evt);
+        txtPriceKeyTyped(evt);
       }
 
-      private void txtPrecioKeyTyped(KeyEvent evt) {
-        Format.onlyNumbers(evt.getKeyChar(), evt, txtPrice.getText(), 9);
+      private void txtPriceKeyTyped(KeyEvent evt) {
+        Format.onlyNumbers(evt.getKeyChar(), evt, txtValue.getText(), 9);
       }
 
     });
@@ -184,134 +184,92 @@ public class Loans extends JDialog implements ActionListener {
   private void btnExitAP() {
     txtReference.setText("");
     txtPhone.setText("");
-    txtPrice.setText("");
+    txtValue.setText("");
     txtPhone.setEnabled(true);
-    txtPrice.setEnabled(true);
+    txtValue.setEnabled(true);
     AppConfig.fadeOut(this);
   }
 
   private void btnSubmitAP() {
 
-    boolean validDocument = false;
-    if (Format.verifyDocument(txtDocument.getText())) {
-      txtReference.setEnabled(false);
-      txtPhone.setEnabled(false);
-      txtPrice.setEnabled(false);
-      weeks.setEnabled(false);
-      months.setEnabled(false);
-      txtDocument.requestFocus();
-      validDocument = false;
-    } else {
-      txtReference.setEnabled(true);
-      txtPhone.setEnabled(true);
-      txtPrice.setEnabled(true);
-      weeks.setEnabled(true);
-      months.setEnabled(true);
-      validDocument = true;
-    }
-
-    if (validDocument) {
-      if (Format.verifyReference(txtReference.getText())) {
-        txtPhone.setEnabled(false);
-        txtPrice.setEnabled(false);
-        weeks.setEnabled(false);
-        months.setEnabled(false);
-        txtReference.requestFocus();
-        validReference = false;
-      } else {
-        txtPhone.setEnabled(true);
-        txtPrice.setEnabled(true);
-        weeks.setEnabled(true);
-        months.setEnabled(true);
-        validReference = true;
-      }
-    }
-
-      boolean validPhone = false;
-      if (validReference && validDocument) {
-      if (!Format.verifyPhone(txtPhone.getText())) {
-        txtPrice.setEnabled(false);
-        weeks.setEnabled(false);
-        months.setEnabled(false);
-      } else {
-        txtPrice.setEnabled(true);
-        weeks.setEnabled(true);
-        months.setEnabled(true);
-      }
-      validPhone = true;
-    } else {
-      txtPrice.setEnabled(false);
-      weeks.setEnabled(false);
-      months.setEnabled(false);
-      txtPhone.requestFocus();
-      validPhone = false;
-    }
-
-    if (validReference && validPhone) {
-
-      if (Format.verifyPrice(Double.parseDouble(txtPrice.getText()))) {
-        validPrice = true;
-      } else {
-        validPrice = false;
-        txtPrice.requestFocus();
-      }
-    }
-
-    if (validReference && validPhone && validPrice
-        && (months.getSelectedItem() != "Month" || weeks.getSelectedItem() != "Weeks")) {
-
-      GregorianCalendar date = new GregorianCalendar();
-      DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
-
-      if (months.getSelectedItem() == "Month") {
-        date.add(Calendar.DATE, Integer.parseInt(String.valueOf(weeks.getSelectedItem())) * 7);
-      } else if (weeks.getSelectedItem() == "Weeks") {
-        date.add(Calendar.MONTH, Integer.parseInt(String.valueOf(months.getSelectedItem())));
-      } else {
-        date.add(Calendar.DATE, Integer.parseInt(String.valueOf(weeks.getSelectedItem())) * 7);
-        date.add(Calendar.MONTH, Integer.parseInt(String.valueOf(months.getSelectedItem())));
-      }
-
-      Database.store.setTotalLoans(Double.parseDouble(txtPrice.getText()));
-      String nom = "";
-
-      nom = Database.searchUserLogged("Online", HomeStore.userLogged);
-
-      if (Database.searchDataUserInCashRegister(nom)) {
-        Database.updateLoan(nom, Database.store.getTotalLoans());
-      } else {
-
-        String[] data = {LOANS, nom, String.valueOf(0), String.valueOf(0.0),
-            String.valueOf(0), String.valueOf(0.0),
-            String.valueOf(Database.store.getTotalLoans())};
-
-        Database.insertData(data);
-      }
-
-      String[] data = {LOANS, Database.searchUserLogged("Online", HomeStore.userLogged), txtName.getText(),
-          txtDocument.getText(),
-          txtReference.getText(), txtPhone.getText(), dateFormat.format(date.getTime()),
-          txtPrice.getText()};
-
-      Database.insertData(data);
-
-      Database.store.setTotalLoans(Double.parseDouble(txtPrice.getText()));
-      Alerts.actionSuccessfully("Lend ", dateFormat.format(date.getTime()),
-          Double.parseDouble(txtPrice.getText()));
-      Database.store.setTotalLoans(0.0);
-
-      txtName.setText("");
-      txtReference.setText("");
-      txtDocument.setText("");
-      txtPhone.setText("");
-      txtPrice.setText("0");
+    if (txtName.getText().length() < 8) {
+      Alerts.message("Verify!", "Input a valid client name.");
       txtName.requestFocus();
-      months.setSelectedItem("Months");
-      weeks.setSelectedItem("Weeks");
     } else {
 
-      if (validReference && validPhone && validPrice) {
-        Alerts.message("Message", "Time not defined");
+      if (!Format.verifyDocument(txtDocument.getText())) {
+        Alerts.message("Verify!", "Input a valid document.");
+        txtDocument.requestFocus();
+      } else {
+
+        if (!Format.verifyReference(txtReference.getText())) {
+          Alerts.message("Verify!", "Input a valid reference.");
+          txtReference.requestFocus();
+        } else {
+
+          if (!Format.verifyPhone(txtPhone.getText())) {
+            Alerts.message("Verify!", "Input a valid phone.");
+            txtPhone.requestFocus();
+          } else {
+
+            if (months.getSelectedItem() == "Months" && weeks.getSelectedItem() == "Weeks") {
+              Alerts.message("Verify!", "Input a valid time.");
+              weeks.requestFocus();
+            } else {
+
+              if (!Format.verifyPrice(Double.parseDouble(txtValue.getText()))) {
+                Alerts.message("Verify!", "Input a valid value.");
+                txtValue.requestFocus();
+              } else {
+
+                GregorianCalendar date = new GregorianCalendar();
+                DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
+
+                if (months.getSelectedItem() == "Months") {
+                  date.add(Calendar.DATE, Integer.parseInt(String.valueOf(weeks.getSelectedItem())) * 7);
+                } else if (weeks.getSelectedItem() == "Weeks") {
+                  date.add(Calendar.MONTH, Integer.parseInt(String.valueOf(months.getSelectedItem())));
+                } else {
+                  date.add(Calendar.DATE, Integer.parseInt(String.valueOf(weeks.getSelectedItem())) * 7);
+                  date.add(Calendar.MONTH, Integer.parseInt(String.valueOf(months.getSelectedItem())));
+                }
+
+                String user = HomeStore.userLogged;
+
+                if (Database.searchDataUserInCashRegister(user)) {
+                  System.out.println("pasa por la caja");
+                  Database.updateLoan(user, Double.parseDouble(txtValue.getText()));
+                } else {
+                  System.out.println("no pasa por la caja");
+                  String[] data = {CASH_REGISTER, user, String.valueOf(0), String.valueOf(0.0),
+                      String.valueOf(0), String.valueOf(0.0),
+                      String.valueOf(txtValue.getText())};
+                  Database.insertData(data);
+                }
+
+                String[] data = {LOANS, user, txtName.getText(), txtDocument.getText(),
+                    txtReference.getText(), txtPhone.getText(), dateFormat.format(date.getTime()),
+                    txtValue.getText()};
+
+                Database.insertData(data);
+
+                Database.store.setTotalLoans(Double.parseDouble(txtValue.getText()));
+                Alerts.actionSuccessfully("lend", dateFormat.format(date.getTime()), Double.parseDouble(
+                    txtValue.getText()));
+                Database.store.setTotalLoans(0.0);
+
+                txtName.setText("");
+                txtReference.setText("");
+                txtDocument.setText("");
+                txtPhone.setText("");
+                txtValue.setText("0");
+                txtName.requestFocus();
+                months.setSelectedItem("Months");
+                weeks.setSelectedItem("Weeks");
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -381,6 +381,8 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
+      System.out.println("pasa por la base de datos, con esto: parametro: "+loanValue+" propiedad: "+store.getTotalLoans());
+
       preparedStatement = connection.prepareStatement(
           Querys.updateCashRegisterLoan(user, (loanValue + store.getTotalLoans())));
       preparedStatement.executeUpdate();
@@ -484,37 +486,6 @@ public class Database {
     return 0;
   }
 
-  public static String searchUserLogged(String status, String user) {
-
-    try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
-
-      preparedStatement = connection.prepareStatement(Querys.searchUserLogged(status, user));
-      resultSet = preparedStatement.executeQuery();
-
-      if (resultSet.next()) {
-        store.setUser(resultSet.getString("Username"));
-        store.setPassword(resultSet.getString("Password"));
-        store.setUserStatus(resultSet.getString("Status"));
-      }
-
-    } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
-    }
-
-    return store.getUserLogged();
-  }
-
   public static boolean userAlreadyExist(String user) {
 
     try {
@@ -542,7 +513,7 @@ public class Database {
     return false;
   }
 
-  public static boolean searchUserRegiter(String user, String password) {
+  public static boolean searchUserRegister(String user, String password) {
 
     try {
       dataSource = dataSourceService.getDataSource();
