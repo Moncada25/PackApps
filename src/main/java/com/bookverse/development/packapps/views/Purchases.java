@@ -33,11 +33,9 @@ import javax.swing.JTextField;
 
 public class Purchases extends JDialog implements ActionListener {
 
-  public InventoryTable inventoryTable = new InventoryTable(this, true, true);
+  private InventoryTable inventoryTable = new InventoryTable(this, true, true);
   private Resources resources = new Resources();
-  private JLabel mas;
-  private JLabel less;
-  private JLabel lblUnits;
+  private JLabel more, less, lblUnits;
   private JButton btnSubmit, btnExit, btnSearch;
   private JTextField txtReference, txtDocument, txtPhone, txtPrice;
   private JRadioButton radioNew, radioUsed;
@@ -87,10 +85,10 @@ public class Purchases extends JDialog implements ActionListener {
       }
     });
 
-    JLabel product = resources
+    JLabel state = resources
         .getLabel("<html><strong>State</strong></html>", TEXT_COLOR, this,
             MEDIUM);
-    product.setBounds(30, 100, 140, 30);
+    state.setBounds(30, 100, 140, 30);
 
     radioNew = new JRadioButton("<html><strong>New</strong></html>");
     radioNew.setForeground(TEXT_COLOR);
@@ -156,11 +154,11 @@ public class Purchases extends JDialog implements ActionListener {
     lblUnits = resources.getLabel("1", TEXT_COLOR, this, BIG);
     lblUnits.setBounds(213, 230, 30, 20);
 
-    mas = resources
+    more = resources
         .getLabel("<html><strong>+</strong></html>", MAIN_COLOR, this, BIG);
-    mas.setBounds(260, 225, 25, 25);
+    more.setBounds(260, 225, 25, 25);
 
-    mas.addMouseListener(new MouseListener() {
+    more.addMouseListener(new MouseListener() {
       public void mouseClicked(MouseEvent e) {
         moreClicked();
       }
@@ -171,7 +169,7 @@ public class Purchases extends JDialog implements ActionListener {
 
       @Override
       public void mouseEntered(MouseEvent e) {
-        mas.setCursor(HAND);
+        more.setCursor(HAND);
       }
 
       @Override
@@ -293,7 +291,7 @@ public class Purchases extends JDialog implements ActionListener {
               if (stateProduct.equals(Database.store.getProductState())
                   && Double.parseDouble(txtPrice.getText()) == Database.store.getPrice()) {
                 Database
-                    .updateInventory(Integer.parseInt(lblUnits.getText()), txtReference.getText());
+                    .updateInventory(Integer.parseInt(lblUnits.getText()), txtReference.getText(), true);
               } else {
                 Alerts.existProduct();
                 existProduct = true;
@@ -330,7 +328,7 @@ public class Purchases extends JDialog implements ActionListener {
               }
 
               Alerts.actionSuccessfully("purchased", lblUnits.getText(), totalPurchase);
-              Database.store.setAvailableProducts(0);
+              Database.store.setUnitsActual(0);
               Database.store.setTotalPurchases(0.0);
 
               txtReference.setEnabled(true);

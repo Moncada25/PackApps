@@ -68,9 +68,9 @@ public class AppConfig {
   public static final Cursor RESIZE = new Cursor(Cursor.NE_RESIZE_CURSOR);
   public static final Cursor TEXT = new Cursor(Cursor.TEXT_CURSOR);
   public static final Cursor HAND = new Cursor(Cursor.HAND_CURSOR);
-  public static final Font SMALL = new Font("Times New Roman", Font.PLAIN, 15);
-  public static final Font MEDIUM = new Font("Times New Roman", Font.PLAIN, 20);
-  public static final Font BIG = new Font("Times New Roman", Font.PLAIN, 30);
+  public static final Font SMALL = new Font("Times New Roman", Font.ITALIC, 15);
+  public static final Font MEDIUM = new Font("Segoe Print", Font.HANGING_BASELINE, 16);
+  public static final Font BIG = new Font("Segoe Print", Font.ITALIC, 24);
 
   public static String inputText(String request, int length) {
 

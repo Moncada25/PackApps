@@ -277,7 +277,7 @@ public class Loans extends JDialog implements ActionListener {
 
       nom = Database.searchUserLogged("Online", HomeStore.userLogged);
 
-      if (Database.searchUser(nom)) {
+      if (Database.searchDataUserInCashRegister(nom)) {
         Database.updateLoan(nom, Database.store.getTotalLoans());
       } else {
 

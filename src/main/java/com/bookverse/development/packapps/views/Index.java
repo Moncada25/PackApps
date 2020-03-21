@@ -117,7 +117,7 @@ public class Index extends JFrame implements ActionListener {
 
       UIManager.put("OptionPane.okButtonText", "Done");
       UIManager.put("OptionPane.cancelButtonText", "No, thanks.");
-      UIManager.put("OptionPane.yesButtonText", "Yes, it is okay.");
+      UIManager.put("OptionPane.yesButtonText", "Yes, it's okay.");
       UIManager.put("OptionPane.noButtonText", "No, thanks.");
       UIManager.put("OptionPane.messageFont", MEDIUM);
       UIManager.put("OptionPane.buttonFont", MEDIUM);

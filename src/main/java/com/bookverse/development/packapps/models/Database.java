@@ -263,16 +263,22 @@ public class Database {
     }
   }
 
-  public static void updateInventory(int units, String reference) {
+  public static void updateInventory(int units, String reference, boolean isPurchase) {
+
+    int trueUnits;
+
+    if (isPurchase) {
+      trueUnits = units + store.getUnitsActual();
+    } else {
+      trueUnits = units - store.getUnitsActual();
+    }
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(
-          Querys.updateInventory(reference, (units + store.getAvailableProducts())));
+      preparedStatement = connection.prepareStatement(Querys.updateInventory(reference, trueUnits));
       preparedStatement.executeUpdate();
-
     } catch (SQLException e) {
       Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
     } finally {
@@ -300,7 +306,7 @@ public class Database {
         store.setReference(resultSet.getString("ID"));
         store.setProductState(resultSet.getString("State"));
         store.setPrice(resultSet.getDouble("Price"));
-        store.setAvailableProducts(resultSet.getInt("Quantity"));
+        store.setUnitsActual(resultSet.getInt("Quantity"));
       }
 
     } catch (SQLException e) {
@@ -509,7 +515,7 @@ public class Database {
     return store.getUserLogged();
   }
 
-  public static boolean searchUser(String user) {
+  public static boolean userAlreadyExist(String user) {
 
     try {
       dataSource = dataSourceService.getDataSource();

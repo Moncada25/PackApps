@@ -142,7 +142,7 @@ public class SignUp extends JDialog implements ActionListener {
       if (Format.verifyDocument(txtUser.getText()) && Format
           .verifyDocument(String.valueOf(txtPassword.getPassword()))) {
 
-        if (!Database.searchUser(txtUser.getText())) {
+        if (!Database.userAlreadyExist(txtUser.getText())) {
 
           String[] data = {USERS, txtUser.getText(), AppConfig.encrypt(String.valueOf(
               txtPassword.getPassword()), true), "Offline"};

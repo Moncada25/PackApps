@@ -69,7 +69,7 @@ public class InventoryTable extends JDialog implements MouseListener {
 
     String[] images = {"eliminar.png", "select.png", "read.png", "refresh.png"};
 
-    panel.setBorder(getBorder("Select Action"));
+    panel.setBorder(getBorder("Select action"));
 
     tittle = new JLabel();
     tittle.setFont(BIG);
@@ -101,11 +101,10 @@ public class InventoryTable extends JDialog implements MouseListener {
 
   private void createComponents() {
 
+    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("inventario.png")).getImage());
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
-
-    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
@@ -123,11 +122,11 @@ public class InventoryTable extends JDialog implements MouseListener {
     rowSorter = new TableRowSorter<>(model);
     viewTable.setRowSorter(rowSorter);
 
-    for (int i = 0; i < columns.length; i++) {
+    IntStream.range(0, columns.length).forEach(i -> {
       DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
       tcr.setHorizontalAlignment(SwingConstants.CENTER);
       viewTable.getColumnModel().getColumn(i).setCellRenderer(tcr);
-    }
+    });
 
     repaint();
   }

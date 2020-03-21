@@ -4,7 +4,7 @@ public class Store {
 
   private String reference, productState, document, phone, date, user, userLogged, password, userStatus;
   private Double price, totalSales, totalPurchases, totalLoans;
-  private int availableProducts, soldProducts, purchasedProducts;
+  private int unitsActual, soldProducts, purchasedProducts;
 
   public String getReference() {
     return reference;
@@ -110,12 +110,12 @@ public class Store {
     this.totalLoans = totalLoans;
   }
 
-  public int getAvailableProducts() {
-    return availableProducts;
+  public int getUnitsActual() {
+    return unitsActual;
   }
 
-  public void setAvailableProducts(int availableProducts) {
-    this.availableProducts = availableProducts;
+  public void setUnitsActual(int unitsAvailable) {
+    this.unitsActual = unitsAvailable;
   }
 
   public int getSoldProducts() {

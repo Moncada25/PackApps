@@ -1,14 +1,22 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.*;
+import static com.bookverse.development.packapps.core.AppConfig.BIG;
+import static com.bookverse.development.packapps.core.AppConfig.HAND;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfig.SMALL;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.getDate;
 import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
 import static com.bookverse.development.packapps.utils.AppConstants.SALES;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.Querys;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,465 +29,362 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class Sales extends JDialog implements ActionListener {
 
-  public JButton btnbuscar;
-  public JTextField txtRef, txtTel, txtDoc, txtPrecio;
-  public InventoryTable inv = new InventoryTable(this, true, true);
-  Resources resources = new Resources();
-  private JLabel titulo, referencia, documento, producto, tel, unid, precio, disponibles, mas, menos, cantDisponible,
-      txtUnid;
-  private JButton btningresar, btnsalir;
+  private JTextField txtReference, txtPhone, txtDocument, txtPrice;
+  private InventoryTable inventoryTable = new InventoryTable(this, true, true);
+  private JButton btnSearch, btnSubmit, btReturn;
+  private Resources resources = new Resources();
+  private JLabel lblUnits, available, more, less, unitsAvailable, unitsActual;
   private ButtonGroup btnGroup;
-  private JRadioButton nuevo, usado;
-  private boolean refVal = false, telVal = false, docVal = false, canVal = false, preVal = false;
+  private JRadioButton radioNew, radioUsed;
 
   public Sales(JDialog parent, boolean modal) {
-
     super(parent, modal);
-
-    componentes();
+    createComponents();
   }
 
-  // Constructor que no recibe parámetros
-  public Sales() {
-
-    componentes();
-  }
-
-  public void componentes() {
+  private void createComponents() {
 
     setLayout(null);
-    setDefaultCloseOperation(0);
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("vender.png")).getImage());
 
-    btnsalir = resources.getButton("Return", MAIN_COLOR, this, this);
-    btnsalir.setBounds(310, 320, 86, 30);
+    btReturn = resources.getButton("Return", MAIN_COLOR, this, this);
+    btReturn.setBounds(310, 320, 86, 30);
 
-    btningresar = resources.getButton("Vender", TEXT_COLOR, this, this);
-    btningresar.setBounds(30, 320, 86, 30);
-    btningresar.setEnabled(false);
+    btnSubmit = resources.getButton("Sell", TEXT_COLOR, this, this);
+    btnSubmit.setBounds(30, 320, 86, 30);
+    btnSubmit.setEnabled(false);
 
-    btnbuscar = resources.getButton("Buscar", TEXT_COLOR, this, this);
-    btnbuscar.setBounds(340, 65, 86, 25);
+    btnSearch = resources.getButton("Search", TEXT_COLOR, this, this);
+    btnSearch.setBounds(340, 65, 86, 25);
 
-    titulo = resources.getLabel("<html><strong><em>Registrar Venta</em></strong></html>",
+    JLabel tittle = resources.getLabel("<html><strong><em>Register sale</em></strong></html>",
         MAIN_COLOR, this, BIG);
-    titulo.setBounds(120, 5, 300, 40);
+    tittle.setBounds(138, 5, 300, 40);
 
-    referencia = resources
-        .getLabel("<html><strong>Referencia</strong></html>", TEXT_COLOR, this,
+    JLabel reference = resources
+        .getLabel("<html><strong>Reference</strong></html>", TEXT_COLOR, this, MEDIUM);
+    reference.setBounds(30, 60, 100, 30);
+
+    txtReference = new JTextField();
+    txtReference.setBounds(180, 65, 150, 30);
+    txtReference.setHorizontalAlignment(JTextField.CENTER);
+    txtReference.setEnabled(false);
+    add(txtReference);
+
+    JLabel state = resources
+        .getLabel("<html><strong>State</strong></html>", TEXT_COLOR, this,
             MEDIUM);
-    referencia.setBounds(30, 60, 100, 30);
+    state.setBounds(30, 100, 140, 30);
 
-    txtRef = new JTextField();
-    txtRef.setBounds(180, 65, 150, 30);
-    txtRef.setHorizontalAlignment(JTextField.CENTER);
-    txtRef.setEnabled(false);
-    add(txtRef);
+    radioNew = new JRadioButton("<html><strong>New</strong></html>");
+    radioNew.setBounds(175, 100, 78, 30);
+    radioNew.setForeground(TEXT_COLOR);
+    radioNew.setEnabled(false);
+    add(radioNew);
 
-    // Permite detectar lo que se escribe en el campo de referencia
-    txtRef.addKeyListener(new KeyAdapter() {
-      public void keyTyped(KeyEvent evt) {
-        txtRefKeyTyped(evt);
-      }
-
-      private void txtRefKeyTyped(KeyEvent evt) {
-        Format.onlyAlfa(evt.getKeyChar(), evt, txtRef.getText(), 10);
-      }
-    });
-
-    producto = resources
-        .getLabel("<html><strong>Estado</strong></html>", TEXT_COLOR, this,
-        MEDIUM);
-    producto.setBounds(30, 100, 140, 30);
-
-    nuevo = new JRadioButton("<html><strong>Nuevo</strong></html>");
-    nuevo.setBounds(175, 100, 78, 30);
-    nuevo.setForeground(TEXT_COLOR);
-    nuevo.setEnabled(false);
-    add(nuevo);
-
-    usado = new JRadioButton("<html><strong>Usado</strong></html>");
-    usado.setBounds(255, 100, 75, 30);
-    usado.setForeground(TEXT_COLOR);
-    usado.setEnabled(false);
-    add(usado);
+    radioUsed = new JRadioButton("<html><strong>Used</strong></html>");
+    radioUsed.setBounds(255, 100, 75, 30);
+    radioUsed.setForeground(TEXT_COLOR);
+    radioUsed.setEnabled(false);
+    add(radioUsed);
 
     btnGroup = new ButtonGroup();
-    btnGroup.add(nuevo);
-    btnGroup.add(usado);
+    btnGroup.add(radioNew);
+    btnGroup.add(radioUsed);
 
-    documento = resources
-        .getLabel("<html><strong>Documento</strong></html>", TEXT_COLOR, this,
+    JLabel document = resources
+        .getLabel("<html><strong>Document</strong></html>", TEXT_COLOR, this,
             MEDIUM);
-    documento.setBounds(30, 140, 130, 30);
+    document.setBounds(30, 140, 130, 30);
 
-    txtDoc = new JTextField();
-    txtDoc.setBounds(180, 145, 150, 30);
-    txtDoc.setHorizontalAlignment(JTextField.CENTER);
-    add(txtDoc);
+    txtDocument = new JTextField();
+    txtDocument.setBounds(180, 145, 150, 30);
+    txtDocument.setHorizontalAlignment(JTextField.CENTER);
+    add(txtDocument);
 
-    // Permite detectar lo que se escribe en el campo de documento
-    txtDoc.addKeyListener(new KeyAdapter() {
+    txtDocument.addKeyListener(new KeyAdapter() {
       public void keyTyped(KeyEvent evt) {
         txtDocKeyTyped(evt);
       }
 
       private void txtDocKeyTyped(KeyEvent evt) {
-        Format.onlyNumbers(evt.getKeyChar(), evt, txtDoc.getText(), 10);
+        Format.onlyNumbers(evt.getKeyChar(), evt, txtDocument.getText(), 10);
       }
     });
 
-    tel = resources
-        .getLabel("<html><strong>Teléfono</strong></html>", TEXT_COLOR, this,
-        MEDIUM);
-    tel.setBounds(30, 180, 130, 30);
+    JLabel phone = resources
+        .getLabel("<html><strong>Phone</strong></html>", TEXT_COLOR, this,
+            MEDIUM);
+    phone.setBounds(30, 180, 130, 30);
 
-    txtTel = new JTextField();
-    txtTel.setBounds(180, 185, 150, 30);
-    txtTel.setHorizontalAlignment(JTextField.CENTER);
-    add(txtTel);
+    txtPhone = new JTextField();
+    txtPhone.setBounds(180, 185, 150, 30);
+    txtPhone.setHorizontalAlignment(JTextField.CENTER);
+    add(txtPhone);
 
-    // Permite detectar lo que se escribe en el campo de teléfono
-    txtTel.addKeyListener(new KeyAdapter() {
+    txtPhone.addKeyListener(new KeyAdapter() {
       public void keyTyped(KeyEvent evt) {
         txtTelKeyTyped(evt);
       }
 
       private void txtTelKeyTyped(KeyEvent evt) {
-        Format.onlyNumbers(evt.getKeyChar(), evt, txtTel.getText(), 10);
+        Format.onlyNumbers(evt.getKeyChar(), evt, txtPhone.getText(), 10);
       }
-
     });
 
-    unid = resources
-        .getLabel("<html><strong>Unidades</strong></html>", TEXT_COLOR, this,
-        MEDIUM);
-    unid.setBounds(30, 220, 130, 30);
-
-    txtUnid = resources.getLabel("1", TEXT_COLOR, this, BIG);
-    txtUnid.setBounds(213, 230, 40, 20);
-
-    mas = resources.getLabel("<html><strong>+</strong></html>", MAIN_COLOR, this,
-        BIG);
-    mas.setBounds(260, 225, 25, 25);
-
-    // Permite hacer clic en la etiqueta "+"
-    mas.addMouseListener(new MouseListener() {
-      public void mouseClicked(MouseEvent e) {
-        masClcked(e);
-      }
-
-      public void masClcked(MouseEvent e) {
-
-        if (!cantDisponible.getText().equals("")) {
-
-          if (Integer.parseInt(txtUnid.getText()) >= Integer.parseInt(cantDisponible.getText())) {
-            JOptionPane.showMessageDialog(null, "<html>" + Format.style()
-                    + "<strong>Stock insuficiente</strong></html>", "Mensaje",
-                JOptionPane.PLAIN_MESSAGE);
-          } else {
-            txtUnid.setText(String.valueOf(Integer.parseInt(txtUnid.getText()) + 1));
-          }
-        } else {
-          JOptionPane.showMessageDialog(null, "<html>" + Format.style()
-                  + "<strong>Seleccione un producto del inventario</strong></html>", "Mensaje",
-              JOptionPane.PLAIN_MESSAGE);
-        }
-      }
-
-      @Override
-      public void mouseEntered(MouseEvent e) {
-        mas.setCursor(HAND);
-      }
-
-      @Override
-      public void mouseExited(MouseEvent e) {
-      }
-
-      @Override
-      public void mousePressed(MouseEvent e) {
-      }
-
-      @Override
-      public void mouseReleased(MouseEvent e) {
-      }
-
-    });
-
-    menos = resources
-        .getLabel("<html><strong>-</strong></html>", MAIN_COLOR, this,
-        BIG);
-    menos.setBounds(180, 224, 25, 25);
-
-    // Permite hacer clic en la etiqueta "-"
-    menos.addMouseListener(new MouseListener() {
-      public void mouseClicked(MouseEvent e) {
-        menosClcked(e);
-      }
-
-      public void menosClcked(MouseEvent e) {
-
-        if (!cantDisponible.getText().equals("")) {
-
-          if (Integer.parseInt(txtUnid.getText()) > 1) {
-            txtUnid.setText(String.valueOf(Integer.parseInt(txtUnid.getText()) - 1));
-          }
-        } else {
-          JOptionPane.showMessageDialog(null, "<html>" + Format.style()
-                  + "<strong>Seleccione un producto del inventario</strong></html>", "Mensaje",
-              JOptionPane.PLAIN_MESSAGE);
-        }
-      }
-
-      @Override
-      public void mouseEntered(MouseEvent e) {
-        menos.setCursor(HAND);
-      }
-
-      @Override
-      public void mouseExited(MouseEvent e) {
-      }
-
-      @Override
-      public void mousePressed(MouseEvent e) {
-      }
-
-      @Override
-      public void mouseReleased(MouseEvent e) {
-      }
-
-    });
-
-    disponibles = resources
-        .getLabel("<html><strong>Disp:</strong></html>", TEXT_COLOR, this,
+    lblUnits = resources
+        .getLabel("<html><strong>Units</strong></html>", TEXT_COLOR, this,
             MEDIUM);
-    disponibles.setBounds(340, 220, 130, 30);
-    disponibles.setVisible(false);
+    lblUnits.setBounds(30, 220, 130, 30);
 
-    cantDisponible = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
-    cantDisponible.setBounds(390, 222, 130, 30);
+    unitsActual = resources.getLabel("1", TEXT_COLOR, this, BIG);
+    unitsActual.setBounds(213, 230, 40, 20);
 
-    precio = resources
-        .getLabel("<html><strong>Precio</strong></html>", TEXT_COLOR, this,
-        MEDIUM);
-    precio.setBounds(30, 260, 130, 30);
+    more = resources.getLabel("<html><strong>+</strong></html>", MAIN_COLOR, this,
+        BIG);
+    more.setBounds(260, 225, 25, 25);
 
-    txtPrecio = new JTextField("0");
-    txtPrecio.setBounds(180, 265, 150, 30);
-    txtPrecio.setEnabled(false);
-    txtPrecio.setHorizontalAlignment(JTextField.CENTER);
-    add(txtPrecio);
-
-    // Permite detectar lo que se escribe en el campo de precio
-    txtPrecio.addKeyListener(new KeyAdapter() {
-      public void keyTyped(KeyEvent evt) {
-        txtPrecioKeyTyped(evt);
+    more.addMouseListener(new MouseListener() {
+      public void mouseClicked(MouseEvent e) {
+        moreClicked();
       }
 
-      private void txtPrecioKeyTyped(KeyEvent evt) {
-        Format.onlyNumbers(evt.getKeyChar(), evt, txtPrecio.getText(), 9);
+      public void moreClicked() {
+
+        if (!unitsAvailable.getText().equals("")) {
+
+          String formatUnitsAvailable = unitsAvailable.getText().replace("<html><strong>", "")
+              .replace("</strong></html>", "");
+
+          if (Integer.parseInt(unitsActual.getText()) >= Integer.parseInt(formatUnitsAvailable)) {
+            Alerts.message("Message", "Insufficient stock");
+          } else {
+            unitsActual.setText(String.valueOf(Integer.parseInt(unitsActual.getText()) + 1));
+          }
+        } else {
+          Alerts.message("Message", "Select a product from inventory");
+        }
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        more.setCursor(HAND);
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
       }
     });
+
+    less = resources
+        .getLabel("<html><strong>-</strong></html>", MAIN_COLOR, this, BIG);
+    less.setBounds(180, 224, 25, 25);
+
+    less.addMouseListener(new MouseListener() {
+      public void mouseClicked(MouseEvent e) {
+        lessClicked();
+      }
+
+      public void lessClicked() {
+
+        if (!unitsAvailable.getText().equals("")) {
+
+          if (Integer.parseInt(unitsActual.getText()) > 1) {
+            unitsActual.setText(String.valueOf(Integer.parseInt(unitsActual.getText()) - 1));
+          }
+        } else {
+          Alerts.message("Message", "Select a product from inventory.");
+        }
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        less.setCursor(HAND);
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+      }
+
+    });
+
+    available = resources
+        .getLabel("<html><strong>Available: </strong></html>", TEXT_COLOR, this, SMALL);
+    available.setBounds(340, 224, 130, 30);
+    available.setVisible(false);
+
+    unitsAvailable = resources.getLabel("", TEXT_COLOR, this, SMALL);
+    unitsAvailable.setBounds(408, 224, 130, 30);
+
+    JLabel price = resources
+        .getLabel("<html><strong>Price</strong></html>", TEXT_COLOR, this,
+            MEDIUM);
+    price.setBounds(30, 260, 130, 30);
+
+    txtPrice = new JTextField("0");
+    txtPrice.setBounds(180, 265, 150, 30);
+    txtPrice.setEnabled(false);
+    txtPrice.setHorizontalAlignment(JTextField.CENTER);
+    add(txtPrice);
   }
 
   public void start(JDialog parent) {
     setSize(440, 400);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Vender");
-    fadeIn(this);
+    setTitle("Sell");
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
 
-  public void btnSalirAP() {
-
-    txtRef.setText("");
-    txtTel.setText("");
-    txtUnid.setText("1");
-    cantDisponible.setText("");
-    txtPrecio.setText("");
-    fadeOut(this);
+  private void btnReturnAP() {
+    txtReference.setText("");
+    txtPhone.setText("");
+    unitsActual.setText("1");
+    unitsAvailable.setText("");
+    txtPrice.setText("");
+    AppConfig.fadeOut(this);
   }
 
-  public void btnIngresarAP() {
+  private void btnSubmitAP() {
 
-    if (Format.verifyReference(txtRef.getText())) {
-      txtRef.requestFocus();
-      refVal = false;
+    if (!Format.verifyDocument(txtDocument.getText())) {
+      Alerts.message("Verify!", "Input a valid document.");
+      txtDocument.requestFocus();
     } else {
-      refVal = true;
-    }
-
-    if (refVal) {
-      if (Format.verifyDocument(txtDoc.getText())) {
-        txtDoc.requestFocus();
-        docVal = false;
-      } else {
-        docVal = true;
-      }
-    }
-
-    if (refVal && docVal) {
-
-      if (Format.verifyPhone(txtTel.getText())) {
-        telVal = true;
-      } else {
-        txtTel.requestFocus();
-        telVal = false;
-      }
-    }
-
-    if (refVal && telVal && docVal) {
-
-      if (Integer.parseInt(txtUnid.getText()) > Integer.parseInt(cantDisponible.getText())) {
-        JOptionPane.showMessageDialog(null, "<html>" + Format.style()
-                + "<strong>No hay suficiente stock, revise las unidades introducidas.</strong></html>",
-            "Mensaje", JOptionPane.PLAIN_MESSAGE);
-        txtUnid.requestFocus();
-        canVal = false;
-      } else {
-        canVal = true;
-      }
-    }
-
-    if (refVal && telVal && docVal) {
-
-      if (Format.verifyPrice(Double.parseDouble(txtPrecio.getText()))) {
-        preVal = true;
-      } else {
-        preVal = false;
-      }
-    }
-
-    if (refVal && telVal && docVal && canVal && preVal) {
-
-      Database.store.setTotalLoans(Double.parseDouble(txtPrecio.getText()) * Integer.parseInt(txtUnid.getText()));
-      Database.store.setAvailableProducts(Integer.parseInt(txtUnid.getText()));
-
-      cantDisponible.setText(
-          String.valueOf(
-              Integer.parseInt(cantDisponible.getText()) - Integer.parseInt(txtUnid.getText())));
-
-      // actualizar inventario
-
-      Database.updateInventory(Integer.parseInt(cantDisponible.getText()), txtRef.getText());
-
-      // actualizar registradora
-      String user = "";
-
-      user = Database.searchUserLogged("Online", HomeStore.userLogged);
-
-      if (Database.searchUser(user)) {
-        Database.updateSales(user, Database.store.getAvailableProducts(), Database.store.getTotalSales());
+      if (!Format.verifyPhone(txtPhone.getText())) {
+        Alerts.message("Verify!", "Input a valid phone.");
+        txtPhone.requestFocus();
       } else {
 
-        String[] datos = {CASH_REGISTER, user, String.valueOf(Database.store.getAvailableProducts()),
-            String.valueOf(Database.store.getTotalSales()), String.valueOf(0), String.valueOf(0.0),
-            String.valueOf(0.0)};
+        String formatUnitsAvailable = unitsAvailable.getText().replace("<html><strong>", "").replace("</strong></html>", "");
 
-        Database.insertData(datos);
+        Database.store.setTotalSales(Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText()));
+        Database.store.setUnitsActual(Integer.parseInt(unitsActual.getText()));
+        Database.updateInventory(Integer.parseInt(formatUnitsAvailable), txtReference.getText(), false);
+
+        String user = HomeStore.userLogged;
+
+        if (Database.searchDataUserInCashRegister(user)) {
+          Database.updateSales(user, Database.store.getUnitsActual(), Database.store.getTotalSales());
+        } else {
+
+          String[] data = {CASH_REGISTER, user,
+              String.valueOf(Database.store.getUnitsActual()),
+              String.valueOf(Database.store.getTotalSales()), String.valueOf(0),
+              String.valueOf(0.0),
+              String.valueOf(0.0)};
+
+          Database.insertData(data);
+        }
+
+        try {
+
+          String[] sale = {SALES, txtReference.getText(), user, txtDocument.getText(),
+              txtPhone.getText(), getDate(), String.valueOf(unitsActual.getText()),
+              String.valueOf(
+                  Double.parseDouble(txtPrice.getText()) * Integer
+                      .parseInt(unitsActual.getText()))};
+
+          Database.insertData(sale);
+
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+
+        Alerts.actionSuccessfully("lend", unitsActual.getText(), Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText()));
+        Database.store.setUnitsActual(0);
+        Database.store.setTotalLoans(0.0);
+
+        btnSubmit.setEnabled(false);
+        available.setVisible(false);
+        btnGroup.clearSelection();
+        txtReference.setText("");
+        txtDocument.setText("");
+        txtPhone.setText("");
+        unitsActual.setText("1");
+        txtPrice.setText("");
+        unitsAvailable.setText("");
       }
-
-      // actualizar ventas
-      try {
-
-        String[] compra = {SALES, txtRef.getText(), user, txtDoc.getText(),
-            txtTel.getText(), getDate(), String.valueOf(txtUnid.getText()),
-            String.valueOf(
-                Double.parseDouble(txtPrecio.getText()) * Integer.parseInt(txtUnid.getText()))};
-
-        Database.insertData(compra);
-
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-
-      Alerts.actionSuccessfully("Lend ", unid.getText(), Double.parseDouble(txtPrecio.getText()) * Integer.parseInt(txtUnid.getText()));
-      Database.store.setAvailableProducts(0);
-      Database.store.setTotalLoans(0.0);
-
-      btningresar.setEnabled(false);
-      disponibles.setVisible(false);
-      btnGroup.clearSelection();
-      txtRef.setText("");
-      txtDoc.setText("");
-      txtTel.setText("");
-      txtUnid.setText("1");
-      txtPrecio.setText("");
-      cantDisponible.setText("");
     }
-
   }
 
-  public void btnBuscarAP() {
+  private void btnSearchAP() {
 
-    inv.cleanTable();
+    inventoryTable.cleanTable();
 
-    // importa el inventario desde sql
     try {
-      Database.readTable(inv.viewTable, "select * from inventario", true);
+      Database.readTable(inventoryTable.viewTable, Querys.getAllData(INVENTORY), true);
     } catch (Exception e1) {
       e1.printStackTrace();
     }
 
-    inv.setSize(830, 400);
-    inv.setMinimumSize(new Dimension(830, 400));
-    inv.setLocationRelativeTo(null);
-    inv.setTitle("Productos disponibles");
-    fadeIn(inv);
+    inventoryTable.setSize(830, 400);
+    inventoryTable.setMinimumSize(new Dimension(830, 400));
+    inventoryTable.setLocationRelativeTo(null);
+    inventoryTable.setTitle("Available products");
+    AppConfig.fadeIn(inventoryTable);
     setVisible(false);
-    inv.setVisible(true);
+    inventoryTable.setVisible(true);
   }
 
-  public void btnImportAP() {
+  private void importDataProduct() {
 
-    if (inv.status == 1) {
+    if (inventoryTable.status == 1) {
+      Database.searchProductByReference(inventoryTable.reference, INVENTORY);
+      txtReference.setText(inventoryTable.reference);
 
-      Database.searchProductByReference(inv.reference, INVENTORY);
-
-      txtRef.setText(inv.reference);
-
-      if (Database.store.getProductState().equals("Nuevo")) {
-        nuevo.setSelected(true);
-      } else {
-        usado.setSelected(true);
+      if (Database.store.getProductState().equals("New")) {
+        radioNew.setSelected(true);
+      } else if (Database.store.getProductState().equals("Used")) {
+        radioUsed.setSelected(true);
       }
 
-      txtPrecio.setText(String.valueOf(Database.store.getPrice()));
-      cantDisponible.setText(String.valueOf(Database.store.getAvailableProducts()));
+      txtPrice.setText(String.valueOf(Database.store.getPrice()));
+      unitsAvailable
+          .setText("<html><strong>" + Database.store.getUnitsActual() + "</strong></html>");
 
-      btningresar.setEnabled(true);
-      disponibles.setVisible(true);
-      txtRef.setEnabled(false);
-      nuevo.setEnabled(false);
-      usado.setEnabled(false);
-      txtPrecio.setEnabled(false);
+      btnSubmit.setEnabled(true);
+      available.setVisible(true);
 
-    } else if (inv.status == 2) {
-      JOptionPane.showMessageDialog(null, "<html>" + Format.style()
-              + "<strong>No existen unidades disponibles del producto seleccionado</strong></html>",
-          "Mensaje",
-          JOptionPane.PLAIN_MESSAGE);
+    } else if (inventoryTable.status == 2) {
+      Alerts.message("Warning", "There are no units available for the selected product.");
     }
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
 
-    if (e.getSource() == btnsalir) {
-      btnSalirAP();
-    } else if (e.getSource() == btningresar) {
-      btnIngresarAP();
-    } else if (e.getSource() == btnbuscar) {
-      btnBuscarAP();
-      btnImportAP();
+    if (e.getSource() == btReturn) {
+      btnReturnAP();
+    } else if (e.getSource() == btnSubmit) {
+      btnSubmitAP();
+    } else if (e.getSource() == btnSearch) {
+      btnSearchAP();
+      importDataProduct();
       setVisible(true);
     }
   }
