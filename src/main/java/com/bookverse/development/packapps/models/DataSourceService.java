@@ -1,24 +1,22 @@
 package com.bookverse.development.packapps.models;
 
+import static com.bookverse.development.packapps.utils.AppConstants.DRIVER_DB;
+import static com.bookverse.development.packapps.utils.AppConstants.PASSWORD_DB;
+import static com.bookverse.development.packapps.utils.AppConstants.URL_DRIVER_DB;
+import static com.bookverse.development.packapps.utils.AppConstants.USER_DB;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 
 public class DataSourceService {
 
-  private static final String USER = "root";
-  private static final String PASS = "";
-  private static final String DATABASE = "packapps";
-  private static final String HOSTNAME = "localhost";
-  private static final String DRIVER = "com.mysql.jdbc.Driver";
-  private static final String PORT = "3306";
-  private static final String URL = "jdbc:mysql://" + HOSTNAME + ":" + PORT + "/" + DATABASE;
   private static BasicDataSource basicDataSource;
 
   public DataSourceService() {
     basicDataSource = new BasicDataSource();
-    basicDataSource.setDriverClassName(DRIVER);
-    basicDataSource.setUsername(USER);
-    basicDataSource.setPassword(PASS);
-    basicDataSource.setUrl(URL);
+    basicDataSource.setDriverClassName(DRIVER_DB);
+    basicDataSource.setUsername(USER_DB);
+    basicDataSource.setPassword(PASSWORD_DB);
+    basicDataSource.setUrl(URL_DRIVER_DB);
     basicDataSource.setMaxTotal(250);
     basicDataSource.setMaxIdle(100);
     basicDataSource.setMinIdle(50);

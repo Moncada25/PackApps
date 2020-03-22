@@ -1,10 +1,24 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.TableConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.core.AppConfig.BIG;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
+import static com.bookverse.development.packapps.core.AppConfig.getDate;
+import static com.bookverse.development.packapps.core.AppConfig.inputNumber;
+import static com.bookverse.development.packapps.core.AppConfig.inputText;
+import static com.bookverse.development.packapps.core.AppConfig.instruccionesAdivinar;
+import static com.bookverse.development.packapps.core.AppConfig.intRandom;
+import static com.bookverse.development.packapps.core.AppConfig.saveGame;
+import static com.bookverse.development.packapps.core.AppConfig.verifyConnection;
+import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
 
-import com.bookverse.development.packapps.core.Core;
+import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -45,10 +59,10 @@ public class GuessNumber extends JDialog implements ActionListener {
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("adivinar.png")).getImage());
 
-    btnReturn = resources.getButton("Return", resources.core.ROJO, this, this);
+    btnReturn = resources.getButton("Return", MAIN_COLOR, this, this);
     btnReturn.setBounds(310, 245, 86, 30);
 
-    btnPlay = resources.getButton("Play", resources.core.AZUL, this, this);
+    btnPlay = resources.getButton("Play", TEXT_COLOR, this, this);
     btnPlay.setBounds(310, 200, 86, 30);
 
     txtNumber = new JTextField();
@@ -100,17 +114,17 @@ public class GuessNumber extends JDialog implements ActionListener {
       }
 
       public void txtNumKeyTyped(KeyEvent e) {
-        resources.core.solonumeros(e.getKeyChar(), e, txtNumber.getText(), 6);
+        Format.onlyNumbers(e.getKeyChar(), e, txtNumber.getText(), 6);
       }
     });
 
-    message = resources.getLabel("", resources.core.ROJO, this, resources.core.BIG);
+    message = resources.getLabel("", MAIN_COLOR, this, BIG);
     message.setBounds(90, 5, 320, 100);
 
-    response = resources.getLabel("", resources.core.AZUL, this, resources.core.MEDIUM);
+    response = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     response.setBounds(90, 110, 300, 70);
 
-    help = resources.getLabel("", resources.core.AZUL, this, resources.core.MEDIUM);
+    help = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     help.setBounds(90, 110, 300, 70);
 
     question = resources.getLabel("", null, this, null);
@@ -121,7 +135,7 @@ public class GuessNumber extends JDialog implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnReturn) {
-      resources.core.fadeOut(this);
+      AppConfig.fadeOut(this);
     } else if (e.getSource() == btnPlay) {
       btnPlayAP();
     }
@@ -129,10 +143,10 @@ public class GuessNumber extends JDialog implements ActionListener {
 
   private void btnPlayAP() {
 
-    high = Integer.parseInt(Core.enterNumber("Maximum number to guess", 6));
+    high = Integer.parseInt(inputNumber("Maximum number to guess", 6));
 
     int minimum = 1;
-    numberRandom = resources.core.enteroAleatorio(minimum, high);
+    numberRandom = intRandom(minimum, high);
 
     message.setText("<html><em>"
         + "<center><strong>Guess the number!</strong></center>"
@@ -166,9 +180,9 @@ public class GuessNumber extends JDialog implements ActionListener {
     setSize(430, 330);
     setResizable(false);
     setLocationRelativeTo(parent);
-    resources.core.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
-    resources.core.instruccionesAdivinar();
+    AppConfig.instruccionesAdivinar();
     setVisible(true);
   }
 
@@ -183,9 +197,9 @@ public class GuessNumber extends JDialog implements ActionListener {
     setSize(430, 330);
     setResizable(false);
     setLocationRelativeTo(parent);
-    resources.core.fadeIn(this);
+    fadeIn(this);
     parent.setVisible(false);
-    resources.core.instruccionesAdivinar();
+    instruccionesAdivinar();
     setVisible(true);
   }
 
@@ -215,7 +229,7 @@ public class GuessNumber extends JDialog implements ActionListener {
       btnPlay.setEnabled(true);
       btnReturn.setEnabled(true);
 
-      if (resources.core.comprobarConexion("Data don't saved", true) && resources.core.saveGame()) {
+      if (verifyConnection("Data don't saved", true) && saveGame()) {
 
         String level;
 
@@ -227,10 +241,10 @@ public class GuessNumber extends JDialog implements ActionListener {
 
         try {
           String[] data = {GUESS_NUMBER,
-              Core.enterNickname("Enter a Nickname", 20),
+              inputText("Enter a Nickname", 20),
               String.valueOf(high), level + " - " + attempts,
-              resources.core.obtenerDate()};
-          resources.database.insertData(data);
+              getDate()};
+          Database.insertData(data);
         } catch (Exception e) {
           Alerts.error(e, GUESS_NUMBER);
         }

@@ -1,12 +1,19 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.TableConstants.DICES;
-import static com.bookverse.development.packapps.utils.TableConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.TableConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.TableConstants.NOTES;
-import static com.bookverse.development.packapps.utils.TableConstants.PUZZLE;
+import static com.bookverse.development.packapps.core.AppConfig.BIG;
+import static com.bookverse.development.packapps.core.AppConfig.HAND;
+import static com.bookverse.development.packapps.core.AppConfig.LOADER;
+import static com.bookverse.development.packapps.core.AppConfig.POINT;
+import static com.bookverse.development.packapps.core.AppConfig.RESIZE;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT;
+import static com.bookverse.development.packapps.utils.AppConstants.DICES;
+import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
+import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
 
-import com.bookverse.development.packapps.core.Core;
+import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -31,7 +38,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -65,16 +71,16 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(resources.core.bordeAzul("Select Table"));
+    panel.setBorder(AppConfig.getBorder("Select Table"));
 
     tittle = new JLabel();
-    tittle.setFont(resources.core.BIG);
-    tittle.setForeground(resources.core.ROJO);
+    tittle.setFont(BIG);
+    tittle.setForeground(AppConfig.MAIN_COLOR);
     tittle.addMouseListener(this);
 
     message = new JLabel();
-    message.setFont(resources.core.BIG);
-    message.setForeground(resources.core.AZUL);
+    message.setFont(BIG);
+    message.setForeground(AppConfig.TEXT_COLOR);
     message.addMouseListener(this);
 
     IntStream.range(0, tables.length).forEach(i -> {
@@ -172,13 +178,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     if (viewTable.getRowCount() != 0) {
 
-      Object option;
-
-      option = JOptionPane.showInputDialog(null,
-          "<html>" + Core.styleJOption()
-              + "<strong><em>What are you looking for?</em></strong></html>",
-          "Search records", JOptionPane.PLAIN_MESSAGE, null, new Object[]{"ID", "Nickname"},
-          "ID");
+      Object option = Alerts.searchRecords();
 
       if (option != null) {
 
@@ -212,8 +212,8 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (resources.core.loginDBA()) {
-          resources.database.updateData(Core.enterNickname("Enter a Nickname", 20),
+        if (AppConfig.loginDBA()) {
+          Database.updateData(AppConfig.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(DICES));
 
           dispose();
@@ -238,8 +238,8 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        if (resources.core.loginDBA()) {
-          resources.database.deleteData(IDs, Format.tableName(DICES));
+        if (AppConfig.loginDBA()) {
+          Database.deleteData(IDs, Format.tableName(DICES));
           dispose();
           new Index().dicesTableAP();
         }
@@ -257,7 +257,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     try {
 
-      if (resources.database.readTable(table.tabResult, query, false)) {
+      if (Database.readTable(table.tabResult, query, false)) {
         table.setBounds(0, 0, 780, size);
         table.setResizable(false);
         table.setLocationRelativeTo(null);
@@ -299,10 +299,10 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
       Alerts.message("Message", "You're here!");
     } else if (e.getSource() == tables[3]) {
       setVisible(false);
-      new Index().NotasTableAP();
+      new Index().notesTableAP();
     } else if (e.getSource() == tables[4]) {
       setVisible(false);
-      new Index().RompecabezasTableAP();
+      new Index().puzzleTableAP();
     }
   }
 
@@ -310,20 +310,20 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == tables[0]) {
-      tables[0].setCursor(resources.core.MIRA);
+      tables[0].setCursor(POINT);
       tittle.setText("    " + GUESS_NUMBER);
     } else if (e.getSource() == tables[1]) {
-      tables[1].setCursor(resources.core.CARGAR);
+      tables[1].setCursor(LOADER);
       tittle.setText("    " + HANGMAN);
     } else if (e.getSource() == tables[2]) {
-      tables[2].setCursor(resources.core.REDI);
+      tables[2].setCursor(RESIZE);
       tittle.setText("    " + DICES);
       message.setText("       You're here");
     } else if (e.getSource() == tables[3]) {
-      tables[3].setCursor(resources.core.TEXT);
+      tables[3].setCursor(TEXT);
       tittle.setText("    " + NOTES);
     } else if (e.getSource() == tables[4]) {
-      tables[4].setCursor(resources.core.MANO);
+      tables[4].setCursor(HAND);
       tittle.setText("    " + PUZZLE);
     }
   }

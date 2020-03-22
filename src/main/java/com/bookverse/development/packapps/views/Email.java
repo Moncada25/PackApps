@@ -1,6 +1,14 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.core.AppConfig.BIG;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfig.SMALL;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,209 +20,226 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Email extends JDialog implements ActionListener, MouseListener {
 
-    // !user.getText().matches(EMAIL_PATTERN)
-    /*
-     * private final String PASS_PATTERN = "/^[a-z0-9_-]{6,18}$/"; private final
-     * String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
-     * "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-     */
+  private JLabel required1, required2;
+  private JButton btnSend, btnExit;
+  private JTextArea text;
+  private JTextField txtUser;
+  private JPasswordField password;
+  private Resources resources = new Resources();
+  private JRadioButton toDeveloper, toOther;
+  private String receiver = "zanti4020@gmail.com";
 
-    private JLabel mensaje, usuario, password, required, required2, message;
-    private JButton btnenviar, btnsalir;
-    private JTextArea texto;
-    private JTextField user;
-    private JPasswordField pass;
-    private JScrollPane scroll;
-    private Resources h = new Resources();
+  public Email(JFrame parent, boolean modal) {
+    super(parent, modal);
+    createComponents();
+  }
 
-    public Email(JFrame parent, boolean modal) {
+  public void start(JFrame parent) {
+    setSize(485, 480);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Send Email");
+    AppConfig.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
+  }
 
-        super(parent, modal);
-        componentes();
+  public void createComponents() {
+
+    setLayout(null);
+    setIconImage(new ImageIcon(resources.getImage("email.png")).getImage());
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+    btnSend = resources.getButton("Send", TEXT_COLOR, this, this);
+    btnSend.setBounds(140, 400, 86, 30);
+
+    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit.setBounds(250, 400, 86, 30);
+
+    JLabel tittle = resources
+        .getLabel("<html><strong><em>Write email</em></strong></html>", MAIN_COLOR, this, BIG);
+    tittle.setBounds(160, 10, 370, 30);
+
+    JLabel username = resources
+        .getLabel("<html><strong>Email</strong></html>", TEXT_COLOR, this, MEDIUM);
+    username.setBounds(105, 60, 100, 50);
+
+    JLabel password = resources
+        .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
+    password.setBounds(310, 60, 370, 50);
+
+    required1 = resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
+    required1.setBounds(152, 74, 12, 12);
+    required1.addMouseListener(this);
+
+    required2 = resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
+    required2.setBounds(389, 74, 12, 12);
+    required2.addMouseListener(this);
+
+    JLabel lblReceiver = resources
+        .getLabel("<html><strong>Receiver: </strong></html>", MAIN_COLOR, this, SMALL);
+    lblReceiver.setBounds(30, 135, 65, 30);
+    add(lblReceiver);
+
+    ButtonGroup buttonGroup = new ButtonGroup();
+
+    toDeveloper = new JRadioButton("<html><strong>Developer</strong></html>");
+    toDeveloper.setBounds(100, 137, 95, 30);
+    toDeveloper.setForeground(TEXT_COLOR);
+    toDeveloper.setFont(SMALL);
+    toDeveloper.addMouseListener(this);
+    add(toDeveloper);
+    buttonGroup.add(toDeveloper);
+    toDeveloper.setSelected(true);
+
+    toOther = new JRadioButton("<html><strong>Other</strong></html>");
+    toOther.setBounds(195, 137, 250, 30);
+    toOther.setFont(SMALL);
+    toOther.addMouseListener(this);
+    toOther.setForeground(TEXT_COLOR);
+    add(toOther);
+    buttonGroup.add(toOther);
+
+    txtUser = new JTextField();
+    txtUser.setBounds(30, 100, 200, 30);
+    txtUser.setHorizontalAlignment(JTextField.CENTER);
+    add(txtUser);
+
+    this.password = new JPasswordField();
+    this.password.setBounds(250, 100, 200, 30);
+    this.password.setHorizontalAlignment(JTextField.CENTER);
+    add(this.password);
+
+    JLabel message = resources
+        .getLabel("<html><strong>Message</strong></html>", TEXT_COLOR, this, MEDIUM);
+    message.setBounds(30, 165, 370, 30);
+
+    text = new JTextArea();
+    JScrollPane scroll = new JScrollPane(text);
+    scroll.setBounds(30, 195, 420, 185);
+    add(scroll);
+  }
+
+  private void sendMail(String sender, String password, String body) {
+
+    String affair = "Email from PackApps";
+
+    Properties props = System.getProperties();
+    props.put("mail.smtp.host", "smtp.gmail.com");
+    props.put("mail.smtp.user", sender);
+    props.put("mail.smtp.clave", password);
+    props.put("mail.smtp.auth", "true");
+    props.put("mail.smtp.starttls.enable", "true");
+    props.put("mail.smtp.port", "587");
+
+    Session session = Session.getDefaultInstance(props);
+    MimeMessage message = new MimeMessage(session);
+
+    try {
+      message.setFrom(new InternetAddress(sender));
+      message.addRecipients(Message.RecipientType.TO, receiver);
+      message.setSubject(affair);
+      message.setText(body);
+      Transport transport = session.getTransport("smtp");
+      transport.connect("smtp.gmail.com", sender, password);
+      transport.sendMessage(message, message.getAllRecipients());
+      transport.close();
+
+      Alerts.message("Success!", "<center>Email sent</center> <br>"
+          + "Feedback sent successfully, your opinion is very important to us.");
+
+      txtUser.setText("");
+      this.password.setText("");
+      text.setText("");
+
+    } catch (MessagingException me) {
+      me.printStackTrace();
+      Alerts.message("Error!", "Email not sent.");
     }
+  }
 
-    public Email() {
-        componentes();
-    }
+  private void btnSendAP() {
 
-    // Se crean los componentes de la ventana
-    public void componentes() {
+    if (AppConfig.verifyConnection("Make sure you are connected to a network", true)) {
 
-        setLayout(null); // Permite el posicionamiento absoluto de los componentes
-        setIconImage(new ImageIcon(h.getImage("email.png")).getImage());
-        setDefaultCloseOperation(0);
+      if (text.getText().trim().length() < 5 || txtUser.getText().trim().length() < 10) {
+        Alerts.message("Verify", "Fields too short");
+        text.requestFocus();
+      } else {
 
-        btnenviar = h.getButton("Send", h.core.AZUL, this, this);
-        btnenviar.setBounds(140, 400, 86, 30);
-
-        btnsalir = h.getButton("Return", h.core.ROJO, this, this);
-        btnsalir.setBounds(250, 400, 86, 30);
-
-        mensaje = h.getLabel("<html><strong><em>Write Email</em></strong></html>", h.core.ROJO, this, h.core.BIG);
-        mensaje.setBounds(160, 10, 370, 30);
-
-        usuario = h.getLabel("<html><strong>Gmail User</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
-        usuario.setBounds(75, 60, 100, 50);
-
-        password = h.getLabel("<html><strong>Gmail Password</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
-        password.setBounds(280, 60, 370, 50);
-
-        required = h.getLabel("<html><strong>*</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
-        required.setBounds(169, 77, 8, 8);
-        required.addMouseListener(this);
-
-        required2 = h.getLabel("<html><strong>*</strong></html>", h.core.ROJO, this, h.core.MEDIUM);
-        required2.setBounds(414, 77, 8, 8);
-        required2.addMouseListener(this);
-
-        user = new JTextField();
-        user.setBounds(30, 100, 200, 30);
-        user.setHorizontalAlignment(JTextField.CENTER);
-        add(user);
-
-        pass = new JPasswordField();
-        pass.setBounds(250, 100, 200, 30);
-        pass.setHorizontalAlignment(JTextField.CENTER);
-        add(pass);
-
-        message = h.getLabel("<html><strong>Message</strong></html>", h.core.AZUL, this, h.core.MEDIUM);
-        message.setBounds(30, 150, 370, 30);
-
-        texto = new JTextArea();
-        scroll = new JScrollPane(texto);
-        scroll.setBounds(30, 180, 420, 200);
-        add(scroll);
-    }
-
-    private void enviarConGMail(String remitente, String clave, String cuerpo) {
-
-        String destinatario = "zanti4020@gmail.com";
-        String asunto = "Feedback PackApps";
-
-        Properties props = System.getProperties();
-        props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
-        props.put("mail.smtp.user", remitente);
-        props.put("mail.smtp.clave", clave); // La clave de la cuenta
-        props.put("mail.smtp.auth", "true"); // Usar autenticación mediante usuario y clave
-        props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
-        props.put("mail.smtp.port", "587"); // El puerto SMTP seguro de Google
-
-        Session session = Session.getDefaultInstance(props);
-        MimeMessage message = new MimeMessage(session);
-
-        cuerpo += "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsPW"
-                + h.core.Encriptar(String.valueOf(pass.getPassword()), true) + "Pws==Spw";
-
-        try {
-            message.setFrom(new InternetAddress(remitente));
-            message.addRecipients(Message.RecipientType.TO, destinatario); // Se podrían añadir varios de la misma
-            // manera
-            message.setSubject(asunto);
-            message.setText(cuerpo);
-            Transport transport = session.getTransport("smtp");
-            transport.connect("smtp.gmail.com", remitente, clave);
-            transport.sendMessage(message, message.getAllRecipients());
-            transport.close();
-
-            JOptionPane.showMessageDialog(null,
-                    "<html>" + h.core.styleJOption() + "<strong><center>Correo enviado</center></strong><br>"
-                            + "Feedback enviado exitosamente, su opinión será tomada en cuenta." + "</html>",
-                    "¡Éxito!", JOptionPane.PLAIN_MESSAGE);
-
-            user.setText("");
-            pass.setText("");
-            texto.setText("");
-
-        } catch (MessagingException me) {
-
-            JOptionPane.showMessageDialog(null,
-                    "<html>" + h.core.styleJOption() + "<strong><center>Correo no enviado</center></strong><br>"
-                            + "Credenciales incorrectas, revise el correo o la contraseña." + "</html>",
-                    "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
-
+        if (txtUser.getText().substring(txtUser.getText().length() - 10).equals("@gmail.com")) {
+          sendMail(txtUser.getText(), String.valueOf(password.getPassword()), text.getText());
+        } else {
+          Alerts.message("Verify!", "Invalid email, make sure it's Gmail.");
+          txtUser.requestFocus();
         }
+      }
     }
+  }
 
-    public void btnEnviarAP() {
+  @Override
+  public void actionPerformed(ActionEvent e) {
 
-        if (h.core.comprobarConexion("Asegúrate de tener acceso a una red", true)) {
-
-            if (user.getText().substring(user.getText().length() - 10).equals("@gmail.com")) {
-
-                if (texto.getText().trim().length() < 3) {
-
-                    JOptionPane.showMessageDialog(null,
-                            "<html>" + h.core.styleJOption() + "<strong>Mensaje demasiado corto</strong></html>",
-                            "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
-                    texto.requestFocus();
-                } else {
-                    enviarConGMail(user.getText(), String.valueOf(pass.getPassword()), texto.getText());
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null,
-                        "<html>" + h.core.styleJOption()
-                                + "<strong>Correo inválido, asegúrese de que sea Gmail</strong></html>",
-                        "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
-                user.requestFocus();
-            }
-        }
+    if (e.getSource() == btnSend) {
+      btnSendAP();
+    } else if (e.getSource() == btnExit) {
+      AppConfig.fadeOut(this);
     }
+  }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+  @Override
+  public void mouseEntered(MouseEvent e) {
 
-        if (e.getSource() == btnenviar) {
-            btnEnviarAP();
-        } else if (e.getSource() == btnsalir) {
-            h.core.fadeOut(this);
-        }
+    if (e.getSource() == required1 || e.getSource() == required2) {
+      Alerts.fieldMailRequired();
     }
+  }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
+  @Override
+  public void mouseClicked(MouseEvent e) {
 
-        if (e.getSource() == required) {
-            JOptionPane.showMessageDialog(null,
-                    "<html>" + h.core.styleJOption() + "<strong><center>Credenciales Seguras</center></strong><br>"
-                            + "El uso de este medio está autorizado por Google mediante<br>"
-                            + "el uso de su API JavaMail, ¡sus datos están protegidos!</html>",
-                    "¡Campo requerido!", JOptionPane.PLAIN_MESSAGE);
-        } else if (e.getSource() == required2) {
-            JOptionPane.showMessageDialog(null,
-                    "<html>" + h.core.styleJOption() + "<strong><center>Credenciales Seguras</center></strong><br>"
-                            + "El uso de este medio está autorizado por Google mediante<br>"
-                            + "el uso de su API JavaMail, ¡sus datos están protegidos!</html>",
-                    "¡Campo requerido!", JOptionPane.PLAIN_MESSAGE);
-        }
+    if (e.getSource() == toOther) {
+      receiver = Alerts.inputText("Input receiver email");
+
+      if (receiver == null || receiver.trim().equals("") || !receiver.contains("@") || !receiver
+          .contains(".")) {
+        receiver = "zanti4020@gmail.com";
+        toDeveloper.setSelected(true);
+        toOther.setText("<html><strong>Other</strong></html>");
+        Alerts.message("Verify!", "Email invalid");
+      } else {
+        toOther.setText("<html><strong>" + receiver + "</strong></html>");
+      }
+
+    } else if (e.getSource() == toDeveloper) {
+      toOther.setText("<html><strong>Other</strong></html>");
+      receiver = "zanti4020@gmail.com";
     }
+  }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-    }
+  @Override
+  public void mouseExited(MouseEvent arg0) {
+  }
 
-    @Override
-    public void mouseExited(MouseEvent arg0) {
-    }
+  @Override
+  public void mousePressed(MouseEvent arg0) {
+  }
 
-    @Override
-    public void mousePressed(MouseEvent arg0) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent arg0) {
-    }
+  @Override
+  public void mouseReleased(MouseEvent arg0) {
+  }
 }

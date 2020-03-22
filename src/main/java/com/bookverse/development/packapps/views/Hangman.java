@@ -1,10 +1,15 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.TableConstants.HANGMAN;
+import static com.bookverse.development.packapps.core.AppConfig.BIG;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.ArrayData.WORD_LIST;
 import static java.awt.Font.PLAIN;
 
-import com.bookverse.development.packapps.core.Core;
+import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.Font;
@@ -56,30 +61,30 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("ahorcado.png")).getImage());
 
-    btnPlay = resources.getButton("Play", resources.core.AZUL, this, this);
+    btnPlay = resources.getButton("Play", TEXT_COLOR, this, this);
     btnPlay.setBounds(30, 160, 86, 30);
 
-    btnExit = resources.getButton("Return", resources.core.ROJO, this, this);
+    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(140, 160, 86, 30);
 
     JLabel tittle = resources.getLabel("<html>"
         + "<strong><em>Category</em></strong>" +
-        "</html>", resources.core.ROJO, this, resources.core.BIG);
+        "</html>", MAIN_COLOR, this, BIG);
     tittle.setBounds(30, 10, 120, 35);
 
-    attempts = resources.getLabel("", resources.core.AZUL, this, resources.core.MEDIUM);
+    attempts = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     attempts.setBounds(30, 200, 250, 30);
 
-    time = resources.getLabel("", resources.core.ROJO, this, new Font("Times New Roman",
+    time = resources.getLabel("", MAIN_COLOR, this, new Font("Times New Roman",
         PLAIN, 50));
     time.setBounds(75, 220, 200, 120);
 
-    lyricsPressed = resources.getLabel("", resources.core.AZUL, this, resources.core.MEDIUM);
+    lyricsPressed = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     lyricsPressed.setBounds(30, 400, 600, 40);
 
     options = new JComboBox<>();
     options.setBounds(30, 50, 220, 30);
-    options.setFont(resources.core.MEDIUM);
+    options.setFont(MEDIUM);
     add(options);
 
     options.addItem("Fruits");
@@ -96,7 +101,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     txtWord.setBounds(30, 100, 220, 40);
     add(txtWord);
 
-    lyricsNumber = resources.getLabel("", resources.core.AZUL, this, resources.core.MEDIUM);
+    lyricsNumber = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     lyricsNumber.setBounds(260, 100, 130, 60);
 
     addKeyListener(this);
@@ -113,9 +118,9 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(HANGMAN);
-    resources.core.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
-    resources.core.instruccionesAhorcado();
+    AppConfig.instruccionesAhorcado();
     setVisible(true);
   }
 
@@ -124,9 +129,9 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(HANGMAN);
-    resources.core.fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
-    resources.core.instruccionesAhorcado();
+    AppConfig.instruccionesAhorcado();
     setVisible(true);
   }
 
@@ -262,7 +267,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
       image.setIcon(new ImageIcon(resources.getImage("dead.png")));
 
-      resources.core.mostrarMensaje("You lose", "Correct word: " + results);
+      Alerts.message("You lose", "Correct word: " + results);
 
       insert("Loser");
 
@@ -323,20 +328,20 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
   private void insert(String state) {
 
-    if (resources.core.comprobarConexion("Data don't saved", true) && resources.core.saveGame()) {
+    if (AppConfig.verifyConnection("Data don't saved", true) && AppConfig.saveGame()) {
 
-      String[] data = {HANGMAN, Core.enterNickname("Enter a Nickname", 20),
+      String[] data = {HANGMAN, AppConfig.inputText("Enter a Nickname", 20),
           String.valueOf(countAttempts), state,
           Objects.requireNonNull(options.getSelectedItem()).toString(),
-          resources.core.obtenerDate()};
+          AppConfig.getDate()};
 
-      resources.database.insertData(data);
+      Database.insertData(data);
     }
   }
 
   private void onlyLyrics(char lyric, KeyEvent evt) {
     if ((lyric < 'a' || lyric > 'z') && (lyric != KeyEvent.VK_BACK_SPACE || lyric != ' ')
-        && lyric != 'ñ') {
+        && lyric != 'Ã±') {
       Alerts.message("Warning", "Only lowercase letters are allowed");
       evt.consume();
     } else {
@@ -389,61 +394,61 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
   public void paint(Graphics g) {
     super.paint(g);
     if (countAttempts == 0) {
-      g.setColor(resources.core.AZUL);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
     } else if (countAttempts == 1) {
-      g.setColor(resources.core.AZUL);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.ROJO);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
     } else if (countAttempts == 2) {
-      g.setColor(resources.core.AZUL);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.ROJO);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
       g.drawLine(650, 270, 550, 250);
     } else if (countAttempts == 3) {
-      g.setColor(resources.core.AZUL);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.ROJO);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
       g.drawLine(650, 270, 550, 250);
       g.drawLine(450, 270, 550, 250);
     } else if (countAttempts == 4) {
-      g.setColor(resources.core.AZUL);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.ROJO);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
       g.drawLine(650, 270, 550, 250);
       g.drawLine(450, 270, 550, 250);
       g.drawLine(550, 320, 550, 250);
     } else if (countAttempts == 5) {
-      g.setColor(resources.core.AZUL);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.ROJO);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
       g.drawLine(650, 270, 550, 250);
       g.drawLine(450, 270, 550, 250);
       g.drawLine(550, 320, 550, 250);
       g.drawLine(600, 420, 550, 320);
     } else if (countAttempts == 6) {
-      g.setColor(resources.core.AZUL);
+      g.setColor(TEXT_COLOR);
       g.drawLine(400, 400, 400, 100);
       g.drawLine(400, 100, 550, 100);
       g.drawLine(550, 150, 550, 100);
-      g.setColor(resources.core.ROJO);
+      g.setColor(MAIN_COLOR);
       g.drawOval(500, 150, 100, 100);
       g.drawLine(650, 270, 550, 250);
       g.drawLine(450, 270, 550, 250);
@@ -469,7 +474,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     if (e.getSource() == btnPlay) {
       btnPlayAP();
     } else if (e.getSource() == btnExit) {
-      resources.core.fadeOut(this);
+      AppConfig.fadeOut(this);
     }
   }
 
