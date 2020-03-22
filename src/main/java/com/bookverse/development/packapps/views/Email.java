@@ -90,7 +90,8 @@ public class Email extends JDialog implements ActionListener, MouseListener {
     required2.setBounds(389, 74, 12, 12);
     required2.addMouseListener(this);
 
-    JLabel lblReceiver = resources.getLabel("<html><strong>Receiver: </strong></html>", MAIN_COLOR, this, SMALL);
+    JLabel lblReceiver = resources
+        .getLabel("<html><strong>Receiver: </strong></html>", MAIN_COLOR, this, SMALL);
     lblReceiver.setBounds(30, 135, 65, 30);
     add(lblReceiver);
 

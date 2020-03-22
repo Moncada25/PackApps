@@ -347,8 +347,8 @@ public class AppConfig {
     WindowEffect.JFrameFadeOut(1f, 0f, 0.2f, 50, window, WindowEffect.EXIT);
   }
 
-  public static void fadeOut(JDialog ventana) {
-    WindowEffect.JDialogFadeOut(1f, 0f, 0.2f, 50, ventana, WindowEffect.DISPOSE);
+  public static void fadeOut(JDialog window) {
+    WindowEffect.JDialogFadeOut(1f, 0f, 0.2f, 50, window, WindowEffect.DISPOSE);
   }
 
   //INSTRUCCIONES

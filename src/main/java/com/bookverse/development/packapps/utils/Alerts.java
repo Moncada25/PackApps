@@ -134,6 +134,14 @@ public class Alerts {
         "Success", JOptionPane.PLAIN_MESSAGE);
   }
 
+  public static void lendSuccessfully(String time, double totalPurchases) {
+    JOptionPane.showMessageDialog(null,
+        "<html>" + Format.style() + "<strong><center>Done!</center></strong><br>"
+            + "Loan made for <strong>" + String.format("%.0f", totalPurchases)
+            + "</strong>, there is a term to pay until <strong>" + time + "</strong></html>",
+        "Success", JOptionPane.PLAIN_MESSAGE);
+  }
+
   public static void fieldMailRequired() {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style() + "<strong><center>Secure credentials</center></strong><br>"

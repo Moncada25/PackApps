@@ -47,7 +47,8 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
 
     setLayout(null);
 
-    JLabel lblFirst = resources.getLabel("<html><strong>First sum of series</strong></html>", MAIN_COLOR, this, MEDIUM);
+    JLabel lblFirst = resources
+        .getLabel("<html><strong>First sum of series</strong></html>", MAIN_COLOR, this, MEDIUM);
     lblFirst.setBounds(25, 70, 280, 30);
 
     JLabel firstFormula = resources

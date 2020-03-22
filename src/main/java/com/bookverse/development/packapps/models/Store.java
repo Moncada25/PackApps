@@ -2,7 +2,7 @@ package com.bookverse.development.packapps.models;
 
 public class Store {
 
-  private String reference, productState, document, phone, date, user, userLogged, password, userStatus;
+  private String reference, productState, document, date, user, password;
   private Double price, totalSales, totalPurchases, totalLoans;
   private int unitsActual, soldProducts, purchasedProducts;
 
@@ -30,14 +30,6 @@ public class Store {
     this.document = document;
   }
 
-  public String getPhone() {
-    return phone;
-  }
-
-  public void setPhone(String phone) {
-    this.phone = phone;
-  }
-
   public String getDate() {
     return date;
   }
@@ -54,28 +46,12 @@ public class Store {
     this.user = user;
   }
 
-  public String getUserLogged() {
-    return userLogged;
-  }
-
-  public void setUserLogged(String userLogged) {
-    this.userLogged = userLogged;
-  }
-
   public String getPassword() {
     return password;
   }
 
   public void setPassword(String password) {
     this.password = password;
-  }
-
-  public String getUserStatus() {
-    return userStatus;
-  }
-
-  public void setUserStatus(String userStatus) {
-    this.userStatus = userStatus;
   }
 
   public Double getPrice() {

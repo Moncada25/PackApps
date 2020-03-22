@@ -280,19 +280,24 @@ public class Sales extends JDialog implements ActionListener {
         txtPhone.requestFocus();
       } else {
 
-        String formatUnitsAvailable = unitsAvailable.getText().replace("<html><strong>", "").replace("</strong></html>", "");
+        String formatUnitsAvailable = unitsAvailable.getText().replace("<html><strong>", "")
+            .replace("</strong></html>", "");
 
-        Database.updateInventory(Integer.parseInt(formatUnitsAvailable), txtReference.getText(), false);
+        Database
+            .updateInventory(Integer.parseInt(formatUnitsAvailable), txtReference.getText(), false);
 
         String user = HomeStore.userLogged;
 
         if (Database.searchDataUserInCashRegister(user)) {
-          Database.updateSales(user, Integer.parseInt(unitsActual.getText()), Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText()));
+          Database.updateSales(user, Integer.parseInt(unitsActual.getText()),
+              Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText()));
         } else {
 
           String[] data = {CASH_REGISTER, user,
               String.valueOf(Integer.parseInt(unitsActual.getText())),
-              String.valueOf(Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText())), String.valueOf(0),
+              String.valueOf(
+                  Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText())),
+              String.valueOf(0),
               String.valueOf(0.0),
               String.valueOf(0.0)};
 
@@ -313,7 +318,8 @@ public class Sales extends JDialog implements ActionListener {
           e.printStackTrace();
         }
 
-        Alerts.actionSuccessfully("lend", unitsActual.getText(), Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText()));
+        Alerts.actionSuccessfully("lend", unitsActual.getText(),
+            Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText()));
         Database.store.setUnitsActual(0);
         Database.store.setTotalLoans(0.0);
 

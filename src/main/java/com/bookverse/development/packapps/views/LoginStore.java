@@ -147,7 +147,8 @@ public class LoginStore extends JDialog implements ActionListener {
       Alerts.inputSomethingText();
     } else {
 
-      if (Database.searchUserRegister(txtUser.getText(), AppConfig.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
+      if (Database.searchUserRegister(txtUser.getText(),
+          AppConfig.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
 
         Database.recordLogin("Online", txtUser.getText());
         new HomeStore(this, true).start(this, txtUser.getText());

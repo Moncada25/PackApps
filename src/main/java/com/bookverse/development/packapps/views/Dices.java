@@ -3,9 +3,9 @@ package com.bookverse.development.packapps.views;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.verifyConnection;
 import static com.bookverse.development.packapps.core.AppConfig.getDate;
 import static com.bookverse.development.packapps.core.AppConfig.saveGame;
+import static com.bookverse.development.packapps.core.AppConfig.verifyConnection;
 import static com.bookverse.development.packapps.utils.AppConstants.DICES;
 
 import com.bookverse.development.packapps.core.AppConfig;

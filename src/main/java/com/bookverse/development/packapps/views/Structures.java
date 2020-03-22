@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Structures extends JDialog implements MouseListener {
 
-  Resources resources = new Resources();
+  private Resources resources = new Resources();
   private JLabel btnStack, btnQueue, btnExit, btnArrays;
 
   public Structures(JFrame parent, boolean modal) {

@@ -1,6 +1,12 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.*;
+import static com.bookverse.development.packapps.core.AppConfig.BORDER_BLUE;
+import static com.bookverse.development.packapps.core.AppConfig.BORDER_RED;
+import static com.bookverse.development.packapps.core.AppConfig.HAND;
+import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfig.getBorder;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
@@ -29,7 +35,7 @@ public class Numbers extends JDialog implements MouseListener {
     super(parent, modal);
     createComponents();
   }
-  
+
   @NotNull
   private JPanel getPanel() {
 

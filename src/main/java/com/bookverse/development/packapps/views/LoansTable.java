@@ -21,7 +21,7 @@ public class LoansTable extends JDialog {
 
   public JTable viewTable;
   private Table model = new Table();
-  private String[] columns = {"ID","USER", "CLIENT", "DOCUMENT", "REFERENCE", "PHONE", "TIME",
+  private String[] columns = {"ID", "USER", "CLIENT", "DOCUMENT", "REFERENCE", "PHONE", "TIME",
       "VALUE"};
 
   public LoansTable(JDialog parent, boolean modal) {

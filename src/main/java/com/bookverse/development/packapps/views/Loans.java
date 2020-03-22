@@ -226,21 +226,23 @@ public class Loans extends JDialog implements ActionListener {
                 DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
 
                 if (months.getSelectedItem() == "Months") {
-                  date.add(Calendar.DATE, Integer.parseInt(String.valueOf(weeks.getSelectedItem())) * 7);
+                  date.add(Calendar.DATE,
+                      Integer.parseInt(String.valueOf(weeks.getSelectedItem())) * 7);
                 } else if (weeks.getSelectedItem() == "Weeks") {
-                  date.add(Calendar.MONTH, Integer.parseInt(String.valueOf(months.getSelectedItem())));
+                  date.add(Calendar.MONTH,
+                      Integer.parseInt(String.valueOf(months.getSelectedItem())));
                 } else {
-                  date.add(Calendar.DATE, Integer.parseInt(String.valueOf(weeks.getSelectedItem())) * 7);
-                  date.add(Calendar.MONTH, Integer.parseInt(String.valueOf(months.getSelectedItem())));
+                  date.add(Calendar.DATE,
+                      Integer.parseInt(String.valueOf(weeks.getSelectedItem())) * 7);
+                  date.add(Calendar.MONTH,
+                      Integer.parseInt(String.valueOf(months.getSelectedItem())));
                 }
 
                 String user = HomeStore.userLogged;
 
                 if (Database.searchDataUserInCashRegister(user)) {
-                  System.out.println("pasa por la caja");
                   Database.updateLoan(user, Double.parseDouble(txtValue.getText()));
                 } else {
-                  System.out.println("no pasa por la caja");
                   String[] data = {CASH_REGISTER, user, String.valueOf(0), String.valueOf(0.0),
                       String.valueOf(0), String.valueOf(0.0),
                       String.valueOf(txtValue.getText())};
@@ -254,7 +256,7 @@ public class Loans extends JDialog implements ActionListener {
                 Database.insertData(data);
 
                 Database.store.setTotalLoans(Double.parseDouble(txtValue.getText()));
-                Alerts.actionSuccessfully("lend", dateFormat.format(date.getTime()), Double.parseDouble(
+                Alerts.lendSuccessfully(dateFormat.format(date.getTime()), Double.parseDouble(
                     txtValue.getText()));
                 Database.store.setTotalLoans(0.0);
 

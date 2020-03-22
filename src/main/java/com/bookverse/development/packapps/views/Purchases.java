@@ -291,7 +291,8 @@ public class Purchases extends JDialog implements ActionListener {
               if (stateProduct.equals(Database.store.getProductState())
                   && Double.parseDouble(txtPrice.getText()) == Database.store.getPrice()) {
                 Database
-                    .updateInventory(Integer.parseInt(lblUnits.getText()), txtReference.getText(), true);
+                    .updateInventory(Integer.parseInt(lblUnits.getText()), txtReference.getText(),
+                        true);
               } else {
                 Alerts.existProduct();
                 existProduct = true;

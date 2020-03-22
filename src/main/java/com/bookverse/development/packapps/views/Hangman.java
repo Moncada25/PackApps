@@ -4,8 +4,8 @@ import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.ArrayData.WORD_LIST;
 import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.ArrayData.WORD_LIST;
 import static java.awt.Font.PLAIN;
 
 import com.bookverse.development.packapps.core.AppConfig;

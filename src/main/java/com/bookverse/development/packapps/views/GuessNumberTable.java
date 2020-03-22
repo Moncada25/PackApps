@@ -10,7 +10,6 @@ import static com.bookverse.development.packapps.core.AppConfig.TEXT;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.getBorder;
 import static com.bookverse.development.packapps.core.AppConfig.inputText;
-import static com.bookverse.development.packapps.core.AppConfig.loginDBA;
 import static com.bookverse.development.packapps.utils.AppConstants.DICES;
 import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
@@ -35,7 +34,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
-import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
 import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -53,7 +51,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
 
 public class GuessNumberTable extends JDialog implements ActionListener, MouseListener {
 

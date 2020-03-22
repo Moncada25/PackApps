@@ -381,8 +381,6 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      System.out.println("pasa por la base de datos, con esto: parametro: "+loanValue+" propiedad: "+store.getTotalLoans());
-
       preparedStatement = connection.prepareStatement(
           Querys.updateCashRegisterLoan(user, (loanValue + store.getTotalLoans())));
       preparedStatement.executeUpdate();
@@ -456,34 +454,6 @@ public class Database {
     }
 
     return user.equals(store.getUser());
-  }
-
-  public static int getIdUser(String user) {
-
-    try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
-
-      preparedStatement = connection.prepareStatement(Querys.idUser(user));
-      resultSet = preparedStatement.executeQuery();
-
-      if (resultSet.next()) {
-        return resultSet.getInt("ID");
-      }
-
-    } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
-    }
-
-    return 0;
   }
 
   public static boolean userAlreadyExist(String user) {
@@ -585,5 +555,4 @@ public class Database {
       }
     }
   }
-
 }

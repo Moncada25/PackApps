@@ -5,8 +5,6 @@ import static com.bookverse.development.packapps.core.AppConfig.HAND;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.getBorder;
-import static com.bookverse.development.packapps.core.AppConfig.inputText;
-import static com.bookverse.development.packapps.core.AppConfig.loginDBA;
 import static com.bookverse.development.packapps.utils.AppConstants.USERS;
 
 import com.bookverse.development.packapps.core.AppConfig;
@@ -185,9 +183,9 @@ public class UsersTable extends JDialog implements MouseListener {
               } else if (option.toString().equals("Username")) {
 
                 String newUsername = AppConfig.inputText("Enter new username", 20);
-                if (!Format.verifyCredentials(newUsername)){
+                if (!Format.verifyCredentials(newUsername)) {
                   Alerts.message("Message", "The username are too weak, please try again.");
-                }else{
+                } else {
 
                   Database.updateUsername(user, newUsername);
                   Alerts.message("Success", "Username updated!");
@@ -246,7 +244,7 @@ public class UsersTable extends JDialog implements MouseListener {
         }
 
       } else {
-        Alerts.message("Access denied", "User "+userOnline+" cannot be deleted.");
+        Alerts.message("Access denied", "User " + userOnline + " cannot be deleted.");
       }
     }
   }

@@ -21,7 +21,8 @@ public class Querys {
 
   @NotNull
   public static String getDataByID(String table) {
-    return "SELECT * FROM " + Format.tableName(table) + " WHERE ID ='" + AppConfig.inputNumber("Enter a ID", 6) + "'";
+    return "SELECT * FROM " + Format.tableName(table) + " WHERE ID ='" + AppConfig
+        .inputNumber("Enter a ID", 6) + "'";
   }
 
   @NotNull
@@ -39,7 +40,8 @@ public class Querys {
   @NotNull
   @Contract(pure = true)
   public static String updateNickname(String nickname, String ID, String table) {
-    return "UPDATE " + Format.tableName(table) + " SET Nickname='" + nickname + "' WHERE ID='" + ID + "'";
+    return "UPDATE " + Format.tableName(table) + " SET Nickname='" + nickname + "' WHERE ID='" + ID
+        + "'";
   }
 
   @NotNull
@@ -144,31 +146,31 @@ public class Querys {
         + "' WHERE User='" + user + "'";
   }
 
-  public static String recordLogin(String status, String user){
-    return "UPDATE "+Format.tableName(USERS)+" SET Status='" + status + "' WHERE Username='" + user + "'";
+  public static String recordLogin(String status, String user) {
+    return "UPDATE " + Format.tableName(USERS) + " SET Status='" + status + "' WHERE Username='"
+        + user + "'";
   }
 
-  public static String idUser(String user){
-    return "SELECT ID FROM "+Format.tableName(USERS)+" WHERE Username ='" + user + "'";
+  public static String searchDataUserInCashRegister(String user) {
+    return "SELECT * FROM " + Format.tableName(CASH_REGISTER) + " WHERE User='" + user + "'";
   }
 
-  public static String searchDataUserInCashRegister(String user){
-    return "SELECT * FROM "+Format.tableName(CASH_REGISTER)+" WHERE User='" + user + "'";
+  public static String searchUser(String user) {
+    return "SELECT * FROM " + Format.tableName(USERS) + " WHERE Username ='" + user + "'";
   }
 
-  public static String searchUser(String user){
-    return "SELECT * FROM "+Format.tableName(USERS)+" WHERE Username ='" + user + "'";
+  public static String searchUserRegister(String user, String password) {
+    return "SELECT * FROM " + Format.tableName(USERS) + " WHERE Username='" + user
+        + "' AND Password='" + password + "'";
   }
 
-  public static String searchUserRegister(String user, String password){
-    return "SELECT * FROM "+Format.tableName(USERS)+" WHERE Username='" + user + "' AND Password='" + password +"'";
+  public static String updatePassword(String user, String newPassword) {
+    return "UPDATE " + Format.tableName(USERS) + " SET Password='" + newPassword
+        + "' WHERE Username='" + user + "'";
   }
 
-  public static String updatePassword(String user, String newPassword){
-    return "UPDATE "+Format.tableName(USERS)+" SET Password='" + newPassword + "' WHERE Username='" + user + "'";
-  }
-
-  public static String updateUsername(String user, String newUsername){
-    return "UPDATE "+Format.tableName(USERS)+" SET Username='" + newUsername + "' WHERE Username='" + user + "'";
+  public static String updateUsername(String user, String newUsername) {
+    return "UPDATE " + Format.tableName(USERS) + " SET Username='" + newUsername
+        + "' WHERE Username='" + user + "'";
   }
 }

@@ -43,7 +43,7 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
     setBounds(0, 0, 900, 600);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Colas");
+    setTitle("Queue");
     AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
@@ -127,7 +127,8 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
 
     if (i > 0) {
       tittle
-          .setText("<html>" + Format.style() + "<strong>Next data → " + peek() + "</strong></html>");
+          .setText(
+              "<html>" + Format.style() + "<strong>Next data → " + peek() + "</strong></html>");
     } else {
       Alerts.message("Message", "The queue is empty");
     }

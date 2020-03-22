@@ -15,7 +15,7 @@ import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
 import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
 import static com.bookverse.development.packapps.utils.AppConstants.SALES;
 import static com.bookverse.development.packapps.utils.AppConstants.TITLE;
-import static com.bookverse.development.packapps.utils.ArrayData.PATH_IMAGES;
+import static com.bookverse.development.packapps.utils.ArrayData.PATH_BACKGROUNDS;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
@@ -131,10 +131,12 @@ public class Index extends JFrame implements ActionListener {
     Index window = new Index();
 
     welcome = new JLabel();
-    window.setSize(ArrayData.WIDTH_IMAGES[background - 1], ArrayData.LONG_IMAGES[background - 1]);
+    window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
+        ArrayData.LONG_BACKGROUNDS[background - 1]);
     window.add(welcome, BorderLayout.CENTER);
-    window.changeBackgroundAP(PATH_IMAGES[background - 1], ArrayData.WIDTH_IMAGES[background - 1],
-        ArrayData.LONG_IMAGES[background - 1]);
+    window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
+        ArrayData.WIDTH_BACKGROUNDS[background - 1],
+        ArrayData.LONG_BACKGROUNDS[background - 1]);
 
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
@@ -546,7 +548,8 @@ public class Index extends JFrame implements ActionListener {
 
     IntStream.range(0, wallpapers.length).filter(i -> e.getSource() == wallpapers[i]).forEach(i -> {
       if (wallpapers[i].getForeground() != MAIN_COLOR) {
-        changeBackgroundAP(PATH_IMAGES[i], ArrayData.WIDTH_IMAGES[i], ArrayData.LONG_IMAGES[i]);
+        changeBackgroundAP(PATH_BACKGROUNDS[i], ArrayData.WIDTH_BACKGROUNDS[i],
+            ArrayData.LONG_BACKGROUNDS[i]);
         wallpapers[i].setForeground(MAIN_COLOR);
         background = i + 1;
         setVisible(true);
@@ -581,12 +584,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(PATH_IMAGES[background - 1],
-              ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
+              ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -622,12 +625,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(PATH_IMAGES[background - 1],
-              ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
+              ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -664,12 +667,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(PATH_IMAGES[background - 1],
-              ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
+              ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -707,12 +710,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(PATH_IMAGES[background - 1],
-              ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
+              ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -752,12 +755,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(PATH_IMAGES[background - 1],
-              ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
+              ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -797,12 +800,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(PATH_IMAGES[background - 1],
-              ArrayData.WIDTH_IMAGES[background - 1],
-              ArrayData.LONG_IMAGES[background - 1]);
+          window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
+              ArrayData.WIDTH_BACKGROUNDS[background - 1],
+              ArrayData.LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);

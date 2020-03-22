@@ -119,7 +119,7 @@ public class Notes extends JDialog implements ActionListener {
           txtNumKeyTyped(e);
         }
 
-        public void txtNumKeyTyped(KeyEvent e) { 
+        public void txtNumKeyTyped(KeyEvent e) {
           Format.onlyNumbersAndPoint(e.getKeyChar(), e, notesFields[j].getText(), 3);
           Format.middlePoint(e.getKeyChar(), e, notesFields[j].getText());
         }
