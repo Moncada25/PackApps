@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.core;
 
+import static com.bookverse.development.packapps.utils.AppConstants.DEFAULT_ENCRYPT_KEY;
 import static com.bookverse.development.packapps.utils.AppConstants.PASSWORD_DBA;
 
 import com.bookverse.development.packapps.utils.Alerts;
@@ -195,7 +196,7 @@ public class AppConfig {
       base64EncryptedString = new String(plainText, StandardCharsets.UTF_8);
 
     } catch (Exception ex) {
-
+      Alerts.error(ex, "Decrypt");
     }
 
     if (base64EncryptedString.equals("")) {
@@ -210,7 +211,7 @@ public class AppConfig {
     }
   }
 
-  public static String secretKey() {
+  public static String setSecretKey() {
 
     boolean canContinue;
     JPasswordField pass = new JPasswordField(10);
@@ -262,7 +263,7 @@ public class AppConfig {
             return true;
           } else {
             JOptionPane.showMessageDialog(null,
-                "<html>" + Format.style() + "<strong>Contraseña incorrecta</strong></html>",
+                "<html>" + Format.style() + "<strong>Incorrect password</strong></html>",
                 "Error", JOptionPane.PLAIN_MESSAGE);
             pass.setText("");
           }
@@ -325,12 +326,12 @@ public class AppConfig {
     return border;
   }
 
-  public static String getSecretKey(boolean isEmail) {
+  public static String getSecretKey(boolean isSetSecretKey) {
 
-    if (!isEmail) {
-      return secretKey();
+    if (!isSetSecretKey) {
+      return setSecretKey();
     } else {
-      return "Akatsuki25";
+      return DEFAULT_ENCRYPT_KEY;
     }
   }
 

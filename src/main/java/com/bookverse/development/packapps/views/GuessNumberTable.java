@@ -17,6 +17,7 @@ import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
 import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
 
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
@@ -34,6 +35,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
+import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
 import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -196,7 +198,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (loginDBA()) {
+        if (AppConfig.loginDBA()) {
 
           Database.updateData(inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(GUESS_NUMBER));
@@ -223,7 +225,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        if (loginDBA()) {
+        if (AppConfig.loginDBA()) {
           Database.deleteData(IDs, Format.tableName(GUESS_NUMBER));
           dispose();
           new Index().guessNumberTableAP();

@@ -17,18 +17,19 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-public class SalesTable extends JDialog {
+public class PurchasesTable extends JDialog {
 
   public JTable viewTable;
   private Table model = new Table();
-  private String[] columns = {"PRODUCT", "USER", "DOCUMENT", "PHONE", "DATE", "UNITS", "TOTAL"};
+  private String[] columns = {"ID", "PRODUCT", "USER", "DOCUMENT", "PHONE", "DATE", "UNITS",
+      "TOTAL"};
 
-  public SalesTable(JDialog parent, boolean modal) {
+  public PurchasesTable(JDialog parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
 
-  public SalesTable(JFrame parent, boolean modal) {
+  public PurchasesTable(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
@@ -44,7 +45,7 @@ public class SalesTable extends JDialog {
     JScrollPane scroll = new JScrollPane(viewTable);
     getContentPane().add(scroll, BorderLayout.CENTER);
 
-    int[] sizes = {60, 35, 70, 50, 105, 50, 40};
+    int[] sizes = {30, 70, 40, 70, 70, 140, 30, 70};
     IntStream.range(0, viewTable.getColumnCount())
         .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
@@ -81,7 +82,7 @@ public class SalesTable extends JDialog {
     super.paint(g);
   }
 
-  public void limpiarTabla() {
+  public void cleanTable() {
 
     while (model.getRowCount() > 0) {
       model.removeRow(0);

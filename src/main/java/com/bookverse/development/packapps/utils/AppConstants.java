@@ -18,4 +18,5 @@ public class AppConstants {
   public static final String TITLE = "PackApps";
   public static final String PASSWORD_DBA = "admin";
   public static final String STORE_MANAGER_KEY = "123";
+  public static final String DEFAULT_ENCRYPT_KEY = "Akatsuki25";
 }

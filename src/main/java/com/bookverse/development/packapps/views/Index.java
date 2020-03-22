@@ -60,8 +60,8 @@ public class Index extends JFrame implements ActionListener {
   protected InventoryTable inventoryTable = new InventoryTable(this, true);
   protected CashRegisterTable cashRegisterTable = new CashRegisterTable(this, true);
   protected LoansTable loansTable = new LoansTable(this, true);
-  protected SalesTable purchasesTable = new SalesTable(this, true);
-  protected VentasTabla salesTable = new VentasTabla(this, true);
+  protected PurchasesTable purchasesTable = new PurchasesTable(this, true);
+  protected SalesTabla salesTable = new SalesTabla(this, true);
   protected JMenuItem[] wallpapers = new JMenuItem[14];
   protected JMenu changeBackground;
   protected JMenuItem moreBacklog, moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,
@@ -996,7 +996,7 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == purchasesTXT) {
 
         try {
-          purchasesTable.limpiarTabla();
+          purchasesTable.cleanTable();
           Export.txt(purchasesTable.viewTable,
               Querys.getAllData(Format.tableName(PURCHASES)),
               ".txt");
@@ -1007,8 +1007,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == salesTXT) {
 
         try {
-          salesTable.limpiarTabla();
-          Export.txt(salesTable.ventasTab,
+          salesTable.cleanTable();
+          Export.txt(salesTable.viewTable,
               Querys.getAllData(Format.tableName(SALES)),
               ".txt");
         } catch (Exception ex) {
@@ -1053,8 +1053,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == cashRegisterTXT) {
 
         try {
-          cashRegisterTable.limpiarTabla();
-          Export.txt(cashRegisterTable.registradoraTab,
+          cashRegisterTable.cleanTable();
+          Export.txt(cashRegisterTable.viewTable,
               Querys.getAllData(Format.tableName(CASH_REGISTER)),
               ".txt");
         } catch (Exception ex) {
@@ -1063,7 +1063,7 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == loansTXT) {
 
         try {
-          loansTable.limpiarTabla();
+          loansTable.cleanTable();
           Export.txt(loansTable.viewTable,
               Querys.getAllData(Format.tableName(LOANS)),
               ".txt");
@@ -1095,7 +1095,7 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == purchasesPDF) {
 
         try {
-          purchasesTable.limpiarTabla();
+          purchasesTable.cleanTable();
           Export.pdf(purchasesTable.viewTable, PURCHASES,
               Querys.getAllData(Format.tableName(PURCHASES)),
               ".pdf");
@@ -1106,8 +1106,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == salesPDF) {
 
         try {
-          salesTable.limpiarTabla();
-          Export.pdf(salesTable.ventasTab, SALES,
+          salesTable.cleanTable();
+          Export.pdf(salesTable.viewTable, SALES,
               Querys.getAllData(Format.tableName(SALES)),
               ".pdf");
         } catch (Exception ex) {
@@ -1156,8 +1156,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == cashRegisterPDF) {
 
         try {
-          cashRegisterTable.limpiarTabla();
-          Export.pdf(cashRegisterTable.registradoraTab, CASH_REGISTER,
+          cashRegisterTable.cleanTable();
+          Export.pdf(cashRegisterTable.viewTable, CASH_REGISTER,
               Querys.getAllData(Format.tableName(CASH_REGISTER)),
               ".pdf");
         } catch (Exception ex) {
@@ -1166,7 +1166,7 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == loansPDF) {
 
         try {
-          loansTable.limpiarTabla();
+          loansTable.cleanTable();
           Export.pdf(loansTable.viewTable, LOANS,
               Querys.getAllData(Format.tableName(LOANS)),
               ".pdf");
@@ -1197,7 +1197,7 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == purchasesEXCEL) {
 
         try {
-          purchasesTable.limpiarTabla();
+          purchasesTable.cleanTable();
           Export.excel(purchasesTable.viewTable,
               Querys.getAllData(Format.tableName(PURCHASES)),
               ".xls");
@@ -1208,8 +1208,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == salesEXCEL) {
 
         try {
-          salesTable.limpiarTabla();
-          Export.excel(salesTable.ventasTab,
+          salesTable.cleanTable();
+          Export.excel(salesTable.viewTable,
               Querys.getAllData(Format.tableName(SALES)),
               ".xls");
         } catch (Exception ex) {
@@ -1254,8 +1254,8 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == cashRegisterEXCEL) {
 
         try {
-          cashRegisterTable.limpiarTabla();
-          Export.excel(cashRegisterTable.registradoraTab,
+          cashRegisterTable.cleanTable();
+          Export.excel(cashRegisterTable.viewTable,
               Querys.getAllData(Format.tableName(CASH_REGISTER)),
               ".xls");
         } catch (Exception ex) {
@@ -1264,7 +1264,7 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == loansEXCEL) {
 
         try {
-          loansTable.limpiarTabla();
+          loansTable.cleanTable();
           Export.excel(loansTable.viewTable,
               Querys.getAllData(Format.tableName(LOANS)),
               ".xls");

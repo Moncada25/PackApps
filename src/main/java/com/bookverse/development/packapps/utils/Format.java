@@ -143,6 +143,10 @@ public class Format {
     return document.length() >= 8 && document.length() <= 10;
   }
 
+  public static boolean verifyCredentials(String credential){
+    return credential.length() >= 4 && credential.length() <= 15;
+  }
+
   public static boolean verifyReference(@NotNull String reference) {
     return reference.length() >= 5 && reference.length() <= 15;
   }

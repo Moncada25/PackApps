@@ -101,6 +101,13 @@ public class SignUp extends JDialog implements ActionListener {
 
     txtCodManager.addKeyListener(new KeyAdapter() {
 
+      public void keyPressed(KeyEvent e) {
+
+        if (e.getKeyCode() == KeyEvent.VK_ENTER){
+          btnSignUpAP();
+        }
+      }
+
       public void keyTyped(KeyEvent evt) {
         txtCodKeyTyped(evt);
       }
@@ -139,8 +146,7 @@ public class SignUp extends JDialog implements ActionListener {
       txtPassword.setEnabled(true);
       txtUser.requestFocus();
 
-      if (Format.verifyDocument(txtUser.getText()) && Format
-          .verifyDocument(String.valueOf(txtPassword.getPassword()))) {
+      if (Format.verifyCredentials(txtUser.getText()) && Format.verifyCredentials(String.valueOf(txtPassword.getPassword()))) {
 
         if (!Database.userAlreadyExist(txtUser.getText())) {
 

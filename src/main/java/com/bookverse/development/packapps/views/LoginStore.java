@@ -82,10 +82,10 @@ public class LoginStore extends JDialog implements ActionListener {
     txtUser.addKeyListener(new KeyAdapter() {
 
       public void keyPressed(KeyEvent e) {
-        txtUsuarioKeyPressed(e);
+        txtUserKeyPressed(e);
       }
 
-      private void txtUsuarioKeyPressed(KeyEvent e) {
+      private void txtUserKeyPressed(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
           btnEnterAP();
@@ -147,8 +147,7 @@ public class LoginStore extends JDialog implements ActionListener {
       Alerts.inputSomethingText();
     } else {
 
-      if (Database.searchUserRegister(txtUser.getText(),
-          AppConfig.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
+      if (Database.searchUserRegister(txtUser.getText(), AppConfig.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
 
         Database.recordLogin("Online", txtUser.getText());
         new HomeStore(this, true).start(this, txtUser.getText());

@@ -161,14 +161,14 @@ public class Querys {
   }
 
   public static String searchUserRegister(String user, String password){
-    return "SELECT * FROM "+Format.tableName(USERS)+" WHERE Username='" + user + "' AND password='" + password +"'";
+    return "SELECT * FROM "+Format.tableName(USERS)+" WHERE Username='" + user + "' AND Password='" + password +"'";
   }
 
   public static String updatePassword(String user, String newPassword){
     return "UPDATE "+Format.tableName(USERS)+" SET Password='" + newPassword + "' WHERE Username='" + user + "'";
   }
 
-  public static String updateQuantity(int quantity, String id, String table){
-    return "UPDATE " + table + " SET Cantidad='" + quantity + "' WHERE ID='" + id + "'";
+  public static String updateUsername(String user, String newUsername){
+    return "UPDATE "+Format.tableName(USERS)+" SET Username='" + newUsername + "' WHERE Username='" + user + "'";
   }
 }

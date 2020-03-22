@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -19,66 +20,47 @@ import javax.swing.table.TableRowSorter;
 public class LoansTable extends JDialog {
 
   public JTable viewTable;
-  private JScrollPane scroll;
-  private Table modelo = new Table();
-  private TableRowSorter<TableModel> ordenar;
-  private String[] columnas = {"USUARIO", "NOMBRE", "DOCUMENTO", "REFERENCIA", "TELÉFONO", "PLAZO",
-      "VALOR"};
+  private Table model = new Table();
+  private String[] columns = {"ID","USER", "CLIENT", "DOCUMENT", "REFERENCE", "PHONE", "TIME",
+      "VALUE"};
 
-  // Constructor que recibe la ventana padre y el valor modal
   public LoansTable(JDialog parent, boolean modal) {
-
     super(parent, modal);
-
-    componentes();
+    createComponents();
   }
 
-  // Constructor que recibe la ventana padre y el valor modal
   public LoansTable(JFrame parent, boolean modal) {
-
     super(parent, modal);
-
-    componentes();
+    createComponents();
   }
 
-  // Constructor que no recibe parámetros
-  public LoansTable() {
-
-    componentes();
-  }
-
-  // Crea los componentes de la tabla
-  private void componentes() {
+  private void createComponents() {
 
     setIconImage(new ImageIcon(new Resources().getImage("prestar.png")).getImage());
 
-    /* TABLA */
-    for (int i = 0; i < columnas.length; i++) {
-      modelo.addColumn(columnas[i]);
-    }
+    IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
-    viewTable = new JTable(modelo);
+    viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
-    scroll = new JScrollPane(viewTable);
+    JScrollPane scroll = new JScrollPane(viewTable);
     getContentPane().add(scroll, BorderLayout.CENTER);
 
-    int[] anchos = {40, 80, 70, 70, 70, 50, 40};
-    for (int i = 0; i < viewTable.getColumnCount(); i++) {
-      viewTable.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-    }
+    int[] sizes = {30, 40, 80, 70, 70, 70, 110, 65};
+    IntStream.range(0, viewTable.getColumnCount())
+        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     pack();
 
-    ordenar = new TableRowSorter<TableModel>(modelo);
-    viewTable.setRowSorter(ordenar);
+    TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(model);
+    viewTable.setRowSorter(rowSorter);
 
-    for (int i = 0; i < columnas.length; i++) {
+    IntStream.range(0, columns.length).forEach(i -> {
       DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
       tcr.setHorizontalAlignment(SwingConstants.CENTER);
       viewTable.getColumnModel().getColumn(i).setCellRenderer(tcr);
-    }
+    });
 
     repaint();
   }
@@ -100,10 +82,10 @@ public class LoansTable extends JDialog {
     super.paint(g);
   }
 
-  public void limpiarTabla() {
+  public void cleanTable() {
 
-    while (modelo.getRowCount() > 0) {
-      modelo.removeRow(0);
+    while (model.getRowCount() > 0) {
+      model.removeRow(0);
     }
   }
 }

@@ -5,19 +5,22 @@ import static com.bookverse.development.packapps.core.AppConfig.HAND;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.getBorder;
+import static com.bookverse.development.packapps.core.AppConfig.inputText;
 import static com.bookverse.development.packapps.core.AppConfig.loginDBA;
-import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.AppConstants.USERS;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
 import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.Format;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -25,50 +28,36 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import org.jetbrains.annotations.NotNull;
 
-public class InventoryTable extends JDialog implements MouseListener {
+public class UsersTable extends JDialog implements MouseListener {
 
-  public JLabel[] actions = new JLabel[4];
   public JTable viewTable;
-  public String reference = "";
-  public int status = 0;
   private JLabel tittle;
+  private JLabel[] actions = new JLabel[3];
   private Table model = new Table();
-  private TableRowSorter<TableModel> rowSorter;
-  private String[] columns = {"REFERENCE", "STATE", "PRICE", "QUANTITY"};
+  private String[] columns = {"ID", "USERNAME", "PASSWORD", "STATUS"};
   private Resources resources = new Resources();
-  private boolean search;
 
-  public InventoryTable(JDialog parent, boolean modal, boolean search) {
-    super(parent, modal);
-    this.search = search;
-    createComponents();
-  }
-
-  public InventoryTable(JFrame parent, boolean modal) {
+  public UsersTable(JDialog parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
 
-  @NotNull
   private JPanel getPanel() {
 
     JPanel panel = new JPanel(new GridLayout());
-
     JPanel row = new JPanel(new FlowLayout());
 
-    String[] images = {"eliminar.png", "select.png", "read.png", "refresh.png"};
+    String[] images = {"añadir_usuario.png", "editar_usuario.png", "eliminar_usuario.png"};
 
     panel.setBorder(getBorder("Select action"));
 
@@ -87,12 +76,6 @@ public class InventoryTable extends JDialog implements MouseListener {
       row.add(actions[i]);
     });
 
-    if (search) {
-      actions[0].setVisible(false);
-    } else {
-      actions[1].setVisible(false);
-    }
-
     panel.add(tittle, BorderLayout.EAST);
     panel.add(row, BorderLayout.CENTER);
     panel.add(message, BorderLayout.WEST);
@@ -102,8 +85,8 @@ public class InventoryTable extends JDialog implements MouseListener {
 
   private void createComponents() {
 
-    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    setIconImage(new ImageIcon(resources.getImage("inventario.png")).getImage());
+    setIconImage(new ImageIcon(resources.getImage("usuario.png")).getImage());
+    add(getPanel(), BorderLayout.SOUTH);
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
@@ -112,15 +95,15 @@ public class InventoryTable extends JDialog implements MouseListener {
     JScrollPane scroll = new JScrollPane(viewTable);
     add(scroll, BorderLayout.CENTER);
 
-    int[] sizes = {130, 80, 80, 40};
+    int[] sizes = {30, 70, 130, 30};
     IntStream.range(0, viewTable.getColumnCount())
         .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
-    add(getPanel(), BorderLayout.SOUTH);
+    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     pack();
 
-    rowSorter = new TableRowSorter<>(model);
+    TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(model);
     viewTable.setRowSorter(rowSorter);
 
     IntStream.range(0, columns.length).forEach(i -> {
@@ -150,93 +133,135 @@ public class InventoryTable extends JDialog implements MouseListener {
   }
 
   public void cleanTable() {
-
     while (model.getRowCount() > 0) {
       model.removeRow(0);
     }
   }
 
-  private void btnSelectAP() {
+  private void editUser() {
 
-    int selectedRow;
-
-    selectedRow = viewTable.getSelectedRow();
+    int selectedRow = viewTable.getSelectedRow();
 
     if (selectedRow == -1) {
       Alerts.message("Message", "No record selected.");
-      status = 0;
     } else {
 
-      if (!String.valueOf(model.getValueAt(selectedRow, 3)).equals("0")) {
-        reference = String.valueOf(model.getValueAt(selectedRow, 0));
-        status = 1;
+      if (String.valueOf(model.getValueAt(selectedRow, 1)).equals("root")) {
+        Alerts.message("Access denied", "Cannot edit root user");
       } else {
-        reference = String.valueOf(model.getValueAt(selectedRow, 0));
-        status = 2;
+
+        String user = String.valueOf(model.getValueAt(selectedRow, 1));
+
+        try {
+
+          if (Database.searchUserRegister(user,
+              AppConfig.encrypt(Alerts.inputPassword("Enter password"), true))) {
+
+            Object option = null;
+
+            option = JOptionPane.showInputDialog(null,
+                "<html>" + Format.style()
+                    + "<strong><em>What do you want to update?</em></strong></html>",
+                "Update data", JOptionPane.PLAIN_MESSAGE, null,
+                new Object[]{"Password", "Username"},
+                "Password");
+
+            if (option != null) {
+
+              if (option.toString().equals("Password")) {
+
+                String newPassword = Alerts.inputPassword("Enter new password");
+
+                if (!Format.verifyCredentials(newPassword)) {
+                  Alerts.message("Message", "The password are too weak, please try again.");
+                } else {
+
+                  Database.updatePassword(user, AppConfig.encrypt(newPassword, true));
+                  Alerts.message("Success", "Password updated!");
+                  dispose();
+                  new HomeStore().btnUsersTableAP();
+                }
+
+              } else if (option.toString().equals("Username")) {
+
+                String newUsername = AppConfig.inputText("Enter new username", 20);
+                if (!Format.verifyCredentials(newUsername)){
+                  Alerts.message("Message", "The username are too weak, please try again.");
+                }else{
+
+                  Database.updateUsername(user, newUsername);
+                  Alerts.message("Success", "Username updated!");
+                  dispose();
+                  new HomeStore().btnUsersTableAP();
+                }
+              }
+            }
+
+          } else {
+            JOptionPane.showMessageDialog(null,
+                "<html>" + Format.style()
+                    + "<strong>Incorrect password</strong></html>",
+                "Verify!", JOptionPane.PLAIN_MESSAGE);
+          }
+        } catch (HeadlessException e) {
+          Alerts.error(e, "Users table");
+        }
       }
-      dispose();
     }
   }
 
-  private void btnSearchAP() {
+  private void deleteUser() {
 
-    String search = searchProduct();
+    int[] selectedRows = viewTable.getSelectedRows();
+    boolean isOnline = false;
+    String userOnline = "";
 
-    if (!search.equals("")) {
-      rowSorter.setRowFilter(RowFilter.regexFilter(search, 0));
-    }
-  }
-
-  private void btnDeleteAP() {
-
-    int selectedRow;
-
-    selectedRow = viewTable.getSelectedRow();
-
-    if (selectedRow == -1) {
-      Alerts.message("Delete", "No record selected");
+    if (viewTable.getSelectedRow() == -1) {
+      Alerts.message("Message", "No record selected.");
     } else {
 
-      if (AppConfig.loginDBA()) {
+      for (int selectedRow : selectedRows) {
 
-        int[] rows = viewTable.getSelectedRows();
-        String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
-            .toArray(String[]::new);
+        if (String.valueOf(model.getValueAt(selectedRow, 1)).equals("root") || String
+            .valueOf(model.getValueAt(selectedRow, 3)).equals("Online")) {
+          isOnline = true;
+          userOnline = String.valueOf(model.getValueAt(selectedRow, 1));
+        }
+      }
 
-        Database.deleteData(IDs, INVENTORY);
-        dispose();
-        new HomeStore().btnInventoryTableAP(false);
+      if (!isOnline) {
+
+        if (viewTable.getSelectedRow() == -1) {
+          Alerts.message("Message", "No record selected.");
+        } else {
+
+          String[] IDs = Arrays.stream(selectedRows).mapToObj(selectedRow ->
+              String.valueOf(model.getValueAt(selectedRow, 0))).toArray(String[]::new);
+
+          if (AppConfig.loginDBA()) {
+            Database.deleteData(IDs, USERS);
+            dispose();
+            new HomeStore().btnUsersTableAP();
+          }
+        }
+
+      } else {
+        Alerts.message("Access denied", "User "+userOnline+" cannot be deleted.");
       }
     }
-  }
-
-  private void btnRefreshAP() {
-    dispose();
-    new HomeStore().btnInventoryTableAP(search);
-  }
-
-  public String searchProduct() {
-
-    String aux = Alerts.inputText("What reference are you looking for?");
-
-    if (aux == null) {
-      aux = "";
-    }
-
-    return aux;
   }
 
   @Override
   public void mouseClicked(MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
-      btnDeleteAP();
+      setVisible(false);
+      new SignUp(this, true).start(this);
+      new HomeStore().btnUsersTableAP();
     } else if (e.getSource() == actions[1]) {
-      btnSelectAP();
+      editUser();
     } else if (e.getSource() == actions[2]) {
-      btnSearchAP();
-    } else if (e.getSource() == actions[3]) {
-      btnRefreshAP();
+      deleteUser();
     }
   }
 
@@ -245,16 +270,13 @@ public class InventoryTable extends JDialog implements MouseListener {
 
     if (e.getSource() == actions[0]) {
       actions[0].setCursor(HAND);
-      tittle.setText("Delete product");
+      tittle.setText("Add User");
     } else if (e.getSource() == actions[1]) {
       actions[1].setCursor(HAND);
-      tittle.setText("Select product");
+      tittle.setText("Edit User");
     } else if (e.getSource() == actions[2]) {
       actions[2].setCursor(HAND);
-      tittle.setText("Search reference");
-    } else if (e.getSource() == actions[3]) {
-      actions[3].setCursor(HAND);
-      tittle.setText("Refresh table");
+      tittle.setText("Delete User");
     }
   }
 
@@ -266,8 +288,6 @@ public class InventoryTable extends JDialog implements MouseListener {
     } else if (e.getSource() == actions[1]) {
       tittle.setText("");
     } else if (e.getSource() == actions[2]) {
-      tittle.setText("");
-    } else if (e.getSource() == actions[3]) {
       tittle.setText("");
     }
   }

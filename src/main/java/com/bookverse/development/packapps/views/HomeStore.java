@@ -107,10 +107,10 @@ public class HomeStore extends JDialog implements ActionListener {
 
     CashRegisterTable table = new CashRegisterTable(this, true);
 
-    table.limpiarTabla();
+    table.cleanTable();
 
     try {
-      Database.readTable(table.registradoraTab, Querys.getAllData(CASH_REGISTER), true);
+      Database.readTable(table.viewTable, Querys.getAllData(CASH_REGISTER), true);
     } catch (Exception e1) {
       e1.printStackTrace();
     }
@@ -151,7 +151,7 @@ public class HomeStore extends JDialog implements ActionListener {
 
     LoansTable table = new LoansTable(this, true);
 
-    table.limpiarTabla();
+    table.cleanTable();
 
     try {
       Database.readTable(table.viewTable, Querys.getAllData(LOANS), true);
@@ -171,9 +171,9 @@ public class HomeStore extends JDialog implements ActionListener {
 
   private void btnPurchasesTableAP() {
 
-    SalesTable table = new SalesTable(this, true);
+    PurchasesTable table = new PurchasesTable(this, true);
 
-    table.limpiarTabla();
+    table.cleanTable();
 
     try {
       Database.readTable(table.viewTable, Querys.getAllData(PURCHASES), true);
@@ -193,18 +193,18 @@ public class HomeStore extends JDialog implements ActionListener {
 
   private void btnSalesTableAP() {
 
-    VentasTabla table = new VentasTabla(this, true);
+    SalesTabla table = new SalesTabla(this, true);
 
-    table.limpiarTabla();
+    table.cleanTable();
 
     try {
-      Database.readTable(table.ventasTab, SALES, true);
+      Database.readTable(table.viewTable, Querys.getAllData(SALES), true);
     } catch (Exception e1) {
       e1.printStackTrace();
     }
 
-    table.setSize(830, 400);
-    table.setMinimumSize(new Dimension(830, 400));
+    table.setSize(850, 400);
+    table.setMinimumSize(new Dimension(850, 400));
     table.setMaximumSize(new Dimension(1280, 720));
     table.setLocationRelativeTo(null);
     table.setTitle(SALES);
@@ -215,18 +215,18 @@ public class HomeStore extends JDialog implements ActionListener {
 
   public void btnUsersTableAP() {
 
-    UsuariosTabla table = new UsuariosTabla(this, true);
+    UsersTable table = new UsersTable(this, true);
 
-    table.limpiarTabla();
+    table.cleanTable();
 
     try {
-      Database.readTable(table.usuariosTab, Querys.getAllData(USERS), true);
+      Database.readTable(table.viewTable, Querys.getAllData(USERS), true);
     } catch (Exception e1) {
       e1.printStackTrace();
     }
 
-    table.setSize(520, 400);
-    table.setMinimumSize(new Dimension(520, 400));
+    table.setSize(620, 410);
+    table.setMinimumSize(new Dimension(620, 410));
     table.setMaximumSize(new Dimension(1280, 720));
     table.setLocationRelativeTo(null);
     table.setTitle(USERS);

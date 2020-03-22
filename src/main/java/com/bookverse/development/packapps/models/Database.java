@@ -563,13 +563,13 @@ public class Database {
     }
   }
 
-  public static void updateQuantity(int quantity, String id, String table) {
+  public static void updateUsername(String user, String newUsername) {
 
     try {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.updateQuantity(quantity, id, table));
+      preparedStatement = connection.prepareStatement(Querys.updateUsername(user, newUsername));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -585,4 +585,5 @@ public class Database {
       }
     }
   }
+
 }

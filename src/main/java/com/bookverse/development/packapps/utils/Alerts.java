@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.utils;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import org.jetbrains.annotations.NotNull;
 
 public class Alerts {
@@ -14,7 +15,7 @@ public class Alerts {
 
   public static void message(String tittle, String message) {
     JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong>" + message ,
+        "<html>" + Format.style() + "<strong>" + message,
         tittle, JOptionPane.PLAIN_MESSAGE);
   }
 
@@ -81,6 +82,14 @@ public class Alerts {
         JOptionPane.PLAIN_MESSAGE);
   }
 
+  public static String inputPassword(String request) {
+    JPasswordField password = new JPasswordField(10);
+    JOptionPane.showConfirmDialog(null, password, request, JOptionPane.PLAIN_MESSAGE,
+        JOptionPane.PLAIN_MESSAGE);
+
+    return new String(password.getPassword());
+  }
+
   public static void inputLarge() {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style() + "<strong>Input too large</strong></html>", "Message",
@@ -101,7 +110,7 @@ public class Alerts {
         JOptionPane.PLAIN_MESSAGE);
   }
 
-  public static boolean requestResponse(String request, String tittle){
+  public static boolean requestResponse(String request, String tittle) {
     return JOptionPane.showConfirmDialog(null, request, tittle,
         JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE) == JOptionPane.YES_OPTION;
   }
@@ -116,15 +125,16 @@ public class Alerts {
         "Reference found!", JOptionPane.PLAIN_MESSAGE);
   }
 
-  public static void actionSuccessfully(String action, String quantityOfProducts, double totalPurchases) {
+  public static void actionSuccessfully(String action, String quantityOfProducts,
+      double totalPurchases) {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style() + "<strong><center>Done!</center></strong><br><strong>"
-            + quantityOfProducts + "</strong> products "+action+" with  a total of <strong>$"
+            + quantityOfProducts + "</strong> products " + action + " with  a total of <strong>$"
             + String.format("%.0f", totalPurchases) + "</strong></html>",
         "Success", JOptionPane.PLAIN_MESSAGE);
   }
 
-  public static void fieldMailRequired(){
+  public static void fieldMailRequired() {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style() + "<strong><center>Secure credentials</center></strong><br>"
             + "The use of this medium is authorized by Google through<br>"

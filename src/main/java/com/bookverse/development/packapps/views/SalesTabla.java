@@ -17,26 +17,26 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-public class CashRegisterTable extends JDialog {
+public class SalesTabla extends JDialog {
 
   public JTable viewTable;
   private Table model = new Table();
-  private String[] columns = {"ID", "USER", "SOLD", "TOTAL SALES", "PURCHASED", "TOTAL PURCHASES",
-      "TOTAL LOANS"};
+  private String[] columns = {"ID", "PRODUCT", "USER", "DOCUMENT", "PHONE", "DATE", "UNITS",
+      "TOTAL"};
 
-  public CashRegisterTable(JDialog parent, boolean modal) {
+  public SalesTabla(JDialog parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
 
-  public CashRegisterTable(JFrame parent, boolean modal) {
+  public SalesTabla(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(new Resources().getImage("registradora.png")).getImage());
+    setIconImage(new ImageIcon(new Resources().getImage("vender.png")).getImage());
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
@@ -45,13 +45,11 @@ public class CashRegisterTable extends JDialog {
     JScrollPane scroll = new JScrollPane(viewTable);
     getContentPane().add(scroll, BorderLayout.CENTER);
 
-    int[] sizes = {30, 30, 20, 80, 20, 80, 100};
-    for (int i = 0; i < viewTable.getColumnCount(); i++) {
-      viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]);
-    }
+    int[] sizes = {30, 60, 30, 70, 70, 120, 30, 50};
+    IntStream.range(0, viewTable.getColumnCount())
+        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
     pack();
 
     TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(model);
@@ -84,6 +82,7 @@ public class CashRegisterTable extends JDialog {
   }
 
   public void cleanTable() {
+
     while (model.getRowCount() > 0) {
       model.removeRow(0);
     }
