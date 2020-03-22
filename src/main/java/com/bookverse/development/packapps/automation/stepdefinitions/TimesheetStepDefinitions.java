@@ -22,25 +22,25 @@ import org.junit.runner.RunWith;
 @RunWith(SerenityRunner.class)
 public class TimesheetStepDefinitions {
 
-    UltimatixData ultimatixData = (UltimatixData) Resources.generalObject;
+  UltimatixData ultimatixData = (UltimatixData) Resources.generalObject;
 
-    @Before
-    public void config() {
-        setTheStage(new Cast());
-        theActorCalled("PackAppsUser");
-        theActorInTheSpotlight().can(BrowseTheWeb.with(DriverChrome.web().inTheWebPage(ultimatixData.getUrl())));
-    }
+  @Before
+  public void config() {
+    setTheStage(Cast.whereEveryoneCan(
+        BrowseTheWeb.with(DriverChrome.web().inTheWebPage(ultimatixData.getUrl()))));
+    theActorCalled("PackAppsUser");
+  }
 
-    @Test
-    public void login() {
-        theActorInTheSpotlight().wasAbleTo(
-            Login.withUltimatix(ultimatixData),
-            Regiter.hours(ultimatixData.getHours()));
-        assertNull("Don't null general object", Resources.generalObject);
-    }
+  @Test
+  public void login() {
+    theActorInTheSpotlight().wasAbleTo(
+        Login.withUltimatix(ultimatixData),
+        Regiter.hours(ultimatixData.getHours()));
+    assertNull("Don't null general object", Resources.generalObject);
+  }
 
-    @After
-    public void close() {
-        BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
-    }
+  @After
+  public void close() {
+    BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
+  }
 }

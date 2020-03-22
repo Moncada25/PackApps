@@ -31,9 +31,7 @@ import org.junit.runner.JUnitCore;
 
 public class Timesheet extends JDialog implements ActionListener {
 
-  Resources resources = new Resources();
-
-  private JLabel tittle, user, password, hours;
+  private Resources resources = new Resources();
   private JTextField txtUser, txtHours;
   private JButton btnRun, btnCancel;
   private JPasswordField txtPassword;
@@ -42,7 +40,7 @@ public class Timesheet extends JDialog implements ActionListener {
 
     super(parent, modal);
 
-    componentes();
+    createComponents();
   }
 
   public void start(JFrame parent) {
@@ -55,8 +53,7 @@ public class Timesheet extends JDialog implements ActionListener {
     setVisible(true);
   }
 
-  // Se crean los componentes de la ventana
-  private void componentes() {
+  private void createComponents() {
 
     setLayout(null);
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -67,12 +64,12 @@ public class Timesheet extends JDialog implements ActionListener {
     btnCancel = resources.getButton("Return", MAIN_COLOR, this, this);
     btnCancel.setBounds(300, 215, 86, 30);
 
-    tittle = resources
+    JLabel tittle = resources
         .getLabel("<html><strong><em>Timesheet Entry</em></strong></html>", MAIN_COLOR, this,
             BIG);
     tittle.setBounds(120, 5, 250, 40);
 
-    user = resources
+    JLabel user = resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
     user.setBounds(30, 60, 180, 30);
 
@@ -91,7 +88,7 @@ public class Timesheet extends JDialog implements ActionListener {
       }
     });
 
-    password = resources
+    JLabel password = resources
         .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
     password.setBounds(30, 110, 120, 30);
 
@@ -110,7 +107,7 @@ public class Timesheet extends JDialog implements ActionListener {
       }
     });
 
-    hours = resources
+    JLabel hours = resources
         .getLabel("<html><strong>Hours</strong></html>", TEXT_COLOR, this, MEDIUM);
     hours.setBounds(30, 160, 180, 30);
 
@@ -157,13 +154,12 @@ public class Timesheet extends JDialog implements ActionListener {
 
   private void btnRunAP() {
 
-    if (txtUser.getText().length() > 5 && txtUser.getText().length() > 5
+    if (txtUser.getText().length() > 5 && String.valueOf(txtPassword.getPassword()).length() > 5
         && txtHours.getText().length() > 0) {
-      UltimatixData data = new UltimatixData(txtUser.getText(),
+      Resources.generalObject = new UltimatixData(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
           ULTIMATIX,
           txtHours.getText());
-      Resources.generalObject = data;
       JUnitCore.runClasses(TimesheetStepDefinitions.class);
     } else {
       Alerts.inputSomethingText();
