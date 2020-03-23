@@ -7,7 +7,8 @@ public class BookverseHomeElements {
   public static final Target IMAGE = Target.the("Image user logged")
       .locatedBy("//img[@alt = 'UserIcon']");
   public static final Target SEARCH_BOOK = Target.the("Search book button")
-      .locatedBy("//ul[@class = 'full-box list-unstyled text-right']//i[@class = 'zmdi zmdi-search']");
+      .locatedBy(
+          "//ul[@class = 'full-box list-unstyled text-right']//i[@class = 'zmdi zmdi-search']");
   public static final Target SEARCH_BOOK_FIELD = Target.the("Search book field")
       .locatedBy("//input[@name = 'busqueda_inicial_libro']");
   public static final Target SEARCH_BOOK_BUTTON = Target.the("Search book button")

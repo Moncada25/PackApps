@@ -2,7 +2,6 @@ package com.bookverse.development.packapps.automation.runners;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
-import static net.serenitybdd.screenplay.actors.OnStage.theActor;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
@@ -46,6 +45,6 @@ public class RunSearchBook {
     BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
     Alerts.message("Book found!", ""
         + "Book → " + bookverseData.getBook() + "\n"
-        + "Author → "+theActorInTheSpotlight().recall("AUTHOR"));
+        + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
   }
 }

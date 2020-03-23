@@ -1,15 +1,17 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE;
+import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_DEVELOPMENT;
 import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static java.awt.Event.ENTER;
 import static javax.swing.SwingConstants.CENTER;
 
 import com.bookverse.development.packapps.automation.models.BookverseData;
 import com.bookverse.development.packapps.automation.runners.RunSearchBook;
 import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -17,7 +19,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.stream.IntStream;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,9 +35,10 @@ import org.junit.runner.JUnitCore;
 public class SearchBook extends JDialog implements ActionListener {
 
   private Resources resources = new Resources();
-  private JTextField txtUser, txtBook;
+  private JTextField txtUser;
   private JButton btnRun, btnReturn;
   private JPasswordField txtPassword;
+  private JComboBox<String> listBooksBox = new JComboBox<>();
 
   public SearchBook(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -86,7 +92,7 @@ public class SearchBook extends JDialog implements ActionListener {
 
     JLabel password = resources
         .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
-    password.setBounds(30, 110, 120, 30);
+    password.setBounds(30, 113, 120, 30);
 
     txtPassword = new JPasswordField();
     txtPassword.setHorizontalAlignment(SwingConstants.CENTER);
@@ -94,6 +100,13 @@ public class SearchBook extends JDialog implements ActionListener {
     add(txtPassword);
 
     txtPassword.addKeyListener(new KeyAdapter() {
+
+      public void keyPressed(KeyEvent event){
+        if (event.getKeyCode() == ENTER){
+          btnRunAP();
+        }
+      }
+
       public void keyTyped(KeyEvent evt) {
         txtCodKeyTyped(evt);
       }
@@ -103,45 +116,19 @@ public class SearchBook extends JDialog implements ActionListener {
       }
     });
 
-    JLabel hours = resources
-        .getLabel("<html><strong>Book</strong></html>", TEXT_COLOR, this, MEDIUM);
-    hours.setBounds(30, 160, 180, 30);
+    List<String> listBooks = Database.getListBook();
 
-    txtBook = new JTextField();
-    txtBook.setHorizontalAlignment(CENTER);
-    txtBook.setBounds(250, 165, 150, 30);
-    add(txtBook);
+    IntStream.range(0, listBooks.size()).forEach(i -> listBooksBox.addItem(listBooks.get(i)));
 
-    txtBook.addKeyListener(new KeyAdapter() {
-
-      public void keyTyped(KeyEvent evt) {
-        txtBookTyped(evt);
-      }
-
-      private void txtBookTyped(KeyEvent evt) {
-        Format.onlyAlfa(evt.getKeyChar(), evt, txtBook.getText(), 40);
-      }
-
-      public void keyPressed(KeyEvent evt) {
-        txtHoursPressed(evt);
-      }
-
-      private void txtHoursPressed(KeyEvent e) {
-
-        if (e.getKeyCode() == KeyEvent.VK_ENTER && txtUser.getText().length() > 0
-            && txtBook.getText().length() > 0) {
-          btnRunAP();
-        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-          dispose();
-        }
-      }
-    });
+    listBooksBox.setFont(AppConfig.SMALL);
+    listBooksBox.setBounds(95, 165, 260, 30);
+    ((JLabel)listBooksBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+    add(listBooksBox);
   }
 
   private void btnReturnAP() {
     txtUser.setText("");
     txtPassword.setText("");
-    txtBook.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
     AppConfig.fadeOut(this);
@@ -149,12 +136,12 @@ public class SearchBook extends JDialog implements ActionListener {
 
   private void btnRunAP() {
 
-    if (txtUser.getText().length() >= 4 && String.valueOf(txtPassword.getPassword()).length() >= 4
-        && txtBook.getText().length() >= 4) {
+    if (txtUser.getText().length() >= 4
+        && String.valueOf(txtPassword.getPassword()).length() >= 4) {
       Resources.generalObject = new BookverseData(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
-          BOOKVERSE,
-          txtBook.getText());
+          BOOKVERSE_DEVELOPMENT,
+          String.valueOf(listBooksBox.getSelectedItem()));
       JUnitCore.runClasses(RunSearchBook.class);
     } else {
       Alerts.inputSomethingText();

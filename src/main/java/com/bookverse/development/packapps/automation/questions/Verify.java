@@ -5,7 +5,6 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.annotations.Subject;
-import net.thucydides.core.annotations.Step;
 
 public class Verify implements Question<Boolean> {
 
@@ -19,7 +18,7 @@ public class Verify implements Question<Boolean> {
     return new Verify(title);
   }
 
-  @Subject("Verify title of modal book #title")
+  @Subject("Verify title of modal book is #title")
   @Override
   public Boolean answeredBy(Actor actor) {
     return TITLE_MODAL.of(title).resolveFor(actor).isVisible();

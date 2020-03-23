@@ -19,6 +19,7 @@ public class AppConstants {
   public static final String USERS = "Users";
   public static final String PURCHASES = "Purchases";
   public static final String SALES = "Sales";
+  public static final String BOOKS = "libro";
 
   public static final String USER_DB = "root";
   public static final String PASSWORD_DB = "";

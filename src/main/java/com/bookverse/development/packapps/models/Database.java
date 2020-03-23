@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 import javax.sql.DataSource;
 import javax.swing.JTable;
@@ -554,5 +555,38 @@ public class Database {
         Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
       }
     }
+  }
+
+  public static List<String> getListBook() {
+
+    ArrayList<String> listBook = new ArrayList<>();
+
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
+
+      preparedStatement = connection.prepareStatement(Querys.getTitleBooks());
+      resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        listBook.add(resultSet.getString(1));
+      }
+
+      return listBook;
+
+    } catch (SQLException e) {
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+
+      try {
+        if (null != connection) {
+          connection.close();
+        }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
+    }
+
+    return listBook;
   }
 }

@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.utils;
 
+import static com.bookverse.development.packapps.utils.AppConstants.BOOKS;
 import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.AppConstants.DICES;
 import static com.bookverse.development.packapps.utils.AppConstants.FEEDBACK;
@@ -14,6 +15,7 @@ import static com.bookverse.development.packapps.utils.AppConstants.SALES;
 import static com.bookverse.development.packapps.utils.AppConstants.USERS;
 
 import com.bookverse.development.packapps.core.AppConfig;
+import java.text.Normalizer.Form;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -172,5 +174,10 @@ public class Querys {
   public static String updateUsername(String user, String newUsername) {
     return "UPDATE " + Format.tableName(USERS) + " SET Username='" + newUsername
         + "' WHERE Username='" + user + "'";
+  }
+
+  @NotNull
+  public static String getTitleBooks(){
+    return "SELECT LibroTitulo FROM "+ Format.tableName(BOOKS);
   }
 }
