@@ -65,9 +65,9 @@ public class LoginStore extends JDialog implements ActionListener {
     btnLogin = resources.getButton("Enter", TEXT_COLOR, this, this);
     btnLogin.setBounds(80, 225, 90, 30);
 
-    JLabel tittle = resources
+    JLabel title = resources
         .getLabel("<html><strong><em>Login store</em></strong></html>", MAIN_COLOR, this, BIG);
-    tittle.setBounds(115, 5, 200, 40);
+    title.setBounds(115, 5, 200, 40);
 
     JLabel user = resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this,

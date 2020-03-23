@@ -56,7 +56,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
 
   public JTable viewTable;
   public Table model = new Table();
-  private JLabel tittle, message;
+  private JLabel title, message;
   private JMenuItem create, read, delete, update;
   private String[] columns = {"ID", "NICKNAME", "STATE", "LEVEL", "MOVES", "DATE"};
   private Resources resources = new Resources();
@@ -77,10 +77,10 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
 
     panel.setBorder(getBorder("Select Table"));
 
-    tittle = new JLabel();
-    tittle.setFont(BIG);
-    tittle.setForeground(MAIN_COLOR);
-    tittle.addMouseListener(this);
+    title = new JLabel();
+    title.setFont(BIG);
+    title.setForeground(MAIN_COLOR);
+    title.addMouseListener(this);
 
     message = new JLabel();
     message.setFont(BIG);
@@ -94,7 +94,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
       row.add(tables[i]);
     });
 
-    panel.add(tittle, BorderLayout.EAST);
+    panel.add(title, BorderLayout.EAST);
     panel.add(row, BorderLayout.CENTER);
     panel.add(message, BorderLayout.WEST);
 
@@ -342,19 +342,19 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
 
     if (e.getSource() == tables[0]) {
       tables[0].setCursor(POINT);
-      tittle.setText("    " + GUESS_NUMBER);
+      title.setText("    " + GUESS_NUMBER);
     } else if (e.getSource() == tables[1]) {
       tables[1].setCursor(LOADER);
-      tittle.setText("    " + HANGMAN);
+      title.setText("    " + HANGMAN);
     } else if (e.getSource() == tables[2]) {
       tables[2].setCursor(RESIZE);
-      tittle.setText("    " + DICES);
+      title.setText("    " + DICES);
     } else if (e.getSource() == tables[3]) {
       tables[3].setCursor(TEXT);
-      tittle.setText("    " + NOTES);
+      title.setText("    " + NOTES);
     } else if (e.getSource() == tables[4]) {
       tables[4].setCursor(HAND);
-      tittle.setText("    " + PUZZLE);
+      title.setText("    " + PUZZLE);
       message.setText("       You're here");
     }
   }
@@ -363,15 +363,15 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
   public void mouseExited(MouseEvent e) {
 
     if (e.getSource() == tables[0]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[1]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[2]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[3]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[4]) {
-      tittle.setText("");
+      title.setText("");
       message.setText("");
     }
   }

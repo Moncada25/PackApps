@@ -28,7 +28,7 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
 
   Resources resources = new Resources();
   private JButton btnChangeColor, btnStart1, btnStart2, btnStart3;
-  private JLabel tittle;
+  private JLabel title;
   private JTextField txtintToBinary, txtBinaryToInt, txtDigits;
   private JComboBox<String> listRed, listGreen, listBlue;
 
@@ -189,10 +189,10 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
       }
     });
 
-    tittle = resources
+    title = resources
         .getLabel("<html><em><strong>Other things...</strong></em></html>", MAIN_COLOR, this, BIG);
-    tittle.addMouseListener(this);
-    tittle.setBounds(120, 20, 200, 35);
+    title.addMouseListener(this);
+    title.setBounds(120, 20, 200, 35);
   }
 
   private void binaryToInt(String num) {
@@ -299,7 +299,7 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
   @Override
   public void mouseClicked(MouseEvent e) {
 
-    if (e.getSource() == tittle) {
+    if (e.getSource() == title) {
       AppConfig.fadeOut(this);
     }
   }

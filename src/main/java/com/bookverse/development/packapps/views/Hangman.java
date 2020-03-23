@@ -67,10 +67,10 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(140, 160, 86, 30);
 
-    JLabel tittle = resources.getLabel("<html>"
+    JLabel title = resources.getLabel("<html>"
         + "<strong><em>Category</em></strong>" +
         "</html>", MAIN_COLOR, this, BIG);
-    tittle.setBounds(30, 10, 120, 35);
+    title.setBounds(30, 10, 120, 35);
 
     attempts = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     attempts.setBounds(30, 200, 250, 30);

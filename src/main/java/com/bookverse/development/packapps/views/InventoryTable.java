@@ -42,7 +42,7 @@ public class InventoryTable extends JDialog implements MouseListener {
   public JTable viewTable;
   public String reference = "";
   public int status = 0;
-  private JLabel tittle;
+  private JLabel title;
   private Table model = new Table();
   private TableRowSorter<TableModel> rowSorter;
   private String[] columns = {"REFERENCE", "STATE", "PRICE", "QUANTITY"};
@@ -71,9 +71,9 @@ public class InventoryTable extends JDialog implements MouseListener {
 
     panel.setBorder(getBorder("Select action"));
 
-    tittle = new JLabel();
-    tittle.setFont(BIG);
-    tittle.setForeground(MAIN_COLOR);
+    title = new JLabel();
+    title.setFont(BIG);
+    title.setForeground(MAIN_COLOR);
 
     JLabel message = new JLabel();
     message.setFont(BIG);
@@ -92,7 +92,7 @@ public class InventoryTable extends JDialog implements MouseListener {
       actions[1].setVisible(false);
     }
 
-    panel.add(tittle, BorderLayout.EAST);
+    panel.add(title, BorderLayout.EAST);
     panel.add(row, BorderLayout.CENTER);
     panel.add(message, BorderLayout.WEST);
 
@@ -244,16 +244,16 @@ public class InventoryTable extends JDialog implements MouseListener {
 
     if (e.getSource() == actions[0]) {
       actions[0].setCursor(HAND);
-      tittle.setText("Delete product");
+      title.setText("Delete product");
     } else if (e.getSource() == actions[1]) {
       actions[1].setCursor(HAND);
-      tittle.setText("Select product");
+      title.setText("Select product");
     } else if (e.getSource() == actions[2]) {
       actions[2].setCursor(HAND);
-      tittle.setText("Search reference");
+      title.setText("Search reference");
     } else if (e.getSource() == actions[3]) {
       actions[3].setCursor(HAND);
-      tittle.setText("Refresh table");
+      title.setText("Refresh table");
     }
   }
 
@@ -261,13 +261,13 @@ public class InventoryTable extends JDialog implements MouseListener {
   public void mouseExited(MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == actions[1]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == actions[2]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == actions[3]) {
-      tittle.setText("");
+      title.setText("");
     }
   }
 

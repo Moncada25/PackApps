@@ -48,9 +48,9 @@ public class SignUp extends JDialog implements ActionListener {
     btnReturn = resources.getButton("Return", MAIN_COLOR, this, this);
     btnReturn.setBounds(300, 215, 86, 30);
 
-    JLabel tittle = resources
+    JLabel title = resources
         .getLabel("<html><strong><em>Sign Up</em></strong></html>", MAIN_COLOR, this, BIG);
-    tittle.setBounds(175, 5, 200, 40);
+    title.setBounds(175, 5, 200, 40);
 
     JLabel lblUser = resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);

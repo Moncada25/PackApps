@@ -64,10 +64,10 @@ public class Timesheet extends JDialog implements ActionListener {
     btnCancel = resources.getButton("Return", MAIN_COLOR, this, this);
     btnCancel.setBounds(300, 215, 86, 30);
 
-    JLabel tittle = resources
+    JLabel title = resources
         .getLabel("<html><strong><em>Timesheet Entry</em></strong></html>", MAIN_COLOR, this,
             BIG);
-    tittle.setBounds(120, 5, 250, 40);
+    title.setBounds(120, 5, 250, 40);
 
     JLabel user = resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);

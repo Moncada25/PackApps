@@ -74,11 +74,11 @@ public class Texts extends JDialog implements MouseListener {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-    JLabel tittle = resources
+    JLabel title = resources
         .getLabel("<html><strong>Write Text...</strong></html>", MAIN_COLOR,
             this, AppConfig.MEDIUM);
-    tittle.setBounds(30, 15, 370, 50);
-    add(tittle, BorderLayout.NORTH);
+    title.setBounds(30, 15, 370, 50);
+    add(title, BorderLayout.NORTH);
 
     text = new JTextArea();
     JScrollPane scroll = new JScrollPane(text);

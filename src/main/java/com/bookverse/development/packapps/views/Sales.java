@@ -63,9 +63,9 @@ public class Sales extends JDialog implements ActionListener {
     btnSearch = resources.getButton("Search", TEXT_COLOR, this, this);
     btnSearch.setBounds(340, 65, 86, 25);
 
-    JLabel tittle = resources.getLabel("<html><strong><em>Register sale</em></strong></html>",
+    JLabel title = resources.getLabel("<html><strong><em>Register sale</em></strong></html>",
         MAIN_COLOR, this, BIG);
-    tittle.setBounds(138, 5, 300, 40);
+    title.setBounds(138, 5, 300, 40);
 
     JLabel reference = resources
         .getLabel("<html><strong>Reference</strong></html>", TEXT_COLOR, this, MEDIUM);

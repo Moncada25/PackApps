@@ -57,9 +57,9 @@ public class Loans extends JDialog implements ActionListener {
     btnLoan = resources.getButton("Lend", AppConfig.TEXT_COLOR, this, this);
     btnLoan.setBounds(30, 320, 86, 30);
 
-    JLabel tittle = resources.getLabel("<html><strong><em>Register loan</em></strong></html>",
+    JLabel title = resources.getLabel("<html><strong><em>Register loan</em></strong></html>",
         AppConfig.MAIN_COLOR, this, AppConfig.BIG);
-    tittle.setBounds(135, 5, 300, 40);
+    title.setBounds(135, 5, 300, 40);
 
     JLabel product = resources
         .getLabel("<html><strong>Client</strong></html>", AppConfig.TEXT_COLOR,
