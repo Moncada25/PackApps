@@ -1,14 +1,14 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.Paths.ULTIMATIX;
+import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE;
 import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static javax.swing.SwingConstants.CENTER;
 
-import com.bookverse.development.packapps.automation.models.UltimatixData;
-import com.bookverse.development.packapps.automation.runners.RunTimesheetEntry;
+import com.bookverse.development.packapps.automation.models.BookverseData;
+import com.bookverse.development.packapps.automation.runners.RunSearchBook;
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -27,14 +27,14 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import org.junit.runner.JUnitCore;
 
-public class Timesheet extends JDialog implements ActionListener {
+public class SearchBook extends JDialog implements ActionListener {
 
   private Resources resources = new Resources();
-  private JTextField txtUser, txtHours;
-  private JButton btnRun, btnCancel;
+  private JTextField txtUser, txtBook;
+  private JButton btnRun, btnReturn;
   private JPasswordField txtPassword;
 
-  public Timesheet(JFrame parent, boolean modal) {
+  public SearchBook(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
@@ -43,7 +43,7 @@ public class Timesheet extends JDialog implements ActionListener {
     setSize(460, 300);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Timesheet Entry");
+    setTitle("Bookverse Test");
     AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
@@ -57,13 +57,13 @@ public class Timesheet extends JDialog implements ActionListener {
     btnRun = resources.getButton("Run", TEXT_COLOR, this, this);
     btnRun.setBounds(60, 215, 100, 30);
 
-    btnCancel = resources.getButton("Return", MAIN_COLOR, this, this);
-    btnCancel.setBounds(300, 215, 86, 30);
+    btnReturn = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnReturn.setBounds(300, 215, 86, 30);
 
     JLabel title = resources
-        .getLabel("<html><strong><em>Timesheet Entry</em></strong></html>", MAIN_COLOR, this,
+        .getLabel("<html><strong><em>Search book</em></strong></html>", MAIN_COLOR, this,
             BIG);
-    title.setBounds(120, 5, 250, 40);
+    title.setBounds(150, 5, 250, 40);
 
     JLabel user = resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
@@ -76,10 +76,10 @@ public class Timesheet extends JDialog implements ActionListener {
 
     txtUser.addKeyListener(new KeyAdapter() {
       public void keyTyped(KeyEvent evt) {
-        txtUsuarioKeyTyped(evt);
+        txtUserKeyTyped(evt);
       }
 
-      private void txtUsuarioKeyTyped(KeyEvent evt) {
+      private void txtUserKeyTyped(KeyEvent evt) {
         Format.onlyAlfa(evt.getKeyChar(), evt, txtUser.getText(), 20);
       }
     });
@@ -104,22 +104,22 @@ public class Timesheet extends JDialog implements ActionListener {
     });
 
     JLabel hours = resources
-        .getLabel("<html><strong>Hours</strong></html>", TEXT_COLOR, this, MEDIUM);
+        .getLabel("<html><strong>Book</strong></html>", TEXT_COLOR, this, MEDIUM);
     hours.setBounds(30, 160, 180, 30);
 
-    txtHours = new JTextField();
-    txtHours.setHorizontalAlignment(CENTER);
-    txtHours.setBounds(250, 165, 150, 30);
-    add(txtHours);
+    txtBook = new JTextField();
+    txtBook.setHorizontalAlignment(CENTER);
+    txtBook.setBounds(250, 165, 150, 30);
+    add(txtBook);
 
-    txtHours.addKeyListener(new KeyAdapter() {
+    txtBook.addKeyListener(new KeyAdapter() {
 
       public void keyTyped(KeyEvent evt) {
-        txtHoursTyped(evt);
+        txtBookTyped(evt);
       }
 
-      private void txtHoursTyped(KeyEvent evt) {
-        Format.onlyNumbers(evt.getKeyChar(), evt, txtHours.getText(), 20);
+      private void txtBookTyped(KeyEvent evt) {
+        Format.onlyAlfa(evt.getKeyChar(), evt, txtBook.getText(), 40);
       }
 
       public void keyPressed(KeyEvent evt) {
@@ -129,7 +129,7 @@ public class Timesheet extends JDialog implements ActionListener {
       private void txtHoursPressed(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_ENTER && txtUser.getText().length() > 0
-            && txtHours.getText().length() > 0) {
+            && txtBook.getText().length() > 0) {
           btnRunAP();
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
           dispose();
@@ -141,7 +141,7 @@ public class Timesheet extends JDialog implements ActionListener {
   private void btnReturnAP() {
     txtUser.setText("");
     txtPassword.setText("");
-    txtHours.setText("");
+    txtBook.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
     AppConfig.fadeOut(this);
@@ -149,13 +149,13 @@ public class Timesheet extends JDialog implements ActionListener {
 
   private void btnRunAP() {
 
-    if (txtUser.getText().length() > 5 && String.valueOf(txtPassword.getPassword()).length() > 5
-        && txtHours.getText().length() > 0) {
-      Resources.generalObject = new UltimatixData(txtUser.getText(),
+    if (txtUser.getText().length() >= 4 && String.valueOf(txtPassword.getPassword()).length() >= 4
+        && txtBook.getText().length() >= 4) {
+      Resources.generalObject = new BookverseData(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
-          ULTIMATIX,
-          txtHours.getText());
-      JUnitCore.runClasses(RunTimesheetEntry.class);
+          BOOKVERSE,
+          txtBook.getText());
+      JUnitCore.runClasses(RunSearchBook.class);
     } else {
       Alerts.inputSomethingText();
     }
@@ -164,7 +164,7 @@ public class Timesheet extends JDialog implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
 
-    if (e.getSource() == btnCancel) {
+    if (e.getSource() == btnReturn) {
       btnReturnAP();
     } else if (e.getSource() == btnRun) {
       btnRunAP();

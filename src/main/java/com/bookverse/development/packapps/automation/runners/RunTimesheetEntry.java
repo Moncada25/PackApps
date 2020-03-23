@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.automation.stepdefinitions;
+package com.bookverse.development.packapps.automation.runners;
 
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
@@ -6,8 +6,8 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.junit.Assert.assertNull;
 
 import com.bookverse.development.packapps.automation.models.UltimatixData;
-import com.bookverse.development.packapps.automation.tasks.Login;
-import com.bookverse.development.packapps.automation.tasks.Regiter;
+import com.bookverse.development.packapps.automation.tasks.UltimatixLogin;
+import com.bookverse.development.packapps.automation.tasks.UltimatixTimesheetRegister;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
 import com.bookverse.development.packapps.models.Resources;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 
 @SuppressWarnings("unchecked")
 @RunWith(SerenityRunner.class)
-public class TimesheetStepDefinitions {
+public class RunTimesheetEntry {
 
   UltimatixData ultimatixData = (UltimatixData) Resources.generalObject;
 
@@ -32,10 +32,9 @@ public class TimesheetStepDefinitions {
   }
 
   @Test
-  public void login() {
-    theActorInTheSpotlight().wasAbleTo(
-        Login.withUltimatix(ultimatixData),
-        Regiter.hours(ultimatixData.getHours()));
+  public void start() {
+    theActorInTheSpotlight().wasAbleTo(UltimatixLogin.withCredentials(ultimatixData));
+    theActorInTheSpotlight().attemptsTo(UltimatixTimesheetRegister.hours(ultimatixData.getHours()));
     assertNull("Don't null general object", Resources.generalObject);
   }
 
