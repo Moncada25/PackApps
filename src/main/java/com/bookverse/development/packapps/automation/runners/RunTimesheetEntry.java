@@ -32,7 +32,7 @@ public class RunTimesheetEntry {
   }
 
   @Test
-  public void start() {
+  public void registerTimeSheet() {
     theActorInTheSpotlight().wasAbleTo(UltimatixLogin.withCredentials(ultimatixData));
     theActorInTheSpotlight().attemptsTo(UltimatixTimesheetRegister.hours(ultimatixData.getHours()));
     assertNull("Don't null general object", Resources.generalObject);

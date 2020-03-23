@@ -575,6 +575,7 @@ public class Database {
       return listBook;
 
     } catch (SQLException e) {
+      e.printStackTrace();
       Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
     } finally {
 

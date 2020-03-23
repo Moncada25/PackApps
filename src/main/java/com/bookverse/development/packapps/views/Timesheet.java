@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.Paths.ULTIMATIX;
+import static com.bookverse.development.packapps.automation.utils.GenericConstants.ULTIMATIX;
 import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;

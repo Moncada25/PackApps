@@ -21,11 +21,16 @@ public class AppConstants {
   public static final String SALES = "Sales";
   public static final String BOOKS = "libro";
 
+//  public static final String USER_DB = "user_23952903";
+//  public static final String PASSWORD_DB = "santiago123";
+//  public static final String NAME_DB = "user_23952903_bookverse";
+//  public static final String HOSTNAME_DB = "sql309.vzpla.net";
+
   public static final String USER_DB = "root";
   public static final String PASSWORD_DB = "";
-  public static final String DRIVER_DB = "com.mysql.jdbc.Driver";
   public static final String NAME_DB = "packapps";
   public static final String HOSTNAME_DB = "localhost";
+  public static final String DRIVER_DB = "com.mysql.jdbc.Driver";
   public static final String PORT_DB = "3306";
   public static final String URL_DRIVER_DB =
       "jdbc:mysql://" + HOSTNAME_DB + ":" + PORT_DB + "/" + NAME_DB;

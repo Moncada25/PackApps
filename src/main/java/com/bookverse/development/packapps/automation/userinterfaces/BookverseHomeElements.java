@@ -4,7 +4,9 @@ import net.serenitybdd.screenplay.targets.Target;
 
 public class BookverseHomeElements {
 
-  public static final Target IMAGE = Target.the("Image user logged")
+  public static final Target USER_LOGGED = Target.the("Name of user logged")
+      .locatedBy("//h4[contains(. , '{0}')]");
+  public static final Target IMAGE = Target.the("Image of user logged")
       .locatedBy("//img[@alt = 'UserIcon']");
   public static final Target SEARCH_BOOK = Target.the("Search book button")
       .locatedBy(

@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.automation.utils.GenericConstants.BOOKVERSE_DEVELOPMENT;
 import static com.bookverse.development.packapps.core.AppConfig.BORDER_BLUE;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
@@ -15,8 +16,12 @@ import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
 import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
 import static com.bookverse.development.packapps.utils.AppConstants.SALES;
 import static com.bookverse.development.packapps.utils.AppConstants.TITLE;
+import static com.bookverse.development.packapps.utils.ArrayData.*;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_BACKGROUNDS;
 
+import com.bookverse.development.packapps.automation.models.BookverseData;
+import com.bookverse.development.packapps.automation.runners.RunRegisterUser;
+import com.bookverse.development.packapps.automation.runners.RunSearchBook;
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
@@ -46,6 +51,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.jetbrains.annotations.NotNull;
+import org.junit.runner.JUnitCore;
 
 public class Index extends JFrame implements ActionListener {
 
@@ -69,7 +75,7 @@ public class Index extends JFrame implements ActionListener {
       roulette, ticTacToePvsP, ticTacToePvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
       inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, UI, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
       inventoryEXCEL, purchasesEXCEL, salesEXCEL, cashRegisterEXCEL, loansEXCEL, puzzleEXCEL, guessNumberPDF, hangmanPDF, dicesPDF,
-      notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet, OCRTask, searchBook;
+      notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet, OCRTask, searchBook, registerUser;
   private boolean isWork = true;
 
   public Index() {
@@ -131,12 +137,12 @@ public class Index extends JFrame implements ActionListener {
     Index window = new Index();
 
     welcome = new JLabel();
-    window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-        ArrayData.LONG_BACKGROUNDS[background - 1]);
+    window.setSize(WIDTH_BACKGROUNDS[background - 1],
+        LONG_BACKGROUNDS[background - 1]);
     window.add(welcome, BorderLayout.CENTER);
     window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-        ArrayData.WIDTH_BACKGROUNDS[background - 1],
-        ArrayData.LONG_BACKGROUNDS[background - 1]);
+        WIDTH_BACKGROUNDS[background - 1],
+        LONG_BACKGROUNDS[background - 1]);
 
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
@@ -350,10 +356,13 @@ public class Index extends JFrame implements ActionListener {
     JMenu tasks = resources.getMenu("Tasks", "task");
     timesheet = resources.getMenuItem("Timesheet Entry (beta)", "timesheet", this);
     searchBook = resources.getMenuItem("Search Book", "searchBook", this);
+    registerUser = resources.getMenuItem("Register User", "añadir_usuario", this);
 
     tasks.add(timesheet);
     tasks.addSeparator();
     tasks.add(searchBook);
+    tasks.addSeparator();
+    tasks.add(registerUser);
 
     changeBackground = resources.getMenu("Background", "background");
 
@@ -556,8 +565,8 @@ public class Index extends JFrame implements ActionListener {
 
     IntStream.range(0, wallpapers.length).filter(i -> e.getSource() == wallpapers[i]).forEach(i -> {
       if (wallpapers[i].getForeground() != MAIN_COLOR) {
-        changeBackgroundAP(PATH_BACKGROUNDS[i], ArrayData.WIDTH_BACKGROUNDS[i],
-            ArrayData.LONG_BACKGROUNDS[i]);
+        changeBackgroundAP(PATH_BACKGROUNDS[i], WIDTH_BACKGROUNDS[i],
+            LONG_BACKGROUNDS[i]);
         wallpapers[i].setForeground(MAIN_COLOR);
         background = i + 1;
         setVisible(true);
@@ -592,12 +601,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -633,12 +642,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -675,12 +684,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -718,12 +727,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -763,12 +772,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -808,12 +817,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -848,6 +857,26 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == searchBook) {
       new SearchBook(this, true).start(this);
       setVisible(true);
+    } else if (e.getSource() == registerUser) {
+      Alerts.message("Bookverse Test", ""
+          + "Register new user with following data...\n\n"
+          + "Name → "+ DATA_NEW_USER[0]+"\n"
+          + "Last name → "+ DATA_NEW_USER[1]+"\n"
+          + "Phone → "+ DATA_NEW_USER[2]+"\n"
+          + "Occupation → "+ DATA_NEW_USER[3]+"\n"
+          + "Address → "+ DATA_NEW_USER[4]+"\n"
+          + "Username → "+ DATA_NEW_USER[5]+"\n"
+          + "Password → "+ DATA_NEW_USER[6]+"\n"
+          + "Email → "+ DATA_NEW_USER[7]+"\n"
+          + "Gender → "+ DATA_NEW_USER[8]+"\n"
+      );
+
+      Resources.generalObject = new BookverseData(DATA_NEW_USER[5],
+          DATA_NEW_USER[6],
+          BOOKVERSE_DEVELOPMENT,
+          "");
+      JUnitCore.runClasses(RunRegisterUser.class);
+
     } else if (e.getSource() == OCRTask) {
       new OCR(this, true).start(this);
       setVisible(true);

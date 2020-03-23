@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_DEVELOPMENT;
+import static com.bookverse.development.packapps.automation.utils.GenericConstants.BOOKVERSE_DEVELOPMENT;
 import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
@@ -145,6 +145,7 @@ public class SearchBook extends JDialog implements ActionListener {
       JUnitCore.runClasses(RunSearchBook.class);
     } else {
       Alerts.inputSomethingText();
+      txtUser.requestFocus();
     }
   }
 

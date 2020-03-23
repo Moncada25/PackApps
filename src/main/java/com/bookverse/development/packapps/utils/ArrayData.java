@@ -42,4 +42,16 @@ public class ArrayData {
               "wear", "mean", "build", "bring", "find", "leave"},
           {"futbol", "baloncesto", "tenis", "natacion", "voleibol", "ciclismo", "golf", "hockey",
               "karate", "esgrima", "boxeo", "atletismo", "rugby", "beisbol", "paracaidismo"}};
+
+  public static final String[] DATA_NEW_USER = {
+      "PackAppsUser",
+      "Java",
+      "3012499315",
+      "Otro",
+      "Carrera 62 #62-b11",
+      "PackApps",
+      "PackApps123",
+      "packapps@mail.com",
+      "Masculino"
+  };
 }

@@ -6,16 +6,16 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.annotations.Subject;
 
-public class Verify implements Question<Boolean> {
+public class VerifyTitle implements Question<Boolean> {
 
   private String title;
 
-  public Verify(String title) {
+  public VerifyTitle(String title) {
     this.title = title;
   }
 
-  public static Verify titleModal(String title) {
-    return new Verify(title);
+  public static VerifyTitle ofModal(String title) {
+    return new VerifyTitle(title);
   }
 
   @Subject("Verify title of modal book is #title")
