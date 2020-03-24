@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.AppConstants.LOANS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.LOANS;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

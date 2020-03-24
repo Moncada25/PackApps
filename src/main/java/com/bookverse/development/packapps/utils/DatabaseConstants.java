@@ -1,11 +1,6 @@
 package com.bookverse.development.packapps.utils;
 
-public class AppConstants {
-
-  public static final String TITLE = "PackApps";
-  public static final String PASSWORD_DBA = "admin";
-  public static final String STORE_MANAGER_KEY = "123";
-  public static final String DEFAULT_ENCRYPT_KEY = "Akatsuki25";
+public class DatabaseConstants {
 
   public static final String GUESS_NUMBER = "Guess Number";
   public static final String HANGMAN = "Hangman";
@@ -19,12 +14,7 @@ public class AppConstants {
   public static final String USERS = "Users";
   public static final String PURCHASES = "Purchases";
   public static final String SALES = "Sales";
-  public static final String BOOKS = "libro";
-
-//  public static final String USER_DB = "user_23952903";
-//  public static final String PASSWORD_DB = "santiago123";
-//  public static final String NAME_DB = "user_23952903_bookverse";
-//  public static final String HOSTNAME_DB = "sql309.vzpla.net";
+  public static final String BOOKS = "Libro";
 
   public static final String USER_DB = "root";
   public static final String PASSWORD_DB = "";

@@ -1,9 +1,7 @@
 package com.bookverse.development.packapps.core;
 
-import static com.bookverse.development.packapps.utils.AppConstants.DEFAULT_ENCRYPT_KEY;
-import static com.bookverse.development.packapps.utils.AppConstants.PASSWORD_DBA;
-
 import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.models.DataAppConfig;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.WindowEffect;
 import java.awt.Color;
@@ -259,7 +257,7 @@ public class AppConfig {
 
         if (aux.length() != 0) {
 
-          if (PASSWORD_DBA.equals(aux)) {
+          if (DataAppConfig.getPasswordDBA().equals(aux)) {
             return true;
           } else {
             JOptionPane.showMessageDialog(null,
@@ -331,7 +329,7 @@ public class AppConfig {
     if (!isSetSecretKey) {
       return setSecretKey();
     } else {
-      return DEFAULT_ENCRYPT_KEY;
+      return DataAppConfig.getDefaultEncryptKey();
     }
   }
 

@@ -5,7 +5,7 @@ import static com.bookverse.development.packapps.core.AppConfig.HAND;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.getBorder;
-import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

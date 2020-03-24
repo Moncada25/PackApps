@@ -7,9 +7,9 @@ import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.SMALL;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.getDate;
-import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.AppConstants.SALES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

@@ -1,33 +1,29 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.GenericConstants.BOOKVERSE_DEVELOPMENT;
 import static com.bookverse.development.packapps.core.AppConfig.BORDER_BLUE;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.AppConstants.DICES;
-import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.AppConstants.LOANS;
-import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
-import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
-import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.AppConstants.SALES;
-import static com.bookverse.development.packapps.utils.AppConstants.TITLE;
-import static com.bookverse.development.packapps.utils.ArrayData.*;
+import static com.bookverse.development.packapps.utils.ArrayData.LONG_BACKGROUNDS;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_BACKGROUNDS;
+import static com.bookverse.development.packapps.utils.ArrayData.WIDTH_BACKGROUNDS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.LOANS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
 
-import com.bookverse.development.packapps.automation.models.BookverseData;
-import com.bookverse.development.packapps.automation.runners.RunRegisterUser;
-import com.bookverse.development.packapps.automation.runners.RunSearchBook;
 import com.bookverse.development.packapps.automation.utils.RunTest;
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.ArrayData;
+import com.bookverse.development.packapps.models.DataAppConfig;
 import com.bookverse.development.packapps.utils.Export;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.OCR;
@@ -52,7 +48,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.jetbrains.annotations.NotNull;
-import org.junit.runner.JUnitCore;
 
 public class Index extends JFrame implements ActionListener {
 
@@ -74,7 +69,7 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem moreBacklog, moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,
       texts, guessNumber, guessNumberHard, hangman, structures, dices, buyAndSell, numbers, puzzle4x4, puzzle5x5, puzzle6x6,
       roulette, ticTacToePvsP, ticTacToePvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
-      inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, UI, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
+      inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
       inventoryEXCEL, purchasesEXCEL, salesEXCEL, cashRegisterEXCEL, loansEXCEL, puzzleEXCEL, guessNumberPDF, hangmanPDF, dicesPDF,
       notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet, OCRTask, searchBook, registerUser;
   private boolean isWork = true;
@@ -148,7 +143,7 @@ public class Index extends JFrame implements ActionListener {
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
-    window.setTitle(TITLE);
+    window.setTitle(DataAppConfig.getTitleApp());
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
     window.textureMode.setForeground(MAIN_COLOR);
     AppConfig.fadeIn(window);
@@ -354,7 +349,7 @@ public class Index extends JFrame implements ActionListener {
     export.addSeparator();
     export.add(exportEXCEL);
 
-    JMenu tasks = resources.getMenu("Tasks", "task");
+    JMenu tasks = resources.getMenu("Tests", "task");
     timesheet = resources.getMenuItem("Timesheet Entry (beta)", "timesheet", this);
     searchBook = resources.getMenuItem("Search Book", "searchBook", this);
     registerUser = resources.getMenuItem("Register User", "añadir_usuario", this);

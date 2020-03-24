@@ -2,11 +2,11 @@ package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.AppConstants.DICES;
-import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
-import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

@@ -4,7 +4,7 @@ import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.AppConstants.FEEDBACK;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.FEEDBACK;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
