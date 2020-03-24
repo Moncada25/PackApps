@@ -5,11 +5,13 @@ import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
+import com.bookverse.development.packapps.automation.exceptions.SearchBookException;
 import com.bookverse.development.packapps.automation.models.BookverseData;
 import com.bookverse.development.packapps.automation.questions.VerifyTitle;
 import com.bookverse.development.packapps.automation.tasks.BookverseLogin;
 import com.bookverse.development.packapps.automation.tasks.BookverseSearchBook;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
+import com.bookverse.development.packapps.automation.utils.GenericConstants;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -37,7 +39,8 @@ public class RunSearchBook {
   public void searchBook() {
     theActorInTheSpotlight().wasAbleTo(BookverseLogin.withCredentials(bookverseData));
     theActorInTheSpotlight().attemptsTo(BookverseSearchBook.andOpen(bookverseData.getBook()));
-    theActorInTheSpotlight().should(seeThat(VerifyTitle.ofModal(bookverseData.getBook())));
+    theActorInTheSpotlight().should(seeThat(VerifyTitle.ofModal(bookverseData.getBook())).
+        orComplainWith(SearchBookException.class, GenericConstants.SEARCH_BOOK_ERROR));
   }
 
   @After

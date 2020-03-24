@@ -6,5 +6,8 @@ public class GenericConstants {
     public static final String BOOKVERSE_DEVELOPMENT = "http://localhost/Bookverse/";
     public static final String BOOKVERSE_PRODUCTION = "http://bookverse.vzpla.net/";
 
+    public static final String SEARCH_BOOK_ERROR = "Failure searching book";
+    public static final String REGISTER_USER_ERROR = "Failure registering new user";
+
     private GenericConstants(){}
 }

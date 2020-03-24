@@ -44,14 +44,14 @@ public class ArrayData {
               "karate", "esgrima", "boxeo", "atletismo", "rugby", "beisbol", "paracaidismo"}};
 
   public static final String[] DATA_NEW_USER = {
-      "PackAppsUser",
-      "Java",
+      "Santiago",
+      "Moncada",
       "3012499315",
-      "Otro",
+      "Profesor",
       "Carrera 62 #62-b11",
       "PackApps",
       "PackApps123",
       "packapps@mail.com",
-      "Masculino"
+      "Femenino"
   };
 }

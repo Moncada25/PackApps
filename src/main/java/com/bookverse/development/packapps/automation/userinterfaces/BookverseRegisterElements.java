@@ -24,7 +24,7 @@ public class BookverseRegisterElements {
       .locatedBy("//input[@name = 'email-reg']");
   public static final Target GENDER_CHECK = Target.the("Gender of client")
       .locatedBy(
-          "//div[@class = 'form-group']//input[@value = '{0}']//following-sibling::span[@class = 'check']");
+          "//div[@class = 'form-group']//input[@value = '{0}']//following-sibling::span[@class = 'circle']");
   public static final Target REGISTER_SUBMIT = Target.the("Button submit and register")
       .locatedBy("//button[@class]");
 

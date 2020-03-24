@@ -5,11 +5,13 @@ import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
+import com.bookverse.development.packapps.automation.exceptions.RegisterUserException;
 import com.bookverse.development.packapps.automation.models.BookverseData;
 import com.bookverse.development.packapps.automation.questions.VerifyUser;
 import com.bookverse.development.packapps.automation.tasks.BookverseLogin;
 import com.bookverse.development.packapps.automation.tasks.BookverseRegister;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
+import com.bookverse.development.packapps.automation.utils.GenericConstants;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -36,7 +38,8 @@ public class RunRegisterUser {
   public void registerNewUser() {
     theActorInTheSpotlight().wasAbleTo(BookverseRegister.newUser());
     theActorInTheSpotlight().attemptsTo(BookverseLogin.withCredentials(bookverseData));
-    theActorInTheSpotlight().should(seeThat(VerifyUser.registered(theActorInTheSpotlight().recall("USER_REGISTERED"))));
+    theActorInTheSpotlight().should(seeThat(VerifyUser.registered(theActorInTheSpotlight().recall("USER_REGISTERED"))).
+        orComplainWith(RegisterUserException.class, GenericConstants.REGISTER_USER_ERROR));
   }
 
   @After
