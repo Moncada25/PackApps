@@ -30,7 +30,8 @@ public class RunRegisterUser {
 
   @Before
   public void config() {
-    setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(DriverChrome.web().inTheWebPage(bookverseData.getUrl()))));
+    setTheStage(Cast.whereEveryoneCan(
+        BrowseTheWeb.with(DriverChrome.web().inTheWebPage(bookverseData.getUrl()))));
     theActorCalled("PackAppsUser");
   }
 
@@ -38,14 +39,15 @@ public class RunRegisterUser {
   public void registerNewUser() {
     theActorInTheSpotlight().wasAbleTo(BookverseRegister.newUser());
     theActorInTheSpotlight().attemptsTo(BookverseLogin.withCredentials(bookverseData));
-    theActorInTheSpotlight().should(seeThat(VerifyUser.registered(theActorInTheSpotlight().recall("USER_REGISTERED"))).
-        orComplainWith(RegisterUserException.class, GenericConstants.REGISTER_USER_ERROR));
+    theActorInTheSpotlight().should(
+        seeThat(VerifyUser.registered(theActorInTheSpotlight().recall("USER_REGISTERED")))
+            .orComplainWith(RegisterUserException.class, GenericConstants.REGISTER_USER_ERROR));
+    Alerts.message("Test passed!",
+        "User " + theActorInTheSpotlight().recall("USER_REGISTERED") + " is registered!");
   }
 
   @After
   public void close() {
     BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
-    Alerts.message("User registered!!",
-        "User " + theActorInTheSpotlight().recall("USER_REGISTERED") + " is registered!");
   }
 }

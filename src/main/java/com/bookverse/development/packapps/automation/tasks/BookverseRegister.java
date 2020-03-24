@@ -14,7 +14,7 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.SECOND_PASSWORD_FIELD;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.USERNAME_FIELD;
 import static com.bookverse.development.packapps.utils.ArrayData.DATA_NEW_USER;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnabled;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import net.serenitybdd.screenplay.Actor;
@@ -37,22 +37,22 @@ public class BookverseRegister implements Task {
   public <T extends Actor> void performAs(T actor) {
 
     actor.wasAbleTo(
-        WaitUntil.the(REGISTER_BUTTON, isEnabled()),
+        WaitUntil.the(REGISTER_BUTTON, isClickable()),
         Click.on(REGISTER_BUTTON),
         WaitUntil.the(NAME_FIELD, isVisible()),
-        Enter.theValue(DATA_NEW_USER[0]).into(NAME_FIELD),
-        Enter.theValue(DATA_NEW_USER[1]).into(LAST_NAME_FIELD),
-        Enter.theValue(DATA_NEW_USER[2]).into(PHONE_FIELD),
-        SelectFromOptions.byValue(DATA_NEW_USER[3]).from(OCCUPATION_LIST),
-        Enter.theValue(DATA_NEW_USER[4]).into(ADDRESS_FIELD),
-        Enter.theValue(DATA_NEW_USER[5]).into(USERNAME_FIELD),
-        Enter.theValue(DATA_NEW_USER[6]).into(FIRST_PASSWORD_FIELD),
-        Enter.theValue(DATA_NEW_USER[6]).into(SECOND_PASSWORD_FIELD),
-        Enter.theValue(DATA_NEW_USER[7]).into(EMAIL_FIELD),
-        Click.on(GENDER_CHECK.of(DATA_NEW_USER[8])),
+        Enter.theValue(DATA_NEW_USER.get("Name")).into(NAME_FIELD),
+        Enter.theValue(DATA_NEW_USER.get("LastName")).into(LAST_NAME_FIELD),
+        Enter.theValue(DATA_NEW_USER.get("Phone")).into(PHONE_FIELD),
+        SelectFromOptions.byValue(DATA_NEW_USER.get("Occupation")).from(OCCUPATION_LIST),
+        Enter.theValue(DATA_NEW_USER.get("Address")).into(ADDRESS_FIELD),
+        Enter.theValue(DATA_NEW_USER.get("Username")).into(USERNAME_FIELD),
+        Enter.theValue(DATA_NEW_USER.get("Password")).into(FIRST_PASSWORD_FIELD),
+        Enter.theValue(DATA_NEW_USER.get("Password")).into(SECOND_PASSWORD_FIELD),
+        Enter.theValue(DATA_NEW_USER.get("Email")).into(EMAIL_FIELD),
+        Click.on(GENDER_CHECK.of(DATA_NEW_USER.get("Gender"))),
         Click.on(REGISTER_SUBMIT),
         Click.on(ALERT_ACCEPT)
     );
-    actor.remember("USER_REGISTERED", DATA_NEW_USER[0]);
+    actor.remember("USER_REGISTERED", DATA_NEW_USER.get("Name"));
   }
 }

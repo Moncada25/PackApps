@@ -860,19 +860,19 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == registerUser) {
       Alerts.message("Bookverse Test", ""
           + "Register new user with following data...\n\n"
-          + "Name → "+ DATA_NEW_USER[0]+"\n"
-          + "Last name → "+ DATA_NEW_USER[1]+"\n"
-          + "Phone → "+ DATA_NEW_USER[2]+"\n"
-          + "Occupation → "+ DATA_NEW_USER[3]+"\n"
-          + "Address → "+ DATA_NEW_USER[4]+"\n"
-          + "Username → "+ DATA_NEW_USER[5]+"\n"
-          + "Password → "+ DATA_NEW_USER[6]+"\n"
-          + "Email → "+ DATA_NEW_USER[7]+"\n"
-          + "Gender → "+ DATA_NEW_USER[8]+"\n"
+          + "Name → "+ DATA_NEW_USER.get("Name")+"\n"
+          + "Last name → "+ DATA_NEW_USER.get("LastName")+"\n"
+          + "Phone → "+ DATA_NEW_USER.get("Phone")+"\n"
+          + "Occupation → "+ DATA_NEW_USER.get("Occupation")+"\n"
+          + "Address → "+ DATA_NEW_USER.get("Address")+"\n"
+          + "Username → "+ DATA_NEW_USER.get("Username")+"\n"
+          + "Password → "+ DATA_NEW_USER.get("Password")+"\n"
+          + "Email → "+ DATA_NEW_USER.get("Email")+"\n"
+          + "Gender → "+ DATA_NEW_USER.get("Gender")+"\n"
       );
 
-      Resources.generalObject = new BookverseData(DATA_NEW_USER[5],
-          DATA_NEW_USER[6],
+      Resources.generalObject = new BookverseData(DATA_NEW_USER.get("Username"),
+          DATA_NEW_USER.get("Password"),
           BOOKVERSE_DEVELOPMENT,
           "");
       JUnitCore.runClasses(RunRegisterUser.class);

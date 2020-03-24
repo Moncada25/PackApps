@@ -5,10 +5,13 @@ import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
+import com.bookverse.development.packapps.automation.exceptions.RegisterUserException;
 import com.bookverse.development.packapps.automation.exceptions.SearchBookException;
 import com.bookverse.development.packapps.automation.models.BookverseData;
 import com.bookverse.development.packapps.automation.questions.VerifyTitle;
+import com.bookverse.development.packapps.automation.questions.VerifyUser;
 import com.bookverse.development.packapps.automation.tasks.BookverseLogin;
+import com.bookverse.development.packapps.automation.tasks.BookverseRegister;
 import com.bookverse.development.packapps.automation.tasks.BookverseSearchBook;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
 import com.bookverse.development.packapps.automation.utils.GenericConstants;
@@ -41,13 +44,13 @@ public class RunSearchBook {
     theActorInTheSpotlight().attemptsTo(BookverseSearchBook.andOpen(bookverseData.getBook()));
     theActorInTheSpotlight().should(seeThat(VerifyTitle.ofModal(bookverseData.getBook())).
         orComplainWith(SearchBookException.class, GenericConstants.SEARCH_BOOK_ERROR));
+    Alerts.message("Test passed!", ""
+        + "Book → " + bookverseData.getBook() + "\n"
+        + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
   }
 
   @After
   public void close() {
     BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
-    Alerts.message("Book found!", ""
-        + "Book → " + bookverseData.getBook() + "\n"
-        + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
   }
 }
