@@ -27,6 +27,8 @@ public class BookverseRegisterElements {
           "//div[@class = 'form-group']//div[@class = 'radio radio-primary']/label[contains(. , '{0}')]");
   public static final Target REGISTER_SUBMIT = Target.the("Button submit and register")
       .locatedBy("//button[@class]");
+  public static final Target ENTER_LOGIN = Target.the("Button go to login")
+      .locatedBy("//input[@id = 'btnIngresar']//ancestor::a");
 
   private BookverseRegisterElements() {
   }

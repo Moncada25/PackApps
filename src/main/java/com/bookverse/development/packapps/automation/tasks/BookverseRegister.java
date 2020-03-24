@@ -4,6 +4,7 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLoginElements.REGISTER_BUTTON;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.ADDRESS_FIELD;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.EMAIL_FIELD;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.ENTER_LOGIN;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.FIRST_PASSWORD_FIELD;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.GENDER_CHECK;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.LAST_NAME_FIELD;
@@ -15,6 +16,9 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.USERNAME_FIELD;
 import static com.bookverse.development.packapps.utils.ArrayData.DATA_NEW_USER;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnabled;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotCurrentlyVisible;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import net.serenitybdd.screenplay.Actor;
@@ -51,8 +55,11 @@ public class BookverseRegister implements Task {
         Enter.theValue(DATA_NEW_USER.get("Email")).into(EMAIL_FIELD),
         Click.on(GENDER_CHECK.of(DATA_NEW_USER.get("Gender"))),
         Click.on(REGISTER_SUBMIT),
-        Click.on(ALERT_ACCEPT)
+        Click.on(ALERT_ACCEPT),
+        Click.on(ALERT_ACCEPT),
+        WaitUntil.the(ALERT_ACCEPT, isNotCurrentlyVisible()),
+        Click.on(ENTER_LOGIN)
     );
-    actor.remember("USER_REGISTERED", DATA_NEW_USER.get("Name"));
+    actor.remember("USER_REGISTERED", DATA_NEW_USER.get("Name")+" "+ DATA_NEW_USER.get("LastName"));
   }
 }

@@ -15,7 +15,7 @@ public class BookverseHomeElements {
       .locatedBy("//input[@name = 'busqueda_inicial_libro']");
   public static final Target SEARCH_BOOK_BUTTON = Target.the("Search book button")
       .locatedBy("//button[@class = 'btn btn-primary btn-raised btn-sm']");
-  public static final Target ALERT_ACCEPT = Target.the("Alert button accpet")
+  public static final Target ALERT_ACCEPT = Target.the("Alert button accept")
       .locatedBy("//button[@class = 'swal2-confirm swal2-styled']");
   public static final Target ALERT_CANCEL = Target.the("Alert button cancel")
       .locatedBy("//button[@class = 'swal2-cancel swal2-styled']");
