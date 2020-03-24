@@ -39,11 +39,13 @@ public class RunRegisterUser {
   public void registerNewUser() {
     theActorInTheSpotlight().wasAbleTo(BookverseRegister.newUser());
     theActorInTheSpotlight().attemptsTo(BookverseLogin.withCredentials(bookverseData));
-    theActorInTheSpotlight().should(
-        seeThat(VerifyUser.registered(theActorInTheSpotlight().recall("USER_REGISTERED")))
-            .orComplainWith(RegisterUserException.class, GenericConstants.REGISTER_USER_ERROR));
-    Alerts.message("Test passed!",
-        "User " + theActorInTheSpotlight().recall("USER_REGISTERED") + " is registered!");
+    theActorInTheSpotlight().should(seeThat(VerifyUser.registered(theActorInTheSpotlight().recall("USER_REGISTERED"))).orComplainWith(RegisterUserException.class, GenericConstants.REGISTER_USER_ERROR));
+
+    if (theActorInTheSpotlight().recall("RESPONSE_REGISTER").toString().contains("ya se encuentra registrado")){
+      Alerts.message("Test passed!", "User " + theActorInTheSpotlight().recall("USER_REGISTERED") + " already is registered!");
+    }else{
+      Alerts.message("Test passed!", "User " + theActorInTheSpotlight().recall("USER_REGISTERED") + " is registered successfully!");
+    }
   }
 
   @After

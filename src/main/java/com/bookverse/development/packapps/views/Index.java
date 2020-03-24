@@ -22,6 +22,7 @@ import static com.bookverse.development.packapps.utils.ArrayData.PATH_BACKGROUND
 import com.bookverse.development.packapps.automation.models.BookverseData;
 import com.bookverse.development.packapps.automation.runners.RunRegisterUser;
 import com.bookverse.development.packapps.automation.runners.RunSearchBook;
+import com.bookverse.development.packapps.automation.utils.RunTest;
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
@@ -858,25 +859,7 @@ public class Index extends JFrame implements ActionListener {
       new SearchBook(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == registerUser) {
-      Alerts.message("Bookverse Test", ""
-          + "Register new user with following data...\n\n"
-          + "Name → "+ DATA_NEW_USER.get("Name")+"\n"
-          + "Last name → "+ DATA_NEW_USER.get("LastName")+"\n"
-          + "Phone → "+ DATA_NEW_USER.get("Phone")+"\n"
-          + "Occupation → "+ DATA_NEW_USER.get("Occupation")+"\n"
-          + "Address → "+ DATA_NEW_USER.get("Address")+"\n"
-          + "Username → "+ DATA_NEW_USER.get("Username")+"\n"
-          + "Password → "+ DATA_NEW_USER.get("Password")+"\n"
-          + "Email → "+ DATA_NEW_USER.get("Email")+"\n"
-          + "Gender → "+ DATA_NEW_USER.get("Gender")+"\n"
-      );
-
-      Resources.generalObject = new BookverseData(DATA_NEW_USER.get("Username"),
-          DATA_NEW_USER.get("Password"),
-          BOOKVERSE_DEVELOPMENT,
-          "");
-      JUnitCore.runClasses(RunRegisterUser.class);
-
+      RunTest.registerNewUser();
     } else if (e.getSource() == OCRTask) {
       new OCR(this, true).start(this);
       setVisible(true);

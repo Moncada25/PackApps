@@ -50,7 +50,7 @@ public class ArrayData {
     put("Name", "Santiago");
     put("LastName", "Moncada");
     put("Phone", "3012499315");
-    put("Occupation", "Estudiante");
+    put("Occupation", "Otro");
     put("Address", "CR 62 #62-b11");
     put("Username", "Akatsuki");
     put("Password", "Akatsuki25");
