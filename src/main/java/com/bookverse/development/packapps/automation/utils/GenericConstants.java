@@ -8,6 +8,7 @@ public class GenericConstants {
 
     public static final String SEARCH_BOOK_ERROR = "Failure searching book";
     public static final String REGISTER_USER_ERROR = "Failure registering new user";
+    public static final String TIMESHEET_ENTRY_ERROR = "Failure register timesheet entry";
 
     private GenericConstants(){}
 }
