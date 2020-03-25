@@ -9,7 +9,6 @@ import static com.bookverse.development.packapps.core.AppConfigCore.RESIZE;
 import static com.bookverse.development.packapps.core.AppConfigCore.TEXT;
 import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfigCore.getBorder;
-import static com.bookverse.development.packapps.core.AppConfigCore.inputText;
 import static com.bookverse.development.packapps.core.AppConfigCore.loginDBA;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
@@ -214,7 +213,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
       } else {
 
         if (loginDBA()) {
-          Database.updateData(inputText("Enter a Nickname", 20),
+          Database.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(NOTES));
 
           dispose();

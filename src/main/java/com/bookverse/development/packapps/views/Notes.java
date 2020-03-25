@@ -59,7 +59,7 @@ public class Notes extends JDialog implements ActionListener {
     setTitle(NOTES);
     AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfigCore.instruccionesNotas();
+    Alerts.instruccionesNotas();
     setVisible(true);
   }
 
@@ -70,7 +70,7 @@ public class Notes extends JDialog implements ActionListener {
     setTitle(NOTES);
     AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfigCore.instruccionesNotas();
+    Alerts.instruccionesNotas();
     setVisible(true);
   }
 
@@ -267,7 +267,7 @@ public class Notes extends JDialog implements ActionListener {
 
   private void insert(String state) {
 
-    if (AppConfigCore.verifyConnection("Data don't saved", true) && AppConfigCore.saveGame()) {
+    if (AppConfigCore.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
       try {
 

@@ -213,7 +213,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
       } else {
 
         if (AppConfigCore.loginDBA()) {
-          Database.updateData(AppConfigCore.inputText("Enter a Nickname", 20),
+          Database.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(DICES));
 
           dispose();

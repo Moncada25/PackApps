@@ -6,11 +6,7 @@ import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfigCore.fadeIn;
 import static com.bookverse.development.packapps.core.AppConfigCore.getDate;
-import static com.bookverse.development.packapps.core.AppConfigCore.inputNumber;
-import static com.bookverse.development.packapps.core.AppConfigCore.inputText;
-import static com.bookverse.development.packapps.core.AppConfigCore.instruccionesAdivinar;
-import static com.bookverse.development.packapps.core.AppConfigCore.intRandom;
-import static com.bookverse.development.packapps.core.AppConfigCore.saveGame;
+import static com.bookverse.development.packapps.core.AppConfigCore.getIntRandom;
 import static com.bookverse.development.packapps.core.AppConfigCore.verifyConnection;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
 
@@ -143,10 +139,10 @@ public class GuessNumber extends JDialog implements ActionListener {
 
   private void btnPlayAP() {
 
-    high = Integer.parseInt(inputNumber("Maximum number to guess", 6));
+    high = Integer.parseInt(Alerts.inputNumber("Maximum number to guess", 6));
 
     int minimum = 1;
-    numberRandom = intRandom(minimum, high);
+    numberRandom = getIntRandom(minimum, high);
 
     message.setText("<html><em>"
         + "<center><strong>Guess the number!</strong></center>"
@@ -182,7 +178,7 @@ public class GuessNumber extends JDialog implements ActionListener {
     setLocationRelativeTo(parent);
     AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfigCore.instruccionesAdivinar();
+    Alerts.instruccionesAdivinar();
     setVisible(true);
   }
 
@@ -199,7 +195,7 @@ public class GuessNumber extends JDialog implements ActionListener {
     setLocationRelativeTo(parent);
     fadeIn(this);
     parent.setVisible(false);
-    instruccionesAdivinar();
+    Alerts.instruccionesAdivinar();
     setVisible(true);
   }
 
@@ -229,7 +225,7 @@ public class GuessNumber extends JDialog implements ActionListener {
       btnPlay.setEnabled(true);
       btnReturn.setEnabled(true);
 
-      if (verifyConnection("Data don't saved", true) && saveGame()) {
+      if (verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
         String level;
 
@@ -241,7 +237,7 @@ public class GuessNumber extends JDialog implements ActionListener {
 
         try {
           String[] data = {GUESS_NUMBER,
-              inputText("Enter a Nickname", 20),
+              Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(high), level + " - " + attempts,
               getDate()};
           Database.insertData(data);

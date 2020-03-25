@@ -4,7 +4,6 @@ import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfigCore.getDate;
-import static com.bookverse.development.packapps.core.AppConfigCore.saveGame;
 import static com.bookverse.development.packapps.core.AppConfigCore.verifyConnection;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 
@@ -144,7 +143,7 @@ public class Dices extends JDialog implements ActionListener {
     setTitle(DICES + ", throw them!");
     AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfigCore.instruccionesDados();
+    Alerts.instruccionesDados();
     setVisible(true);
   }
 
@@ -155,7 +154,7 @@ public class Dices extends JDialog implements ActionListener {
     setTitle(DICES + ", throw them!");
     AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfigCore.instruccionesDados();
+    Alerts.instruccionesDados();
     setVisible(true);
   }
 
@@ -330,7 +329,7 @@ public class Dices extends JDialog implements ActionListener {
 
   private void insertResults(String name, String win) {
 
-    if (verifyConnection("Data don't saved", true) && saveGame()) {
+    if (verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
       try {
         String[] data = {DICES, name, win, String.valueOf(round),
             getDate()};

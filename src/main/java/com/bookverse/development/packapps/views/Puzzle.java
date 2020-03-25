@@ -2,7 +2,6 @@ package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.inputText;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.AppConfigCore;
@@ -57,7 +56,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     }
     AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfigCore.instruccionesRompe();
+    Alerts.instruccionesRompe();
     setVisible(true);
   }
 
@@ -74,7 +73,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     }
     AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfigCore.instruccionesRompe();
+    Alerts.instruccionesRompe();
     setVisible(true);
   }
 
@@ -241,9 +240,9 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
 
   private void insert(String state) {
 
-    if (AppConfigCore.verifyConnection("Data don't saved", true) && AppConfigCore.saveGame()) {
+    if (AppConfigCore.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
-      String[] data = {PUZZLE, inputText("Enter a Nickname", 20), state,
+      String[] data = {PUZZLE, Alerts.inputText("Enter a Nickname", 20), state,
           getLevel(), String.valueOf(moves), AppConfigCore.getDate()};
 
       Database.insertData(data);

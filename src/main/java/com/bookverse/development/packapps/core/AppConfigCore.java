@@ -1,34 +1,3 @@
-package com.bookverse.development.packapps.core;
-
-import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.models.AppConfigModel;
-import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.WindowEffect;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.io.IOException;
-import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.text.DateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.regex.Pattern;
-import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import javax.swing.BorderFactory;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-import org.apache.commons.codec.binary.Base64;
-import org.jetbrains.annotations.NotNull;
-
 /*
 Date 23/12/18
 8748 view p = 336.46 : 26 class
@@ -56,6 +25,35 @@ Date 10/06/19
 15859 total  : 45 class
 */
 
+package com.bookverse.development.packapps.core;
+
+import com.bookverse.development.packapps.models.AppConfigModel;
+import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.WindowEffect;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.io.IOException;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.text.DateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import javax.swing.BorderFactory;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+import org.apache.commons.codec.binary.Base64;
+import org.jetbrains.annotations.NotNull;
+
 public class AppConfigCore {
 
   public static final Color TEXT_COLOR = new Color(21, 87, 163);
@@ -71,71 +69,6 @@ public class AppConfigCore {
   public static final Font MEDIUM = new Font("Cambria", Font.ITALIC, 18);
   public static final Font BIG = new Font("Cambria", Font.ITALIC, 28);
 
-  public static String inputText(String request, int length) {
-
-    boolean canContinue = false;
-    String text;
-
-    do {
-
-      text = Alerts.inputText(request);
-
-      if (text != null && !text.trim().equals("") && Pattern.matches("^[a-zA-Z]*$", text)) {
-
-        if (text.length() <= length) {
-          canContinue = true;
-        } else {
-          Alerts.inputLarge();
-        }
-
-      } else {
-        Alerts.invalidInput();
-      }
-
-    } while (!canContinue);
-
-    return text;
-  }
-
-  @NotNull
-  public static String inputNumber(String request, int length) {
-
-    boolean canContinue = false;
-    String text;
-    int num = 0;
-
-    do {
-
-      text = Alerts.inputText(request);
-
-      try {
-        num = Integer.parseInt(text);
-
-        if (text.length() <= length) {
-          canContinue = true;
-        } else {
-          Alerts.inputLarge();
-        }
-
-      } catch (NumberFormatException e) {
-        Alerts.onlyNumbers(length);
-      }
-    } while (!canContinue);
-
-    return String.valueOf(num);
-  }
-
-  public static boolean saveGame() {
-
-    boolean save = false;
-
-    if (Alerts.requestResponse("You want to save the data?", "Save")) {
-      save = true;
-    }
-
-    return save;
-  }
-
   @NotNull
   public static String getDate() {
 
@@ -146,7 +79,7 @@ public class AppConfigCore {
         + date.get(Calendar.MINUTE);
   }
 
-  public static int intRandom(int min, int max) {
+  public static int getIntRandom(int min, int max) {
     return (int) Math.floor(Math.random() * (min - max + 1) + max);
   }
 
@@ -209,7 +142,7 @@ public class AppConfigCore {
     }
   }
 
-  public static String setSecretKey() {
+  private static String setSecretKey() {
 
     boolean canContinue;
     JPasswordField pass = new JPasswordField(10);
@@ -241,29 +174,29 @@ public class AppConfigCore {
 
   public static boolean loginDBA() {
 
-    JPasswordField pass = new JPasswordField(10);
+    JPasswordField jPasswordField = new JPasswordField(10);
 
     boolean canContinue = true;
 
     while (canContinue) {
 
       int action = JOptionPane
-          .showConfirmDialog(null, pass, "DBA's Password", JOptionPane.PLAIN_MESSAGE,
+          .showConfirmDialog(null, jPasswordField, "DBA's Password", JOptionPane.PLAIN_MESSAGE,
               JOptionPane.PLAIN_MESSAGE);
 
       if (action >= 0) {
 
-        String aux = new String(pass.getPassword());
+        String password = new String(jPasswordField.getPassword());
 
-        if (aux.length() != 0) {
+        if (password.length() != 0) {
 
-          if (AppConfigModel.getPasswordDBA().equals(aux)) {
+          if (AppConfigModel.getPasswordDBA().equals(password)) {
             return true;
           } else {
             JOptionPane.showMessageDialog(null,
                 "<html>" + Format.style() + "<strong>Incorrect password</strong></html>",
                 "Error", JOptionPane.PLAIN_MESSAGE);
-            pass.setText("");
+            jPasswordField.setText("");
           }
 
         } else {
@@ -282,27 +215,27 @@ public class AppConfigCore {
 
     String dirWeb = "www.google.com";
     int puerto = 80;
-    Socket s = null;
+    Socket socket = null;
 
     try {
-      s = new Socket(dirWeb, puerto);
+      socket = new Socket(dirWeb, puerto);
 
-      return s.isConnected();
+      return socket.isConnected();
 
     } catch (Exception e) {
 
       if (show) {
         JOptionPane.showMessageDialog(null,
             "<html>" + Format.style() + "<strong>" + request + "</strong></html>",
-            "Sin conexión a Internet", JOptionPane.PLAIN_MESSAGE);
+            "No internet connection", JOptionPane.PLAIN_MESSAGE);
       }
 
     } finally {
 
       try {
 
-        if (s != null) {
-          s.close();
+        if (socket != null) {
+          socket.close();
         }
 
       } catch (IOException e) {
@@ -324,7 +257,7 @@ public class AppConfigCore {
     return border;
   }
 
-  public static String getSecretKey(boolean isSetSecretKey) {
+  private static String getSecretKey(boolean isSetSecretKey) {
 
     if (!isSetSecretKey) {
       return setSecretKey();
@@ -347,108 +280,5 @@ public class AppConfigCore {
 
   public static void fadeOut(JDialog window) {
     WindowEffect.JDialogFadeOut(1f, 0f, 0.2f, 50, window, WindowEffect.DISPOSE);
-  }
-
-  //INSTRUCCIONES
-
-  public static void instruccionesRuleta() {
-
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong><center>Ruleta</center></strong><br>"
-            + "<strong>Jugadores: </strong>1-9<br><br>"
-            + "Al iniciar, se pedirá el número de jugadores<br>"
-            + "que participarán. Luego, tendrá que ingresar<br>"
-            + "la información de cada jugador (nombre y saldo).<br><br>"
-            + "Finalmente, empezarán las apuestas pertinentes<br>"
-            + "teniendo en cuenta lo siguiente: de ganar se le<br>"
-            + "sumará al saldo el doble del valor de la apuesta y<br>"
-            + "<strong>¡apostar por el cero (0) implica perder x2 y ganar x4!</strong><br>"
-            + "</html>",
-        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
-  }
-
-
-  public static void instruccionesDados() {
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong><center>Juego de Dados</center></strong><br>"
-            + "<strong>Jugadores: </strong>3<br><br>"
-            + "El juego consta de 5 rondas, cada jugador<br>"
-            + "lanzará tres dados para sumar sus puntos<br>"
-            + "pero si los saca iguales ganará inmediatamente.<br>"
-            + "Si al finalizar el juego, ninguno saca los tres<br>"
-            + "dados iguales, ganará quien sume más puntos." + "</html>",
-        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public static void instruccionesRompe() {
-    JOptionPane.showMessageDialog(null, "<html>" + Format.style()
-            + "<strong><center>Rompecabezas</center></strong><br>"
-            + "<strong>Jugadores: </strong>1<br><br>"
-            + "Después de seleccionar la dificultad, el<br>"
-            + "tablero iniciará en orden aleatorio, se tendrán<br>"
-            + "que ordenar los números de menor a mayor<br>"
-            + "en la menor cantidad de intentos posible.<br><br>"
-            + "¡Apúrate! habrá un tiempo límite para ganar:<br><br>"
-            + "<strong>Level Easy:</strong> 3 min<br>"
-            + "<strong>Level Medium:</strong> 6 min<br>" + "<strong>Level Hard:</strong> 10 min<br>"
-            + "</html>",
-        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public static void instruccionesAdivinar() {
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong><center>Adivinar Número</center></strong><br>"
-            + "<strong>Jugadores: </strong>1<br><br>"
-            + "Después de seleccionar la dificultad, se pedirá<br>"
-            + "el máximo rango a adivinar, éste no puede ser<br>"
-            + "mayor de 6 dígitos. Después, simplemente tendrás<br>"
-            + "que ir ingresando valores hasta adivinar el número<br>"
-            + "secreto en la menor cantidad de intentos." + "</html>",
-        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public static void instruccionesTriqui() {
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong><center>Triqui</center></strong><br>"
-            + "<strong>Jugadores: </strong>1 o 2<br><br>"
-            + "Triqui clásico usuario vs usuario o usuario vs CPU.<br>"
-            + "En principio, cada uno tendrá tres movimientos.<br>"
-            + "Después de hacerlos, tendrán que empezar a mover<br>"
-            + "las piezas ya puestas hasta lograr poner las tres en linea.<br>"
-            + "Cuando un jugador llegue a 5 puntos ganará la partida." + "</html>",
-        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public static void instruccionesEstructuras() {
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style()
-            + "<strong><center>Estructuras de Datos</center></strong><br>"
-            + "Simulación funcional de estructuras tipo <strong>pilas, colas </strong><br> y <strong>matrices </strong>"
-            + "con funciones de conteo, suma y promedio,<br>"
-            + "para las primeras, y multiplicación, transpuesta<br>"
-            + "y determinantes para las opecaciones con matrices.<br>"
-            + "Útil para entender el funcionamiento de estas estructuras." + "</html>",
-        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public static void instruccionesAhorcado() {
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong><center>Ahorcadito</center></strong><br>"
-            + "<strong>Jugadores: </strong>1<br><br>"
-            + "El juego empieza cuando se selecciona una<br>"
-            + "categoría de palabras para jugar. Tendrás que ir<br>"
-            + "digitando letra por letra la palabra secreta,<br>"
-            + "¡pero no te tardes! tendrás 60 segundo para ganar." + "</html>",
-        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public static void instruccionesNotas() {
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong><center>Notas</center></strong><br>"
-            + "<strong>¿No sabes cuánto necesitas para ganar la materia?</strong><br><br>"
-            + "¡Con esta aplicación podrás saberlo! suma tus notas<br>"
-            + "y entérate si tienes esperanza para pasarla o si ya<br>"
-            + "mejor la cancelas... puedes agregar hasta 10 notas.<br>" + "</html>",
-        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 }

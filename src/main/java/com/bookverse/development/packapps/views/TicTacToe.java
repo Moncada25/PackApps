@@ -5,10 +5,10 @@ import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfigCore.fadeIn;
-import static com.bookverse.development.packapps.core.AppConfigCore.fadeOut;
-import static com.bookverse.development.packapps.core.AppConfigCore.instruccionesTriqui;
-import static com.bookverse.development.packapps.core.AppConfigCore.intRandom;
+import static com.bookverse.development.packapps.utils.Alerts.instruccionesTriqui;
+import static com.bookverse.development.packapps.core.AppConfigCore.getIntRandom;
 
+import com.bookverse.development.packapps.core.AppConfigCore;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.Color;
 import java.awt.Font;
@@ -505,7 +505,7 @@ public class TicTacToe extends JDialog implements ActionListener {
 
     int[][] points = getPoints();
 
-    int aux = intRandom(0, 2);
+    int aux = getIntRandom(0, 2);
 
     position[0] = points[aux][0];
     position[1] = points[aux][1];
@@ -589,7 +589,7 @@ public class TicTacToe extends JDialog implements ActionListener {
     } else if (e.getSource() == btnReset) {
       btnResetAP();
     } else if (e.getSource() == btnExit) {
-      fadeOut(this);
+      AppConfigCore.fadeOut(this);
     } else {
       btnBoardAP(e);
     }

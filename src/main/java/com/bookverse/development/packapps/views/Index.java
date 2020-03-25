@@ -960,7 +960,7 @@ public class Index extends JFrame implements ActionListener {
 
       if (e.getSource() == roulette) {
 
-        AppConfigCore.instruccionesRuleta();
+        Alerts.instruccionesRuleta();
 
         try {
           Desktop.getDesktop()

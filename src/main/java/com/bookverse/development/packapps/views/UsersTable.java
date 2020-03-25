@@ -182,7 +182,7 @@ public class UsersTable extends JDialog implements MouseListener {
 
               } else if (option.toString().equals("Username")) {
 
-                String newUsername = AppConfigCore.inputText("Enter new username", 20);
+                String newUsername = Alerts.inputText("Enter new username", 20);
                 if (!Format.verifyCredentials(newUsername)) {
                   Alerts.message("Message", "The username are too weak, please try again.");
                 } else {

@@ -14,7 +14,6 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,13 +21,13 @@ public class Querys {
 
   @NotNull
   public static String getDataByID(String table) {
-    return "SELECT * FROM " + Format.tableName(table) + " WHERE ID ='" + AppConfigCore
+    return "SELECT * FROM " + Format.tableName(table) + " WHERE ID ='" + Alerts
         .inputNumber("Enter a ID", 6) + "'";
   }
 
   @NotNull
   public static String getDataByNickname(String table) {
-    return "SELECT * FROM " + Format.tableName(table) + " WHERE Nickname ='" + AppConfigCore
+    return "SELECT * FROM " + Format.tableName(table) + " WHERE Nickname ='" + Alerts
         .inputText("Enter a Nickname", 20) + "'";
   }
 
@@ -176,7 +175,7 @@ public class Querys {
   }
 
   @NotNull
-  public static String getTitleBooks(){
-    return "SELECT LibroTitulo FROM "+ Format.tableName(BOOKS);
+  public static String getTitleBooks() {
+    return "SELECT LibroTitulo FROM " + Format.tableName(BOOKS);
   }
 }

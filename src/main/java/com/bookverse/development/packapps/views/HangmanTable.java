@@ -188,7 +188,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
       } else {
 
         if (AppConfigCore.loginDBA()) {
-          Database.updateData(AppConfigCore.inputText("Enter a Nickname", 20),
+          Database.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(HANGMAN));
 
           dispose();

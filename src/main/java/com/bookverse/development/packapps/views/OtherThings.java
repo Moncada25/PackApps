@@ -261,7 +261,7 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Hacks");
-    fadeIn(this);
+    AppConfigCore.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }

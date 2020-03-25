@@ -4,7 +4,6 @@ import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
 import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.fadeOut;
 
 import com.bookverse.development.packapps.core.AppConfigCore;
 import com.bookverse.development.packapps.models.Resources;
@@ -258,7 +257,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
   public void mouseClicked(MouseEvent e) {
 
     if (e.getSource() == message) {
-      fadeOut(this);
+      AppConfigCore.fadeOut(this);
     }
   }
 

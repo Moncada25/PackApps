@@ -4,8 +4,8 @@ import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
 import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.ArrayData.WORD_LIST;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
 import static java.awt.Font.PLAIN;
 
 import com.bookverse.development.packapps.core.AppConfigCore;
@@ -120,7 +120,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setTitle(HANGMAN);
     AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfigCore.instruccionesAhorcado();
+    Alerts.instruccionesAhorcado();
     setVisible(true);
   }
 
@@ -131,7 +131,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setTitle(HANGMAN);
     AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfigCore.instruccionesAhorcado();
+    Alerts.instruccionesAhorcado();
     setVisible(true);
   }
 
@@ -328,9 +328,9 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
   private void insert(String state) {
 
-    if (AppConfigCore.verifyConnection("Data don't saved", true) && AppConfigCore.saveGame()) {
+    if (AppConfigCore.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
-      String[] data = {HANGMAN, AppConfigCore.inputText("Enter a Nickname", 20),
+      String[] data = {HANGMAN, Alerts.inputText("Enter a Nickname", 20),
           String.valueOf(countAttempts), state,
           Objects.requireNonNull(options.getSelectedItem()).toString(),
           AppConfigCore.getDate()};
