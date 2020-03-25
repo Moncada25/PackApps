@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.GenericConstants.BOOKVERSE_DEVELOPMENT;
+import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_DEVELOPMENT;
 import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
@@ -140,7 +140,7 @@ public class SearchBook extends JDialog implements ActionListener {
         && String.valueOf(txtPassword.getPassword()).length() >= 4) {
       Resources.generalObject = new BookverseData(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
-          BOOKVERSE_DEVELOPMENT,
+          BOOKVERSE_DEVELOPMENT.getProperty(),
           String.valueOf(listBooksBox.getSelectedItem()));
       JUnitCore.runClasses(RunSearchBook.class);
     } else {

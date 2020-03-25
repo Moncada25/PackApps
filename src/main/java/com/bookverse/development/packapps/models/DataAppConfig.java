@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.models;
 
-import com.bookverse.development.packapps.utils.GenericConstants;
+import com.bookverse.development.packapps.utils.ConfigData;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.PropertyResourceBundle;
@@ -13,7 +13,7 @@ public class DataAppConfig {
 
   static {
     try {
-      FileInputStream file = new FileInputStream(GenericConstants.FILE_PROPERTIES);
+      FileInputStream file = new FileInputStream(ConfigData.FILE_PROPERTIES.getProperty());
       configProperties = new PropertyResourceBundle(file);
     } catch (IOException e) {
       e.printStackTrace();
@@ -25,21 +25,21 @@ public class DataAppConfig {
 
   @NotNull
   public static String getTitleApp() {
-    return configProperties.getString(GenericConstants.TITLE);
+    return configProperties.getString(ConfigData.TITLE.getProperty());
   }
 
   @NotNull
   public static String getPasswordDBA() {
-    return configProperties.getString(GenericConstants.PASSWORD_DBA);
+    return configProperties.getString(ConfigData.PASSWORD_DBA.getProperty());
   }
 
   @NotNull
   public static String getStoreManagerKey() {
-    return configProperties.getString(GenericConstants.STORE_MANAGER_KEY);
+    return configProperties.getString(ConfigData.STORE_MANAGER_KEY.getProperty());
   }
 
   @NotNull
   public static String getDefaultEncryptKey() {
-    return configProperties.getString(GenericConstants.DEFAULT_ENCRYPT_KEY);
+    return configProperties.getString(ConfigData.DEFAULT_ENCRYPT_KEY.getProperty());
   }
 }

@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.automation.runners;
 
-import static com.bookverse.development.packapps.automation.utils.GenericConstants.TIMESHEET_ENTRY_ERROR;
+import static com.bookverse.development.packapps.automation.utils.ExceptionsMessages.TIMESHEET_ENTRY_ERROR;
 import static net.serenitybdd.screenplay.GivenWhenThen.*;
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
@@ -15,7 +15,6 @@ import com.bookverse.development.packapps.automation.tasks.UltimatixTimesheetReg
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
 import com.bookverse.development.packapps.models.Resources;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.Cast;
 import org.junit.After;
@@ -40,7 +39,7 @@ public class RunTimesheetEntry {
   public void registerTimeSheet() {
     theActorInTheSpotlight().wasAbleTo(UltimatixLogin.withCredentials(ultimatixData));
     theActorInTheSpotlight().attemptsTo(UltimatixTimesheetRegister.hours(ultimatixData.getHours()));
-    theActorInTheSpotlight().should(seeThat(VerifyStatus.ofGeneralObject()).orComplainWith(TimesheetEntryException.class, TIMESHEET_ENTRY_ERROR));
+    theActorInTheSpotlight().should(seeThat(VerifyStatus.ofGeneralObject()).orComplainWith(TimesheetEntryException.class, TIMESHEET_ENTRY_ERROR.getProperty()));
   }
 
   @After

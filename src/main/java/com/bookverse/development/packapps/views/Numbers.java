@@ -41,7 +41,7 @@ public class Numbers extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
     panel.setBackground(new Color(0, 0, 0));
-    panel.setBorder(getBorder("Select"));
+    panel.setBorder(getBorder("Select action"));
 
     btnPhi = resources.getLabel("  Phi φ  ", TEXT_COLOR, panel, MEDIUM);
     btnPhi.setBorder(BORDER_BLUE);
