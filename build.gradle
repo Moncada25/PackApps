@@ -52,7 +52,6 @@ ext {
 dependencies {
     implementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
     implementation "net.serenity-bdd:serenity-junit:${serenityCoreVersion}"
-    implementation "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}"
     implementation "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}"
     implementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}"
 
