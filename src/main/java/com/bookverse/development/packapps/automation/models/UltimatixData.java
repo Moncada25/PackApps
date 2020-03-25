@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.automation.models;
 
+
 public class UltimatixData {
 
   private String user;

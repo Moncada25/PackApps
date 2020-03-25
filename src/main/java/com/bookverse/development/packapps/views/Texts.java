@@ -45,7 +45,7 @@ public class Texts extends JDialog implements MouseListener {
   public JPanel getPanel() {
 
     JPanel panel = new JPanel(new FlowLayout());
-    panel.setBorder(AppConfig.getBorder("Select Action"));
+    panel.setBorder(AppConfig.getBorder("Select action"));
 
     encrypt = resources.getLabel("  Encrypt  ", TEXT_COLOR, panel, AppConfig.MEDIUM);
     encrypt.setBorder(AppConfig.BORDER_BLUE);

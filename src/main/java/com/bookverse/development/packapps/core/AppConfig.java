@@ -194,7 +194,7 @@ public class AppConfig {
       base64EncryptedString = new String(plainText, StandardCharsets.UTF_8);
 
     } catch (Exception ex) {
-      Alerts.error(ex, "Decrypt");
+      ex.printStackTrace();
     }
 
     if (base64EncryptedString.equals("")) {

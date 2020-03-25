@@ -71,7 +71,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(AppConfig.getBorder("Select Table"));
+    panel.setBorder(AppConfig.getBorder("Select table"));
 
     title = new JLabel();
     title.setFont(BIG);

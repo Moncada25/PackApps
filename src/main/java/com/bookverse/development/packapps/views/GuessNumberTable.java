@@ -75,7 +75,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(getBorder("Select Table"));
+    panel.setBorder(getBorder("Select table"));
 
     title = new JLabel();
     title.setFont(BIG);

@@ -51,6 +51,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import org.jetbrains.annotations.NotNull;
 
 public class PuzzleTable extends JDialog implements ActionListener, MouseListener {
 
@@ -67,6 +68,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
     createComponents();
   }
 
+  @NotNull
   private JPanel getPanel() {
 
     JPanel panel = new JPanel(new GridLayout());
@@ -75,7 +77,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(getBorder("Select Table"));
+    panel.setBorder(getBorder("Select table"));
 
     title = new JLabel();
     title.setFont(BIG);

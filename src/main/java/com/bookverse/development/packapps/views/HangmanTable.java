@@ -65,7 +65,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
     JPanel row = new JPanel(new FlowLayout());
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(AppConfig.getBorder("Select Table"));
+    panel.setBorder(AppConfig.getBorder("Select table"));
 
     title = new JLabel();
     title.setFont(AppConfig.BIG);

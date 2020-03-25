@@ -41,8 +41,8 @@ jar {
     }
 }
 
-sourceSets.main.resources.srcDirs = ["src/main/resources"]
-sourceSets.main.resources.includes = ["*.png", "*.jpg"]
+sourceSets.main.resources.srcDirs = ["src/main/resources/images"]
+sourceSets.main.resources.includes = ["*.png", "*.jpg", "*.gif"]
 
 ext {
     serenityCoreVersion = "2.0.49"
