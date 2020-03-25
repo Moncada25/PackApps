@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.utils;
 
-public enum ConfigData {
+public enum AppConfigUtility {
 
   TITLE("titleApp"),
   PASSWORD_DBA("passwordDBA"),
@@ -10,7 +10,7 @@ public enum ConfigData {
 
   private String property;
 
-  ConfigData(String property) {
+  AppConfigUtility(String property) {
     this.property = property;
   }
 

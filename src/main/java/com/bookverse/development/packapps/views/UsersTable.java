@@ -1,13 +1,13 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.HAND;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.getBorder;
+import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
+import static com.bookverse.development.packapps.core.AppConfigCore.HAND;
+import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.getBorder;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.AppConfigCore;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
@@ -153,7 +153,7 @@ public class UsersTable extends JDialog implements MouseListener {
         try {
 
           if (Database.searchUserRegister(user,
-              AppConfig.encrypt(Alerts.inputPassword("Enter password"), true))) {
+              AppConfigCore.encrypt(Alerts.inputPassword("Enter password"), true))) {
 
             Object option = null;
 
@@ -174,7 +174,7 @@ public class UsersTable extends JDialog implements MouseListener {
                   Alerts.message("Message", "The password are too weak, please try again.");
                 } else {
 
-                  Database.updatePassword(user, AppConfig.encrypt(newPassword, true));
+                  Database.updatePassword(user, AppConfigCore.encrypt(newPassword, true));
                   Alerts.message("Success", "Password updated!");
                   dispose();
                   new HomeStore().btnUsersTableAP();
@@ -182,7 +182,7 @@ public class UsersTable extends JDialog implements MouseListener {
 
               } else if (option.toString().equals("Username")) {
 
-                String newUsername = AppConfig.inputText("Enter new username", 20);
+                String newUsername = AppConfigCore.inputText("Enter new username", 20);
                 if (!Format.verifyCredentials(newUsername)) {
                   Alerts.message("Message", "The username are too weak, please try again.");
                 } else {
@@ -236,7 +236,7 @@ public class UsersTable extends JDialog implements MouseListener {
           String[] IDs = Arrays.stream(selectedRows).mapToObj(selectedRow ->
               String.valueOf(model.getValueAt(selectedRow, 0))).toArray(String[]::new);
 
-          if (AppConfig.loginDBA()) {
+          if (AppConfigCore.loginDBA()) {
             Database.deleteData(IDs, USERS);
             dispose();
             new HomeStore().btnUsersTableAP();

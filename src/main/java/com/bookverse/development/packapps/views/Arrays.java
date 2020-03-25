@@ -1,14 +1,14 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.SMALL;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.inputNumber;
-import static com.bookverse.development.packapps.core.AppConfig.intRandom;
+import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
+import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfigCore.SMALL;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.inputNumber;
+import static com.bookverse.development.packapps.core.AppConfigCore.intRandom;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.AppConfigCore;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -148,7 +148,7 @@ public class Arrays extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Arrays");
-    AppConfig.fadeIn(this);
+    AppConfigCore.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }

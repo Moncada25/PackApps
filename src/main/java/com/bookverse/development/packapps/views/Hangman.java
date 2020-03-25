@@ -1,14 +1,14 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
+import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.ArrayData.WORD_LIST;
 import static java.awt.Font.PLAIN;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.AppConfigCore;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -118,9 +118,9 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(HANGMAN);
-    AppConfig.fadeIn(this);
+    AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfig.instruccionesAhorcado();
+    AppConfigCore.instruccionesAhorcado();
     setVisible(true);
   }
 
@@ -129,9 +129,9 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(HANGMAN);
-    AppConfig.fadeIn(this);
+    AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfig.instruccionesAhorcado();
+    AppConfigCore.instruccionesAhorcado();
     setVisible(true);
   }
 
@@ -328,12 +328,12 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
   private void insert(String state) {
 
-    if (AppConfig.verifyConnection("Data don't saved", true) && AppConfig.saveGame()) {
+    if (AppConfigCore.verifyConnection("Data don't saved", true) && AppConfigCore.saveGame()) {
 
-      String[] data = {HANGMAN, AppConfig.inputText("Enter a Nickname", 20),
+      String[] data = {HANGMAN, AppConfigCore.inputText("Enter a Nickname", 20),
           String.valueOf(countAttempts), state,
           Objects.requireNonNull(options.getSelectedItem()).toString(),
-          AppConfig.getDate()};
+          AppConfigCore.getDate()};
 
       Database.insertData(data);
     }
@@ -474,7 +474,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     if (e.getSource() == btnPlay) {
       btnPlayAP();
     } else if (e.getSource() == btnExit) {
-      AppConfig.fadeOut(this);
+      AppConfigCore.fadeOut(this);
     }
   }
 

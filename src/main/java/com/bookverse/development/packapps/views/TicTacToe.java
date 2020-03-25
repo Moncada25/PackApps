@@ -1,13 +1,13 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
-import static com.bookverse.development.packapps.core.AppConfig.fadeOut;
-import static com.bookverse.development.packapps.core.AppConfig.instruccionesTriqui;
-import static com.bookverse.development.packapps.core.AppConfig.intRandom;
+import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
+import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.fadeIn;
+import static com.bookverse.development.packapps.core.AppConfigCore.fadeOut;
+import static com.bookverse.development.packapps.core.AppConfigCore.instruccionesTriqui;
+import static com.bookverse.development.packapps.core.AppConfigCore.intRandom;
 
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.Color;

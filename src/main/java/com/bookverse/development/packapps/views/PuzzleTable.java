@@ -1,16 +1,16 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.HAND;
-import static com.bookverse.development.packapps.core.AppConfig.LOADER;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.POINT;
-import static com.bookverse.development.packapps.core.AppConfig.RESIZE;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.getBorder;
-import static com.bookverse.development.packapps.core.AppConfig.inputText;
-import static com.bookverse.development.packapps.core.AppConfig.loginDBA;
+import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
+import static com.bookverse.development.packapps.core.AppConfigCore.HAND;
+import static com.bookverse.development.packapps.core.AppConfigCore.LOADER;
+import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.POINT;
+import static com.bookverse.development.packapps.core.AppConfigCore.RESIZE;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.getBorder;
+import static com.bookverse.development.packapps.core.AppConfigCore.inputText;
+import static com.bookverse.development.packapps.core.AppConfigCore.loginDBA;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;

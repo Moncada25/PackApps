@@ -1,14 +1,14 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.getDate;
-import static com.bookverse.development.packapps.core.AppConfig.saveGame;
-import static com.bookverse.development.packapps.core.AppConfig.verifyConnection;
+import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.getDate;
+import static com.bookverse.development.packapps.core.AppConfigCore.saveGame;
+import static com.bookverse.development.packapps.core.AppConfigCore.verifyConnection;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.AppConfigCore;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -142,9 +142,9 @@ public class Dices extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DICES + ", throw them!");
-    AppConfig.fadeIn(this);
+    AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfig.instruccionesDados();
+    AppConfigCore.instruccionesDados();
     setVisible(true);
   }
 
@@ -153,9 +153,9 @@ public class Dices extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DICES + ", throw them!");
-    AppConfig.fadeIn(this);
+    AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfig.instruccionesDados();
+    AppConfigCore.instruccionesDados();
     setVisible(true);
   }
 
@@ -378,7 +378,7 @@ public class Dices extends JDialog implements ActionListener {
     }
 
     if (e.getSource() == btnExit) {
-      AppConfig.fadeOut(this);
+      AppConfigCore.fadeOut(this);
     }
 
     if (e.getSource() == btnReset) {

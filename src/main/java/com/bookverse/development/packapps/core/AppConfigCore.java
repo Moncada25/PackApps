@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.core;
 
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.models.DataAppConfig;
+import com.bookverse.development.packapps.models.AppConfigModel;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.WindowEffect;
 import java.awt.Color;
@@ -56,7 +56,7 @@ Date 10/06/19
 15859 total  : 45 class
 */
 
-public class AppConfig {
+public class AppConfigCore {
 
   public static final Color TEXT_COLOR = new Color(21, 87, 163);
   public static final Color MAIN_COLOR = new Color(220, 12, 12);
@@ -257,7 +257,7 @@ public class AppConfig {
 
         if (aux.length() != 0) {
 
-          if (DataAppConfig.getPasswordDBA().equals(aux)) {
+          if (AppConfigModel.getPasswordDBA().equals(aux)) {
             return true;
           } else {
             JOptionPane.showMessageDialog(null,
@@ -329,7 +329,7 @@ public class AppConfig {
     if (!isSetSecretKey) {
       return setSecretKey();
     } else {
-      return DataAppConfig.getDefaultEncryptKey();
+      return AppConfigModel.getDefaultEncryptKey();
     }
   }
 

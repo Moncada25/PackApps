@@ -1,16 +1,16 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
+import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.AppConfigCore;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.models.DataAppConfig;
+import com.bookverse.development.packapps.models.AppConfigModel;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -123,7 +123,7 @@ public class SignUp extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Add User");
-    AppConfig.fadeIn(this);
+    AppConfigCore.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
     txtPassword.setText("");
@@ -135,12 +135,12 @@ public class SignUp extends JDialog implements ActionListener {
     txtCodManager.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
-    AppConfig.fadeOut(this);
+    AppConfigCore.fadeOut(this);
   }
 
   private void btnSignUpAP() {
 
-    if (String.valueOf(txtCodManager.getPassword()).equals(DataAppConfig.getStoreManagerKey())) {
+    if (String.valueOf(txtCodManager.getPassword()).equals(AppConfigModel.getStoreManagerKey())) {
 
       txtUser.setEnabled(true);
       txtPassword.setEnabled(true);
@@ -150,7 +150,7 @@ public class SignUp extends JDialog implements ActionListener {
 
         if (!Database.userAlreadyExist(txtUser.getText())) {
 
-          String[] data = {USERS, txtUser.getText(), AppConfig.encrypt(String.valueOf(
+          String[] data = {USERS, txtUser.getText(), AppConfigCore.encrypt(String.valueOf(
               txtPassword.getPassword()), true), "Offline"};
 
           Database.insertData(data);
@@ -159,10 +159,10 @@ public class SignUp extends JDialog implements ActionListener {
           txtUser.setText("");
           txtPassword.setText("");
           txtCodManager.setText("");
-          AppConfig.fadeOut(this);
+          AppConfigCore.fadeOut(this);
         } else {
           Alerts.message("Message", "User already exists, please try to login.");
-          AppConfig.fadeOut(this);
+          AppConfigCore.fadeOut(this);
         }
 
       } else {

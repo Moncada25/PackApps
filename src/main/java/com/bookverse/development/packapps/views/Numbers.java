@@ -1,14 +1,14 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BORDER_BLUE;
-import static com.bookverse.development.packapps.core.AppConfig.BORDER_RED;
-import static com.bookverse.development.packapps.core.AppConfig.HAND;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.getBorder;
+import static com.bookverse.development.packapps.core.AppConfigCore.BORDER_BLUE;
+import static com.bookverse.development.packapps.core.AppConfigCore.BORDER_RED;
+import static com.bookverse.development.packapps.core.AppConfigCore.HAND;
+import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.getBorder;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.AppConfigCore;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -72,7 +72,7 @@ public class Numbers extends JDialog implements MouseListener {
     setMaximumSize(new Dimension(1295, 820));
     setLocationRelativeTo(parent);
     setTitle("Numbers");
-    AppConfig.fadeIn(this);
+    AppConfigCore.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -127,7 +127,7 @@ public class Numbers extends JDialog implements MouseListener {
       new OtherThings(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == welcome) {
-      AppConfig.fadeOut(this);
+      AppConfigCore.fadeOut(this);
     }
   }
 

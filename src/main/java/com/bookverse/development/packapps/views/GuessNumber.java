@@ -1,20 +1,20 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
-import static com.bookverse.development.packapps.core.AppConfig.getDate;
-import static com.bookverse.development.packapps.core.AppConfig.inputNumber;
-import static com.bookverse.development.packapps.core.AppConfig.inputText;
-import static com.bookverse.development.packapps.core.AppConfig.instruccionesAdivinar;
-import static com.bookverse.development.packapps.core.AppConfig.intRandom;
-import static com.bookverse.development.packapps.core.AppConfig.saveGame;
-import static com.bookverse.development.packapps.core.AppConfig.verifyConnection;
+import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
+import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.fadeIn;
+import static com.bookverse.development.packapps.core.AppConfigCore.getDate;
+import static com.bookverse.development.packapps.core.AppConfigCore.inputNumber;
+import static com.bookverse.development.packapps.core.AppConfigCore.inputText;
+import static com.bookverse.development.packapps.core.AppConfigCore.instruccionesAdivinar;
+import static com.bookverse.development.packapps.core.AppConfigCore.intRandom;
+import static com.bookverse.development.packapps.core.AppConfigCore.saveGame;
+import static com.bookverse.development.packapps.core.AppConfigCore.verifyConnection;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.AppConfigCore;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -135,7 +135,7 @@ public class GuessNumber extends JDialog implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnReturn) {
-      AppConfig.fadeOut(this);
+      AppConfigCore.fadeOut(this);
     } else if (e.getSource() == btnPlay) {
       btnPlayAP();
     }
@@ -180,9 +180,9 @@ public class GuessNumber extends JDialog implements ActionListener {
     setSize(430, 330);
     setResizable(false);
     setLocationRelativeTo(parent);
-    AppConfig.fadeIn(this);
+    AppConfigCore.fadeIn(this);
     parent.setVisible(false);
-    AppConfig.instruccionesAdivinar();
+    AppConfigCore.instruccionesAdivinar();
     setVisible(true);
   }
 

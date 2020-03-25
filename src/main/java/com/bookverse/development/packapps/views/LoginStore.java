@@ -1,12 +1,12 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.SMALL;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
+import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
+import static com.bookverse.development.packapps.core.AppConfigCore.SMALL;
+import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.AppConfigCore;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -41,7 +41,7 @@ public class LoginStore extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Buy & Sell");
-    AppConfig.fadeIn(this);
+    AppConfigCore.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -148,7 +148,7 @@ public class LoginStore extends JDialog implements ActionListener {
     } else {
 
       if (Database.searchUserRegister(txtUser.getText(),
-          AppConfig.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
+          AppConfigCore.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
 
         Database.recordLogin("Online", txtUser.getText());
         new HomeStore(this, true).start(this, txtUser.getText());
@@ -169,8 +169,8 @@ public class LoginStore extends JDialog implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnExit) {
-      AppConfig.fadeOut(this);
-    } else if (AppConfig.verifyConnection("Make sure you are connected to a network", true)) {
+      AppConfigCore.fadeOut(this);
+    } else if (AppConfigCore.verifyConnection("Make sure you are connected to a network", true)) {
 
       if (e.getSource() == btnLogin) {
         btnEnterAP();
