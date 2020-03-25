@@ -6,9 +6,9 @@ import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
-import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PURCHASES;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
@@ -54,16 +54,16 @@ public class Purchases extends JDialog implements ActionListener {
     btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(310, 320, 95, 30);
 
-    btnSubmit = resources.getButton("Purchase", TEXT_COLOR, this, this);
+    btnSubmit = resources.getButton("Buy", TEXT_COLOR, this, this);
     btnSubmit.setBounds(30, 320, 95, 30);
 
     btnSearch = resources.getButton("Search", TEXT_COLOR, this, this);
     btnSearch.setBounds(340, 65, 86, 25);
 
-    JLabel tittle = resources
+    JLabel title = resources
         .getLabel("<html><strong><em>Register purchase</em></strong></html>",
             MAIN_COLOR, this, BIG);
-    tittle.setBounds(110, 5, 300, 40);
+    title.setBounds(110, 5, 300, 40);
 
     JLabel reference = resources
         .getLabel("<html><strong>Reference</strong></html>", TEXT_COLOR,

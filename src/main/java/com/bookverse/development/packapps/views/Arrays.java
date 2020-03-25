@@ -473,7 +473,7 @@ public class Arrays extends JDialog implements ActionListener {
 
     result.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     result.setSize(480, 530);
-    result.setTitle("Llenar B");
+    result.setTitle("Fill in B");
     result.setResizable(false);
     result.setLocationRelativeTo(null);
     result.setVisible(true);

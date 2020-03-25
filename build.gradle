@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 group 'com.bookverse.development.packapps'
 version '1.0-SNAPSHOT'
 
@@ -28,10 +30,19 @@ apply plugin: 'net.serenity-bdd.aggregator'
 jar {
     manifest {
         attributes(
-                'Main-Class': 'com.bookverse.development.packapps.core.Start'
+                'Main-Class': 'com.bookverse.development.packapps.core.Start',
+                'Built-By': System.properties['user.name'],
+                'Build-Timestamp': new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
+                'Build-Revision': 3.0,
+                'Created-By': "Gradle ${gradle.gradleVersion}",
+                'Build-Jdk': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})",
+                'Build-OS': "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}"
         )
     }
 }
+
+sourceSets.main.resources.srcDirs = ["src/main/resources/images"]
+sourceSets.main.resources.includes = ["*.png", "*.jpg", "*.gif"]
 
 ext {
     serenityCoreVersion = "2.0.49"
@@ -45,7 +56,7 @@ dependencies {
     implementation "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}"
     implementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}"
 
-    implementation group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'junit', name: 'junit', version: '4.13'
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.10'
     implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.5.0'
     implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'

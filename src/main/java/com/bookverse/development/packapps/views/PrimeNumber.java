@@ -26,7 +26,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
 
   Resources resources = new Resources();
   private JButton btnStartChronometer, btnSearchPrime, btnVerifyPrime;
-  private JLabel tittle;
+  private JLabel title;
   private JLabel chronometer;
   private JTextField txtSince, txtUntil, txtVerify;
   private boolean chronometerActive;
@@ -157,10 +157,10 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
     chronometer = resources.getLabel("00:00:000", TEXT_COLOR, this, MEDIUM);
     chronometer.setBounds(160, 190, 100, 30);
 
-    tittle = resources
+    title = resources
         .getLabel("<html><em><strong>Prime Numbers</strong></em></html>", MAIN_COLOR, this, BIG);
-    tittle.addMouseListener(this);
-    tittle.setBounds(110, 15, 280, 40);
+    title.addMouseListener(this);
+    title.setBounds(110, 15, 280, 40);
   }
 
   private void verifyPrimeNumber(int num) {
@@ -335,7 +335,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
   @Override
   public void mouseClicked(MouseEvent e) {
 
-    if (e.getSource() == tittle) {
+    if (e.getSource() == title) {
       AppConfig.fadeOut(this);
     }
   }

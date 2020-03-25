@@ -2,11 +2,11 @@ package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.AppConstants.DICES;
-import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
-import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
@@ -48,7 +48,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
   public JTable viewTable;
   Table model = new Table();
   TableRowSorter<TableModel> rowSorter;
-  private JLabel tittle, message;
+  private JLabel title, message;
   private JLabel[] tables = new JLabel[5];
   private JMenuItem create, read, delete, update;
   private String[] columns = {"ID", "NICKNAME", "MISTAKES", "STATE", "CATEGORY", "DATE"};
@@ -65,12 +65,12 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
     JPanel row = new JPanel(new FlowLayout());
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(AppConfig.getBorder("Select Table"));
+    panel.setBorder(AppConfig.getBorder("Select table"));
 
-    tittle = new JLabel();
-    tittle.setFont(AppConfig.BIG);
-    tittle.setForeground(MAIN_COLOR);
-    tittle.addMouseListener(this);
+    title = new JLabel();
+    title.setFont(AppConfig.BIG);
+    title.setForeground(MAIN_COLOR);
+    title.addMouseListener(this);
 
     message = new JLabel();
     message.setFont(AppConfig.BIG);
@@ -84,7 +84,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
       row.add(tables[i]);
     });
 
-    panel.add(tittle, BorderLayout.EAST);
+    panel.add(title, BorderLayout.EAST);
     panel.add(row, BorderLayout.CENTER);
     panel.add(message, BorderLayout.WEST);
 
@@ -286,20 +286,20 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
     if (e.getSource() == tables[0]) {
       tables[0].setCursor(AppConfig.POINT);
-      tittle.setText("    " + GUESS_NUMBER);
+      title.setText("    " + GUESS_NUMBER);
     } else if (e.getSource() == tables[1]) {
       tables[1].setCursor(AppConfig.LOADER);
-      tittle.setText("    " + HANGMAN);
+      title.setText("    " + HANGMAN);
       message.setText("       You're here");
     } else if (e.getSource() == tables[2]) {
       tables[2].setCursor(AppConfig.RESIZE);
-      tittle.setText("    " + DICES);
+      title.setText("    " + DICES);
     } else if (e.getSource() == tables[3]) {
       tables[3].setCursor(AppConfig.TEXT);
-      tittle.setText("    " + NOTES);
+      title.setText("    " + NOTES);
     } else if (e.getSource() == tables[4]) {
       tables[4].setCursor(AppConfig.HAND);
-      tittle.setText("    " + PUZZLE);
+      title.setText("    " + PUZZLE);
     }
   }
 
@@ -307,16 +307,16 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
   public void mouseExited(MouseEvent e) {
 
     if (e.getSource() == tables[0]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[1]) {
       message.setText("");
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[2]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[3]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[4]) {
-      tittle.setText("");
+      title.setText("");
     }
   }
 

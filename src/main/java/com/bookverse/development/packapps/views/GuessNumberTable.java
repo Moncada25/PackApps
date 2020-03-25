@@ -10,11 +10,11 @@ import static com.bookverse.development.packapps.core.AppConfig.TEXT;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.getBorder;
 import static com.bookverse.development.packapps.core.AppConfig.inputText;
-import static com.bookverse.development.packapps.utils.AppConstants.DICES;
-import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
-import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
@@ -56,7 +56,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
   public JTable viewTable;
   private JLabel[] tables = new JLabel[5];
-  private JLabel tittle, message;
+  private JLabel title, message;
   private Table model = new Table();
   private JMenuItem create, read, delete, update;
   private String[] columns = {"ID", "NICKNAME", "LIMIT", "LEVEL", "DATE"};
@@ -75,11 +75,11 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(getBorder("Select Table"));
+    panel.setBorder(getBorder("Select table"));
 
-    tittle = new JLabel();
-    tittle.setFont(BIG);
-    tittle.setForeground(MAIN_COLOR);
+    title = new JLabel();
+    title.setFont(BIG);
+    title.setForeground(MAIN_COLOR);
 
     message = new JLabel();
     message.setFont(BIG);
@@ -92,7 +92,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
       row.add(tables[i]);
     });
 
-    panel.add(tittle, BorderLayout.EAST);
+    panel.add(title, BorderLayout.EAST);
     panel.add(row, BorderLayout.CENTER);
     panel.add(message, BorderLayout.WEST);
 
@@ -318,20 +318,20 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
     if (e.getSource() == tables[0]) {
       tables[0].setCursor(POINT);
-      tittle.setText("    " + GUESS_NUMBER);
+      title.setText("    " + GUESS_NUMBER);
       message.setText("       You're here");
     } else if (e.getSource() == tables[1]) {
       tables[1].setCursor(LOADER);
-      tittle.setText("    " + HANGMAN);
+      title.setText("    " + HANGMAN);
     } else if (e.getSource() == tables[2]) {
       tables[2].setCursor(RESIZE);
-      tittle.setText("    " + DICES);
+      title.setText("    " + DICES);
     } else if (e.getSource() == tables[3]) {
       tables[3].setCursor(TEXT);
-      tittle.setText("    " + NOTES);
+      title.setText("    " + NOTES);
     } else if (e.getSource() == tables[4]) {
       tables[4].setCursor(HAND);
-      tittle.setText("    " + PUZZLE);
+      title.setText("    " + PUZZLE);
     }
   }
 
@@ -339,16 +339,16 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
   public void mouseExited(MouseEvent e) {
 
     if (e.getSource() == tables[0]) {
-      tittle.setText("");
+      title.setText("");
       message.setText("");
     } else if (e.getSource() == tables[1]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[2]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[3]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[4]) {
-      tittle.setText("");
+      title.setText("");
     }
   }
 

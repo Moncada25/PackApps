@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Build-Timestamp: 2020-03-22T18:13:25.541-0500
+Built-By: 1742708
+Build-Revision: 3.0
+Build-OS: Windows 10 amd64 10.0
+Created-By: Gradle 5.2.1
+Build-Jdk: 1.8.0_221 (Oracle Corporation 25.221-b11)
+Main-Class: com.bookverse.development.packapps.core.Start

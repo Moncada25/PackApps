@@ -1,9 +1,9 @@
 package com.bookverse.development.packapps.models;
 
-import static com.bookverse.development.packapps.utils.AppConstants.DRIVER_DB;
-import static com.bookverse.development.packapps.utils.AppConstants.PASSWORD_DB;
-import static com.bookverse.development.packapps.utils.AppConstants.URL_DRIVER_DB;
-import static com.bookverse.development.packapps.utils.AppConstants.USER_DB;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.DRIVER_DB;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PASSWORD_DB;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.URL_DRIVER_DB;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.USER_DB;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 

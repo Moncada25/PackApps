@@ -3,7 +3,7 @@ package com.bookverse.development.packapps.views;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.inputText;
-import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

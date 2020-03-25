@@ -4,7 +4,7 @@ import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.ArrayData.WORD_LIST;
 import static java.awt.Font.PLAIN;
 
@@ -67,10 +67,10 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(140, 160, 86, 30);
 
-    JLabel tittle = resources.getLabel("<html>"
+    JLabel title = resources.getLabel("<html>"
         + "<strong><em>Category</em></strong>" +
         "</html>", MAIN_COLOR, this, BIG);
-    tittle.setBounds(30, 10, 120, 35);
+    title.setBounds(30, 10, 120, 35);
 
     attempts = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     attempts.setBounds(30, 200, 250, 30);

@@ -4,7 +4,7 @@ import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.AppConstants.FEEDBACK;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.FEEDBACK;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
@@ -62,10 +62,10 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
     btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(250, 400, 86, 30);
 
-    JLabel tittle = resources
+    JLabel title = resources
         .getLabel("<html><strong><em>Write commentary</em></strong></html>",
             MAIN_COLOR, this, BIG);
-    tittle.setBounds(130, 10, 370, 50);
+    title.setBounds(130, 10, 370, 50);
 
     JLabel lblUser = resources
         .getLabel("<html><strong>User</strong></html>", TEXT_COLOR, this,

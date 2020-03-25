@@ -12,7 +12,7 @@ import static com.bookverse.development.packapps.core.AppConfig.instruccionesAdi
 import static com.bookverse.development.packapps.core.AppConfig.intRandom;
 import static com.bookverse.development.packapps.core.AppConfig.saveGame;
 import static com.bookverse.development.packapps.core.AppConfig.verifyConnection;
-import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;

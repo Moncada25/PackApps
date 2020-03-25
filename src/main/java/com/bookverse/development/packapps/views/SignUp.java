@@ -4,13 +4,13 @@ import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.AppConstants.STORE_MANAGER_KEY;
-import static com.bookverse.development.packapps.utils.AppConstants.USERS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.models.DataAppConfig;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,9 +48,9 @@ public class SignUp extends JDialog implements ActionListener {
     btnReturn = resources.getButton("Return", MAIN_COLOR, this, this);
     btnReturn.setBounds(300, 215, 86, 30);
 
-    JLabel tittle = resources
+    JLabel title = resources
         .getLabel("<html><strong><em>Sign Up</em></strong></html>", MAIN_COLOR, this, BIG);
-    tittle.setBounds(175, 5, 200, 40);
+    title.setBounds(175, 5, 200, 40);
 
     JLabel lblUser = resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
@@ -140,7 +140,7 @@ public class SignUp extends JDialog implements ActionListener {
 
   private void btnSignUpAP() {
 
-    if (String.valueOf(txtCodManager.getPassword()).equals(STORE_MANAGER_KEY)) {
+    if (String.valueOf(txtCodManager.getPassword()).equals(DataAppConfig.getStoreManagerKey())) {
 
       txtUser.setEnabled(true);
       txtPassword.setEnabled(true);

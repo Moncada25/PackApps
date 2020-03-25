@@ -1,17 +1,15 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.Paths.ULTIMATIX;
+import static com.bookverse.development.packapps.automation.utils.GenericConstants.ULTIMATIX;
 import static com.bookverse.development.packapps.core.AppConfig.BIG;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
-import static com.bookverse.development.packapps.core.AppConfig.fadeOut;
 import static javax.swing.SwingConstants.CENTER;
 
 import com.bookverse.development.packapps.automation.models.UltimatixData;
-import com.bookverse.development.packapps.automation.stepdefinitions.TimesheetStepDefinitions;
-import com.bookverse.development.packapps.automation.utils.TextUtility;
+import com.bookverse.development.packapps.automation.runners.RunTimesheetEntry;
+import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -31,18 +29,14 @@ import org.junit.runner.JUnitCore;
 
 public class Timesheet extends JDialog implements ActionListener {
 
-  Resources resources = new Resources();
-
-  private JLabel tittle, user, password, hours;
+  private Resources resources = new Resources();
   private JTextField txtUser, txtHours;
   private JButton btnRun, btnCancel;
   private JPasswordField txtPassword;
 
   public Timesheet(JFrame parent, boolean modal) {
-
     super(parent, modal);
-
-    componentes();
+    createComponents();
   }
 
   public void start(JFrame parent) {
@@ -50,13 +44,12 @@ public class Timesheet extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Timesheet Entry");
-    fadeIn(this);
+    AppConfig.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
 
-  // Se crean los componentes de la ventana
-  private void componentes() {
+  private void createComponents() {
 
     setLayout(null);
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -67,12 +60,12 @@ public class Timesheet extends JDialog implements ActionListener {
     btnCancel = resources.getButton("Return", MAIN_COLOR, this, this);
     btnCancel.setBounds(300, 215, 86, 30);
 
-    tittle = resources
+    JLabel title = resources
         .getLabel("<html><strong><em>Timesheet Entry</em></strong></html>", MAIN_COLOR, this,
             BIG);
-    tittle.setBounds(120, 5, 250, 40);
+    title.setBounds(120, 5, 250, 40);
 
-    user = resources
+    JLabel user = resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
     user.setBounds(30, 60, 180, 30);
 
@@ -91,7 +84,7 @@ public class Timesheet extends JDialog implements ActionListener {
       }
     });
 
-    password = resources
+    JLabel password = resources
         .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
     password.setBounds(30, 110, 120, 30);
 
@@ -106,11 +99,11 @@ public class Timesheet extends JDialog implements ActionListener {
       }
 
       private void txtCodKeyTyped(KeyEvent evt) {
-        TextUtility.textPass(evt.getKeyChar(), evt, String.valueOf(txtPassword.getPassword()), 30);
+        Format.onlyAlfa(evt.getKeyChar(), evt, String.valueOf(txtPassword.getPassword()), 30);
       }
     });
 
-    hours = resources
+    JLabel hours = resources
         .getLabel("<html><strong>Hours</strong></html>", TEXT_COLOR, this, MEDIUM);
     hours.setBounds(30, 160, 180, 30);
 
@@ -145,26 +138,24 @@ public class Timesheet extends JDialog implements ActionListener {
     });
   }
 
-  private void btnCancelarAP() {
-
+  private void btnReturnAP() {
     txtUser.setText("");
     txtPassword.setText("");
     txtHours.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
-    fadeOut(this);
+    AppConfig.fadeOut(this);
   }
 
   private void btnRunAP() {
 
-    if (txtUser.getText().length() > 5 && txtUser.getText().length() > 5
+    if (txtUser.getText().length() > 5 && String.valueOf(txtPassword.getPassword()).length() > 5
         && txtHours.getText().length() > 0) {
-      UltimatixData data = new UltimatixData(txtUser.getText(),
+      Resources.generalObject = new UltimatixData(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
           ULTIMATIX,
           txtHours.getText());
-      Resources.generalObject = data;
-      JUnitCore.runClasses(TimesheetStepDefinitions.class);
+      JUnitCore.runClasses(RunTimesheetEntry.class);
     } else {
       Alerts.inputSomethingText();
     }
@@ -174,7 +165,7 @@ public class Timesheet extends JDialog implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnCancel) {
-      btnCancelarAP();
+      btnReturnAP();
     } else if (e.getSource() == btnRun) {
       btnRunAP();
     }

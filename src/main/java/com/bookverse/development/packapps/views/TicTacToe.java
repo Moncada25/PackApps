@@ -190,7 +190,7 @@ public class TicTacToe extends JDialog implements ActionListener {
 
       if (pointsNumberX == 5) {
         lblTurn.setText(
-            "<html><em><strong>¡Champion " + txtName1.getText() + "!</strong></em></html>");
+            "<html><em><strong>Champion " + txtName1.getText() + "!</strong></em></html>");
         image.setIcon(new ImageIcon(new Resources().getImage("triquito.png")));
       }
 
@@ -223,7 +223,7 @@ public class TicTacToe extends JDialog implements ActionListener {
 
       if (pointsNumberO == 5) {
         lblTurn.setText(
-            "<html><em><strong>¡Champion " + txtName2.getText() + "!</strong></em></html>");
+            "<html><em><strong>Champion " + txtName2.getText() + "!</strong></em></html>");
         image.setIcon(new ImageIcon(new Resources().getImage("triquito.png")));
       }
     }
@@ -248,7 +248,7 @@ public class TicTacToe extends JDialog implements ActionListener {
         || (board[0][2].getText().equals("X") && board[1][1].getText().equals("X") && board[2][0]
         .getText().equals("X"))) {
 
-      lblTurn.setText("<html><em><strong>¡Winner " + txtName1.getText() + "!</strong></em></html>");
+      lblTurn.setText("<html><em><strong>Winner " + txtName1.getText() + "!</strong></em></html>");
       lblTurn.setForeground(colorX);
       win = true;
 
@@ -272,7 +272,7 @@ public class TicTacToe extends JDialog implements ActionListener {
             || (board[0][2].getText().equals("O") && board[1][1].getText().equals("O")
             && board[2][0].getText().equals("O"))) {
 
-      lblTurn.setText("<html><em><strong>¡Winner " + txtName2.getText() + "!</strong></em></html>");
+      lblTurn.setText("<html><em><strong>Winner " + txtName2.getText() + "!</strong></em></html>");
       lblTurn.setForeground(colorO);
       win = true;
 

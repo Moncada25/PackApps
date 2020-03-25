@@ -6,11 +6,11 @@ import static com.bookverse.development.packapps.core.AppConfig.LOADER;
 import static com.bookverse.development.packapps.core.AppConfig.POINT;
 import static com.bookverse.development.packapps.core.AppConfig.RESIZE;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT;
-import static com.bookverse.development.packapps.utils.AppConstants.DICES;
-import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
-import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
@@ -52,7 +52,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
   public JTable viewTable;
   Table model = new Table();
   TableRowSorter<TableModel> rowSorter;
-  private JLabel tittle, message;
+  private JLabel title, message;
   private JMenuItem create, read, delete, update;
   private String[] columns = {"ID", "NICKNAME", "WINNER", "ROUND", "DATE"};
   private Resources resources = new Resources();
@@ -71,12 +71,12 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(AppConfig.getBorder("Select Table"));
+    panel.setBorder(AppConfig.getBorder("Select table"));
 
-    tittle = new JLabel();
-    tittle.setFont(BIG);
-    tittle.setForeground(AppConfig.MAIN_COLOR);
-    tittle.addMouseListener(this);
+    title = new JLabel();
+    title.setFont(BIG);
+    title.setForeground(AppConfig.MAIN_COLOR);
+    title.addMouseListener(this);
 
     message = new JLabel();
     message.setFont(BIG);
@@ -90,7 +90,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
       row.add(tables[i]);
     });
 
-    panel.add(tittle, BorderLayout.EAST);
+    panel.add(title, BorderLayout.EAST);
     panel.add(row, BorderLayout.CENTER);
     panel.add(message, BorderLayout.WEST);
 
@@ -311,20 +311,20 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     if (e.getSource() == tables[0]) {
       tables[0].setCursor(POINT);
-      tittle.setText("    " + GUESS_NUMBER);
+      title.setText("    " + GUESS_NUMBER);
     } else if (e.getSource() == tables[1]) {
       tables[1].setCursor(LOADER);
-      tittle.setText("    " + HANGMAN);
+      title.setText("    " + HANGMAN);
     } else if (e.getSource() == tables[2]) {
       tables[2].setCursor(RESIZE);
-      tittle.setText("    " + DICES);
+      title.setText("    " + DICES);
       message.setText("       You're here");
     } else if (e.getSource() == tables[3]) {
       tables[3].setCursor(TEXT);
-      tittle.setText("    " + NOTES);
+      title.setText("    " + NOTES);
     } else if (e.getSource() == tables[4]) {
       tables[4].setCursor(HAND);
-      tittle.setText("    " + PUZZLE);
+      title.setText("    " + PUZZLE);
     }
   }
 
@@ -332,16 +332,16 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
   public void mouseExited(MouseEvent e) {
 
     if (e.getSource() == tables[0]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[1]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[2]) {
       message.setText("");
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[3]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == tables[4]) {
-      tittle.setText("");
+      title.setText("");
     }
   }
 

@@ -45,7 +45,7 @@ public class Texts extends JDialog implements MouseListener {
   public JPanel getPanel() {
 
     JPanel panel = new JPanel(new FlowLayout());
-    panel.setBorder(AppConfig.getBorder("Select Action"));
+    panel.setBorder(AppConfig.getBorder("Select action"));
 
     encrypt = resources.getLabel("  Encrypt  ", TEXT_COLOR, panel, AppConfig.MEDIUM);
     encrypt.setBorder(AppConfig.BORDER_BLUE);
@@ -74,11 +74,11 @@ public class Texts extends JDialog implements MouseListener {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-    JLabel tittle = resources
+    JLabel title = resources
         .getLabel("<html><strong>Write Text...</strong></html>", MAIN_COLOR,
             this, AppConfig.MEDIUM);
-    tittle.setBounds(30, 15, 370, 50);
-    add(tittle, BorderLayout.NORTH);
+    title.setBounds(30, 15, 370, 50);
+    add(title, BorderLayout.NORTH);
 
     text = new JTextArea();
     JScrollPane scroll = new JScrollPane(text);

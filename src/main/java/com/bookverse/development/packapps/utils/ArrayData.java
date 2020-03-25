@@ -1,5 +1,8 @@
 package com.bookverse.development.packapps.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ArrayData {
 
   public static final String[] PATH_BACKGROUNDS = {
@@ -42,4 +45,16 @@ public class ArrayData {
               "wear", "mean", "build", "bring", "find", "leave"},
           {"futbol", "baloncesto", "tenis", "natacion", "voleibol", "ciclismo", "golf", "hockey",
               "karate", "esgrima", "boxeo", "atletismo", "rugby", "beisbol", "paracaidismo"}};
+
+  public static Map<String,String> DATA_NEW_USER = new HashMap<String, String>(){{
+    put("Name", "Santiago");
+    put("LastName", "Moncada");
+    put("Phone", "3012499315");
+    put("Occupation", "Otro");
+    put("Address", "CR 62 #62-b11");
+    put("Username", "Akatsuki");
+    put("Password", "Akatsuki25");
+    put("Email", "akatsuki@gmail.com");
+    put("Gender", "Masculino");
+  }};
 }

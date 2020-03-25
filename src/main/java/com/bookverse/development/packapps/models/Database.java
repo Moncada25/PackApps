@@ -1,17 +1,17 @@
 package com.bookverse.development.packapps.models;
 
-import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.AppConstants.DICES;
-import static com.bookverse.development.packapps.utils.AppConstants.FEEDBACK;
-import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.AppConstants.LOANS;
-import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
-import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
-import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.AppConstants.SALES;
-import static com.bookverse.development.packapps.utils.AppConstants.USERS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.FEEDBACK;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.LOANS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Querys;
@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 import javax.sql.DataSource;
 import javax.swing.JTable;
@@ -554,5 +555,39 @@ public class Database {
         Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
       }
     }
+  }
+
+  public static List<String> getListBook() {
+
+    ArrayList<String> listBook = new ArrayList<>();
+
+    try {
+      dataSource = dataSourceService.getDataSource();
+      connection = dataSource.getConnection();
+
+      preparedStatement = connection.prepareStatement(Querys.getTitleBooks());
+      resultSet = preparedStatement.executeQuery();
+
+      while (resultSet.next()) {
+        listBook.add(resultSet.getString(1));
+      }
+
+      return listBook;
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+    } finally {
+
+      try {
+        if (null != connection) {
+          connection.close();
+        }
+      } catch (SQLException e) {
+        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      }
+    }
+
+    return listBook;
   }
 }

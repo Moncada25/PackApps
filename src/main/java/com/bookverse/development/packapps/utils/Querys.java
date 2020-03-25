@@ -1,17 +1,18 @@
 package com.bookverse.development.packapps.utils;
 
-import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.AppConstants.DICES;
-import static com.bookverse.development.packapps.utils.AppConstants.FEEDBACK;
-import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.AppConstants.LOANS;
-import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
-import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
-import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.AppConstants.SALES;
-import static com.bookverse.development.packapps.utils.AppConstants.USERS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.BOOKS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.FEEDBACK;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.LOANS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import org.jetbrains.annotations.Contract;
@@ -172,5 +173,10 @@ public class Querys {
   public static String updateUsername(String user, String newUsername) {
     return "UPDATE " + Format.tableName(USERS) + " SET Username='" + newUsername
         + "' WHERE Username='" + user + "'";
+  }
+
+  @NotNull
+  public static String getTitleBooks(){
+    return "SELECT LibroTitulo FROM "+ Format.tableName(BOOKS);
   }
 }

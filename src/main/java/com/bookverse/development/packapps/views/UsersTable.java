@@ -5,7 +5,7 @@ import static com.bookverse.development.packapps.core.AppConfig.HAND;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.getBorder;
-import static com.bookverse.development.packapps.utils.AppConstants.USERS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
@@ -39,7 +39,7 @@ import javax.swing.table.TableRowSorter;
 public class UsersTable extends JDialog implements MouseListener {
 
   public JTable viewTable;
-  private JLabel tittle;
+  private JLabel title;
   private JLabel[] actions = new JLabel[3];
   private Table model = new Table();
   private String[] columns = {"ID", "USERNAME", "PASSWORD", "STATUS"};
@@ -59,9 +59,9 @@ public class UsersTable extends JDialog implements MouseListener {
 
     panel.setBorder(getBorder("Select action"));
 
-    tittle = new JLabel();
-    tittle.setFont(BIG);
-    tittle.setForeground(MAIN_COLOR);
+    title = new JLabel();
+    title.setFont(BIG);
+    title.setForeground(MAIN_COLOR);
 
     JLabel message = new JLabel();
     message.setFont(BIG);
@@ -74,7 +74,7 @@ public class UsersTable extends JDialog implements MouseListener {
       row.add(actions[i]);
     });
 
-    panel.add(tittle, BorderLayout.EAST);
+    panel.add(title, BorderLayout.EAST);
     panel.add(row, BorderLayout.CENTER);
     panel.add(message, BorderLayout.WEST);
 
@@ -268,13 +268,13 @@ public class UsersTable extends JDialog implements MouseListener {
 
     if (e.getSource() == actions[0]) {
       actions[0].setCursor(HAND);
-      tittle.setText("Add User");
+      title.setText("Add User");
     } else if (e.getSource() == actions[1]) {
       actions[1].setCursor(HAND);
-      tittle.setText("Edit User");
+      title.setText("Edit User");
     } else if (e.getSource() == actions[2]) {
       actions[2].setCursor(HAND);
-      tittle.setText("Delete User");
+      title.setText("Delete User");
     }
   }
 
@@ -282,11 +282,11 @@ public class UsersTable extends JDialog implements MouseListener {
   public void mouseExited(MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == actions[1]) {
-      tittle.setText("");
+      title.setText("");
     } else if (e.getSource() == actions[2]) {
-      tittle.setText("");
+      title.setText("");
     }
   }
 

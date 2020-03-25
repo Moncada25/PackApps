@@ -4,24 +4,26 @@ import static com.bookverse.development.packapps.core.AppConfig.BORDER_BLUE;
 import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
 import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.AppConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.AppConstants.DICES;
-import static com.bookverse.development.packapps.utils.AppConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.AppConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.AppConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.AppConstants.LOANS;
-import static com.bookverse.development.packapps.utils.AppConstants.NOTES;
-import static com.bookverse.development.packapps.utils.AppConstants.PURCHASES;
-import static com.bookverse.development.packapps.utils.AppConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.AppConstants.SALES;
-import static com.bookverse.development.packapps.utils.AppConstants.TITLE;
+import static com.bookverse.development.packapps.utils.ArrayData.LONG_BACKGROUNDS;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_BACKGROUNDS;
+import static com.bookverse.development.packapps.utils.ArrayData.WIDTH_BACKGROUNDS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.LOANS;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
 
+import com.bookverse.development.packapps.automation.utils.RunTest;
 import com.bookverse.development.packapps.core.AppConfig;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.ArrayData;
+import com.bookverse.development.packapps.models.DataAppConfig;
 import com.bookverse.development.packapps.utils.Export;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.OCR;
@@ -49,7 +51,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Index extends JFrame implements ActionListener {
 
-  protected static int background = 10;
+  protected static int background = 4;
   private static Resources resources = new Resources();
   private static JLabel welcome;
   protected HangmanTable hangmanTable = new HangmanTable(this, true);
@@ -69,7 +71,7 @@ public class Index extends JFrame implements ActionListener {
       roulette, ticTacToePvsP, ticTacToePvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
       inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
       inventoryEXCEL, purchasesEXCEL, salesEXCEL, cashRegisterEXCEL, loansEXCEL, puzzleEXCEL, guessNumberPDF, hangmanPDF, dicesPDF,
-      notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet, OCRTask;
+      notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet, OCRTask, searchBook, registerUser;
   private boolean isWork = true;
 
   public Index() {
@@ -131,17 +133,17 @@ public class Index extends JFrame implements ActionListener {
     Index window = new Index();
 
     welcome = new JLabel();
-    window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-        ArrayData.LONG_BACKGROUNDS[background - 1]);
+    window.setSize(WIDTH_BACKGROUNDS[background - 1],
+        LONG_BACKGROUNDS[background - 1]);
     window.add(welcome, BorderLayout.CENTER);
     window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-        ArrayData.WIDTH_BACKGROUNDS[background - 1],
-        ArrayData.LONG_BACKGROUNDS[background - 1]);
+        WIDTH_BACKGROUNDS[background - 1],
+        LONG_BACKGROUNDS[background - 1]);
 
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
-    window.setTitle(TITLE);
+    window.setTitle(DataAppConfig.getTitleApp());
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
     window.textureMode.setForeground(MAIN_COLOR);
     AppConfig.fadeIn(window);
@@ -219,11 +221,11 @@ public class Index extends JFrame implements ActionListener {
     ticTacToe.addSeparator();
     ticTacToe.add(ticTacToePvsCPU);
 
+    apps.add(dices);
+    apps.addSeparator();
     apps.add(guessNumberMenu);
     apps.addSeparator();
     apps.add(hangman);
-    apps.addSeparator();
-    apps.add(dices);
     apps.addSeparator();
     apps.add(puzzle);
     apps.addSeparator();
@@ -242,17 +244,6 @@ public class Index extends JFrame implements ActionListener {
     numbers = resources.getMenuItem("Numbers", "numeritos", this);
     notes = resources.getMenuItem(NOTES, "notas", this);
     texts = resources.getMenuItem("Texts", "textos", this);
-
-    changeBackground = resources.getMenu("Background", "background");
-
-    IntStream.range(0, wallpapers.length).forEach(i -> {
-      wallpapers[i] = new JMenuItem("Image " + (i + 1));
-      wallpapers[i].setForeground(TEXT_COLOR);
-      wallpapers[i].setIcon(new ImageIcon(resources.getImage("backs.png")));
-      wallpapers[i].addActionListener(this);
-      changeBackground.add(wallpapers[i]);
-      changeBackground.addSeparator();
-    });
 
     JMenu export = resources.getMenu("Export Data", "export");
 
@@ -358,12 +349,27 @@ public class Index extends JFrame implements ActionListener {
     export.addSeparator();
     export.add(exportEXCEL);
 
-    JMenu tasks = resources.getMenu("Tasks", "task");
+    JMenu tasks = resources.getMenu("Tests", "task");
     timesheet = resources.getMenuItem("Timesheet Entry (beta)", "timesheet", this);
-    tasks.add(timesheet);
+    searchBook = resources.getMenuItem("Search Book", "searchBook", this);
+    registerUser = resources.getMenuItem("Register User", "añadir_usuario", this);
 
-    OCRTask = resources.getMenuItem("OCR", "ocr", this);
-    tasks.add(OCRTask);
+    tasks.add(timesheet);
+    tasks.addSeparator();
+    tasks.add(searchBook);
+    tasks.addSeparator();
+    tasks.add(registerUser);
+
+    changeBackground = resources.getMenu("Background", "background");
+
+    IntStream.range(0, wallpapers.length).forEach(i -> {
+      wallpapers[i] = new JMenuItem("Image " + (i + 1));
+      wallpapers[i].setForeground(TEXT_COLOR);
+      wallpapers[i].setIcon(new ImageIcon(resources.getImage("backs.png")));
+      wallpapers[i].addActionListener(this);
+      changeBackground.add(wallpapers[i]);
+      changeBackground.addSeparator();
+    });
 
     JMenu mode = resources.getMenu("Theme", "mode");
     darkMode = resources.getMenuItem("Dark", "dark", this);
@@ -385,11 +391,16 @@ public class Index extends JFrame implements ActionListener {
     mode.addSeparator();
     mode.add(textureMode);
 
-    tools.add(changeBackground);
-    tools.addSeparator();
+    JMenu changeUI = resources.getMenu("Change UI", "UI");
+    changeUI.add(mode);
+    changeUI.addSeparator();
+    changeUI.add(changeBackground);
+
+    OCRTask = resources.getMenuItem("OCR", "ocr", this);
+
     tools.add(buyAndSell);
     tools.addSeparator();
-    tools.add(structures);
+    tools.add(changeUI);
     tools.addSeparator();
     tools.add(export);
     tools.addSeparator();
@@ -397,11 +408,13 @@ public class Index extends JFrame implements ActionListener {
     tools.addSeparator();
     tools.add(numbers);
     tools.addSeparator();
-    tools.add(texts);
+    tools.add(OCRTask);
+    tools.addSeparator();
+    tools.add(structures);
     tools.addSeparator();
     tools.add(tasks);
     tools.addSeparator();
-    tools.add(mode);
+    tools.add(texts);
 
     menuBar.add(apps);
     menuBar.add(scores);
@@ -548,8 +561,8 @@ public class Index extends JFrame implements ActionListener {
 
     IntStream.range(0, wallpapers.length).filter(i -> e.getSource() == wallpapers[i]).forEach(i -> {
       if (wallpapers[i].getForeground() != MAIN_COLOR) {
-        changeBackgroundAP(PATH_BACKGROUNDS[i], ArrayData.WIDTH_BACKGROUNDS[i],
-            ArrayData.LONG_BACKGROUNDS[i]);
+        changeBackgroundAP(PATH_BACKGROUNDS[i], WIDTH_BACKGROUNDS[i],
+            LONG_BACKGROUNDS[i]);
         wallpapers[i].setForeground(MAIN_COLOR);
         background = i + 1;
         setVisible(true);
@@ -584,12 +597,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -625,12 +638,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -667,12 +680,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -710,12 +723,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -755,12 +768,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -800,12 +813,12 @@ public class Index extends JFrame implements ActionListener {
           Index window = new Index();
 
           welcome = new JLabel();
-          window.setSize(ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+          window.setSize(WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
           window.add(welcome, BorderLayout.CENTER);
           window.changeBackgroundAP(PATH_BACKGROUNDS[background - 1],
-              ArrayData.WIDTH_BACKGROUNDS[background - 1],
-              ArrayData.LONG_BACKGROUNDS[background - 1]);
+              WIDTH_BACKGROUNDS[background - 1],
+              LONG_BACKGROUNDS[background - 1]);
 
           window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
           window.setResizable(false);
@@ -837,6 +850,11 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == timesheet) {
       new Timesheet(this, true).start(this);
       setVisible(true);
+    } else if (e.getSource() == searchBook) {
+      new SearchBook(this, true).start(this);
+      setVisible(true);
+    } else if (e.getSource() == registerUser) {
+      RunTest.registerNewUser();
     } else if (e.getSource() == OCRTask) {
       new OCR(this, true).start(this);
       setVisible(true);
