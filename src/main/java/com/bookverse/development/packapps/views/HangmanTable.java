@@ -1,14 +1,14 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
@@ -65,15 +65,15 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
     JPanel row = new JPanel(new FlowLayout());
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(AppConfigCore.getBorder("Select table"));
+    panel.setBorder(Settings.getBorder("Select table"));
 
     title = new JLabel();
-    title.setFont(AppConfigCore.BIG);
+    title.setFont(Settings.BIG);
     title.setForeground(MAIN_COLOR);
     title.addMouseListener(this);
 
     message = new JLabel();
-    message.setFont(AppConfigCore.BIG);
+    message.setFont(Settings.BIG);
     message.setForeground(TEXT_COLOR);
     message.addMouseListener(this);
 
@@ -187,7 +187,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (AppConfigCore.loginDBA()) {
+        if (Settings.loginDBA()) {
           Database.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(HANGMAN));
 
@@ -213,7 +213,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        if (AppConfigCore.loginDBA()) {
+        if (Settings.loginDBA()) {
           Database.deleteData(IDs, Format.tableName(HANGMAN));
           dispose();
           new Index().hangmanTableAP();
@@ -285,20 +285,20 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == tables[0]) {
-      tables[0].setCursor(AppConfigCore.POINT);
+      tables[0].setCursor(Settings.POINT);
       title.setText("    " + GUESS_NUMBER);
     } else if (e.getSource() == tables[1]) {
-      tables[1].setCursor(AppConfigCore.LOADER);
+      tables[1].setCursor(Settings.LOADER);
       title.setText("    " + HANGMAN);
       message.setText("       You're here");
     } else if (e.getSource() == tables[2]) {
-      tables[2].setCursor(AppConfigCore.RESIZE);
+      tables[2].setCursor(Settings.RESIZE);
       title.setText("    " + DICES);
     } else if (e.getSource() == tables[3]) {
-      tables[3].setCursor(AppConfigCore.TEXT);
+      tables[3].setCursor(Settings.TEXT);
       title.setText("    " + NOTES);
     } else if (e.getSource() == tables[4]) {
-      tables[4].setCursor(AppConfigCore.HAND);
+      tables[4].setCursor(Settings.HAND);
       title.setText("    " + PUZZLE);
     }
   }

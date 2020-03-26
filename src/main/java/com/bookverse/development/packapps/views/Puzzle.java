@@ -1,10 +1,10 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -54,7 +54,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     } else {
       setTitle(PUZZLE + " - Level Hard");
     }
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesRompe();
     setVisible(true);
@@ -71,7 +71,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     } else {
       setTitle(PUZZLE + " - Level Hard");
     }
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesRompe();
     setVisible(true);
@@ -93,7 +93,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     btnReset.setBounds(200, 300, 86, 30);
     btnReset.setEnabled(false);
 
-    lblTurn = resources.getLabel("", MAIN_COLOR, this, AppConfigCore.MEDIUM);
+    lblTurn = resources.getLabel("", MAIN_COLOR, this, Settings.MEDIUM);
     lblTurn.setBounds(335, 90, 200, 100);
 
     time = resources.getLabel("", MAIN_COLOR, this, new Font("Times New Roman", Font.PLAIN, 45));
@@ -240,10 +240,10 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
 
   private void insert(String state) {
 
-    if (AppConfigCore.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (Settings.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
       String[] data = {PUZZLE, Alerts.inputText("Enter a Nickname", 20), state,
-          getLevel(), String.valueOf(moves), AppConfigCore.getDate()};
+          getLevel(), String.valueOf(moves), Settings.getDate()};
 
       Database.insertData(data);
     }
@@ -366,7 +366,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     if (e.getSource() == btnPlay) {
       btnPlayAP();
     } else if (e.getSource() == btnExit) {
-      AppConfigCore.fadeOut(this);
+      Settings.fadeOut(this);
     } else if (e.getSource() == btnReset) {
       btnResetAP();
     }

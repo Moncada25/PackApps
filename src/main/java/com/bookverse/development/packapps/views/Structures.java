@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.BorderLayout;
@@ -28,26 +28,26 @@ public class Structures extends JDialog implements MouseListener {
   private JPanel getPanel() {
 
     JPanel panel = new JPanel(new FlowLayout());
-    panel.setBorder(AppConfigCore.getBorder("Select structure"));
+    panel.setBorder(Settings.getBorder("Select structure"));
 
     btnStack = resources
-        .getLabel("  Stack  ", AppConfigCore.TEXT_COLOR, panel, AppConfigCore.MEDIUM);
-    btnStack.setBorder(AppConfigCore.BORDER_BLUE);
+        .getLabel("  Stack  ", Settings.TEXT_COLOR, panel, Settings.MEDIUM);
+    btnStack.setBorder(Settings.BORDER_BLUE);
     btnStack.addMouseListener(this);
 
     btnQueue = resources
-        .getLabel("  Queue  ", AppConfigCore.TEXT_COLOR, panel, AppConfigCore.MEDIUM);
-    btnQueue.setBorder(AppConfigCore.BORDER_BLUE);
+        .getLabel("  Queue  ", Settings.TEXT_COLOR, panel, Settings.MEDIUM);
+    btnQueue.setBorder(Settings.BORDER_BLUE);
     btnQueue.addMouseListener(this);
 
     btnArrays = resources
-        .getLabel("  Arrays  ", AppConfigCore.TEXT_COLOR, panel, AppConfigCore.MEDIUM);
-    btnArrays.setBorder(AppConfigCore.BORDER_BLUE);
+        .getLabel("  Arrays  ", Settings.TEXT_COLOR, panel, Settings.MEDIUM);
+    btnArrays.setBorder(Settings.BORDER_BLUE);
     btnArrays.addMouseListener(this);
 
     btnExit = resources
-        .getLabel("  Return  ", AppConfigCore.MAIN_COLOR, panel, AppConfigCore.MEDIUM);
-    btnExit.setBorder(AppConfigCore.BORDER_RED);
+        .getLabel("  Return  ", Settings.MAIN_COLOR, panel, Settings.MEDIUM);
+    btnExit.setBorder(Settings.BORDER_RED);
     btnExit.addMouseListener(this);
 
     return panel;
@@ -58,7 +58,7 @@ public class Structures extends JDialog implements MouseListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Structures of data");
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesEstructuras();
     setVisible(true);
@@ -82,7 +82,7 @@ public class Structures extends JDialog implements MouseListener {
   public void mouseClicked(MouseEvent e) {
 
     if (e.getSource() == btnExit) {
-      AppConfigCore.fadeOut(this);
+      Settings.fadeOut(this);
     } else if (e.getSource() == btnStack) {
       new Stack(this, true).start(this);
       setVisible(true);
@@ -99,13 +99,13 @@ public class Structures extends JDialog implements MouseListener {
   public void mouseEntered(MouseEvent e) {
 
     if (e.getSource() == btnExit) {
-      btnExit.setCursor(AppConfigCore.HAND);
+      btnExit.setCursor(Settings.HAND);
     } else if (e.getSource() == btnStack) {
-      btnStack.setCursor(AppConfigCore.HAND);
+      btnStack.setCursor(Settings.HAND);
     } else if (e.getSource() == btnQueue) {
-      btnQueue.setCursor(AppConfigCore.HAND);
+      btnQueue.setCursor(Settings.HAND);
     } else if (e.getSource() == btnArrays) {
-      btnArrays.setCursor(AppConfigCore.HAND);
+      btnArrays.setCursor(Settings.HAND);
     }
   }
 

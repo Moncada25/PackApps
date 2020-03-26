@@ -1,13 +1,13 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.getDate;
-import static com.bookverse.development.packapps.core.AppConfigCore.verifyConnection;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.getDate;
+import static com.bookverse.development.packapps.core.Settings.verifyConnection;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -141,7 +141,7 @@ public class Dices extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DICES + ", throw them!");
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesDados();
     setVisible(true);
@@ -152,7 +152,7 @@ public class Dices extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DICES + ", throw them!");
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesDados();
     setVisible(true);
@@ -377,7 +377,7 @@ public class Dices extends JDialog implements ActionListener {
     }
 
     if (e.getSource() == btnExit) {
-      AppConfigCore.fadeOut(this);
+      Settings.fadeOut(this);
     }
 
     if (e.getSource() == btnReset) {

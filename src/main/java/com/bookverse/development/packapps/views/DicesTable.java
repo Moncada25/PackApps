@@ -1,18 +1,18 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
-import static com.bookverse.development.packapps.core.AppConfigCore.HAND;
-import static com.bookverse.development.packapps.core.AppConfigCore.LOADER;
-import static com.bookverse.development.packapps.core.AppConfigCore.POINT;
-import static com.bookverse.development.packapps.core.AppConfigCore.RESIZE;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.HAND;
+import static com.bookverse.development.packapps.core.Settings.LOADER;
+import static com.bookverse.development.packapps.core.Settings.POINT;
+import static com.bookverse.development.packapps.core.Settings.RESIZE;
+import static com.bookverse.development.packapps.core.Settings.TEXT;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
@@ -71,16 +71,16 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(AppConfigCore.getBorder("Select table"));
+    panel.setBorder(Settings.getBorder("Select table"));
 
     title = new JLabel();
     title.setFont(BIG);
-    title.setForeground(AppConfigCore.MAIN_COLOR);
+    title.setForeground(Settings.MAIN_COLOR);
     title.addMouseListener(this);
 
     message = new JLabel();
     message.setFont(BIG);
-    message.setForeground(AppConfigCore.TEXT_COLOR);
+    message.setForeground(Settings.TEXT_COLOR);
     message.addMouseListener(this);
 
     IntStream.range(0, tables.length).forEach(i -> {
@@ -212,7 +212,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (AppConfigCore.loginDBA()) {
+        if (Settings.loginDBA()) {
           Database.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(DICES));
 
@@ -238,7 +238,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        if (AppConfigCore.loginDBA()) {
+        if (Settings.loginDBA()) {
           Database.deleteData(IDs, Format.tableName(DICES));
           dispose();
           new Index().dicesTableAP();

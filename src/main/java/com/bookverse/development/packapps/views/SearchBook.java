@@ -1,16 +1,16 @@
 package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_DEVELOPMENT;
-import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static java.awt.Event.ENTER;
 import static javax.swing.SwingConstants.CENTER;
 
 import com.bookverse.development.packapps.automation.models.BookverseData;
 import com.bookverse.development.packapps.automation.runners.RunSearchBook;
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -50,7 +50,7 @@ public class SearchBook extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Bookverse Test");
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -120,7 +120,7 @@ public class SearchBook extends JDialog implements ActionListener {
 
     IntStream.range(0, listBooks.size()).forEach(i -> listBooksBox.addItem(listBooks.get(i)));
 
-    listBooksBox.setFont(AppConfigCore.SMALL);
+    listBooksBox.setFont(Settings.SMALL);
     listBooksBox.setBounds(95, 165, 260, 30);
     ((JLabel)listBooksBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
     add(listBooksBox);
@@ -131,7 +131,7 @@ public class SearchBook extends JDialog implements ActionListener {
     txtPassword.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
-    AppConfigCore.fadeOut(this);
+    Settings.fadeOut(this);
   }
 
   private void btnRunAP() {

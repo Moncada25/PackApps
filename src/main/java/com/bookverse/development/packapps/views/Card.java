@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
@@ -35,7 +35,7 @@ public class Card extends JDialog implements MouseListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Developed by");
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -44,7 +44,7 @@ public class Card extends JDialog implements MouseListener {
   public void mouseClicked(MouseEvent e) {
 
     if (e.getSource() == imageCard) {
-      AppConfigCore.fadeOut(this);
+      Settings.fadeOut(this);
     }
   }
 

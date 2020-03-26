@@ -3,7 +3,7 @@ package com.bookverse.development.packapps.views;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.LOANS;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -40,7 +40,7 @@ public class Loans extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Lend");
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -51,19 +51,19 @@ public class Loans extends JDialog implements ActionListener {
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(resources.getImage("prestar.png")).getImage());
 
-    btnExit = resources.getButton("Return", AppConfigCore.MAIN_COLOR, this, this);
+    btnExit = resources.getButton("Return", Settings.MAIN_COLOR, this, this);
     btnExit.setBounds(330, 320, 86, 30);
 
-    btnLoan = resources.getButton("Lend", AppConfigCore.TEXT_COLOR, this, this);
+    btnLoan = resources.getButton("Lend", Settings.TEXT_COLOR, this, this);
     btnLoan.setBounds(30, 320, 86, 30);
 
     JLabel title = resources.getLabel("<html><strong><em>Register loan</em></strong></html>",
-        AppConfigCore.MAIN_COLOR, this, AppConfigCore.BIG);
+        Settings.MAIN_COLOR, this, Settings.BIG);
     title.setBounds(135, 5, 300, 40);
 
     JLabel product = resources
-        .getLabel("<html><strong>Client</strong></html>", AppConfigCore.TEXT_COLOR,
-            this, AppConfigCore.MEDIUM);
+        .getLabel("<html><strong>Client</strong></html>", Settings.TEXT_COLOR,
+            this, Settings.MEDIUM);
     product.setBounds(30, 60, 140, 30);
 
     txtName = new JTextField();
@@ -83,8 +83,8 @@ public class Loans extends JDialog implements ActionListener {
     });
 
     JLabel document = resources
-        .getLabel("<html><strong>Document</strong></html>", AppConfigCore.TEXT_COLOR,
-            this, AppConfigCore.MEDIUM);
+        .getLabel("<html><strong>Document</strong></html>", Settings.TEXT_COLOR,
+            this, Settings.MEDIUM);
     document.setBounds(30, 100, 140, 30);
 
     txtDocument = new JTextField();
@@ -103,8 +103,8 @@ public class Loans extends JDialog implements ActionListener {
     });
 
     JLabel reference = resources
-        .getLabel("<html><strong>Reference</strong></html>", AppConfigCore.TEXT_COLOR,
-            this, AppConfigCore.MEDIUM);
+        .getLabel("<html><strong>Reference</strong></html>", Settings.TEXT_COLOR,
+            this, Settings.MEDIUM);
     reference.setBounds(30, 140, 130, 30);
 
     txtReference = new JTextField();
@@ -123,8 +123,8 @@ public class Loans extends JDialog implements ActionListener {
     });
 
     JLabel phone = resources
-        .getLabel("<html><strong>Phone</strong></html>", AppConfigCore.TEXT_COLOR,
-            this, AppConfigCore.MEDIUM);
+        .getLabel("<html><strong>Phone</strong></html>", Settings.TEXT_COLOR,
+            this, Settings.MEDIUM);
     phone.setBounds(30, 180, 130, 30);
 
     txtPhone = new JTextField();
@@ -144,8 +144,8 @@ public class Loans extends JDialog implements ActionListener {
     });
 
     JLabel time = resources
-        .getLabel("<html><strong>Time</strong></html>", AppConfigCore.TEXT_COLOR, this,
-            AppConfigCore.MEDIUM);
+        .getLabel("<html><strong>Time</strong></html>", Settings.TEXT_COLOR, this,
+            Settings.MEDIUM);
     time.setBounds(30, 220, 130, 30);
 
     weeks = new JComboBox<>();
@@ -160,8 +160,8 @@ public class Loans extends JDialog implements ActionListener {
     add(months);
 
     JLabel price = resources
-        .getLabel("<html><strong>Loan of</strong></html>", AppConfigCore.TEXT_COLOR,
-            this, AppConfigCore.MEDIUM);
+        .getLabel("<html><strong>Loan of</strong></html>", Settings.TEXT_COLOR,
+            this, Settings.MEDIUM);
     price.setBounds(30, 260, 130, 30);
 
     txtValue = new JTextField("0");
@@ -187,7 +187,7 @@ public class Loans extends JDialog implements ActionListener {
     txtValue.setText("");
     txtPhone.setEnabled(true);
     txtValue.setEnabled(true);
-    AppConfigCore.fadeOut(this);
+    Settings.fadeOut(this);
   }
 
   private void btnSubmitAP() {

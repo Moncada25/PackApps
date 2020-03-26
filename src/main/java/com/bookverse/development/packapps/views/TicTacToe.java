@@ -1,14 +1,14 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.fadeIn;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.fadeIn;
 import static com.bookverse.development.packapps.utils.Alerts.instruccionesTriqui;
-import static com.bookverse.development.packapps.core.AppConfigCore.getIntRandom;
+import static com.bookverse.development.packapps.core.Settings.getIntRandom;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.Color;
 import java.awt.Font;
@@ -589,7 +589,7 @@ public class TicTacToe extends JDialog implements ActionListener {
     } else if (e.getSource() == btnReset) {
       btnResetAP();
     } else if (e.getSource() == btnExit) {
-      AppConfigCore.fadeOut(this);
+      Settings.fadeOut(this);
     } else {
       btnBoardAP(e);
     }

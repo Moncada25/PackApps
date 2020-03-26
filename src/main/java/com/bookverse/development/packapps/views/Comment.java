@@ -1,12 +1,12 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.FEEDBACK;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -45,7 +45,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Send Commentary");
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -104,9 +104,9 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
 
   private void sendCommentary(String username, String commentary) {
 
-    if (AppConfigCore.verifyConnection("Make sure you are connected to a network", true)) {
+    if (Settings.verifyConnection("Make sure you are connected to a network", true)) {
 
-      String[] data = {FEEDBACK, username, commentary, AppConfigCore.getDate()};
+      String[] data = {FEEDBACK, username, commentary, Settings.getDate()};
 
       if (Database.insertData(data)) {
 
@@ -150,7 +150,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
     if (e.getSource() == btnSend) {
       btnSendAP();
     } else if (e.getSource() == btnExit) {
-      AppConfigCore.fadeOut(this);
+      Settings.fadeOut(this);
     }
   }
 

@@ -1,16 +1,16 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.fadeIn;
-import static com.bookverse.development.packapps.core.AppConfigCore.getDate;
-import static com.bookverse.development.packapps.core.AppConfigCore.getIntRandom;
-import static com.bookverse.development.packapps.core.AppConfigCore.verifyConnection;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.fadeIn;
+import static com.bookverse.development.packapps.core.Settings.getDate;
+import static com.bookverse.development.packapps.core.Settings.getIntRandom;
+import static com.bookverse.development.packapps.core.Settings.verifyConnection;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -131,7 +131,7 @@ public class GuessNumber extends JDialog implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnReturn) {
-      AppConfigCore.fadeOut(this);
+      Settings.fadeOut(this);
     } else if (e.getSource() == btnPlay) {
       btnPlayAP();
     }
@@ -176,7 +176,7 @@ public class GuessNumber extends JDialog implements ActionListener {
     setSize(430, 330);
     setResizable(false);
     setLocationRelativeTo(parent);
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesAdivinar();
     setVisible(true);

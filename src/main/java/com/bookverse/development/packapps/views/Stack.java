@@ -1,13 +1,13 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
-import static com.bookverse.development.packapps.core.AppConfigCore.HAND;
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.getBorder;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.HAND;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.getBorder;
 import static com.bookverse.development.packapps.utils.Alerts.inputNumber;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -97,7 +97,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Stack");
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }

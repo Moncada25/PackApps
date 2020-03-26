@@ -1,13 +1,13 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
-import static com.bookverse.development.packapps.core.AppConfigCore.HAND;
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.getBorder;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.HAND;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.getBorder;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
@@ -153,7 +153,7 @@ public class UsersTable extends JDialog implements MouseListener {
         try {
 
           if (Database.searchUserRegister(user,
-              AppConfigCore.encrypt(Alerts.inputPassword("Enter password"), true))) {
+              Settings.encrypt(Alerts.inputPassword("Enter password"), true))) {
 
             Object option = null;
 
@@ -174,7 +174,7 @@ public class UsersTable extends JDialog implements MouseListener {
                   Alerts.message("Message", "The password are too weak, please try again.");
                 } else {
 
-                  Database.updatePassword(user, AppConfigCore.encrypt(newPassword, true));
+                  Database.updatePassword(user, Settings.encrypt(newPassword, true));
                   Alerts.message("Success", "Password updated!");
                   dispose();
                   new HomeStore().btnUsersTableAP();
@@ -236,7 +236,7 @@ public class UsersTable extends JDialog implements MouseListener {
           String[] IDs = Arrays.stream(selectedRows).mapToObj(selectedRow ->
               String.valueOf(model.getValueAt(selectedRow, 0))).toArray(String[]::new);
 
-          if (AppConfigCore.loginDBA()) {
+          if (Settings.loginDBA()) {
             Database.deleteData(IDs, USERS);
             dispose();
             new HomeStore().btnUsersTableAP();

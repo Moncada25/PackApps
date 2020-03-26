@@ -1,12 +1,12 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.BIG;
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.fadeIn;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.fadeIn;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -261,7 +261,7 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Hacks");
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -300,7 +300,7 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
   public void mouseClicked(MouseEvent e) {
 
     if (e.getSource() == title) {
-      AppConfigCore.fadeOut(this);
+      Settings.fadeOut(this);
     }
   }
 

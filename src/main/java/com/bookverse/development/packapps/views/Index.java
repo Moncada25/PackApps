@@ -1,9 +1,9 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfigCore.BORDER_BLUE;
-import static com.bookverse.development.packapps.core.AppConfigCore.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfigCore.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfigCore.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.BORDER_BLUE;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ArrayData.LONG_BACKGROUNDS;
 import static com.bookverse.development.packapps.utils.ArrayData.PATH_BACKGROUNDS;
 import static com.bookverse.development.packapps.utils.ArrayData.WIDTH_BACKGROUNDS;
@@ -19,7 +19,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
 
 import com.bookverse.development.packapps.automation.utils.RunTest;
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.AppConfigModel;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
@@ -145,7 +145,7 @@ public class Index extends JFrame implements ActionListener {
     window.setTitle(AppConfigModel.getTitleApp());
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
     window.textureMode.setForeground(MAIN_COLOR);
-    AppConfigCore.fadeIn(window);
+    Settings.fadeIn(window);
     window.setVisible(true);
   }
 
@@ -427,7 +427,7 @@ public class Index extends JFrame implements ActionListener {
   private void changeBackgroundAP(String name, int width, int length) {
 
     try {
-      AppConfigCore.fadeIn(this);
+      Settings.fadeIn(this);
       setVisible(false);
       ((JPanel) getContentPane()).setOpaque(false);
       welcome.setIcon(new ImageIcon(resources.getImage(name)));
@@ -461,7 +461,7 @@ public class Index extends JFrame implements ActionListener {
     guessNumberTable.setMinimumSize(new Dimension(830, 400));
     guessNumberTable.setMaximumSize(new Dimension(1280, 720));
     guessNumberTable.setTitle(GUESS_NUMBER + " Information");
-    AppConfigCore.fadeIn(guessNumberTable);
+    Settings.fadeIn(guessNumberTable);
     guessNumberTable.setVisible(true);
   }
 
@@ -481,7 +481,7 @@ public class Index extends JFrame implements ActionListener {
     hangmanTable.setMinimumSize(new Dimension(830, 400));
     hangmanTable.setMaximumSize(new Dimension(1280, 720));
     hangmanTable.setTitle(HANGMAN + " Information");
-    AppConfigCore.fadeIn(hangmanTable);
+    Settings.fadeIn(hangmanTable);
     hangmanTable.setVisible(true);
   }
 
@@ -503,7 +503,7 @@ public class Index extends JFrame implements ActionListener {
       dicesTable.setMinimumSize(new Dimension(830, 400));
       dicesTable.setMaximumSize(new Dimension(1280, 720));
       dicesTable.setTitle(DICES + " Information");
-      AppConfigCore.fadeIn(dicesTable);
+      Settings.fadeIn(dicesTable);
       dicesTable.setVisible(true);
     }
 
@@ -524,7 +524,7 @@ public class Index extends JFrame implements ActionListener {
     notesTable.setMinimumSize(new Dimension(830, 400));
     notesTable.setMaximumSize(new Dimension(1280, 720));
     notesTable.setTitle(NOTES + " Information");
-    AppConfigCore.fadeIn(notesTable);
+    Settings.fadeIn(notesTable);
     notesTable.setVisible(true);
   }
 
@@ -543,7 +543,7 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.setMaximumSize(new Dimension(1280, 720));
     puzzleTable.setTitle(PUZZLE + " Information");
     setVisible(false);
-    AppConfigCore.fadeIn(puzzleTable);
+    Settings.fadeIn(puzzleTable);
     puzzleTable.setVisible(true);
   }
 
@@ -609,7 +609,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.grayMode.setForeground(MAIN_COLOR);
-          AppConfigCore.fadeIn(window);
+          Settings.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Gray");
 
@@ -650,7 +650,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.textureMode.setForeground(MAIN_COLOR);
-          AppConfigCore.fadeIn(window);
+          Settings.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Texture");
 
@@ -692,7 +692,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.darkMode.setForeground(MAIN_COLOR);
-          AppConfigCore.fadeIn(window);
+          Settings.fadeIn(window);
           window.setVisible(true);
 
           Alerts.changeUI("Dark");
@@ -735,7 +735,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.macMode.setForeground(MAIN_COLOR);
-          AppConfigCore.fadeIn(window);
+          Settings.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Mac OS");
 
@@ -780,7 +780,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.mintMode.setForeground(MAIN_COLOR);
-          AppConfigCore.fadeIn(window);
+          Settings.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Mint");
 
@@ -825,7 +825,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.classicMode.setForeground(MAIN_COLOR);
-          AppConfigCore.fadeIn(window);
+          Settings.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Classic");
 
@@ -845,7 +845,7 @@ public class Index extends JFrame implements ActionListener {
     paintBackground(e);
 
     if (e.getSource() == yes_exit) {
-      AppConfigCore.fadeOut(this);
+      Settings.fadeOut(this);
     } else if (e.getSource() == timesheet) {
       new Timesheet(this, true).start(this);
       setVisible(true);
@@ -956,7 +956,7 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == read) {
       new Card(this, true).start(this);
       setVisible(true);
-    } else if (AppConfigCore.verifyConnection("Connect to see more!", isWork)) {
+    } else if (Settings.verifyConnection("Connect to see more!", isWork)) {
 
       if (e.getSource() == roulette) {
 

@@ -54,7 +54,7 @@ import javax.swing.border.TitledBorder;
 import org.apache.commons.codec.binary.Base64;
 import org.jetbrains.annotations.NotNull;
 
-public class AppConfigCore {
+public class Settings {
 
   public static final Color TEXT_COLOR = new Color(21, 87, 163);
   public static final Color MAIN_COLOR = new Color(220, 12, 12);

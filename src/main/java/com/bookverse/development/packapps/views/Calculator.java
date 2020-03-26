@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.AppConfigCore;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -113,7 +113,7 @@ public class Calculator extends JDialog implements ActionListener {
     btnDivide = resources.getButton("/", null, this, this);
     btnDivide.setBounds(179, 100, 43, 43);
 
-    btnEqual = resources.getButton("=", AppConfigCore.TEXT_COLOR, this, this);
+    btnEqual = resources.getButton("=", Settings.TEXT_COLOR, this, this);
     btnEqual.setBounds(222, 186, 43, 86);
 
     btnRoot = resources.getButton("√", null, this, this);
@@ -122,7 +122,7 @@ public class Calculator extends JDialog implements ActionListener {
     btnPower = resources.getButton("^", null, this, this);
     btnPower.setBounds(222, 100, 43, 43);
 
-    btnDelete = resources.getButton("←", AppConfigCore.MAIN_COLOR, this, this);
+    btnDelete = resources.getButton("←", Settings.MAIN_COLOR, this, this);
     btnDelete.setBounds(179, 57, 86, 43);
 
     btnClean = resources.getButton("C", null, this, this);
@@ -368,7 +368,7 @@ public class Calculator extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Estandar Calculator");
-    AppConfigCore.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
