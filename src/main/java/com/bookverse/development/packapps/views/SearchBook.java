@@ -1,16 +1,16 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.GenericConstants.BOOKVERSE_DEVELOPMENT;
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_DEVELOPMENT;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static java.awt.Event.ENTER;
 import static javax.swing.SwingConstants.CENTER;
 
 import com.bookverse.development.packapps.automation.models.BookverseData;
 import com.bookverse.development.packapps.automation.runners.RunSearchBook;
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -50,7 +50,7 @@ public class SearchBook extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Bookverse Test");
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -120,7 +120,7 @@ public class SearchBook extends JDialog implements ActionListener {
 
     IntStream.range(0, listBooks.size()).forEach(i -> listBooksBox.addItem(listBooks.get(i)));
 
-    listBooksBox.setFont(AppConfig.SMALL);
+    listBooksBox.setFont(Settings.SMALL);
     listBooksBox.setBounds(95, 165, 260, 30);
     ((JLabel)listBooksBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
     add(listBooksBox);
@@ -131,7 +131,7 @@ public class SearchBook extends JDialog implements ActionListener {
     txtPassword.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
-    AppConfig.fadeOut(this);
+    Settings.fadeOut(this);
   }
 
   private void btnRunAP() {
@@ -140,7 +140,7 @@ public class SearchBook extends JDialog implements ActionListener {
         && String.valueOf(txtPassword.getPassword()).length() >= 4) {
       Resources.generalObject = new BookverseData(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
-          BOOKVERSE_DEVELOPMENT,
+          BOOKVERSE_DEVELOPMENT.getProperty(),
           String.valueOf(listBooksBox.getSelectedItem()));
       JUnitCore.runClasses(RunSearchBook.class);
     } else {

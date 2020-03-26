@@ -1,16 +1,16 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.HAND;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.HAND;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.fadeIn;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PURCHASES;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -248,7 +248,7 @@ public class Purchases extends JDialog implements ActionListener {
     txtPhone.setText("");
     lblUnits.setText("1");
     txtPrice.setText("");
-    AppConfig.fadeOut(this);
+    Settings.fadeOut(this);
   }
 
   private void btnSubmitAP() {
@@ -319,7 +319,7 @@ public class Purchases extends JDialog implements ActionListener {
               try {
 
                 String[] purchase = {PURCHASES, txtReference.getText(), user, txtDocument.getText(),
-                    txtPhone.getText(), AppConfig.getDate(), String.valueOf(lblUnits.getText()),
+                    txtPhone.getText(), Settings.getDate(), String.valueOf(lblUnits.getText()),
                     String.valueOf(totalPurchase)};
 
                 Database.insertData(purchase);
@@ -395,7 +395,7 @@ public class Purchases extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Buy");
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }

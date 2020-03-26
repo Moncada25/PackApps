@@ -1,22 +1,21 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.HAND;
-import static com.bookverse.development.packapps.core.AppConfig.LOADER;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.POINT;
-import static com.bookverse.development.packapps.core.AppConfig.RESIZE;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.getBorder;
-import static com.bookverse.development.packapps.core.AppConfig.inputText;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.HAND;
+import static com.bookverse.development.packapps.core.Settings.LOADER;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.POINT;
+import static com.bookverse.development.packapps.core.Settings.RESIZE;
+import static com.bookverse.development.packapps.core.Settings.TEXT;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.getBorder;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.models.Table;
@@ -195,9 +194,9 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (AppConfig.loginDBA()) {
+        if (Settings.loginDBA()) {
 
-          Database.updateData(inputText("Enter a Nickname", 20),
+          Database.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(GUESS_NUMBER));
 
           dispose();
@@ -222,7 +221,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        if (AppConfig.loginDBA()) {
+        if (Settings.loginDBA()) {
           Database.deleteData(IDs, Format.tableName(GUESS_NUMBER));
           dispose();
           new Index().guessNumberTableAP();

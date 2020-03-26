@@ -1,14 +1,14 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
-import static com.bookverse.development.packapps.core.AppConfig.fadeOut;
-import static com.bookverse.development.packapps.core.AppConfig.instruccionesTriqui;
-import static com.bookverse.development.packapps.core.AppConfig.intRandom;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.fadeIn;
+import static com.bookverse.development.packapps.utils.Alerts.instruccionesTriqui;
+import static com.bookverse.development.packapps.core.Settings.getIntRandom;
 
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.Color;
 import java.awt.Font;
@@ -505,7 +505,7 @@ public class TicTacToe extends JDialog implements ActionListener {
 
     int[][] points = getPoints();
 
-    int aux = intRandom(0, 2);
+    int aux = getIntRandom(0, 2);
 
     position[0] = points[aux][0];
     position[1] = points[aux][1];
@@ -589,7 +589,7 @@ public class TicTacToe extends JDialog implements ActionListener {
     } else if (e.getSource() == btnReset) {
       btnResetAP();
     } else if (e.getSource() == btnExit) {
-      fadeOut(this);
+      Settings.fadeOut(this);
     } else {
       btnBoardAP(e);
     }

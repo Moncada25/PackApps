@@ -1,14 +1,13 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.getDate;
-import static com.bookverse.development.packapps.core.AppConfig.saveGame;
-import static com.bookverse.development.packapps.core.AppConfig.verifyConnection;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.getDate;
+import static com.bookverse.development.packapps.core.Settings.verifyConnection;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -142,9 +141,9 @@ public class Dices extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DICES + ", throw them!");
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
-    AppConfig.instruccionesDados();
+    Alerts.instruccionesDados();
     setVisible(true);
   }
 
@@ -153,9 +152,9 @@ public class Dices extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DICES + ", throw them!");
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
-    AppConfig.instruccionesDados();
+    Alerts.instruccionesDados();
     setVisible(true);
   }
 
@@ -330,7 +329,7 @@ public class Dices extends JDialog implements ActionListener {
 
   private void insertResults(String name, String win) {
 
-    if (verifyConnection("Data don't saved", true) && saveGame()) {
+    if (verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
       try {
         String[] data = {DICES, name, win, String.valueOf(round),
             getDate()};
@@ -378,7 +377,7 @@ public class Dices extends JDialog implements ActionListener {
     }
 
     if (e.getSource() == btnExit) {
-      AppConfig.fadeOut(this);
+      Settings.fadeOut(this);
     }
 
     if (e.getSource() == btnReset) {

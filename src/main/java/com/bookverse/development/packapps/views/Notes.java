@@ -1,10 +1,10 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -57,9 +57,9 @@ public class Notes extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(NOTES);
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
-    AppConfig.instruccionesNotas();
+    Alerts.instruccionesNotas();
     setVisible(true);
   }
 
@@ -68,9 +68,9 @@ public class Notes extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(NOTES);
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
-    AppConfig.instruccionesNotas();
+    Alerts.instruccionesNotas();
     setVisible(true);
   }
 
@@ -148,17 +148,17 @@ public class Notes extends JDialog implements ActionListener {
 
     JLabel lblNotes = resources
         .getLabel("<html><strong>Notes</strong></html>", MAIN_COLOR, this,
-            AppConfig.MEDIUM);
+            Settings.MEDIUM);
     lblNotes.setBounds(30, 30, 100, 30);
 
     JLabel lblPercentages = resources
         .getLabel("<html><strong>%</strong></html>", MAIN_COLOR, this,
-            AppConfig.MEDIUM);
+            Settings.MEDIUM);
     lblPercentages.setBounds(145, 30, 100, 30);
 
     JLabel name = resources
         .getLabel("<html><strong>Name</strong></html>", MAIN_COLOR, this,
-            AppConfig.MEDIUM);
+            Settings.MEDIUM);
     name.setBounds(270, 30, 100, 30);
 
     txtName = new JTextField();
@@ -179,7 +179,7 @@ public class Notes extends JDialog implements ActionListener {
 
     JLabel scale = resources
         .getLabel("<html><strong>Scale</strong></html>", MAIN_COLOR, this,
-            AppConfig.MEDIUM);
+            Settings.MEDIUM);
     scale.setBounds(270, 110, 100, 30);
 
     ButtonGroup buttonGroup = new ButtonGroup();
@@ -267,7 +267,7 @@ public class Notes extends JDialog implements ActionListener {
 
   private void insert(String state) {
 
-    if (AppConfig.verifyConnection("Data don't saved", true) && AppConfig.saveGame()) {
+    if (Settings.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
       try {
 
@@ -280,7 +280,7 @@ public class Notes extends JDialog implements ActionListener {
         }
 
         String[] data = {NOTES, txtName.getText(), option, String.format("%.0f", totalPercentage),
-            String.format("%.2f", totalNote), state, AppConfig.getDate()};
+            String.format("%.2f", totalNote), state, Settings.getDate()};
         Database.insertData(data);
       } catch (Exception e) {
         Alerts.error(e, NOTES);
@@ -416,7 +416,7 @@ public class Notes extends JDialog implements ActionListener {
     } else if (e.getSource() == btnReset) {
       btnResetAP();
     } else if (e.getSource() == btnExit) {
-      AppConfig.fadeOut(this);
+      Settings.fadeOut(this);
     }
   }
 }

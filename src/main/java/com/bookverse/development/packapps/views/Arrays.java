@@ -1,14 +1,13 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.SMALL;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.inputNumber;
-import static com.bookverse.development.packapps.core.AppConfig.intRandom;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.SMALL;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.getIntRandom;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -148,7 +147,7 @@ public class Arrays extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Arrays");
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -218,7 +217,7 @@ public class Arrays extends JDialog implements ActionListener {
           case "A scalar":
 
             int scalar = Integer.parseInt(
-                inputNumber("Enter the scalar by which you want to multiply the matrix", 2));
+                Alerts.inputNumber("Enter the scalar by which you want to multiply the matrix", 2));
 
             for (int i = 0; i < Integer.parseInt(txtRows.getText()); i++) {
               for (int j = 0; j < Integer.parseInt(txtColumns.getText()); j++) {
@@ -260,7 +259,8 @@ public class Arrays extends JDialog implements ActionListener {
           case "A matrix":
 
             int columnsB = Integer
-                .parseInt(inputNumber("Enter the number of columns that matrix B will have", 1));
+                .parseInt(
+                    Alerts.inputNumber("Enter the number of columns that matrix B will have", 1));
 
             int f = Integer.parseInt(txtRows.getText());
             int c = Integer.parseInt(txtColumns.getText());
@@ -398,7 +398,9 @@ public class Arrays extends JDialog implements ActionListener {
 
         if (e.getSource() == matrix[i][j]) {
           matrix[i][j].setText(
-              inputNumber("Enter the value of the position [" + (i + 1) + "][" + (j + 1) + "]", 2));
+              Alerts
+                  .inputNumber("Enter the value of the position [" + (i + 1) + "][" + (j + 1) + "]",
+                      2));
         }
       }
     }
@@ -562,7 +564,7 @@ public class Arrays extends JDialog implements ActionListener {
 
     for (int i = 0; i < f; i++) {
       for (int j = 0; j < c; j++) {
-        matrix[i][j].setText(String.valueOf(intRandom(0, 9)));
+        matrix[i][j].setText(String.valueOf(getIntRandom(0, 9)));
         matrix[i][j].setBackground(getBackground());
         matrix[i][j].setFont(MEDIUM);
       }

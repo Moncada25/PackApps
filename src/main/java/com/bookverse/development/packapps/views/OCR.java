@@ -1,10 +1,11 @@
-package com.bookverse.development.packapps.utils;
+package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -75,7 +76,7 @@ public class OCR extends JDialog implements MouseListener {
     setMinimumSize(new Dimension(560, 330));
     setMaximumSize(new Dimension(1280, 720));
     setTitle("OCR");
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -84,12 +85,12 @@ public class OCR extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
 
-    searchFile = resources.getLabel("  SEARCH FILE  ", TEXT_COLOR, panel, AppConfig.MEDIUM);
-    searchFile.setBorder(AppConfig.BORDER_BLUE);
+    searchFile = resources.getLabel("  SEARCH FILE  ", TEXT_COLOR, panel, Settings.MEDIUM);
+    searchFile.setBorder(Settings.BORDER_BLUE);
     searchFile.addMouseListener(this);
 
-    exit = resources.getLabel("  RETURN  ", MAIN_COLOR, panel, AppConfig.MEDIUM);
-    exit.setBorder(AppConfig.BORDER_RED);
+    exit = resources.getLabel("  RETURN  ", MAIN_COLOR, panel, Settings.MEDIUM);
+    exit.setBorder(Settings.BORDER_RED);
     exit.addMouseListener(this);
 
     return panel;
@@ -122,7 +123,7 @@ public class OCR extends JDialog implements MouseListener {
         text.setEnabled(true);
       }
     } else if (e.getSource() == exit) {
-      AppConfig.fadeOut(this);
+      Settings.fadeOut(this);
     }
   }
 
@@ -139,9 +140,9 @@ public class OCR extends JDialog implements MouseListener {
   @Override
   public void mouseEntered(MouseEvent e) {
     if (e.getSource() == searchFile) {
-      searchFile.setCursor(AppConfig.HAND);
+      searchFile.setCursor(Settings.HAND);
     } else if (e.getSource() == exit) {
-      exit.setCursor(AppConfig.HAND);
+      exit.setCursor(Settings.HAND);
     }
   }
 

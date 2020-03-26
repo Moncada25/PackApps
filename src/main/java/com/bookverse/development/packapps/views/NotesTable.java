@@ -1,16 +1,15 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.HAND;
-import static com.bookverse.development.packapps.core.AppConfig.LOADER;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.POINT;
-import static com.bookverse.development.packapps.core.AppConfig.RESIZE;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.getBorder;
-import static com.bookverse.development.packapps.core.AppConfig.inputText;
-import static com.bookverse.development.packapps.core.AppConfig.loginDBA;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.HAND;
+import static com.bookverse.development.packapps.core.Settings.LOADER;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.POINT;
+import static com.bookverse.development.packapps.core.Settings.RESIZE;
+import static com.bookverse.development.packapps.core.Settings.TEXT;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.getBorder;
+import static com.bookverse.development.packapps.core.Settings.loginDBA;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
@@ -214,7 +213,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
       } else {
 
         if (loginDBA()) {
-          Database.updateData(inputText("Enter a Nickname", 20),
+          Database.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(NOTES));
 
           dispose();

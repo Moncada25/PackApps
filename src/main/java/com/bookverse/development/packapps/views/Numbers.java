@@ -1,14 +1,14 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BORDER_BLUE;
-import static com.bookverse.development.packapps.core.AppConfig.BORDER_RED;
-import static com.bookverse.development.packapps.core.AppConfig.HAND;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.getBorder;
+import static com.bookverse.development.packapps.core.Settings.BORDER_BLUE;
+import static com.bookverse.development.packapps.core.Settings.BORDER_RED;
+import static com.bookverse.development.packapps.core.Settings.HAND;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.getBorder;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -41,7 +41,7 @@ public class Numbers extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
     panel.setBackground(new Color(0, 0, 0));
-    panel.setBorder(getBorder("Select"));
+    panel.setBorder(getBorder("Select action"));
 
     btnPhi = resources.getLabel("  Phi φ  ", TEXT_COLOR, panel, MEDIUM);
     btnPhi.setBorder(BORDER_BLUE);
@@ -72,7 +72,7 @@ public class Numbers extends JDialog implements MouseListener {
     setMaximumSize(new Dimension(1295, 820));
     setLocationRelativeTo(parent);
     setTitle("Numbers");
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -127,7 +127,7 @@ public class Numbers extends JDialog implements MouseListener {
       new OtherThings(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == welcome) {
-      AppConfig.fadeOut(this);
+      Settings.fadeOut(this);
     }
   }
 

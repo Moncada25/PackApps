@@ -52,9 +52,9 @@ public class ArrayData {
     put("Phone", "3012499315");
     put("Occupation", "Otro");
     put("Address", "CR 62 #62-b11");
-    put("Username", "Akatsuki");
-    put("Password", "Akatsuki25");
-    put("Email", "akatsuki@gmail.com");
+    put("Username", "PackApps");
+    put("Password", "PackApps123");
+    put("Email", "packapps@gmail.com");
     put("Gender", "Masculino");
   }};
 }

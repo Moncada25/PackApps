@@ -1,12 +1,12 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.SMALL;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.SMALL;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.event.ActionEvent;
@@ -53,7 +53,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Send Email");
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -174,7 +174,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
   private void btnSendAP() {
 
-    if (AppConfig.verifyConnection("Make sure you are connected to a network", true)) {
+    if (Settings.verifyConnection("Make sure you are connected to a network", true)) {
 
       if (text.getText().trim().length() < 5 || txtUser.getText().trim().length() < 10) {
         Alerts.message("Verify", "Fields too short");
@@ -197,7 +197,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
     if (e.getSource() == btnSend) {
       btnSendAP();
     } else if (e.getSource() == btnExit) {
-      AppConfig.fadeOut(this);
+      Settings.fadeOut(this);
     }
   }
 

@@ -11,7 +11,7 @@ import com.bookverse.development.packapps.automation.questions.VerifyUser;
 import com.bookverse.development.packapps.automation.tasks.BookverseLogin;
 import com.bookverse.development.packapps.automation.tasks.BookverseRegister;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
-import com.bookverse.development.packapps.automation.utils.GenericConstants;
+import com.bookverse.development.packapps.automation.utils.ExceptionsMessages;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -40,7 +40,7 @@ public class RunRegisterUser {
     theActorInTheSpotlight().attemptsTo(BookverseLogin.withCredentials(bookverseData));
     theActorInTheSpotlight().should(
         seeThat(VerifyUser.registered(theActorInTheSpotlight().recall("USER_REGISTERED")))
-            .orComplainWith(RegisterUserException.class, GenericConstants.REGISTER_USER_ERROR));
+            .orComplainWith(RegisterUserException.class, ExceptionsMessages.REGISTER_USER_ERROR.getProperty()));
 
     if (theActorInTheSpotlight().recall("RESPONSE_REGISTER").toString()
         .contains("ya se encuentra registrado")) {

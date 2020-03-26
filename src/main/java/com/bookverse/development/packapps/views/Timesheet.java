@@ -1,15 +1,15 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.GenericConstants.ULTIMATIX;
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
+import static com.bookverse.development.packapps.automation.utils.Paths.ULTIMATIX;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static javax.swing.SwingConstants.CENTER;
 
 import com.bookverse.development.packapps.automation.models.UltimatixData;
 import com.bookverse.development.packapps.automation.runners.RunTimesheetEntry;
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -44,7 +44,7 @@ public class Timesheet extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Timesheet Entry");
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -144,7 +144,7 @@ public class Timesheet extends JDialog implements ActionListener {
     txtHours.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
-    AppConfig.fadeOut(this);
+    Settings.fadeOut(this);
   }
 
   private void btnRunAP() {
@@ -153,7 +153,7 @@ public class Timesheet extends JDialog implements ActionListener {
         && txtHours.getText().length() > 0) {
       Resources.generalObject = new UltimatixData(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
-          ULTIMATIX,
+          ULTIMATIX.getProperty(),
           txtHours.getText());
       JUnitCore.runClasses(RunTimesheetEntry.class);
     } else {

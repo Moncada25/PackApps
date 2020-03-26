@@ -1,20 +1,16 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.AppConfig.BIG;
-import static com.bookverse.development.packapps.core.AppConfig.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.MEDIUM;
-import static com.bookverse.development.packapps.core.AppConfig.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.fadeIn;
-import static com.bookverse.development.packapps.core.AppConfig.getDate;
-import static com.bookverse.development.packapps.core.AppConfig.inputNumber;
-import static com.bookverse.development.packapps.core.AppConfig.inputText;
-import static com.bookverse.development.packapps.core.AppConfig.instruccionesAdivinar;
-import static com.bookverse.development.packapps.core.AppConfig.intRandom;
-import static com.bookverse.development.packapps.core.AppConfig.saveGame;
-import static com.bookverse.development.packapps.core.AppConfig.verifyConnection;
+import static com.bookverse.development.packapps.core.Settings.BIG;
+import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
+import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.core.Settings.fadeIn;
+import static com.bookverse.development.packapps.core.Settings.getDate;
+import static com.bookverse.development.packapps.core.Settings.getIntRandom;
+import static com.bookverse.development.packapps.core.Settings.verifyConnection;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
 
-import com.bookverse.development.packapps.core.AppConfig;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -135,7 +131,7 @@ public class GuessNumber extends JDialog implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnReturn) {
-      AppConfig.fadeOut(this);
+      Settings.fadeOut(this);
     } else if (e.getSource() == btnPlay) {
       btnPlayAP();
     }
@@ -143,10 +139,10 @@ public class GuessNumber extends JDialog implements ActionListener {
 
   private void btnPlayAP() {
 
-    high = Integer.parseInt(inputNumber("Maximum number to guess", 6));
+    high = Integer.parseInt(Alerts.inputNumber("Maximum number to guess", 6));
 
     int minimum = 1;
-    numberRandom = intRandom(minimum, high);
+    numberRandom = getIntRandom(minimum, high);
 
     message.setText("<html><em>"
         + "<center><strong>Guess the number!</strong></center>"
@@ -180,9 +176,9 @@ public class GuessNumber extends JDialog implements ActionListener {
     setSize(430, 330);
     setResizable(false);
     setLocationRelativeTo(parent);
-    AppConfig.fadeIn(this);
+    Settings.fadeIn(this);
     parent.setVisible(false);
-    AppConfig.instruccionesAdivinar();
+    Alerts.instruccionesAdivinar();
     setVisible(true);
   }
 
@@ -199,7 +195,7 @@ public class GuessNumber extends JDialog implements ActionListener {
     setLocationRelativeTo(parent);
     fadeIn(this);
     parent.setVisible(false);
-    instruccionesAdivinar();
+    Alerts.instruccionesAdivinar();
     setVisible(true);
   }
 
@@ -229,7 +225,7 @@ public class GuessNumber extends JDialog implements ActionListener {
       btnPlay.setEnabled(true);
       btnReturn.setEnabled(true);
 
-      if (verifyConnection("Data don't saved", true) && saveGame()) {
+      if (verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
         String level;
 
@@ -241,7 +237,7 @@ public class GuessNumber extends JDialog implements ActionListener {
 
         try {
           String[] data = {GUESS_NUMBER,
-              inputText("Enter a Nickname", 20),
+              Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(high), level + " - " + attempts,
               getDate()};
           Database.insertData(data);
