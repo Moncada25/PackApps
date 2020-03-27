@@ -6,7 +6,7 @@ public enum AppConfigUtility {
   PASSWORD_DBA("passwordDBA"),
   STORE_MANAGER_KEY("storeManagerKey"),
   DEFAULT_ENCRYPT_KEY("defaultEncryptKey"),
-  FILE_PROPERTIES("config.properties");
+  FILE_PROPERTIES("src/main/resources/data/config.properties");
 
   private String property;
 
