@@ -17,8 +17,6 @@ Set of small applications for different purposes.
   - Integration with automated testing
   - Sending emails to any recipient
 
->Unit tests carried out, the correct operation of the applications is validated.
-
 ### Tech and libraries
 
 PackApps uses a number of open source projects to work properly:
@@ -33,6 +31,8 @@ PackApps uses a number of open source projects to work properly:
 * [junit] - To test
 * [gradle] - To manage dependencies
 
+>Unit tests carried out, the correct operation of the applications is validated.
+
 And of course, PackApps itself is open source with a public repository on GitHub.
 
 ### Installation
@@ -40,7 +40,7 @@ And of course, PackApps itself is open source with a public repository on GitHub
 PackApps requires JDK v1.8+ and Gradle to run 
 
 ```sh
-gradle build 
+run gradle build 
 run class main com.bookverse.development.packapps.core.Start
 ```
 
@@ -52,6 +52,7 @@ Want to contribute? Great!
 
  - Write MORE Tests
  - Add more applications
+ - End Tic Tac Toe game that is in beta
  
 ### License
 
