@@ -13,16 +13,16 @@ Set of small applications for different purposes.
 
 ### New features!
 
-  - Optical Character Recognition (OCR)
-  - Integration with automated testing
-  - Sending emails to any recipient
+  - Optical Character Recognition (OCR).
+  - Integration with automated testing.
+  - Sending emails to any recipient.
 
 ### Tech and libraries
 
-PackApps uses a number of open source projects to work properly:
+PackApps uses several open source projects to work properly:
 
 * [jtattoo] - To add themes
-* [javax.mail] - For sending emails with Gmail
+* [javax.mail] - To send emails by Gmail
 * [itextpdf] - To manage PDF files
 * [mysql-connector-java] - To connect to the database
 * [tess4j] - To use OCR
@@ -31,28 +31,28 @@ PackApps uses a number of open source projects to work properly:
 * [junit] - To test
 * [gradle] - To manage dependencies
 
->Unit tests carried out, the correct operation of the applications is validated.
+>Unit tests were carried out, the correct operation of the applications was validated.
 
 And of course, PackApps itself is open source with a public repository on GitHub.
 
 ### Installation
 
-PackApps requires JDK v1.8+ and Gradle to run 
+PackApps requires JDK v1.8+ and Gradle to run:
 
 ```sh
 run gradle build 
-run class main com.bookverse.development.packapps.core.Start
+run main class com.bookverse.development.packapps.core.Start
 ```
 
 ### Development
 
-Want to contribute? Great!
+Do you want to contribute? Great!
 
 ### To do
 
- - Write MORE Tests
- - Add more applications
- - End Tic Tac Toe game that is in beta
+ - Write MORE Tests.
+ - Add more applications.
+ - Finish Tic Tac Toe game which is in beta version.
  
 ### License
 
