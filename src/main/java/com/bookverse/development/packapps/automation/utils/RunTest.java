@@ -11,20 +11,20 @@ import org.junit.runner.JUnitCore;
 
 public class RunTest {
 
-  public static void registerNewUser(){
+  public static void registerNewUser() {
 
-    if(Alerts.requestResponse(
+    if (Alerts.requestResponse(
         "Register new user with following data...\n\n"
-        + "Name → "+ DATA_NEW_USER.get("Name")+"\n"
-        + "Last name → "+ DATA_NEW_USER.get("LastName")+"\n"
-        + "Phone → "+ DATA_NEW_USER.get("Phone")+"\n"
-        + "Occupation → "+ DATA_NEW_USER.get("Occupation")+"\n"
-        + "Address → "+ DATA_NEW_USER.get("Address")+"\n"
-        + "Username → "+ DATA_NEW_USER.get("Username")+"\n"
-        + "Password → "+ DATA_NEW_USER.get("Password")+"\n"
-        + "Email → "+ DATA_NEW_USER.get("Email")+"\n"
-        + "Gender → "+ DATA_NEW_USER.get("Gender")+"\n\n"
-            + "Do you want run test?", "Bookverse Test")){
+            + "Name → " + DATA_NEW_USER.get("Name") + "\n"
+            + "Last name → " + DATA_NEW_USER.get("LastName") + "\n"
+            + "Phone → " + DATA_NEW_USER.get("Phone") + "\n"
+            + "Occupation → " + DATA_NEW_USER.get("Occupation") + "\n"
+            + "Address → " + DATA_NEW_USER.get("Address") + "\n"
+            + "Username → " + DATA_NEW_USER.get("Username") + "\n"
+            + "Password → " + DATA_NEW_USER.get("Password") + "\n"
+            + "Email → " + DATA_NEW_USER.get("Email") + "\n"
+            + "Gender → " + DATA_NEW_USER.get("Gender") + "\n\n"
+            + "Do you want run test?", "Bookverse Test")) {
 
       Resources.generalObject = new BookverseData(DATA_NEW_USER.get("Username"),
           DATA_NEW_USER.get("Password"),

@@ -17,7 +17,7 @@ public class Resources {
   public static Object generalObject;
 
   public URL getImage(String image) {
-    return this.getClass().getResource("/"+image);
+    return this.getClass().getResource("/" + image);
   }
 
   public JMenuItem getMenuItem(String name, String image, ActionListener listener) {

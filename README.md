@@ -53,7 +53,6 @@ Do you want to contribute? Great!
  - Write MORE Tests.
  - Add more applications.
  - Finish Tic Tac Toe game which is in beta version.
- - 
  
 ### License
 
