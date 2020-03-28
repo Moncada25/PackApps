@@ -27,7 +27,7 @@ Date 10/06/19
 
 package com.bookverse.development.packapps.core;
 
-import com.bookverse.development.packapps.models.AppConfigModel;
+import com.bookverse.development.packapps.utils.AppConfigUtility;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.WindowEffect;
 import java.awt.Color;
@@ -190,7 +190,7 @@ public class Settings {
 
         if (password.length() != 0) {
 
-          if (AppConfigModel.getPasswordDBA().equals(password)) {
+          if (AppConfigUtility.PASSWORD_DBA.getProperty().equals(password)) {
             return true;
           } else {
             JOptionPane.showMessageDialog(null,
@@ -262,7 +262,7 @@ public class Settings {
     if (!isSetSecretKey) {
       return setSecretKey();
     } else {
-      return AppConfigModel.getDefaultEncryptKey();
+      return AppConfigUtility.DEFAULT_ENCRYPT_KEY.getProperty();
     }
   }
 
