@@ -46,7 +46,7 @@ public class ArrayData {
           {"futbol", "baloncesto", "tenis", "natacion", "voleibol", "ciclismo", "golf", "hockey",
               "karate", "esgrima", "boxeo", "atletismo", "rugby", "beisbol", "paracaidismo"}};
 
-  public static Map<String,String> DATA_NEW_USER = new HashMap<String, String>(){{
+  public static Map<String, String> DATA_NEW_USER = new HashMap<String, String>() {{
     put("Name", "Santiago");
     put("LastName", "Moncada");
     put("Phone", "3012499315");
