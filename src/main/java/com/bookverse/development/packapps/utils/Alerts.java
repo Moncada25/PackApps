@@ -96,7 +96,7 @@ public class Alerts {
   public static void changeUI(String aspect) {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style()
-            + "<strong><center>Changes Saved</center></strong><br>"
+            + "<strong><center>Changes saved</center></strong><br>"
             + "Modified UI, enjoy the " + aspect + " aspect!</html>",
         "New Look!", JOptionPane.PLAIN_MESSAGE);
   }

@@ -50,7 +50,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Index extends JFrame implements ActionListener {
 
-  protected static int background = 4;
+  protected static int background = 13;
   private static Resources resources = new Resources();
   private static JLabel welcome;
   protected HangmanTable hangmanTable = new HangmanTable(this, true);
@@ -81,7 +81,7 @@ public class Index extends JFrame implements ActionListener {
 
     try {
 
-      UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+      UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
 
       UIManager.put("PasswordField.border", BORDER_BLUE);
       UIManager.put("PasswordField.font", MEDIUM);
@@ -673,7 +673,7 @@ public class Index extends JFrame implements ActionListener {
           UIManager.put("Table.foreground", Color.WHITE);
           UIManager.put("OptionPane.messageForeground", Color.WHITE);
           UIManager.put("Button.foreground", Color.WHITE);
-          UIManager.put("MenuItem.foreground", TEXT_COLOR);
+          UIManager.put("MenuItem.foreground", Color.WHITE);
 
           setVisible(false);
           Index window = new Index();

@@ -39,7 +39,7 @@ public class OCR extends JDialog implements MouseListener {
   private String getPath() {
 
     JFileChooser chooser = new JFileChooser();
-    chooser.addChoosableFileFilter(new FileNameExtensionFilter("Images (PNG - JPG)", "png"));
+    chooser.addChoosableFileFilter(new FileNameExtensionFilter("Images (PNG - JPG)", "png", "jpg", "pdf"));
     chooser.setAcceptAllFileFilterUsed(false);
 
     String path = "";
