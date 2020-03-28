@@ -2,11 +2,10 @@ package com.bookverse.development.packapps.utils;
 
 public enum AppConfigUtility {
 
-  TITLE("titleApp"),
-  PASSWORD_DBA("passwordDBA"),
-  STORE_MANAGER_KEY("storeManagerKey"),
-  DEFAULT_ENCRYPT_KEY("defaultEncryptKey"),
-  FILE_PROPERTIES("config.properties");
+  TITLE("PackApps"),
+  PASSWORD_DBA("admin"),
+  STORE_MANAGER_KEY("123"),
+  DEFAULT_ENCRYPT_KEY("PackAppsDefaultKey");
 
   private String property;
 

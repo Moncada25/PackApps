@@ -10,7 +10,7 @@ import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.models.AppConfigModel;
+import com.bookverse.development.packapps.utils.AppConfigUtility;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -103,7 +103,7 @@ public class SignUp extends JDialog implements ActionListener {
 
       public void keyPressed(KeyEvent e) {
 
-        if (e.getKeyCode() == KeyEvent.VK_ENTER){
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
           btnSignUpAP();
         }
       }
@@ -140,13 +140,15 @@ public class SignUp extends JDialog implements ActionListener {
 
   private void btnSignUpAP() {
 
-    if (String.valueOf(txtCodManager.getPassword()).equals(AppConfigModel.getStoreManagerKey())) {
+    if (String.valueOf(txtCodManager.getPassword())
+        .equals(AppConfigUtility.STORE_MANAGER_KEY.getProperty())) {
 
       txtUser.setEnabled(true);
       txtPassword.setEnabled(true);
       txtUser.requestFocus();
 
-      if (Format.verifyCredentials(txtUser.getText()) && Format.verifyCredentials(String.valueOf(txtPassword.getPassword()))) {
+      if (Format.verifyCredentials(txtUser.getText()) && Format
+          .verifyCredentials(String.valueOf(txtPassword.getPassword()))) {
 
         if (!Database.userAlreadyExist(txtUser.getText())) {
 
