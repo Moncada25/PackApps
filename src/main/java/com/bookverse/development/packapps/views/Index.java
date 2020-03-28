@@ -81,7 +81,7 @@ public class Index extends JFrame implements ActionListener {
 
     try {
 
-      UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+      UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
 
       UIManager.put("PasswordField.border", BORDER_BLUE);
       UIManager.put("PasswordField.font", MEDIUM);
@@ -97,24 +97,24 @@ public class Index extends JFrame implements ActionListener {
       UIManager.put("TextArea.font", MEDIUM);
 
       UIManager.put("ComboBox.font", MEDIUM);
-      UIManager.put("ComboBox.foreground", TEXT_COLOR);
+      UIManager.put("ComboBox.foreground", Color.WHITE);
 
       UIManager.put("ScrollPane.border", BORDER_BLUE);
 
-      UIManager.put("MenuItem.foreground", TEXT_COLOR);
+      UIManager.put("MenuItem.foreground", Color.WHITE);
       UIManager.put("MenuItem.font", MEDIUM);
 
       UIManager.put("Menu.foreground", MAIN_COLOR);
       UIManager.put("Menu.font", MEDIUM);
 
       UIManager.put("Button.font", MEDIUM);
-      UIManager.put("Button.foreground", Color.BLACK);
+      UIManager.put("Button.foreground", Color.WHITE);
 
       UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
       UIManager.put("TableHeader.foreground", MAIN_COLOR);
       UIManager.put("TableHeader.font", MEDIUM);
       UIManager.put("Table.font", MEDIUM);
-      UIManager.put("Table.foreground", TEXT_COLOR);
+      UIManager.put("Table.foreground", Color.WHITE);
 
       UIManager.put("OptionPane.okButtonText", "Done");
       UIManager.put("OptionPane.cancelButtonText", "No, thanks.");
@@ -122,7 +122,7 @@ public class Index extends JFrame implements ActionListener {
       UIManager.put("OptionPane.noButtonText", "No, thanks.");
       UIManager.put("OptionPane.messageFont", MEDIUM);
       UIManager.put("OptionPane.buttonFont", MEDIUM);
-      UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
+      UIManager.put("OptionPane.messageForeground", Color.WHITE);
 
     } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
         | IllegalAccessException e) {
@@ -144,7 +144,7 @@ public class Index extends JFrame implements ActionListener {
     window.setLocationRelativeTo(null);
     window.setTitle(AppConfigModel.getTitleApp());
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-    window.textureMode.setForeground(MAIN_COLOR);
+    window.darkMode.setForeground(MAIN_COLOR);
     Settings.fadeIn(window);
     window.setVisible(true);
   }
@@ -666,9 +666,7 @@ public class Index extends JFrame implements ActionListener {
         try {
           UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
 
-          UIManager.put("MenuItem.foreground", TEXT_COLOR);
           UIManager.put("Menu.foreground", MAIN_COLOR);
-
           UIManager.put("ComboBox.foreground", Color.WHITE);
           UIManager.put("Table.foreground", Color.WHITE);
           UIManager.put("OptionPane.messageForeground", Color.WHITE);
