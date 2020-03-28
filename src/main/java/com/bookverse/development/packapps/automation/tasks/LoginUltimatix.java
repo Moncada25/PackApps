@@ -18,16 +18,16 @@ import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Step;
 
-public class UltimatixLogin implements Task {
+public class LoginUltimatix implements Task {
 
   private UltimatixData ultimatixData;
 
-  public UltimatixLogin(UltimatixData ultimatixData) {
+  public LoginUltimatix(UltimatixData ultimatixData) {
     this.ultimatixData = ultimatixData;
   }
 
-  public static UltimatixLogin withCredentials(UltimatixData ultimatixData){
-    return Tasks.instrumented(UltimatixLogin.class, ultimatixData);
+  public static LoginUltimatix withCredentials(UltimatixData ultimatixData){
+    return Tasks.instrumented(LoginUltimatix.class, ultimatixData);
   }
 
   @Step("Login Ultimatix")

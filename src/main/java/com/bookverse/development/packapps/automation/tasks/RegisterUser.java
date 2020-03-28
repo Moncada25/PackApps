@@ -12,12 +12,11 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.OCCUPATION_LIST;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.PHONE_FIELD;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.REGISTER_SUBMIT;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.RESPONSE_REGISTER;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.SECOND_PASSWORD_FIELD;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegisterElements.USERNAME_FIELD;
 import static com.bookverse.development.packapps.utils.ArrayData.DATA_NEW_USER;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotCurrentlyVisible;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnabled;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import net.serenitybdd.screenplay.Actor;
@@ -26,23 +25,24 @@ import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
-import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Step;
 
-public class BookverseRegister implements Task {
+public class RegisterUser implements Task {
 
-  public static BookverseRegister newUser() {
-    return Tasks.instrumented(BookverseRegister.class);
+  public static RegisterUser inBookverse() {
+    return Tasks.instrumented(RegisterUser.class);
   }
 
   @Step("Register new user in Bookverse")
   @Override
   public <T extends Actor> void performAs(T actor) {
 
+    do {
+      actor.wasAbleTo(WaitUntil.the(REGISTER_BUTTON, isVisible()), Click.on(REGISTER_BUTTON));
+    } while (REGISTER_BUTTON.resolveFor(actor).isCurrentlyVisible());
+
     actor.wasAbleTo(
-        WaitUntil.the(REGISTER_BUTTON, isClickable()),
-        Click.on(REGISTER_BUTTON),
         WaitUntil.the(NAME_FIELD, isVisible()),
         Enter.theValue(DATA_NEW_USER.get("Name")).into(NAME_FIELD),
         Enter.theValue(DATA_NEW_USER.get("LastName")).into(LAST_NAME_FIELD),
@@ -55,14 +55,9 @@ public class BookverseRegister implements Task {
         Enter.theValue(DATA_NEW_USER.get("Email")).into(EMAIL_FIELD),
         Click.on(GENDER_CHECK.of(DATA_NEW_USER.get("Gender"))),
         Click.on(REGISTER_SUBMIT),
-        Click.on(ALERT_ACCEPT));
-    actor.remember("RESPONSE_REGISTER", Text.of(RESPONSE_REGISTER).viewedBy(actor).asString());
-    actor.attemptsTo(
         Click.on(ALERT_ACCEPT),
-        WaitUntil.the(ALERT_ACCEPT, isNotCurrentlyVisible()),
-        Click.on(ENTER_LOGIN)
-    );
-    actor.remember("USER_REGISTERED",
-        DATA_NEW_USER.get("Name") + " " + DATA_NEW_USER.get("LastName"));
+        Click.on(ALERT_ACCEPT),
+        WaitUntil.the(ENTER_LOGIN, isClickable()),
+        Click.on(ENTER_LOGIN));
   }
 }

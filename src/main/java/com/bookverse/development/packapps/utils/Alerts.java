@@ -65,7 +65,7 @@ public class Alerts {
 
     boolean save = false;
 
-    if (Alerts.requestResponse("You want to save the data?", "Save")) {
+    if (Alerts.requestResponse("Do you want to save the data?", "Save")) {
       save = true;
     }
 

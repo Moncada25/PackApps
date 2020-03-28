@@ -5,5 +5,4 @@ public class TimesheetEntryException extends AssertionError {
   public TimesheetEntryException(String message, Throwable cause) {
     super(message, cause);
   }
-
 }

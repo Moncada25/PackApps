@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.automation.utils;
 
 import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_DEVELOPMENT;
+import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_PRODUCTION;
 import static com.bookverse.development.packapps.utils.ArrayData.DATA_NEW_USER;
 
 import com.bookverse.development.packapps.automation.models.BookverseData;
@@ -9,9 +10,9 @@ import com.bookverse.development.packapps.models.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import org.junit.runner.JUnitCore;
 
-public class RunTest {
+public class StartTests {
 
-  public static void registerNewUser() {
+  public static void startRegisterUser() {
 
     if (Alerts.requestResponse(
         "Register new user with following data...\n\n"
@@ -28,7 +29,7 @@ public class RunTest {
 
       Resources.generalObject = new BookverseData(DATA_NEW_USER.get("Username"),
           DATA_NEW_USER.get("Password"),
-          BOOKVERSE_DEVELOPMENT.getProperty(),
+          BOOKVERSE_PRODUCTION.getProperty(),
           "");
       JUnitCore.runClasses(RunRegisterUser.class);
     }

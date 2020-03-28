@@ -14,16 +14,16 @@ import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Step;
 
-public class UltimatixTimesheetRegister implements Task {
+public class RegisterHours implements Task {
 
   private String hours;
 
-  public UltimatixTimesheetRegister(String hours) {
+  public RegisterHours(String hours) {
     this.hours = hours;
   }
 
-  public static UltimatixTimesheetRegister hours(String hours) {
-    return Tasks.instrumented(UltimatixTimesheetRegister.class, hours);
+  public static RegisterHours inTimesheetEntry(String hours) {
+    return Tasks.instrumented(RegisterHours.class, hours);
   }
 
   @Step("Register hours")

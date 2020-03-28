@@ -4,12 +4,13 @@ import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static org.hamcrest.Matchers.*;
 
 import com.bookverse.development.packapps.automation.exceptions.SearchBookException;
 import com.bookverse.development.packapps.automation.models.BookverseData;
-import com.bookverse.development.packapps.automation.questions.VerifyTitle;
-import com.bookverse.development.packapps.automation.tasks.BookverseLogin;
-import com.bookverse.development.packapps.automation.tasks.BookverseSearchBook;
+import com.bookverse.development.packapps.automation.questions.TheTitle;
+import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
+import com.bookverse.development.packapps.automation.tasks.SearchBook;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
 import com.bookverse.development.packapps.automation.utils.ExceptionsMessages;
 import com.bookverse.development.packapps.models.Resources;
@@ -37,9 +38,9 @@ public class RunSearchBook {
 
   @Test
   public void searchBook() {
-    theActorInTheSpotlight().wasAbleTo(BookverseLogin.withCredentials(bookverseData));
-    theActorInTheSpotlight().attemptsTo(BookverseSearchBook.andOpen(bookverseData.getBook()));
-    theActorInTheSpotlight().should(seeThat(VerifyTitle.ofModal(bookverseData.getBook())).
+    theActorInTheSpotlight().wasAbleTo(LoginBookverse.withCredentials(bookverseData));
+    theActorInTheSpotlight().attemptsTo(SearchBook.inBookverse(bookverseData.getBook()));
+    theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverseData.getBook())).
         orComplainWith(SearchBookException.class, ExceptionsMessages.SEARCH_BOOK_ERROR.getProperty()));
     Alerts.message("Test passed!", ""
         + "Book → " + bookverseData.getBook() + "\n"

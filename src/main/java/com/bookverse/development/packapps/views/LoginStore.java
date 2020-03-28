@@ -40,7 +40,7 @@ public class LoginStore extends JDialog implements ActionListener {
     setSize(375, 400);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Buy & Sell");
+    setTitle("Store");
     Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
