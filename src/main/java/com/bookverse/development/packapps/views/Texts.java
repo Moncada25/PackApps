@@ -36,7 +36,7 @@ public class Texts extends JDialog implements MouseListener {
     setLocationRelativeTo(parent);
     setMinimumSize(new Dimension(530, 330));
     setMaximumSize(new Dimension(1280, 720));
-    setTitle("Text Editor");
+    setTitle("Texts");
     Settings.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);

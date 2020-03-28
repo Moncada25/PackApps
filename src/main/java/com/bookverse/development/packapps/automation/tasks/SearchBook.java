@@ -18,16 +18,16 @@ import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Step;
 
-public class BookverseSearchBook implements Task {
+public class SearchBook implements Task {
 
   private String book;
 
-  public BookverseSearchBook(String book) {
+  public SearchBook(String book) {
     this.book = book;
   }
 
-  public static BookverseSearchBook andOpen(String book) {
-    return Tasks.instrumented(BookverseSearchBook.class, book);
+  public static SearchBook inBookverse(String book) {
+    return Tasks.instrumented(SearchBook.class, book);
   }
 
   @Step("Search the book #book")

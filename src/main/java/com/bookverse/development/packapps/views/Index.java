@@ -18,7 +18,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.PURCHAS
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
 
-import com.bookverse.development.packapps.automation.utils.RunTest;
+import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Resources;
@@ -50,7 +50,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Index extends JFrame implements ActionListener {
 
-  protected static int background = 13;
+  protected static int background = 2;
   private static Resources resources = new Resources();
   private static JLabel welcome;
   protected HangmanTable hangmanTable = new HangmanTable(this, true);
@@ -66,7 +66,7 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem[] wallpapers = new JMenuItem[14];
   protected JMenu changeBackground;
   protected JMenuItem moreBacklog, moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,
-      texts, guessNumber, guessNumberHard, hangman, structures, dices, buyAndSell, numbers, puzzle4x4, puzzle5x5, puzzle6x6,
+      texts, guessNumber, guessNumberHard, hangman, structures, dices, store, numbers, puzzle4x4, puzzle5x5, puzzle6x6,
       roulette, ticTacToePvsP, ticTacToePvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
       inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
       inventoryEXCEL, purchasesEXCEL, salesEXCEL, cashRegisterEXCEL, loansEXCEL, puzzleEXCEL, guessNumberPDF, hangmanPDF, dicesPDF,
@@ -81,7 +81,7 @@ public class Index extends JFrame implements ActionListener {
 
     try {
 
-      UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+      UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
 
       UIManager.put("PasswordField.border", BORDER_BLUE);
       UIManager.put("PasswordField.font", MEDIUM);
@@ -97,24 +97,24 @@ public class Index extends JFrame implements ActionListener {
       UIManager.put("TextArea.font", MEDIUM);
 
       UIManager.put("ComboBox.font", MEDIUM);
-      UIManager.put("ComboBox.foreground", Color.WHITE);
+      UIManager.put("ComboBox.foreground", Color.BLACK);
 
       UIManager.put("ScrollPane.border", BORDER_BLUE);
 
-      UIManager.put("MenuItem.foreground", Color.WHITE);
+      UIManager.put("MenuItem.foreground", TEXT_COLOR);
       UIManager.put("MenuItem.font", MEDIUM);
 
       UIManager.put("Menu.foreground", MAIN_COLOR);
       UIManager.put("Menu.font", MEDIUM);
 
       UIManager.put("Button.font", MEDIUM);
-      UIManager.put("Button.foreground", Color.WHITE);
+      UIManager.put("Button.foreground", Color.BLACK);
 
       UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
       UIManager.put("TableHeader.foreground", MAIN_COLOR);
       UIManager.put("TableHeader.font", MEDIUM);
       UIManager.put("Table.font", MEDIUM);
-      UIManager.put("Table.foreground", Color.WHITE);
+      UIManager.put("Table.foreground", TEXT_COLOR);
 
       UIManager.put("OptionPane.okButtonText", "Done");
       UIManager.put("OptionPane.cancelButtonText", "No, thanks.");
@@ -122,7 +122,7 @@ public class Index extends JFrame implements ActionListener {
       UIManager.put("OptionPane.noButtonText", "No, thanks.");
       UIManager.put("OptionPane.messageFont", MEDIUM);
       UIManager.put("OptionPane.buttonFont", MEDIUM);
-      UIManager.put("OptionPane.messageForeground", Color.WHITE);
+      UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
 
     } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
         | IllegalAccessException e) {
@@ -144,7 +144,7 @@ public class Index extends JFrame implements ActionListener {
     window.setLocationRelativeTo(null);
     window.setTitle(AppConfigUtility.TITLE.getProperty());
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-    window.darkMode.setForeground(MAIN_COLOR);
+    window.grayMode.setForeground(MAIN_COLOR);
     Settings.fadeIn(window);
     window.setVisible(true);
   }
@@ -238,7 +238,7 @@ public class Index extends JFrame implements ActionListener {
     scores.add(tables);
 
     JMenu tools = resources.getMenu("Tools", "tools");
-    buyAndSell = resources.getMenuItem("Buy & Sell", "compraventa", this);
+    store = resources.getMenuItem("Store", "compraventa", this);
     structures = resources.getMenuItem("Structures", "estructuras", this);
     numbers = resources.getMenuItem("Numbers", "numeritos", this);
     notes = resources.getMenuItem(NOTES, "notas", this);
@@ -348,7 +348,7 @@ public class Index extends JFrame implements ActionListener {
     export.addSeparator();
     export.add(exportEXCEL);
 
-    JMenu tasks = resources.getMenu("Tests", "task");
+    JMenu tasks = resources.getMenu("Tasks", "task");
     timesheet = resources.getMenuItem("Timesheet Entry (beta)", "timesheet", this);
     searchBook = resources.getMenuItem("Search Book", "searchBook", this);
     registerUser = resources.getMenuItem("Register User", "añadir_usuario", this);
@@ -397,8 +397,6 @@ public class Index extends JFrame implements ActionListener {
 
     OCRTask = resources.getMenuItem("OCR", "ocr", this);
 
-    tools.add(buyAndSell);
-    tools.addSeparator();
     tools.add(changeUI);
     tools.addSeparator();
     tools.add(export);
@@ -408,6 +406,8 @@ public class Index extends JFrame implements ActionListener {
     tools.add(numbers);
     tools.addSeparator();
     tools.add(OCRTask);
+    tools.addSeparator();
+    tools.add(store);
     tools.addSeparator();
     tools.add(structures);
     tools.addSeparator();
@@ -625,7 +625,7 @@ public class Index extends JFrame implements ActionListener {
         try {
           UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 
-          UIManager.put("MenuItem.foreground", TEXT_COLOR);
+          UIManager.put("MenuItem.foreground", Color.WHITE);
           UIManager.put("Menu.foreground", MAIN_COLOR);
 
           UIManager.put("ComboBox.foreground", TEXT_COLOR);
@@ -851,7 +851,7 @@ public class Index extends JFrame implements ActionListener {
       new SearchBook(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == registerUser) {
-      RunTest.registerNewUser();
+      StartTests.startRegisterUser();
     } else if (e.getSource() == OCRTask) {
       new OCR(this, true).start(this);
       setVisible(true);
@@ -948,7 +948,7 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == notes) {
       new Notes(this, true).start(this);
       setVisible(true);
-    } else if (e.getSource() == buyAndSell) {
+    } else if (e.getSource() == store) {
       new LoginStore(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == read) {

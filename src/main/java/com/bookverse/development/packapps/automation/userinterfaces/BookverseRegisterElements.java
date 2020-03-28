@@ -29,8 +29,6 @@ public class BookverseRegisterElements {
       .locatedBy("//button[@class]");
   public static final Target ENTER_LOGIN = Target.the("Button go to login")
       .locatedBy("//input[@id = 'btnIngresar']//ancestor::a");
-  public static final Target RESPONSE_REGISTER = Target.the("Response message of register")
-      .locatedBy("//div[@class = 'swal2-content']");
 
   private BookverseRegisterElements() {
   }

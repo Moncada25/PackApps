@@ -1,23 +1,48 @@
-# PackApps
+## PackApps
 
 Set of small applications for different purposes.
 
-### Modules:
+#### Modules
 
-  - Games
-  - Tools
-  - Database
-  - UI
-  - Store (Buy & Sell)
-  - Feedback and info
-
-### New features!
+  + Games
+    * Puzzle
+    * Hangman
+    * Tic Tac Toe
+    * ...
+  + Tools
+    * Calculate notes
+    * Structures of Data
+    * Optical Character Recognition (OCR)
+    * Cryptography
+    * ...
+  + Database
+    * Score storage
+    * Transaction management in the store
+    * Actions on stored data
+    * ...
+  + UI
+    * Change themes, even the dark theme
+    * Change wallpapers
+    * Custom colors
+    * ...
+  + Store
+    * Authentication and storage in the database
+    * Create, edit and delete users
+    * Services like Buy, Sell and Lend
+    * ...
+  + Feedback and info
+    * Development information menu
+    * More developer projects
+    * Send emails and comments
+    * ...
+       
+#### New features!
 
   - Optical Character Recognition (OCR).
   - Integration with automated testing.
   - Sending emails to any recipient.
 
-### Tech and libraries
+#### Tech and libraries
 
 PackApps uses several open source projects to work properly:
 
@@ -35,7 +60,7 @@ PackApps uses several open source projects to work properly:
 
 And of course, PackApps itself is open source with a public repository on GitHub.
 
-### Installation
+#### Installation
 
 PackApps requires JDK v1.8+ and Gradle to run:
 
@@ -44,16 +69,17 @@ run gradle build
 run main class com.bookverse.development.packapps.core.Start
 ```
 
-### Development
+#### Development
 
 Do you want to contribute? Great!
+>You found a bug? tell me!
 
-### To do
+#### To do
 
  - Write MORE Tests.
  - Add more applications.
- - Finish Tic Tac Toe game which is in beta version.
+ - Finish Tic Tac Toe game which is in beta version, in Player vs CPU option.
  
-### License
+#### License
 
 **Free Software, Hell Yeah!**

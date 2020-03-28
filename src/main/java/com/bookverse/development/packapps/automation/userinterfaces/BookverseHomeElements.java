@@ -5,7 +5,7 @@ import net.serenitybdd.screenplay.targets.Target;
 public class BookverseHomeElements {
 
   public static final Target USER_LOGGED = Target.the("Name of user logged")
-      .locatedBy("//h4[contains(. , '{0}')]");
+      .locatedBy("//img[@alt = 'UserIcon']//following-sibling::h4");
   public static final Target IMAGE = Target.the("Image of user logged")
       .locatedBy("//img[@alt = 'UserIcon']");
   public static final Target SEARCH_BOOK = Target.the("Search book button")
@@ -16,9 +16,7 @@ public class BookverseHomeElements {
   public static final Target SEARCH_BOOK_BUTTON = Target.the("Search book button")
       .locatedBy("//button[@class = 'btn btn-primary btn-raised btn-sm']");
   public static final Target ALERT_ACCEPT = Target.the("Alert button accept")
-      .locatedBy("//button[@class = 'swal2-confirm swal2-styled']");
-  public static final Target ALERT_CANCEL = Target.the("Alert button cancel")
-      .locatedBy("//button[@class = 'swal2-cancel swal2-styled']");
+      .locatedBy("//button[text() = 'Aceptar' or text() = 'OK']");
 
   private BookverseHomeElements() {
   }
