@@ -113,7 +113,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
         JOptionPane.showMessageDialog(null,
             "<html>" + Format.style()
                 + "<strong><center>Commentary sent</center></strong><br>"
-                + "Commentaries sent successfully, your opinion will be taken into account."
+                + "Feedback sent, your opinion will be taken into account."
                 + "</html>",
             "Successfully", JOptionPane.PLAIN_MESSAGE);
 

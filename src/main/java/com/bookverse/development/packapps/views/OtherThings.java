@@ -26,7 +26,7 @@ import javax.swing.JTextField;
 
 public class OtherThings extends JDialog implements ActionListener, MouseListener {
 
-  Resources resources = new Resources();
+  private Resources resources = new Resources();
   private JButton btnChangeColor, btnStart1, btnStart2, btnStart3;
   private JLabel title;
   private JTextField txtintToBinary, txtBinaryToInt, txtDigits;
@@ -192,7 +192,7 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
     title = resources
         .getLabel("<html><em><strong>Other things...</strong></em></html>", MAIN_COLOR, this, BIG);
     title.addMouseListener(this);
-    title.setBounds(120, 20, 200, 35);
+    title.setBounds(120, 8, 200, 35);
   }
 
   private void binaryToInt(String num) {

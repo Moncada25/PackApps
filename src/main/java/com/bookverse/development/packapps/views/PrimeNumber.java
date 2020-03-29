@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PrimeNumber extends JDialog implements Runnable, ActionListener, MouseListener {
 
-  Resources resources = new Resources();
+  private Resources resources = new Resources();
   private JButton btnStartChronometer, btnSearchPrime, btnVerifyPrime;
   private JLabel title;
   private JLabel chronometer;
@@ -40,7 +40,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
 
     setLayout(null);
 
-    btnStartChronometer = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnStartChronometer = resources.getButton("Start", TEXT_COLOR, this, this);
     btnStartChronometer.setBounds(315, 195, 75, 25);
 
     JLabel lblSearchPrime = resources
@@ -160,7 +160,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
     title = resources
         .getLabel("<html><em><strong>Prime Numbers</strong></em></html>", MAIN_COLOR, this, BIG);
     title.addMouseListener(this);
-    title.setBounds(110, 15, 280, 40);
+    title.setBounds(110, 8, 280, 40);
   }
 
   private void verifyPrimeNumber(int num) {
@@ -228,7 +228,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
       }
       Alerts.message("Quantity: " + quantity + " - Sum: " + sum, divisors);
     } else {
-      Alerts.message("Illogical range", "Verify");
+      Alerts.message("Verify!", "Illogical range");
     }
   }
 

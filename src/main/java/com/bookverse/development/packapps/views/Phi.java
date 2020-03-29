@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 
 public class Phi extends JDialog implements ActionListener, MouseListener {
 
-  Resources resources = new Resources();
+  private Resources resources = new Resources();
   private JButton btnCalculateFirst, btnCalculateSecond, btnProportion;
   private JLabel message;
   private JLabel value;
@@ -164,7 +164,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
         .getLabel("<html><em><strong>Approach to φ</strong></em></html>", MAIN_COLOR, this,
             BIG);
     message.addMouseListener(this);
-    message.setBounds(120, 20, 250, 30);
+    message.setBounds(120, 8, 250, 30);
   }
 
   public void start(JDialog parent) {
@@ -207,7 +207,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     fi = (1 + Math.sqrt(5)) / 2;
 
     number = (1 / Math.sqrt(5)) * (Math.pow(fi, n) - (Math.pow(-1 / fi, n)));
-    Alerts.message("Result", "N° " + n + " in the Fibonacci's series is " + number);
+    Alerts.message("Result", "N° " + n + " in the Fibonacci's series is " + String.format("%.0f", number));
   }
 
   private void calculatePhi(double num1, double num2) {
