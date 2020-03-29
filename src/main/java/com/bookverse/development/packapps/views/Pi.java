@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 public class Pi extends JDialog implements ActionListener, MouseListener {
 
-  Resources resources = new Resources();
+  private Resources resources = new Resources();
   private JButton btnCalculateFirst, btnCalculateSecond;
   private JLabel message;
   private JTextField txtFirst, txtSecond;
@@ -135,7 +135,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
         .getLabel("<html><em><strong>Approach to π</strong></em></html>", MAIN_COLOR, this,
             BIG);
     message.addMouseListener(this);
-    message.setBounds(120, 20, 250, 30);
+    message.setBounds(120, 8, 250, 30);
   }
 
   private void secondCalculate(double numberElements) {

@@ -177,8 +177,8 @@ public class Index extends JFrame implements ActionListener {
     yes_exit = resources.getMenuItem("Are you sure?", "salir", this);
 
     JMenu send = resources.getMenu("Send Feedback", "send");
-    email = resources.getMenuItem("Email (priority)", "email", this);
-    comment = resources.getMenuItem("Comment (simple)", "coment", this);
+    email = resources.getMenuItem("Email", "email", this);
+    comment = resources.getMenuItem("Comment", "coment", this);
 
     send.add(comment);
     send.addSeparator();
@@ -984,8 +984,13 @@ public class Index extends JFrame implements ActionListener {
         }
 
       } else if (e.getSource() == moreBacklog) {
-        Alerts.message("Recuerdaaaa",
-            "Poner la app de backlog en un servidor y poner acá el link!! XD");
+
+        try {
+          Desktop.getDesktop().browse(new URL("http://backlog.vzpla.net/").toURI());
+        } catch (Exception ex) {
+          Alerts.error(ex, "Opening URL");
+        }
+
       } else if (e.getSource() == tables) {
 
         if (dicesTableAP()) {

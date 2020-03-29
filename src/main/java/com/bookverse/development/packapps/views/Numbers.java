@@ -47,21 +47,21 @@ public class Numbers extends JDialog implements MouseListener {
     btnPhi.setBorder(BORDER_BLUE);
     btnPhi.addMouseListener(this);
 
-    btnPi = resources.getLabel("  Pi π  ", TEXT_COLOR, panel, MEDIUM);
-    btnPi.setBorder(BORDER_BLUE);
-    btnPi.addMouseListener(this);
+    btnPrimeNumbers = resources.getLabel("  Primes  ", TEXT_COLOR, panel, MEDIUM);
+    btnPrimeNumbers.setBorder(BORDER_BLUE);
+    btnPrimeNumbers.addMouseListener(this);
 
     btnCalculator = resources.getLabel("  Calculator  ", MAIN_COLOR, panel, MEDIUM);
     btnCalculator.setBorder(BORDER_RED);
     btnCalculator.addMouseListener(this);
 
-    btnPrimeNumbers = resources.getLabel("  Primes  ", TEXT_COLOR, panel, MEDIUM);
-    btnPrimeNumbers.setBorder(BORDER_BLUE);
-    btnPrimeNumbers.addMouseListener(this);
-
-    btnOther = resources.getLabel("  Others  ", TEXT_COLOR, panel, MEDIUM);
+    btnOther = resources.getLabel("  Hacks  ", TEXT_COLOR, panel, MEDIUM);
     btnOther.setBorder(BORDER_BLUE);
     btnOther.addMouseListener(this);
+
+    btnPi = resources.getLabel("  Pi π  ", TEXT_COLOR, panel, MEDIUM);
+    btnPi.setBorder(BORDER_BLUE);
+    btnPi.addMouseListener(this);
 
     return panel;
   }

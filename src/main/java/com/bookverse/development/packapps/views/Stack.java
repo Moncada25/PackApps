@@ -47,7 +47,7 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
         "pares.png",
         "vaciar.png"};
 
-    panel.setBorder(getBorder("Select Action"));
+    panel.setBorder(getBorder("Select action"));
 
     IntStream.range(0, actions.length).forEach(i -> {
       actions[i] = new JLabel();

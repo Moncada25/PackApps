@@ -90,7 +90,7 @@ public class Arrays extends JDialog implements ActionListener {
     JLabel rows = resources
         .getLabel("<html><em>Rows</em></html>", TEXT_COLOR, this,
             SMALL);
-    rows.setBounds(40, 80, 100, 25);
+    rows.setBounds(38, 80, 100, 25);
 
     txtRows = new JTextField();
     txtRows.setBounds(20, 100, 70, 25);
@@ -110,7 +110,7 @@ public class Arrays extends JDialog implements ActionListener {
 
     JLabel columns = resources.getLabel("<html><em>Columns</em></html>", TEXT_COLOR, this,
         SMALL);
-    columns.setBounds(25, 130, 100, 25);
+    columns.setBounds(27, 130, 100, 25);
 
     txtColumns = new JTextField();
     txtColumns.setBounds(20, 150, 70, 25);

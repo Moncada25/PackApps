@@ -57,7 +57,7 @@ public class Structures extends JDialog implements MouseListener {
     setSize(717, 380);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Structures of data");
+    setTitle("Structures of Data");
     Settings.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesEstructuras();
