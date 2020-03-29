@@ -76,7 +76,7 @@ Do you want to contribute? Great!
 
 #### To do
 
- - Write MORE Tests.
+ - Write more tests.
  - Add more applications.
  - Finish Tic Tac Toe game which is in beta version, in Player vs CPU option.
  
