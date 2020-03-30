@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-03-2020 a las 00:53:21
+-- Tiempo de generación: 30-03-2020 a las 04:33:15
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -94,8 +94,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `CategoriaCodigo`, `CategoriaNombre`) VALUES
-(5, 'LC367034405', 'Science'),
-(6, 'LC470446156', 'Programming');
+(5, 'LC367034405', 'Ciencia'),
+(6, 'LC470446156', 'Programación');
 
 -- --------------------------------------------------------
 
@@ -559,7 +559,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=342;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=346;
 
 --
 -- AUTO_INCREMENT de la tabla `cashregister`
@@ -595,7 +595,7 @@ ALTER TABLE `dices`
 -- AUTO_INCREMENT de la tabla `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `guessnumber`
