@@ -65,6 +65,8 @@ And of course, PackApps itself is open source with a public repository on GitHub
 PackApps requires JDK v1.8+ and Gradle to run:
 
 ```sh
+import database
+
 run gradle build 
 run main class com.bookverse.development.packapps.core.Start
 ```
