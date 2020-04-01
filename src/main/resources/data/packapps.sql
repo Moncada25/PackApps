@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-03-2020 a las 04:33:15
+-- Tiempo de generación: 31-03-2020 a las 07:13:45
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -60,6 +60,19 @@ CREATE TABLE `bitacora` (
   `BitacoraYear` int(4) NOT NULL,
   `CuentaCodigo` varchar(70) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `bitacora`
+--
+
+INSERT INTO `bitacora` (`id`, `BitacoraCodigo`, `BitacoraFecha`, `BitacoraHoraInicio`, `BitacoraHoraFinal`, `BitacoraTipo`, `BitacoraYear`, `CuentaCodigo`) VALUES
+(346, 'CB29755651', 'Mar 29, 2020', '23:36:16', '00:12:20', 'Administrador', 2020, 'AC750702071'),
+(347, 'CB93870762', 'Mar 30, 2020', '00:12:39', '00:16:57', 'Administrador', 2020, 'AC750702071'),
+(348, 'CB76322283', 'Mar 30, 2020', '00:26:27', 'Sin registro', 'Administrador', 2020, 'AC750702071'),
+(349, 'CB32883024', 'Mar 30, 2020', '11:57:55', 'Sin registro', 'Administrador', 2020, 'AC750702071'),
+(350, 'CB61103585', 'Mar 30, 2020', '15:57:14', '16:04:07', 'Administrador', 2020, 'AC750702071'),
+(351, 'CB66843136', 'Mar 30, 2020', '16:04:15', '16:30:18', 'Cliente', 2020, 'CC810442852'),
+(352, 'CB80978787', 'Mar 30, 2020', '16:30:21', 'Sin registro', 'Administrador', 2020, 'AC750702071');
 
 -- --------------------------------------------------------
 
@@ -398,6 +411,30 @@ CREATE TABLE `sales` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `task`
+--
+
+CREATE TABLE `task` (
+  `ID` int(11) NOT NULL,
+  `UserAssigned` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
+  `Task` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `Description` text COLLATE utf8_spanish2_ci NOT NULL,
+  `Points` int(11) NOT NULL,
+  `Status` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
+  `Date` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
+  `AccountCode` varchar(60) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `task`
+--
+
+INSERT INTO `task` (`ID`, `UserAssigned`, `Task`, `Description`, `Points`, `Status`, `Date`, `AccountCode`) VALUES
+(11, 'Santiago Moncada (root)', 'Ejemplo', 'Esto es una prueba', 12, 'Nueva', 'Mar 31, 2020 - 00:12', 'AC750702071');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `users`
 --
 
@@ -539,6 +576,13 @@ ALTER TABLE `sales`
   ADD KEY `IDUSUARIO` (`User`);
 
 --
+-- Indices de la tabla `task`
+--
+ALTER TABLE `task`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CuentaCodigo` (`AccountCode`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -559,7 +603,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=346;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=353;
 
 --
 -- AUTO_INCREMENT de la tabla `cashregister`
@@ -595,7 +639,7 @@ ALTER TABLE `dices`
 -- AUTO_INCREMENT de la tabla `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `guessnumber`
@@ -644,6 +688,12 @@ ALTER TABLE `puzzle`
 --
 ALTER TABLE `sales`
   MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `task`
+--
+ALTER TABLE `task`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -707,6 +757,12 @@ ALTER TABLE `sales`
   ADD CONSTRAINT `sales_ibfk_2` FOREIGN KEY (`IdProduct`) REFERENCES `inventory` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sales_ibfk_3` FOREIGN KEY (`User`) REFERENCES `users` (`UserName`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sales_ibfk_4` FOREIGN KEY (`User`) REFERENCES `cashregister` (`User`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `task`
+--
+ALTER TABLE `task`
+  ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`AccountCode`) REFERENCES `cuenta` (`CuentaCodigo`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

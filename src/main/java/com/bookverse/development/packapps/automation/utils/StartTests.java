@@ -1,12 +1,11 @@
 package com.bookverse.development.packapps.automation.utils;
 
-import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_DEVELOPMENT;
 import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_PRODUCTION;
 import static com.bookverse.development.packapps.utils.ArrayData.DATA_NEW_USER;
 
 import com.bookverse.development.packapps.automation.models.BookverseData;
 import com.bookverse.development.packapps.automation.runners.RunRegisterUser;
-import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import org.junit.runner.JUnitCore;
 

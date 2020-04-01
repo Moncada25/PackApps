@@ -5,7 +5,7 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Ultim
 import static com.bookverse.development.packapps.automation.userinterfaces.UltimatixLoginElements.TIMESHEET;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
-import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.core.Resources;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
