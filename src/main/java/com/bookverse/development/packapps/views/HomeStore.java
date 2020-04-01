@@ -9,7 +9,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Querys;
 import java.awt.BorderLayout;
 import java.awt.Dimension;

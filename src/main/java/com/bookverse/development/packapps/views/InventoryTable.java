@@ -9,7 +9,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTO
 
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.models.Table;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.BorderLayout;

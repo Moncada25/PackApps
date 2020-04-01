@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.models;
+package com.bookverse.development.packapps.core;
 
 import java.awt.Color;
 import java.awt.Container;

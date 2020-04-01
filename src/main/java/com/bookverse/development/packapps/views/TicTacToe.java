@@ -9,7 +9,7 @@ import static com.bookverse.development.packapps.utils.Alerts.instruccionesTriqu
 import static com.bookverse.development.packapps.core.Settings.getIntRandom;
 
 import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.core.Resources;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

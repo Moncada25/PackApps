@@ -12,7 +12,7 @@ import com.bookverse.development.packapps.automation.questions.TheStatus;
 import com.bookverse.development.packapps.automation.tasks.LoginUltimatix;
 import com.bookverse.development.packapps.automation.tasks.RegisterHours;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
-import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.core.Resources;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.Cast;

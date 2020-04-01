@@ -1,6 +1,5 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_DEVELOPMENT;
 import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_PRODUCTION;
 import static com.bookverse.development.packapps.core.Settings.BIG;
 import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
@@ -13,7 +12,7 @@ import com.bookverse.development.packapps.automation.models.BookverseData;
 import com.bookverse.development.packapps.automation.runners.RunSearchBook;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.models.Resources;
+import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;

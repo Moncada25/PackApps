@@ -27,8 +27,8 @@ Date 10/06/19
 
 package com.bookverse.development.packapps.core;
 
+import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.AppConfigUtility;
-import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.WindowEffect;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -47,8 +47,6 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import org.apache.commons.codec.binary.Base64;
@@ -132,10 +130,8 @@ public class Settings {
 
     if (base64EncryptedString.equals("")) {
 
-      JOptionPane.showMessageDialog(null, "<html>" + Format.style()
-              + "<strong>El texto introducido no tiene contenido encriptado o la llave es incorrecta.</strong></html>",
-          "¡Verifique!", JOptionPane.PLAIN_MESSAGE);
-
+      Alerts.message("Verify!",
+          "The text entered does not have encrypted content or the key is incorrect");
       return text;
     } else {
       return base64EncryptedString;
@@ -145,25 +141,16 @@ public class Settings {
   private static String setSecretKey() {
 
     boolean canContinue;
-    JPasswordField pass = new JPasswordField(10);
     String value;
 
     do {
 
-      int action = JOptionPane.showConfirmDialog(null, pass, "Enter secret key",
-          JOptionPane.DEFAULT_OPTION,
-          JOptionPane.PLAIN_MESSAGE);
+      value = Alerts.inputPassword("Enter secret key");
 
-      value = new String(pass.getPassword());
-
-      if (action >= 0 && value.length() >= 2) {
+      if (value.length() >= 2) {
         canContinue = true;
       } else {
-        JOptionPane.showMessageDialog(null,
-            "<html>" + Format.style()
-                + "<strong>Invalid text or length too short.</strong></html>",
-            "Warnings",
-            JOptionPane.PLAIN_MESSAGE);
+        Alerts.message("Warnings", "Invalid text or length too short.");
         canContinue = false;
       }
 
@@ -174,33 +161,18 @@ public class Settings {
 
   public static boolean loginDBA() {
 
-    JPasswordField jPasswordField = new JPasswordField(10);
-
     boolean canContinue = true;
 
     while (canContinue) {
 
-      int action = JOptionPane
-          .showConfirmDialog(null, jPasswordField, "DBA's Password", JOptionPane.PLAIN_MESSAGE,
-              JOptionPane.PLAIN_MESSAGE);
+      String password = Alerts.inputPassword("DBA's Password");
 
-      if (action >= 0) {
+      if (password.length() != 0) {
 
-        String password = new String(jPasswordField.getPassword());
-
-        if (password.length() != 0) {
-
-          if (AppConfigUtility.PASSWORD_DBA.getProperty().equals(password)) {
-            return true;
-          } else {
-            JOptionPane.showMessageDialog(null,
-                "<html>" + Format.style() + "<strong>Incorrect password</strong></html>",
-                "Error", JOptionPane.PLAIN_MESSAGE);
-            jPasswordField.setText("");
-          }
-
+        if (AppConfigUtility.PASSWORD_DBA.getProperty().equals(password)) {
+          return true;
         } else {
-          canContinue = false;
+          Alerts.message("Error", "Incorrect password");
         }
 
       } else {
@@ -225,9 +197,7 @@ public class Settings {
     } catch (Exception e) {
 
       if (show) {
-        JOptionPane.showMessageDialog(null,
-            "<html>" + Format.style() + "<strong>" + request + "</strong></html>",
-            "No internet connection", JOptionPane.PLAIN_MESSAGE);
+        Alerts.message("No internet connection", request);
       }
 
     } finally {
