@@ -26,7 +26,7 @@ public class LoginUltimatix implements Task {
     this.ultimatixData = ultimatixData;
   }
 
-  public static LoginUltimatix withCredentials(UltimatixData ultimatixData){
+  public static LoginUltimatix withCredentials(UltimatixData ultimatixData) {
     return Tasks.instrumented(LoginUltimatix.class, ultimatixData);
   }
 

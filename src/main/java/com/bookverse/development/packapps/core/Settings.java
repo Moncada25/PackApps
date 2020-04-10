@@ -1,30 +1,3 @@
-/*
-Date 23/12/18
-8748 view p = 336.46 : 26 class
-2282 model p = 207.45 : 11 class
-1229 controller p = 307.25 : 4 class
-21 images : 1 class
-12280 total  : 42 class
-*/
-
-/*
-Date 23/01/19
-11912 view p = 321.94 : 37 class
-956 model p = 478 : 2 class
-2773 controller p = 554.6 : 5 class
-19 resources : 1 class ? 93 images
-15660 total  : 45 class
-*/
-
-/*
-Date 10/06/19
-13430 view p = 344.35 : 39 class
-954 model p = 477 : 2 class
-1375 controller p = 1375 : 1 class
-100 resources p = 33.33 : 3 class ? 108 images
-15859 total  : 45 class
-*/
-
 package com.bookverse.development.packapps.core;
 
 import com.bookverse.development.packapps.utils.Alerts;

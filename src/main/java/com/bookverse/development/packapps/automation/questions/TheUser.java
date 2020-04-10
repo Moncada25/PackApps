@@ -11,14 +11,14 @@ import net.serenitybdd.screenplay.waits.WaitUntil;
 
 public class TheUser implements Question<String> {
 
-    public static TheUser logged() {
+  public static TheUser logged() {
     return new TheUser();
   }
 
   @Subject("Verify that user #user is registered")
   @Override
   public String answeredBy(Actor actor) {
-      actor.attemptsTo(WaitUntil.the(USER_LOGGED, isVisible()));
+    actor.attemptsTo(WaitUntil.the(USER_LOGGED, isVisible()));
     return Text.of(USER_LOGGED).viewedBy(actor).asString();
   }
 }

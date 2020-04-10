@@ -8,9 +8,9 @@ import static com.bookverse.development.packapps.utils.ArrayData.WORD_LIST;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
 import static java.awt.Font.PLAIN;
 
+import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.Font;
 import java.awt.Graphics;

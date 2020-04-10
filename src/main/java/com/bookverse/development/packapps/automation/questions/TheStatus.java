@@ -7,7 +7,7 @@ import net.serenitybdd.screenplay.annotations.Subject;
 
 public class TheStatus implements Question<Boolean> {
 
-  public static TheStatus ofGeneralObject(){
+  public static TheStatus ofGeneralObject() {
     return new TheStatus();
   }
 

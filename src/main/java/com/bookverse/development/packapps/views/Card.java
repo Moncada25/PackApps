@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.core.Settings;
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

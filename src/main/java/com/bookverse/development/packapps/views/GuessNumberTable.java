@@ -15,9 +15,9 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN
 import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
 
+import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.models.Table;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -375,4 +375,4 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
     }
     super.paint(g);
   }
-}                              
+}

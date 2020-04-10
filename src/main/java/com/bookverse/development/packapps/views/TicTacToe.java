@@ -5,11 +5,11 @@ import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.Settings.fadeIn;
-import static com.bookverse.development.packapps.utils.Alerts.instruccionesTriqui;
 import static com.bookverse.development.packapps.core.Settings.getIntRandom;
+import static com.bookverse.development.packapps.utils.Alerts.instruccionesTriqui;
 
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.core.Settings;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

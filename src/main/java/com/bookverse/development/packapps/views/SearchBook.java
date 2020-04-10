@@ -10,9 +10,9 @@ import static javax.swing.SwingConstants.CENTER;
 
 import com.bookverse.development.packapps.automation.models.BookverseData;
 import com.bookverse.development.packapps.automation.runners.RunSearchBook;
+import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
@@ -101,8 +101,8 @@ public class SearchBook extends JDialog implements ActionListener {
 
     txtPassword.addKeyListener(new KeyAdapter() {
 
-      public void keyPressed(KeyEvent event){
-        if (event.getKeyCode() == ENTER){
+      public void keyPressed(KeyEvent event) {
+        if (event.getKeyCode() == ENTER) {
           btnRunAP();
         }
       }
@@ -122,7 +122,7 @@ public class SearchBook extends JDialog implements ActionListener {
 
     listBooksBox.setFont(Settings.SMALL);
     listBooksBox.setBounds(95, 165, 260, 30);
-    ((JLabel)listBooksBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+    ((JLabel) listBooksBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
     add(listBooksBox);
   }
 

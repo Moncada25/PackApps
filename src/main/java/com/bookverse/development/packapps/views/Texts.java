@@ -3,8 +3,8 @@ package com.bookverse.development.packapps.views;
 import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
