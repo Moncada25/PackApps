@@ -32,7 +32,8 @@ public class LoginBookverse implements Task {
   @Override
   public <T extends Actor> void performAs(T actor) {
 
-    actor.remember("USER_REGISTERED", DATA_NEW_USER.get("Name") + " " + DATA_NEW_USER.get("LastName"));
+    actor.remember("USER_REGISTERED",
+        DATA_NEW_USER.get("Name") + " " + DATA_NEW_USER.get("LastName"));
 
     actor.wasAbleTo(
         WaitUntil.the(USERNAME_FIELD, isVisible()),

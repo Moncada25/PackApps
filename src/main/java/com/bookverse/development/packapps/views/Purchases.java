@@ -10,9 +10,9 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_RE
 import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PURCHASES;
 
+import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.Querys;

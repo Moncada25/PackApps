@@ -5,8 +5,8 @@ import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
@@ -207,7 +207,8 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     fi = (1 + Math.sqrt(5)) / 2;
 
     number = (1 / Math.sqrt(5)) * (Math.pow(fi, n) - (Math.pow(-1 / fi, n)));
-    Alerts.message("Result", "N° " + n + " in the Fibonacci's series is " + String.format("%.0f", number));
+    Alerts.message("Result",
+        "N° " + n + " in the Fibonacci's series is " + String.format("%.0f", number));
   }
 
   private void calculatePhi(double num1, double num2) {

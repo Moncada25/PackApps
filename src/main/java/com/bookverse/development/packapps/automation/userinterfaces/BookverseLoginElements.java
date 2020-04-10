@@ -12,6 +12,7 @@ public class BookverseLoginElements {
       .locatedBy("//input[@value = 'Iniciar sesión']");
   public static final Target REGISTER_BUTTON = Target.the("Register button")
       .locatedBy("//input[@id = 'btnRegistrarNuevo']");
+
   private BookverseLoginElements() {
   }
 }

@@ -4,7 +4,7 @@ import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 
 import com.bookverse.development.packapps.automation.exceptions.SearchBookException;
 import com.bookverse.development.packapps.automation.models.BookverseData;
@@ -41,7 +41,8 @@ public class RunSearchBook {
     theActorInTheSpotlight().wasAbleTo(LoginBookverse.withCredentials(bookverseData));
     theActorInTheSpotlight().attemptsTo(SearchBook.inBookverse(bookverseData.getBook()));
     theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverseData.getBook())).
-        orComplainWith(SearchBookException.class, ExceptionsMessages.SEARCH_BOOK_ERROR.getProperty()));
+        orComplainWith(SearchBookException.class,
+            ExceptionsMessages.SEARCH_BOOK_ERROR.getProperty()));
     Alerts.message("Test passed!", ""
         + "Book → " + bookverseData.getBook() + "\n"
         + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
