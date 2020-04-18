@@ -1,87 +1,104 @@
-## PackApps
+# **PackApps**
 
-Set of small applications for different purposes.
+## Introduction 🚀
 
-#### Modules
+Set of small applications for different purposes. games, tools and even a store; They are just some options that PackApps has integrated, and yes, it has a dark mode.
 
-  + Games
-    * Puzzle
-    * Hangman
-    * Tic Tac Toe
-    * ...
-  + Tools
-    * Calculate notes
-    * Structures of Data
-    * Optical Character Recognition (OCR)
-    * Cryptography
-    * ...
-  + Database
-    * Score storage
-    * Transaction management in the store
-    * Actions on stored data
-    * ...
-  + UI
-    * Change themes, even the dark theme
-    * Change wallpapers
-    * Custom colors
-    * ...
-  + Store
-    * Authentication and storage in the database
-    * Create, edit and delete users
-    * Services like Buy, Sell and Lend
-    * ...
-  + Feedback and info
-    * Development information menu
-    * More developer projects
-    * Send emails and comments
-    * ...
-       
 #### New features!
 
-  - Optical Character Recognition (OCR).
-  - Integration with automated testing.
-  - Sending emails to any recipient.
+  - Optical Character Recognition (OCR)
+  - Integration with automated testing
+  - Sending emails to any recipient
 
-#### Tech and libraries
+## Pre requirements 📋
+- Java v1.8 update 151 or higher and JDK (environment variables configured).
+- Eclipse IDE (Oxigen or Neon) or IntelliJ IDEA (v2018.3 or higher).
+- Gradle v4.7 or higher (environment variables configured).
+- Xampp and database.
 
-PackApps uses several open source projects to work properly:
+## Installation 🔧
+- To clone this repository locally, the following command must be run: 
+```git clone https://github.com/Moncada25/PackApps.git``` 
+- Import the project from Eclipse or IntelliJ IDE under the structure of an existing Gradle project. 
+- Configure JRE System Library with JavaSE-1.8.
+- Configure the encoding to UTF-8 to the project once it is imported.
 
-* [jtattoo] - To add themes
-* [javax.mail] - To send emails by Gmail
-* [itextpdf] - To manage PDF files
-* [mysql-connector-java] - To connect to the database
-* [tess4j] - To use OCR
-* [commons-pool2] - To create the connection pool
-* [poi] - To manage XLS files
-* [junit] - To test
-* [gradle] - To manage dependencies
+## Compile the project and generate Wrapper 🔨
+- To build the project you must run the command:
+```gradle clean build -x test```
+- To generate the project wrapper files, you must run the command:
+```gradle wrapper --gradle-distribution-url https://services.gradle.org/distributions/gradle-5.2.1-all.zip```
 
->Unit tests were carried out, the correct operation of the applications was validated.
+## Web browsers 🌐
+Automation currently runs in the following browsers:
+- Google Chrome v80 or higher.
 
-And of course, PackApps itself is open source with a public repository on GitHub.
+## Project structure 🚧
 
-#### Installation
+* ```src/main/java/com/bookverse/development/packapps```
+``` 
++ automation
+    Classes needed to perform automation.
+    - exceptions
+    - models
+    - questions
+    - runners
+    - tasks
+    - userinterfaces
+    - utils
 
-PackApps requires JDK v1.8+ and Gradle to run:
++ core
+    Classes that contain general application settings.
 
-```sh
-import database
++ models
+    Classes with which the data models are built and the connection is made.
 
-run gradle build 
-run main class com.bookverse.development.packapps.core.Start
++ utils
+    Classes that contain common functionalities.
+
++ views
+    Classes that contain the design of the applications.
 ```
 
-#### Development
+* ```src/main/resources```
+``` 
++ data
+    Contains the sql and properties file.
+
++ images
+    Contains the images used in the application.
+```
+
+## Built with 🛠
+PackApps was developed with:
+ - MVC - Development strategy
+ - Screenplay for automation
+ - Gradle - Dependency manager
+ - Selenium Web Driver - Tool to automate actions in web browsers
+ - Serenity BDD - Open source library for report generation
+ - JTattoo - To add themes
+ - Javax Mail - To send emails by Gmail
+ - iTextPDF - To manage PDF files
+ - MySQL - As a database engine
+ - Tess4j - To use OCR
+ - Commons-Pool2 - To create the connection pool
+ - Poi - To manage XLS files
+ - JUnit - To test.
+ 
+## Versioning 📌 
+Git was used for version control, applying GitFlow 🔀
+
+## Authors ✒
+
+* **Santiago Moncada** - [zanti4020@gmail.com]()
+
+## Taxpayers 🙂
 
 Do you want to contribute? Great!
 >You found a bug? tell me!
 
-#### To do
+## To do 📋
 
  - Write more tests.
  - Add more applications.
  - Finish Tic Tac Toe game which is in beta version, in Player vs CPU option.
- 
-#### License
-
-**Free Software, Hell Yeah!**
