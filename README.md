@@ -2,7 +2,7 @@
 
 ## Introduction 🚀
 
-Set of small applications for different purposes. games, tools and even a store; They are just some options that PackApps has integrated, and yes, it has a dark mode.
+Set of small applications for different purposes. Games, tools and even a store; they are just some options that PackApps has integrated, and yes, it has a dark mode.
 
 #### New features!
 
@@ -83,7 +83,7 @@ PackApps was developed with:
  - Tess4j - To use OCR
  - Commons-Pool2 - To create the connection pool
  - Poi - To manage XLS files
- - JUnit - To test.
+ - JUnit - To test
  
 ## Versioning 📌 
 Git was used for version control, applying GitFlow 🔀
