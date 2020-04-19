@@ -16,7 +16,7 @@ public class BookverseHomeElements {
   public static final Target SEARCH_BOOK_BUTTON = Target.the("Search book button")
       .locatedBy("//button[@class = 'btn btn-primary btn-raised btn-sm']");
   public static final Target ALERT_ACCEPT = Target.the("Alert button accept")
-      .locatedBy("//button[text() = 'Aceptar' or text() = 'OK']");
+      .locatedBy("//button[contains(text(), 'Aceptar') or contains(text(), 'OK')]");
 
   private BookverseHomeElements() {
   }
