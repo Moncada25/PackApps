@@ -10,6 +10,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
+import com.bookverse.development.packapps.models.Dice;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
@@ -383,19 +384,5 @@ public class Dices extends JDialog implements ActionListener {
     if (e.getSource() == btnReset) {
       btnResetAP();
     }
-  }
-}
-
-class Dice {
-
-  private int valor;
-
-  public int throwDices() {
-    valor = (1 + (int) (Math.random() * 6));
-    return valor;
-  }
-
-  public int getValor() {
-    return valor;
   }
 }
