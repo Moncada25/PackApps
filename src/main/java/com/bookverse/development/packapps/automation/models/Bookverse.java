@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.automation.models;
 
-public class BookverseData {
+public class Bookverse {
 
   private String user;
   private String password;
@@ -23,7 +23,7 @@ public class BookverseData {
     return book;
   }
 
-  public BookverseData(String user, String pass, String url, String book) {
+  public Bookverse(String user, String pass, String url, String book) {
     this.user = user;
     this.password = pass;
     this.url = url;

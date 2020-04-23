@@ -2,7 +2,7 @@ package com.bookverse.development.packapps.automation.userinterfaces;
 
 import net.serenitybdd.screenplay.targets.Target;
 
-public class BookverseSearchElements {
+public class BookverseSearch {
 
   public static final Target SEARCH_RESULT = Target.the("Result find")
       .locatedBy("//p[contains(. , '{0}')]");
@@ -14,6 +14,6 @@ public class BookverseSearchElements {
   public static final Target AUTHOR_BOOK = Target.the("Author of book")
       .locatedBy("//tbody//td[contains(. , '{0}')]//following-sibling::td[1]");
 
-  private BookverseSearchElements() {
+  private BookverseSearch() {
   }
 }

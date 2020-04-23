@@ -2,7 +2,7 @@ package com.bookverse.development.packapps.automation.userinterfaces;
 
 import net.serenitybdd.screenplay.targets.Target;
 
-public class BookverseHomeElements {
+public class BookverseHome {
 
   public static final Target USER_LOGGED = Target.the("Name of user logged")
       .locatedBy("//img[@alt = 'UserIcon']//following-sibling::h4");
@@ -18,6 +18,6 @@ public class BookverseHomeElements {
   public static final Target ALERT_ACCEPT = Target.the("Alert button accept")
       .locatedBy("//button[contains(text(), 'Aceptar') or contains(text(), 'OK')]");
 
-  private BookverseHomeElements() {
+  private BookverseHome() {
   }
 }

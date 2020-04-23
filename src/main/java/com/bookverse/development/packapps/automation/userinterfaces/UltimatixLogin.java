@@ -2,7 +2,7 @@ package com.bookverse.development.packapps.automation.userinterfaces;
 
 import net.serenitybdd.screenplay.targets.Target;
 
-public class UltimatixLoginElements {
+public class UltimatixLogin {
 
   public static final Target USER = Target.the("Username field").locatedBy("//input[@id='form1']");
   public static final Target NEXT_BUTTON = Target.the("Next button")
@@ -20,6 +20,6 @@ public class UltimatixLoginElements {
   public static final Target OK_MODAL = Target.the("Button ok of modal from page").locatedBy(
       "//div[. = 'Secured Access to Enterprise Applications']//following::div//input[@value = 'OK']");
 
-  private UltimatixLoginElements() {
+  private UltimatixLogin() {
   }
 }

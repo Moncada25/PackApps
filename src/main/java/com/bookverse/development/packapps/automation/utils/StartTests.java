@@ -3,8 +3,8 @@ package com.bookverse.development.packapps.automation.utils;
 import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_PRODUCTION;
 import static com.bookverse.development.packapps.utils.ArrayData.DATA_NEW_USER;
 
-import com.bookverse.development.packapps.automation.models.BookverseData;
-import com.bookverse.development.packapps.automation.runners.RunRegisterUser;
+import com.bookverse.development.packapps.automation.models.Bookverse;
+import com.bookverse.development.packapps.automation.runners.RegisterUser;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import org.junit.runner.JUnitCore;
@@ -26,11 +26,11 @@ public class StartTests {
             + "Gender → " + DATA_NEW_USER.get("Gender") + "\n\n"
             + "Do you want run test?", "Bookverse Test")) {
 
-      Resources.generalObject = new BookverseData(DATA_NEW_USER.get("Username"),
+      Resources.generalObject = new Bookverse(DATA_NEW_USER.get("Username"),
           DATA_NEW_USER.get("Password"),
           BOOKVERSE_PRODUCTION.getProperty(),
           "");
-      JUnitCore.runClasses(RunRegisterUser.class);
+      JUnitCore.runClasses(RegisterUser.class);
     }
   }
 }

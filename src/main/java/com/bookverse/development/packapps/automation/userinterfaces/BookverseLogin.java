@@ -2,7 +2,7 @@ package com.bookverse.development.packapps.automation.userinterfaces;
 
 import net.serenitybdd.screenplay.targets.Target;
 
-public class BookverseLoginElements {
+public class BookverseLogin {
 
   public static final Target USERNAME_FIELD = Target.the("Username field in login")
       .locatedBy("//input[@id = 'UserName']");
@@ -13,6 +13,6 @@ public class BookverseLoginElements {
   public static final Target REGISTER_BUTTON = Target.the("Register button")
       .locatedBy("//input[@id = 'btnRegistrarNuevo']");
 
-  private BookverseLoginElements() {
+  private BookverseLogin() {
   }
 }

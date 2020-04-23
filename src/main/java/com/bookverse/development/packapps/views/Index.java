@@ -23,7 +23,7 @@ import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.AppConfigUtility;
+import com.bookverse.development.packapps.utils.AppConfig;
 import com.bookverse.development.packapps.utils.Export;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.Querys;
@@ -142,7 +142,7 @@ public class Index extends JFrame implements ActionListener {
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
-    window.setTitle(AppConfigUtility.TITLE.getProperty());
+    window.setTitle(AppConfig.TITLE.getProperty());
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
     window.grayMode.setForeground(MAIN_COLOR);
     Settings.fadeIn(window);

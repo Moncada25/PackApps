@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.automation.models;
 
 
-public class UltimatixData {
+public class Ultimatix {
 
   private String user;
   private String pass;
@@ -24,7 +24,7 @@ public class UltimatixData {
     return hours;
   }
 
-  public UltimatixData(String user, String pass, String url, String hours) {
+  public Ultimatix(String user, String pass, String url, String hours) {
     this.user = user;
     this.pass = pass;
     this.url = url;

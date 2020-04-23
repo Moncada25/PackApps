@@ -7,8 +7,8 @@ import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static javax.swing.SwingConstants.CENTER;
 
-import com.bookverse.development.packapps.automation.models.UltimatixData;
-import com.bookverse.development.packapps.automation.runners.RunTimesheetEntry;
+import com.bookverse.development.packapps.automation.models.Ultimatix;
+import com.bookverse.development.packapps.automation.runners.TimesheetEntry;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -151,11 +151,11 @@ public class Timesheet extends JDialog implements ActionListener {
 
     if (txtUser.getText().length() > 5 && String.valueOf(txtPassword.getPassword()).length() > 5
         && txtHours.getText().length() > 0) {
-      Resources.generalObject = new UltimatixData(txtUser.getText(),
+      Resources.generalObject = new Ultimatix(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
           ULTIMATIX.getProperty(),
           txtHours.getText());
-      JUnitCore.runClasses(RunTimesheetEntry.class);
+      JUnitCore.runClasses(TimesheetEntry.class);
     } else {
       Alerts.inputSomethingText();
     }

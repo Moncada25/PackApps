@@ -1,13 +1,13 @@
 package com.bookverse.development.packapps.automation.tasks;
 
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHomeElements.IMAGE;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLoginElements.LOGIN_BUTTON;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLoginElements.PASSWORD_FIELD;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLoginElements.USERNAME_FIELD;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.IMAGE;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLogin.LOGIN_BUTTON;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLogin.PASSWORD_FIELD;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLogin.USERNAME_FIELD;
 import static com.bookverse.development.packapps.utils.ArrayData.DATA_NEW_USER;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
-import com.bookverse.development.packapps.automation.models.BookverseData;
+import com.bookverse.development.packapps.automation.models.Bookverse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
@@ -18,14 +18,14 @@ import net.thucydides.core.annotations.Step;
 
 public class LoginBookverse implements Task {
 
-  private BookverseData bookverseData;
+  private Bookverse bookverse;
 
-  public LoginBookverse(BookverseData bookverseData) {
-    this.bookverseData = bookverseData;
+  public LoginBookverse(Bookverse bookverse) {
+    this.bookverse = bookverse;
   }
 
-  public static LoginBookverse withCredentials(BookverseData bookverseData) {
-    return Tasks.instrumented(LoginBookverse.class, bookverseData);
+  public static LoginBookverse withCredentials(Bookverse bookverse) {
+    return Tasks.instrumented(LoginBookverse.class, bookverse);
   }
 
   @Step("Login Bookverse")
@@ -37,8 +37,8 @@ public class LoginBookverse implements Task {
 
     actor.wasAbleTo(
         WaitUntil.the(USERNAME_FIELD, isVisible()),
-        Enter.theValue(bookverseData.getUser()).into(USERNAME_FIELD),
-        Enter.theValue(bookverseData.getPassword()).into(PASSWORD_FIELD),
+        Enter.theValue(bookverse.getUser()).into(USERNAME_FIELD),
+        Enter.theValue(bookverse.getPassword()).into(PASSWORD_FIELD),
         Click.on(LOGIN_BUTTON),
         WaitUntil.the(IMAGE, isVisible()));
   }
