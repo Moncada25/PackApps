@@ -6,11 +6,10 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.hamcrest.Matchers.is;
 
-import com.bookverse.development.packapps.automation.exceptions.SearchBookException;
-import com.bookverse.development.packapps.automation.models.BookverseData;
+import com.bookverse.development.packapps.automation.exceptions.BookNotFound;
+import com.bookverse.development.packapps.automation.models.Bookverse;
 import com.bookverse.development.packapps.automation.questions.TheTitle;
 import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
-import com.bookverse.development.packapps.automation.tasks.SearchBook;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
 import com.bookverse.development.packapps.automation.utils.ExceptionsMessages;
 import com.bookverse.development.packapps.core.Resources;
@@ -25,26 +24,27 @@ import org.junit.runner.RunWith;
 
 @SuppressWarnings("unchecked")
 @RunWith(SerenityRunner.class)
-public class RunSearchBook {
+public class SearchBook {
 
-  BookverseData bookverseData = (BookverseData) Resources.generalObject;
+  Bookverse bookverse = (Bookverse) Resources.generalObject;
 
   @Before
   public void config() {
     setTheStage(Cast.whereEveryoneCan(
-        BrowseTheWeb.with(DriverChrome.web().inTheWebPage(bookverseData.getUrl()))));
+        BrowseTheWeb.with(DriverChrome.web().inTheWebPage(bookverse.getUrl()))));
     theActorCalled("PackAppsUser");
   }
 
   @Test
   public void searchBook() {
-    theActorInTheSpotlight().wasAbleTo(LoginBookverse.withCredentials(bookverseData));
-    theActorInTheSpotlight().attemptsTo(SearchBook.inBookverse(bookverseData.getBook()));
-    theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverseData.getBook())).
-        orComplainWith(SearchBookException.class,
+    theActorInTheSpotlight().wasAbleTo(LoginBookverse.withCredentials(bookverse));
+    theActorInTheSpotlight().attemptsTo(
+        com.bookverse.development.packapps.automation.tasks.SearchBook.inBookverse(bookverse.getBook()));
+    theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverse.getBook())).
+        orComplainWith(BookNotFound.class,
             ExceptionsMessages.SEARCH_BOOK_ERROR.getProperty()));
     Alerts.message("Test passed!", ""
-        + "Book → " + bookverseData.getBook() + "\n"
+        + "Book → " + bookverse.getBook() + "\n"
         + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
   }
 

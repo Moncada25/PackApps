@@ -1,8 +1,8 @@
 package com.bookverse.development.packapps.automation.tasks;
 
-import static com.bookverse.development.packapps.automation.userinterfaces.UltimatixTimesheetElements.HOURS_DOC;
-import static com.bookverse.development.packapps.automation.userinterfaces.UltimatixLoginElements.OK_MODAL;
-import static com.bookverse.development.packapps.automation.userinterfaces.UltimatixLoginElements.TIMESHEET;
+import static com.bookverse.development.packapps.automation.userinterfaces.UltimatixTimesheet.HOURS_DOC;
+import static com.bookverse.development.packapps.automation.userinterfaces.UltimatixLogin.OK_MODAL;
+import static com.bookverse.development.packapps.automation.userinterfaces.UltimatixLogin.TIMESHEET;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import com.bookverse.development.packapps.core.Resources;

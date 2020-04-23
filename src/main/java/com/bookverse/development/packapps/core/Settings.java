@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.core;
 
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.AppConfigUtility;
+import com.bookverse.development.packapps.utils.AppConfig;
 import com.bookverse.development.packapps.utils.WindowEffect;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -142,7 +142,7 @@ public class Settings {
 
       if (password.length() != 0) {
 
-        if (AppConfigUtility.PASSWORD_DBA.getProperty().equals(password)) {
+        if (AppConfig.PASSWORD_DBA.getProperty().equals(password)) {
           return true;
         } else {
           Alerts.message("Error", "Incorrect password");
@@ -205,7 +205,7 @@ public class Settings {
     if (!isSetSecretKey) {
       return setSecretKey();
     } else {
-      return AppConfigUtility.DEFAULT_ENCRYPT_KEY.getProperty();
+      return AppConfig.DEFAULT_ENCRYPT_KEY.getProperty();
     }
   }
 

@@ -1,12 +1,12 @@
 package com.bookverse.development.packapps.automation.tasks;
 
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHomeElements.ALERT_ACCEPT;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHomeElements.SEARCH_BOOK;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHomeElements.SEARCH_BOOK_BUTTON;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHomeElements.SEARCH_BOOK_FIELD;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseSearchElements.AUTHOR_BOOK;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseSearchElements.OPEN_BOOK;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseSearchElements.SEARCH_RESULT;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.ALERT_ACCEPT;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.SEARCH_BOOK;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.SEARCH_BOOK_BUTTON;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.SEARCH_BOOK_FIELD;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseSearch.AUTHOR_BOOK;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseSearch.OPEN_BOOK;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseSearch.SEARCH_RESULT;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import net.serenitybdd.screenplay.Actor;

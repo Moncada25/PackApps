@@ -6,11 +6,10 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.hamcrest.Matchers.is;
 
-import com.bookverse.development.packapps.automation.exceptions.RegisterUserException;
-import com.bookverse.development.packapps.automation.models.BookverseData;
+import com.bookverse.development.packapps.automation.exceptions.UserNotRegistered;
+import com.bookverse.development.packapps.automation.models.Bookverse;
 import com.bookverse.development.packapps.automation.questions.TheUser;
 import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
-import com.bookverse.development.packapps.automation.tasks.RegisterUser;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
 import com.bookverse.development.packapps.automation.utils.ExceptionsMessages;
 import com.bookverse.development.packapps.core.Resources;
@@ -25,25 +24,26 @@ import org.junit.runner.RunWith;
 
 @SuppressWarnings("unchecked")
 @RunWith(SerenityRunner.class)
-public class RunRegisterUser {
+public class RegisterUser {
 
-  BookverseData bookverseData = (BookverseData) Resources.generalObject;
+  Bookverse bookverse = (Bookverse) Resources.generalObject;
 
   @Before
   public void config() {
     setTheStage(Cast.whereEveryoneCan(
-        BrowseTheWeb.with(DriverChrome.web().inTheWebPage(bookverseData.getUrl()))));
+        BrowseTheWeb.with(DriverChrome.web().inTheWebPage(bookverse.getUrl()))));
     theActorCalled("PackAppsUser");
   }
 
   @Test
   public void registerNewUser() {
-    theActorInTheSpotlight().wasAbleTo(RegisterUser.inBookverse());
-    theActorInTheSpotlight().attemptsTo(LoginBookverse.withCredentials(bookverseData));
+    theActorInTheSpotlight().wasAbleTo(
+        com.bookverse.development.packapps.automation.tasks.RegisterUser.inBookverse());
+    theActorInTheSpotlight().attemptsTo(LoginBookverse.withCredentials(bookverse));
     theActorInTheSpotlight().should(
         seeThat(TheUser.logged(),
             is(theActorInTheSpotlight().recall("USER_REGISTERED").toString()))
-            .orComplainWith(RegisterUserException.class,
+            .orComplainWith(UserNotRegistered.class,
                 ExceptionsMessages.REGISTER_USER_ERROR.getProperty()));
     if (theActorInTheSpotlight().recall("USER_REGISTERED") == null) {
       Alerts.message("Test failed!", "User no registered");

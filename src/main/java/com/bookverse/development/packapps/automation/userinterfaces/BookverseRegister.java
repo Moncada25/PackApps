@@ -2,7 +2,7 @@ package com.bookverse.development.packapps.automation.userinterfaces;
 
 import net.serenitybdd.screenplay.targets.Target;
 
-public class BookverseRegisterElements {
+public class BookverseRegister {
 
   public static final Target NAME_FIELD = Target.the("Name of client")
       .locatedBy("//input[@name = 'nombre-reg']");
@@ -30,6 +30,6 @@ public class BookverseRegisterElements {
   public static final Target ENTER_LOGIN = Target.the("Button go to login")
       .locatedBy("//input[@id = 'btnIngresar']//ancestor::a");
 
-  private BookverseRegisterElements() {
+  private BookverseRegister() {
   }
 }

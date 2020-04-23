@@ -2,7 +2,7 @@ package com.bookverse.development.packapps.automation.userinterfaces;
 
 import net.serenitybdd.screenplay.targets.Target;
 
-public class UltimatixTimesheetElements {
+public class UltimatixTimesheet {
 
   public static final Target DAY_ENTRY = Target.the("Day entry")
       .locatedBy("(//div[@class = 'calendarContainer']//div[@class = 'notFilledEffort'])[1]");
@@ -13,6 +13,6 @@ public class UltimatixTimesheetElements {
   public static final Target SUBMIT_HOURS = Target.the("Button submit")
       .locatedBy("//input[@value = 'Submit']");
 
-  private UltimatixTimesheetElements() {
+  private UltimatixTimesheet() {
   }
 }

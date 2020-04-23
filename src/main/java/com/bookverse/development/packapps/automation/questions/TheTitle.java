@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.automation.questions;
 
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseSearchElements.TITLE_MODAL;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseSearch.TITLE_MODAL;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import net.serenitybdd.screenplay.Actor;

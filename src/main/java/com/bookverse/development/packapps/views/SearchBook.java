@@ -8,8 +8,7 @@ import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static java.awt.Event.ENTER;
 import static javax.swing.SwingConstants.CENTER;
 
-import com.bookverse.development.packapps.automation.models.BookverseData;
-import com.bookverse.development.packapps.automation.runners.RunSearchBook;
+import com.bookverse.development.packapps.automation.models.Bookverse;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
@@ -138,11 +137,11 @@ public class SearchBook extends JDialog implements ActionListener {
 
     if (txtUser.getText().length() >= 4
         && String.valueOf(txtPassword.getPassword()).length() >= 4) {
-      Resources.generalObject = new BookverseData(txtUser.getText(),
+      Resources.generalObject = new Bookverse(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
           BOOKVERSE_PRODUCTION.getProperty(),
           String.valueOf(listBooksBox.getSelectedItem()));
-      JUnitCore.runClasses(RunSearchBook.class);
+      JUnitCore.runClasses(com.bookverse.development.packapps.automation.runners.SearchBook.class);
     } else {
       Alerts.inputSomethingText();
       txtUser.requestFocus();

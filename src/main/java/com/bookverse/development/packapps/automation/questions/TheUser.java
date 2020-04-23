@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.automation.questions;
 
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHomeElements.USER_LOGGED;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.USER_LOGGED;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import net.serenitybdd.screenplay.Actor;

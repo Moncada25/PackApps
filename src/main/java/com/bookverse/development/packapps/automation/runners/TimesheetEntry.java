@@ -6,8 +6,8 @@ import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
-import com.bookverse.development.packapps.automation.exceptions.TimesheetEntryException;
-import com.bookverse.development.packapps.automation.models.UltimatixData;
+import com.bookverse.development.packapps.automation.exceptions.TimesheetNotRegistered;
+import com.bookverse.development.packapps.automation.models.Ultimatix;
 import com.bookverse.development.packapps.automation.questions.TheStatus;
 import com.bookverse.development.packapps.automation.tasks.LoginUltimatix;
 import com.bookverse.development.packapps.automation.tasks.RegisterHours;
@@ -23,23 +23,23 @@ import org.junit.runner.RunWith;
 
 @SuppressWarnings("unchecked")
 @RunWith(SerenityRunner.class)
-public class RunTimesheetEntry {
+public class TimesheetEntry {
 
-  UltimatixData ultimatixData = (UltimatixData) Resources.generalObject;
+  Ultimatix ultimatix = (Ultimatix) Resources.generalObject;
 
   @Before
   public void config() {
     setTheStage(Cast.whereEveryoneCan(
-        BrowseTheWeb.with(DriverChrome.web().inTheWebPage(ultimatixData.getUrl()))));
+        BrowseTheWeb.with(DriverChrome.web().inTheWebPage(ultimatix.getUrl()))));
     theActorCalled("PackAppsUser");
   }
 
   @Test
   public void registerTimeSheet() {
-    theActorInTheSpotlight().wasAbleTo(LoginUltimatix.withCredentials(ultimatixData));
-    theActorInTheSpotlight().attemptsTo(RegisterHours.inTimesheetEntry(ultimatixData.getHours()));
+    theActorInTheSpotlight().wasAbleTo(LoginUltimatix.withCredentials(ultimatix));
+    theActorInTheSpotlight().attemptsTo(RegisterHours.inTimesheetEntry(ultimatix.getHours()));
     theActorInTheSpotlight().should(seeThat(TheStatus.ofGeneralObject())
-        .orComplainWith(TimesheetEntryException.class, TIMESHEET_ENTRY_ERROR.getProperty()));
+        .orComplainWith(TimesheetNotRegistered.class, TIMESHEET_ENTRY_ERROR.getProperty()));
   }
 
   @After
