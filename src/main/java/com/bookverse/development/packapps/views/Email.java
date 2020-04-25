@@ -5,7 +5,7 @@ import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.SMALL;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.AppConfig.DEVELOPER_EMAIL;
+import static com.bookverse.development.packapps.core.AppConfig.DEVELOPER_EMAIL;
 
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;

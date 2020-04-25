@@ -1,7 +1,6 @@
 package com.bookverse.development.packapps.core;
 
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.AppConfig;
 import com.bookverse.development.packapps.utils.WindowEffect;
 import java.awt.Color;
 import java.awt.Cursor;
