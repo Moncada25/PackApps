@@ -81,7 +81,7 @@ PackApps was developed with:
  - iTextPDF - To manage PDF files
  - MySQL - As a database engine
  - Tess4j - To use OCR
- - Commons-Pool2 - To create the connection pool
+ - Commons Pool2 - To create the connection pool
  - Poi - To manage XLS files
  - JUnit - To test
  
