@@ -72,7 +72,7 @@ Automation currently runs in the following browsers:
 ## Built with 🛠
 PackApps was developed with:
  - MVC - Development strategy
- - Screenplay for automation
+ - Screenplay - To automation
  - Gradle - Dependency manager
  - Selenium Web Driver - Tool to automate actions in web browsers
  - Serenity BDD - Open source library for report generation
