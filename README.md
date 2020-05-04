@@ -92,7 +92,7 @@ Git was used for version control, applying GitFlow 🔀
 
 * **Santiago Moncada** - [zanti4020@gmail.com]()
 
-## Taxpayers 🙂
+## Collaborators 🙂
 
 Do you want to contribute? Great!
 >You found a bug? tell me!
