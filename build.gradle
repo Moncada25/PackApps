@@ -7,6 +7,7 @@ repositories {
     mavenLocal()
     jcenter()
 }
+
 buildscript {
     repositories {
         mavenLocal()
@@ -42,7 +43,7 @@ jar {
 }
 
 sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/images", "src/main/resources/data"]
-sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties"]
+sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif"]
 
 ext {
     serenityCoreVersion = "2.0.49"
