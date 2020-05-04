@@ -5,10 +5,10 @@ import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.SMALL;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.AppConfig.DEVELOPER_EMAIL;
 
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
+import com.bookverse.development.packapps.models.DataConfig;
 import com.bookverse.development.packapps.utils.Alerts;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,7 +42,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
   private JPasswordField password;
   private Resources resources = new Resources();
   private JRadioButton toDeveloper, toOther;
-  private String receiver = DEVELOPER_EMAIL.getProperty();
+  private String receiver = DataConfig.getDeveloperEmail();
 
   public Email(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -218,7 +218,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
       if (receiver == null || receiver.trim().equals("") || !receiver.contains("@") || !receiver
           .contains(".")) {
-        receiver = DEVELOPER_EMAIL.getProperty();
+        receiver = DataConfig.getDeveloperEmail();
         toDeveloper.setSelected(true);
         toOther.setText("<html><strong>Other</strong></html>");
         Alerts.message("Verify!", "Email invalid");
@@ -228,7 +228,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
     } else if (e.getSource() == toDeveloper) {
       toOther.setText("<html><strong>Other</strong></html>");
-      receiver = DEVELOPER_EMAIL.getProperty();
+      receiver = DataConfig.getDeveloperEmail();
     }
   }
 
