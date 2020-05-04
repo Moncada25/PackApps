@@ -7,6 +7,7 @@ repositories {
     mavenLocal()
     jcenter()
 }
+
 buildscript {
     repositories {
         mavenLocal()
@@ -31,7 +32,7 @@ jar {
     manifest {
         attributes(
                 'Main-Class': 'com.bookverse.development.packapps.core.Start',
-                'Built-By': System.properties['user.name'],
+                'Built-By': 'Santiago Moncada'+' ('+System.properties['user.name'] + ')',
                 'Build-Timestamp': new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
                 'Build-Revision': 3.0,
                 'Created-By': "Gradle ${gradle.gradleVersion}",
