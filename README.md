@@ -6,9 +6,10 @@ Set of small applications for different purposes. Games, tools and even a store;
 
 #### New features!
 
-  - Optical Character Recognition (OCR)
-  - Integration with automated testing
-  - Sending emails to any recipient
+  - Direct message to a WhatsApp number.
+  - Optical Character Recognition (OCR).
+  - Integration with automated testing.
+  - Sending emails to any recipient.
 
 ## Pre requirements 📋
 - Java v1.8 update 151 or higher and JDK (environment variables configured).
