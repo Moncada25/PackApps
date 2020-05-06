@@ -126,27 +126,30 @@ public class WhatsApp extends JDialog implements ActionListener {
 
   private void btnRunAP() {
 
-    if (txtNumber.getText().length() == 10 && Settings
-        .verifyConnection("Connect to see more!", true)) {
+    if (Settings.verifyConnection("Connect to see more!", true)) {
 
-      if (!"Select country".equals(listCountries.getSelectedItem().toString())) {
+      if (txtNumber.getText().length() >= 8) {
 
-        try {
-          Desktop.getDesktop().browse(new URL(
-              "https://web.whatsapp.com/send?phone=" + ArrayData.COUNTRIES_CODES
-                  .get(listCountries.getSelectedItem().toString()) + txtNumber.getText()
-                  + "&text=" + message.getText().replaceAll("\\s", "")).toURI());
-        } catch (Exception ex) {
-          Alerts.error(ex, "Opening URL");
+        if (!"Select country".equals(listCountries.getSelectedItem().toString())) {
+
+          try {
+            Desktop.getDesktop().browse(new URL(
+                "https://web.whatsapp.com/send?phone=" + ArrayData.COUNTRIES_CODES
+                    .get(listCountries.getSelectedItem().toString()) + txtNumber.getText()
+                    + "&text=" + message.getText().replaceAll("\\s", "+")).toURI());
+          } catch (Exception ex) {
+            Alerts.error(ex, "Opening URL");
+          }
+
+        } else {
+          Alerts.message("Verify!", "Select a country");
         }
 
       } else {
-        Alerts.message("Verify!", "Select a country");
-      }
 
-    } else {
-      Alerts.message("Verify!", "Number incomplete.");
-      txtNumber.requestFocus();
+        Alerts.message("Verify!", "Phone number too short.");
+        txtNumber.requestFocus();
+      }
     }
   }
 
