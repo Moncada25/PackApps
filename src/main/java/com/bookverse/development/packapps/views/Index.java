@@ -70,7 +70,7 @@ public class Index extends JFrame implements ActionListener {
       roulette, ticTacToePvsP, ticTacToePvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
       inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
       inventoryEXCEL, purchasesEXCEL, salesEXCEL, cashRegisterEXCEL, loansEXCEL, puzzleEXCEL, guessNumberPDF, hangmanPDF, dicesPDF,
-      notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet, OCRTask, searchBook, registerUser;
+      notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet, OCRTask, searchBook, registerUser, sendWhatsApp;
   private boolean isWork = true;
 
   public Index() {
@@ -239,6 +239,7 @@ public class Index extends JFrame implements ActionListener {
 
     JMenu tools = resources.getMenu("Tools", "tools");
     store = resources.getMenuItem("Store", "compraventa", this);
+    sendWhatsApp = resources.getMenuItem("Send Message", "whatsapp", this);
     structures = resources.getMenuItem("Structures", "estructuras", this);
     numbers = resources.getMenuItem("Numbers", "numeritos", this);
     notes = resources.getMenuItem(NOTES, "notas", this);
@@ -408,6 +409,8 @@ public class Index extends JFrame implements ActionListener {
     tools.add(OCRTask);
     tools.addSeparator();
     tools.add(store);
+    tools.addSeparator();
+    tools.add(sendWhatsApp);
     tools.addSeparator();
     tools.add(structures);
     tools.addSeparator();
@@ -849,6 +852,9 @@ public class Index extends JFrame implements ActionListener {
       setVisible(true);
     } else if (e.getSource() == searchBook) {
       new SearchBook(this, true).start(this);
+      setVisible(true);
+    } else if (e.getSource() == sendWhatsApp) {
+      new WhatsApp(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == registerUser) {
       StartTests.startRegisterUser();

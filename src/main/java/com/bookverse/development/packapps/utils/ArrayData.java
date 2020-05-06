@@ -32,6 +32,13 @@ public class ArrayData {
       602, 650, 644, 660
   };
 
+  public static final Map<String, String> COUNTRIES_CODES = new HashMap<String, String>() {{
+    put("Colombia", "57");
+    put("Venezuela", "58");
+    put("Brasil", "55");
+    put("Bolivia", "591");
+  }};
+
   public static final String[][] WORD_LIST =
       {{"pera", "mango", "limon", "sandia", "banana", "manzana", "naranja", "mandarina", "fresa",
           "coco", "papaya", "kiwi", "cereza", "uva", "ciruela"},
@@ -46,7 +53,7 @@ public class ArrayData {
           {"futbol", "baloncesto", "tenis", "natacion", "voleibol", "ciclismo", "golf", "hockey",
               "karate", "esgrima", "boxeo", "atletismo", "rugby", "beisbol", "paracaidismo"}};
 
-  public static Map<String, String> DATA_NEW_USER = new HashMap<String, String>() {{
+  public static final Map<String, String> DATA_NEW_USER = new HashMap<String, String>() {{
     put("Name", "Santiago");
     put("LastName", "Moncada");
     put("Phone", "3012499315");
