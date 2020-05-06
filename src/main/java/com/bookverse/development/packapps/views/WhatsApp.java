@@ -56,7 +56,7 @@ public class WhatsApp extends JDialog implements ActionListener {
     setLayout(null);
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-    btnOpen = resources.getButton("Run", TEXT_COLOR, this, this);
+    btnOpen = resources.getButton("Open", TEXT_COLOR, this, this);
     btnOpen.setBounds(60, 290, 100, 30);
 
     btnReturn = resources.getButton("Return", MAIN_COLOR, this, this);
