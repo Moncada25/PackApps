@@ -12,9 +12,10 @@ Set of small applications for different purposes. Games, tools and even a store;
   - Sending emails to any recipient.
 
 ## Pre requirements 📋
-- Java v1.8 update 151 or higher and JDK (environment variables configured).
-- Eclipse IDE (Oxigen or Neon) or IntelliJ IDEA (v2018.3 or higher).
-- Gradle v4.7 or higher (environment variables configured).
+- Java version 1.8, update 151 or higher and JDK (environment variables configured).
+- Eclipse IDE or IntelliJ IDEA (version 2018.3 or higher).
+- Gradle version 4.9 or higher (environment variables configured).
+- ChromeDriver version 80.0.3987.106 for local runs of automations.
 - Xampp and database.
 
 ## Installation 🔧
@@ -30,7 +31,7 @@ Set of small applications for different purposes. Games, tools and even a store;
 - To generate the project wrapper files, you must run the command:
 ```gradle wrapper --gradle-distribution-url https://services.gradle.org/distributions/gradle-5.2.1-all.zip```
 
-## Web browsers 🌐
+## Web browser 🌐
 Automation currently runs in the following browsers:
 - Google Chrome v80 or higher.
 
