@@ -8,8 +8,8 @@ import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.models.DataConfig;
 import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.AppConfig;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -42,7 +42,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
   private JPasswordField password;
   private Resources resources = new Resources();
   private JRadioButton toDeveloper, toOther;
-  private String receiver = DataConfig.getDeveloperEmail();
+  private String receiver = AppConfig.DEVELOPER_EMAIL.getProperty();
 
   public Email(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -160,16 +160,19 @@ public class Email extends JDialog implements ActionListener, MouseListener {
       transport.sendMessage(message, message.getAllRecipients());
       transport.close();
 
-      Alerts.message("Success!", "<center>Email sent</center> <br>"
-          + "Feedback sent successfully, your opinion is very important to us.");
+      if(toDeveloper.isSelected()){
+        Alerts.message("Success!", "<center>Email sent</center> <br>"
+            + "Feedback sent successfully, your opinion is very important to us.");
+      }else{
+        Alerts.message("Success!", "Your email was sent successfully.");
+      }
 
       txtUser.setText("");
       this.password.setText("");
       text.setText("");
 
     } catch (MessagingException me) {
-      me.printStackTrace();
-      Alerts.message("Error!", "Email not sent.");
+      Alerts.message("Error", "Email not sent");
     }
   }
 
@@ -182,7 +185,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
         text.requestFocus();
       } else {
 
-        if (txtUser.getText().substring(txtUser.getText().length() - 10).equals("@gmail.com")) {
+        if (txtUser.getText().endsWith("@gmail.com")) {
           sendMail(txtUser.getText(), String.valueOf(password.getPassword()), text.getText());
         } else {
           Alerts.message("Verify!", "Invalid email, make sure it's Gmail.");
@@ -218,7 +221,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
       if (receiver == null || receiver.trim().equals("") || !receiver.contains("@") || !receiver
           .contains(".")) {
-        receiver = DataConfig.getDeveloperEmail();
+        receiver = AppConfig.DEVELOPER_EMAIL.getProperty();
         toDeveloper.setSelected(true);
         toOther.setText("<html><strong>Other</strong></html>");
         Alerts.message("Verify!", "Email invalid");
@@ -228,7 +231,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
 
     } else if (e.getSource() == toDeveloper) {
       toOther.setText("<html><strong>Other</strong></html>");
-      receiver = DataConfig.getDeveloperEmail();
+      receiver = AppConfig.DEVELOPER_EMAIL.getProperty();
     }
   }
 
