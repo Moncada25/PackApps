@@ -81,7 +81,7 @@ public class Index extends JFrame implements ActionListener {
 
     try {
 
-      UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+      UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
 
       UIManager.put("PasswordField.border", BORDER_BLUE);
       UIManager.put("PasswordField.font", MEDIUM);
@@ -97,13 +97,14 @@ public class Index extends JFrame implements ActionListener {
       UIManager.put("TextArea.font", MEDIUM);
 
       UIManager.put("ComboBox.font", MEDIUM);
-      UIManager.put("ComboBox.foreground", TEXT_COLOR);
+      UIManager.put("ComboBox.foreground", Color.BLACK);
 
       UIManager.put("ScrollPane.border", BORDER_BLUE);
 
       UIManager.put("MenuItem.foreground", Color.WHITE);
       UIManager.put("MenuItem.font", MEDIUM);
 
+      UIManager.put("MenuItem.foreground", TEXT_COLOR);
       UIManager.put("Menu.foreground", MAIN_COLOR);
       UIManager.put("Menu.font", MEDIUM);
 
@@ -144,7 +145,7 @@ public class Index extends JFrame implements ActionListener {
     window.setLocationRelativeTo(null);
     window.setTitle(DataConfig.getTitleApp());
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-    window.grayMode.setForeground(MAIN_COLOR);
+    window.classicMode.setForeground(MAIN_COLOR);
     Settings.fadeIn(window);
     window.setVisible(true);
   }
