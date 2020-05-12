@@ -65,7 +65,7 @@ public class Index extends JFrame implements ActionListener {
   protected SalesTabla salesTable = new SalesTabla(this, true);
   protected JMenuItem[] wallpapers = new JMenuItem[14];
   protected JMenu changeBackground;
-  protected JMenuItem moreBacklog, moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,
+  protected JMenuItem moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,
       texts, guessNumber, guessNumberHard, hangman, structures, dices, store, numbers, puzzle4x4, puzzle5x5, puzzle6x6,
       roulette, ticTacToePvsP, ticTacToePvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
       inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
@@ -160,12 +160,9 @@ public class Index extends JFrame implements ActionListener {
 
     JMenu more = resources.getMenu("See More", "more");
     moreSystems = resources.getMenuItem("My Systems", "mysystems", this);
-    moreBacklog = resources.getMenuItem("Backlog", "profiles", this);
     moreBookverse = resources.getMenuItem("Bookverse", "books", this);
 
     more.add(moreBookverse);
-    more.addSeparator();
-    more.add(moreBacklog);
     more.addSeparator();
     more.add(moreSystems);
 
@@ -985,14 +982,6 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           Desktop.getDesktop().browse(new URL("http://bookverse.vzpla.net").toURI());
-        } catch (Exception ex) {
-          Alerts.error(ex, "Opening URL");
-        }
-
-      } else if (e.getSource() == moreBacklog) {
-
-        try {
-          Desktop.getDesktop().browse(new URL("http://backlog.vzpla.net/").toURI());
         } catch (Exception ex) {
           Alerts.error(ex, "Opening URL");
         }
