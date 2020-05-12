@@ -107,10 +107,16 @@ public class WhatsApp extends JDialog implements ActionListener {
     });
 
     listCountries.addItem("Select country");
-    listCountries.addItem("Colombia");
-    listCountries.addItem("Venezuela");
-    listCountries.addItem("Brasil");
+    listCountries.addItem("Argentina");
     listCountries.addItem("Bolivia");
+    listCountries.addItem("Brasil");
+    listCountries.addItem("Colombia");
+    listCountries.addItem("Costa Rica");
+    listCountries.addItem("Chile");
+    listCountries.addItem("Ecuador");
+    listCountries.addItem("España");
+    listCountries.addItem("Estados Unidos");
+    listCountries.addItem("Venezuela");
 
     listCountries.setFont(MEDIUM);
     listCountries.setBounds(130, 240, 200, 30);

@@ -32,13 +32,6 @@ public class ArrayData {
       602, 650, 644, 660
   };
 
-  public static final Map<String, String> COUNTRIES_CODES = new HashMap<String, String>() {{
-    put("Colombia", "57");
-    put("Venezuela", "58");
-    put("Brasil", "55");
-    put("Bolivia", "591");
-  }};
-
   public static final String[][] WORD_LIST =
       {{"pera", "mango", "limon", "sandia", "banana", "manzana", "naranja", "mandarina", "fresa",
           "coco", "papaya", "kiwi", "cereza", "uva", "ciruela"},
@@ -63,5 +56,18 @@ public class ArrayData {
     put("Password", "PackApps123");
     put("Email", "packapps@gmail.com");
     put("Gender", "Masculino");
+  }};
+
+  public static final Map<String, String> COUNTRIES_CODES = new HashMap<String, String>() {{
+    put("Argentina", "54");
+    put("Bolivia", "591");
+    put("Brasil", "55");
+    put("Colombia", "57");
+    put("Costa Rica", "506");
+    put("Chile", "56");
+    put("Ecuador", "593");
+    put("España", "34");
+    put("Estados Unidos", "1");
+    put("Venezuela", "58");
   }};
 }
