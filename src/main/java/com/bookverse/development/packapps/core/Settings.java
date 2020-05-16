@@ -74,7 +74,7 @@ public class Settings {
       base64EncryptedString = new String(base64Bytes);
 
     } catch (Exception ex) {
-
+      Alerts.message("Error", ex.getMessage());
     }
     return base64EncryptedString;
   }
