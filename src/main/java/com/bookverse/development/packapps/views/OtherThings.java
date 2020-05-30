@@ -22,13 +22,14 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import net.serenitybdd.screenplay.Interaction;
 
 public class OtherThings extends JDialog implements ActionListener, MouseListener {
 
   private Resources resources = new Resources();
   private JButton btnChangeColor, btnStart1, btnStart2, btnStart3;
   private JLabel title;
-  private JTextField txtintToBinary, txtBinaryToInt, txtDigits;
+  private JTextField txtIntToBinary, txtBinaryToInt, txtDigits;
   private JComboBox<String> listRed, listGreen, listBlue;
 
   public OtherThings(JDialog parent, boolean modal) {
@@ -95,12 +96,12 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
         .getLabel("<html><strong>Binary to Int</strong></html>", MAIN_COLOR, this, MEDIUM);
     binaryToInt.setBounds(25, 170, 280, 30);
 
-    txtintToBinary = new JTextField();
-    txtintToBinary.setBounds(200, 125, 100, 25);
-    txtintToBinary.setHorizontalAlignment(JTextField.CENTER);
-    add(txtintToBinary);
+    txtIntToBinary = new JTextField();
+    txtIntToBinary.setBounds(200, 125, 100, 25);
+    txtIntToBinary.setHorizontalAlignment(JTextField.CENTER);
+    add(txtIntToBinary);
 
-    txtintToBinary.addKeyListener(new KeyAdapter() {
+    txtIntToBinary.addKeyListener(new KeyAdapter() {
 
       public void keyPressed(KeyEvent e) {
         txt1KeyPressed(e);
@@ -108,8 +109,8 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
 
       private void txt1KeyPressed(KeyEvent e) {
 
-        if (e.getKeyCode() == KeyEvent.VK_ENTER && txtintToBinary.getText().length() > 0) {
-          intToBinary(Integer.parseInt(txtintToBinary.getText()));
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && txtIntToBinary.getText().length() > 0) {
+          intToBinary(Integer.parseInt(txtIntToBinary.getText()));
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
           Alerts.inputSomethingText();
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -122,7 +123,7 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
       }
 
       private void txt1KeyTyped(KeyEvent e) {
-        Format.onlyNumbers(e.getKeyChar(), e, txtintToBinary.getText(), 9);
+        Format.onlyNumbers(e.getKeyChar(), e, txtIntToBinary.getText(), 9);
       }
     });
 
@@ -243,16 +244,11 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
 
   private void btnColorAP() {
 
-    String cad1 = (String) listRed.getSelectedItem();
-    String cad2 = (String) listGreen.getSelectedItem();
-    String cad3 = (String) listBlue.getSelectedItem();
+    int red = Integer.parseInt(listRed.getSelectedItem().toString());
+    int green = Integer.parseInt(listGreen.getSelectedItem().toString());
+    int blue = Integer.parseInt(listBlue.getSelectedItem().toString());
 
-    int red = Integer.parseInt(cad1);
-    int green = Integer.parseInt(cad2);
-    int blue = Integer.parseInt(cad3);
-
-    Color color = new Color(red, green, blue);
-    btnChangeColor.setBackground(color);
+    btnChangeColor.setBackground(new Color(red, green, blue));
   }
 
   public void start(JDialog parent) {
@@ -272,8 +268,8 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
       btnColorAP();
     } else if (e.getSource() == btnStart1) {
 
-      if (txtintToBinary.getText().length() > 0) {
-        intToBinary(Integer.parseInt(txtintToBinary.getText()));
+      if (txtIntToBinary.getText().length() > 0) {
+        intToBinary(Integer.parseInt(txtIntToBinary.getText()));
       } else {
         Alerts.inputSomethingText();
       }
