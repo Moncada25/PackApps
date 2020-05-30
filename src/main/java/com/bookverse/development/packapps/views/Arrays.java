@@ -59,7 +59,7 @@ public class Arrays extends JDialog implements ActionListener {
     JLabel welcome = resources
         .getLabel("<html><em><strong>Matrix operations</strong></em></html>", MAIN_COLOR, this,
             BIG);
-    welcome.setBounds(280, 10, 500, 40);
+    welcome.setBounds(320, 10, 500, 40);
 
     btnAction = resources.getButton("Show", TEXT_COLOR, this, this);
     btnAction.setBounds(20, 190, 70, 25);
@@ -581,22 +581,28 @@ public class Arrays extends JDialog implements ActionListener {
         isWork = false;
       } else {
 
-        isWork = true;
+        if (Integer.parseInt(txtRows.getText()) < 2 || Integer.parseInt(txtColumns.getText()) < 2){
+          Alerts.message("Verify!", "Dimensions must be greater than or equal to 2");
+          isWork = false;
+        }else{
 
-        deleteAll();
+          isWork = true;
 
-        for (int i = 0; i < Integer.parseInt(txtRows.getText()); i++) {
-          for (int j = 0; j < Integer.parseInt(txtColumns.getText()); j++) {
-            arrayBoard[i][j].setVisible(true);
+          deleteAll();
+
+          for (int i = 0; i < Integer.parseInt(txtRows.getText()); i++) {
+            for (int j = 0; j < Integer.parseInt(txtColumns.getText()); j++) {
+              arrayBoard[i][j].setVisible(true);
+            }
           }
-        }
 
-        btnAuto.setEnabled(true);
-        btnDeterminant.setEnabled(true);
-        btnClean.setEnabled(true);
-        btnTransposed.setEnabled(true);
-        btnDiagonals.setEnabled(true);
-        btnMultiply.setEnabled(true);
+          btnAuto.setEnabled(true);
+          btnDeterminant.setEnabled(true);
+          btnClean.setEnabled(true);
+          btnTransposed.setEnabled(true);
+          btnDiagonals.setEnabled(true);
+          btnMultiply.setEnabled(true);
+        }
       }
 
       if (isWork) {

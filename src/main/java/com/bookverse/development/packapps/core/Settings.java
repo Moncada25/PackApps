@@ -54,14 +54,14 @@ public class Settings {
     return (int) Math.floor(Math.random() * (min - max + 1) + max);
   }
 
-  public static String encrypt(String text, boolean isEmail) {
+  public static String encrypt(String text, boolean useDefaultKey) {
 
     String base64EncryptedString = "";
 
     try {
 
       MessageDigest md = MessageDigest.getInstance("MD5");
-      byte[] digestOfPassword = md.digest(getSecretKey(isEmail).getBytes(StandardCharsets.UTF_8));
+      byte[] digestOfPassword = md.digest(getSecretKey(useDefaultKey).getBytes(StandardCharsets.UTF_8));
       byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
 
       SecretKey key = new SecretKeySpec(keyBytes, "DESede");
@@ -200,9 +200,9 @@ public class Settings {
     return border;
   }
 
-  private static String getSecretKey(boolean isSetSecretKey) {
+  private static String getSecretKey(boolean useDefaultKey) {
 
-    if (!isSetSecretKey) {
+    if (!useDefaultKey) {
       return setSecretKey();
     } else {
       return DataConfig.getDefaultEncryptKey();
