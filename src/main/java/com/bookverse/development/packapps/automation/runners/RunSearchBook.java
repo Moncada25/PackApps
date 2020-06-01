@@ -6,9 +6,9 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.hamcrest.Matchers.is;
 
-import com.bookverse.development.packapps.automation.exceptions.UserNotRegistered;
+import com.bookverse.development.packapps.automation.exceptions.BookNotFound;
 import com.bookverse.development.packapps.automation.models.Bookverse;
-import com.bookverse.development.packapps.automation.questions.TheUser;
+import com.bookverse.development.packapps.automation.questions.TheTitle;
 import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
 import com.bookverse.development.packapps.automation.utils.DriverChrome;
 import com.bookverse.development.packapps.automation.utils.ExceptionsMessages;
@@ -24,7 +24,7 @@ import org.junit.runner.RunWith;
 
 @SuppressWarnings("unchecked")
 @RunWith(SerenityRunner.class)
-public class RegisterUser {
+public class RunSearchBook {
 
   Bookverse bookverse = (Bookverse) Resources.generalObject;
 
@@ -36,22 +36,16 @@ public class RegisterUser {
   }
 
   @Test
-  public void registerNewUser() {
-    theActorInTheSpotlight().wasAbleTo(
-        com.bookverse.development.packapps.automation.tasks.RegisterUser.inBookverse());
-    theActorInTheSpotlight().attemptsTo(LoginBookverse.withCredentials(bookverse));
-    theActorInTheSpotlight().should(
-        seeThat(TheUser.logged(),
-            is(theActorInTheSpotlight().recall("USER_REGISTERED").toString()))
-            .orComplainWith(UserNotRegistered.class,
-                ExceptionsMessages.REGISTER_USER_ERROR.getProperty()));
-    if (theActorInTheSpotlight().recall("USER_REGISTERED") == null) {
-      Alerts.message("Test failed!", "User no registered");
-    } else {
-      Alerts.message("Test passed!", "User " + theActorInTheSpotlight().recall("USER_REGISTERED")
-          + " is registered!");
-    }
-
+  public void searchBook() {
+    theActorInTheSpotlight().wasAbleTo(LoginBookverse.withCredentials(bookverse));
+    theActorInTheSpotlight().attemptsTo(
+        com.bookverse.development.packapps.automation.tasks.SearchBook.inBookverse(bookverse.getBook()));
+    theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverse.getBook())).
+        orComplainWith(BookNotFound.class,
+            ExceptionsMessages.SEARCH_BOOK_ERROR.getProperty()));
+    Alerts.message("Test passed!", ""
+        + "Book → " + bookverse.getBook() + "\n"
+        + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
   }
 
   @After
