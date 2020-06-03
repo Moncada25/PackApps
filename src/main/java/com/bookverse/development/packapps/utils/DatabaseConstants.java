@@ -20,8 +20,8 @@ public class DatabaseConstants {
   public static final String PASSWORD_DB = "";
   public static final String NAME_DB = "packapps";
   public static final String HOSTNAME_DB = "localhost";
-  public static final String DRIVER_DB = "com.mysql.jdbc.Driver";
+  public static final String DRIVER_DB = "com.mysql.cj.jdbc.Driver";
   public static final String PORT_DB = "3306";
   public static final String URL_DRIVER_DB =
-      "jdbc:mysql://" + HOSTNAME_DB + ":" + PORT_DB + "/" + NAME_DB;
+      "jdbc:mysql://" + HOSTNAME_DB + ":" + PORT_DB + "/" + NAME_DB+ "?serverTimezone=UTC";
 }
