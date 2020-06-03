@@ -62,7 +62,7 @@ dependencies {
     implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13'
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
     implementation group: 'com.jtattoo', name: 'JTattoo', version: '1.6.12'
-    implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.22'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
     implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
     implementation group: 'net.sourceforge.tess4j', name: 'tess4j', version: '3.2.1'
 }

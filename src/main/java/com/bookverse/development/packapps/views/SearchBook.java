@@ -9,6 +9,7 @@ import static java.awt.Event.ENTER;
 import static javax.swing.SwingConstants.CENTER;
 
 import com.bookverse.development.packapps.automation.models.Bookverse;
+import com.bookverse.development.packapps.automation.runners.RunSearchBook;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
@@ -141,7 +142,7 @@ public class SearchBook extends JDialog implements ActionListener {
           String.valueOf(txtPassword.getPassword()),
           BOOKVERSE_PRODUCTION.getProperty(),
           String.valueOf(listBooksBox.getSelectedItem()));
-      JUnitCore.runClasses(com.bookverse.development.packapps.automation.runners.SearchBook.class);
+      JUnitCore.runClasses(RunSearchBook.class);
     } else {
       Alerts.inputSomethingText();
       txtUser.requestFocus();

@@ -1,10 +1,11 @@
 package com.bookverse.development.packapps.automation.utils;
 
+import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_DEVELOPMENT;
 import static com.bookverse.development.packapps.automation.utils.Paths.BOOKVERSE_PRODUCTION;
 import static com.bookverse.development.packapps.utils.ArrayData.DATA_NEW_USER;
 
 import com.bookverse.development.packapps.automation.models.Bookverse;
-import com.bookverse.development.packapps.automation.runners.RegisterUser;
+import com.bookverse.development.packapps.automation.runners.RunRegisterUser;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import org.junit.runner.JUnitCore;
@@ -28,9 +29,9 @@ public class StartTests {
 
       Resources.generalObject = new Bookverse(DATA_NEW_USER.get("Username"),
           DATA_NEW_USER.get("Password"),
-          BOOKVERSE_PRODUCTION.getProperty(),
+          BOOKVERSE_DEVELOPMENT.getProperty(),
           "");
-      JUnitCore.runClasses(RegisterUser.class);
+      JUnitCore.runClasses(RunRegisterUser.class);
     }
   }
 }

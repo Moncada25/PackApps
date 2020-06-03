@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 
 @SuppressWarnings("unchecked")
 @RunWith(SerenityRunner.class)
-public class TimesheetEntry {
+public class RunTimesheetEntry {
 
   Ultimatix ultimatix = (Ultimatix) Resources.generalObject;
 

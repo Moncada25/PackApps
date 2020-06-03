@@ -11,7 +11,7 @@ public class BookverseLogin {
   public static final Target LOGIN_BUTTON = Target.the("Login button")
       .locatedBy("//input[@value = 'Iniciar sesión']");
   public static final Target REGISTER_BUTTON = Target.the("Register button")
-      .locatedBy("//input[@id = 'btnRegistrarNuevo']");
+      .locatedBy("//a[contains(@href, 'signup')]");
 
   private BookverseLogin() {
   }
