@@ -192,9 +192,7 @@ public class Export {
 
       if (Database.readTable(table, query, false)) {
 
-        try {
-
-          BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
 
           bufferedWriter.write("{");
           for (int k = 0; k < table.getColumnCount(); k++) {
@@ -220,7 +218,6 @@ public class Export {
             bufferedWriter.newLine();
           }
 
-          bufferedWriter.close();
           Alerts.export(filePath);
 
         } catch (IOException e) {
