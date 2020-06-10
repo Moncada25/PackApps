@@ -68,35 +68,33 @@ public class ArrayData {
 
   public static String getDataUser(String key) {
 
-    Map<String, String> dataNewUser = new HashMap<String, String>() {{
-      put("Name", "Santiago");
-      put("LastName", "Moncada");
-      put("Phone", "3012499315");
-      put("Occupation", "Otro");
-      put("Address", "CR 62 #62-b11");
-      put("Username", "NewUser");
-      put("Password", "newUserTest");
-      put("Email", "test@mail.com");
-      put("Gender", "Masculino");
-    }};
+    Map<String, String> dataNewUser = new HashMap<>();
+    dataNewUser.put("Name", "Santiago");
+    dataNewUser.put("LastName", "Moncada");
+    dataNewUser.put("Phone", "3012499315");
+    dataNewUser.put("Occupation", "Otro");
+    dataNewUser.put("Address", "CR 62 #62-b11");
+    dataNewUser.put("Username", "NewUser");
+    dataNewUser.put("Password", "newUserTest");
+    dataNewUser.put("Email", "test@mail.com");
+    dataNewUser.put("Gender", "Masculino");
 
     return dataNewUser.get(key);
   }
 
   public static String getCountryCode(String key) {
 
-    Map<String, String> countryCodes = new HashMap<String, String>() {{
-      put("Argentina", "54");
-      put("Bolivia", "591");
-      put("Brasil", "55");
-      put("Colombia", "57");
-      put("Costa Rica", "506");
-      put("Chile", "56");
-      put("Ecuador", "593");
-      put("España", "34");
-      put("Estados Unidos", "1");
-      put("Venezuela", "58");
-    }};
+    Map<String, String> countryCodes = new HashMap<>();
+    countryCodes.put("Argentina", "54");
+    countryCodes.put("Bolivia", "591");
+    countryCodes.put("Brasil", "55");
+    countryCodes.put("Colombia", "57");
+    countryCodes.put("Costa Rica", "506");
+    countryCodes.put("Chile", "56");
+    countryCodes.put("Ecuador", "593");
+    countryCodes.put("España", "34");
+    countryCodes.put("Estados Unidos", "1");
+    countryCodes.put("Venezuela", "58");
 
     return countryCodes.get(key);
   }
