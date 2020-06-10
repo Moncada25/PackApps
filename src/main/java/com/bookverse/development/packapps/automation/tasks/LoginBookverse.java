@@ -4,10 +4,10 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLogin.LOGIN_BUTTON;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLogin.PASSWORD_FIELD;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLogin.USERNAME_FIELD;
-import static com.bookverse.development.packapps.utils.ArrayData.DATA_NEW_USER;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import com.bookverse.development.packapps.automation.models.Bookverse;
+import com.bookverse.development.packapps.utils.ArrayData;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
@@ -33,7 +33,7 @@ public class LoginBookverse implements Task {
   public <T extends Actor> void performAs(T actor) {
 
     actor.remember("USER_REGISTERED",
-        DATA_NEW_USER.get("Name") + " " + DATA_NEW_USER.get("LastName"));
+        ArrayData.getDataUser("Name") + " " + ArrayData.getDataUser("LastName"));
 
     actor.wasAbleTo(
         WaitUntil.the(USERNAME_FIELD, isVisible()),
