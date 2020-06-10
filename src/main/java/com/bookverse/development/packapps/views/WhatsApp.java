@@ -140,8 +140,7 @@ public class WhatsApp extends JDialog implements ActionListener {
 
           try {
             Desktop.getDesktop().browse(new URL(
-                "https://web.whatsapp.com/send?phone=" + ArrayData.COUNTRIES_CODES
-                    .get(listCountries.getSelectedItem().toString()) + txtNumber.getText()
+                "https://web.whatsapp.com/send?phone=" + ArrayData.getCountryCode(listCountries.getSelectedItem().toString()) + txtNumber.getText()
                     + "&text=" + message.getText().replaceAll("\\s", "+")).toURI());
           } catch (Exception ex) {
             Alerts.error(ex, "Opening URL");

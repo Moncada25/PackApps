@@ -14,11 +14,11 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.REGISTER_SUBMIT;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.SECOND_PASSWORD_FIELD;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.USERNAME_FIELD;
-import static com.bookverse.development.packapps.utils.ArrayData.DATA_NEW_USER;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnabled;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
+import com.bookverse.development.packapps.utils.ArrayData;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
@@ -44,17 +44,17 @@ public class RegisterUser implements Task {
         WaitUntil.the(REGISTER_BUTTON, isEnabled()),
         Click.on(REGISTER_BUTTON),
         WaitUntil.the(NAME_FIELD, isVisible()),
-        Enter.theValue(DATA_NEW_USER.get("Name")).into(NAME_FIELD),
-        Enter.theValue(DATA_NEW_USER.get("LastName")).into(LAST_NAME_FIELD),
-        Enter.theValue(DATA_NEW_USER.get("Phone")).into(PHONE_FIELD),
-        SelectFromOptions.byValue(DATA_NEW_USER.get("Occupation")).from(OCCUPATION_LIST),
-        Enter.theValue(DATA_NEW_USER.get("Address")).into(ADDRESS_FIELD),
+        Enter.theValue(ArrayData.getDataUser("Name")).into(NAME_FIELD),
+        Enter.theValue(ArrayData.getDataUser("LastName")).into(LAST_NAME_FIELD),
+        Enter.theValue(ArrayData.getDataUser("Phone")).into(PHONE_FIELD),
+        SelectFromOptions.byValue(ArrayData.getDataUser("Occupation")).from(OCCUPATION_LIST),
+        Enter.theValue(ArrayData.getDataUser("Address")).into(ADDRESS_FIELD),
         Scroll.to(USERNAME_FIELD).andAlignToTop(),
-        Enter.theValue(DATA_NEW_USER.get("Username")).into(USERNAME_FIELD),
-        Enter.theValue(DATA_NEW_USER.get("Password")).into(FIRST_PASSWORD_FIELD),
-        Enter.theValue(DATA_NEW_USER.get("Password")).into(SECOND_PASSWORD_FIELD),
-        Enter.theValue(DATA_NEW_USER.get("Email")).into(EMAIL_FIELD),
-        Click.on(GENDER_CHECK.of(DATA_NEW_USER.get("Gender"))),
+        Enter.theValue(ArrayData.getDataUser("Username")).into(USERNAME_FIELD),
+        Enter.theValue(ArrayData.getDataUser("Password")).into(FIRST_PASSWORD_FIELD),
+        Enter.theValue(ArrayData.getDataUser("Password")).into(SECOND_PASSWORD_FIELD),
+        Enter.theValue(ArrayData.getDataUser("Email")).into(EMAIL_FIELD),
+        Click.on(GENDER_CHECK.of(ArrayData.getDataUser("Gender"))),
         Click.on(REGISTER_SUBMIT),
         WaitUntil.the(ALERT_ACCEPT, isVisible()),
         Click.on(ALERT_ACCEPT),

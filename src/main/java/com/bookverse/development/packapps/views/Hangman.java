@@ -4,7 +4,6 @@ import static com.bookverse.development.packapps.core.Settings.BIG;
 import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.ArrayData.WORD_LIST;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
 import static java.awt.Font.PLAIN;
 
@@ -12,6 +11,7 @@ import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.ArrayData;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -41,8 +41,8 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
   private Resources resources = new Resources();
   private int countAttempts = 0;
   private boolean lyricsEquals = false, chronometerActive;
-  private String lines = "", results, lyrics = "";
-  private char[] wordSecret = new char[13];
+  private String lines = "", randomWord, lyrics = "";
+  private char[] secretWord = new char[13];
   private char[] word = new char[13];
 
   public Hangman(JFrame parent, boolean modal) {
@@ -148,7 +148,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
       options.setEnabled(false);
       btnExit.setEnabled(false);
       btnPlay.setEnabled(false);
-      results = null;
+      randomWord = null;
       countAttempts = 0;
       txtWord.setText("");
       time.setText("");
@@ -158,70 +158,70 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
       IntStream.rangeClosed(0, word.length - 1).forEach(i -> {
         word[i] = ' ';
-        wordSecret[i] = ' ';
+        secretWord[i] = ' ';
       });
 
       String option = options.getSelectedItem().toString();
-      int x = (int) (Math.random() * 15);
+      int randomInt = (int) (Math.random() * 15);
 
       int size;
       switch (option) {
         case "Fruits":
-          results = WORD_LIST[0][x];
-          size = results.length() - 1;
+          randomWord = ArrayData.getSecretWord(0, randomInt);
+          size = randomWord.length() - 1;
 
           for (int i = 0; i <= size; i++) {
-            wordSecret[i] = results.charAt(i);
+            secretWord[i] = randomWord.charAt(i);
             lines += "_" + " ";
           }
 
           break;
         case "Animals":
-          results = WORD_LIST[1][x];
-          size = results.length() - 1;
+          randomWord = ArrayData.getSecretWord(1, randomInt);
+          size = randomWord.length() - 1;
 
           for (int i = 0; i <= size; i++) {
-            wordSecret[i] = results.charAt(i);
+            secretWord[i] = randomWord.charAt(i);
             lines += "_" + " ";
           }
 
           break;
         case "Countries":
-          results = WORD_LIST[2][x];
-          size = results.length() - 1;
+          randomWord = ArrayData.getSecretWord(2, randomInt);
+          size = randomWord.length() - 1;
 
           for (int i = 0; i <= size; i++) {
-            wordSecret[i] = results.charAt(i);
+            secretWord[i] = randomWord.charAt(i);
             lines += "_" + " ";
           }
 
           break;
         case "Colors":
-          results = WORD_LIST[3][x];
-          size = results.length() - 1;
+          randomWord = ArrayData.getSecretWord(3, randomInt);
+          size = randomWord.length() - 1;
 
           for (int i = 0; i <= size; i++) {
-            wordSecret[i] = results.charAt(i);
+            secretWord[i] = randomWord.charAt(i);
             lines += "_" + " ";
           }
 
           break;
         case "Irregular Verbs":
-          results = WORD_LIST[4][x];
-          size = results.length() - 1;
+          randomWord = ArrayData.getSecretWord(4, randomInt);
+          size = randomWord.length() - 1;
 
           for (int i = 0; i <= size; i++) {
-            wordSecret[i] = results.charAt(i);
+            secretWord[i] = randomWord.charAt(i);
             lines += "_" + " ";
           }
 
           break;
         case "Sports":
-          results = WORD_LIST[5][x];
-          size = results.length() - 1;
+          randomWord = ArrayData.getSecretWord(5, randomInt);
+          size = randomWord.length() - 1;
 
           for (int i = 0; i <= size; i++) {
-            wordSecret[i] = results.charAt(i);
+            secretWord[i] = randomWord.charAt(i);
             lines += "_" + " ";
           }
           break;
@@ -231,7 +231,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
       IntStream.rangeClosed(0, size).forEach(i -> word[i] = lines.charAt(i));
 
-      lyricsNumber.setText("Lyrics: " + results.length());
+      lyricsNumber.setText("Lyrics: " + randomWord.length());
       txtWord.setText(lines);
     }
   }
@@ -242,8 +242,8 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     String lyric = lines;
     lines = "";
 
-    IntStream.rangeClosed(0, results.length() - 1).forEach(j -> {
-      if (results.charAt(j) == lyricActual) {
+    IntStream.rangeClosed(0, randomWord.length() - 1).forEach(j -> {
+      if (randomWord.charAt(j) == lyricActual) {
         word[j] = lyricActual;
         lyricsEquals = true;
       }
@@ -267,7 +267,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
       image.setIcon(new ImageIcon(resources.getImage("dead.png")));
 
-      Alerts.message("You lose", "Correct word: " + results);
+      Alerts.message("You lose", "Correct word: " + randomWord);
 
       insert("Loser");
 
@@ -282,9 +282,9 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
     boolean win = false;
 
-    for (int i = 0; i <= wordSecret.length - 1; i++) {
+    for (int i = 0; i <= secretWord.length - 1; i++) {
 
-      if (word[i] == wordSecret[i]) {
+      if (word[i] == secretWord[i]) {
         win = true;
       } else {
         win = false;
@@ -518,7 +518,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
         time.setText(min + ":" + seg);
 
         if (minutes <= 0 && seconds <= 0) {
-          Alerts.message("You lose!", "Right word: " + results);
+          Alerts.message("You lose!", "Right word: " + randomWord);
 
           insert("Loser");
           reset();
