@@ -14,6 +14,6 @@ public class TheStatus implements Question<Boolean> {
   @Subject("Verify status of general object")
   @Override
   public Boolean answeredBy(Actor actor) {
-    return Resources.generalObject == null;
+    return Resources.getGeneralObject() == null;
   }
 }

@@ -138,10 +138,10 @@ public class SearchBook extends JDialog implements ActionListener {
 
     if (txtUser.getText().length() >= 4
         && String.valueOf(txtPassword.getPassword()).length() >= 4) {
-      Resources.generalObject = new Bookverse(txtUser.getText(),
+      Resources.setGeneralObject(new Bookverse(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
           BOOKVERSE_PRODUCTION.getProperty(),
-          String.valueOf(listBooksBox.getSelectedItem()));
+          String.valueOf(listBooksBox.getSelectedItem())));
       JUnitCore.runClasses(RunSearchBook.class);
     } else {
       Alerts.inputSomethingText();

@@ -5,8 +5,8 @@ import javax.swing.JFrame;
 
 public class WindowEffect {
 
-  public static int EXIT = 3;
-  public static int DISPOSE = 2;
+  public static final int EXIT = 3;
+  public static final int DISPOSE = 2;
 
   public WindowEffect() {
   }
@@ -21,7 +21,7 @@ public class WindowEffect {
           Thread.sleep(sleep);
           frame.setOpacity(i);
         } catch (Exception var3) {
-          var3.printStackTrace();
+          Alerts.message("Error", var3.getMessage());
         }
       }
 
@@ -38,7 +38,7 @@ public class WindowEffect {
           Thread.sleep(sleep);
           frame.setOpacity(i);
         } catch (Exception var3) {
-          var3.printStackTrace();
+          Alerts.message("Error", var3.getMessage());
         }
       }
 
@@ -55,7 +55,7 @@ public class WindowEffect {
           Thread.sleep(sleep);
           dialog.setOpacity(i);
         } catch (Exception var3) {
-          var3.printStackTrace();
+          Alerts.message("Error", var3.getMessage());
         }
       }
 
@@ -72,7 +72,7 @@ public class WindowEffect {
           Thread.sleep(sleep);
           dialog.setOpacity(i);
         } catch (Exception var3) {
-          var3.printStackTrace();
+          Alerts.message("Error", var3.getMessage());
         }
       }
 

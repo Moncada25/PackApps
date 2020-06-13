@@ -37,6 +37,6 @@ public class RegisterHours implements Task {
         WaitUntil.the(HOURS_DOC, isVisible()),
         Enter.theValue(hours).into(HOURS_DOC));
 
-    Resources.generalObject = null;
+    Resources.setGeneralObject(null);
   }
 }

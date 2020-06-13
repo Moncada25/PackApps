@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.models;
 
+import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.AppConfig;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class DataConfig {
       FileInputStream file = new FileInputStream(AppConfig.FILE_PROPERTIES.getProperty());
       configProperties = new PropertyResourceBundle(file);
     } catch (IOException e) {
-      e.printStackTrace();
+      Alerts.message("Error", e.getMessage());
     }
   }
 

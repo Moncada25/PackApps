@@ -75,7 +75,7 @@ public class ArrayData {
     dataNewUser.put("Occupation", "Otro");
     dataNewUser.put("Address", "CR 62 #62-b11");
     dataNewUser.put("Username", "NewUser");
-    dataNewUser.put("Password", "newUserTest");
+    dataNewUser.put("Pass", "newUserTest");
     dataNewUser.put("Email", "test@mail.com");
     dataNewUser.put("Gender", "Masculino");
 

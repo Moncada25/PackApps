@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 @RunWith(SerenityRunner.class)
 public class RunTimesheetEntry {
 
-  Ultimatix ultimatix = (Ultimatix) Resources.generalObject;
+  Ultimatix ultimatix = (Ultimatix) Resources.getGeneralObject();
 
   @Before
   public void config() {

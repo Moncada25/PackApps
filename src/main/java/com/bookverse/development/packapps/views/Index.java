@@ -60,7 +60,7 @@ public class Index extends JFrame implements ActionListener {
   protected CashRegisterTable cashRegisterTable = new CashRegisterTable(this, true);
   protected LoansTable loansTable = new LoansTable(this, true);
   protected PurchasesTable purchasesTable = new PurchasesTable(this, true);
-  protected SalesTabla salesTable = new SalesTabla(this, true);
+  protected SalesTable salesTable = new SalesTable(this, true);
   protected JMenuItem[] wallpapers = new JMenuItem[14];
   protected JMenu changeBackground;
   protected JMenuItem moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,

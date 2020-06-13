@@ -39,11 +39,11 @@ import org.jetbrains.annotations.NotNull;
 public class InventoryTable extends JDialog implements MouseListener {
 
   public JLabel[] actions = new JLabel[4];
-  public JTable viewTable;
   public String reference = "";
   public int status = 0;
-  private JLabel title;
   private Table model = new Table();
+  public final JTable viewTable = new JTable(model);
+  private JLabel title;
   private TableRowSorter<TableModel> rowSorter;
   private String[] columns = {"REFERENCE", "STATE", "PRICE", "QUANTITY"};
   private Resources resources = new Resources();
@@ -106,7 +106,6 @@ public class InventoryTable extends JDialog implements MouseListener {
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
-    viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
     JScrollPane scroll = new JScrollPane(viewTable);
     add(scroll, BorderLayout.CENTER);

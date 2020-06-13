@@ -38,10 +38,10 @@ import javax.swing.table.TableRowSorter;
 
 public class UsersTable extends JDialog implements MouseListener {
 
-  public JTable viewTable;
+  private Table model = new Table();
+  public final JTable viewTable = new JTable(model);
   private JLabel title;
   private JLabel[] actions = new JLabel[3];
-  private Table model = new Table();
   private String[] columns = {"ID", "USERNAME", "PASSWORD", "STATUS"};
   private Resources resources = new Resources();
 
@@ -88,7 +88,6 @@ public class UsersTable extends JDialog implements MouseListener {
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
-    viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
     JScrollPane scroll = new JScrollPane(viewTable);
     add(scroll, BorderLayout.CENTER);

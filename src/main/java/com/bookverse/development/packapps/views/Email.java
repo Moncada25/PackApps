@@ -8,6 +8,7 @@ import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
+import com.bookverse.development.packapps.models.DataConfig;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.AppConfig;
 import java.awt.event.ActionEvent;
@@ -42,7 +43,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
   private JPasswordField password;
   private Resources resources = new Resources();
   private JRadioButton toDeveloper, toOther;
-  private String receiver = AppConfig.DEVELOPER_EMAIL.getProperty();
+  private String receiver = DataConfig.getDeveloperEmail();
 
   public Email(JFrame parent, boolean modal) {
     super(parent, modal);

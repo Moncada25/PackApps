@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Database {
 
-  public static Store store = new Store();
+  public static final Store store = new Store();
   private static Connection connection = null;
   private static ResultSet resultSet;
   private static PreparedStatement preparedStatement;
@@ -575,7 +575,6 @@ public class Database {
       return listBook;
 
     } catch (SQLException e) {
-      e.printStackTrace();
       Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
     } finally {
 

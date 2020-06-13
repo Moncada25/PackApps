@@ -17,19 +17,19 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-public class SalesTabla extends JDialog {
+public class SalesTable extends JDialog {
 
-  public JTable viewTable;
   private Table model = new Table();
+  public final JTable viewTable = new JTable(model);
   private String[] columns = {"ID", "PRODUCT", "USER", "DOCUMENT", "PHONE", "DATE", "UNITS",
       "TOTAL"};
 
-  public SalesTabla(JDialog parent, boolean modal) {
+  public SalesTable(JDialog parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
 
-  public SalesTabla(JFrame parent, boolean modal) {
+  public SalesTable(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
@@ -40,7 +40,6 @@ public class SalesTabla extends JDialog {
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
-    viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
     JScrollPane scroll = new JScrollPane(viewTable);
     getContentPane().add(scroll, BorderLayout.CENTER);

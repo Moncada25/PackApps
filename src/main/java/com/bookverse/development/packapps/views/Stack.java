@@ -216,9 +216,15 @@ public class Stack extends JDialog implements MouseListener, ActionListener {
     if (i == 0) {
       Alerts.message("Message", "The stack is empty");
     } else {
-      title.setText(
-          "<html><strong>Average → " + String.format("%.2f", btnAdd() / btnCount())
-              + "</strong></html>");
+
+      int count = btnCount();
+
+      if(count != 0){
+
+        title.setText(
+            "<html><strong>Average → " + String.format("%.2f", btnAdd() / count)
+                + "</strong></html>");
+      }
     }
   }
 

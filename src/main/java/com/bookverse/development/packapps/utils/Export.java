@@ -101,7 +101,7 @@ public class Export {
           try {
             PdfWriter.getInstance(document, new FileOutputStream(filePath));
           } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Alerts.message("Error", e.getMessage());
           }
 
           document.open();
@@ -109,7 +109,7 @@ public class Export {
           document.addTitle(title);
           document.addSubject("Made in PackApps");
           document.addKeywords("Java, PDF, PackApps");
-          document.addAuthor("SMONCADA");
+          document.addAuthor("Moncada");
           document.addCreator("PackApps");
 
           Anchor anchor = new Anchor(title + " - PackApps");

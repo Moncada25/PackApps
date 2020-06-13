@@ -193,7 +193,7 @@ public class HomeStore extends JDialog implements ActionListener {
 
   private void btnSalesTableAP() {
 
-    SalesTabla table = new SalesTabla(this, true);
+    SalesTable table = new SalesTable(this, true);
 
     table.cleanTable();
 

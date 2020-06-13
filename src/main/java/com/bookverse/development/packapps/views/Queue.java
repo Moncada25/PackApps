@@ -198,8 +198,14 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
     if (i == 0) {
       Alerts.message("Message", "The queue is empty");
     } else {
-      title.setText("<html>" + Format.style() + "<strong>Average of the queue → " + String
-          .format("%.2f", btnAdd() / btnCount()) + "</strong></html>");
+
+      int count = btnCount();
+
+      if(count != 0){
+
+        title.setText("<html>" + Format.style() + "<strong>Average of the queue → " + String
+            .format("%.2f", btnAdd() / count) + "</strong></html>");
+      }
     }
   }
 

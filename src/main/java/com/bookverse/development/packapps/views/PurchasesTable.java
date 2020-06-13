@@ -19,8 +19,8 @@ import javax.swing.table.TableRowSorter;
 
 public class PurchasesTable extends JDialog {
 
-  public JTable viewTable;
   private Table model = new Table();
+  public final JTable viewTable = new JTable(model);
   private String[] columns = {"ID", "PRODUCT", "USER", "DOCUMENT", "PHONE", "DATE", "UNITS",
       "TOTAL"};
 
@@ -40,7 +40,6 @@ public class PurchasesTable extends JDialog {
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
-    viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
     JScrollPane scroll = new JScrollPane(viewTable);
     getContentPane().add(scroll, BorderLayout.CENTER);
