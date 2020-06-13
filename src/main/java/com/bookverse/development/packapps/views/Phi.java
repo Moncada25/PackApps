@@ -196,11 +196,14 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
 
       numbers += "[" + String.format("%.0f", f) + "]";
     }
-    calculatePhi(num1, num2);
+
+    if(num2 != 0)
+      phi = num1 / num2;
+
     Alerts.message("Result", numbers);
   }
 
-  private void getFibonacci(int n) {
+  private void getFibonacci(int n)  {
 
     double fi, number;
 
@@ -209,10 +212,6 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     number = (1 / Math.sqrt(5)) * (Math.pow(fi, n) - (Math.pow(-1 / fi, n)));
     Alerts.message("Result",
         "N° " + n + " in the Fibonacci's series is " + String.format("%.0f", number));
-  }
-
-  private void calculatePhi(double num1, double num2) {
-    phi = num1 / num2;
   }
 
   private void proportionAurea(double length) {

@@ -53,10 +53,10 @@ import javax.swing.table.TableRowSorter;
 
 public class GuessNumberTable extends JDialog implements ActionListener, MouseListener {
 
-  public JTable viewTable;
+  private Table model = new Table();
+  public final JTable viewTable = new JTable(model);
   private JLabel[] tables = new JLabel[5];
   private JLabel title, message;
-  private Table model = new Table();
   private JMenuItem create, read, delete, update;
   private String[] columns = {"ID", "NICKNAME", "LIMIT", "LEVEL", "DATE"};
   private Resources resources = new Resources();
@@ -105,7 +105,6 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
     Arrays.stream(columns).forEach(column -> model.addColumn(column));
 
-    viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
     JScrollPane scroll = new JScrollPane(viewTable);
     add(scroll, BorderLayout.CENTER);

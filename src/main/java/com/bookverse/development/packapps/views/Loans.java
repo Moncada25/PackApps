@@ -238,7 +238,7 @@ public class Loans extends JDialog implements ActionListener {
                       Integer.parseInt(String.valueOf(months.getSelectedItem())));
                 }
 
-                String user = HomeStore.userLogged;
+                String user = new HomeStore().getUserLogged();
 
                 if (Database.searchDataUserInCashRegister(user)) {
                   Database.updateLoan(user, Double.parseDouble(txtValue.getText()));

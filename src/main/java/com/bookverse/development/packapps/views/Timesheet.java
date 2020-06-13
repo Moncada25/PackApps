@@ -151,10 +151,10 @@ public class Timesheet extends JDialog implements ActionListener {
 
     if (txtUser.getText().length() > 5 && String.valueOf(txtPassword.getPassword()).length() > 5
         && txtHours.getText().length() > 0) {
-      Resources.generalObject = new Ultimatix(txtUser.getText(),
+      Resources.setGeneralObject(new Ultimatix(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
           ULTIMATIX.getProperty(),
-          txtHours.getText());
+          txtHours.getText()));
       JUnitCore.runClasses(RunTimesheetEntry.class);
     } else {
       Alerts.inputSomethingText();

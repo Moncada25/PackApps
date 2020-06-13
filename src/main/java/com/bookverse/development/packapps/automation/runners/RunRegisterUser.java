@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
 @RunWith(SerenityRunner.class)
 public class RunRegisterUser {
 
-  Bookverse bookverse = (Bookverse) Resources.generalObject;
+  Bookverse bookverse = (Bookverse) Resources.getGeneralObject();
 
   @Before
   public void config() {

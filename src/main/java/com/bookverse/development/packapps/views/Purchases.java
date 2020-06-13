@@ -305,7 +305,7 @@ public class Purchases extends JDialog implements ActionListener {
             }
 
             if (!existProduct) {
-              String user = HomeStore.userLogged;
+              String user = HomeStore.getUserLogged();
 
               if (Database.searchDataUserInCashRegister(user)) {
                 Database.updatePurchases(user, productCount, totalPurchase);
@@ -355,7 +355,7 @@ public class Purchases extends JDialog implements ActionListener {
     try {
       Database.readTable(inventoryTable.viewTable, Querys.getAllData(INVENTORY), true);
     } catch (Exception e1) {
-      e1.printStackTrace();
+      Alerts.message("Error", e1.getMessage());
     }
 
     inventoryTable.setSize(830, 400);
@@ -369,11 +369,11 @@ public class Purchases extends JDialog implements ActionListener {
 
   private void btnImportAP() {
 
-    if (inventoryTable.status == 1 || inventoryTable.status == 2) {
+    if (inventoryTable.getStatus() == 1 || inventoryTable.getStatus() == 2) {
 
-      Database.searchProductByReference(inventoryTable.reference, INVENTORY);
+      Database.searchProductByReference(inventoryTable.getReference(), INVENTORY);
 
-      txtReference.setText(inventoryTable.reference);
+      txtReference.setText(inventoryTable.getReference());
 
       if (Database.store.getProductState().equals("New")) {
         radioNew.setSelected(true);

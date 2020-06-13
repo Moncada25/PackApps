@@ -61,11 +61,12 @@ public class Settings {
     try {
 
       MessageDigest md = MessageDigest.getInstance("MD5");
-      byte[] digestOfPassword = md.digest(getSecretKey(useDefaultKey).getBytes(StandardCharsets.UTF_8));
+      byte[] digestOfPassword = md
+          .digest(getSecretKey(useDefaultKey).getBytes(StandardCharsets.UTF_8));
       byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
 
-      SecretKey key = new SecretKeySpec(keyBytes, "DESede");
-      Cipher cipher = Cipher.getInstance("DESede");
+      SecretKey key = new SecretKeySpec(keyBytes, "AES");
+      Cipher cipher = Cipher.getInstance("AES");
       cipher.init(Cipher.ENCRYPT_MODE, key);
 
       byte[] plainTextBytes = text.getBytes(StandardCharsets.UTF_8);
@@ -88,9 +89,9 @@ public class Settings {
       MessageDigest md = MessageDigest.getInstance("MD5");
       byte[] digestOfPassword = md.digest(getSecretKey(isEmail).getBytes(StandardCharsets.UTF_8));
       byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
-      SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+      SecretKey key = new SecretKeySpec(keyBytes, "AES");
 
-      Cipher decipher = Cipher.getInstance("DESede");
+      Cipher decipher = Cipher.getInstance("AES");
       decipher.init(Cipher.DECRYPT_MODE, key);
 
       byte[] plainText = decipher.doFinal(message);
@@ -98,7 +99,10 @@ public class Settings {
       base64EncryptedString = new String(plainText, StandardCharsets.UTF_8);
 
     } catch (Exception ex) {
-      ex.printStackTrace();
+
+      if (!base64EncryptedString.equals("")) {
+        Alerts.message("Error", ex.getMessage());
+      }
     }
 
     if (base64EncryptedString.equals("")) {
@@ -182,7 +186,7 @@ public class Settings {
         }
 
       } catch (IOException e) {
-        e.printStackTrace();
+        Alerts.message("Error", e.getMessage());
       }
     }
     return false;

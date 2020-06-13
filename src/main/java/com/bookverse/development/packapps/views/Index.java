@@ -60,15 +60,72 @@ public class Index extends JFrame implements ActionListener {
   protected CashRegisterTable cashRegisterTable = new CashRegisterTable(this, true);
   protected LoansTable loansTable = new LoansTable(this, true);
   protected PurchasesTable purchasesTable = new PurchasesTable(this, true);
-  protected SalesTabla salesTable = new SalesTabla(this, true);
+  protected SalesTable salesTable = new SalesTable(this, true);
   protected JMenuItem[] wallpapers = new JMenuItem[14];
   protected JMenu changeBackground;
-  protected JMenuItem moreSystems, moreBookverse, darkMode, textureMode, mintMode, classicMode, macMode, grayMode,
-      texts, guessNumber, guessNumberHard, hangman, structures, dices, store, numbers, puzzle4x4, puzzle5x5, puzzle6x6,
-      roulette, ticTacToePvsP, ticTacToePvsCPU, tables, notes, yes_exit, email, comment, guessNumberTXT, hangmanTXT, dicesTXT, notesTXT,
-      inventoryTXT, purchasesTXT, salesTXT, cashRegisterTXT, loansTXT, puzzleTXT, guessNumberEXCEL, hangmanEXCEL, dicesEXCEL, notesEXCEL,
-      inventoryEXCEL, purchasesEXCEL, salesEXCEL, cashRegisterEXCEL, loansEXCEL, puzzleEXCEL, guessNumberPDF, hangmanPDF, dicesPDF,
-      notesPDF, inventoryPDF, purchasesPDF, salesPDF, cashRegisterPDF, loansPDF, puzzlePDF, read, timesheet, OCRTask, searchBook, registerUser, sendWhatsApp;
+  protected JMenuItem moreSystems;
+  protected JMenuItem moreBookverse;
+  protected JMenuItem darkMode;
+  protected JMenuItem textureMode;
+  protected JMenuItem mintMode;
+  protected JMenuItem classicMode;
+  protected JMenuItem macMode;
+  protected JMenuItem grayMode;
+  protected JMenuItem texts;
+  protected JMenuItem guessNumber;
+  protected JMenuItem guessNumberHard;
+  protected JMenuItem hangman;
+  protected JMenuItem structures;
+  protected JMenuItem dices;
+  protected JMenuItem store;
+  protected JMenuItem numbers;
+  protected JMenuItem puzzle4x4;
+  protected JMenuItem puzzle5x5;
+  protected JMenuItem puzzle6x6;
+  protected JMenuItem roulette;
+  protected JMenuItem ticTacToePvsP;
+  protected JMenuItem ticTacToePvsCPU;
+  protected JMenuItem tables;
+  protected JMenuItem notes;
+  protected JMenuItem yes_exit;
+  protected JMenuItem email;
+  protected JMenuItem comment;
+  protected JMenuItem guessNumberTXT;
+  protected JMenuItem hangmanTXT;
+  protected JMenuItem dicesTXT;
+  protected JMenuItem notesTXT;
+  protected JMenuItem inventoryTXT;
+  protected JMenuItem purchasesTXT;
+  protected JMenuItem salesTXT;
+  protected JMenuItem cashRegisterTXT;
+  protected JMenuItem loansTXT;
+  protected JMenuItem puzzleTXT;
+  protected JMenuItem guessNumberEXCEL;
+  protected JMenuItem hangmanEXCEL;
+  protected JMenuItem dicesEXCEL;
+  protected JMenuItem notesEXCEL;
+  protected JMenuItem inventoryEXCEL;
+  protected JMenuItem purchasesEXCEL;
+  protected JMenuItem salesEXCEL;
+  protected JMenuItem cashRegisterEXCEL;
+  protected JMenuItem loansEXCEL;
+  protected JMenuItem puzzleEXCEL;
+  protected JMenuItem guessNumberPDF;
+  protected JMenuItem hangmanPDF;
+  protected JMenuItem dicesPDF;
+  protected JMenuItem notesPDF;
+  protected JMenuItem inventoryPDF;
+  protected JMenuItem purchasesPDF;
+  protected JMenuItem salesPDF;
+  protected JMenuItem cashRegisterPDF;
+  protected JMenuItem loansPDF;
+  protected JMenuItem puzzlePDF;
+  protected JMenuItem read;
+  protected JMenuItem timesheet;
+  protected JMenuItem OCRTask;
+  protected JMenuItem searchBook;
+  protected JMenuItem registerUser;
+  protected JMenuItem sendWhatsApp;
   private boolean isWork = true;
 
   public Index() {

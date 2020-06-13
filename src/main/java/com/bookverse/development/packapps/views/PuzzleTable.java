@@ -54,8 +54,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class PuzzleTable extends JDialog implements ActionListener, MouseListener {
 
-  public JTable viewTable;
-  public Table model = new Table();
+  private Table model = new Table();
+  public final JTable viewTable = new JTable(model);
   private JLabel title, message;
   private JMenuItem create, read, delete, update;
   private String[] columns = {"ID", "NICKNAME", "STATE", "LEVEL", "MOVES", "DATE"};
@@ -111,7 +111,6 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
       model.addColumn(column);
     }
 
-    viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
     JScrollPane scroll = new JScrollPane(viewTable);
     getContentPane().add(scroll, BorderLayout.CENTER);

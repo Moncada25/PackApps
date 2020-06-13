@@ -14,7 +14,15 @@ import org.jetbrains.annotations.NotNull;
 
 public class Resources {
 
-  public static Object generalObject;
+  private static Object generalObject;
+
+  public static Object getGeneralObject() {
+    return generalObject;
+  }
+
+  public static void setGeneralObject(Object generalObject) {
+    Resources.generalObject = generalObject;
+  }
 
   public URL getImage(String image) {
     return this.getClass().getResource("/" + image);

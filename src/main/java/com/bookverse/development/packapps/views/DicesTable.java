@@ -49,8 +49,8 @@ import javax.swing.table.TableRowSorter;
 
 public class DicesTable extends JDialog implements ActionListener, MouseListener {
 
-  public JTable viewTable;
-  Table model = new Table();
+  private Table model = new Table();
+  public final JTable viewTable = new JTable(model);
   TableRowSorter<TableModel> rowSorter;
   private JLabel title, message;
   private JMenuItem create, read, delete, update;
@@ -106,7 +106,6 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
       model.addColumn(column);
     }
 
-    viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
     JScrollPane scroll = new JScrollPane(viewTable);
     add(scroll, BorderLayout.CENTER);

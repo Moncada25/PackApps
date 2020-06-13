@@ -52,9 +52,9 @@ import javax.swing.table.TableRowSorter;
 
 public class NotesTable extends JDialog implements ActionListener, MouseListener {
 
-  public JTable viewTable;
-  private JLabel title, message;
   private Table model = new Table();
+  public final JTable viewTable = new JTable(model);
+  private JLabel title, message;
   private JMenuItem create, read, delete, update;
   private String[] columns = {"ID", "NAME", "SCALE", "% TOTAL", "TOTAL", "STATE", "DATE"};
   private Resources resources = new Resources();
@@ -106,7 +106,6 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
-    viewTable = new JTable(model);
     viewTable.getTableHeader().setReorderingAllowed(false);
     JScrollPane scroll = new JScrollPane(viewTable);
     add(scroll, BorderLayout.CENTER);

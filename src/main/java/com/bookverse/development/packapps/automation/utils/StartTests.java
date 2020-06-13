@@ -21,15 +21,15 @@ public class StartTests {
             + "Occupation → " + ArrayData.getDataUser("Occupation") + "\n"
             + "Address → " + ArrayData.getDataUser("Address") + "\n"
             + "Username → " + ArrayData.getDataUser("Username") + "\n"
-            + "Password → " + ArrayData.getDataUser("Password") + "\n"
+            + "Password → " + ArrayData.getDataUser("Pass") + "\n"
             + "Email → " + ArrayData.getDataUser("Email") + "\n"
             + "Gender → " + ArrayData.getDataUser("Gender") + "\n\n"
             + "Do you want run test?", "Bookverse Test")) {
 
-      Resources.generalObject = new Bookverse(ArrayData.getDataUser("Username"),
-          ArrayData.getDataUser("Password"),
+      Resources.setGeneralObject(new Bookverse(ArrayData.getDataUser("Username"),
+          ArrayData.getDataUser("Pass"),
           BOOKVERSE_DEVELOPMENT.getProperty(),
-          "");
+          ""));
       JUnitCore.runClasses(RunRegisterUser.class);
     }
   }
