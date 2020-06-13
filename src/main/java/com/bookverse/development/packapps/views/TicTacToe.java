@@ -25,13 +25,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class TicTacToe extends JDialog implements ActionListener {
 
-  public static JButton[][] board;
-  public JTextField txtName1, txtName2;
-  public Color colorO = MAIN_COLOR;
-  public Color colorX = TEXT_COLOR;
-  public Color color = new Color(100, 220, 0);
-  public boolean vsCPU;
+  public static final JTextField txtName1 = new JTextField();
+  public static final JTextField txtName2 = new JTextField();
+  public static final Color colorO = MAIN_COLOR;
+  public static final Color colorX = TEXT_COLOR;
+  public static final Color color = new Color(100, 220, 0);
+  private static final JButton[][] board = new JButton[3][3];
   Resources resources = new Resources();
+  private boolean vsCPU;
   private JLabel lblTurn;
   private JLabel pointsX;
   private JLabel pointsO;
@@ -53,6 +54,10 @@ public class TicTacToe extends JDialog implements ActionListener {
     super(parent, modal);
     this.vsCPU = vsCPU;
     createComponents();
+  }
+
+  public static JButton[][] getBoard() {
+    return board;
   }
 
   public void start(JFrame parent) {
@@ -86,7 +91,6 @@ public class TicTacToe extends JDialog implements ActionListener {
     btnPlay = resources.getButton("Play", TEXT_COLOR, this, this);
     btnPlay.setBounds(50, 300, 86, 30);
 
-    board = new JButton[3][3];
     int x = 50;
     int y = 50;
 
@@ -132,12 +136,12 @@ public class TicTacToe extends JDialog implements ActionListener {
     image = resources.getLabel("", null, this, null);
     image.setBounds(300, 90, 96, 96);
 
-    txtName1 = new JTextField("X");
+    txtName1.setText("X");
 
     if (!vsCPU) {
-      txtName2 = new JTextField("O");
+      txtName2.setText("O");
     } else {
-      txtName2 = new JTextField("CPU");
+      txtName2.setText("CPU");
     }
   }
 

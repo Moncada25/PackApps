@@ -286,7 +286,7 @@ public class Sales extends JDialog implements ActionListener {
         Database
             .updateInventory(Integer.parseInt(formatUnitsAvailable), txtReference.getText(), false);
 
-        String user = HomeStore.userLogged;
+        String user = new HomeStore().getUserLogged();
 
         if (Database.searchDataUserInCashRegister(user)) {
           Database.updateSales(user, Integer.parseInt(unitsActual.getText()),
@@ -315,7 +315,7 @@ public class Sales extends JDialog implements ActionListener {
           Database.insertData(sale);
 
         } catch (Exception e) {
-          e.printStackTrace();
+          Alerts.message("Error", e.getMessage());
         }
 
         Alerts.actionSuccessfully("lend", unitsActual.getText(),
@@ -343,7 +343,7 @@ public class Sales extends JDialog implements ActionListener {
     try {
       Database.readTable(inventoryTable.viewTable, Querys.getAllData(INVENTORY), true);
     } catch (Exception e1) {
-      e1.printStackTrace();
+      Alerts.message("Error", e1.getMessage());
     }
 
     inventoryTable.setSize(830, 400);
@@ -357,9 +357,9 @@ public class Sales extends JDialog implements ActionListener {
 
   private void importDataProduct() {
 
-    if (inventoryTable.status == 1) {
-      Database.searchProductByReference(inventoryTable.reference, INVENTORY);
-      txtReference.setText(inventoryTable.reference);
+    if (inventoryTable.getStatus() == 1) {
+      Database.searchProductByReference(inventoryTable.getReference(), INVENTORY);
+      txtReference.setText(inventoryTable.getReference());
 
       if (Database.store.getProductState().equals("New")) {
         radioNew.setSelected(true);
@@ -374,7 +374,7 @@ public class Sales extends JDialog implements ActionListener {
       btnSubmit.setEnabled(true);
       available.setVisible(true);
 
-    } else if (inventoryTable.status == 2) {
+    } else if (inventoryTable.getStatus() == 2) {
       Alerts.message("Warning", "There are no units available for the selected product.");
     }
   }

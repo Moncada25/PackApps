@@ -14,8 +14,8 @@ import javax.swing.table.TableRowSorter;
 
 public class TableResult extends JDialog {
 
-  public JTable tabResult;
-  private Table model = new Table();
+  private static Table model = new Table();
+  public static final JTable tabResult = new JTable(model);;
 
   public TableResult(JDialog parent, boolean modal, String[] columns) {
     super(parent, modal);
@@ -28,7 +28,6 @@ public class TableResult extends JDialog {
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
-    tabResult = new JTable(model);
     tabResult.getTableHeader().setReorderingAllowed(false);
     JScrollPane scroll = new JScrollPane(tabResult);
     getContentPane().add(scroll, BorderLayout.CENTER);

@@ -10,6 +10,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
+import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Querys;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -24,8 +25,8 @@ import javax.swing.JMenuItem;
 
 public class HomeStore extends JDialog implements ActionListener {
 
-  public static String userLogged;
   Resources resources = new Resources();
+  private static String userLogged;
   private JMenuItem sell, buy, lend, cashRegister, inventory, loans, purchases, sales, users, exit;
 
   public HomeStore(JDialog parent, boolean modal) {
@@ -93,7 +94,7 @@ public class HomeStore extends JDialog implements ActionListener {
   }
 
   public void start(JDialog parent, String user) {
-    userLogged = user;
+    setUserLogged(user);
     setSize(620, 380);
     setResizable(false);
     setLocationRelativeTo(parent);
@@ -112,7 +113,7 @@ public class HomeStore extends JDialog implements ActionListener {
     try {
       Database.readTable(table.viewTable, Querys.getAllData(CASH_REGISTER), true);
     } catch (Exception e1) {
-      e1.printStackTrace();
+      Alerts.message("Error", e1.getMessage());
     }
 
     table.setSize(950, 400);
@@ -134,7 +135,7 @@ public class HomeStore extends JDialog implements ActionListener {
     try {
       Database.readTable(table.viewTable, Querys.getAllData(INVENTORY), true);
     } catch (Exception e1) {
-      e1.printStackTrace();
+      Alerts.message("Error", e1.getMessage());
     }
 
     table.setSize(830, 400);
@@ -156,7 +157,7 @@ public class HomeStore extends JDialog implements ActionListener {
     try {
       Database.readTable(table.viewTable, Querys.getAllData(LOANS), true);
     } catch (Exception e1) {
-      e1.printStackTrace();
+      Alerts.message("Error", e1.getMessage());
     }
 
     table.setSize(830, 400);
@@ -178,7 +179,7 @@ public class HomeStore extends JDialog implements ActionListener {
     try {
       Database.readTable(table.viewTable, Querys.getAllData(PURCHASES), true);
     } catch (Exception e1) {
-      e1.printStackTrace();
+      Alerts.message("Error", e1.getMessage());
     }
 
     table.setSize(830, 400);
@@ -200,7 +201,7 @@ public class HomeStore extends JDialog implements ActionListener {
     try {
       Database.readTable(table.viewTable, Querys.getAllData(SALES), true);
     } catch (Exception e1) {
-      e1.printStackTrace();
+      Alerts.message("Error", e1.getMessage());
     }
 
     table.setSize(850, 400);
@@ -222,7 +223,7 @@ public class HomeStore extends JDialog implements ActionListener {
     try {
       Database.readTable(table.viewTable, Querys.getAllData(USERS), true);
     } catch (Exception e1) {
-      e1.printStackTrace();
+      Alerts.message("Error", e1.getMessage());
     }
 
     table.setSize(620, 410);
@@ -233,6 +234,14 @@ public class HomeStore extends JDialog implements ActionListener {
     Settings.fadeIn(table);
     setVisible(false);
     table.setVisible(true);
+  }
+
+  public static String getUserLogged() {
+    return userLogged;
+  }
+
+  public static void setUserLogged(String user) {
+    userLogged = user;
   }
 
   private void logout() {

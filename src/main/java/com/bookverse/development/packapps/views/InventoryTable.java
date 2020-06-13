@@ -38,9 +38,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class InventoryTable extends JDialog implements MouseListener {
 
-  public JLabel[] actions = new JLabel[4];
-  public String reference = "";
-  public int status = 0;
+  protected static final JLabel[] actions = new JLabel[4];
+  private int status = 0;
+  private String reference = "";
   private Table model = new Table();
   public final JTable viewTable = new JTable(model);
   private JLabel title;
@@ -154,6 +154,22 @@ public class InventoryTable extends JDialog implements MouseListener {
     }
   }
 
+  public String getReference() {
+    return reference;
+  }
+
+  public void setReference(String reference) {
+    this.reference = reference;
+  }
+
+  public int getStatus() {
+    return status;
+  }
+
+  public void setStatus(int status) {
+    this.status = status;
+  }
+
   private void btnSelectAP() {
 
     int selectedRow;
@@ -162,15 +178,15 @@ public class InventoryTable extends JDialog implements MouseListener {
 
     if (selectedRow == -1) {
       Alerts.message("Message", "No record selected.");
-      status = 0;
+      setStatus(0);
     } else {
 
       if (!String.valueOf(model.getValueAt(selectedRow, 3)).equals("0")) {
-        reference = String.valueOf(model.getValueAt(selectedRow, 0));
-        status = 1;
+        setReference(String.valueOf(model.getValueAt(selectedRow, 0)));
+        setStatus(1);
       } else {
-        reference = String.valueOf(model.getValueAt(selectedRow, 0));
-        status = 2;
+        setReference(String.valueOf(model.getValueAt(selectedRow, 0)));
+        setStatus(2);
       }
       dispose();
     }
