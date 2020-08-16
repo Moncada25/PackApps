@@ -122,17 +122,18 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem puzzlePDF;
   protected JMenuItem read;
   protected JMenuItem timesheet;
-  protected JMenuItem OCRTask;
+  protected JMenuItem OCR;
   protected JMenuItem searchBook;
   protected JMenuItem registerUser;
   protected JMenuItem sendWhatsApp;
+  protected JMenuItem question;
   private boolean isWork = true;
 
   public Index() {
     createComponents();
   }
 
-  public static void main(String[] args) {
+  protected static void run() {
 
     try {
 
@@ -297,6 +298,7 @@ public class Index extends JFrame implements ActionListener {
     numbers = resources.getMenuItem("Numbers", "numeritos", this);
     notes = resources.getMenuItem(NOTES, "notas", this);
     texts = resources.getMenuItem("Texts", "textos", this);
+    question = resources.getMenuItem("Question", "question", this);
 
     JMenu export = resources.getMenu("Export Data", "export");
 
@@ -449,7 +451,7 @@ public class Index extends JFrame implements ActionListener {
     changeUI.addSeparator();
     changeUI.add(changeBackground);
 
-    OCRTask = resources.getMenuItem("OCR", "ocr", this);
+    OCR = resources.getMenuItem("OCR", "ocr", this);
 
     tools.add(changeUI);
     tools.addSeparator();
@@ -459,7 +461,9 @@ public class Index extends JFrame implements ActionListener {
     tools.addSeparator();
     tools.add(numbers);
     tools.addSeparator();
-    tools.add(OCRTask);
+    tools.add(OCR);
+    tools.addSeparator();
+    tools.add(question);
     tools.addSeparator();
     tools.add(store);
     tools.addSeparator();
@@ -911,8 +915,11 @@ public class Index extends JFrame implements ActionListener {
       setVisible(true);
     } else if (e.getSource() == registerUser) {
       StartTests.startRegisterUser();
-    } else if (e.getSource() == OCRTask) {
+    } else if (e.getSource() == OCR) {
       new OCR(this, true).start(this);
+      setVisible(true);
+    } else if (e.getSource() == question) {
+      new Question(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == grayMode) {
 
