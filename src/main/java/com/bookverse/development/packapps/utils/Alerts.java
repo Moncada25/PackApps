@@ -244,7 +244,7 @@ public class Alerts {
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
-  public static void instruccionesRompe() {
+    public static void instruccionesRompe() {
     JOptionPane.showMessageDialog(null, "<html>" + Format.style()
             + "<strong><center>Rompecabezas</center></strong><br>"
             + "<strong>Jugadores: </strong>1<br><br>"

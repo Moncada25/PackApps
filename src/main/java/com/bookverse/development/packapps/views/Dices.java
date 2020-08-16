@@ -197,7 +197,7 @@ public class Dices extends JDialog implements ActionListener {
             dice2.setIcon(getIcon(d2.throwDices()));
             dice3.setIcon(getIcon(d3.throwDices()));
 
-            if ((d1.getValor() == d2.getValor()) && (d1.getValor() == d3.getValor())) {
+            if ((d1.getValue() == d2.getValue()) && (d1.getValue() == d3.getValue())) {
               Alerts.message("Congratulations",
                   player1.getText() + " has won, took all three equals dices!");
 
@@ -211,7 +211,7 @@ public class Dices extends JDialog implements ActionListener {
               btnThrow.setEnabled(false);
 
             } else {
-              points1 += d1.getValor() + d2.getValor() + d3.getValor();
+              points1 += d1.getValue() + d2.getValue() + d3.getValue();
               lblPoints1.setText("<html><center><strong>Points</strong><br>" + points1
                   + "</center></html>");
             }
@@ -222,7 +222,7 @@ public class Dices extends JDialog implements ActionListener {
             dice2.setIcon(getIcon(d2.throwDices()));
             dice3.setIcon(getIcon(d3.throwDices()));
 
-            if ((d1.getValor() == d2.getValor()) && (d1.getValor() == d3.getValor())) {
+            if ((d1.getValue() == d2.getValue()) && (d1.getValue() == d3.getValue())) {
               Alerts.message("Congratulations",
                   player2.getText() + " has won, took all three equals dices!");
 
@@ -236,7 +236,7 @@ public class Dices extends JDialog implements ActionListener {
               winner = true;
 
             } else {
-              points2 += d1.getValor() + d2.getValor() + d3.getValor();
+              points2 += d1.getValue() + d2.getValue() + d3.getValue();
               lblPoints2.setText("<html><center><strong>Points</strong><br>" + points2
                   + "</center></html>");
             }
@@ -247,7 +247,7 @@ public class Dices extends JDialog implements ActionListener {
             dice2.setIcon(getIcon(d2.throwDices()));
             dice3.setIcon(getIcon(d3.throwDices()));
 
-            if ((d1.getValor() == d2.getValor()) && (d1.getValor() == d3.getValor())) {
+            if ((d1.getValue() == d2.getValue()) && (d1.getValue() == d3.getValue())) {
               Alerts.message("Congratulations",
                   player3.getText() + " has won, took all three equals dices!");
 
@@ -261,7 +261,7 @@ public class Dices extends JDialog implements ActionListener {
               winner = true;
 
             } else {
-              points3 += d1.getValor() + d2.getValor() + d3.getValor();
+              points3 += d1.getValue() + d2.getValue() + d3.getValue();
               lblPoints3.setText("<html><center><strong>Points</strong><br>" + points3
                   + "</center></html>");
             }

@@ -2,14 +2,14 @@ package com.bookverse.development.packapps.models;
 
 public class Dice {
 
-  private int valor;
+  private int value;
 
   public int throwDices() {
-    valor = (1 + (int) (Math.random() * 6));
-    return valor;
+    value = (1 + (int) (Math.random() * 6));
+    return value;
   }
 
-  public int getValor() {
-    return valor;
+  public int getValue() {
+    return value;
   }
 }
