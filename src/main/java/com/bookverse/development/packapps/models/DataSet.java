@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-public class DataConfig {
+public class DataSet {
 
   private static ResourceBundle configProperties;
 
@@ -20,7 +20,7 @@ public class DataConfig {
     }
   }
 
-  private DataConfig() {
+  private DataSet() {
   }
 
   public static String getTitleApp() {

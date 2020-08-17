@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.core;
 
-import com.bookverse.development.packapps.models.DataConfig;
+import com.bookverse.development.packapps.models.DataSet;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.WindowEffect;
 import java.awt.Color;
@@ -146,7 +146,7 @@ public class Settings {
 
       if (password.length() != 0) {
 
-        if (DataConfig.getPasswordDBA().equals(password)) {
+        if (DataSet.getPasswordDBA().equals(password)) {
           return true;
         } else {
           Alerts.message("Error", "Incorrect password");
@@ -209,7 +209,7 @@ public class Settings {
     if (!useDefaultKey) {
       return setSecretKey();
     } else {
-      return DataConfig.getDefaultEncryptKey();
+      return DataSet.getDefaultEncryptKey();
     }
   }
 

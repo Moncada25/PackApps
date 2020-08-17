@@ -8,7 +8,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.models.DataConfig;
+import com.bookverse.development.packapps.models.DataSet;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
@@ -141,7 +141,7 @@ public class SignUp extends JDialog implements ActionListener {
   private void btnSignUpAP() {
 
     if (String.valueOf(txtCodManager.getPassword())
-        .equals(DataConfig.getStoreManagerKey())) {
+        .equals(DataSet.getStoreManagerKey())) {
 
       txtUser.setEnabled(true);
       txtPassword.setEnabled(true);

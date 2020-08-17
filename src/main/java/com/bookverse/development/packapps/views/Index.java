@@ -18,7 +18,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
 import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.models.DataConfig;
+import com.bookverse.development.packapps.models.DataSet;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.ArrayData;
@@ -199,7 +199,7 @@ public class Index extends JFrame implements ActionListener {
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
-    window.setTitle(DataConfig.getTitleApp());
+    window.setTitle(DataSet.getTitleApp());
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
     window.classicMode.setForeground(MAIN_COLOR);
     Settings.fadeIn(window);
