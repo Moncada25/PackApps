@@ -15,7 +15,7 @@ public class TheUser implements Question<String> {
     return new TheUser();
   }
 
-  @Subject("Verify that user #user is registered")
+  @Subject("Verify that user is registered")
   @Override
   public String answeredBy(Actor actor) {
     actor.attemptsTo(WaitUntil.the(USER_LOGGED, isVisible()));
