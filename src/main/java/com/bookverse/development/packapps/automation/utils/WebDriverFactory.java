@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.automation.utils;
 
-import com.bookverse.development.packapps.utils.ReadConfiguration;
+import com.bookverse.development.packapps.models.DataSet;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -22,14 +22,12 @@ public class WebDriverFactory {
 
   private static WebDriver getDriver() {
 
-    String currentSystem = ReadConfiguration.getData(CURRENT_SYSTEM);
+    String currentSystem = DataSet.getCurrentSystem();
 
     String driver =
         (currentSystem.equals(MAC))
             ? CHROME_DRIVER.replace(SYSTEM, MAC)
             : CHROME_DRIVER.replace(SYSTEM, WINDOWS);
-
-    System.out.println("driver :: "+driver);
 
     ChromeDriverService chromeDriverService =
         new ChromeDriverService.Builder()

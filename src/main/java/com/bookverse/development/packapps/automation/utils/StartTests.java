@@ -31,8 +31,6 @@ public class StartTests {
           BOOKVERSE_PRODUCTION,
           ""));
 
-      System.out.println("Objetc::: "+Resources.getGeneralObject());
-
       JUnitCore.runClasses(RunRegisterUser.class);
     }
   }

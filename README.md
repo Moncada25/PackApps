@@ -67,6 +67,9 @@ Automation currently runs in the following browsers:
 + data
     Contains the sql and properties file.
 
++ drivers
+    Contains the drivers used in the project.
+
 + images
     Contains the images used in the application.
 ```
@@ -90,9 +93,9 @@ PackApps was developed with:
 ## Versioning 📌 
 Git was used for version control, applying GitFlow 🔀
 
-## Authors ✒
+## Author ✒
 
-* **Santiago Moncada** - [zanti4020@gmail.com]()
+* **Santiago Moncada** - [santiago.moncada.dev@gmail.com]()
 
 ## Collaborators 🙂
 

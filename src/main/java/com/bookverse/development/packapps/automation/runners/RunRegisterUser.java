@@ -31,11 +31,9 @@ public class RunRegisterUser {
 
   @Before
   public void config() {
-    System.out.println("Pasa 1");
     setTheStage(Cast.whereEveryoneCan(
         BrowseTheWeb.with(WebDriverFactory.goToWeb(bookverse.getUrl()))));
     theActorCalled(Constants.ACTOR);
-    System.out.println("Crea actor");
   }
 
   @Test
@@ -52,7 +50,6 @@ public class RunRegisterUser {
       Alerts.message("Test passed!", "User " + theActorInTheSpotlight().recall("USER_REGISTERED")
           + " is registered!");
     }
-
   }
 
   @After
