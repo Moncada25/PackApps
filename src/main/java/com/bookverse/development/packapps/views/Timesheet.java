@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.Paths.ULTIMATIX;
+import static com.bookverse.development.packapps.automation.utils.Constants.ULTIMATIX;
 import static com.bookverse.development.packapps.core.Settings.BIG;
 import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
@@ -153,7 +153,7 @@ public class Timesheet extends JDialog implements ActionListener {
         && txtHours.getText().length() > 0) {
       Resources.setGeneralObject(new Ultimatix(txtUser.getText(),
           String.valueOf(txtPassword.getPassword()),
-          ULTIMATIX.getProperty(),
+          ULTIMATIX,
           txtHours.getText()));
       JUnitCore.runClasses(RunTimesheetEntry.class);
     } else {

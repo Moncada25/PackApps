@@ -11,7 +11,8 @@ import com.bookverse.development.packapps.automation.models.Ultimatix;
 import com.bookverse.development.packapps.automation.questions.TheStatus;
 import com.bookverse.development.packapps.automation.tasks.LoginUltimatix;
 import com.bookverse.development.packapps.automation.tasks.RegisterHours;
-import com.bookverse.development.packapps.automation.utils.DriverChrome;
+import com.bookverse.development.packapps.automation.utils.Constants;
+import com.bookverse.development.packapps.automation.utils.WebDriverFactory;
 import com.bookverse.development.packapps.core.Resources;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
@@ -21,7 +22,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@SuppressWarnings("unchecked")
 @RunWith(SerenityRunner.class)
 public class RunTimesheetEntry {
 
@@ -30,8 +30,8 @@ public class RunTimesheetEntry {
   @Before
   public void config() {
     setTheStage(Cast.whereEveryoneCan(
-        BrowseTheWeb.with(DriverChrome.web().inTheWebPage(ultimatix.getUrl()))));
-    theActorCalled("PackAppsUser");
+        BrowseTheWeb.with(WebDriverFactory.goToWeb(ultimatix.getUrl()))));
+    theActorCalled(Constants.ACTOR);
   }
 
   @Test

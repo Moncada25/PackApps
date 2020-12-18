@@ -1,4 +1,4 @@
-package com.sophossolutions.certification.practice.utils;
+package com.bookverse.development.packapps.utils;
 
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.util.EnvironmentVariables;

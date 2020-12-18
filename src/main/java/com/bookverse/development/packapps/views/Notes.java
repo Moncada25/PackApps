@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 @SuppressWarnings("unchecked")
 public class Notes extends JDialog implements ActionListener {
 
-  private int numberOfNotes = 10;
+  private final int numberOfNotes = 10;
   private int maxNote, minNote;
   private JLabel image;
   private JTextField txtName;
@@ -133,7 +133,7 @@ public class Notes extends JDialog implements ActionListener {
     for (int i = 0; i < percentagesBoxes.length; i++) {
       percentagesBoxes[i] = new JComboBox<>();
       percentagesBoxes[i].setBounds(x, y, 58, 25);
-      for (int j = 1; j <= 100; j++) {
+      for (int j = 1; j < 100; j++) {
         percentagesBoxes[i].addItem(String.valueOf(j));
       }
       add(percentagesBoxes[i]);

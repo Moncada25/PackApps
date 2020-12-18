@@ -11,8 +11,9 @@ import com.bookverse.development.packapps.automation.models.Bookverse;
 import com.bookverse.development.packapps.automation.questions.TheUser;
 import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
 import com.bookverse.development.packapps.automation.tasks.RegisterUser;
-import com.bookverse.development.packapps.automation.utils.DriverChrome;
+import com.bookverse.development.packapps.automation.utils.Constants;
 import com.bookverse.development.packapps.automation.utils.ExceptionsMessages;
+import com.bookverse.development.packapps.automation.utils.WebDriverFactory;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -23,7 +24,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@SuppressWarnings("unchecked")
 @RunWith(SerenityRunner.class)
 public class RunRegisterUser {
 
@@ -31,9 +31,11 @@ public class RunRegisterUser {
 
   @Before
   public void config() {
+    System.out.println("Pasa 1");
     setTheStage(Cast.whereEveryoneCan(
-        BrowseTheWeb.with(DriverChrome.web().inTheWebPage(bookverse.getUrl()))));
-    theActorCalled("PackAppsUser");
+        BrowseTheWeb.with(WebDriverFactory.goToWeb(bookverse.getUrl()))));
+    theActorCalled(Constants.ACTOR);
+    System.out.println("Crea actor");
   }
 
   @Test
