@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.SwingConstants;
 import org.jetbrains.annotations.NotNull;
 
 public class Resources {
@@ -51,7 +52,7 @@ public class Resources {
   }
 
   public JLabel getLabel(String text, Color color, @NotNull Container container, Font font) {
-    JLabel label = new JLabel(text);
+    JLabel label = new JLabel(text, SwingConstants.CENTER);
     label.setForeground(color);
     label.setFont(font);
     container.add(label);

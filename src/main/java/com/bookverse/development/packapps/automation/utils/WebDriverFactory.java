@@ -1,15 +1,17 @@
 package com.bookverse.development.packapps.automation.utils;
 
+import static com.bookverse.development.packapps.automation.utils.Constants.CHROME_DRIVER;
+import static com.bookverse.development.packapps.automation.utils.Constants.MAC;
+import static com.bookverse.development.packapps.automation.utils.Constants.SYSTEM;
+import static com.bookverse.development.packapps.automation.utils.Constants.WINDOWS;
+
 import com.bookverse.development.packapps.models.DataSet;
+import java.io.File;
+import java.io.IOException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
-
-import java.io.File;
-import java.io.IOException;
-
-import static com.bookverse.development.packapps.automation.utils.Constants.*;
 
 public class WebDriverFactory {
 
@@ -24,10 +26,9 @@ public class WebDriverFactory {
 
     String currentSystem = DataSet.getCurrentSystem();
 
-    String driver =
-        (currentSystem.equals(MAC))
-            ? CHROME_DRIVER.replace(SYSTEM, MAC)
-            : CHROME_DRIVER.replace(SYSTEM, WINDOWS);
+    String driver = (currentSystem.equals(MAC))
+        ? CHROME_DRIVER.replace(SYSTEM, MAC)
+        : CHROME_DRIVER.replace(SYSTEM, WINDOWS);
 
     ChromeDriverService chromeDriverService =
         new ChromeDriverService.Builder()
@@ -42,6 +43,7 @@ public class WebDriverFactory {
     }
 
     ChromeOptions chromeOptions = new ChromeOptions();
+
     chromeOptions.addArguments(
         "--incognito",
         "--start-maximized",

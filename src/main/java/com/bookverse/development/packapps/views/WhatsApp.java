@@ -64,7 +64,7 @@ public class WhatsApp extends JDialog implements ActionListener {
 
     JLabel lblPhone = resources
         .getLabel("<html><strong>Phone</strong></html>", TEXT_COLOR, this, MEDIUM);
-    lblPhone.setBounds(204, 14, 52, 30);
+    lblPhone.setBounds(204, 12, 60, 30);
 
     txtNumber = new JTextField();
     txtNumber.setBounds(155, 45, 150, 30);
@@ -90,7 +90,7 @@ public class WhatsApp extends JDialog implements ActionListener {
 
     JLabel lblMessage = resources
         .getLabel("<html><strong>Message</strong></html>", TEXT_COLOR, this, MEDIUM);
-    lblMessage.setBounds(195, 83, 70, 30);
+    lblMessage.setBounds(195, 80, 85, 30);
 
     message = new JTextArea();
     JScrollPane scroll = new JScrollPane(message);
