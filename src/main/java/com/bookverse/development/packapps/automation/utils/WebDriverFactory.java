@@ -18,6 +18,7 @@ public class WebDriverFactory {
   public static WebDriver goToWeb(String url) {
     WebDriver driver = getDriver();
     driver.get(url);
+    driver.manage().window().maximize();
 
     return driver;
   }
@@ -46,7 +47,6 @@ public class WebDriverFactory {
 
     chromeOptions.addArguments(
         "--incognito",
-        "--start-maximized",
         "--disable-infobars",
         "enable-automation",
         "--disable-browser-side-navigation");

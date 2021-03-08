@@ -36,9 +36,9 @@ public class Settings {
   public static final Cursor RESIZE = new Cursor(Cursor.NE_RESIZE_CURSOR);
   public static final Cursor TEXT = new Cursor(Cursor.TEXT_CURSOR);
   public static final Cursor HAND = new Cursor(Cursor.HAND_CURSOR);
-  public static final Font SMALL = new Font("Cambria", Font.ITALIC, 15);
-  public static final Font MEDIUM = new Font("Cambria", Font.ITALIC, 18);
-  public static final Font BIG = new Font("Cambria", Font.ITALIC, 28);
+  public static final Font SMALL = new Font("Cambria", Font.PLAIN, 15);
+  public static final Font MEDIUM = new Font("Cambria", Font.PLAIN, 18);
+  public static final Font BIG = new Font("Cambria", Font.PLAIN, 28);
 
   @NotNull
   public static String getDate() {

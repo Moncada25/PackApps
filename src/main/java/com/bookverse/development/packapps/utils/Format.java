@@ -35,6 +35,17 @@ public class Format {
     }
   }
 
+  public static void anyone(char txt, KeyEvent evt, String data, int length) {
+
+    if (data.length() > length - 1) {
+
+      if (data.length() > length - 1 && txt != KeyEvent.VK_ENTER) {
+        Alerts.inputLarge();
+      }
+      evt.consume();
+    }
+  }
+
   public static void onlyNumbers(char num, KeyEvent evt, String data, int length) {
     boolean match =
         (num < '0' || num > '9') && num != KeyEvent.VK_ESCAPE && num != KeyEvent.VK_ENTER

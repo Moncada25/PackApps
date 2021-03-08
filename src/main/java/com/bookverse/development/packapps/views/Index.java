@@ -126,7 +126,6 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem searchBook;
   protected JMenuItem registerUser;
   protected JMenuItem sendWhatsApp;
-  protected JMenuItem question;
   private boolean isWork = true;
 
   public Index() {
@@ -298,7 +297,6 @@ public class Index extends JFrame implements ActionListener {
     numbers = resources.getMenuItem("Numbers", "numeritos", this);
     notes = resources.getMenuItem(NOTES, "notas", this);
     texts = resources.getMenuItem("Texts", "textos", this);
-    question = resources.getMenuItem("Question", "question", this);
 
     JMenu export = resources.getMenu("Export Data", "export");
 
@@ -405,7 +403,7 @@ public class Index extends JFrame implements ActionListener {
     export.add(exportEXCEL);
 
     JMenu tasks = resources.getMenu("Tasks", "task");
-    timesheet = resources.getMenuItem("Timesheet Entry (beta)", "timesheet", this);
+    timesheet = resources.getMenuItem("Timesheet (beta)", "timesheet", this);
     searchBook = resources.getMenuItem("Search Book", "searchBook", this);
     registerUser = resources.getMenuItem("Register User", "añadir_usuario", this);
 
@@ -463,7 +461,6 @@ public class Index extends JFrame implements ActionListener {
     tools.addSeparator();
     tools.add(OCR);
     tools.addSeparator();
-    tools.add(question);
     tools.addSeparator();
     tools.add(store);
     tools.addSeparator();
@@ -917,9 +914,6 @@ public class Index extends JFrame implements ActionListener {
       StartTests.startRegisterUser();
     } else if (e.getSource() == OCR) {
       new OCR(this, true).start(this);
-      setVisible(true);
-    } else if (e.getSource() == question) {
-      new Question(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == grayMode) {
 
