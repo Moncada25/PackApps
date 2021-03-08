@@ -403,7 +403,7 @@ public class Index extends JFrame implements ActionListener {
     export.add(exportEXCEL);
 
     JMenu tasks = resources.getMenu("Tasks", "task");
-    timesheet = resources.getMenuItem("Timesheet (beta)", "timesheet", this);
+    timesheet = resources.getMenuItem("Timesheet", "timesheet", this);
     searchBook = resources.getMenuItem("Search Book", "searchBook", this);
     registerUser = resources.getMenuItem("Register User", "añadir_usuario", this);
 
