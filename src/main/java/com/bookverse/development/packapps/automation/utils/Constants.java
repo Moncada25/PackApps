@@ -16,5 +16,5 @@ public class Constants {
   public static final String DEFAULT_AREA = "PROYECTOS";
   public static final String DEFAULT_CLIENT = "BANCOLOMBIA S.A.";
   public static final String DEFAULT_PROJETC = "SBBC0230 - Facturación Pruebas Funcionales";
-
+  public static final String OS = "os.name";
 }

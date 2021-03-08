@@ -42,8 +42,4 @@ public class DataSet {
   public static String getDeveloperEmail() {
     return configProperties.getString(AppConfig.DEVELOPER_EMAIL.getProperty());
   }
-
-  public static String getCurrentSystem() {
-    return configProperties.getString(AppConfig.CURRENT_SYSTEM.getProperty());
-  }
 }

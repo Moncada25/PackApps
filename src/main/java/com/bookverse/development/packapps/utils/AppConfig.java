@@ -7,7 +7,6 @@ public enum AppConfig {
   STORE_MANAGER_KEY("storeManagerKey"),
   DEVELOPER_EMAIL("developerEmail"),
   DEFAULT_ENCRYPT_KEY("defaultEncryptKey"),
-  CURRENT_SYSTEM("currentSystem"),
   FILE_PROPERTIES("src/main/resources/data/config.properties");
 
   private String property;

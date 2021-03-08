@@ -2,6 +2,7 @@ package com.bookverse.development.packapps.automation.utils;
 
 import static com.bookverse.development.packapps.automation.utils.Constants.CHROME_DRIVER;
 import static com.bookverse.development.packapps.automation.utils.Constants.MAC;
+import static com.bookverse.development.packapps.automation.utils.Constants.OS;
 import static com.bookverse.development.packapps.automation.utils.Constants.SYSTEM;
 import static com.bookverse.development.packapps.automation.utils.Constants.WINDOWS;
 
@@ -25,11 +26,13 @@ public class WebDriverFactory {
 
   private static WebDriver getDriver() {
 
-    String currentSystem = DataSet.getCurrentSystem();
+    String currentSystem = (System.getProperty(OS).contains(MAC))
+        ? System.getProperty(OS).replace(" OS X", "")
+        : System.getProperty(OS).replace(" 10", "");
 
     String driver = (currentSystem.equals(MAC))
         ? CHROME_DRIVER.replace(SYSTEM, MAC)
-        : CHROME_DRIVER.replace(SYSTEM, WINDOWS);
+        : CHROME_DRIVER.replace(SYSTEM, WINDOWS).concat(".exe");
 
     ChromeDriverService chromeDriverService =
         new ChromeDriverService.Builder()
