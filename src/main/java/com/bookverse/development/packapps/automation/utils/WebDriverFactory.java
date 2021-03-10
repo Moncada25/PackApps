@@ -6,7 +6,6 @@ import static com.bookverse.development.packapps.automation.utils.Constants.OS;
 import static com.bookverse.development.packapps.automation.utils.Constants.SYSTEM;
 import static com.bookverse.development.packapps.automation.utils.Constants.WINDOWS;
 
-import com.bookverse.development.packapps.models.DataSet;
 import java.io.File;
 import java.io.IOException;
 import org.openqa.selenium.WebDriver;
