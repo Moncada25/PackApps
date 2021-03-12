@@ -35,7 +35,7 @@ public class LoginChronus implements Task {
         Enter.theValue(chronus.getUser()).into(USER),
         Enter.theValue(chronus.getPass()).into(PASS),
         Click.on(LOGIN_BUTTON),
-        WaitUntil.the(STATUS_WEEK, isVisible())
+        WaitUntil.the(STATUS_WEEK, isVisible()).forNoMoreThan(5).seconds()
     );
   }
 }

@@ -40,12 +40,16 @@ public class RunTimesheetEntry {
     theActorInTheSpotlight().wasAbleTo(LoginChronus.withCredentials(chronus));
     theActorInTheSpotlight().attemptsTo(RegisterHours.inTimesheet(chronus));
     theActorInTheSpotlight().should(seeThat(LogoutChronus.successful()).orComplainWith(TimesheetNotRegistered.class, TIMESHEET_ENTRY_ERROR.getProperty()));
-
-    Alerts.message("Test passed!", "Timesheet filled.");
   }
 
   @After
   public void close() {
     BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
+
+    if (Resources.getGeneralObject() != null){
+      Alerts.message("Test failed!", "Something went wrong!");
+    }else{
+      Alerts.message("Test passed!", "Timesheet filled successfully.");
+    }
   }
 }

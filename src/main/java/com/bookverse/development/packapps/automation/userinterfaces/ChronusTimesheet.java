@@ -22,6 +22,12 @@ public class ChronusTimesheet {
       .locatedBy("//h4[contains(., '{0}')]/following::input[contains(@id, 'btInsert')][1]");
   public static final Target LOGOUT = Target.the("Logout button")
       .locatedBy("//a[contains(@id, 'LoginStatus1')]");
+  public static final Target CLOSE_WEEK = Target.the("Close week button")
+      .locatedBy("//input[contains(@id, 'btnClosedWeek')]");
+  public static final Target YES_CONTINUE = Target.the("Yes continue button")
+      .locatedBy("//input[contains(@id, 'btnAddressSi')]");
+  public static final Target ACCEPT_WEEK_CLOSED = Target.the("Accept week closed button")
+      .locatedBy("//input[contains(@id, 'btnAceptar')]");
 
   private ChronusTimesheet() {
   }

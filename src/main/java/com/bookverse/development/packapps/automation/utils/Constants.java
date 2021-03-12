@@ -12,6 +12,7 @@ public class Constants {
   public static final String SYSTEM = "{{SYSTEM}}";
   public static final String APPROVED = "APROBADO";
   public static final String OPEN = "ABIERTO";
+  public static final String FRIDAY = "Friday";
   public static final String CLIENT_HOURS = "Horas Cargables al Cliente";
   public static final String DEFAULT_AREA = "PROYECTOS";
   public static final String DEFAULT_CLIENT = "BANCOLOMBIA S.A.";

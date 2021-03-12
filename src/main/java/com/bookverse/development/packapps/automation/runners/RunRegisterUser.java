@@ -43,6 +43,11 @@ public class RunRegisterUser {
     theActorInTheSpotlight().should(seeThat(TheUser.logged(), is(theActorInTheSpotlight().recall("USER_REGISTERED").toString()))
             .orComplainWith(UserNotRegistered.class,
                 ExceptionsMessages.REGISTER_USER_ERROR.getProperty()));
+  }
+
+  @After
+  public void close() {
+    BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
 
     if (theActorInTheSpotlight().recall("USER_REGISTERED") == null) {
       Alerts.message("Test failed!", "User no registered");
@@ -50,10 +55,5 @@ public class RunRegisterUser {
       Alerts.message("Test passed!", "User " + theActorInTheSpotlight().recall("USER_REGISTERED")
           + " is registered!");
     }
-  }
-
-  @After
-  public void close() {
-    BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
   }
 }

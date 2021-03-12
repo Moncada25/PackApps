@@ -1,20 +1,25 @@
 package com.bookverse.development.packapps.automation.tasks;
 
 import static com.bookverse.development.packapps.automation.userinterfaces.ChronusLogin.STATUS_WEEK;
+import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.ACCEPT_WEEK_CLOSED;
 import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.AREA_NAME;
 import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.CATEGORY_NAME;
 import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.CLIENT_NAME;
+import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.CLOSE_WEEK;
 import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.DAY;
 import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.DESCRIPTION;
 import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.NEXT_WEEK;
 import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.PROJECT_NAME;
 import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.REGISTER;
+import static com.bookverse.development.packapps.automation.userinterfaces.ChronusTimesheet.YES_CONTINUE;
 import static com.bookverse.development.packapps.automation.utils.Constants.CLIENT_HOURS;
 import static com.bookverse.development.packapps.automation.utils.Constants.DEFAULT_AREA;
 import static com.bookverse.development.packapps.automation.utils.Constants.DEFAULT_CLIENT;
 import static com.bookverse.development.packapps.automation.utils.Constants.DEFAULT_PROJETC;
+import static com.bookverse.development.packapps.automation.utils.Constants.FRIDAY;
 import static com.bookverse.development.packapps.automation.utils.Constants.OPEN;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnabled;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import com.bookverse.development.packapps.automation.interactions.WaitTime;
 import com.bookverse.development.packapps.automation.models.Chronus;
@@ -26,6 +31,7 @@ import java.util.Locale;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
@@ -63,12 +69,31 @@ public class RegisterHours implements Task {
         WaitTime.inSeconds(1),
         SelectFromOptions.byVisibleText(DEFAULT_PROJETC).from(PROJECT_NAME.of(CLIENT_HOURS)),
         WaitTime.inSeconds(1),
-        SelectFromOptions.byVisibleText(chronus.getCategory().toUpperCase()).from(CATEGORY_NAME.of(CLIENT_HOURS)),
+        SelectFromOptions.byVisibleText(chronus.getCategory().toUpperCase())
+            .from(CATEGORY_NAME.of(CLIENT_HOURS)),
         WaitTime.inSeconds(1),
         Enter.theValue(chronus.getDescription()).into(DESCRIPTION.of(CLIENT_HOURS)),
         Enter.theValue(chronus.getHours()).into(DAY.of(CLIENT_HOURS, day)),
         Click.on(REGISTER.of(CLIENT_HOURS))
     );
+
+    if (day.equals(FRIDAY)) {
+
+      actor.attemptsTo(
+          WaitTime.inSeconds(1),
+          Click.on(CLOSE_WEEK)
+      );
+
+      BrowseTheWeb.as(actor).getDriver().switchTo().alert().accept();
+
+      actor.attemptsTo(
+          WaitUntil.the(YES_CONTINUE, isVisible()).forNoMoreThan(5).seconds(),
+          Click.on(YES_CONTINUE),
+          WaitUntil.the(ACCEPT_WEEK_CLOSED, isVisible()).forNoMoreThan(5).seconds(),
+          Click.on(ACCEPT_WEEK_CLOSED),
+          WaitTime.inSeconds(1)
+      );
+    }
 
     Resources.setGeneralObject(null);
   }
