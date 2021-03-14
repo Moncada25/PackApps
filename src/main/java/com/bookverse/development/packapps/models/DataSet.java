@@ -42,4 +42,8 @@ public class DataSet {
   public static String getDeveloperEmail() {
     return configProperties.getString(AppConfig.DEVELOPER_EMAIL.getProperty());
   }
+
+  public static String getDefaultBrowser() {
+    return configProperties.getString(AppConfig.DEFAULT_BROWSER.getProperty());
+  }
 }
