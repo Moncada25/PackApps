@@ -14,7 +14,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.Querys;
+import com.bookverse.development.packapps.utils.Queries;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,7 +46,7 @@ public class Database {
 
       switch (data[0]) {
         case GUESS_NUMBER:
-          preparedStatement = connection.prepareStatement(Querys.insertGuessNumber());
+          preparedStatement = connection.prepareStatement(Queries.insertGuessNumber());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setInt(2, Integer.parseInt(data[2]));
           preparedStatement.setString(3, data[3]);
@@ -54,7 +54,7 @@ public class Database {
           preparedStatement.execute();
           break;
         case HANGMAN:
-          preparedStatement = connection.prepareStatement(Querys.insertHangman());
+          preparedStatement = connection.prepareStatement(Queries.insertHangman());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setInt(2, Integer.parseInt(data[2]));
           preparedStatement.setString(3, data[3]);
@@ -63,7 +63,7 @@ public class Database {
           preparedStatement.execute();
           break;
         case DICES:
-          preparedStatement = connection.prepareStatement(Querys.insertDices());
+          preparedStatement = connection.prepareStatement(Queries.insertDices());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setString(2, data[2]);
           preparedStatement.setInt(3, Integer.parseInt(data[3]));
@@ -71,7 +71,7 @@ public class Database {
           preparedStatement.execute();
           break;
         case PUZZLE:
-          preparedStatement = connection.prepareStatement(Querys.insertPuzzle());
+          preparedStatement = connection.prepareStatement(Queries.insertPuzzle());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setString(2, data[2]);
           preparedStatement.setString(3, data[3]);
@@ -80,7 +80,7 @@ public class Database {
           preparedStatement.execute();
           break;
         case NOTES:
-          preparedStatement = connection.prepareStatement(Querys.insertNote());
+          preparedStatement = connection.prepareStatement(Queries.insertNote());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setString(2, data[2]);
           preparedStatement.setInt(3, Integer.parseInt(data[3]));
@@ -90,14 +90,14 @@ public class Database {
           preparedStatement.execute();
           break;
         case FEEDBACK:
-          preparedStatement = connection.prepareStatement(Querys.insertFeedback());
+          preparedStatement = connection.prepareStatement(Queries.insertFeedback());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setString(2, data[2]);
           preparedStatement.setString(3, data[3]);
           preparedStatement.execute();
           break;
         case INVENTORY:
-          preparedStatement = connection.prepareStatement(Querys.insertInventory());
+          preparedStatement = connection.prepareStatement(Queries.insertInventory());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setString(2, data[2]);
           preparedStatement.setDouble(3, Double.parseDouble(data[3]));
@@ -105,7 +105,7 @@ public class Database {
           preparedStatement.execute();
           break;
         case CASH_REGISTER:
-          preparedStatement = connection.prepareStatement(Querys.insertRecord());
+          preparedStatement = connection.prepareStatement(Queries.insertRecord());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setInt(2, Integer.parseInt(data[2]));
           preparedStatement.setDouble(3, Double.parseDouble(data[3]));
@@ -115,7 +115,7 @@ public class Database {
           preparedStatement.execute();
           break;
         case LOANS:
-          preparedStatement = connection.prepareStatement(Querys.insertLoan());
+          preparedStatement = connection.prepareStatement(Queries.insertLoan());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setString(2, data[2]);
           preparedStatement.setString(3, data[3]);
@@ -126,14 +126,14 @@ public class Database {
           preparedStatement.execute();
           break;
         case USERS:
-          preparedStatement = connection.prepareStatement(Querys.insertUser());
+          preparedStatement = connection.prepareStatement(Queries.insertUser());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setString(2, data[2]);
           preparedStatement.setString(3, data[3]);
           preparedStatement.execute();
           break;
         case PURCHASES:
-          preparedStatement = connection.prepareStatement(Querys.insertPurchase());
+          preparedStatement = connection.prepareStatement(Queries.insertPurchase());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setString(2, data[2]);
           preparedStatement.setString(3, data[3]);
@@ -144,7 +144,7 @@ public class Database {
           preparedStatement.execute();
           break;
         case SALES:
-          preparedStatement = connection.prepareStatement(Querys.insertSale());
+          preparedStatement = connection.prepareStatement(Queries.insertSale());
           preparedStatement.setString(1, data[1]);
           preparedStatement.setString(2, data[2]);
           preparedStatement.setString(3, data[3]);
@@ -223,7 +223,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.updateNickname(nickname, id, table));
+      preparedStatement = connection.prepareStatement(Queries.updateNickname(nickname, id, table));
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
       Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
@@ -246,7 +246,7 @@ public class Database {
       connection = dataSource.getConnection();
 
       for (String row : rows) {
-        preparedStatement = connection.prepareStatement(Querys.deleteDataByID(row, table));
+        preparedStatement = connection.prepareStatement(Queries.deleteDataByID(row, table));
         preparedStatement.executeUpdate();
       }
 
@@ -278,7 +278,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.updateInventory(reference, trueUnits));
+      preparedStatement = connection.prepareStatement(Queries.updateInventory(reference, trueUnits));
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
       Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
@@ -300,7 +300,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.getDataProduct(reference, table));
+      preparedStatement = connection.prepareStatement(Queries.getDataProduct(reference, table));
       resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {
@@ -332,7 +332,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys
+      preparedStatement = connection.prepareStatement(Queries
           .updateCashRegisterSales(user, (productsSold + store.getSoldProducts()),
               (totalSales + store.getTotalSales())));
       preparedStatement.executeUpdate();
@@ -357,7 +357,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys
+      preparedStatement = connection.prepareStatement(Queries
           .updateCashRegisterPurchases(user, (purchasedProducts + store.getPurchasedProducts()),
               (totalPurchases + store.getTotalPurchases())));
       preparedStatement.executeUpdate();
@@ -383,7 +383,7 @@ public class Database {
       connection = dataSource.getConnection();
 
       preparedStatement = connection.prepareStatement(
-          Querys.updateCashRegisterLoan(user, (loanValue + store.getTotalLoans())));
+          Queries.updateCashRegisterLoan(user, (loanValue + store.getTotalLoans())));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -406,7 +406,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.recordLogin(status, user));
+      preparedStatement = connection.prepareStatement(Queries.recordLogin(status, user));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -429,7 +429,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.searchDataUserInCashRegister(user));
+      preparedStatement = connection.prepareStatement(Queries.searchDataUserInCashRegister(user));
       resultSet = preparedStatement.executeQuery();
 
       if (resultSet.next()) {
@@ -463,7 +463,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.searchUser(user));
+      preparedStatement = connection.prepareStatement(Queries.searchUser(user));
       resultSet = preparedStatement.executeQuery();
 
       return resultSet.next();
@@ -490,7 +490,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.searchUserRegister(user, password));
+      preparedStatement = connection.prepareStatement(Queries.searchUserRegister(user, password));
       resultSet = preparedStatement.executeQuery();
 
       return resultSet.next();
@@ -517,7 +517,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.updatePassword(user, newPassword));
+      preparedStatement = connection.prepareStatement(Queries.updatePassword(user, newPassword));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -540,7 +540,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.updateUsername(user, newUsername));
+      preparedStatement = connection.prepareStatement(Queries.updateUsername(user, newUsername));
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -565,7 +565,7 @@ public class Database {
       dataSource = dataSourceService.getDataSource();
       connection = dataSource.getConnection();
 
-      preparedStatement = connection.prepareStatement(Querys.getTitleBooks());
+      preparedStatement = connection.prepareStatement(Queries.getTitleBooks());
       resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {

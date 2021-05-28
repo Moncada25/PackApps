@@ -17,7 +17,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class Querys {
+public class Queries {
 
   @NotNull
   public static String getDataByID(String table) {

@@ -15,7 +15,7 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Chron
 import static com.bookverse.development.packapps.automation.utils.Constants.CLIENT_HOURS;
 import static com.bookverse.development.packapps.automation.utils.Constants.DEFAULT_AREA;
 import static com.bookverse.development.packapps.automation.utils.Constants.DEFAULT_CLIENT;
-import static com.bookverse.development.packapps.automation.utils.Constants.DEFAULT_PROJETC;
+import static com.bookverse.development.packapps.automation.utils.Constants.DEFAULT_PROJECT;
 import static com.bookverse.development.packapps.automation.utils.Constants.FRIDAY;
 import static com.bookverse.development.packapps.automation.utils.Constants.OPEN;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnabled;
@@ -67,13 +67,14 @@ public class RegisterHours implements Task {
         WaitTime.inSeconds(1),
         SelectFromOptions.byVisibleText(DEFAULT_CLIENT).from(CLIENT_NAME.of(CLIENT_HOURS)),
         WaitTime.inSeconds(1),
-        SelectFromOptions.byVisibleText(DEFAULT_PROJETC).from(PROJECT_NAME.of(CLIENT_HOURS)),
+        SelectFromOptions.byVisibleText(DEFAULT_PROJECT).from(PROJECT_NAME.of(CLIENT_HOURS)),
         WaitTime.inSeconds(1),
         SelectFromOptions.byVisibleText(chronus.getCategory().toUpperCase())
             .from(CATEGORY_NAME.of(CLIENT_HOURS)),
         WaitTime.inSeconds(1),
         Enter.theValue(chronus.getDescription()).into(DESCRIPTION.of(CLIENT_HOURS)),
         Enter.theValue(chronus.getHours()).into(DAY.of(CLIENT_HOURS, day)),
+        WaitTime.inSeconds(1),
         Click.on(REGISTER.of(CLIENT_HOURS))
     );
 
@@ -81,13 +82,14 @@ public class RegisterHours implements Task {
 
       actor.attemptsTo(
           WaitTime.inSeconds(1),
-          Click.on(CLOSE_WEEK)
+          Click.on(CLOSE_WEEK),
+          WaitTime.inSeconds(1)
       );
 
       BrowseTheWeb.as(actor).getDriver().switchTo().alert().accept();
 
       actor.attemptsTo(
-          WaitUntil.the(YES_CONTINUE, isVisible()).forNoMoreThan(5).seconds(),
+          WaitTime.inSeconds(1),
           Click.on(YES_CONTINUE),
           WaitUntil.the(ACCEPT_WEEK_CLOSED, isVisible()).forNoMoreThan(5).seconds(),
           Click.on(ACCEPT_WEEK_CLOSED),

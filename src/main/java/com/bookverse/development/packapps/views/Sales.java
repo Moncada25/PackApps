@@ -16,7 +16,7 @@ import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.Querys;
+import com.bookverse.development.packapps.utils.Queries;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -341,7 +341,7 @@ public class Sales extends JDialog implements ActionListener {
     inventoryTable.cleanTable();
 
     try {
-      Database.readTable(inventoryTable.viewTable, Querys.getAllData(INVENTORY), true);
+      Database.readTable(inventoryTable.viewTable, Queries.getAllData(INVENTORY), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }

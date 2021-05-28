@@ -21,7 +21,7 @@ import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Table;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.Querys;
+import com.bookverse.development.packapps.utils.Queries;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -184,10 +184,10 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
         try {
 
           if (option.toString().equals("ID")) {
-            searchResult(90, Querys.getDataByID(Format.tableName(NOTES)));
+            searchResult(90, Queries.getDataByID(Format.tableName(NOTES)));
             setVisible(true);
           } else if (option.toString().equals("Nickname")) {
-            searchResult(250, Querys.getDataByNickname(Format.tableName(NOTES)));
+            searchResult(250, Queries.getDataByNickname(Format.tableName(NOTES)));
             setVisible(true);
           }
 

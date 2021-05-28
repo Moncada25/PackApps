@@ -11,7 +11,7 @@ import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.Querys;
+import com.bookverse.development.packapps.utils.Queries;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -111,7 +111,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Querys.getAllData(CASH_REGISTER), true);
+      Database.readTable(table.viewTable, Queries.getAllData(CASH_REGISTER), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -133,7 +133,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Querys.getAllData(INVENTORY), true);
+      Database.readTable(table.viewTable, Queries.getAllData(INVENTORY), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -155,7 +155,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Querys.getAllData(LOANS), true);
+      Database.readTable(table.viewTable, Queries.getAllData(LOANS), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -177,7 +177,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Querys.getAllData(PURCHASES), true);
+      Database.readTable(table.viewTable, Queries.getAllData(PURCHASES), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -199,7 +199,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Querys.getAllData(SALES), true);
+      Database.readTable(table.viewTable, Queries.getAllData(SALES), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -221,7 +221,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Querys.getAllData(USERS), true);
+      Database.readTable(table.viewTable, Queries.getAllData(USERS), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
