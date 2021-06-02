@@ -99,10 +99,6 @@ public class OCR extends JDialog implements MouseListener {
 
   private String readText(String image) {
 
-    System.out.println("dxdx");
-    System.out.println(new File(image));
-
-    File fileImage = new File(image);
     Tesseract tesseract = new Tesseract();
     tesseract.setDatapath("src/main/resources/tessdata");
     tesseract.setLanguage("eng");
@@ -110,7 +106,7 @@ public class OCR extends JDialog implements MouseListener {
     tesseract.setOcrEngineMode(1);
 
     try {
-      return tesseract.doOCR(fileImage);
+      return tesseract.doOCR(new File(image));
     } catch (TesseractException e) {
       return "Error";
     }

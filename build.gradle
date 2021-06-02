@@ -53,6 +53,7 @@ dependencies {
     testImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
     testImplementation "net.serenity-bdd:serenity-junit:${serenityCoreVersion}"
     testImplementation "junit:junit:4.13"
+
     implementation "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}"
     implementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}"
     implementation "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}"
@@ -65,7 +66,7 @@ dependencies {
     implementation "com.jtattoo:JTattoo:1.6.12"
     implementation "mysql:mysql-connector-java:8.0.16"
     implementation "org.apache.poi:poi:3.17"
-    implementation "net.sourceforge.tess4j:tess4j:3.2.1"
+    implementation "net.sourceforge.tess4j:tess4j:4.5.4"
 
 }
 
