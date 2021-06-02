@@ -36,6 +36,7 @@ import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.conditions.Check;
+import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Step;
 
@@ -93,7 +94,8 @@ public class RegisterHours implements Task {
           Click.on(YES_CONTINUE),
           WaitUntil.the(ACCEPT_WEEK_CLOSED, isVisible()).forNoMoreThan(5).seconds(),
           Click.on(ACCEPT_WEEK_CLOSED),
-          WaitTime.inSeconds(1)
+          WaitTime.inSeconds(1),
+          Ensure.that(STATUS_WEEK.resolveFor(actor).getText()).contains(OPEN)
       );
     }
 

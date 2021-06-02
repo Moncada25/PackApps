@@ -13,7 +13,7 @@ public class WaitTime implements Interaction {
         this.time = time;
     }
 
-    @Step("Waiting...")
+    @Step("Waiting... #time seconds")
     @Override
     public <T extends Actor> void performAs(T actor) {
 
