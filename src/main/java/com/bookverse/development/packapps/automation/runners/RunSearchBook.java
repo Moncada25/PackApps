@@ -30,8 +30,7 @@ public class RunSearchBook {
 
   @Before
   public void config() {
-    setTheStage(Cast.whereEveryoneCan(
-        BrowseTheWeb.with(WebDriverFactory.goToWeb(bookverse.getUrl()))));
+    setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(WebDriverFactory.goToWeb(bookverse.getUrl()))));
     theActorCalled(Constants.ACTOR);
   }
 

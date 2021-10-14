@@ -121,7 +121,6 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem loansPDF;
   protected JMenuItem puzzlePDF;
   protected JMenuItem read;
-  protected JMenuItem timesheet;
   protected JMenuItem OCR;
   protected JMenuItem searchBook;
   protected JMenuItem registerUser;
@@ -403,11 +402,9 @@ public class Index extends JFrame implements ActionListener {
     export.add(exportEXCEL);
 
     JMenu tasks = resources.getMenu("Tasks", "task");
-    timesheet = resources.getMenuItem("Timesheet", "timesheet", this);
     searchBook = resources.getMenuItem("Search Book", "searchBook", this);
     registerUser = resources.getMenuItem("Register User", "añadir_usuario", this);
 
-    tasks.add(timesheet);
     tasks.addSeparator();
     tasks.add(searchBook);
     tasks.addSeparator();
@@ -901,9 +898,6 @@ public class Index extends JFrame implements ActionListener {
 
     if (e.getSource() == yes_exit) {
       Settings.fadeOut(this);
-    } else if (e.getSource() == timesheet) {
-      new Timesheet(this, true).start(this);
-      setVisible(true);
     } else if (e.getSource() == searchBook) {
       new SearchBook(this, true).start(this);
       setVisible(true);

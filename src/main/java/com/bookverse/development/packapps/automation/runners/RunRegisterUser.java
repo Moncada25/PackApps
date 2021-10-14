@@ -31,8 +31,7 @@ public class RunRegisterUser {
 
   @Before
   public void config() {
-    setTheStage(Cast.whereEveryoneCan(
-        BrowseTheWeb.with(WebDriverFactory.goToWeb(bookverse.getUrl()))));
+    setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(WebDriverFactory.goToWeb(bookverse.getUrl()))));
     theActorCalled(Constants.ACTOR);
   }
 
@@ -40,9 +39,9 @@ public class RunRegisterUser {
   public void registerNewUser() {
     theActorInTheSpotlight().wasAbleTo(RegisterUser.inBookverse());
     theActorInTheSpotlight().attemptsTo(LoginBookverse.withCredentials(bookverse));
-    theActorInTheSpotlight().should(seeThat(TheUser.logged(), is(theActorInTheSpotlight().recall("USER_REGISTERED").toString()))
-            .orComplainWith(UserNotRegistered.class,
-                ExceptionsMessages.REGISTER_USER_ERROR.getProperty()));
+    theActorInTheSpotlight().should(
+        seeThat(TheUser.logged(), is(theActorInTheSpotlight().recall("USER_REGISTERED").toString()))
+            .orComplainWith(UserNotRegistered.class, ExceptionsMessages.REGISTER_USER_ERROR.getProperty()));
   }
 
   @After

@@ -40,8 +40,7 @@ public class RegisterUser implements Task {
   public <T extends Actor> void performAs(T actor) {
 
     actor.wasAbleTo(
-        WaitUntil.the(REGISTER_BUTTON, isVisible()),
-        WaitUntil.the(REGISTER_BUTTON, isEnabled()),
+        WaitUntil.the(REGISTER_BUTTON, isVisible()).forNoMoreThan(5).seconds(),
         Click.on(REGISTER_BUTTON),
         WaitUntil.the(NAME_FIELD, isVisible()),
         Enter.theValue(ArrayData.getDataUser("Name")).into(NAME_FIELD),
