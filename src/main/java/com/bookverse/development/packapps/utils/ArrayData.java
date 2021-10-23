@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.utils;
 
+import com.github.javafaker.Faker;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,15 +69,17 @@ public class ArrayData {
 
   public static String getDataUser(String key) {
 
+    Faker faker = Faker.instance();
+
     Map<String, String> dataNewUser = new HashMap<>();
-    dataNewUser.put("Name", "Santiago");
-    dataNewUser.put("LastName", "Moncada");
-    dataNewUser.put("Phone", "3012499315");
+    dataNewUser.put("Name", faker.name().firstName());
+    dataNewUser.put("LastName", faker.name().lastName());
+    dataNewUser.put("Phone", faker.phoneNumber().cellPhone());
     dataNewUser.put("Occupation", "Otro");
-    dataNewUser.put("Address", "CR 62 #62-b11");
-    dataNewUser.put("Username", "NewUser");
-    dataNewUser.put("Pass", "newUserTest");
-    dataNewUser.put("Email", "test@mail.com");
+    dataNewUser.put("Address", faker.address().fullAddress());
+    dataNewUser.put("Username", faker.name().username());
+    dataNewUser.put("Pass", faker.random().hex());
+    dataNewUser.put("Email", faker.internet().emailAddress());
     dataNewUser.put("Gender", "Masculino");
 
     return dataNewUser.get(key);
