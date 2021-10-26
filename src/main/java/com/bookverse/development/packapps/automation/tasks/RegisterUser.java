@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.automation.tasks;
 
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.ALERT_ACCEPT;
+import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.ALERT_TITLE;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLogin.REGISTER_BUTTON;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.ADDRESS_FIELD;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.EMAIL_FIELD;
@@ -14,10 +15,12 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.REGISTER_SUBMIT;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.SECOND_PASSWORD_FIELD;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.USERNAME_FIELD;
+import static com.bookverse.development.packapps.automation.utils.Constants.ALERT_ERROR;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnabled;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
+import com.bookverse.development.packapps.automation.interactions.WaitTime;
 import com.bookverse.development.packapps.utils.ArrayData;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
@@ -26,6 +29,8 @@ import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
+import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.thucydides.core.annotations.Step;
 
@@ -55,11 +60,15 @@ public class RegisterUser implements Task {
         Enter.theValue(ArrayData.getDataUser("Email")).into(EMAIL_FIELD),
         Click.on(GENDER_CHECK.of(ArrayData.getDataUser("Gender"))),
         Click.on(REGISTER_SUBMIT),
-        WaitUntil.the(ALERT_ACCEPT, isVisible()),
+        WaitUntil.the(ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
+        Click.on(ALERT_ACCEPT));
+
+    actor.wasAbleTo(
+        WaitUntil.the(ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
+        Ensure.that(Text.of(ALERT_TITLE).viewedBy(actor).asString()).isNotEqualTo(ALERT_ERROR),
         Click.on(ALERT_ACCEPT),
-        WaitUntil.the(ALERT_ACCEPT, isVisible()),
-        Click.on(ALERT_ACCEPT),
-        WaitUntil.the(ENTER_LOGIN, isClickable()),
-        Click.on(ENTER_LOGIN));
+        WaitUntil.the(ENTER_LOGIN, isClickable()).forNoMoreThan(5).seconds(),
+        Click.on(ENTER_LOGIN)
+    );
   }
 }
