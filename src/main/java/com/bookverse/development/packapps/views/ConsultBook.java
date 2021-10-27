@@ -1,6 +1,5 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.automation.utils.Constants.BOOKVERSE_DEV;
 import static com.bookverse.development.packapps.core.Settings.BIG;
 import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
@@ -8,8 +7,8 @@ import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static java.awt.Event.ENTER;
 import static javax.swing.SwingConstants.CENTER;
 
-import com.bookverse.development.packapps.automation.models.Bookverse;
 import com.bookverse.development.packapps.automation.runners.RunSearchBook;
+import com.bookverse.development.packapps.automation.utils.SetUser;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
@@ -32,15 +31,15 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import org.junit.runner.JUnitCore;
 
-public class SearchBook extends JDialog implements ActionListener {
+public class ConsultBook extends JDialog implements ActionListener {
 
-  private Resources resources = new Resources();
+  private final Resources resources = new Resources();
+  private final JComboBox<String> listBooksBox = new JComboBox<>();
   private JTextField txtUser;
   private JButton btnRun, btnReturn;
   private JPasswordField txtPassword;
-  private JComboBox<String> listBooksBox = new JComboBox<>();
 
-  public SearchBook(JFrame parent, boolean modal) {
+  public ConsultBook(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
@@ -69,14 +68,14 @@ public class SearchBook extends JDialog implements ActionListener {
     JLabel title = resources
         .getLabel("<html><strong><em>Search book</em></strong></html>", MAIN_COLOR, this,
             BIG);
-    title.setBounds(150, 5, 250, 40);
+    title.setBounds(95, 5, 250, 40);
 
     JLabel user = resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
-    user.setBounds(30, 60, 180, 30);
+    user.setBounds(30, 60, 120, 30);
 
     txtUser = new JTextField();
-    txtUser.setBounds(250, 65, 150, 30);
+    txtUser.setBounds(250, 65, 120, 30);
     txtUser.setHorizontalAlignment(CENTER);
     add(txtUser);
 
@@ -96,7 +95,7 @@ public class SearchBook extends JDialog implements ActionListener {
 
     txtPassword = new JPasswordField();
     txtPassword.setHorizontalAlignment(SwingConstants.CENTER);
-    txtPassword.setBounds(250, 115, 150, 30);
+    txtPassword.setBounds(250, 115, 120, 30);
     add(txtPassword);
 
     txtPassword.addKeyListener(new KeyAdapter() {
@@ -136,12 +135,10 @@ public class SearchBook extends JDialog implements ActionListener {
 
   private void btnRunAP() {
 
-    if (txtUser.getText().length() >= 4
-        && String.valueOf(txtPassword.getPassword()).length() >= 4) {
-      Resources.setGeneralObject(new Bookverse(txtUser.getText(),
-          String.valueOf(txtPassword.getPassword()),
-          BOOKVERSE_DEV,
-          String.valueOf(listBooksBox.getSelectedItem())));
+    if (txtUser.getText().length() >= 4 && String.valueOf(txtPassword.getPassword()).length() >= 4) {
+      Resources.setGeneralObject(SetUser.toLogin(
+          txtUser.getText(),String.valueOf(txtPassword.getPassword()),String.valueOf(listBooksBox.getSelectedItem()))
+      );
       JUnitCore.runClasses(RunSearchBook.class);
     } else {
       Alerts.inputSomethingText();

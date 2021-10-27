@@ -16,12 +16,12 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.SECOND_PASSWORD_FIELD;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.USERNAME_FIELD;
 import static com.bookverse.development.packapps.automation.utils.Constants.ALERT_ERROR;
+import static com.bookverse.development.packapps.automation.utils.Constants.USER_REGISTERED;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isEnabled;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
-import com.bookverse.development.packapps.automation.interactions.WaitTime;
-import com.bookverse.development.packapps.utils.ArrayData;
+import com.bookverse.development.packapps.automation.models.Bookverse;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
@@ -36,8 +36,14 @@ import net.thucydides.core.annotations.Step;
 
 public class RegisterUser implements Task {
 
-  public static RegisterUser inBookverse() {
-    return Tasks.instrumented(RegisterUser.class);
+  private final Bookverse bookverse;
+
+  public RegisterUser(Bookverse bookverse) {
+    this.bookverse = bookverse;
+  }
+
+  public static RegisterUser inBookverse(Bookverse bookverse) {
+    return Tasks.instrumented(RegisterUser.class, bookverse);
   }
 
   @Step("Register new user in Bookverse")
@@ -48,17 +54,17 @@ public class RegisterUser implements Task {
         WaitUntil.the(REGISTER_BUTTON, isVisible()).forNoMoreThan(5).seconds(),
         Click.on(REGISTER_BUTTON),
         WaitUntil.the(NAME_FIELD, isVisible()),
-        Enter.theValue(ArrayData.getDataUser("Name")).into(NAME_FIELD),
-        Enter.theValue(ArrayData.getDataUser("LastName")).into(LAST_NAME_FIELD),
-        Enter.theValue(ArrayData.getDataUser("Phone")).into(PHONE_FIELD),
-        SelectFromOptions.byValue(ArrayData.getDataUser("Occupation")).from(OCCUPATION_LIST),
-        Enter.theValue(ArrayData.getDataUser("Address")).into(ADDRESS_FIELD),
+        Enter.theValue(bookverse.getName()).into(NAME_FIELD),
+        Enter.theValue(bookverse.getLastName()).into(LAST_NAME_FIELD),
+        Enter.theValue(bookverse.getPhone()).into(PHONE_FIELD),
+        SelectFromOptions.byValue(bookverse.getOccupation()).from(OCCUPATION_LIST),
+        Enter.theValue(bookverse.getAddress()).into(ADDRESS_FIELD),
         Scroll.to(USERNAME_FIELD).andAlignToTop(),
-        Enter.theValue(ArrayData.getDataUser("Username")).into(USERNAME_FIELD),
-        Enter.theValue(ArrayData.getDataUser("Pass")).into(FIRST_PASSWORD_FIELD),
-        Enter.theValue(ArrayData.getDataUser("Pass")).into(SECOND_PASSWORD_FIELD),
-        Enter.theValue(ArrayData.getDataUser("Email")).into(EMAIL_FIELD),
-        Click.on(GENDER_CHECK.of(ArrayData.getDataUser("Gender"))),
+        Enter.theValue(bookverse.getUsername()).into(USERNAME_FIELD),
+        Enter.theValue(bookverse.getPassword()).into(FIRST_PASSWORD_FIELD),
+        Enter.theValue(bookverse.getPassword()).into(SECOND_PASSWORD_FIELD),
+        Enter.theValue(bookverse.getEmail()).into(EMAIL_FIELD),
+        Click.on(GENDER_CHECK.of(bookverse.getGender())),
         Click.on(REGISTER_SUBMIT),
         WaitUntil.the(ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
         Click.on(ALERT_ACCEPT));
@@ -70,5 +76,7 @@ public class RegisterUser implements Task {
         WaitUntil.the(ENTER_LOGIN, isClickable()).forNoMoreThan(5).seconds(),
         Click.on(ENTER_LOGIN)
     );
+
+    Serenity.setSessionVariable(USER_REGISTERED).to(bookverse.getName() + " " + bookverse.getLastName());
   }
 }

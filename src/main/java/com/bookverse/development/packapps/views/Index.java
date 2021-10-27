@@ -899,7 +899,7 @@ public class Index extends JFrame implements ActionListener {
     if (e.getSource() == yes_exit) {
       Settings.fadeOut(this);
     } else if (e.getSource() == searchBook) {
-      new SearchBook(this, true).start(this);
+      new ConsultBook(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == sendWhatsApp) {
       new WhatsApp(this, true).start(this);
