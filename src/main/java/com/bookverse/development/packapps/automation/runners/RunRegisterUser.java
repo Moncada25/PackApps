@@ -1,5 +1,7 @@
 package com.bookverse.development.packapps.automation.runners;
 
+import static com.bookverse.development.packapps.automation.utils.Constants.BOOKVERSE_DEV;
+import static com.bookverse.development.packapps.automation.utils.Constants.USER_REGISTERED;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
@@ -16,6 +18,7 @@ import com.bookverse.development.packapps.automation.utils.ExceptionsMessages;
 import com.bookverse.development.packapps.automation.utils.WebDriverFactory;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.Cast;
@@ -31,28 +34,28 @@ public class RunRegisterUser {
 
   @Before
   public void config() {
-    setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(WebDriverFactory.goToWeb(bookverse.getUrl()))));
+    setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(WebDriverFactory.goToWeb(BOOKVERSE_DEV))));
     theActorCalled(Constants.ACTOR);
   }
 
   @Test
   public void registerNewUser() {
-    theActorInTheSpotlight().wasAbleTo(RegisterUser.inBookverse());
+    theActorInTheSpotlight().wasAbleTo(RegisterUser.inBookverse(bookverse));
     theActorInTheSpotlight().attemptsTo(LoginBookverse.withCredentials(bookverse));
     theActorInTheSpotlight().should(
-        seeThat(TheUser.logged(), is(theActorInTheSpotlight().recall("USER_REGISTERED").toString()))
-            .orComplainWith(UserNotRegistered.class, ExceptionsMessages.REGISTER_USER_ERROR.getProperty()));
+        seeThat(TheUser.logged(), is(bookverse.getName() + " " + bookverse.getLastName()))
+            .orComplainWith(UserNotRegistered.class,
+                ExceptionsMessages.REGISTER_USER_ERROR.getProperty()));
   }
 
   @After
   public void close() {
     BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
 
-    if (theActorInTheSpotlight().recall("USER_REGISTERED") == null) {
+    if (Serenity.sessionVariableCalled(USER_REGISTERED) == null) {
       Alerts.message("Test failed!", "User no registered");
     } else {
-      Alerts.message("Test passed!", "User " + theActorInTheSpotlight().recall("USER_REGISTERED")
-          + " is registered!");
+      Alerts.message("Test passed!", "User " + Serenity.sessionVariableCalled(USER_REGISTERED) + " is registered!");
     }
   }
 }

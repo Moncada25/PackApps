@@ -1,32 +1,20 @@
 package com.bookverse.development.packapps.automation.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public class Bookverse {
 
-  private String user;
-  private String password;
-  private String url;
-  private String book;
-
-  public String getUser() {
-    return user;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public String getUrl() {
-    return url;
-  }
-
-  public String getBook() {
-    return book;
-  }
-
-  public Bookverse(String user, String pass, String url, String book) {
-    this.user = user;
-    this.password = pass;
-    this.url = url;
-    this.book = book;
-  }
+  private final String name;
+  private final String lastName;
+  private final String phone;
+  private final String occupation;
+  private final String address;
+  private final String username;
+  private final String password;
+  private final String email;
+  private final String gender;
+  private final String book;
 }

@@ -3,6 +3,7 @@ package com.bookverse.development.packapps.automation.questions;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.USER_LOGGED;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
+import com.bookverse.development.packapps.automation.interactions.WaitTime;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.annotations.Subject;
@@ -18,7 +19,12 @@ public class TheUser implements Question<String> {
   @Subject("Verify that user is registered")
   @Override
   public String answeredBy(Actor actor) {
-    actor.attemptsTo(WaitUntil.the(USER_LOGGED, isVisible()));
+
+    actor.attemptsTo(
+        WaitUntil.the(USER_LOGGED, isVisible()),
+        WaitTime.inSeconds(5)
+    );
+
     return Text.of(USER_LOGGED).viewedBy(actor).asString();
   }
 }

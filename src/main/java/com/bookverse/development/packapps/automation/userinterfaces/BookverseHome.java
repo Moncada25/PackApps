@@ -17,7 +17,8 @@ public class BookverseHome {
       .locatedBy("//button[@class = 'btn btn-primary btn-raised btn-sm']");
   public static final Target ALERT_ACCEPT = Target.the("Alert button accept")
       .locatedBy("//button[contains(text(), 'Aceptar') or contains(text(), 'OK')]");
-
+  public static final Target ALERT_TITLE = Target.the("Alert button accept")
+      .locatedBy("//h2[@class = 'swal2-title']");
   private BookverseHome() {
   }
 }

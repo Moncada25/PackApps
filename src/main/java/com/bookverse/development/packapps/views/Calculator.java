@@ -1,5 +1,7 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.utils.Format.*;
+
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.utils.Alerts;
@@ -60,7 +62,7 @@ public class Calculator extends JDialog implements ActionListener {
         } else if (e.getKeyCode() == KeyEvent.VK_MULTIPLY) {
           btnMultiplyAP();
         } else if (e.getKeyCode() == 110 || e.getKeyCode() == 46) {
-          InputPoint();
+          inputPoint();
         } else if (e.getKeyCode() == 8) {
           inputDelete();
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -73,8 +75,8 @@ public class Calculator extends JDialog implements ActionListener {
       }
 
       private void txtResultKeyTyped(KeyEvent e) {
-        Format.onlyNumberCalc(e.getKeyChar(), e, btnResult.getText(), 15);
-        Format.onlyAPoint(e.getKeyChar(), e, btnResult.getText());
+        onlyNumberCalc(e.getKeyChar(), e, btnResult.getText(), 15);
+        onlyAPoint(e.getKeyChar(), e, btnResult.getText());
       }
     });
 
@@ -186,7 +188,7 @@ public class Calculator extends JDialog implements ActionListener {
     }
   }
 
-  private void InputPoint() {
+  private void inputPoint() {
 
     content = btnResult.getText();
 
@@ -411,14 +413,26 @@ public class Calculator extends JDialog implements ActionListener {
           break;
         }
 
-        if (e.getSource() == numbers[f][c] && sw == 1 && s == 1) {
+        if (!isNumber(btnResult.getText()) && !btnResult.getText().isEmpty()){
+          Alerts.message("Number invalid", "Try again");
           btnResult.setText("");
-          btnResult.setText(btnResult.getText() + numbers[f][c].getText());
-          sw = 0;
+          System.out.println("llegaaaaa");
+        } else {
 
-        } else if (e.getSource() == numbers[f][c] && (sw == 0 || s == 0)) {
-          btnResult.setText(btnResult.getText() + numbers[f][c].getText());
+          if (e.getSource() == numbers[f][c] && sw == 1 && s == 1) {
+
+            System.out.println("No llegaaaaa");
+            btnResult.setText("");
+            btnResult.setText(btnResult.getText() + numbers[f][c].getText());
+            sw = 0;
+
+          } else if (e.getSource() == numbers[f][c] && (sw == 0 || s == 0)) {
+            btnResult.setText(btnResult.getText() + numbers[f][c].getText());
+          }
         }
+
+
+
       }
     }
   }

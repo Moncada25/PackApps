@@ -3,10 +3,9 @@ package com.bookverse.development.packapps.automation.utils;
 public enum ExceptionsMessages {
 
   SEARCH_BOOK_ERROR("Failure searching book"),
-  REGISTER_USER_ERROR("Failure registering new user"),
-  TIMESHEET_ENTRY_ERROR("Failure register timesheet entry");
+  REGISTER_USER_ERROR("Failure registering new user");
 
-  private String property;
+  private final String property;
 
   ExceptionsMessages(String property) {
     this.property = property;

@@ -8,6 +8,7 @@ import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.Format;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -243,7 +244,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     if (Settings.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
       String[] data = {PUZZLE, Alerts.inputText("Enter a Nickname", 20), state,
-          getLevel(), String.valueOf(moves), Settings.getDate()};
+          getLevel(), String.valueOf(moves), Format.getDate()};
 
       Database.insertData(data);
     }

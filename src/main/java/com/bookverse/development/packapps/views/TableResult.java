@@ -15,7 +15,7 @@ import javax.swing.table.TableRowSorter;
 public class TableResult extends JDialog {
 
   private static Table model = new Table();
-  public static final JTable tabResult = new JTable(model);;
+  public static final JTable tabResult = new JTable(model);
 
   public TableResult(JDialog parent, boolean modal, String[] columns) {
     super(parent, modal);

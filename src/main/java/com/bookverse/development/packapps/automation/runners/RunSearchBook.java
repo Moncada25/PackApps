@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.automation.runners;
 
+import static com.bookverse.development.packapps.automation.utils.Constants.BOOKVERSE_DEV;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
@@ -10,6 +11,7 @@ import com.bookverse.development.packapps.automation.exceptions.BookNotFound;
 import com.bookverse.development.packapps.automation.models.Bookverse;
 import com.bookverse.development.packapps.automation.questions.TheTitle;
 import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
+import com.bookverse.development.packapps.automation.tasks.SearchBook;
 import com.bookverse.development.packapps.automation.utils.Constants;
 import com.bookverse.development.packapps.automation.utils.ExceptionsMessages;
 import com.bookverse.development.packapps.automation.utils.WebDriverFactory;
@@ -30,15 +32,14 @@ public class RunSearchBook {
 
   @Before
   public void config() {
-    setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(WebDriverFactory.goToWeb(bookverse.getUrl()))));
+    setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(WebDriverFactory.goToWeb(BOOKVERSE_DEV))));
     theActorCalled(Constants.ACTOR);
   }
 
   @Test
   public void searchBook() {
     theActorInTheSpotlight().wasAbleTo(LoginBookverse.withCredentials(bookverse));
-    theActorInTheSpotlight().attemptsTo(
-        com.bookverse.development.packapps.automation.tasks.SearchBook.inBookverse(bookverse.getBook()));
+    theActorInTheSpotlight().attemptsTo(SearchBook.inBookverse(bookverse.getBook()));
     theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverse.getBook())).
         orComplainWith(BookNotFound.class,
             ExceptionsMessages.SEARCH_BOOK_ERROR.getProperty()));

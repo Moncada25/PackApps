@@ -40,16 +40,6 @@ public class Settings {
   public static final Font MEDIUM = new Font("Cambria", Font.PLAIN, 18);
   public static final Font BIG = new Font("Cambria", Font.PLAIN, 28);
 
-  @NotNull
-  public static String getDate() {
-
-    Calendar date = new GregorianCalendar();
-    DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
-
-    return dateFormat.format(date.getTime()) + " - " + date.get(Calendar.HOUR_OF_DAY) + ":"
-        + date.get(Calendar.MINUTE);
-  }
-
   public static int getIntRandom(int min, int max) {
     return (int) Math.floor(Math.random() * (min - max + 1) + max);
   }

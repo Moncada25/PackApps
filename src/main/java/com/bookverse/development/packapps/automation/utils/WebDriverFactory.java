@@ -1,16 +1,14 @@
 package com.bookverse.development.packapps.automation.utils;
 
 import static com.bookverse.development.packapps.automation.utils.Constants.CHROME;
+import static com.bookverse.development.packapps.automation.utils.Constants.DEFAULT_BROWSER;
 
-import com.bookverse.development.packapps.models.DataSet;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 
 public class WebDriverFactory {
-
-  private static final String DEFAULT_BROWSER = DataSet.getDefaultBrowser();
 
   public static WebDriver goToWeb(String url) {
     WebDriver driver = getDriver();

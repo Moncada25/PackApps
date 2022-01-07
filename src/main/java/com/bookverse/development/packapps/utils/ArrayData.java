@@ -78,7 +78,7 @@ public class ArrayData {
     dataNewUser.put("Occupation", "Otro");
     dataNewUser.put("Address", faker.address().fullAddress());
     dataNewUser.put("Username", faker.name().username());
-    dataNewUser.put("Pass", faker.random().hex());
+    dataNewUser.put("Password", faker.random().hex());
     dataNewUser.put("Email", faker.internet().emailAddress());
     dataNewUser.put("Gender", "Masculino");
 

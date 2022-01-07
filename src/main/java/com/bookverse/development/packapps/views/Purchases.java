@@ -253,22 +253,22 @@ public class Purchases extends JDialog implements ActionListener {
 
   private void btnSubmitAP() {
 
-    if (!Format.verifyReference(txtReference.getText())) {
+    if (Format.verifyReference(txtReference.getText())) {
       Alerts.message("Verify!", "Input a valid reference.");
       txtReference.requestFocus();
     } else {
 
-      if (!Format.verifyDocument(txtDocument.getText())) {
+      if (Format.verifyDocument(txtDocument.getText())) {
         Alerts.message("Verify!", "Input a valid document.");
         txtDocument.requestFocus();
       } else {
 
-        if (!Format.verifyPhone(txtPhone.getText())) {
+        if (Format.verifyPhone(txtPhone.getText())) {
           Alerts.message("Verify!", "Input a valid phone.");
           txtPhone.requestFocus();
         } else {
 
-          if (!Format.verifyPrice(Double.parseDouble(txtPrice.getText()))) {
+          if (Format.verifyPrice(Double.parseDouble(txtPrice.getText()))) {
             Alerts.message("Verify!", "Input a valid price.");
             txtPrice.requestFocus();
           } else {
@@ -319,7 +319,7 @@ public class Purchases extends JDialog implements ActionListener {
               try {
 
                 String[] purchase = {PURCHASES, txtReference.getText(), user, txtDocument.getText(),
-                    txtPhone.getText(), Settings.getDate(), String.valueOf(lblUnits.getText()),
+                    txtPhone.getText(), Format.getDate(), String.valueOf(lblUnits.getText()),
                     String.valueOf(totalPurchase)};
 
                 Database.insertData(purchase);

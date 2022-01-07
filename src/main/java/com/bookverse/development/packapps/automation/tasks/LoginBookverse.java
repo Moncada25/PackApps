@@ -18,7 +18,7 @@ import net.thucydides.core.annotations.Step;
 
 public class LoginBookverse implements Task {
 
-  private Bookverse bookverse;
+  private final Bookverse bookverse;
 
   public LoginBookverse(Bookverse bookverse) {
     this.bookverse = bookverse;
@@ -32,13 +32,11 @@ public class LoginBookverse implements Task {
   @Override
   public <T extends Actor> void performAs(T actor) {
 
-    actor.remember("USER_REGISTERED", ArrayData.getDataUser("Name") + " " + ArrayData.getDataUser("LastName"));
-
     actor.wasAbleTo(
         WaitUntil.the(USERNAME_FIELD, isVisible()),
-        Enter.theValue(bookverse.getUser()).into(USERNAME_FIELD),
+        Enter.theValue(bookverse.getUsername()).into(USERNAME_FIELD),
         Enter.theValue(bookverse.getPassword()).into(PASSWORD_FIELD),
         Click.on(LOGIN_BUTTON),
-        WaitUntil.the(IMAGE, isVisible()));
+        WaitUntil.the(IMAGE, isVisible()).forNoMoreThan(5).seconds());
   }
 }

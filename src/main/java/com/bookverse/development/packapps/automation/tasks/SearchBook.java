@@ -20,7 +20,7 @@ import net.thucydides.core.annotations.Step;
 
 public class SearchBook implements Task {
 
-  private String book;
+  private final String book;
 
   public SearchBook(String book) {
     this.book = book;

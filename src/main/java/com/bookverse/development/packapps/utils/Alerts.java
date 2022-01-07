@@ -306,6 +306,17 @@ public class Alerts {
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
+  public static void instruccionesPreguntas() {
+    JOptionPane.showMessageDialog(null,
+        "<html>" + Format.style() + "<strong><center>Quién quiere ser millonario</center></strong><br>"
+            + "<strong>Jugadores: </strong>1<br><br>"
+            + "El juego empieza cuando se selecciona una categoría<br>"
+            + "de preguntas para jugar. Tendrás que adivinar<br>"
+            + "la respuesta correcta para avanzar de nivel,<br>"
+            + "</html>",
+        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
+  }
+
   public static void instruccionesNotas() {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style() + "<strong><center>Notas</center></strong><br>"

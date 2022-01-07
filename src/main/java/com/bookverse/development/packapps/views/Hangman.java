@@ -12,6 +12,7 @@ import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.utils.Alerts;
 import com.bookverse.development.packapps.utils.ArrayData;
+import com.bookverse.development.packapps.utils.Format;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -333,7 +334,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
       String[] data = {HANGMAN, Alerts.inputText("Enter a Nickname", 20),
           String.valueOf(countAttempts), state,
           Objects.requireNonNull(options.getSelectedItem()).toString(),
-          Settings.getDate()};
+          Format.getDate()};
 
       Database.insertData(data);
     }

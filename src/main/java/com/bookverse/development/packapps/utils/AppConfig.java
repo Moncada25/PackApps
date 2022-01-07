@@ -7,10 +7,9 @@ public enum AppConfig {
   STORE_MANAGER_KEY("storeManagerKey"),
   DEVELOPER_EMAIL("developerEmail"),
   DEFAULT_ENCRYPT_KEY("defaultEncryptKey"),
-  DEFAULT_BROWSER("defaultBrowser"),
   FILE_PROPERTIES("src/main/resources/data/config.properties");
 
-  private String property;
+  private final String property;
 
   AppConfig(String property) {
     this.property = property;
