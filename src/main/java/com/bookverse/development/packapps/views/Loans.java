@@ -197,17 +197,17 @@ public class Loans extends JDialog implements ActionListener {
       txtName.requestFocus();
     } else {
 
-      if (!Format.verifyDocument(txtDocument.getText())) {
+      if (Format.verifyDocument(txtDocument.getText())) {
         Alerts.message("Verify!", "Input a valid document.");
         txtDocument.requestFocus();
       } else {
 
-        if (!Format.verifyReference(txtReference.getText())) {
+        if (Format.verifyReference(txtReference.getText())) {
           Alerts.message("Verify!", "Input a valid reference.");
           txtReference.requestFocus();
         } else {
 
-          if (!Format.verifyPhone(txtPhone.getText())) {
+          if (Format.verifyPhone(txtPhone.getText())) {
             Alerts.message("Verify!", "Input a valid phone.");
             txtPhone.requestFocus();
           } else {
@@ -217,7 +217,7 @@ public class Loans extends JDialog implements ActionListener {
               weeks.requestFocus();
             } else {
 
-              if (!Format.verifyPrice(Double.parseDouble(txtValue.getText()))) {
+              if (Format.verifyPrice(Double.parseDouble(txtValue.getText()))) {
                 Alerts.message("Verify!", "Input a valid value.");
                 txtValue.requestFocus();
               } else {

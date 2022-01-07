@@ -6,7 +6,7 @@ import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.SMALL;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.Settings.getDate;
+import static com.bookverse.development.packapps.utils.Format.getDate;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
@@ -271,11 +271,11 @@ public class Sales extends JDialog implements ActionListener {
 
   private void btnSubmitAP() {
 
-    if (!Format.verifyDocument(txtDocument.getText())) {
+    if (Format.verifyDocument(txtDocument.getText())) {
       Alerts.message("Verify!", "Input a valid document.");
       txtDocument.requestFocus();
     } else {
-      if (!Format.verifyPhone(txtPhone.getText())) {
+      if (Format.verifyPhone(txtPhone.getText())) {
         Alerts.message("Verify!", "Input a valid phone.");
         txtPhone.requestFocus();
       } else {

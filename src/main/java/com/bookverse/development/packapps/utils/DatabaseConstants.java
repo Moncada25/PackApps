@@ -15,6 +15,7 @@ public class DatabaseConstants {
   public static final String PURCHASES = "Purchases";
   public static final String SALES = "Sales";
   public static final String BOOKS = "Libro";
+  public static final String QUESTIONS_AND_ANSWERS = "Questions & Answers";
 
   public static final String USER_DB = "root";
   public static final String PASSWORD_DB = "";

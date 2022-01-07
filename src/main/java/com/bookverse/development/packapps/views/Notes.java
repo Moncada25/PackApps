@@ -280,7 +280,7 @@ public class Notes extends JDialog implements ActionListener {
         }
 
         String[] data = {NOTES, txtName.getText(), option, String.format("%.0f", totalPercentage),
-            String.format("%.2f", totalNote), state, Settings.getDate()};
+            String.format("%.2f", totalNote), state, Format.getDate()};
         Database.insertData(data);
       } catch (Exception e) {
         Alerts.error(e, NOTES);

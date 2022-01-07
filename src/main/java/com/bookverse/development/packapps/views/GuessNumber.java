@@ -5,7 +5,7 @@ import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.Settings.fadeIn;
-import static com.bookverse.development.packapps.core.Settings.getDate;
+import static com.bookverse.development.packapps.utils.Format.getDate;
 import static com.bookverse.development.packapps.core.Settings.getIntRandom;
 import static com.bookverse.development.packapps.core.Settings.verifyConnection;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;

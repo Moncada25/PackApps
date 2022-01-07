@@ -28,7 +28,6 @@ buildscript {
 
     dependencies {
         classpath "net.serenity-bdd:serenity-gradle-plugin:2.1.5"
-        classpath "net.serenity-bdd:serenity-single-page-report:2.1.5"
         classpath "io.freefair.gradle:lombok-plugin:5.1.1"
     }
 }
@@ -55,14 +54,13 @@ sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/i
 sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties"]
 
 ext {
-    serenityCoreVersion = "2.2.13"
+    serenityCoreVersion = "2.6.0"
 }
 
 dependencies {
-    testImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
-    testImplementation "net.serenity-bdd:serenity-junit:${serenityCoreVersion}"
-    testImplementation "junit:junit:4.13"
-
+    implementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
+    implementation "net.serenity-bdd:serenity-junit:${serenityCoreVersion}"
+    implementation "junit:junit:4.13"
     implementation "org.slf4j:slf4j-simple:1.7.32"
     implementation "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}"
     implementation "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}"
@@ -79,5 +77,3 @@ dependencies {
     implementation "io.github.bonigarcia:webdrivermanager:5.0.3"
     implementation "com.github.javafaker:javafaker:1.0.2"
 }
-
-gradle.startParameter.continueOnFailure = true

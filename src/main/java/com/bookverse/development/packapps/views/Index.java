@@ -13,6 +13,7 @@ import static com.bookverse.development.packapps.utils.DatabaseConstants.LOANS;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PURCHASES;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.DatabaseConstants.QUESTIONS_AND_ANSWERS;
 import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
 
 import com.bookverse.development.packapps.automation.utils.StartTests;
@@ -125,6 +126,7 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem searchBook;
   protected JMenuItem registerUser;
   protected JMenuItem sendWhatsApp;
+  protected JMenuItem questionsAndAnswers;
   private boolean isWork = true;
 
   public Index() {
@@ -240,7 +242,7 @@ public class Index extends JFrame implements ActionListener {
     exit.addSeparator();
     exit.add(send);
 
-    JMenu apps = resources.getMenu("Games", "games");
+    JMenu games = resources.getMenu("Games", "games");
     hangman = resources.getMenuItem(HANGMAN, "ahorcado", this);
     dices = resources.getMenuItem(DICES, "dado", this);
     roulette = resources.getMenuItem("Roulette", "ruleta", this);
@@ -264,6 +266,8 @@ public class Index extends JFrame implements ActionListener {
     puzzle.addSeparator();
     puzzle.add(puzzle6x6);
 
+    questionsAndAnswers = resources.getMenuItem(QUESTIONS_AND_ANSWERS, "questions", this);
+
     JMenu ticTacToe = resources.getMenu("Tic Tac Toe", "triqui");
     ticTacToePvsP = resources.getMenuItem("Player vs Player", "jvsj", this);
     ticTacToePvsCPU = resources.getMenuItem("Player vs CPU (beta)", "jvscpu", this);
@@ -272,17 +276,19 @@ public class Index extends JFrame implements ActionListener {
     ticTacToe.addSeparator();
     ticTacToe.add(ticTacToePvsCPU);
 
-    apps.add(dices);
-    apps.addSeparator();
-    apps.add(guessNumberMenu);
-    apps.addSeparator();
-    apps.add(hangman);
-    apps.addSeparator();
-    apps.add(puzzle);
-    apps.addSeparator();
-    apps.add(roulette);
-    apps.addSeparator();
-    apps.add(ticTacToe);
+    games.add(dices);
+    games.addSeparator();
+    games.add(guessNumberMenu);
+    games.addSeparator();
+    games.add(hangman);
+    games.addSeparator();
+    games.add(puzzle);
+    games.addSeparator();
+    games.add(questionsAndAnswers);
+    games.addSeparator();
+    games.add(roulette);
+    games.addSeparator();
+    games.add(ticTacToe);
 
     JMenu scores = resources.getMenu("Data", "data");
     tables = resources.getMenuItem("Database", "tabla", this);
@@ -469,7 +475,7 @@ public class Index extends JFrame implements ActionListener {
     tools.addSeparator();
     tools.add(texts);
 
-    menuBar.add(apps);
+    menuBar.add(games);
     menuBar.add(scores);
     menuBar.add(tools);
     menuBar.add(about);
@@ -992,6 +998,9 @@ public class Index extends JFrame implements ActionListener {
       setVisible(true);
     } else if (e.getSource() == puzzle6x6) {
       new Puzzle(this, true, 6, 45, 10).start(this);
+      setVisible(true);
+    } else if (e.getSource() == questionsAndAnswers) {
+      new QuestionsAndAnswers(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == structures) {
       new Structures(this, true).start(this);

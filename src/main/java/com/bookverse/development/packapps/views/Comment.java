@@ -106,7 +106,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
 
     if (Settings.verifyConnection("Make sure you are connected to a network", true)) {
 
-      String[] data = {FEEDBACK, username, commentary, Settings.getDate()};
+      String[] data = {FEEDBACK, username, commentary, Format.getDate()};
 
       if (Database.insertData(data)) {
 
