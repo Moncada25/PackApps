@@ -52,7 +52,7 @@ public class QuestionsAndAnswers extends JDialog implements ActionListener {
     setSize(750, 500);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle(QUESTIONS_AND_ANSWERS);
+    setTitle(QUESTIONS_AND_ANSWERS + " (beta)");
     Settings.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesPreguntas();
@@ -64,7 +64,7 @@ public class QuestionsAndAnswers extends JDialog implements ActionListener {
     setSize(750, 500);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle(QUESTIONS_AND_ANSWERS);
+    setTitle(QUESTIONS_AND_ANSWERS + " (beta)");
     Settings.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesPreguntas();
@@ -150,6 +150,9 @@ public class QuestionsAndAnswers extends JDialog implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
 
+    if (e.getSource() == exit){
+      dispose();
+    }
   }
 
 

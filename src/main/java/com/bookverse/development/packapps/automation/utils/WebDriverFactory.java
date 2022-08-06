@@ -10,6 +10,8 @@ import org.openqa.selenium.edge.EdgeOptions;
 
 public class WebDriverFactory {
 
+  private WebDriverFactory(){}
+
   public static WebDriver goToWeb(String url) {
     WebDriver driver = getDriver();
     driver.get(url);

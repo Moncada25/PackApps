@@ -19,6 +19,6 @@ public class TheTitle implements Question<String> {
   @Override
   public String answeredBy(Actor actor) {
     actor.attemptsTo(WaitUntil.the(TITLE_MODAL, isVisible()));
-    return Text.of(TITLE_MODAL).viewedBy(actor).asString();
+    return Text.of(TITLE_MODAL).answeredBy(actor);
   }
 }

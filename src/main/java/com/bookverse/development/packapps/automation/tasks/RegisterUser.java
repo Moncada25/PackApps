@@ -67,11 +67,12 @@ public class RegisterUser implements Task {
         Click.on(GENDER_CHECK.of(bookverse.getGender())),
         Click.on(REGISTER_SUBMIT),
         WaitUntil.the(ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
-        Click.on(ALERT_ACCEPT));
+        Click.on(ALERT_ACCEPT)
+    );
 
     actor.wasAbleTo(
         WaitUntil.the(ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
-        Ensure.that(Text.of(ALERT_TITLE).viewedBy(actor).asString()).isNotEqualTo(ALERT_ERROR),
+        Ensure.that(Text.of(ALERT_TITLE).answeredBy(actor)).isNotEqualTo(ALERT_ERROR),
         Click.on(ALERT_ACCEPT),
         WaitUntil.the(ENTER_LOGIN, isClickable()).forNoMoreThan(5).seconds(),
         Click.on(ENTER_LOGIN)

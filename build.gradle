@@ -1,12 +1,24 @@
-import java.text.SimpleDateFormat
-
 group "com.bookverse.development.packapps"
 version "1.0-SNAPSHOT"
 
+buildscript {
+    ext.kotlin_version = "1.7.1"
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        google()
+    }
+    dependencies {
+        classpath "net.serenity-bdd:serenity-gradle-plugin:3.3.1"
+        classpath "io.freefair.gradle:lombok-plugin:5.1.1"
+    }
+}
+
 apply plugin: "java"
-apply plugin: "eclipse"
 apply plugin: "idea"
-apply plugin: "net.serenity-bdd.aggregator"
+apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
 apply plugin: "io.freefair.lombok"
 
 repositories {
@@ -17,23 +29,16 @@ repositories {
     google()
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-        google()
-    }
-
-    dependencies {
-        classpath "net.serenity-bdd:serenity-gradle-plugin:2.1.5"
-        classpath "io.freefair.gradle:lombok-plugin:5.1.1"
-    }
-}
-
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
+}
+
+test {
+    systemProperties System.getProperties()
+    systemProperty "file.encoding", "UTF-8"
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+    testLogging.showStandardStreams = true
 }
 
 jar {
@@ -41,7 +46,6 @@ jar {
         attributes(
                 "Main-Class": "com.bookverse.development.packapps.core.Start",
                 "Built-By": "Santiago Moncada"+" ("+System.properties["user.name"] + ")",
-                "Build-Timestamp": new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ").format(new Date()),
                 "Build-Revision": 3.0,
                 "Created-By": "Gradle ${gradle.gradleVersion}",
                 "Build-Jdk": "${System.properties["java.version"]} (${System.properties["java.vendor"]} ${System.properties["java.vm.version"]})",
@@ -54,16 +58,18 @@ sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/i
 sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties"]
 
 ext {
-    serenityCoreVersion = "2.6.0"
+    serenityVersion = "3.3.1"
 }
 
 dependencies {
-    implementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
-    implementation "net.serenity-bdd:serenity-junit:${serenityCoreVersion}"
-    implementation "junit:junit:4.13"
+    implementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-junit:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-reports:${serenityVersion}"
+    implementation "net.serenity-bdd:serenity-ensure:${serenityVersion}"
+
     implementation "org.slf4j:slf4j-simple:1.7.32"
-    implementation "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}"
-    implementation "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}"
     implementation "commons-codec:commons-codec:1.10"
     implementation "org.apache.commons:commons-dbcp2:2.5.0"
     implementation "commons-logging:commons-logging:1.2"
@@ -76,4 +82,10 @@ dependencies {
     implementation "net.sourceforge.tess4j:tess4j:4.5.4"
     implementation "io.github.bonigarcia:webdrivermanager:5.0.3"
     implementation "com.github.javafaker:javafaker:1.0.2"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
 }
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate, reports)

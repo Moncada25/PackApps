@@ -40,8 +40,10 @@ public class SearchBook implements Task {
         Enter.theValue(book).into(SEARCH_BOOK_FIELD),
         Click.on(SEARCH_BOOK_BUTTON),
         Click.on(ALERT_ACCEPT),
-        WaitUntil.the(SEARCH_RESULT.of(book), isVisible()));
-    actor.remember("AUTHOR", Text.of(AUTHOR_BOOK.of(book)).viewedBy(actor).asString());
+        WaitUntil.the(SEARCH_RESULT.of(book), isVisible())
+    );
+
+    actor.remember("AUTHOR", Text.of(AUTHOR_BOOK.of(book)).answeredBy(actor));
     actor.attemptsTo(Click.on(OPEN_BOOK.of(book)));
   }
 }

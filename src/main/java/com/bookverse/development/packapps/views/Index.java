@@ -88,7 +88,7 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem ticTacToePvsCPU;
   protected JMenuItem tables;
   protected JMenuItem notes;
-  protected JMenuItem yes_exit;
+  protected JMenuItem yesExit;
   protected JMenuItem email;
   protected JMenuItem comment;
   protected JMenuItem guessNumberTXT;
@@ -228,7 +228,7 @@ public class Index extends JFrame implements ActionListener {
     about.add(more);
 
     JMenu exit = resources.getMenu("Exit", "exit");
-    yes_exit = resources.getMenuItem("Are you sure?", "salir", this);
+    yesExit = resources.getMenuItem("Are you sure?", "salir", this);
 
     JMenu send = resources.getMenu("Send Feedback", "send");
     email = resources.getMenuItem("Email", "email", this);
@@ -238,7 +238,7 @@ public class Index extends JFrame implements ActionListener {
     send.addSeparator();
     send.add(email);
 
-    exit.add(yes_exit);
+    exit.add(yesExit);
     exit.addSeparator();
     exit.add(send);
 
@@ -266,7 +266,7 @@ public class Index extends JFrame implements ActionListener {
     puzzle.addSeparator();
     puzzle.add(puzzle6x6);
 
-    questionsAndAnswers = resources.getMenuItem(QUESTIONS_AND_ANSWERS, "questions", this);
+    questionsAndAnswers = resources.getMenuItem(QUESTIONS_AND_ANSWERS + " (beta)", "questions", this);
 
     JMenu ticTacToe = resources.getMenu("Tic Tac Toe", "triqui");
     ticTacToePvsP = resources.getMenuItem("Player vs Player", "jvsj", this);
@@ -902,7 +902,7 @@ public class Index extends JFrame implements ActionListener {
     isWork = true;
     paintBackground(e);
 
-    if (e.getSource() == yes_exit) {
+    if (e.getSource() == yesExit) {
       Settings.fadeOut(this);
     } else if (e.getSource() == searchBook) {
       new ConsultBook(this, true).start(this);
