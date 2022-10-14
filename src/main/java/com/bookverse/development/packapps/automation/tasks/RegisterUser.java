@@ -50,27 +50,36 @@ public class RegisterUser implements Task {
   @Override
   public <T extends Actor> void performAs(T actor) {
 
-    actor.wasAbleTo(
+    actor.attemptsTo(
         WaitUntil.the(REGISTER_BUTTON, isVisible()).forNoMoreThan(5).seconds(),
-        Click.on(REGISTER_BUTTON),
-        WaitUntil.the(NAME_FIELD, isVisible()),
+        Click.on(REGISTER_BUTTON)
+    );
+
+    actor.attemptsTo(
+        WaitUntil.the(NAME_FIELD, isVisible()).forNoMoreThan(5).seconds(),
         Enter.theValue(bookverse.getName()).into(NAME_FIELD),
         Enter.theValue(bookverse.getLastName()).into(LAST_NAME_FIELD),
-        Enter.theValue(bookverse.getPhone()).into(PHONE_FIELD),
+        Enter.theValue("1234567").into(PHONE_FIELD),
         SelectFromOptions.byValue(bookverse.getOccupation()).from(OCCUPATION_LIST),
-        Enter.theValue(bookverse.getAddress()).into(ADDRESS_FIELD),
+        Enter.theValue(bookverse.getAddress()).into(ADDRESS_FIELD)
+    );
+
+    actor.attemptsTo(
         Scroll.to(USERNAME_FIELD).andAlignToTop(),
         Enter.theValue(bookverse.getUsername()).into(USERNAME_FIELD),
         Enter.theValue(bookverse.getPassword()).into(FIRST_PASSWORD_FIELD),
         Enter.theValue(bookverse.getPassword()).into(SECOND_PASSWORD_FIELD),
         Enter.theValue(bookverse.getEmail()).into(EMAIL_FIELD),
         Click.on(GENDER_CHECK.of(bookverse.getGender())),
-        Click.on(REGISTER_SUBMIT),
+        Click.on(REGISTER_SUBMIT)
+    );
+
+    actor.attemptsTo(
         WaitUntil.the(ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
         Click.on(ALERT_ACCEPT)
     );
 
-    actor.wasAbleTo(
+    actor.attemptsTo(
         WaitUntil.the(ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
         Ensure.that(Text.of(ALERT_TITLE).answeredBy(actor)).isNotEqualTo(ALERT_ERROR),
         Click.on(ALERT_ACCEPT),

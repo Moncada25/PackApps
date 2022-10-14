@@ -123,6 +123,7 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem puzzlePDF;
   protected JMenuItem read;
   protected JMenuItem OCR;
+  protected JMenuItem QR;
   protected JMenuItem searchBook;
   protected JMenuItem registerUser;
   protected JMenuItem sendWhatsApp;
@@ -454,6 +455,8 @@ public class Index extends JFrame implements ActionListener {
 
     OCR = resources.getMenuItem("OCR", "ocr", this);
 
+    QR = resources.getMenuItem("QR", "qr", this);
+
     tools.add(changeUI);
     tools.addSeparator();
     tools.add(export);
@@ -464,6 +467,7 @@ public class Index extends JFrame implements ActionListener {
     tools.addSeparator();
     tools.add(OCR);
     tools.addSeparator();
+    tools.add(QR);
     tools.addSeparator();
     tools.add(store);
     tools.addSeparator();
@@ -914,6 +918,9 @@ public class Index extends JFrame implements ActionListener {
       StartTests.startRegisterUser();
     } else if (e.getSource() == OCR) {
       new OCR(this, true).start(this);
+      setVisible(true);
+    } else if (e.getSource() == QR) {
+      new QR(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == grayMode) {
 

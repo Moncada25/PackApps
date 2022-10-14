@@ -2,7 +2,6 @@ group "com.bookverse.development.packapps"
 version "1.0-SNAPSHOT"
 
 buildscript {
-    ext.kotlin_version = "1.7.1"
     repositories {
         mavenCentral()
         maven {
@@ -11,7 +10,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath "net.serenity-bdd:serenity-gradle-plugin:3.3.1"
+        classpath "net.serenity-bdd:serenity-gradle-plugin:3.2.0"
         classpath "io.freefair.gradle:lombok-plugin:5.1.1"
     }
 }
@@ -58,7 +57,7 @@ sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/i
 sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties"]
 
 ext {
-    serenityVersion = "3.3.1"
+    serenityVersion = "3.2.0"
 }
 
 dependencies {
@@ -82,6 +81,8 @@ dependencies {
     implementation "net.sourceforge.tess4j:tess4j:4.5.4"
     implementation "io.github.bonigarcia:webdrivermanager:5.0.3"
     implementation "com.github.javafaker:javafaker:1.0.2"
+    implementation "com.google.zxing:core:3.5.0"
+    implementation "com.google.zxing:javase:3.5.0"
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
 }

@@ -7,7 +7,7 @@ import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static java.awt.Event.ENTER;
 import static javax.swing.SwingConstants.CENTER;
 
-import com.bookverse.development.packapps.automation.runners.RunSearchBook;
+import com.bookverse.development.packapps.automation.runners.SearchBookTest;
 import com.bookverse.development.packapps.automation.utils.SetUser;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.core.Settings;
@@ -139,7 +139,7 @@ public class ConsultBook extends JDialog implements ActionListener {
       Resources.setGeneralObject(SetUser.toLogin(
           txtUser.getText(),String.valueOf(txtPassword.getPassword()),String.valueOf(listBooksBox.getSelectedItem()))
       );
-      JUnitCore.runClasses(RunSearchBook.class);
+      JUnitCore.runClasses(SearchBookTest.class);
     } else {
       Alerts.inputSomethingText();
       txtUser.requestFocus();

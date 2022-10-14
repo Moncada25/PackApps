@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.automation.utils;
 
 import com.bookverse.development.packapps.automation.models.Bookverse;
-import com.bookverse.development.packapps.automation.runners.RunRegisterUser;
+import com.bookverse.development.packapps.automation.runners.RegisterUserTest;
 import com.bookverse.development.packapps.core.Resources;
 import com.bookverse.development.packapps.utils.Alerts;
 import org.junit.runner.JUnitCore;
@@ -27,7 +27,7 @@ public class StartTests {
 
       Resources.setGeneralObject(bookverse);
 
-      JUnitCore.runClasses(RunRegisterUser.class);
+      JUnitCore.runClasses(RegisterUserTest.class);
     }
   }
 }
