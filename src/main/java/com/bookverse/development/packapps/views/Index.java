@@ -16,7 +16,8 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.QUESTIONS_AND_ANSWERS;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 
-import com.bookverse.development.packapps.apps.ocr.View;
+import com.bookverse.development.packapps.apps.view.OCRView;
+import com.bookverse.development.packapps.apps.view.QRView;
 import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
@@ -919,10 +920,10 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == registerUser) {
       StartTests.startRegisterUser();
     } else if (e.getSource() == OCR) {
-      new View(this, true).start(this);
+      new OCRView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == QR) {
-      new QR(this, true).start(this);
+      new QRView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == grayMode) {
 

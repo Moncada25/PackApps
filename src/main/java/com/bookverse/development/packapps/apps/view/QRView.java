@@ -1,44 +1,32 @@
-package com.bookverse.development.packapps.views;
+package com.bookverse.development.packapps.apps.view;
 
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.ui.Resources.getFile;
-
-import com.bookverse.development.packapps.utils.constants.Styles;
-import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.ui.Effects;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.common.HybridBinarizer;
+import java.net.URL;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class QR extends JDialog implements MouseListener {
+import com.bookverse.development.packapps.utils.constants.Styles;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.ui.Resources;
+
+import static com.bookverse.development.packapps.apps.services.QRService.createQR;
+import static com.bookverse.development.packapps.apps.services.QRService.readQR;
+import static com.bookverse.development.packapps.utils.ui.Resources.getFile;
+
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+
+public class QRView extends JDialog implements MouseListener {
 
   private JLabel readQR;
   private JLabel generateQR;
@@ -46,7 +34,7 @@ public class QR extends JDialog implements MouseListener {
   private JTextArea text;
   private Resources resources = new Resources();
 
-  public QR(JFrame parent, boolean modal) {
+  public QRView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
@@ -91,38 +79,6 @@ public class QR extends JDialog implements MouseListener {
     exit.addMouseListener(this);
 
     return panel;
-  }
-
-  private String readQR(String image) {
-
-    BinaryBitmap binaryBitmap;
-
-    try {
-
-      binaryBitmap = new BinaryBitmap(
-          new HybridBinarizer(new BufferedImageLuminanceSource(
-              ImageIO.read(new FileInputStream(image))))
-      );
-
-      return new MultiFormatReader().decode(binaryBitmap).getText();
-
-    } catch (IOException | NotFoundException e) {
-      return "Error";
-    }
-  }
-
-  public void createQR(String data, String path, int height, int width)
-      throws WriterException, IOException {
-
-    final String CHARSET = "UTF-8";
-
-    BitMatrix matrix = new MultiFormatWriter().encode(
-        new String(data.getBytes(CHARSET), CHARSET), BarcodeFormat.QR_CODE, width, height);
-
-    MatrixToImageWriter.writeToPath(
-        matrix,
-        path.substring(path.lastIndexOf('.') + 1),
-        new File(path).toPath());
   }
 
   private void showQR() {
@@ -178,13 +134,9 @@ public class QR extends JDialog implements MouseListener {
 
         final String PATH = "src/main/resources/images/qr-code-generated.jpg";
 
-        try {
-          createQR(text.getText(), PATH, 400, 400);
-          Alerts.message("Pass", "QR creado");
-          showQR();
-        } catch (WriterException | IOException ex) {
-          Alerts.message("Error", "Algo pasa :(");
-        }
+        createQR(text.getText(), PATH, 400, 400);
+        Alerts.message("Pass", "QR creado");
+        showQR();
       }
 
     } else if (e.getSource() == exit) {

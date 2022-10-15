@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.apps.ocr;
+package com.bookverse.development.packapps.apps.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -17,20 +17,20 @@ import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.Resources;
 
-import static com.bookverse.development.packapps.apps.ocr.Service.readText;
+import static com.bookverse.development.packapps.apps.services.OCRService.readText;
 import static com.bookverse.development.packapps.utils.ui.Resources.getFile;
 
 import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
 import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 
-public class View extends JDialog implements MouseListener {
+public class OCRView extends JDialog implements MouseListener {
 
   private Resources resources = new Resources();
   private JLabel searchFile;
   private JLabel exit;
   private JTextArea text;
 
-  public View(JFrame parent, boolean modal) {
+  public OCRView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }

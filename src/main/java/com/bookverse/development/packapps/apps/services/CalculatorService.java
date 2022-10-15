@@ -1,11 +1,11 @@
-package com.bookverse.development.packapps.apps.calculator;
+package com.bookverse.development.packapps.apps.services;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import com.bookverse.development.packapps.utils.ui.Alerts;
 
-public class Service {
+public class CalculatorService {
 
   private static double result;
   private static boolean point = false;

@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.apps.calculator;
+package com.bookverse.development.packapps.apps.view;
 
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Effects;
@@ -17,31 +17,31 @@ import com.bookverse.development.packapps.utils.ui.Resources;
 import static com.bookverse.development.packapps.utils.Format.isNumber;
 import static com.bookverse.development.packapps.utils.Format.onlyAPoint;
 import static com.bookverse.development.packapps.utils.Format.onlyNumberCalc;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnAdd;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnClean;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnDelete;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnDivide;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnEqual;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnEuler;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnLess;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnMultiply;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnNegative;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnPoint;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnPotency;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnRoot;
-import static com.bookverse.development.packapps.apps.calculator.Service.clickOnZero;
-import static com.bookverse.development.packapps.apps.calculator.Service.keyPoint;
-import static com.bookverse.development.packapps.apps.calculator.Service.s;
-import static com.bookverse.development.packapps.apps.calculator.Service.sw;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnAdd;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnClean;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnDelete;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnDivide;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnEqual;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnEuler;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnLess;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnMultiply;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnNegative;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnPoint;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnPotency;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnRoot;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnZero;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.keyPoint;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.s;
+import static com.bookverse.development.packapps.apps.services.CalculatorService.sw;
 
-public class View extends JDialog implements ActionListener {
+public class CalculatorView extends JDialog implements ActionListener {
 
   private Resources resources = new Resources();
   private JButton[][] numbers;
   private JButton btnZero, btnPoint, btnAdd, btnLess, btnDivide, btnMultiply, btnNegative, btnRoot, btnEuler, btnPower, btnEqual, btnDelete, btnClean;
   private JTextField txtResult;
 
-  public View(JDialog parent, boolean modal) {
+  public CalculatorView(JDialog parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }

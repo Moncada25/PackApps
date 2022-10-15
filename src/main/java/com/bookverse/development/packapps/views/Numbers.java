@@ -8,7 +8,7 @@ import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
 import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 
-import com.bookverse.development.packapps.apps.calculator.View;
+import com.bookverse.development.packapps.apps.view.CalculatorView;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.BorderLayout;
@@ -116,7 +116,7 @@ public class Numbers extends JDialog implements MouseListener {
       new PrimeNumber(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == btnCalculator) {
-      new View(this, true).start(this);
+      new CalculatorView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == btnPhi) {
       new Phi(this, true).start(this);
