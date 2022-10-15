@@ -22,6 +22,8 @@ import com.bookverse.development.packapps.apps.views.FeedbackView;
 import com.bookverse.development.packapps.apps.views.ProfessionalCardView;
 import com.bookverse.development.packapps.apps.views.OCRView;
 import com.bookverse.development.packapps.apps.views.QRView;
+import com.bookverse.development.packapps.apps.views.TextsView;
+import com.bookverse.development.packapps.apps.views.WhatsAppView;
 import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.Config;
@@ -919,7 +921,7 @@ public class Index extends JFrame implements ActionListener {
       new ConsultBook(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == sendWhatsApp) {
-      new WhatsApp(this, true).start(this);
+      new WhatsAppView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == registerUser) {
       StartTests.startRegisterUser();
@@ -984,7 +986,7 @@ public class Index extends JFrame implements ActionListener {
       new FeedbackView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == texts) {
-      new Texts(this, true).start(this);
+      new TextsView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == guessNumber) {
       new GuessNumber(this, true, false).start(this);

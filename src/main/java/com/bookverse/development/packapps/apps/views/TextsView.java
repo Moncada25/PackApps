@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.views;
+package com.bookverse.development.packapps.apps.views;
 
 import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
 import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
@@ -22,13 +22,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class Texts extends JDialog implements MouseListener {
+public class TextsView extends JDialog implements MouseListener {
 
   private JLabel encrypt, decrypt, upperCase, lowerCase, exit;
   private JTextArea text;
   private Resources resources = new Resources();
 
-  public Texts(JFrame parent, boolean modal) {
+  public TextsView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
