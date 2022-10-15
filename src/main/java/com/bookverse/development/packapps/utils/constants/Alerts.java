@@ -1,5 +1,6 @@
-package com.bookverse.development.packapps.utils;
+package com.bookverse.development.packapps.utils.constants;
 
+import com.bookverse.development.packapps.utils.Format;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;

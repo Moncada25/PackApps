@@ -1,14 +1,12 @@
 package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.QUESTIONS_AND_ANSWERS;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.QUESTIONS_AND_ANSWERS;
 import static java.awt.Font.BOLD;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.utils.Alerts;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -22,7 +20,6 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class QuestionsAndAnswers extends JDialog implements ActionListener {

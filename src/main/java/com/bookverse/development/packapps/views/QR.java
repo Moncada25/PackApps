@@ -1,19 +1,16 @@
 package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.SMALL;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.ArrayData;
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.NotFoundException;
-import com.google.zxing.Result;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -21,7 +18,6 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -31,7 +27,6 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -40,8 +35,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
 
 public class QR extends JDialog implements MouseListener {
 

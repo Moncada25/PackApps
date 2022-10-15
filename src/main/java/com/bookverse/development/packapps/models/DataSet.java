@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.models;
 
-import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.AppConfig;
+import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.constants.AppConfig;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.PropertyResourceBundle;

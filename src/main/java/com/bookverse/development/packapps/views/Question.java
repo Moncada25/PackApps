@@ -4,9 +4,9 @@ import static com.bookverse.development.packapps.core.Settings.BORDER_BLUE;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;

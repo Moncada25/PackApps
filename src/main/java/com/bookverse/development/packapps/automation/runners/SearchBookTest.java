@@ -15,8 +15,8 @@ import com.bookverse.development.packapps.automation.tasks.SearchBook;
 import com.bookverse.development.packapps.automation.utils.Constants;
 import com.bookverse.development.packapps.automation.utils.ExceptionsMessages;
 import com.bookverse.development.packapps.automation.utils.WebDriverFactory;
-import com.bookverse.development.packapps.core.Resources;
-import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.Cast;
@@ -28,7 +28,7 @@ import org.junit.runner.RunWith;
 @RunWith(SerenityRunner.class)
 public class SearchBookTest {
 
-  Bookverse bookverse = (Bookverse) Resources.getGeneralObject();
+  Bookverse bookverse = (Bookverse) Resources.getObject();
 
   @Before
   public void config() {

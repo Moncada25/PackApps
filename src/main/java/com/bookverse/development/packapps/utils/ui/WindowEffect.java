@@ -1,5 +1,6 @@
-package com.bookverse.development.packapps.utils;
+package com.bookverse.development.packapps.utils.ui;
 
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 

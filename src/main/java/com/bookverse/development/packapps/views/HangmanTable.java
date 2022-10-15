@@ -2,19 +2,19 @@ package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Table;
-import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.Queries;
+import com.bookverse.development.packapps.utils.constants.Queries;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

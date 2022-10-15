@@ -1,8 +1,8 @@
 package com.bookverse.development.packapps.core;
 
 import com.bookverse.development.packapps.models.DataSet;
-import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.WindowEffect;
+import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.WindowEffect;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -10,10 +10,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.text.DateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;

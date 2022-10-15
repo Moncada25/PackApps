@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.utils;
+package com.bookverse.development.packapps.utils.constants;
 
 import com.github.javafaker.Faker;
 import java.util.HashMap;

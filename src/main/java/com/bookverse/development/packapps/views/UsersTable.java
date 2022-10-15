@@ -5,13 +5,13 @@ import static com.bookverse.development.packapps.core.Settings.HAND;
 import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
 import static com.bookverse.development.packapps.core.Settings.getBorder;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.USERS;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Table;
-import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.BorderLayout;
 import java.awt.Dimension;

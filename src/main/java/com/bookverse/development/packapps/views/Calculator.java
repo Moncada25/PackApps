@@ -2,10 +2,9 @@ package com.bookverse.development.packapps.views;
 
 import static com.bookverse.development.packapps.utils.Format.*;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -20,7 +19,7 @@ public class Calculator extends JDialog implements ActionListener {
 
   private JButton[][] numbers;
   private JButton btnZero, btnPoint, btnAdd, btnLess, btnDivide, btnMultiply, btnNegative, btnRoot, btnEuler, btnPower, btnEqual, btnDelete, btnClean;
-  private JTextField btnResult;
+  private JTextField txtResult;
   private int sw = 1, s = 1;
   private double result;
   private boolean point = false;
@@ -38,12 +37,12 @@ public class Calculator extends JDialog implements ActionListener {
     setLayout(null);
     setIconImage(new ImageIcon(resources.getImage("numeritos.png")).getImage());
 
-    btnResult = new JTextField("");
-    btnResult.setBounds(50, 14, 215, 43);
-    btnResult.setHorizontalAlignment(JTextField.CENTER);
-    add(btnResult);
+    txtResult = new JTextField("");
+    txtResult.setBounds(50, 14, 215, 43);
+    txtResult.setHorizontalAlignment(JTextField.CENTER);
+    add(txtResult);
 
-    btnResult.addKeyListener(new KeyAdapter() {
+    txtResult.addKeyListener(new KeyAdapter() {
 
       public void keyPressed(KeyEvent e) {
         txtResultKeyPressed(e);
@@ -75,8 +74,8 @@ public class Calculator extends JDialog implements ActionListener {
       }
 
       private void txtResultKeyTyped(KeyEvent e) {
-        onlyNumberCalc(e.getKeyChar(), e, btnResult.getText(), 15);
-        onlyAPoint(e.getKeyChar(), e, btnResult.getText());
+        onlyNumberCalc(e.getKeyChar(), e, txtResult.getText(), 15);
+        onlyAPoint(e.getKeyChar(), e, txtResult.getText());
       }
     });
 
@@ -87,7 +86,7 @@ public class Calculator extends JDialog implements ActionListener {
 
     for (int f = 0; f < 3; f++) {
       for (int c = 0; c < 3; c++) {
-        numbers[f][c] = resources.getButton(btnResult.getText() + n, null, this, this);
+        numbers[f][c] = resources.getButton(txtResult.getText() + n, null, this, this);
         numbers[f][c].setBounds(x, y, 43, 43);
         n++;
         x = x + 43;
@@ -168,21 +167,21 @@ public class Calculator extends JDialog implements ActionListener {
 
   private void btnZeroAP() {
 
-    if (btnResult.getText().length() < 15) {
-      btnResult.setText(btnResult.getText() + "0");
+    if (txtResult.getText().length() < 15) {
+      txtResult.setText(txtResult.getText() + "0");
     }
   }
 
   private void btnPointAP() {
 
-    content = btnResult.getText();
+    content = txtResult.getText();
 
-    if (btnResult.getText().length() < 15) {
+    if (txtResult.getText().length() < 15) {
 
       if (content.length() <= 0) {
-        btnResult.setText("0.");
-      } else if (!btnResult.getText().contains(".")) {
-        btnResult.setText(btnResult.getText() + ".");
+        txtResult.setText("0.");
+      } else if (!txtResult.getText().contains(".")) {
+        txtResult.setText(txtResult.getText() + ".");
         point = false;
       }
     }
@@ -190,31 +189,31 @@ public class Calculator extends JDialog implements ActionListener {
 
   private void inputPoint() {
 
-    content = btnResult.getText();
+    content = txtResult.getText();
 
     if (content.length() <= 0 && !point) {
-      btnResult.setText("0");
+      txtResult.setText("0");
       point = true;
-    } else if (btnResult.getText().contains(".")) {
+    } else if (txtResult.getText().contains(".")) {
       point = true;
     }
   }
 
   private void btnAddAP() {
 
-    if (!btnResult.getText().equals("")) {
-      firstNumber = btnResult.getText();
+    if (!txtResult.getText().equals("")) {
+      firstNumber = txtResult.getText();
       sign = "+";
-      btnResult.setText("");
+      txtResult.setText("");
     }
   }
 
   private void btnLessAP() {
 
-    if (!btnResult.getText().equals("")) {
-      firstNumber = btnResult.getText();
+    if (!txtResult.getText().equals("")) {
+      firstNumber = txtResult.getText();
       sign = "-";
-      btnResult.setText("");
+      txtResult.setText("");
     }
   }
 
@@ -222,10 +221,10 @@ public class Calculator extends JDialog implements ActionListener {
 
     try {
 
-      if (!btnResult.getText().equals("")) {
-        firstNumber = btnResult.getText();
+      if (!txtResult.getText().equals("")) {
+        firstNumber = txtResult.getText();
         sign = "x^y";
-        btnResult.setText("");
+        txtResult.setText("");
       }
 
     } catch (Exception e) {
@@ -237,11 +236,11 @@ public class Calculator extends JDialog implements ActionListener {
 
     try {
 
-      content = btnResult.getText();
+      content = txtResult.getText();
 
       if (content.length() > 0) {
         result = Math.sqrt(Double.parseDouble(content));
-        btnResult.setText(String.valueOf(result));
+        txtResult.setText(String.valueOf(result));
       }
 
     } catch (Exception e) {
@@ -250,27 +249,27 @@ public class Calculator extends JDialog implements ActionListener {
   }
 
   private void btnCleanAP() {
-    btnResult.setText("");
+    txtResult.setText("");
     point = false;
     result = 0;
-    btnResult.requestFocus();
+    txtResult.requestFocus();
   }
 
   private void btnMultiplyAP() {
 
-    if (!btnResult.getText().equals("")) {
-      firstNumber = btnResult.getText();
+    if (!txtResult.getText().equals("")) {
+      firstNumber = txtResult.getText();
       sign = "*";
-      btnResult.setText("");
+      txtResult.setText("");
     }
   }
 
   private void btnDivideAP() {
 
-    if (!btnResult.getText().equals("")) {
-      firstNumber = btnResult.getText();
+    if (!txtResult.getText().equals("")) {
+      firstNumber = txtResult.getText();
       sign = "/";
-      btnResult.setText("");
+      txtResult.setText("");
     }
   }
 
@@ -278,11 +277,11 @@ public class Calculator extends JDialog implements ActionListener {
 
     try {
 
-      content = btnResult.getText();
+      content = txtResult.getText();
 
       if (content.length() > 0) {
         result = Math.exp(Double.parseDouble(content));
-        btnResult.setText(String.valueOf(result));
+        txtResult.setText(String.valueOf(result));
       }
 
     } catch (Exception e) {
@@ -294,11 +293,11 @@ public class Calculator extends JDialog implements ActionListener {
 
     try {
 
-      content = btnResult.getText();
+      content = txtResult.getText();
 
       if (content.length() > 0) {
         result = (-1) * Double.parseDouble(content);
-        btnResult.setText(String.valueOf(result));
+        txtResult.setText(String.valueOf(result));
       }
 
     } catch (Exception e) {
@@ -308,11 +307,11 @@ public class Calculator extends JDialog implements ActionListener {
 
   private void btnDeleteAP() {
 
-    if (!btnResult.getText().equals("") && !btnResult.getText().equals("0")) {
-      btnResult
-          .setText(btnResult.getText().substring(0, btnResult.getText().length() - 1));
+    if (!txtResult.getText().equals("") && !txtResult.getText().equals("0")) {
+      txtResult
+          .setText(txtResult.getText().substring(0, txtResult.getText().length() - 1));
     } else {
-      btnResult.setText("");
+      txtResult.setText("");
       point = false;
       result = 0;
       sw = 1;
@@ -322,8 +321,8 @@ public class Calculator extends JDialog implements ActionListener {
 
   private void inputDelete() {
 
-    if (btnResult.getText().equals("") && !btnResult.getText().equals("0")) {
-      btnResult.setText("");
+    if (txtResult.getText().equals("") && !txtResult.getText().equals("0")) {
+      txtResult.setText("");
       point = false;
       result = 0;
       sw = 1;
@@ -336,11 +335,11 @@ public class Calculator extends JDialog implements ActionListener {
     try {
 
       String result;
-      secondNumber = btnResult.getText();
+      secondNumber = txtResult.getText();
 
       if (!secondNumber.equals("")) {
         result = operations(firstNumber, secondNumber, sign);
-        btnResult.setText(result);
+        txtResult.setText(result);
       }
 
     } catch (Exception e) {
@@ -353,11 +352,11 @@ public class Calculator extends JDialog implements ActionListener {
     try {
 
       String result;
-      secondNumber = btnResult.getText().substring(1);
+      secondNumber = txtResult.getText().substring(1);
 
       if (!secondNumber.equals("")) {
         result = operations(firstNumber, secondNumber, sign);
-        btnResult.setText(result);
+        txtResult.setText(result);
       }
 
     } catch (Exception e) {
@@ -409,25 +408,25 @@ public class Calculator extends JDialog implements ActionListener {
     for (int f = 0; f < 3; f++) {
       for (int c = 0; c < 3; c++) {
 
-        if (btnResult.getText().length() >= 15) {
+        if (txtResult.getText().length() >= 15) {
           break;
         }
 
-        if (!isNumber(btnResult.getText()) && !btnResult.getText().isEmpty()){
+        if (!isNumber(txtResult.getText()) && !txtResult.getText().isEmpty()){
           Alerts.message("Number invalid", "Try again");
-          btnResult.setText("");
+          txtResult.setText("");
           System.out.println("llegaaaaa");
         } else {
 
           if (e.getSource() == numbers[f][c] && sw == 1 && s == 1) {
 
             System.out.println("No llegaaaaa");
-            btnResult.setText("");
-            btnResult.setText(btnResult.getText() + numbers[f][c].getText());
+            txtResult.setText("");
+            txtResult.setText(txtResult.getText() + numbers[f][c].getText());
             sw = 0;
 
           } else if (e.getSource() == numbers[f][c] && (sw == 0 || s == 0)) {
-            btnResult.setText(btnResult.getText() + numbers[f][c].getText());
+            txtResult.setText(txtResult.getText() + numbers[f][c].getText());
           }
         }
 

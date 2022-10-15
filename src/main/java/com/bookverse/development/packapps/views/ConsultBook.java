@@ -9,10 +9,10 @@ import static javax.swing.SwingConstants.CENTER;
 
 import com.bookverse.development.packapps.automation.runners.SearchBookTest;
 import com.bookverse.development.packapps.automation.utils.SetUser;
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -136,7 +136,7 @@ public class ConsultBook extends JDialog implements ActionListener {
   private void btnRunAP() {
 
     if (txtUser.getText().length() >= 4 && String.valueOf(txtPassword.getPassword()).length() >= 4) {
-      Resources.setGeneralObject(SetUser.toLogin(
+      Resources.setObject(SetUser.toLogin(
           txtUser.getText(),String.valueOf(txtPassword.getPassword()),String.valueOf(listBooksBox.getSelectedItem()))
       );
       JUnitCore.runClasses(SearchBookTest.class);

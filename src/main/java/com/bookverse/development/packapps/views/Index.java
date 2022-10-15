@@ -4,28 +4,28 @@ import static com.bookverse.development.packapps.core.Settings.BORDER_BLUE;
 import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.DICES;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.LOANS;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.NOTES;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.PURCHASES;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.QUESTIONS_AND_ANSWERS;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.SALES;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.LOANS;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.QUESTIONS_AND_ANSWERS;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 
 import com.bookverse.development.packapps.automation.utils.StartTests;
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.DataSet;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.ArrayData;
-import com.bookverse.development.packapps.utils.Export;
+import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.constants.ArrayData;
+import com.bookverse.development.packapps.utils.ExportFile;
 import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.Queries;
+import com.bookverse.development.packapps.utils.constants.Queries;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -1063,7 +1063,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           guessNumberTable.cleanTable();
-          Export.txt(guessNumberTable.viewTable, Queries.getAllData(Format.tableName(GUESS_NUMBER)),
+          ExportFile.txt(guessNumberTable.viewTable, Queries.getAllData(Format.tableName(GUESS_NUMBER)),
               ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, GUESS_NUMBER);
@@ -1073,7 +1073,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           hangmanTable.cleanTable();
-          Export.txt(hangmanTable.viewTable, Queries.getAllData(Format.tableName(HANGMAN)), ".txt");
+          ExportFile.txt(hangmanTable.viewTable, Queries.getAllData(Format.tableName(HANGMAN)), ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, HANGMAN);
         }
@@ -1082,7 +1082,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           purchasesTable.cleanTable();
-          Export.txt(purchasesTable.viewTable,
+          ExportFile.txt(purchasesTable.viewTable,
               Queries.getAllData(Format.tableName(PURCHASES)),
               ".txt");
         } catch (Exception ex) {
@@ -1093,7 +1093,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           salesTable.cleanTable();
-          Export.txt(salesTable.viewTable,
+          ExportFile.txt(salesTable.viewTable,
               Queries.getAllData(Format.tableName(SALES)),
               ".txt");
         } catch (Exception ex) {
@@ -1104,7 +1104,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           dicesTable.cleanTable();
-          Export.txt(dicesTable.viewTable, Queries.getAllData(Format.tableName(DICES)), ".txt");
+          ExportFile.txt(dicesTable.viewTable, Queries.getAllData(Format.tableName(DICES)), ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, DICES);
         }
@@ -1113,7 +1113,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           notesTable.cleanTable();
-          Export.txt(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)), ".txt");
+          ExportFile.txt(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)), ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, NOTES);
         }
@@ -1122,7 +1122,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           puzzleTable.cleanTable();
-          Export.txt(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)), ".txt");
+          ExportFile.txt(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)), ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, PUZZLE);
         }
@@ -1130,7 +1130,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           inventoryTable.cleanTable();
-          Export.txt(inventoryTable.viewTable, Queries.getAllData(Format.tableName(INVENTORY)),
+          ExportFile.txt(inventoryTable.viewTable, Queries.getAllData(Format.tableName(INVENTORY)),
               ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, INVENTORY);
@@ -1139,7 +1139,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           cashRegisterTable.cleanTable();
-          Export.txt(cashRegisterTable.viewTable,
+          ExportFile.txt(cashRegisterTable.viewTable,
               Queries.getAllData(Format.tableName(CASH_REGISTER)),
               ".txt");
         } catch (Exception ex) {
@@ -1149,7 +1149,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           loansTable.cleanTable();
-          Export.txt(loansTable.viewTable,
+          ExportFile.txt(loansTable.viewTable,
               Queries.getAllData(Format.tableName(LOANS)),
               ".txt");
         } catch (Exception ex) {
@@ -1160,7 +1160,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           guessNumberTable.cleanTable();
-          Export.pdf(guessNumberTable.viewTable, GUESS_NUMBER,
+          ExportFile.pdf(guessNumberTable.viewTable, GUESS_NUMBER,
               Queries.getAllData(Format.tableName(GUESS_NUMBER)),
               ".pdf");
         } catch (Exception ex) {
@@ -1171,7 +1171,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           hangmanTable.cleanTable();
-          Export.pdf(hangmanTable.viewTable, HANGMAN, Queries.getAllData(Format.tableName(HANGMAN)),
+          ExportFile.pdf(hangmanTable.viewTable, HANGMAN, Queries.getAllData(Format.tableName(HANGMAN)),
               ".pdf");
         } catch (Exception ex) {
           Alerts.error(ex, HANGMAN);
@@ -1181,7 +1181,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           purchasesTable.cleanTable();
-          Export.pdf(purchasesTable.viewTable, PURCHASES,
+          ExportFile.pdf(purchasesTable.viewTable, PURCHASES,
               Queries.getAllData(Format.tableName(PURCHASES)),
               ".pdf");
         } catch (Exception ex) {
@@ -1192,7 +1192,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           salesTable.cleanTable();
-          Export.pdf(salesTable.viewTable, SALES,
+          ExportFile.pdf(salesTable.viewTable, SALES,
               Queries.getAllData(Format.tableName(SALES)),
               ".pdf");
         } catch (Exception ex) {
@@ -1203,7 +1203,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           dicesTable.cleanTable();
-          Export.pdf(dicesTable.viewTable, DICES, Queries.getAllData(
+          ExportFile.pdf(dicesTable.viewTable, DICES, Queries.getAllData(
               Format.tableName(DICES)), ".pdf");
         } catch (Exception ex) {
           Alerts.error(ex, DICES);
@@ -1213,7 +1213,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           notesTable.cleanTable();
-          Export.pdf(notesTable.viewTable, NOTES, Queries
+          ExportFile.pdf(notesTable.viewTable, NOTES, Queries
                   .getAllData(Format.tableName(NOTES)),
               ".pdf");
         } catch (Exception ex) {
@@ -1224,7 +1224,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           puzzleTable.cleanTable();
-          Export.pdf(puzzleTable.viewTable, PUZZLE,
+          ExportFile.pdf(puzzleTable.viewTable, PUZZLE,
               Queries.getAllData(Format.tableName(PUZZLE)), ".pdf");
         } catch (Exception ex) {
           Alerts.error(ex, PUZZLE);
@@ -1233,7 +1233,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           inventoryTable.cleanTable();
-          Export.pdf(inventoryTable.viewTable, INVENTORY,
+          ExportFile.pdf(inventoryTable.viewTable, INVENTORY,
               Queries.getAllData(Format.tableName(INVENTORY)), ".pdf");
         } catch (Exception ex) {
           Alerts.error(ex, INVENTORY);
@@ -1242,7 +1242,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           cashRegisterTable.cleanTable();
-          Export.pdf(cashRegisterTable.viewTable, CASH_REGISTER,
+          ExportFile.pdf(cashRegisterTable.viewTable, CASH_REGISTER,
               Queries.getAllData(Format.tableName(CASH_REGISTER)),
               ".pdf");
         } catch (Exception ex) {
@@ -1252,7 +1252,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           loansTable.cleanTable();
-          Export.pdf(loansTable.viewTable, LOANS,
+          ExportFile.pdf(loansTable.viewTable, LOANS,
               Queries.getAllData(Format.tableName(LOANS)),
               ".pdf");
         } catch (Exception ex) {
@@ -1262,7 +1262,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           guessNumberTable.cleanTable();
-          Export
+          ExportFile
               .excel(guessNumberTable.viewTable, Queries.getAllData(Format.tableName(GUESS_NUMBER)),
                   ".xls");
         } catch (Exception ex) {
@@ -1273,7 +1273,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           hangmanTable.cleanTable();
-          Export
+          ExportFile
               .excel(hangmanTable.viewTable, Queries.getAllData(Format.tableName(HANGMAN)), ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, HANGMAN);
@@ -1283,7 +1283,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           purchasesTable.cleanTable();
-          Export.excel(purchasesTable.viewTable,
+          ExportFile.excel(purchasesTable.viewTable,
               Queries.getAllData(Format.tableName(PURCHASES)),
               ".xls");
         } catch (Exception ex) {
@@ -1294,7 +1294,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           salesTable.cleanTable();
-          Export.excel(salesTable.viewTable,
+          ExportFile.excel(salesTable.viewTable,
               Queries.getAllData(Format.tableName(SALES)),
               ".xls");
         } catch (Exception ex) {
@@ -1305,7 +1305,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           dicesTable.cleanTable();
-          Export.excel(dicesTable.viewTable, Queries.getAllData(Format.tableName(DICES)), ".xls");
+          ExportFile.excel(dicesTable.viewTable, Queries.getAllData(Format.tableName(DICES)), ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, DICES);
         }
@@ -1314,7 +1314,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           notesTable.cleanTable();
-          Export.excel(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)), ".xls");
+          ExportFile.excel(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)), ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, NOTES);
         }
@@ -1323,7 +1323,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           puzzleTable.cleanTable();
-          Export.excel(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)), ".xls");
+          ExportFile.excel(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)), ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, PUZZLE);
         }
@@ -1331,7 +1331,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           inventoryTable.cleanTable();
-          Export.excel(inventoryTable.viewTable, Queries.getAllData(Format.tableName(INVENTORY)),
+          ExportFile.excel(inventoryTable.viewTable, Queries.getAllData(Format.tableName(INVENTORY)),
               ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, INVENTORY);
@@ -1340,7 +1340,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           cashRegisterTable.cleanTable();
-          Export.excel(cashRegisterTable.viewTable,
+          ExportFile.excel(cashRegisterTable.viewTable,
               Queries.getAllData(Format.tableName(CASH_REGISTER)),
               ".xls");
         } catch (Exception ex) {
@@ -1350,7 +1350,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           loansTable.cleanTable();
-          Export.excel(loansTable.viewTable,
+          ExportFile.excel(loansTable.viewTable,
               Queries.getAllData(Format.tableName(LOANS)),
               ".xls");
         } catch (Exception ex) {

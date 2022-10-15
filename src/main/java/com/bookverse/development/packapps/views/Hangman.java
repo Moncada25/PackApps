@@ -4,14 +4,14 @@ import static com.bookverse.development.packapps.core.Settings.BIG;
 import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
 import static com.bookverse.development.packapps.core.Settings.MEDIUM;
 import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.HANGMAN;
 import static java.awt.Font.PLAIN;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.Alerts;
-import com.bookverse.development.packapps.utils.ArrayData;
+import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.Font;
 import java.awt.Graphics;

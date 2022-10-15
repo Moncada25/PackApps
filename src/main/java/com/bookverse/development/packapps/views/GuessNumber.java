@@ -8,12 +8,12 @@ import static com.bookverse.development.packapps.core.Settings.fadeIn;
 import static com.bookverse.development.packapps.utils.Format.getDate;
 import static com.bookverse.development.packapps.core.Settings.getIntRandom;
 import static com.bookverse.development.packapps.core.Settings.verifyConnection;
-import static com.bookverse.development.packapps.utils.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
 
-import com.bookverse.development.packapps.core.Resources;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

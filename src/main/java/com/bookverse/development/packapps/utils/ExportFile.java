@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.utils;
 
 import com.bookverse.development.packapps.models.Database;
+import com.bookverse.development.packapps.utils.constants.Alerts;
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
@@ -28,7 +29,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.jetbrains.annotations.NotNull;
 
-public class Export {
+public class ExportFile {
 
   private static int n = 1;
   private static String filePath;

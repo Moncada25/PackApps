@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.utils;
+package com.bookverse.development.packapps.utils.constants;
 
 public enum AppConfig {
 

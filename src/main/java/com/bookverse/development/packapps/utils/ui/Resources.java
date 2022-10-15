@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.core;
+package com.bookverse.development.packapps.utils.ui;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -15,14 +15,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class Resources {
 
-  private static Object generalObject;
+  private static Object object;
 
-  public static Object getGeneralObject() {
-    return generalObject;
+  public static Object getObject() {
+    return object;
   }
 
-  public static void setGeneralObject(Object generalObject) {
-    Resources.generalObject = generalObject;
+  public static void setObject(Object object) {
+    Resources.object = object;
   }
 
   public URL getImage(String image) {
