@@ -16,6 +16,7 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.QUESTIONS_AND_ANSWERS;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 
+import com.bookverse.development.packapps.apps.views.EmailView;
 import com.bookverse.development.packapps.apps.views.FeedbackView;
 import com.bookverse.development.packapps.apps.views.ProfessionalCardView;
 import com.bookverse.development.packapps.apps.views.OCRView;
@@ -976,7 +977,7 @@ public class Index extends JFrame implements ActionListener {
       }
 
     } else if (e.getSource() == email) {
-      new Email(this, true).start(this);
+      new EmailView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == comment) {
       new FeedbackView(this, true).start(this);

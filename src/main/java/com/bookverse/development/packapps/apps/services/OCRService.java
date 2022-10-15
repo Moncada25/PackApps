@@ -20,4 +20,7 @@ public final class OCRService {
       return "Error";
     }
   }
+
+  private OCRService(){
+  }
 }

@@ -54,4 +54,7 @@ public final class FeedbackService {
       }
     }
   }
+
+  private FeedbackService(){
+  }
 }

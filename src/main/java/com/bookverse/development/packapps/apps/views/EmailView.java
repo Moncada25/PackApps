@@ -1,27 +1,9 @@
-package com.bookverse.development.packapps.views;
+package com.bookverse.development.packapps.apps.views;
 
-import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.utils.constants.Styles.SMALL;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
-
-import com.bookverse.development.packapps.utils.GeneralUtilities;
-import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.models.DataSet;
-import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,7 +16,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Email extends JDialog implements ActionListener, MouseListener {
+import com.bookverse.development.packapps.models.DataSet;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Effects;
+
+import static com.bookverse.development.packapps.apps.services.EmailService.clickOnSend;
+import static com.bookverse.development.packapps.apps.services.EmailService.receiver;
+
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.SMALL;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+
+public class EmailView extends JDialog implements ActionListener, MouseListener {
 
   private JLabel required1, required2;
   private JButton btnSend, btnExit;
@@ -43,9 +39,8 @@ public class Email extends JDialog implements ActionListener, MouseListener {
   private JPasswordField password;
   private Resources resources = new Resources();
   private JRadioButton toDeveloper, toOther;
-  private String receiver = DataSet.getDeveloperEmail();
 
-  public Email(JFrame parent, boolean modal) {
+  public EmailView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
@@ -136,71 +131,11 @@ public class Email extends JDialog implements ActionListener, MouseListener {
     add(scroll);
   }
 
-  private void sendMail(String sender, String password, String body) {
-
-    String affair = "Email from PackApps";
-
-    Properties props = System.getProperties();
-    props.put("mail.smtp.host", "smtp.gmail.com");
-    props.put("mail.smtp.user", sender);
-    props.put("mail.smtp.clave", password);
-    props.put("mail.smtp.auth", "true");
-    props.put("mail.smtp.starttls.enable", "true");
-    props.put("mail.smtp.port", "587");
-
-    Session session = Session.getDefaultInstance(props);
-    MimeMessage message = new MimeMessage(session);
-
-    try {
-      message.setFrom(new InternetAddress(sender));
-      message.addRecipients(Message.RecipientType.TO, receiver);
-      message.setSubject(affair);
-      message.setText(body);
-      Transport transport = session.getTransport("smtp");
-      transport.connect("smtp.gmail.com", sender, password);
-      transport.sendMessage(message, message.getAllRecipients());
-      transport.close();
-
-      if(toDeveloper.isSelected()){
-        Alerts.message("Success!", "<center>Email sent</center> <br>"
-            + "Feedback sent successfully, your opinion is very important to us.");
-      }else{
-        Alerts.message("Success!", "Your email was sent successfully.");
-      }
-
-      txtUser.setText("");
-      this.password.setText("");
-      text.setText("");
-
-    } catch (MessagingException me) {
-      Alerts.message("Error", "Email not sent");
-    }
-  }
-
-  private void btnSendAP() {
-
-    if (GeneralUtilities.verifyConnection("Make sure you are connected to a network", true)) {
-
-      if (text.getText().trim().length() < 5 || txtUser.getText().trim().length() < 10) {
-        Alerts.message("Verify", "Fields too short");
-        text.requestFocus();
-      } else {
-
-        if (txtUser.getText().endsWith("@gmail.com")) {
-          sendMail(txtUser.getText(), String.valueOf(password.getPassword()), text.getText());
-        } else {
-          Alerts.message("Verify!", "Invalid email, make sure it's Gmail.");
-          txtUser.requestFocus();
-        }
-      }
-    }
-  }
-
   @Override
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnSend) {
-      btnSendAP();
+      clickOnSend(text, txtUser, password, toDeveloper.isSelected());
     } else if (e.getSource() == btnExit) {
       Effects.fadeOut(this);
     }
@@ -220,8 +155,7 @@ public class Email extends JDialog implements ActionListener, MouseListener {
     if (e.getSource() == toOther) {
       receiver = Alerts.inputText("Input receiver email");
 
-      if (receiver == null || receiver.trim().equals("") || !receiver.contains("@") || !receiver
-          .contains(".")) {
+      if (receiver == null || receiver.trim().equals("") || !receiver.contains("@") || !receiver.contains(".")) {
         receiver = DataSet.getDeveloperEmail();
         toDeveloper.setSelected(true);
         toOther.setText("<html><strong>Other</strong></html>");

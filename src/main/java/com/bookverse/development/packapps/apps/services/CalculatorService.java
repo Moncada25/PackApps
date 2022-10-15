@@ -197,4 +197,7 @@ public final class CalculatorService {
       Alerts.error(e, "Calculator");
     }
   }
+
+  private CalculatorService(){
+  }
 }

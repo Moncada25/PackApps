@@ -51,4 +51,7 @@ public final class QRService {
         new File(path).toPath()
     );
   }
+
+  private QRService(){
+  }
 }
