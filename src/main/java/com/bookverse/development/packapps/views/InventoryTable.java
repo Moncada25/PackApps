@@ -1,17 +1,17 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BIG;
-import static com.bookverse.development.packapps.core.Settings.HAND;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.Settings.getBorder;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
 
+import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Table;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -211,7 +211,7 @@ public class InventoryTable extends JDialog implements MouseListener {
       Alerts.message("Delete", "No record selected");
     } else {
 
-      if (Settings.loginDBA()) {
+      if (GeneralUtilities.loginDBA()) {
 
         int[] rows = viewTable.getSelectedRows();
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))

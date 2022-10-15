@@ -1,16 +1,17 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static java.awt.Event.ENTER;
 import static javax.swing.SwingConstants.CENTER;
 
+import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,7 +47,7 @@ public class WhatsApp extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Open conversation on WhatsApp");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -127,12 +128,12 @@ public class WhatsApp extends JDialog implements ActionListener {
   private void btnReturnAP() {
     txtNumber.setText("");
     txtNumber.setEnabled(true);
-    Settings.fadeOut(this);
+    Effects.fadeOut(this);
   }
 
   private void btnRunAP() {
 
-    if (Settings.verifyConnection("Connect to see more!", true)) {
+    if (GeneralUtilities.verifyConnection("Connect to see more!", true)) {
 
       if (txtNumber.getText().length() >= 8) {
 

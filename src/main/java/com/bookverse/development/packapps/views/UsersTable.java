@@ -1,17 +1,18 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BIG;
-import static com.bookverse.development.packapps.core.Settings.HAND;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.Settings.getBorder;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
+import com.bookverse.development.packapps.utils.Crypto;
+import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Table;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -152,7 +153,7 @@ public class UsersTable extends JDialog implements MouseListener {
         try {
 
           if (Database.searchUserRegister(user,
-              Settings.encrypt(Alerts.inputPassword("Enter password"), true))) {
+              Crypto.encrypt(Alerts.inputPassword("Enter password"), true))) {
 
             Object option = null;
 
@@ -173,7 +174,7 @@ public class UsersTable extends JDialog implements MouseListener {
                   Alerts.message("Message", "The password are too weak, please try again.");
                 } else {
 
-                  Database.updatePassword(user, Settings.encrypt(newPassword, true));
+                  Database.updatePassword(user, Crypto.encrypt(newPassword, true));
                   Alerts.message("Success", "Password updated!");
                   dispose();
                   new HomeStore().btnUsersTableAP();
@@ -235,7 +236,7 @@ public class UsersTable extends JDialog implements MouseListener {
           String[] IDs = Arrays.stream(selectedRows).mapToObj(selectedRow ->
               String.valueOf(model.getValueAt(selectedRow, 0))).toArray(String[]::new);
 
-          if (Settings.loginDBA()) {
+          if (GeneralUtilities.loginDBA()) {
             Database.deleteData(IDs, USERS);
             dispose();
             new HomeStore().btnUsersTableAP();

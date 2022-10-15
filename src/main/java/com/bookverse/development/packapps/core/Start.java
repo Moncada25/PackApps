@@ -41,6 +41,10 @@
 1102 utils p = 137.7 : 8 files & 115 images
 13426 views p = 319,6 : 42 files
 16407 total : 83 files
+
+@Refactor v2 - Scaling and decoupling
+@Started: 10/10/2022
+
 */
 
 package com.bookverse.development.packapps.core;

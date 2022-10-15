@@ -4,7 +4,7 @@ import com.github.javafaker.Faker;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ArrayData {
+public final class ArrayData {
 
   public static String getPathBackground(int index) {
 

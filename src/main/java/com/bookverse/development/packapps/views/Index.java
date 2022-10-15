@@ -1,9 +1,9 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BORDER_BLUE;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.BORDER_BLUE;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
@@ -16,16 +16,18 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.QUESTIONS_AND_ANSWERS;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 
+import com.bookverse.development.packapps.apps.ocr.View;
 import com.bookverse.development.packapps.automation.utils.StartTests;
+import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.DataSet;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.ExportFile;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.constants.Queries;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -203,7 +205,7 @@ public class Index extends JFrame implements ActionListener {
     window.setTitle(DataSet.getTitleApp());
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
     window.classicMode.setForeground(MAIN_COLOR);
-    Settings.fadeIn(window);
+    Effects.fadeIn(window);
     window.setVisible(true);
   }
 
@@ -491,7 +493,7 @@ public class Index extends JFrame implements ActionListener {
   private void changeBackgroundAP(String name, int width, int length) {
 
     try {
-      Settings.fadeIn(this);
+      Effects.fadeIn(this);
       setVisible(false);
       ((JPanel) getContentPane()).setOpaque(false);
       welcome.setIcon(new ImageIcon(resources.getImage(name)));
@@ -525,7 +527,7 @@ public class Index extends JFrame implements ActionListener {
     guessNumberTable.setMinimumSize(new Dimension(830, 400));
     guessNumberTable.setMaximumSize(new Dimension(1280, 720));
     guessNumberTable.setTitle(GUESS_NUMBER + " Information");
-    Settings.fadeIn(guessNumberTable);
+    Effects.fadeIn(guessNumberTable);
     guessNumberTable.setVisible(true);
   }
 
@@ -545,7 +547,7 @@ public class Index extends JFrame implements ActionListener {
     hangmanTable.setMinimumSize(new Dimension(830, 400));
     hangmanTable.setMaximumSize(new Dimension(1280, 720));
     hangmanTable.setTitle(HANGMAN + " Information");
-    Settings.fadeIn(hangmanTable);
+    Effects.fadeIn(hangmanTable);
     hangmanTable.setVisible(true);
   }
 
@@ -567,7 +569,7 @@ public class Index extends JFrame implements ActionListener {
       dicesTable.setMinimumSize(new Dimension(830, 400));
       dicesTable.setMaximumSize(new Dimension(1280, 720));
       dicesTable.setTitle(DICES + " Information");
-      Settings.fadeIn(dicesTable);
+      Effects.fadeIn(dicesTable);
       dicesTable.setVisible(true);
     }
 
@@ -588,7 +590,7 @@ public class Index extends JFrame implements ActionListener {
     notesTable.setMinimumSize(new Dimension(830, 400));
     notesTable.setMaximumSize(new Dimension(1280, 720));
     notesTable.setTitle(NOTES + " Information");
-    Settings.fadeIn(notesTable);
+    Effects.fadeIn(notesTable);
     notesTable.setVisible(true);
   }
 
@@ -607,7 +609,7 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.setMaximumSize(new Dimension(1280, 720));
     puzzleTable.setTitle(PUZZLE + " Information");
     setVisible(false);
-    Settings.fadeIn(puzzleTable);
+    Effects.fadeIn(puzzleTable);
     puzzleTable.setVisible(true);
   }
 
@@ -673,7 +675,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.grayMode.setForeground(MAIN_COLOR);
-          Settings.fadeIn(window);
+          Effects.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Gray");
 
@@ -714,7 +716,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.textureMode.setForeground(MAIN_COLOR);
-          Settings.fadeIn(window);
+          Effects.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Texture");
 
@@ -754,7 +756,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.darkMode.setForeground(MAIN_COLOR);
-          Settings.fadeIn(window);
+          Effects.fadeIn(window);
           window.setVisible(true);
 
           Alerts.changeUI("Dark");
@@ -797,7 +799,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.macMode.setForeground(MAIN_COLOR);
-          Settings.fadeIn(window);
+          Effects.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Mac OS");
 
@@ -842,7 +844,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.mintMode.setForeground(MAIN_COLOR);
-          Settings.fadeIn(window);
+          Effects.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Mint");
 
@@ -887,7 +889,7 @@ public class Index extends JFrame implements ActionListener {
           window.setTitle(getTitle());
           window.wallpapers[background - 1].setForeground(MAIN_COLOR);
           window.classicMode.setForeground(MAIN_COLOR);
-          Settings.fadeIn(window);
+          Effects.fadeIn(window);
           window.setVisible(true);
           Alerts.changeUI("Classic");
 
@@ -907,7 +909,7 @@ public class Index extends JFrame implements ActionListener {
     paintBackground(e);
 
     if (e.getSource() == yesExit) {
-      Settings.fadeOut(this);
+      Effects.fadeOut(this);
     } else if (e.getSource() == searchBook) {
       new ConsultBook(this, true).start(this);
       setVisible(true);
@@ -917,7 +919,7 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == registerUser) {
       StartTests.startRegisterUser();
     } else if (e.getSource() == OCR) {
-      new OCR(this, true).start(this);
+      new View(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == QR) {
       new QR(this, true).start(this);
@@ -1024,7 +1026,7 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == read) {
       new Card(this, true).start(this);
       setVisible(true);
-    } else if (Settings.verifyConnection("Connect to see more!", isWork)) {
+    } else if (GeneralUtilities.verifyConnection("Connect to see more!", isWork)) {
 
       if (e.getSource() == roulette) {
 

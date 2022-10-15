@@ -1,12 +1,12 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.QUESTIONS_AND_ANSWERS;
 import static java.awt.Font.BOLD;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -50,7 +50,7 @@ public class QuestionsAndAnswers extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(QUESTIONS_AND_ANSWERS + " (beta)");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesPreguntas();
 //pack();
@@ -62,7 +62,7 @@ public class QuestionsAndAnswers extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(QUESTIONS_AND_ANSWERS + " (beta)");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesPreguntas();
 

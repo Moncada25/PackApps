@@ -1,20 +1,20 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BIG;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.Settings.fadeIn;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ui.Effects.fadeIn;
 import static com.bookverse.development.packapps.utils.Format.getDate;
-import static com.bookverse.development.packapps.core.Settings.getIntRandom;
-import static com.bookverse.development.packapps.core.Settings.verifyConnection;
+import static com.bookverse.development.packapps.utils.GeneralUtilities.getIntRandom;
+import static com.bookverse.development.packapps.utils.GeneralUtilities.verifyConnection;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -131,7 +131,7 @@ public class GuessNumber extends JDialog implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnReturn) {
-      Settings.fadeOut(this);
+      Effects.fadeOut(this);
     } else if (e.getSource() == btnPlay) {
       btnPlayAP();
     }
@@ -176,7 +176,7 @@ public class GuessNumber extends JDialog implements ActionListener {
     setSize(430, 330);
     setResizable(false);
     setLocationRelativeTo(parent);
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesAdivinar();
     setVisible(true);

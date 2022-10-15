@@ -7,11 +7,12 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
+import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.Queries;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -99,7 +100,7 @@ public class HomeStore extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Welcome " + userLogged + "!");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -121,7 +122,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.setMaximumSize(new Dimension(1280, 720));
     table.setLocationRelativeTo(null);
     table.setTitle(CASH_REGISTER);
-    Settings.fadeIn(table);
+    Effects.fadeIn(table);
     setVisible(false);
     table.setVisible(true);
   }
@@ -143,7 +144,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.setMaximumSize(new Dimension(1280, 720));
     table.setLocationRelativeTo(null);
     table.setTitle("Available products");
-    Settings.fadeIn(table);
+    Effects.fadeIn(table);
     setVisible(false);
     table.setVisible(true);
   }
@@ -165,7 +166,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.setMaximumSize(new Dimension(1280, 720));
     table.setLocationRelativeTo(null);
     table.setTitle(LOANS);
-    Settings.fadeIn(table);
+    Effects.fadeIn(table);
     setVisible(false);
     table.setVisible(true);
   }
@@ -187,7 +188,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.setMaximumSize(new Dimension(1280, 720));
     table.setLocationRelativeTo(null);
     table.setTitle(PURCHASES);
-    Settings.fadeIn(table);
+    Effects.fadeIn(table);
     setVisible(false);
     table.setVisible(true);
   }
@@ -209,7 +210,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.setMaximumSize(new Dimension(1280, 720));
     table.setLocationRelativeTo(null);
     table.setTitle(SALES);
-    Settings.fadeIn(table);
+    Effects.fadeIn(table);
     setVisible(false);
     table.setVisible(true);
   }
@@ -231,7 +232,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.setMaximumSize(new Dimension(1280, 720));
     table.setLocationRelativeTo(null);
     table.setTitle(USERS);
-    Settings.fadeIn(table);
+    Effects.fadeIn(table);
     setVisible(false);
     table.setVisible(true);
   }
@@ -246,7 +247,7 @@ public class HomeStore extends JDialog implements ActionListener {
 
   private void logout() {
     Database.recordLogin("Offline", userLogged);
-    Settings.fadeOut(this);
+    Effects.fadeOut(this);
   }
 
   @Override
@@ -256,7 +257,7 @@ public class HomeStore extends JDialog implements ActionListener {
       logout();
     } else {
 
-      if (Settings.verifyConnection("Make sure you are connected to a network", true)) {
+      if (GeneralUtilities.verifyConnection("Make sure you are connected to a network", true)) {
 
         if (e.getSource() == buy) {
           new Purchases(this, true).start(this);

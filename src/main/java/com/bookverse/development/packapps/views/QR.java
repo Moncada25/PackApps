@@ -1,11 +1,13 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ui.Resources.getFile;
 
+import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.MultiFormatReader;
@@ -49,28 +51,6 @@ public class QR extends JDialog implements MouseListener {
     createComponents();
   }
 
-  private String getPath() {
-
-    JFileChooser chooser = new JFileChooser();
-    chooser.addChoosableFileFilter(new FileNameExtensionFilter(
-        "Images (PNG - JPG)", "png", "jpg", "pdf")
-    );
-    chooser.setAcceptAllFileFilterUsed(false);
-
-    String path = "";
-
-    try {
-
-      if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-        path = chooser.getSelectedFile().getAbsolutePath();
-      }
-
-    } catch (Exception ex) {
-      Alerts.error(ex, "QR");
-    }
-    return path;
-  }
-
   private void createComponents() {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -89,7 +69,7 @@ public class QR extends JDialog implements MouseListener {
     setSize(500, 200);
     setLocationRelativeTo(parent);
     setTitle("QR");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -98,17 +78,17 @@ public class QR extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
 
-    readQR = resources.getLabel("  READ QR  ", TEXT_COLOR, panel, Settings.MEDIUM);
-    readQR.setBorder(Settings.BORDER_BLUE);
+    readQR = resources.getLabel("  READ QR  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    readQR.setBorder(Styles.BORDER_BLUE);
     readQR.addMouseListener(this);
 
-    exit = resources.getLabel("  RETURN  ", MAIN_COLOR, panel, Settings.MEDIUM);
-    exit.setBorder(Settings.BORDER_RED);
-    exit.addMouseListener(this);
-
-    generateQR = resources.getLabel("  GENERATE QR  ", TEXT_COLOR, panel, Settings.MEDIUM);
-    generateQR.setBorder(Settings.BORDER_BLUE);
+    generateQR = resources.getLabel("  GENERATE QR  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    generateQR.setBorder(Styles.BORDER_BLUE);
     generateQR.addMouseListener(this);
+
+    exit = resources.getLabel("  RETURN  ", MAIN_COLOR, panel, Styles.MEDIUM);
+    exit.setBorder(Styles.BORDER_RED);
+    exit.addMouseListener(this);
 
     return panel;
   }
@@ -171,7 +151,7 @@ public class QR extends JDialog implements MouseListener {
 
     if (e.getSource() == readQR) {
 
-      String response = readQR(getPath());
+      String response = readQR(getFile(this));
 
       if ("Error".equals(response)) {
         Alerts.message("Message", "File not found");
@@ -208,7 +188,7 @@ public class QR extends JDialog implements MouseListener {
       }
 
     } else if (e.getSource() == exit) {
-      Settings.fadeOut(this);
+      Effects.fadeOut(this);
     }
   }
 
@@ -225,11 +205,11 @@ public class QR extends JDialog implements MouseListener {
   @Override
   public void mouseEntered(MouseEvent e) {
     if (e.getSource() == readQR) {
-      readQR.setCursor(Settings.HAND);
+      readQR.setCursor(Styles.HAND);
     } else if (e.getSource() == generateQR) {
-      generateQR.setCursor(Settings.HAND);
+      generateQR.setCursor(Styles.HAND);
     } else if (e.getSource() == exit) {
-      exit.setCursor(Settings.HAND);
+      exit.setCursor(Styles.HAND);
     }
   }
 

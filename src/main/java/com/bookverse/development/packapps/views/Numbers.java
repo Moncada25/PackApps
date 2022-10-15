@@ -1,16 +1,16 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BORDER_BLUE;
-import static com.bookverse.development.packapps.core.Settings.BORDER_RED;
-import static com.bookverse.development.packapps.core.Settings.HAND;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.Settings.getBorder;
+import static com.bookverse.development.packapps.utils.constants.Styles.BORDER_BLUE;
+import static com.bookverse.development.packapps.utils.constants.Styles.BORDER_RED;
+import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 
 import com.bookverse.development.packapps.apps.calculator.View;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -73,7 +73,7 @@ public class Numbers extends JDialog implements MouseListener {
     setMaximumSize(new Dimension(1295, 820));
     setLocationRelativeTo(parent);
     setTitle("Numbers");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -128,7 +128,7 @@ public class Numbers extends JDialog implements MouseListener {
       new OtherThings(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == welcome) {
-      Settings.fadeOut(this);
+      Effects.fadeOut(this);
     }
   }
 

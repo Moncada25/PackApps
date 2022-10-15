@@ -1,22 +1,22 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BIG;
-import static com.bookverse.development.packapps.core.Settings.HAND;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.core.Settings.SMALL;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.SMALL;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.Format.getDate;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.constants.Queries;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -255,7 +255,7 @@ public class Sales extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Sell");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -266,7 +266,7 @@ public class Sales extends JDialog implements ActionListener {
     unitsActual.setText("1");
     unitsAvailable.setText("");
     txtPrice.setText("");
-    Settings.fadeOut(this);
+    Effects.fadeOut(this);
   }
 
   private void btnSubmitAP() {
@@ -350,7 +350,7 @@ public class Sales extends JDialog implements ActionListener {
     inventoryTable.setMinimumSize(new Dimension(830, 400));
     inventoryTable.setLocationRelativeTo(null);
     inventoryTable.setTitle("Available products");
-    Settings.fadeIn(inventoryTable);
+    Effects.fadeIn(inventoryTable);
     setVisible(false);
     inventoryTable.setVisible(true);
   }

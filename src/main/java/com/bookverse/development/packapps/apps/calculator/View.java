@@ -1,5 +1,7 @@
 package com.bookverse.development.packapps.apps.calculator;
 
+import com.bookverse.development.packapps.utils.constants.Styles;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -9,8 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.core.Settings;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Resources;
 
 import static com.bookverse.development.packapps.utils.Format.isNumber;
@@ -35,7 +36,7 @@ import static com.bookverse.development.packapps.apps.calculator.Service.sw;
 
 public class View extends JDialog implements ActionListener {
 
-  private final Resources R = new Resources();
+  private Resources resources = new Resources();
   private JButton[][] numbers;
   private JButton btnZero, btnPoint, btnAdd, btnLess, btnDivide, btnMultiply, btnNegative, btnRoot, btnEuler, btnPower, btnEqual, btnDelete, btnClean;
   private JTextField txtResult;
@@ -48,7 +49,7 @@ public class View extends JDialog implements ActionListener {
   private void createComponents() {
 
     setLayout(null);
-    setIconImage(new ImageIcon(R.getImage("numeritos.png")).getImage());
+    setIconImage(new ImageIcon(resources.getImage("numeritos.png")).getImage());
 
     txtResult = new JTextField("");
     txtResult.setBounds(50, 14, 215, 43);
@@ -99,7 +100,7 @@ public class View extends JDialog implements ActionListener {
 
     for (int f = 0; f < 3; f++) {
       for (int c = 0; c < 3; c++) {
-        numbers[f][c] = R.getButton(txtResult.getText() + n, null, this, this);
+        numbers[f][c] = resources.getButton(txtResult.getText() + n, null, this, this);
         numbers[f][c].setBounds(x, y, 43, 43);
         n++;
         x = x + 43;
@@ -109,43 +110,43 @@ public class View extends JDialog implements ActionListener {
       y = y + 43;
     }
 
-    btnZero = R.getButton("0", null, this, this);
+    btnZero = resources.getButton("0", null, this, this);
     btnZero.setBounds(50, 229, 86, 43);
 
-    btnPoint = R.getButton(".", null, this, this);
+    btnPoint = resources.getButton(".", null, this, this);
     btnPoint.setBounds(136, 229, 43, 43);
 
-    btnAdd = R.getButton("+", null, this, this);
+    btnAdd = resources.getButton("+", null, this, this);
     btnAdd.setBounds(179, 229, 43, 43);
 
-    btnLess = R.getButton("-", null, this, this);
+    btnLess = resources.getButton("-", null, this, this);
     btnLess.setBounds(179, 186, 43, 43);
 
-    btnMultiply = R.getButton("*", null, this, this);
+    btnMultiply = resources.getButton("*", null, this, this);
     btnMultiply.setBounds(179, 143, 43, 43);
 
-    btnDivide = R.getButton("/", null, this, this);
+    btnDivide = resources.getButton("/", null, this, this);
     btnDivide.setBounds(179, 100, 43, 43);
 
-    btnEqual = R.getButton("=", Settings.TEXT_COLOR, this, this);
+    btnEqual = resources.getButton("=", Styles.TEXT_COLOR, this, this);
     btnEqual.setBounds(222, 186, 43, 86);
 
-    btnRoot = R.getButton("√", null, this, this);
+    btnRoot = resources.getButton("√", null, this, this);
     btnRoot.setBounds(222, 143, 43, 43);
 
-    btnPower = R.getButton("^", null, this, this);
+    btnPower = resources.getButton("^", null, this, this);
     btnPower.setBounds(222, 100, 43, 43);
 
-    btnDelete = R.getButton("←", Settings.MAIN_COLOR, this, this);
+    btnDelete = resources.getButton("←", Styles.MAIN_COLOR, this, this);
     btnDelete.setBounds(179, 57, 86, 43);
 
-    btnClean = R.getButton("C", null, this, this);
+    btnClean = resources.getButton("C", null, this, this);
     btnClean.setBounds(136, 57, 43, 43);
 
-    btnEuler = R.getButton("e^", null, this, this);
+    btnEuler = resources.getButton("e^", null, this, this);
     btnEuler.setBounds(93, 57, 43, 43);
 
-    btnNegative = R.getButton("±", null, this, this);
+    btnNegative = resources.getButton("±", null, this, this);
     btnNegative.setBounds(50, 57, 43, 43);
   }
 
@@ -153,8 +154,8 @@ public class View extends JDialog implements ActionListener {
     setBounds(0, 0, 320, 320);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle("Estandar Calculator");
-    Settings.fadeIn(this);
+    setTitle("Calculator");
+    Effects.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }

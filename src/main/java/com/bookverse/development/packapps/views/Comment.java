@@ -1,16 +1,17 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BIG;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.FEEDBACK;
 
+import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -45,7 +46,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Send Commentary");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -104,7 +105,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
 
   private void sendCommentary(String username, String commentary) {
 
-    if (Settings.verifyConnection("Make sure you are connected to a network", true)) {
+    if (GeneralUtilities.verifyConnection("Make sure you are connected to a network", true)) {
 
       String[] data = {FEEDBACK, username, commentary, Format.getDate()};
 
@@ -150,7 +151,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
     if (e.getSource() == btnSend) {
       btnSendAP();
     } else if (e.getSource() == btnExit) {
-      Settings.fadeOut(this);
+      Effects.fadeOut(this);
     }
   }
 

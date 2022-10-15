@@ -1,19 +1,20 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BIG;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static java.awt.Event.ENTER;
 import static javax.swing.SwingConstants.CENTER;
 
 import com.bookverse.development.packapps.automation.runners.SearchBookTest;
 import com.bookverse.development.packapps.automation.utils.SetUser;
+import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -49,7 +50,7 @@ public class ConsultBook extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Bookverse Test");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
   }
@@ -119,7 +120,7 @@ public class ConsultBook extends JDialog implements ActionListener {
 
     IntStream.range(0, listBooks.size()).forEach(i -> listBooksBox.addItem(listBooks.get(i)));
 
-    listBooksBox.setFont(Settings.SMALL);
+    listBooksBox.setFont(Styles.SMALL);
     listBooksBox.setBounds(95, 165, 260, 30);
     ((JLabel) listBooksBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
     add(listBooksBox);
@@ -130,7 +131,7 @@ public class ConsultBook extends JDialog implements ActionListener {
     txtPassword.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
-    Settings.fadeOut(this);
+    Effects.fadeOut(this);
   }
 
   private void btnRunAP() {

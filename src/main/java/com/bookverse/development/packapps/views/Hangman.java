@@ -1,18 +1,19 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BIG;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.HANGMAN;
 import static java.awt.Font.PLAIN;
 
+import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -119,7 +120,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(HANGMAN);
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesAhorcado();
     setVisible(true);
@@ -130,7 +131,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(HANGMAN);
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesAhorcado();
     setVisible(true);
@@ -329,7 +330,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
   private void insert(String state) {
 
-    if (Settings.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (GeneralUtilities.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
       String[] data = {HANGMAN, Alerts.inputText("Enter a Nickname", 20),
           String.valueOf(countAttempts), state,
@@ -475,7 +476,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     if (e.getSource() == btnPlay) {
       btnPlayAP();
     } else if (e.getSource() == btnExit) {
-      Settings.fadeOut(this);
+      Effects.fadeOut(this);
     }
   }
 

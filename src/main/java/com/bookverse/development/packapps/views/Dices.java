@@ -1,18 +1,18 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.Format.getDate;
-import static com.bookverse.development.packapps.core.Settings.verifyConnection;
+import static com.bookverse.development.packapps.utils.GeneralUtilities.verifyConnection;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Dice;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -142,7 +142,7 @@ public class Dices extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DICES + ", throw them!");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesDados();
     setVisible(true);
@@ -153,7 +153,7 @@ public class Dices extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DICES + ", throw them!");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesDados();
     setVisible(true);
@@ -378,7 +378,7 @@ public class Dices extends JDialog implements ActionListener {
     }
 
     if (e.getSource() == btnExit) {
-      Settings.fadeOut(this);
+      Effects.fadeOut(this);
     }
 
     if (e.getSource() == btnReset) {

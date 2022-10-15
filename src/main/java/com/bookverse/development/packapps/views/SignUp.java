@@ -1,17 +1,18 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BIG;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.MEDIUM;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
+import com.bookverse.development.packapps.utils.Crypto;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.DataSet;
 import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -123,7 +124,7 @@ public class SignUp extends JDialog implements ActionListener {
     setResizable(false);
     setLocationRelativeTo(parent);
     setTitle("Add User");
-    Settings.fadeIn(this);
+    Effects.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
     txtPassword.setText("");
@@ -135,7 +136,7 @@ public class SignUp extends JDialog implements ActionListener {
     txtCodManager.setText("");
     txtUser.setEnabled(true);
     txtPassword.setEnabled(true);
-    Settings.fadeOut(this);
+    Effects.fadeOut(this);
   }
 
   private void btnSignUpAP() {
@@ -152,7 +153,7 @@ public class SignUp extends JDialog implements ActionListener {
 
         if (!Database.userAlreadyExist(txtUser.getText())) {
 
-          String[] data = {USERS, txtUser.getText(), Settings.encrypt(String.valueOf(
+          String[] data = {USERS, txtUser.getText(), Crypto.encrypt(String.valueOf(
               txtPassword.getPassword()), true), "Offline"};
 
           Database.insertData(data);
@@ -161,10 +162,10 @@ public class SignUp extends JDialog implements ActionListener {
           txtUser.setText("");
           txtPassword.setText("");
           txtCodManager.setText("");
-          Settings.fadeOut(this);
+          Effects.fadeOut(this);
         } else {
           Alerts.message("Message", "User already exists, please try to login.");
-          Settings.fadeOut(this);
+          Effects.fadeOut(this);
         }
 
       } else {

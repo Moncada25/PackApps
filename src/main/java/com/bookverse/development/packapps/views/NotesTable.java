@@ -1,15 +1,15 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BIG;
-import static com.bookverse.development.packapps.core.Settings.HAND;
-import static com.bookverse.development.packapps.core.Settings.LOADER;
-import static com.bookverse.development.packapps.core.Settings.MAIN_COLOR;
-import static com.bookverse.development.packapps.core.Settings.POINT;
-import static com.bookverse.development.packapps.core.Settings.RESIZE;
-import static com.bookverse.development.packapps.core.Settings.TEXT;
-import static com.bookverse.development.packapps.core.Settings.TEXT_COLOR;
-import static com.bookverse.development.packapps.core.Settings.getBorder;
-import static com.bookverse.development.packapps.core.Settings.loginDBA;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
+import static com.bookverse.development.packapps.utils.constants.Styles.LOADER;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.POINT;
+import static com.bookverse.development.packapps.utils.constants.Styles.RESIZE;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
+import static com.bookverse.development.packapps.utils.GeneralUtilities.loginDBA;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.HANGMAN;
@@ -19,7 +19,7 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Table;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.constants.Queries;
 import java.awt.BorderLayout;

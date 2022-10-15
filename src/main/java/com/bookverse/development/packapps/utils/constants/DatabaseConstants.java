@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.utils.constants;
 
-public class DatabaseConstants {
+public final class DatabaseConstants {
 
   public static final String GUESS_NUMBER = "Guess Number";
   public static final String HANGMAN = "Hangman";

@@ -15,11 +15,11 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public class Queries {
+public final class Queries {
 
   @NotNull
   public static String getDataByID(String table) {

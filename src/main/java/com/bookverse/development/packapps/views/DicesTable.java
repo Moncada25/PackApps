@@ -1,22 +1,23 @@
 package com.bookverse.development.packapps.views;
 
-import static com.bookverse.development.packapps.core.Settings.BIG;
-import static com.bookverse.development.packapps.core.Settings.HAND;
-import static com.bookverse.development.packapps.core.Settings.LOADER;
-import static com.bookverse.development.packapps.core.Settings.POINT;
-import static com.bookverse.development.packapps.core.Settings.RESIZE;
-import static com.bookverse.development.packapps.core.Settings.TEXT;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
+import static com.bookverse.development.packapps.utils.constants.Styles.LOADER;
+import static com.bookverse.development.packapps.utils.constants.Styles.POINT;
+import static com.bookverse.development.packapps.utils.constants.Styles.RESIZE;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.HANGMAN;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.NOTES;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PUZZLE;
 
+import com.bookverse.development.packapps.utils.GeneralUtilities;
+import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.core.Settings;
 import com.bookverse.development.packapps.models.Database;
 import com.bookverse.development.packapps.models.Table;
-import com.bookverse.development.packapps.utils.constants.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.constants.Queries;
 import java.awt.BorderLayout;
@@ -71,16 +72,16 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
 
-    panel.setBorder(Settings.getBorder("Select table"));
+    panel.setBorder(Resources.getBorder("Select table"));
 
     title = new JLabel();
     title.setFont(BIG);
-    title.setForeground(Settings.MAIN_COLOR);
+    title.setForeground(Styles.MAIN_COLOR);
     title.addMouseListener(this);
 
     message = new JLabel();
     message.setFont(BIG);
-    message.setForeground(Settings.TEXT_COLOR);
+    message.setForeground(Styles.TEXT_COLOR);
     message.addMouseListener(this);
 
     IntStream.range(0, tables.length).forEach(i -> {
@@ -211,7 +212,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (Settings.loginDBA()) {
+        if (GeneralUtilities.loginDBA()) {
           Database.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(DICES));
 
@@ -237,7 +238,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        if (Settings.loginDBA()) {
+        if (GeneralUtilities.loginDBA()) {
           Database.deleteData(IDs, Format.tableName(DICES));
           dispose();
           new Index().dicesTableAP();
