@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.utils.constants.AppConfig.STORE_MANAGER_KEY;
 import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
 import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
 import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
@@ -7,9 +8,9 @@ import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COL
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.utils.Crypto;
+import com.bookverse.development.packapps.utils.Config;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.models.DataSet;
-import com.bookverse.development.packapps.models.Database;
+import com.bookverse.development.packapps.apps.repositories.Database;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
@@ -142,7 +143,7 @@ public class SignUp extends JDialog implements ActionListener {
   private void btnSignUpAP() {
 
     if (String.valueOf(txtCodManager.getPassword())
-        .equals(DataSet.getStoreManagerKey())) {
+        .equals(Config.get(STORE_MANAGER_KEY.getProperty()))) {
 
       txtUser.setEnabled(true);
       txtPassword.setEnabled(true);

@@ -8,8 +8,8 @@ import static com.bookverse.development.packapps.utils.GeneralUtilities.verifyCo
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.models.Dice;
+import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.models.Dice;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;

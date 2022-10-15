@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.utils;
 
-import com.bookverse.development.packapps.models.DataSet;
+import static com.bookverse.development.packapps.utils.constants.AppConfig.PASSWORD_DBA;
+
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import java.io.IOException;
 import java.net.Socket;
@@ -26,7 +27,7 @@ public final class GeneralUtilities {
 
       if (password.length() != 0) {
 
-        if (DataSet.getPasswordDBA().equals(password)) {
+        if (Config.get(PASSWORD_DBA.getProperty()).equals(password)) {
           return true;
         } else {
           Alerts.message("Error", "Incorrect password");

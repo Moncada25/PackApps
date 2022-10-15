@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.models.Database;
+import com.bookverse.development.packapps.apps.repositories.Database;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Alerts;

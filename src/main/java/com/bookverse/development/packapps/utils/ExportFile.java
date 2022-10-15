@@ -28,7 +28,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.jetbrains.annotations.NotNull;
 
-import com.bookverse.development.packapps.models.Database;
+import com.bookverse.development.packapps.apps.repositories.Database;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 
 public final class ExportFile {

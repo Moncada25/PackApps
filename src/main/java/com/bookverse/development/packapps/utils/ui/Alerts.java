@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import org.jetbrains.annotations.NotNull;
 
-public class Alerts {
+public final class Alerts {
 
   public static String inputText(String request, int length) {
 

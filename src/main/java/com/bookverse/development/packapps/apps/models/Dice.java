@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.models;
+package com.bookverse.development.packapps.apps.models;
 
 public class Dice {
 

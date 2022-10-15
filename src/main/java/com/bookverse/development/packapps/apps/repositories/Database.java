@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.models;
+package com.bookverse.development.packapps.apps.repositories;
 
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
@@ -13,6 +13,8 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
+import com.bookverse.development.packapps.apps.database.DataSource;
+import com.bookverse.development.packapps.apps.models.Store;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.Queries;
 import java.sql.Connection;
@@ -23,7 +25,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-import javax.sql.DataSource;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.jetbrains.annotations.NotNull;
@@ -35,8 +36,8 @@ public class Database {
   private static ResultSet resultSet;
   private static PreparedStatement preparedStatement;
   private static DefaultTableModel tableModel;
-  private static DataSource dataSource;
-  private static DataSourceService dataSourceService = new DataSourceService();
+  private static javax.sql.DataSource dataSource;
+  private static DataSource dataSourceService = new DataSource();
 
   public static boolean insertData(@NotNull String[] data) {
 

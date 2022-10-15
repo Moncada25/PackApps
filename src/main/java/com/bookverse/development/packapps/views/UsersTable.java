@@ -10,8 +10,8 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import com.bookverse.development.packapps.utils.Crypto;
 import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.models.Table;
+import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.utils.ui.Table;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import java.awt.BorderLayout;

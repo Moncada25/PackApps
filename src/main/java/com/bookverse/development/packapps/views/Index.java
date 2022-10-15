@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.views;
 
+import static com.bookverse.development.packapps.utils.constants.AppConfig.TITLE;
 import static com.bookverse.development.packapps.utils.constants.Styles.BORDER_BLUE;
 import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
 import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
@@ -23,9 +24,9 @@ import com.bookverse.development.packapps.apps.views.OCRView;
 import com.bookverse.development.packapps.apps.views.QRView;
 import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.utils.GeneralUtilities;
+import com.bookverse.development.packapps.utils.Config;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.models.DataSet;
-import com.bookverse.development.packapps.models.Database;
+import com.bookverse.development.packapps.apps.repositories.Database;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.ExportFile;
@@ -206,7 +207,7 @@ public class Index extends JFrame implements ActionListener {
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
-    window.setTitle(DataSet.getTitleApp());
+    window.setTitle(Config.get(TITLE.getProperty()));
     window.wallpapers[background - 1].setForeground(MAIN_COLOR);
     window.classicMode.setForeground(MAIN_COLOR);
     Effects.fadeIn(window);

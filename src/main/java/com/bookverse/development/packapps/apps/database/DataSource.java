@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.models;
+package com.bookverse.development.packapps.apps.database;
 
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DRIVER_DB;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PASSWORD_DB;
@@ -7,11 +7,11 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-public class DataSourceService {
+public class DataSource {
 
   private static BasicDataSource basicDataSource;
 
-  public DataSourceService() {
+  public DataSource() {
     basicDataSource = new BasicDataSource();
     basicDataSource.setDriverClassName(DRIVER_DB);
     basicDataSource.setUsername(USER_DB);

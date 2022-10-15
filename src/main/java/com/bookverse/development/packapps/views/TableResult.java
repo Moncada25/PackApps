@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.models.Table;
+import com.bookverse.development.packapps.utils.ui.Table;
 import java.awt.BorderLayout;
 import java.util.stream.IntStream;
 import javax.swing.JDialog;

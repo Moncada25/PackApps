@@ -3,13 +3,10 @@ package com.bookverse.development.packapps.utils.ui;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-public class Effects {
+public final class Effects {
 
-  public static final int EXIT = 3;
-  public static final int DISPOSE = 2;
-
-  public Effects() {
-  }
+  private static final int EXIT = 3;
+  private static final int DISPOSE = 2;
 
   private static void JFrameFadeOut(final float opacityStart, final float opacityEnd,
       final float opacityDecrement, final long sleep, final JFrame frame,
@@ -115,5 +112,8 @@ public class Effects {
 
   public static void fadeOut(JDialog window) {
     JDialogFadeOut(1f, 0f, 0.2f, 50, window, DISPOSE);
+  }
+
+  private Effects() {
   }
 }

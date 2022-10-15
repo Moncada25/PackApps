@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.views;
 
+import com.bookverse.development.packapps.utils.Config;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -16,7 +17,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.models.DataSet;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
@@ -24,6 +24,7 @@ import com.bookverse.development.packapps.utils.ui.Effects;
 import static com.bookverse.development.packapps.apps.services.EmailService.clickOnSend;
 import static com.bookverse.development.packapps.apps.services.EmailService.receiver;
 
+import static com.bookverse.development.packapps.utils.constants.AppConfig.DEVELOPER_EMAIL;
 import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
 import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
 import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
@@ -156,7 +157,7 @@ public class EmailView extends JDialog implements ActionListener, MouseListener 
       receiver = Alerts.inputText("Input receiver email");
 
       if (receiver == null || receiver.trim().equals("") || !receiver.contains("@") || !receiver.contains(".")) {
-        receiver = DataSet.getDeveloperEmail();
+        receiver = Config.get(DEVELOPER_EMAIL.getProperty());
         toDeveloper.setSelected(true);
         toOther.setText("<html><strong>Other</strong></html>");
         Alerts.message("Verify!", "Email invalid");
@@ -166,7 +167,7 @@ public class EmailView extends JDialog implements ActionListener, MouseListener 
 
     } else if (e.getSource() == toDeveloper) {
       toOther.setText("<html><strong>Other</strong></html>");
-      receiver = DataSet.getDeveloperEmail();
+      receiver = Config.get(DEVELOPER_EMAIL.getProperty());
     }
   }
 

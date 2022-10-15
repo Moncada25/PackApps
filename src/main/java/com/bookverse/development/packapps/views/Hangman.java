@@ -9,7 +9,7 @@ import static java.awt.Font.PLAIN;
 
 import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.models.Database;
+import com.bookverse.development.packapps.apps.repositories.Database;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.Format;

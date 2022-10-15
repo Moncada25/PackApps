@@ -9,8 +9,9 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.bookverse.development.packapps.models.DataSet;
 import com.bookverse.development.packapps.utils.ui.Alerts;
+
+import static com.bookverse.development.packapps.utils.constants.AppConfig.DEFAULT_ENCRYPT_KEY;
 
 public final class Crypto {
 
@@ -98,7 +99,7 @@ public final class Crypto {
     if (!useDefaultKey) {
       return setSecretKey();
     } else {
-      return DataSet.getDefaultEncryptKey();
+      return Config.get(DEFAULT_ENCRYPT_KEY.getProperty());
     }
   }
 
