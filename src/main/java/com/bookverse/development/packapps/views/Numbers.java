@@ -8,7 +8,7 @@ import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
 import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 
-import com.bookverse.development.packapps.apps.view.CalculatorView;
+import com.bookverse.development.packapps.apps.views.CalculatorView;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.BorderLayout;

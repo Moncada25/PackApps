@@ -1,17 +1,5 @@
-package com.bookverse.development.packapps.views;
+package com.bookverse.development.packapps.apps.views;
 
-import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.FEEDBACK;
-
-import com.bookverse.development.packapps.utils.GeneralUtilities;
-import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.models.Database;
-import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -28,7 +16,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Comment extends JDialog implements ActionListener, MouseListener {
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
+
+import static com.bookverse.development.packapps.apps.services.FeedbackService.clickOnSend;
+
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+
+public class FeedbackView extends JDialog implements ActionListener, MouseListener {
 
   private JLabel required;
   private JButton btnSend, btnExit;
@@ -36,7 +35,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
   private JTextField txtUser;
   private Resources resources = new Resources();
 
-  public Comment(JFrame parent, boolean modal) {
+  public FeedbackView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
@@ -54,7 +53,7 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
   private void createComponents() {
 
     setLayout(null);
-    setIconImage(new ImageIcon(resources.getImage("coment.png")).getImage());
+    setIconImage(new ImageIcon(resources.getImage("feedback.png")).getImage());
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
     btnSend = resources.getButton("Send", TEXT_COLOR, this, this);
@@ -103,53 +102,11 @@ public class Comment extends JDialog implements ActionListener, MouseListener {
     add(scroll);
   }
 
-  private void sendCommentary(String username, String commentary) {
-
-    if (GeneralUtilities.verifyConnection("Make sure you are connected to a network", true)) {
-
-      String[] data = {FEEDBACK, username, commentary, Format.getDate()};
-
-      if (Database.insertData(data)) {
-
-        JOptionPane.showMessageDialog(null,
-            "<html>" + Format.style()
-                + "<strong><center>Commentary sent</center></strong><br>"
-                + "Feedback sent, your opinion will be taken into account."
-                + "</html>",
-            "Successfully", JOptionPane.PLAIN_MESSAGE);
-
-        txtUser.setText("");
-        text.setText("");
-      }
-    }
-  }
-
-  private void btnSendAP() {
-
-    if (txtUser.getText().equals("")) {
-
-      JOptionPane.showMessageDialog(null,
-          "<html>" + Format.style() + "<strong>Username empty</strong></html>",
-          "Verify!!",
-          JOptionPane.PLAIN_MESSAGE);
-      txtUser.requestFocus();
-
-    } else {
-
-      if (text.getText().trim().length() < 3) {
-        Alerts.message("Verify", "Message too short");
-        text.requestFocus();
-      } else {
-        sendCommentary(txtUser.getText(), text.getText());
-      }
-    }
-  }
-
   @Override
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnSend) {
-      btnSendAP();
+      clickOnSend(text, txtUser);
     } else if (e.getSource() == btnExit) {
       Effects.fadeOut(this);
     }

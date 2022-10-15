@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.views;
+package com.bookverse.development.packapps.apps.views;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Effects;
@@ -11,11 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Card extends JDialog implements MouseListener {
+public class ProfessionalCardView extends JDialog implements MouseListener {
 
-  private JLabel imageCard = new JLabel();
+  private JLabel imageCard;
 
-  public Card(JFrame parent, boolean modal) {
+  public ProfessionalCardView(JFrame parent, boolean modal) {
     super(parent, modal);
 
     Resources resources = new Resources();

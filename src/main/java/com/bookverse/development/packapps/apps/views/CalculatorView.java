@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.apps.view;
+package com.bookverse.development.packapps.apps.views;
 
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Effects;

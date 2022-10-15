@@ -5,7 +5,7 @@ import javax.swing.JTextField;
 
 import com.bookverse.development.packapps.utils.ui.Alerts;
 
-public class CalculatorService {
+public final class CalculatorService {
 
   private static double result;
   private static boolean point = false;

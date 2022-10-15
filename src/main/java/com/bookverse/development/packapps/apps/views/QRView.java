@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.apps.view;
+package com.bookverse.development.packapps.apps.views;
 
 import java.net.URL;
 import java.awt.BorderLayout;

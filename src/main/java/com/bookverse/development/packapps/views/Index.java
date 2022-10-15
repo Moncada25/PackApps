@@ -16,8 +16,10 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.QUESTIONS_AND_ANSWERS;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 
-import com.bookverse.development.packapps.apps.view.OCRView;
-import com.bookverse.development.packapps.apps.view.QRView;
+import com.bookverse.development.packapps.apps.views.FeedbackView;
+import com.bookverse.development.packapps.apps.views.ProfessionalCardView;
+import com.bookverse.development.packapps.apps.views.OCRView;
+import com.bookverse.development.packapps.apps.views.QRView;
 import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.utils.GeneralUtilities;
 import com.bookverse.development.packapps.utils.ui.Resources;
@@ -236,7 +238,7 @@ public class Index extends JFrame implements ActionListener {
 
     JMenu send = resources.getMenu("Send Feedback", "send");
     email = resources.getMenuItem("Email", "email", this);
-    comment = resources.getMenuItem("Comment", "coment", this);
+    comment = resources.getMenuItem("Comment", "feedback", this);
 
     send.add(comment);
     send.addSeparator();
@@ -977,7 +979,7 @@ public class Index extends JFrame implements ActionListener {
       new Email(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == comment) {
-      new Comment(this, true).start(this);
+      new FeedbackView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == texts) {
       new Texts(this, true).start(this);
@@ -1025,7 +1027,7 @@ public class Index extends JFrame implements ActionListener {
       new LoginStore(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == read) {
-      new Card(this, true).start(this);
+      new ProfessionalCardView(this, true).start(this);
       setVisible(true);
     } else if (GeneralUtilities.verifyConnection("Connect to see more!", isWork)) {
 
