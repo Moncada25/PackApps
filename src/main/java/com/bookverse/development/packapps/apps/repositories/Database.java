@@ -13,11 +13,10 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.apps.database.DataSource;
+import com.bookverse.development.packapps.apps.database.Connection;
 import com.bookverse.development.packapps.apps.models.Store;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.Queries;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -32,12 +31,12 @@ import org.jetbrains.annotations.NotNull;
 public class Database {
 
   public static final Store store = new Store();
-  private static Connection connection = null;
+  private static java.sql.Connection connection = null;
   private static ResultSet resultSet;
   private static PreparedStatement preparedStatement;
   private static DefaultTableModel tableModel;
   private static javax.sql.DataSource dataSource;
-  private static DataSource dataSourceService = new DataSource();
+  private static Connection dataSourceService = new Connection();
 
   public static boolean insertData(@NotNull String[] data) {
 

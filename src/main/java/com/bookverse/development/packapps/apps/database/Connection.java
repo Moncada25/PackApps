@@ -7,11 +7,11 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-public class DataSource {
+public class Connection {
 
   private static BasicDataSource basicDataSource;
 
-  public DataSource() {
+  public Connection() {
     basicDataSource = new BasicDataSource();
     basicDataSource.setDriverClassName(DRIVER_DB);
     basicDataSource.setUsername(USER_DB);

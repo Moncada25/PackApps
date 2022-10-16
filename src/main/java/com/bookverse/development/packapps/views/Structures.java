@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.views;
 
 import com.bookverse.development.packapps.apps.views.ArraysView;
+import com.bookverse.development.packapps.apps.views.QueueView;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Alerts;
@@ -89,7 +90,7 @@ public class Structures extends JDialog implements MouseListener {
       new Stack(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == btnQueue) {
-      new Queue(this, true).start(this);
+      new QueueView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == btnArrays) {
       new ArraysView(this, true).start(this);

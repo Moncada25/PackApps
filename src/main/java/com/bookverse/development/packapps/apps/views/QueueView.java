@@ -1,16 +1,5 @@
-package com.bookverse.development.packapps.views;
+package com.bookverse.development.packapps.apps.views;
 
-import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
-import static com.bookverse.development.packapps.utils.ui.Alerts.inputNumber;
-
-import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,18 +12,39 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Queue extends JDialog implements ActionListener, MouseListener {
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Effects;
+
+import static com.bookverse.development.packapps.apps.services.QueueService.x;
+import static com.bookverse.development.packapps.apps.services.QueueService.y;
+import static com.bookverse.development.packapps.apps.services.QueueService.sum;
+import static com.bookverse.development.packapps.apps.services.QueueService.i;
+import static com.bookverse.development.packapps.apps.services.QueueService.selectedDate;
+import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
+import static com.bookverse.development.packapps.apps.services.QueueService.clickOnAdd;
+import static com.bookverse.development.packapps.apps.services.QueueService.clickOnAverage;
+import static com.bookverse.development.packapps.apps.services.QueueService.clickOnClean;
+import static com.bookverse.development.packapps.apps.services.QueueService.clickOnCount;
+import static com.bookverse.development.packapps.apps.services.QueueService.clickOnDecouple;
+import static com.bookverse.development.packapps.apps.services.QueueService.clickOnPairs;
+import static com.bookverse.development.packapps.apps.services.QueueService.clickOnPeek;
+import static com.bookverse.development.packapps.apps.services.QueueService.clickPush;
+
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+
+public class QueueView extends JDialog implements ActionListener, MouseListener {
 
   private JLabel[] actions = new JLabel[8];
-  private int i = 0, x = 50, y = 400, countPairs = 0, selectedDate = 0;
-  private double add = 0, totalAdd = 0, sum = 0;
-  private String result = "";
   private boolean sw = true;
   private Resources resources = new Resources();
   private JLabel title, message, bonus;
   private JButton[] elementsQueue = new JButton[50];
 
-  public Queue(JDialog parent, boolean modal) {
+  public QueueView(JDialog parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
@@ -49,7 +59,7 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
     setVisible(true);
   }
 
-  private void setPanel() {
+  private void getPanel() {
 
     JPanel panel = new JPanel(new FlowLayout());
 
@@ -89,7 +99,7 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
           x -= 80;
         }
 
-        x += 80;
+       x += 80;
 
       } else {
 
@@ -103,7 +113,7 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
       }
     }
 
-    setPanel();
+    getPanel();
 
     bonus = new JLabel();
     bonus.setBounds(0, 380, 80, 80);
@@ -119,210 +129,25 @@ public class Queue extends JDialog implements ActionListener, MouseListener {
     message.setBounds(620, 480, 200, 85);
   }
 
-  private Object peek() {
-    return elementsQueue[0].getText();
-  }
-
-  private void btnPeekAP() {
-
-    if (i > 0) {
-      title
-          .setText(
-              "<html>" + Format.style() + "<strong>Next data → " + peek() + "</strong></html>");
-    } else {
-      Alerts.message("Message", "The queue is empty");
-    }
-  }
-
-  private void reset() {
-    i = 0;
-    x = 50;
-    y = 400;
-    add = 0;
-    totalAdd = 0;
-  }
-
-  private void btnClean() {
-
-    if (i > 0) {
-
-      for (int j = 0; j < i; j++) {
-        elementsQueue[j].setText("");
-        elementsQueue[j].setVisible(false);
-        elementsQueue[j].setBackground(getBackground());
-      }
-
-      bonus.setVisible(false);
-      reset();
-
-      title.setText("<html><strong>Queue empty</strong></html>");
-
-    } else {
-      Alerts.message("Message", "The queue is empty");
-      reset();
-    }
-  }
-
-  private void btnPairs() {
-
-    for (int n = 0; n < i; n++) {
-
-      if (Integer.parseInt(elementsQueue[n].getText()) % 2 == 0) {
-
-        if (countPairs % 10 == 0) {
-          result += "\n";
-        }
-
-        result += "[" + elementsQueue[n].getText() + "]";
-        countPairs++;
-      }
-    }
-
-    if (i == 0) {
-      Alerts.message("Message", "The queue is empty");
-    } else if (countPairs == 0) {
-      title.setText(
-          "<html>" + Format.style() + "<strong>There is not pairs in the queue</strong></html>");
-    } else {
-      title.setText("<html>" + Format.style() + "<strong>Number of pairs → " + countPairs
-          + "</strong></html>");
-      Alerts.message("Result", "Numbers pairs in the queue <br> " + result);
-    }
-
-    countPairs = 0;
-    result = "";
-  }
-
-  private void btnAverage() {
-
-    if (i == 0) {
-      Alerts.message("Message", "The queue is empty");
-    } else {
-
-      int count = btnCount();
-
-      if(count != 0){
-
-        title.setText("<html>" + Format.style() + "<strong>Average of the queue → " + String
-            .format("%.2f", btnAdd() / count) + "</strong></html>");
-      }
-    }
-  }
-
-  private double btnAdd() {
-
-    if (i == 0) {
-      Alerts.message("Message", "The queue is empty");
-    } else {
-
-      for (int n = 0; n < i; n++) {
-        add += Double.parseDouble(elementsQueue[n].getText());
-      }
-
-      title.setText(
-          "<html>" + Format.style() + "<strong>Queue items add up → " + add + "</strong></html>");
-
-      totalAdd = add;
-      add = 0;
-    }
-    return totalAdd;
-  }
-
-  private int btnCount() {
-
-    if (i == 0) {
-      Alerts.message("Message", "The queue is empty");
-    } else {
-      title.setText("<html><strong>There are " + i + " items in the queue</strong></html>");
-    }
-    return i;
-  }
-
-  private Object pop() {
-
-    Object aux = elementsQueue[0].getText();
-
-    i--;
-
-    if (elementsQueue[0].getBackground() == TEXT_COLOR) {
-      selectedDate--;
-      sum -= Double.parseDouble((elementsQueue[0].getText()));
-      elementsQueue[0].setBackground(getBackground());
-    }
-
-    elementsQueue[i].setVisible(false);
-
-    if (i < 1) {
-      bonus.setVisible(false);
-    }
-
-    for (int k = 0; k < i; k++) {
-      elementsQueue[k].setText(elementsQueue[k + 1].getText());
-      elementsQueue[k].setBackground(elementsQueue[k + 1].getBackground());
-    }
-
-    return aux;
-  }
-
-  private void btnDecoupleAP() {
-
-    title.setText("");
-
-    if (i > 0) {
-      title.setText("<html><strong>Decouples → " + pop() + "</strong></html>");
-    } else {
-      Alerts.message("Message", "The queue is empty");
-      reset();
-    }
-  }
-
-  private void push(int data) {
-    bonus.setVisible(true);
-    elementsQueue[i].setVisible(true);
-    elementsQueue[i].setBackground(getBackground());
-    elementsQueue[i].setText(String.valueOf(data));
-    title.setText("<html><strong>Is coupled → " + elementsQueue[i].getText() + "</strong></html>");
-  }
-
-  private void btnPushAP() {
-
-    title.setText("");
-
-    if (i < elementsQueue.length) {
-      do {
-        int num = Integer.parseInt(inputNumber("Enter a numeric data", 6));
-        push(num);
-        i++;
-
-      } while (Alerts.requestResponse("Do you want to enter more data?", "Enter data")
-          && i < elementsQueue.length);
-
-      title.setText("");
-
-    } else {
-      Alerts.message("Message", "The queue is full");
-    }
-  }
-
   @Override
   public void mouseClicked(MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
-      btnPushAP();
+      clickPush(elementsQueue, title, bonus, this);
     } else if (e.getSource() == actions[1]) {
-      btnDecoupleAP();
+      clickOnDecouple(elementsQueue, title, bonus, this);
     } else if (e.getSource() == actions[2]) {
-      btnPeekAP();
+      clickOnPeek(elementsQueue, title);
     } else if (e.getSource() == actions[3]) {
-      btnCount();
+      clickOnCount(title);
     } else if (e.getSource() == actions[4]) {
-      btnAdd();
+      clickOnAdd(elementsQueue, title);
     } else if (e.getSource() == actions[5]) {
-      btnAverage();
+      clickOnAverage(elementsQueue, title);
     } else if (e.getSource() == actions[6]) {
-      btnPairs();
+      clickOnPairs(elementsQueue, title);
     } else if (e.getSource() == actions[7]) {
-      btnClean();
+      clickOnClean(elementsQueue, title, bonus, this);
     } else if (e.getSource() == bonus) {
       Alerts.message("BONUS", "It's a joke! XD");
     }
