@@ -12,51 +12,41 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
 
-import static com.bookverse.development.packapps.apps.services.QueueService.x;
-import static com.bookverse.development.packapps.apps.services.QueueService.y;
-import static com.bookverse.development.packapps.apps.services.QueueService.sum;
-import static com.bookverse.development.packapps.apps.services.QueueService.i;
-import static com.bookverse.development.packapps.apps.services.QueueService.selectedDate;
+import static com.bookverse.development.packapps.apps.services.StackService.i;
+import static com.bookverse.development.packapps.apps.services.StackService.x;
+import static com.bookverse.development.packapps.apps.services.StackService.y;
+import static com.bookverse.development.packapps.apps.services.StackService.con;
+import static com.bookverse.development.packapps.apps.services.StackService.sum;
+import static com.bookverse.development.packapps.apps.services.StackService.average;
+import static com.bookverse.development.packapps.apps.services.StackService.clickOnAdd;
+import static com.bookverse.development.packapps.apps.services.StackService.clickOnClean;
+import static com.bookverse.development.packapps.apps.services.StackService.clickOnCount;
+import static com.bookverse.development.packapps.apps.services.StackService.clickOnPairs;
+import static com.bookverse.development.packapps.apps.services.StackService.clickOnPeek;
+import static com.bookverse.development.packapps.apps.services.StackService.clickOnPop;
+import static com.bookverse.development.packapps.apps.services.StackService.clickOnPush;
 import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
-import static com.bookverse.development.packapps.apps.services.QueueService.clickOnAdd;
-import static com.bookverse.development.packapps.apps.services.QueueService.clickOnAverage;
-import static com.bookverse.development.packapps.apps.services.QueueService.clickOnClean;
-import static com.bookverse.development.packapps.apps.services.QueueService.clickOnCount;
-import static com.bookverse.development.packapps.apps.services.QueueService.clickOnDecouple;
-import static com.bookverse.development.packapps.apps.services.QueueService.clickOnPairs;
-import static com.bookverse.development.packapps.apps.services.QueueService.clickOnPeek;
-import static com.bookverse.development.packapps.apps.services.QueueService.clickPush;
 
 import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
 import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
 import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
 import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 
-public class QueueView extends JDialog implements ActionListener, MouseListener {
+public class StackView extends JDialog implements MouseListener, ActionListener {
 
   private JLabel[] actions = new JLabel[8];
-  private boolean sw = true;
   private Resources resources = new Resources();
-  private JLabel title, message, bonus;
-  private JButton[] queue = new JButton[50];
+  private JLabel title, message;
+  private JButton[] stack = new JButton[50];
 
-  public QueueView(JDialog parent, boolean modal) {
+  public StackView(JDialog parent, boolean modal) {
     super(parent, modal);
     createComponents();
-  }
-
-  public void start(JDialog parent) {
-    setBounds(0, 0, 900, 600);
-    setResizable(false);
-    setLocationRelativeTo(parent);
-    setTitle("Queue");
-    Effects.fadeIn(this);
-    parent.setVisible(false);
-    setVisible(true);
   }
 
   private void getPanel() {
@@ -84,78 +74,68 @@ public class QueueView extends JDialog implements ActionListener, MouseListener 
 
     setLayout(null);
 
-    for (int j = 0; j < queue.length; j++) {
+    int c = 0;
 
-      queue[j] = resources.getButton("", null, this, this);
-      queue[j].setBounds(x, y, 80, 40);
-      queue[j].setForeground(MAIN_COLOR);
-      queue[j].setVisible(false);
+    for (int j = 0; j < stack.length; j++) {
+      stack[j] = resources.getButton("", null, this, this);
+      stack[j].setBounds(x, y, 80, 40);
+      stack[j].setForeground(MAIN_COLOR);
+      stack[j].setVisible(false);
+      y -= 40;
 
-      if (sw) {
+      c++;
 
-        if (x == 770) {
-          sw = false;
-          y = y - 60;
-          x -= 80;
-        }
+      if (c == 10) {
+        x += 100;
+        y = 400;
 
-       x += 80;
-
-      } else {
-
-        if (x == 50) {
-          sw = true;
-          y = y - 60;
-          x += 80;
-        }
-
-        x -= 80;
+        c = 0;
       }
     }
 
     getPanel();
 
-    bonus = new JLabel();
-    bonus.setBounds(0, 380, 80, 80);
-    bonus.setIcon(new ImageIcon(resources.getImage("puerta.png")));
-    bonus.addMouseListener(this);
-    bonus.setVisible(false);
-    add(bonus);
-
     title = resources.getLabel("", MAIN_COLOR, this, BIG);
-    title.setBounds(50, 0, 900, 160);
+    title.setBounds(550, 70, 600, 200);
 
     message = resources.getLabel("", MAIN_COLOR, this, BIG);
     message.setBounds(620, 480, 200, 85);
   }
 
+  public void start(JDialog parent) {
+    setBounds(0, 0, 900, 600);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Stack");
+    Effects.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
+  }
+
   @Override
-  public void mouseClicked(MouseEvent e) {
+  public void mouseClicked(@NotNull MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
-      clickPush(queue, title, bonus, this);
+      clickOnPush(stack, title);
     } else if (e.getSource() == actions[1]) {
-      clickOnDecouple(queue, title, bonus, this);
+      clickOnPop(stack, title, this);
     } else if (e.getSource() == actions[2]) {
-      clickOnPeek(queue, title);
+      clickOnPeek(stack, title);
     } else if (e.getSource() == actions[3]) {
       clickOnCount(title);
     } else if (e.getSource() == actions[4]) {
-      clickOnAdd(queue, title);
+      clickOnAdd(stack, title);
     } else if (e.getSource() == actions[5]) {
-      clickOnAverage(queue, title);
+      average(stack, title);
     } else if (e.getSource() == actions[6]) {
-      clickOnPairs(queue, title);
+      clickOnPairs(stack, title);
     } else if (e.getSource() == actions[7]) {
-      clickOnClean(queue, title, bonus, this);
-    } else if (e.getSource() == bonus) {
-      Alerts.message("BONUS", "It's a joke! XD");
+      clickOnClean(stack, title, this);
     }
   }
 
   @Override
-  public void mouseEntered(MouseEvent e) {
-
+  public void mouseEntered(@NotNull MouseEvent e) {
     if (e.getSource() == actions[0]) {
       actions[0].setCursor(HAND);
       message.setText("<html><strong>Push( )</strong></html>");
@@ -180,14 +160,11 @@ public class QueueView extends JDialog implements ActionListener, MouseListener 
     } else if (e.getSource() == actions[7]) {
       actions[7].setCursor(HAND);
       message.setText("<html><strong>Clean</strong></html>");
-    } else if (e.getSource() == bonus) {
-      bonus.setCursor(HAND);
-      message.setText("<html><strong>Bonus</strong></html>");
     }
   }
 
   @Override
-  public void mouseExited(MouseEvent e) {
+  public void mouseExited(@NotNull MouseEvent e) {
 
     if (e.getSource() == actions[0]) {
       message.setText("");
@@ -204,8 +181,6 @@ public class QueueView extends JDialog implements ActionListener, MouseListener 
     } else if (e.getSource() == actions[6]) {
       message.setText("");
     } else if (e.getSource() == actions[7]) {
-      message.setText("");
-    } else if (e.getSource() == bonus) {
       message.setText("");
     }
   }
@@ -225,24 +200,25 @@ public class QueueView extends JDialog implements ActionListener, MouseListener 
 
     for (int j = 0; j < i; j++) {
 
-      if (e.getSource() == queue[j]) {
+      if (e.getSource() == stack[j]) {
 
-        if (queue[j].getBackground() == TEXT_COLOR) {
-          queue[j].setBackground(getBackground());
-          selectedDate--;
-          sum -= Double.parseDouble(queue[j].getText());
+        if (stack[j].getBackground() == TEXT_COLOR) {
+          stack[j].setBackground(getBackground());
+          con--;
+          sum -= Double.parseDouble(stack[j].getText());
         } else {
-          queue[j].setBackground(TEXT_COLOR);
-          selectedDate++;
-          sum += Double.parseDouble(queue[j].getText());
+          stack[j].setBackground(TEXT_COLOR);
+          con++;
+          sum += Double.parseDouble(stack[j].getText());
         }
 
-        if (selectedDate > 0) {
-          title.setText("<html><strong>Selected data → " + selectedDate + "<br>" + "Sum → " + sum
-              + "<br>" + "Average → " + String.format("%.2f", sum / selectedDate)
-              + "</strong></html>");
+        if (con > 0) {
+          title.setText(
+              "<html><strong>Data selected → " + con + "<br>" + "Sum up → " + (int) sum
+                  + "<br>" + "Average → " + String.format("%.2f", sum / con)
+                  + "</strong></html>");
         } else {
-          title.setText("<html><strong>Nothing selected</strong></html>");
+          title.setText("<html><strong>No data selected</strong></html>");
         }
       }
     }

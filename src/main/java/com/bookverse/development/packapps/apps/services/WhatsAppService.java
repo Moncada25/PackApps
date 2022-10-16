@@ -12,7 +12,7 @@ import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
 
-public class WhatsAppService {
+public final class WhatsAppService {
 
   public static void clickOnReturn(JTextField number, JDialog parent) {
     number.setText("");
@@ -20,7 +20,8 @@ public class WhatsAppService {
     Effects.fadeOut(parent);
   }
 
-  public static void clickOnOpen(JTextField number, JComboBox<String> listCountry, JTextArea message) {
+  public static void clickOnOpen(JTextField number, JComboBox<String> listCountry,
+      JTextArea message) {
 
     if (GeneralUtilities.verifyConnection("Connect to see more!", true)) {
 
@@ -30,7 +31,8 @@ public class WhatsAppService {
 
           try {
             Desktop.getDesktop().browse(new URL(
-                "https://web.whatsapp.com/send?phone=" + ArrayData.getCountryCode(listCountry.getSelectedItem().toString()) + number.getText()
+                "https://web.whatsapp.com/send?phone=" + ArrayData.getCountryCode(
+                    listCountry.getSelectedItem().toString()) + number.getText()
                     + "&text=" + message.getText().replaceAll("\\s", "+")).toURI());
           } catch (Exception ex) {
             Alerts.error(ex, "Opening URL");
@@ -46,5 +48,8 @@ public class WhatsAppService {
         number.requestFocus();
       }
     }
+  }
+
+  private WhatsAppService() {
   }
 }
