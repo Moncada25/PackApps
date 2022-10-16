@@ -7,10 +7,10 @@ import javax.swing.JDialog;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.utils.GeneralUtilities;
-import com.bookverse.development.packapps.utils.constants.ArrayData;
-import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.constants.ArrayData;
+import com.bookverse.development.packapps.apps.utils.ui.Alerts;
+import com.bookverse.development.packapps.apps.utils.ui.Effects;
 
 public final class WhatsAppService {
 

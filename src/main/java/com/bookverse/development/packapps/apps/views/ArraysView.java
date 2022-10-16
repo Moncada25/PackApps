@@ -9,9 +9,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.apps.utils.ui.Resources;
+import com.bookverse.development.packapps.apps.utils.other.Format;
+import com.bookverse.development.packapps.apps.utils.ui.Effects;
 
 import static com.bookverse.development.packapps.apps.services.ArraysService.clickOnAction;
 import static com.bookverse.development.packapps.apps.services.ArraysService.clickOnAutoFill;
@@ -22,10 +22,10 @@ import static com.bookverse.development.packapps.apps.services.ArraysService.cli
 import static com.bookverse.development.packapps.apps.services.ArraysService.clickOnTransposed;
 import static com.bookverse.development.packapps.apps.services.ArraysService.manualFill;
 
-import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.SMALL;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.SMALL;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
 public class ArraysView extends JDialog implements ActionListener {
 

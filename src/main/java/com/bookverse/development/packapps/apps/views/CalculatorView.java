@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.apps.views;
 
-import com.bookverse.development.packapps.utils.constants.Styles;
-import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.apps.utils.constants.Styles;
+import com.bookverse.development.packapps.apps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -11,12 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.apps.utils.ui.Alerts;
+import com.bookverse.development.packapps.apps.utils.ui.Resources;
 
-import static com.bookverse.development.packapps.utils.Format.isNumber;
-import static com.bookverse.development.packapps.utils.Format.onlyAPoint;
-import static com.bookverse.development.packapps.utils.Format.onlyNumberCalc;
+import static com.bookverse.development.packapps.apps.utils.other.Format.isNumber;
+import static com.bookverse.development.packapps.apps.utils.other.Format.onlyAPoint;
+import static com.bookverse.development.packapps.apps.utils.other.Format.onlyNumberCalc;
 import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnAdd;
 import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnClean;
 import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnDelete;

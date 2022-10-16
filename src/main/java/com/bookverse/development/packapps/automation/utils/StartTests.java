@@ -2,8 +2,8 @@ package com.bookverse.development.packapps.automation.utils;
 
 import com.bookverse.development.packapps.automation.models.Bookverse;
 import com.bookverse.development.packapps.automation.runners.RegisterUserTest;
-import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.apps.utils.ui.Resources;
+import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import org.junit.runner.JUnitCore;
 
 public class StartTests {

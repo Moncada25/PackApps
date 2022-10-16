@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.apps.utils.ui.Resources;
+import com.bookverse.development.packapps.apps.utils.ui.Effects;
 
 import static com.bookverse.development.packapps.apps.services.StackService.i;
 import static com.bookverse.development.packapps.apps.services.StackService.x;
@@ -30,12 +30,12 @@ import static com.bookverse.development.packapps.apps.services.StackService.clic
 import static com.bookverse.development.packapps.apps.services.StackService.clickOnPeek;
 import static com.bookverse.development.packapps.apps.services.StackService.clickOnPop;
 import static com.bookverse.development.packapps.apps.services.StackService.clickOnPush;
-import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
+import static com.bookverse.development.packapps.apps.utils.ui.Resources.getBorder;
 
-import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.HAND;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
 public class StackView extends JDialog implements MouseListener, ActionListener {
 

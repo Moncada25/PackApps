@@ -4,12 +4,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.apps.utils.other.Format;
+import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
-import static com.bookverse.development.packapps.utils.ui.Alerts.inputNumber;
+import static com.bookverse.development.packapps.apps.utils.ui.Alerts.inputNumber;
 
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
 public final class QueueService {
 

@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.apps.views;
 
-import com.bookverse.development.packapps.utils.Config;
+import com.bookverse.development.packapps.apps.utils.other.Config;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -17,19 +17,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.apps.utils.ui.Resources;
+import com.bookverse.development.packapps.apps.utils.ui.Alerts;
+import com.bookverse.development.packapps.apps.utils.ui.Effects;
 
 import static com.bookverse.development.packapps.apps.services.EmailService.clickOnSend;
 import static com.bookverse.development.packapps.apps.services.EmailService.receiver;
 
-import static com.bookverse.development.packapps.utils.constants.AppConfig.DEVELOPER_EMAIL;
-import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.utils.constants.Styles.SMALL;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.AppConfig.DEVELOPER_EMAIL;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.SMALL;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
 public class EmailView extends JDialog implements ActionListener, MouseListener {
 

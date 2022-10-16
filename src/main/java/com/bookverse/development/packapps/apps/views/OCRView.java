@@ -12,16 +12,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import com.bookverse.development.packapps.utils.constants.Styles;
-import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.ui.Effects;
-import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.apps.utils.constants.Styles;
+import com.bookverse.development.packapps.apps.utils.ui.Alerts;
+import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import com.bookverse.development.packapps.apps.utils.ui.Resources;
 
 import static com.bookverse.development.packapps.apps.services.OCRService.readText;
-import static com.bookverse.development.packapps.utils.ui.Resources.getFile;
+import static com.bookverse.development.packapps.apps.utils.ui.Resources.getFile;
 
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
 public class OCRView extends JDialog implements MouseListener {
 

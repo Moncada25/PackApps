@@ -15,9 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
-import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.Format;
-import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.apps.utils.ui.Resources;
+import com.bookverse.development.packapps.apps.utils.other.Format;
+import com.bookverse.development.packapps.apps.utils.ui.Effects;
 
 import static com.bookverse.development.packapps.apps.services.WhatsAppService.clickOnOpen;
 import static com.bookverse.development.packapps.apps.services.WhatsAppService.clickOnReturn;
@@ -25,9 +25,9 @@ import static com.bookverse.development.packapps.apps.services.WhatsAppService.c
 import static java.awt.Event.ENTER;
 import static javax.swing.SwingConstants.CENTER;
 
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
 public class WhatsAppView extends JDialog implements ActionListener {
 

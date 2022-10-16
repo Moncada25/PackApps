@@ -1,22 +1,22 @@
 package com.bookverse.development.packapps.apps.repositories;
 
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.FEEDBACK;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.LOANS;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.NOTES;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PURCHASES;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PUZZLE;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.FEEDBACK;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.INVENTORY;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.LOANS;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PURCHASES;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PUZZLE;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.SALES;
+import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.apps.database.Connection;
 import com.bookverse.development.packapps.apps.models.Store;
-import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.constants.Queries;
+import com.bookverse.development.packapps.apps.utils.ui.Alerts;
+import com.bookverse.development.packapps.apps.utils.constants.Queries;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;

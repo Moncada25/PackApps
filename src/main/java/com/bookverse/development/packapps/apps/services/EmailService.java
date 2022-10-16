@@ -11,8 +11,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.utils.GeneralUtilities;
-import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
 public final class EmailService {
 
