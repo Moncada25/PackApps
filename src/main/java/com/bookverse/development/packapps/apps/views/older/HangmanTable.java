@@ -11,7 +11,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Table;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
@@ -188,7 +188,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
       } else {
 
         if (GeneralUtilities.loginDBA()) {
-          Database.updateData(Alerts.inputText("Enter a Nickname", 20),
+          OlderRepository.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(HANGMAN));
 
           dispose();
@@ -214,7 +214,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
             .toArray(String[]::new);
 
         if (GeneralUtilities.loginDBA()) {
-          Database.deleteData(IDs, Format.tableName(HANGMAN));
+          OlderRepository.deleteData(IDs, Format.tableName(HANGMAN));
           dispose();
           new Index().hangmanTableAP();
         }
@@ -232,7 +232,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
     try {
 
-      if (Database.readTable(table.tabResult, sql, false)) {
+      if (OlderRepository.readTable(table.tabResult, sql, false)) {
         table.setBounds(0, 0, 780, alto);
         table.setResizable(false);
         table.setLocationRelativeTo(null);

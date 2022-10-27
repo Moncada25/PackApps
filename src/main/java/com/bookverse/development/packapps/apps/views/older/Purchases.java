@@ -11,7 +11,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PURCHASES;
 
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.constants.Queries;
@@ -286,11 +286,11 @@ public class Purchases extends JDialog implements ActionListener {
               stateProduct = "New";
             }
 
-            if (Database.searchProductByReference(txtReference.getText(), INVENTORY)) {
+            if (OlderRepository.searchProductByReference(txtReference.getText(), INVENTORY)) {
 
-              if (stateProduct.equals(Database.store.getProductState())
-                  && Double.parseDouble(txtPrice.getText()) == Database.store.getPrice()) {
-                Database
+              if (stateProduct.equals(OlderRepository.store.getProductState())
+                  && Double.parseDouble(txtPrice.getText()) == OlderRepository.store.getPrice()) {
+                OlderRepository
                     .updateInventory(Integer.parseInt(lblUnits.getText()), txtReference.getText(),
                         true);
               } else {
@@ -301,19 +301,19 @@ public class Purchases extends JDialog implements ActionListener {
             } else {
               String[] data = {INVENTORY, txtReference.getText(), stateProduct,
                   String.valueOf(Double.parseDouble(txtPrice.getText())), lblUnits.getText()};
-              Database.insertData(data);
+              OlderRepository.insertData(data);
             }
 
             if (!existProduct) {
               String user = HomeStore.getUserLogged();
 
-              if (Database.searchDataUserInCashRegister(user)) {
-                Database.updatePurchases(user, productCount, totalPurchase);
+              if (OlderRepository.searchDataUserInCashRegister(user)) {
+                OlderRepository.updatePurchases(user, productCount, totalPurchase);
               } else {
                 String[] data = {CASH_REGISTER, user, String.valueOf(0), String.valueOf(0.0),
                     String.valueOf(productCount), String.valueOf(totalPurchase),
                     String.valueOf(0.0)};
-                Database.insertData(data);
+                OlderRepository.insertData(data);
               }
 
               try {
@@ -322,15 +322,15 @@ public class Purchases extends JDialog implements ActionListener {
                     txtPhone.getText(), Format.getDate(), String.valueOf(lblUnits.getText()),
                     String.valueOf(totalPurchase)};
 
-                Database.insertData(purchase);
+                OlderRepository.insertData(purchase);
 
               } catch (Exception e) {
                 Alerts.error(e, PURCHASES);
               }
 
               Alerts.actionSuccessfully("purchased", lblUnits.getText(), totalPurchase);
-              Database.store.setUnitsActual(0);
-              Database.store.setTotalPurchases(0.0);
+              OlderRepository.store.setUnitsActual(0);
+              OlderRepository.store.setTotalPurchases(0.0);
 
               txtReference.setEnabled(true);
               radioNew.setEnabled(true);
@@ -353,7 +353,7 @@ public class Purchases extends JDialog implements ActionListener {
     inventoryTable.cleanTable();
 
     try {
-      Database.readTable(inventoryTable.viewTable, Queries.getAllData(INVENTORY), true);
+      OlderRepository.readTable(inventoryTable.viewTable, Queries.getAllData(INVENTORY), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -371,17 +371,17 @@ public class Purchases extends JDialog implements ActionListener {
 
     if (inventoryTable.getStatus() == 1 || inventoryTable.getStatus() == 2) {
 
-      Database.searchProductByReference(inventoryTable.getReference(), INVENTORY);
+      OlderRepository.searchProductByReference(inventoryTable.getReference(), INVENTORY);
 
       txtReference.setText(inventoryTable.getReference());
 
-      if (Database.store.getProductState().equals("New")) {
+      if (OlderRepository.store.getProductState().equals("New")) {
         radioNew.setSelected(true);
       } else {
         radioUsed.setSelected(true);
       }
 
-      txtPrice.setText(String.valueOf(Database.store.getPrice()));
+      txtPrice.setText(String.valueOf(OlderRepository.store.getPrice()));
 
       txtReference.setEnabled(false);
       radioNew.setEnabled(false);

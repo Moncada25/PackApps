@@ -5,7 +5,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
@@ -241,25 +241,25 @@ public class Loans extends JDialog implements ActionListener {
 
                 String user = new HomeStore().getUserLogged();
 
-                if (Database.searchDataUserInCashRegister(user)) {
-                  Database.updateLoan(user, Double.parseDouble(txtValue.getText()));
+                if (OlderRepository.searchDataUserInCashRegister(user)) {
+                  OlderRepository.updateLoan(user, Double.parseDouble(txtValue.getText()));
                 } else {
                   String[] data = {CASH_REGISTER, user, String.valueOf(0), String.valueOf(0.0),
                       String.valueOf(0), String.valueOf(0.0),
                       String.valueOf(txtValue.getText())};
-                  Database.insertData(data);
+                  OlderRepository.insertData(data);
                 }
 
                 String[] data = {LOANS, user, txtName.getText(), txtDocument.getText(),
                     txtReference.getText(), txtPhone.getText(), dateFormat.format(date.getTime()),
                     txtValue.getText()};
 
-                Database.insertData(data);
+                OlderRepository.insertData(data);
 
-                Database.store.setTotalLoans(Double.parseDouble(txtValue.getText()));
+                OlderRepository.store.setTotalLoans(Double.parseDouble(txtValue.getText()));
                 Alerts.lendSuccessfully(dateFormat.format(date.getTime()), Double.parseDouble(
                     txtValue.getText()));
-                Database.store.setTotalLoans(0.0);
+                OlderRepository.store.setTotalLoans(0.0);
 
                 txtName.setText("");
                 txtReference.setText("");

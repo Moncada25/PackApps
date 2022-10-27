@@ -17,11 +17,12 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PUZZLE;
 
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Table;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.constants.Queries;
+import com.bookverse.development.packapps.apps.views.NotesView;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -212,7 +213,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
       } else {
 
         if (loginDBA()) {
-          Database.updateData(Alerts.inputText("Enter a Nickname", 20),
+          OlderRepository.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(NOTES));
 
           dispose();
@@ -238,7 +239,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
             .toArray(String[]::new);
 
         if (loginDBA()) {
-          Database.deleteData(IDs, Format.tableName(NOTES));
+          OlderRepository.deleteData(IDs, Format.tableName(NOTES));
 
           dispose();
           new Index().notesTableAP();
@@ -257,7 +258,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
 
     try {
 
-      if (Database.readTable(table.tabResult, sql, false)) {
+      if (OlderRepository.readTable(table.tabResult, sql, false)) {
         table.setBounds(0, 0, 780, alto);
         table.setResizable(false);
         table.setLocationRelativeTo(null);
@@ -282,7 +283,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
       btnConsultAP();
     } else if (e.getSource() == create) {
       setVisible(false);
-      new Notes(this, true).start(this);
+      new NotesView(this, true).start(this);
     }
   }
 

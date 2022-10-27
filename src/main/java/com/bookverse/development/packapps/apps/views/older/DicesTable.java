@@ -15,7 +15,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Table;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
@@ -214,7 +214,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
       } else {
 
         if (GeneralUtilities.loginDBA()) {
-          Database.updateData(Alerts.inputText("Enter a Nickname", 20),
+          OlderRepository.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(DICES));
 
           dispose();
@@ -240,7 +240,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
             .toArray(String[]::new);
 
         if (GeneralUtilities.loginDBA()) {
-          Database.deleteData(IDs, Format.tableName(DICES));
+          OlderRepository.deleteData(IDs, Format.tableName(DICES));
           dispose();
           new Index().dicesTableAP();
         }
@@ -258,7 +258,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     try {
 
-      if (Database.readTable(table.tabResult, query, false)) {
+      if (OlderRepository.readTable(table.tabResult, query, false)) {
         table.setBounds(0, 0, 780, size);
         table.setResizable(false);
         table.setLocationRelativeTo(null);

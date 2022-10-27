@@ -1,8 +1,5 @@
-package com.bookverse.development.packapps.apps.views.older;
+package com.bookverse.development.packapps.apps.views;
 
-import com.bookverse.development.packapps.apps.views.ArraysView;
-import com.bookverse.development.packapps.apps.views.QueueView;
-import com.bookverse.development.packapps.apps.views.StackView;
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
@@ -18,12 +15,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.jetbrains.annotations.NotNull;
 
-public class Structures extends JDialog implements MouseListener {
+public class StructuresView extends JDialog implements MouseListener {
 
   private Resources resources = new Resources();
-  private JLabel btnStack, btnQueue, btnExit, btnArrays;
+  private JLabel btnStack;
+  private JLabel btnQueue;
+  private JLabel btnExit;
+  private JLabel btnArrays;
 
-  public Structures(JFrame parent, boolean modal) {
+  public StructuresView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }

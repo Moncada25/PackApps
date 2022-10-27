@@ -9,7 +9,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Table;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import java.awt.BorderLayout;
@@ -217,7 +217,7 @@ public class InventoryTable extends JDialog implements MouseListener {
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        Database.deleteData(IDs, INVENTORY);
+        OlderRepository.deleteData(IDs, INVENTORY);
         dispose();
         new HomeStore().btnInventoryTableAP(false);
       }

@@ -7,7 +7,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
@@ -248,7 +248,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
       String[] data = {PUZZLE, Alerts.inputText("Enter a Nickname", 20), state,
           getLevel(), String.valueOf(moves), Format.getDate()};
 
-      Database.insertData(data);
+      OlderRepository.insertData(data);
     }
   }
 

@@ -17,20 +17,20 @@ import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 
-import static com.bookverse.development.packapps.apps.services.OCRService.readText;
+import static com.bookverse.development.packapps.apps.services.OcrService.readText;
 import static com.bookverse.development.packapps.apps.utils.ui.Resources.getFile;
 
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
-public class OCRView extends JDialog implements MouseListener {
+public class OcrView extends JDialog implements MouseListener {
 
   private Resources resources = new Resources();
   private JLabel searchFile;
   private JLabel exit;
   private JTextArea text;
 
-  public OCRView(JFrame parent, boolean modal) {
+  public OcrView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }

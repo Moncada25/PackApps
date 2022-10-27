@@ -28,7 +28,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.jetbrains.annotations.NotNull;
 
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
 public final class ExportFile {
@@ -95,7 +95,7 @@ public final class ExportFile {
 
     if (!filePath.equals(file)) {
 
-      if (Database.readTable(table, query, false)) {
+      if (OlderRepository.readTable(table, query, false)) {
 
         try {
 
@@ -155,7 +155,7 @@ public final class ExportFile {
 
     if (!filePath.equals(file)) {
 
-      if (Database.readTable(table, query, false)) {
+      if (OlderRepository.readTable(table, query, false)) {
 
         int rowCount = table.getRowCount();
         int columnCount = table.getColumnCount();
@@ -193,7 +193,7 @@ public final class ExportFile {
 
     if (!filePath.equals(file)) {
 
-      if (Database.readTable(table, query, false)) {
+      if (OlderRepository.readTable(table, query, false)) {
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
 

@@ -19,14 +19,14 @@ import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 
-import static com.bookverse.development.packapps.apps.services.QRService.createQR;
-import static com.bookverse.development.packapps.apps.services.QRService.readQR;
+import static com.bookverse.development.packapps.apps.services.QrService.createQR;
+import static com.bookverse.development.packapps.apps.services.QrService.readQR;
 import static com.bookverse.development.packapps.apps.utils.ui.Resources.getFile;
 
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
-public class QRView extends JDialog implements MouseListener {
+public class QrView extends JDialog implements MouseListener {
 
   private JLabel readQR;
   private JLabel generateQR;
@@ -34,7 +34,7 @@ public class QRView extends JDialog implements MouseListener {
   private JTextArea text;
   private Resources resources = new Resources();
 
-  public QRView(JFrame parent, boolean modal) {
+  public QrView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }

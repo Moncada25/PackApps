@@ -2,9 +2,19 @@ package com.bookverse.development.packapps.apps.models;
 
 public class Store {
 
-  private String reference, productState, document, date, user, password;
-  private Double price, totalSales, totalPurchases, totalLoans;
-  private int unitsActual, soldProducts, purchasedProducts;
+  private String reference;
+  private String productState;
+  private String document;
+  private String date;
+  private String user;
+  private String password;
+  private Double price;
+  private Double totalSales;
+  private Double totalPurchases;
+  private Double totalLoans;
+  private int unitsActual;
+  private int soldProducts;
+  private int purchasedProducts;
 
   public String getReference() {
     return reference;

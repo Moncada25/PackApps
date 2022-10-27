@@ -17,7 +17,7 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 
-public final class QRService {
+public final class QrService {
 
   public static String readQR(String image) {
 
@@ -52,6 +52,6 @@ public final class QRService {
     );
   }
 
-  private QRService(){
+  private QrService(){
   }
 }

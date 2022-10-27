@@ -17,7 +17,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PUZZLE;
 
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Table;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
@@ -217,7 +217,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
       } else {
 
         if (loginDBA()) {
-          Database.updateData(Alerts.inputText("Enter a Nickname", 20),
+          OlderRepository.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), PUZZLE);
 
           dispose();
@@ -243,7 +243,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
             .toArray(String[]::new);
 
         if (loginDBA()) {
-          Database.deleteData(IDs, PUZZLE);
+          OlderRepository.deleteData(IDs, PUZZLE);
 
           dispose();
           new Index().puzzleTableAP();
@@ -290,7 +290,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
 
     try {
 
-      if (Database.readTable(table.tabResult, sql, false)) {
+      if (OlderRepository.readTable(table.tabResult, sql, false)) {
         table.setBounds(0, 0, 780, alto);
         table.setResizable(false);
         table.setLocationRelativeTo(null);

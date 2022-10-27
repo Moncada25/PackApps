@@ -12,7 +12,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.SALES;
 
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.constants.Queries;
@@ -283,13 +283,13 @@ public class Sales extends JDialog implements ActionListener {
         String formatUnitsAvailable = unitsAvailable.getText().replace("<html><strong>", "")
             .replace("</strong></html>", "");
 
-        Database
+        OlderRepository
             .updateInventory(Integer.parseInt(formatUnitsAvailable), txtReference.getText(), false);
 
         String user = new HomeStore().getUserLogged();
 
-        if (Database.searchDataUserInCashRegister(user)) {
-          Database.updateSales(user, Integer.parseInt(unitsActual.getText()),
+        if (OlderRepository.searchDataUserInCashRegister(user)) {
+          OlderRepository.updateSales(user, Integer.parseInt(unitsActual.getText()),
               Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText()));
         } else {
 
@@ -301,7 +301,7 @@ public class Sales extends JDialog implements ActionListener {
               String.valueOf(0.0),
               String.valueOf(0.0)};
 
-          Database.insertData(data);
+          OlderRepository.insertData(data);
         }
 
         try {
@@ -312,7 +312,7 @@ public class Sales extends JDialog implements ActionListener {
                   Double.parseDouble(txtPrice.getText()) * Integer
                       .parseInt(unitsActual.getText()))};
 
-          Database.insertData(sale);
+          OlderRepository.insertData(sale);
 
         } catch (Exception e) {
           Alerts.message("Error", e.getMessage());
@@ -320,8 +320,8 @@ public class Sales extends JDialog implements ActionListener {
 
         Alerts.actionSuccessfully("lend", unitsActual.getText(),
             Double.parseDouble(txtPrice.getText()) * Integer.parseInt(unitsActual.getText()));
-        Database.store.setUnitsActual(0);
-        Database.store.setTotalLoans(0.0);
+        OlderRepository.store.setUnitsActual(0);
+        OlderRepository.store.setTotalLoans(0.0);
 
         btnSubmit.setEnabled(false);
         available.setVisible(false);
@@ -341,7 +341,7 @@ public class Sales extends JDialog implements ActionListener {
     inventoryTable.cleanTable();
 
     try {
-      Database.readTable(inventoryTable.viewTable, Queries.getAllData(INVENTORY), true);
+      OlderRepository.readTable(inventoryTable.viewTable, Queries.getAllData(INVENTORY), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -358,18 +358,18 @@ public class Sales extends JDialog implements ActionListener {
   private void importDataProduct() {
 
     if (inventoryTable.getStatus() == 1) {
-      Database.searchProductByReference(inventoryTable.getReference(), INVENTORY);
+      OlderRepository.searchProductByReference(inventoryTable.getReference(), INVENTORY);
       txtReference.setText(inventoryTable.getReference());
 
-      if (Database.store.getProductState().equals("New")) {
+      if (OlderRepository.store.getProductState().equals("New")) {
         radioNew.setSelected(true);
-      } else if (Database.store.getProductState().equals("Used")) {
+      } else if (OlderRepository.store.getProductState().equals("Used")) {
         radioUsed.setSelected(true);
       }
 
-      txtPrice.setText(String.valueOf(Database.store.getPrice()));
+      txtPrice.setText(String.valueOf(OlderRepository.store.getPrice()));
       unitsAvailable
-          .setText("<html><strong>" + Database.store.getUnitsActual() + "</strong></html>");
+          .setText("<html><strong>" + OlderRepository.store.getUnitsActual() + "</strong></html>");
 
       btnSubmit.setEnabled(true);
       available.setVisible(true);

@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
@@ -19,7 +19,7 @@ public final class FeedbackService {
 
       String[] data = {FEEDBACK, username, commentary, Format.getDate()};
 
-      if (Database.insertData(data)) {
+      if (OlderRepository.insertData(data)) {
 
         JOptionPane.showMessageDialog(null,
             "<html>" + Format.style()

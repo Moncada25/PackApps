@@ -9,7 +9,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.constants.Queries;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
@@ -112,7 +112,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Queries.getAllData(CASH_REGISTER), true);
+      OlderRepository.readTable(table.viewTable, Queries.getAllData(CASH_REGISTER), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -134,7 +134,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Queries.getAllData(INVENTORY), true);
+      OlderRepository.readTable(table.viewTable, Queries.getAllData(INVENTORY), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -156,7 +156,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Queries.getAllData(LOANS), true);
+      OlderRepository.readTable(table.viewTable, Queries.getAllData(LOANS), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -178,7 +178,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Queries.getAllData(PURCHASES), true);
+      OlderRepository.readTable(table.viewTable, Queries.getAllData(PURCHASES), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -200,7 +200,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Queries.getAllData(SALES), true);
+      OlderRepository.readTable(table.viewTable, Queries.getAllData(SALES), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -222,7 +222,7 @@ public class HomeStore extends JDialog implements ActionListener {
     table.cleanTable();
 
     try {
-      Database.readTable(table.viewTable, Queries.getAllData(USERS), true);
+      OlderRepository.readTable(table.viewTable, Queries.getAllData(USERS), true);
     } catch (Exception e1) {
       Alerts.message("Error", e1.getMessage());
     }
@@ -246,7 +246,7 @@ public class HomeStore extends JDialog implements ActionListener {
   }
 
   private void logout() {
-    Database.recordLogin("Offline", userLogged);
+    OlderRepository.recordLogin("Offline", userLogged);
     Effects.fadeOut(this);
   }
 

@@ -9,7 +9,7 @@ import static java.awt.Font.PLAIN;
 
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.apps.utils.other.Format;
@@ -337,7 +337,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
           Objects.requireNonNull(options.getSelectedItem()).toString(),
           Format.getDate()};
 
-      Database.insertData(data);
+      OlderRepository.insertData(data);
     }
   }
 

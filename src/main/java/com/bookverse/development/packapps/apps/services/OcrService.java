@@ -5,7 +5,7 @@ import java.io.File;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
-public final class OCRService {
+public final class OcrService {
 
   public static String readText(String image) {
 
@@ -21,6 +21,6 @@ public final class OCRService {
     }
   }
 
-  private OCRService(){
+  private OcrService(){
   }
 }

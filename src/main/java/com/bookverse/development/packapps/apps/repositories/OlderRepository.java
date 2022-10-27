@@ -13,10 +13,11 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.SALES;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.apps.database.Connection;
+import com.bookverse.development.packapps.apps.database.DatabaseConnection;
 import com.bookverse.development.packapps.apps.models.Store;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.constants.Queries;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -28,21 +29,21 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.jetbrains.annotations.NotNull;
 
-public class Database {
+public final class OlderRepository {
+
+  private OlderRepository() {
+  }
 
   public static final Store store = new Store();
-  private static java.sql.Connection connection = null;
+  private static Connection connection = null;
   private static ResultSet resultSet;
   private static PreparedStatement preparedStatement;
   private static DefaultTableModel tableModel;
-  private static javax.sql.DataSource dataSource;
-  private static Connection dataSourceService = new Connection();
 
   public static boolean insertData(@NotNull String[] data) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      connection = DatabaseConnection.getConnection();
 
       switch (data[0]) {
         case GUESS_NUMBER:
@@ -80,14 +81,7 @@ public class Database {
           preparedStatement.execute();
           break;
         case NOTES:
-          preparedStatement = connection.prepareStatement(Queries.insertNote());
-          preparedStatement.setString(1, data[1]);
-          preparedStatement.setString(2, data[2]);
-          preparedStatement.setInt(3, Integer.parseInt(data[3]));
-          preparedStatement.setString(4, data[4]);
-          preparedStatement.setString(5, data[5]);
-          preparedStatement.setString(6, data[6]);
-          preparedStatement.execute();
+          //DONE
           break;
         case FEEDBACK:
           preparedStatement = connection.prepareStatement(Queries.insertFeedback());
@@ -178,8 +172,8 @@ public class Database {
   public static boolean readTable(JTable tabla, String query, boolean isMain) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(query);
       resultSet = preparedStatement.executeQuery();
@@ -220,8 +214,8 @@ public class Database {
   public static void updateData(String nickname, String id, String table) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries.updateNickname(nickname, id, table));
       preparedStatement.executeUpdate();
@@ -242,8 +236,8 @@ public class Database {
   public static void deleteData(@NotNull String[] rows, String table) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       for (String row : rows) {
         preparedStatement = connection.prepareStatement(Queries.deleteDataByID(row, table));
@@ -275,8 +269,8 @@ public class Database {
     }
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries.updateInventory(reference, trueUnits));
       preparedStatement.executeUpdate();
@@ -297,8 +291,8 @@ public class Database {
   public static boolean searchProductByReference(String reference, String table) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries.getDataProduct(reference, table));
       resultSet = preparedStatement.executeQuery();
@@ -329,8 +323,8 @@ public class Database {
   public static void updateSales(String user, int productsSold, Double totalSales) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries
           .updateCashRegisterSales(user, (productsSold + store.getSoldProducts()),
@@ -354,8 +348,8 @@ public class Database {
   public static void updatePurchases(String user, int purchasedProducts, Double totalPurchases) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries
           .updateCashRegisterPurchases(user, (purchasedProducts + store.getPurchasedProducts()),
@@ -379,8 +373,8 @@ public class Database {
   public static void updateLoan(String user, Double loanValue) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(
           Queries.updateCashRegisterLoan(user, (loanValue + store.getTotalLoans())));
@@ -403,8 +397,8 @@ public class Database {
   public static void recordLogin(String status, String user) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries.recordLogin(status, user));
       preparedStatement.executeUpdate();
@@ -426,8 +420,8 @@ public class Database {
   public static boolean searchDataUserInCashRegister(String user) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries.searchDataUserInCashRegister(user));
       resultSet = preparedStatement.executeQuery();
@@ -460,8 +454,8 @@ public class Database {
   public static boolean userAlreadyExist(String user) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries.searchUser(user));
       resultSet = preparedStatement.executeQuery();
@@ -487,8 +481,8 @@ public class Database {
   public static boolean searchUserRegister(String user, String password) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries.searchUserRegister(user, password));
       resultSet = preparedStatement.executeQuery();
@@ -514,8 +508,8 @@ public class Database {
   public static void updatePassword(String user, String newPassword) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries.updatePassword(user, newPassword));
       preparedStatement.executeUpdate();
@@ -537,8 +531,8 @@ public class Database {
   public static void updateUsername(String user, String newUsername) {
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries.updateUsername(user, newUsername));
       preparedStatement.executeUpdate();
@@ -562,8 +556,8 @@ public class Database {
     ArrayList<String> listBook = new ArrayList<>();
 
     try {
-      dataSource = dataSourceService.getDataSource();
-      connection = dataSource.getConnection();
+      
+      connection = DatabaseConnection.getConnection();
 
       preparedStatement = connection.prepareStatement(Queries.getTitleBooks());
       resultSet = preparedStatement.executeQuery();

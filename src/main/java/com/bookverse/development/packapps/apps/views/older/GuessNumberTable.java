@@ -17,7 +17,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Table;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
@@ -195,7 +195,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
         if (GeneralUtilities.loginDBA()) {
 
-          Database.updateData(Alerts.inputText("Enter a Nickname", 20),
+          OlderRepository.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(GUESS_NUMBER));
 
           dispose();
@@ -221,7 +221,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
             .toArray(String[]::new);
 
         if (GeneralUtilities.loginDBA()) {
-          Database.deleteData(IDs, Format.tableName(GUESS_NUMBER));
+          OlderRepository.deleteData(IDs, Format.tableName(GUESS_NUMBER));
           dispose();
           new Index().guessNumberTableAP();
         }
@@ -263,7 +263,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
     try {
 
-      if (Database.readTable(table.tabResult, query, false)) {
+      if (OlderRepository.readTable(table.tabResult, query, false)) {
         table.setBounds(0, 0, 780, size);
         table.setResizable(false);
         table.setLocationRelativeTo(null);

@@ -9,7 +9,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEX
 import com.bookverse.development.packapps.apps.utils.other.Crypto;
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
@@ -149,10 +149,10 @@ public class LoginStore extends JDialog implements ActionListener {
       Alerts.inputSomethingText();
     } else {
 
-      if (Database.searchUserRegister(txtUser.getText(),
+      if (OlderRepository.searchUserRegister(txtUser.getText(),
           Crypto.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
 
-        Database.recordLogin("Online", txtUser.getText());
+        OlderRepository.recordLogin("Online", txtUser.getText());
         new HomeStore(this, true).start(this, txtUser.getText());
 
         txtPassword.setText("");

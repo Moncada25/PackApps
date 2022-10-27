@@ -20,16 +20,18 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import com.bookverse.development.packapps.apps.views.DicesGameView;
 import com.bookverse.development.packapps.apps.views.EmailView;
 import com.bookverse.development.packapps.apps.views.FeedbackView;
+import com.bookverse.development.packapps.apps.views.NotesView;
 import com.bookverse.development.packapps.apps.views.ProfessionalCardView;
-import com.bookverse.development.packapps.apps.views.OCRView;
-import com.bookverse.development.packapps.apps.views.QRView;
+import com.bookverse.development.packapps.apps.views.OcrView;
+import com.bookverse.development.packapps.apps.views.QrView;
+import com.bookverse.development.packapps.apps.views.StructuresView;
 import com.bookverse.development.packapps.apps.views.TextsView;
 import com.bookverse.development.packapps.apps.views.WhatsAppView;
 import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import com.bookverse.development.packapps.apps.utils.other.Config;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.apps.utils.other.ExportFile;
@@ -132,8 +134,8 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem loansPDF;
   protected JMenuItem puzzlePDF;
   protected JMenuItem read;
-  protected JMenuItem OCR;
-  protected JMenuItem QR;
+  protected JMenuItem ocr;
+  protected JMenuItem qr;
   protected JMenuItem searchBook;
   protected JMenuItem registerUser;
   protected JMenuItem sendWhatsApp;
@@ -463,9 +465,9 @@ public class Index extends JFrame implements ActionListener {
     changeUI.addSeparator();
     changeUI.add(changeBackground);
 
-    OCR = resources.getMenuItem("OCR", "ocr", this);
+    ocr = resources.getMenuItem("OCR", "ocr", this);
 
-    QR = resources.getMenuItem("QR", "qr", this);
+    qr = resources.getMenuItem("QR", "qr", this);
 
     tools.add(changeUI);
     tools.addSeparator();
@@ -475,9 +477,9 @@ public class Index extends JFrame implements ActionListener {
     tools.addSeparator();
     tools.add(numbers);
     tools.addSeparator();
-    tools.add(OCR);
+    tools.add(ocr);
     tools.addSeparator();
-    tools.add(QR);
+    tools.add(qr);
     tools.addSeparator();
     tools.add(store);
     tools.addSeparator();
@@ -524,7 +526,7 @@ public class Index extends JFrame implements ActionListener {
     guessNumberTable.cleanTable();
 
     try {
-      Database.readTable(guessNumberTable.viewTable,
+      OlderRepository.readTable(guessNumberTable.viewTable,
           Queries.getAllData(Format.tableName(GUESS_NUMBER)), true);
     } catch (Exception e1) {
       Alerts.error(e1, GUESS_NUMBER);
@@ -544,7 +546,7 @@ public class Index extends JFrame implements ActionListener {
     hangmanTable.cleanTable();
 
     try {
-      Database
+      OlderRepository
           .readTable(hangmanTable.viewTable, Queries.getAllData(Format.tableName(HANGMAN)), true);
     } catch (Exception e1) {
       Alerts.error(e1, HANGMAN);
@@ -565,7 +567,7 @@ public class Index extends JFrame implements ActionListener {
     dicesTable.cleanTable();
 
     try {
-      aux = Database.readTable(dicesTable.viewTable, Queries.getAllData(DICES), true);
+      aux = OlderRepository.readTable(dicesTable.viewTable, Queries.getAllData(DICES), true);
     } catch (Exception e1) {
       Alerts.error(e1, DICES);
     }
@@ -588,7 +590,7 @@ public class Index extends JFrame implements ActionListener {
     notesTable.cleanTable();
 
     try {
-      Database.readTable(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)), true);
+      OlderRepository.readTable(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)), true);
     } catch (Exception e1) {
       Alerts.error(e1, NOTES);
     }
@@ -606,7 +608,7 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.cleanTable();
 
     try {
-      Database.readTable(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)), true);
+      OlderRepository.readTable(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)), true);
     } catch (Exception e1) {
       Alerts.error(e1, PUZZLE);
     }
@@ -926,11 +928,11 @@ public class Index extends JFrame implements ActionListener {
       setVisible(true);
     } else if (e.getSource() == registerUser) {
       StartTests.startRegisterUser();
-    } else if (e.getSource() == OCR) {
-      new OCRView(this, true).start(this);
+    } else if (e.getSource() == ocr) {
+      new OcrView(this, true).start(this);
       setVisible(true);
-    } else if (e.getSource() == QR) {
-      new QRView(this, true).start(this);
+    } else if (e.getSource() == qr) {
+      new QrView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == grayMode) {
 
@@ -1020,13 +1022,13 @@ public class Index extends JFrame implements ActionListener {
       new QuestionsAndAnswers(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == structures) {
-      new Structures(this, true).start(this);
+      new StructuresView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == dices) {
       new DicesGameView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == notes) {
-      new Notes(this, true).start(this);
+      new NotesView(this, true).start(this);
       setVisible(true);
     } else if (e.getSource() == store) {
       new LoginStore(this, true).start(this);

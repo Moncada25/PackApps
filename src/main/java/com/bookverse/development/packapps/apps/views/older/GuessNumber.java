@@ -11,7 +11,7 @@ import static com.bookverse.development.packapps.apps.utils.other.GeneralUtiliti
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.GUESS_NUMBER;
 
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
@@ -240,7 +240,7 @@ public class GuessNumber extends JDialog implements ActionListener {
               Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(high), level + " - " + attempts,
               getDate()};
-          Database.insertData(data);
+          OlderRepository.insertData(data);
         } catch (Exception e) {
           Alerts.error(e, GUESS_NUMBER);
         }

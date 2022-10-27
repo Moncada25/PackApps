@@ -33,6 +33,9 @@ public final class CalculatorService {
       case "x^y":
         result = Math.pow(Double.parseDouble(firstNumber), Double.parseDouble(secondNumber));
         break;
+      case "√":
+        result = Math.sqrt(Double.parseDouble(firstNumber));
+        break;
       default:
         throw new IllegalStateException("Unexpected value: " + sign);
     }
@@ -108,7 +111,7 @@ public final class CalculatorService {
     try {
       
       if (field.getText().length() > 0) {
-        result = Math.sqrt(Double.parseDouble(field.getText()));
+        result = Double.parseDouble(operations(field.getText(), "0" , "√"));
         field.setText(String.valueOf(result));
       }
 

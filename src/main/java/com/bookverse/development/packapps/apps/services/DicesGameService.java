@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import com.bookverse.development.packapps.apps.models.Dice;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 
@@ -228,7 +228,7 @@ public final class DicesGameService {
     if (GeneralUtilities.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
       try {
         String[] data = {DICES, name, win, String.valueOf(round), getDate()};
-        Database.insertData(data);
+        OlderRepository.insertData(data);
       } catch (Exception e) {
         Alerts.error(e, DICES);
       }

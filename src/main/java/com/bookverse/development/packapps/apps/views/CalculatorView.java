@@ -1,7 +1,5 @@
 package com.bookverse.development.packapps.apps.views;
 
-import com.bookverse.development.packapps.apps.utils.constants.Styles;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -13,6 +11,8 @@ import javax.swing.JTextField;
 
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
+import com.bookverse.development.packapps.apps.utils.constants.Styles;
+import com.bookverse.development.packapps.apps.utils.ui.Effects;
 
 import static com.bookverse.development.packapps.apps.utils.other.Format.isNumber;
 import static com.bookverse.development.packapps.apps.utils.other.Format.onlyAPoint;

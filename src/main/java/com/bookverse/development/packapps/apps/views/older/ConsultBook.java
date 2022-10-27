@@ -11,7 +11,7 @@ import com.bookverse.development.packapps.automation.runners.SearchBookTest;
 import com.bookverse.development.packapps.automation.utils.SetUser;
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
@@ -116,7 +116,7 @@ public class ConsultBook extends JDialog implements ActionListener {
       }
     });
 
-    List<String> listBooks = Database.getListBook();
+    List<String> listBooks = OlderRepository.getListBook();
 
     IntStream.range(0, listBooks.size()).forEach(i -> listBooksBox.addItem(listBooks.get(i)));
 

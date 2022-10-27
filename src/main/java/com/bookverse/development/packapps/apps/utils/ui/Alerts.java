@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 
 public final class Alerts {
 
+  private Alerts() {
+  }
+
   public static String inputText(String request, int length) {
 
     boolean canContinue = false;
@@ -63,14 +66,7 @@ public final class Alerts {
   }
 
   public static boolean saveGame() {
-
-    boolean save = false;
-
-    if (Alerts.requestResponse("Do you want to save the data?", "Save")) {
-      save = true;
-    }
-
-    return save;
+    return Alerts.requestResponse("Do you want to save the data?", "Save");
   }
 
   public static void error(@NotNull Exception exception, String parent) {
@@ -81,9 +77,7 @@ public final class Alerts {
   }
 
   public static void message(String tittle, String message) {
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong>" + message,
-        tittle, JOptionPane.PLAIN_MESSAGE);
+    JOptionPane.showMessageDialog(null, message, tittle, JOptionPane.PLAIN_MESSAGE);
   }
 
   public static void emptyTable() {
@@ -245,7 +239,7 @@ public final class Alerts {
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
-    public static void instruccionesRompe() {
+  public static void instruccionesRompe() {
     JOptionPane.showMessageDialog(null, "<html>" + Format.style()
             + "<strong><center>Rompecabezas</center></strong><br>"
             + "<strong>Jugadores: </strong>1<br><br>"

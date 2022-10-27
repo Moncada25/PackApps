@@ -10,7 +10,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import com.bookverse.development.packapps.apps.utils.other.Crypto;
 import com.bookverse.development.packapps.apps.utils.other.Config;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.Database;
+import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
@@ -152,12 +152,12 @@ public class SignUp extends JDialog implements ActionListener {
       if (Format.verifyCredentials(txtUser.getText()) && Format
           .verifyCredentials(String.valueOf(txtPassword.getPassword()))) {
 
-        if (!Database.userAlreadyExist(txtUser.getText())) {
+        if (!OlderRepository.userAlreadyExist(txtUser.getText())) {
 
           String[] data = {USERS, txtUser.getText(), Crypto.encrypt(String.valueOf(
               txtPassword.getPassword()), true), "Offline"};
 
-          Database.insertData(data);
+          OlderRepository.insertData(data);
           Alerts.message("Message", "Registered user!");
 
           txtUser.setText("");
