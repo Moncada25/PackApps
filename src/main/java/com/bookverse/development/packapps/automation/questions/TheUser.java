@@ -25,6 +25,6 @@ public class TheUser implements Question<String> {
         WaitTime.inSeconds(5)
     );
 
-    return Text.of(USER_LOGGED).viewedBy(actor).asString();
+    return Text.of(USER_LOGGED).answeredBy(actor);
   }
 }

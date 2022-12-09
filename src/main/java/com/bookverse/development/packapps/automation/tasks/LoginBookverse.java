@@ -7,7 +7,6 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 import com.bookverse.development.packapps.automation.models.Bookverse;
-import com.bookverse.development.packapps.utils.ArrayData;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;

@@ -1,9 +1,9 @@
 package com.bookverse.development.packapps.automation.utils;
 
 import com.bookverse.development.packapps.automation.models.Bookverse;
-import com.bookverse.development.packapps.automation.runners.RunRegisterUser;
-import com.bookverse.development.packapps.core.Resources;
-import com.bookverse.development.packapps.utils.Alerts;
+import com.bookverse.development.packapps.automation.runners.RegisterUserTest;
+import com.bookverse.development.packapps.apps.utils.ui.Resources;
+import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import org.junit.runner.JUnitCore;
 
 public class StartTests {
@@ -25,9 +25,9 @@ public class StartTests {
             + "Gender → " + bookverse.getGender() + "\n\n"
             + "Do you want run test?", "Bookverse Test")) {
 
-      Resources.setGeneralObject(bookverse);
+      Resources.setObject(bookverse);
 
-      JUnitCore.runClasses(RunRegisterUser.class);
+      JUnitCore.runClasses(RegisterUserTest.class);
     }
   }
 }

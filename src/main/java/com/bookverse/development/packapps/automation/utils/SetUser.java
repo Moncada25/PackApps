@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.automation.utils;
 
 import com.bookverse.development.packapps.automation.models.Bookverse;
-import com.bookverse.development.packapps.utils.ArrayData;
+import com.bookverse.development.packapps.apps.utils.constants.ArrayData;
 
 public class SetUser {
 
