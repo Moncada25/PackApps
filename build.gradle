@@ -10,14 +10,13 @@ buildscript {
         google()
     }
     dependencies {
-        classpath "net.serenity-bdd:serenity-gradle-plugin:3.2.0"
+        classpath "net.serenity-bdd:serenity-gradle-plugin:3.4.2"
         classpath "io.freefair.gradle:lombok-plugin:5.1.1"
     }
 }
 
 apply plugin: "java"
 apply plugin: "idea"
-apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
 apply plugin: "io.freefair.lombok"
 
 repositories {
@@ -57,7 +56,7 @@ sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/i
 sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties"]
 
 ext {
-    serenityVersion = "3.2.0"
+    serenityVersion = "3.4.2"
 }
 
 dependencies {
@@ -89,4 +88,4 @@ dependencies {
 
 gradle.startParameter.continueOnFailure = true
 
-test.finalizedBy(aggregate, reports)
+//test.finalizedBy(aggregate, reports)

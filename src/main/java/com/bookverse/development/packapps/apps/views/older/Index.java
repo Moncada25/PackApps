@@ -308,7 +308,7 @@ public class Index extends JFrame implements ActionListener {
 
     scores.add(tables);
 
-    JMenu tools = resources.getMenu("Tools", "tools");
+    JMenu tools = resources.getMenu("Utils", "tools");
     store = resources.getMenuItem("Store", "compraventa", this);
     sendWhatsApp = resources.getMenuItem("Send Message", "whatsapp", this);
     structures = resources.getMenuItem("Structures", "estructuras", this);

@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants;
 
-
 public final class DatabaseConnection {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseConnection.class);

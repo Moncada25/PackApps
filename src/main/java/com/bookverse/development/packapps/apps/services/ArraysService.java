@@ -386,7 +386,7 @@ public final class ArraysService {
           JOptionPane.showMessageDialog(null,
               "<html>" + Format.style()
                   + "<strong><center>Undefined values</center></strong><br>"
-                  + "Some of the values are not undefined, please enter a value."
+                  + "Some of the values are undefined, please enter a value."
                   + "</html>",
               "Verify!", JOptionPane.PLAIN_MESSAGE);
 
