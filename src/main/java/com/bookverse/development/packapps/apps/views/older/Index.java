@@ -79,6 +79,7 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem moreSystems;
   protected JMenuItem moreBookverse;
   protected JMenuItem darkMode;
+  protected JMenuItem defaultMode;
   protected JMenuItem textureMode;
   protected JMenuItem mintMode;
   protected JMenuItem classicMode;
@@ -441,6 +442,7 @@ public class Index extends JFrame implements ActionListener {
     });
 
     JMenu mode = resources.getMenu("Theme", "mode");
+    defaultMode = resources.getMenuItem("Default", "default_theme", this);
     darkMode = resources.getMenuItem("Dark", "dark", this);
     textureMode = resources.getMenuItem("Texture", "texture", this);
     macMode = resources.getMenuItem("Mac OS", "mac", this);
@@ -451,6 +453,8 @@ public class Index extends JFrame implements ActionListener {
     mode.add(classicMode);
     mode.addSeparator();
     mode.add(darkMode);
+    mode.addSeparator();
+    mode.add(defaultMode);
     mode.addSeparator();
     mode.add(macMode);
     mode.addSeparator();
@@ -653,6 +657,50 @@ public class Index extends JFrame implements ActionListener {
 
     switch (selectedUI) {
 
+      case "Default":
+
+        try {
+          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+          UIManager.put("ComboBox.foreground", new Color(0, 0, 0));
+          UIManager.put("MenuItem.foreground", TEXT_COLOR);
+          UIManager.put("Menu.foreground", MAIN_COLOR);
+          UIManager.put("Button.foreground", new Color(0, 0, 0));
+
+          UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
+          UIManager.put("TableHeader.foreground", MAIN_COLOR);
+          UIManager.put("Table.foreground", TEXT_COLOR);
+          UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
+
+          dispose();
+          Index window = new Index();
+
+          welcome = new JLabel();
+          window.setSize(ArrayData.getWidthBackground(background - 1),
+              ArrayData.getLongBackground(background - 1));
+          window.add(welcome, BorderLayout.CENTER);
+          window.changeBackgroundAP(ArrayData.getPathBackground(background - 1),
+              ArrayData.getWidthBackground(background - 1),
+              ArrayData.getLongBackground(background - 1));
+
+          window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+          window.setResizable(false);
+          window.setLocationRelativeTo(null);
+          window.setTitle(getTitle());
+          window.wallpapers[background - 1].setForeground(MAIN_COLOR);
+          window.grayMode.setForeground(MAIN_COLOR);
+          Effects.fadeIn(window);
+          window.setVisible(true);
+          Alerts.changeUI("Default");
+
+        } catch (UnsupportedLookAndFeelException eq) {
+          Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+          throw new RuntimeException(e);
+        }
+
+        break;
+
       case "Gray":
 
         try {
@@ -668,7 +716,7 @@ public class Index extends JFrame implements ActionListener {
           UIManager.put("Table.foreground", TEXT_COLOR);
           UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
 
-          setVisible(false);
+          dispose();
           Index window = new Index();
 
           welcome = new JLabel();
@@ -709,7 +757,7 @@ public class Index extends JFrame implements ActionListener {
           UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
           UIManager.put("Button.foreground", Color.BLACK);
 
-          setVisible(false);
+          dispose();
           Index window = new Index();
 
           welcome = new JLabel();
@@ -749,7 +797,7 @@ public class Index extends JFrame implements ActionListener {
           UIManager.put("Button.foreground", Color.WHITE);
           UIManager.put("MenuItem.foreground", Color.WHITE);
 
-          setVisible(false);
+          dispose();
           Index window = new Index();
 
           welcome = new JLabel();
@@ -792,7 +840,7 @@ public class Index extends JFrame implements ActionListener {
           UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
           UIManager.put("Button.foreground", Color.BLACK);
 
-          setVisible(false);
+          dispose();
           Index window = new Index();
 
           welcome = new JLabel();
@@ -837,7 +885,7 @@ public class Index extends JFrame implements ActionListener {
           UIManager.put("Table.foreground", TEXT_COLOR);
           UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
 
-          setVisible(false);
+          dispose();
           Index window = new Index();
 
           welcome = new JLabel();
@@ -882,7 +930,7 @@ public class Index extends JFrame implements ActionListener {
           UIManager.put("Table.foreground", TEXT_COLOR);
           UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
 
-          setVisible(false);
+          dispose();
           Index window = new Index();
 
           welcome = new JLabel();
@@ -934,6 +982,14 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == qr) {
       new QrView(this, true).start(this);
       setVisible(true);
+    } else if (e.getSource() == defaultMode) {
+
+      if (defaultMode.getForeground() != MAIN_COLOR) {
+        setUI("Default");
+      } else {
+        Alerts.elementApplied(true);
+      }
+
     } else if (e.getSource() == grayMode) {
 
       if (grayMode.getForeground() != MAIN_COLOR) {
