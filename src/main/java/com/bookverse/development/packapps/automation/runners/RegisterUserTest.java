@@ -22,8 +22,7 @@ import net.serenitybdd.core.Serenity;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.Cast;
-import org.junit.After;
-import org.junit.Before;
+import io.cucumber.java.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,24 +31,19 @@ public class RegisterUserTest {
 
   Bookverse bookverse = (Bookverse) Resources.getObject();
 
-  @Before
-  public void config() {
-    setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(WebDriverFactory.goToWeb(BOOKVERSE_DEV))));
-    theActorCalled(Constants.ACTOR);
-  }
-
   @Test
   public void registerNewUser() {
+
+    setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(WebDriverFactory.goToWeb(BOOKVERSE_DEV))));
+    theActorCalled(Constants.ACTOR);
+
     theActorInTheSpotlight().wasAbleTo(RegisterUser.inBookverse(bookverse));
     theActorInTheSpotlight().attemptsTo(LoginBookverse.withCredentials(bookverse));
     theActorInTheSpotlight().should(
         seeThat(TheUser.logged(), is(bookverse.getName() + " " + bookverse.getLastName()))
             .orComplainWith(UserNotRegistered.class,
                 ExceptionsMessages.REGISTER_USER_ERROR.getProperty()));
-  }
 
-  @After
-  public void close() {
     BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
 
     if (Serenity.sessionVariableCalled(USER_REGISTERED) == null) {

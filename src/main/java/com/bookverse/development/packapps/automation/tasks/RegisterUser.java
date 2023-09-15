@@ -66,7 +66,7 @@ public class RegisterUser implements Task {
 
     actor.attemptsTo(
         Scroll.to(USERNAME_FIELD).andAlignToTop(),
-        Enter.theValue(bookverse.getUsername()).into(USERNAME_FIELD),
+        Enter.theValue(bookverse.getName()).into(USERNAME_FIELD),
         Enter.theValue(bookverse.getPassword()).into(FIRST_PASSWORD_FIELD),
         Enter.theValue(bookverse.getPassword()).into(SECOND_PASSWORD_FIELD),
         Enter.theValue(bookverse.getEmail()).into(EMAIL_FIELD),

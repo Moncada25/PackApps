@@ -28,16 +28,17 @@ public final class DatabaseConnection {
       return connection;
     }
 
-    BasicDataSource basicDataSource = new BasicDataSource();
-    basicDataSource.setDriverClassName(DatabaseConstants.DRIVER_DB);
-    basicDataSource.setUsername(DatabaseConstants.USER_DB);
-    basicDataSource.setPassword(DatabaseConstants.PASSWORD_DB);
-    basicDataSource.setUrl(DatabaseConstants.URL_DRIVER_DB);
-    basicDataSource.setMaxTotal(250);
-    basicDataSource.setMaxIdle(100);
-    basicDataSource.setMinIdle(50);
+    try (BasicDataSource basicDataSource = new BasicDataSource()) {
+      basicDataSource.setDriverClassName(DatabaseConstants.DRIVER_DB);
+      basicDataSource.setUsername(DatabaseConstants.USER_DB);
+      basicDataSource.setPassword(DatabaseConstants.PASSWORD_DB);
+      basicDataSource.setUrl(DatabaseConstants.URL_DRIVER_DB);
+      basicDataSource.setMaxTotal(250);
+      basicDataSource.setMaxIdle(100);
+      basicDataSource.setMinIdle(50);
 
-    connection = basicDataSource.getConnection();
+      connection = basicDataSource.getConnection();
+    }
 
     return connection;
   }

@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.apps.utils.constants;
 
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,7 +69,7 @@ public final class ArrayData {
 
   public static String getDataUser(String key) {
 
-    Faker faker = Faker.instance();
+    Faker faker = new Faker();
 
     Map<String, String> dataNewUser = new HashMap<>();
     dataNewUser.put("Name", faker.name().firstName());
