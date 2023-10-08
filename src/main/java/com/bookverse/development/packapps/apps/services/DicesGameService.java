@@ -26,8 +26,7 @@ public final class DicesGameService {
   private static Dice d3 = new Dice();
   private static int points1 = 0, points2 = 0, points3 = 0, round = 1, turn = 1;
   private static boolean winner = false;
-  private static Resources resources = new Resources();
-
+  
   public static void clickOnThrow(
       JTextField player1, JTextField player2, JTextField player3, JButton btnExit, JButton btnThrow,
       JButton btnReset, JLabel lblPoints1, JLabel lblPoints2, JLabel lblPoints3, JLabel dice1,
@@ -56,9 +55,9 @@ public final class DicesGameService {
       JTextField player1, JTextField player2, JTextField player3,
       JButton btnThrow, JButton btnExit, JLabel dice1, JLabel dice2, JLabel dice3, JDialog parent) {
 
-    dice1.setIcon(new ImageIcon(resources.getImage("01.gif")));
-    dice2.setIcon(new ImageIcon(resources.getImage("02.gif")));
-    dice3.setIcon(new ImageIcon(resources.getImage("03.gif")));
+    dice1.setIcon(new ImageIcon(Resources.getImage("01.gif")));
+    dice2.setIcon(new ImageIcon(Resources.getImage("02.gif")));
+    dice3.setIcon(new ImageIcon(Resources.getImage("03.gif")));
 
     btnThrow.setText("Stop");
     btnThrow.setBackground(MAIN_COLOR);
@@ -183,7 +182,7 @@ public final class DicesGameService {
   @NotNull
   @Contract("_ -> new")
   private static ImageIcon getIcon(int n) {
-    return new ImageIcon(resources.getImage(n + ".png"));
+    return new ImageIcon(Resources.getImage(n + ".png"));
   }
 
   private static void highestScore(JTextField player1, JTextField player2, JTextField player3, JButton btnThrow, JButton btnReset, JDialog parent) {

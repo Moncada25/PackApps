@@ -36,7 +36,7 @@ import static com.bookverse.development.packapps.apps.services.CalculatorService
 
 public class CalculatorView extends JDialog implements ActionListener {
 
-  private Resources resources = new Resources();
+  
   private JButton[][] numbers;
   private JButton btnZero, btnPoint, btnAdd, btnLess, btnDivide, btnMultiply, btnNegative, btnRoot, btnEuler, btnPower, btnEqual, btnDelete, btnClean;
   private JTextField txtResult;
@@ -49,7 +49,7 @@ public class CalculatorView extends JDialog implements ActionListener {
   private void createComponents() {
 
     setLayout(null);
-    setIconImage(new ImageIcon(resources.getImage("numeritos.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("numeritos.png")).getImage());
 
     txtResult = new JTextField("");
     txtResult.setBounds(50, 14, 215, 43);
@@ -100,7 +100,7 @@ public class CalculatorView extends JDialog implements ActionListener {
 
     for (int f = 0; f < 3; f++) {
       for (int c = 0; c < 3; c++) {
-        numbers[f][c] = resources.getButton(txtResult.getText() + n, null, this, this);
+        numbers[f][c] = Resources.getButton(txtResult.getText() + n, null, this, this);
         numbers[f][c].setBounds(x, y, 43, 43);
         n++;
         x = x + 43;
@@ -110,43 +110,43 @@ public class CalculatorView extends JDialog implements ActionListener {
       y = y + 43;
     }
 
-    btnZero = resources.getButton("0", null, this, this);
+    btnZero = Resources.getButton("0", null, this, this);
     btnZero.setBounds(50, 229, 86, 43);
 
-    btnPoint = resources.getButton(".", null, this, this);
+    btnPoint = Resources.getButton(".", null, this, this);
     btnPoint.setBounds(136, 229, 43, 43);
 
-    btnAdd = resources.getButton("+", null, this, this);
+    btnAdd = Resources.getButton("+", null, this, this);
     btnAdd.setBounds(179, 229, 43, 43);
 
-    btnLess = resources.getButton("-", null, this, this);
+    btnLess = Resources.getButton("-", null, this, this);
     btnLess.setBounds(179, 186, 43, 43);
 
-    btnMultiply = resources.getButton("*", null, this, this);
+    btnMultiply = Resources.getButton("*", null, this, this);
     btnMultiply.setBounds(179, 143, 43, 43);
 
-    btnDivide = resources.getButton("/", null, this, this);
+    btnDivide = Resources.getButton("/", null, this, this);
     btnDivide.setBounds(179, 100, 43, 43);
 
-    btnEqual = resources.getButton("=", Styles.TEXT_COLOR, this, this);
+    btnEqual = Resources.getButton("=", Styles.TEXT_COLOR, this, this);
     btnEqual.setBounds(222, 186, 43, 86);
 
-    btnRoot = resources.getButton("√", null, this, this);
+    btnRoot = Resources.getButton("√", null, this, this);
     btnRoot.setBounds(222, 143, 43, 43);
 
-    btnPower = resources.getButton("^", null, this, this);
+    btnPower = Resources.getButton("^", null, this, this);
     btnPower.setBounds(222, 100, 43, 43);
 
-    btnDelete = resources.getButton("←", Styles.MAIN_COLOR, this, this);
+    btnDelete = Resources.getButton("←", Styles.MAIN_COLOR, this, this);
     btnDelete.setBounds(179, 57, 86, 43);
 
-    btnClean = resources.getButton("C", null, this, this);
+    btnClean = Resources.getButton("C", null, this, this);
     btnClean.setBounds(136, 57, 43, 43);
 
-    btnEuler = resources.getButton("e^", null, this, this);
+    btnEuler = Resources.getButton("e^", null, this, this);
     btnEuler.setBounds(93, 57, 43, 43);
 
-    btnNegative = resources.getButton("±", null, this, this);
+    btnNegative = Resources.getButton("±", null, this, this);
     btnNegative.setBounds(50, 57, 43, 43);
   }
 

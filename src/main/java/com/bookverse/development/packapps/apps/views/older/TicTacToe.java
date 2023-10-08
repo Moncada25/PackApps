@@ -31,7 +31,7 @@ public class TicTacToe extends JDialog implements ActionListener {
   public static final Color colorX = TEXT_COLOR;
   public static final Color color = new Color(100, 220, 0);
   private static final JButton[][] board = new JButton[3][3];
-  Resources resources = new Resources();
+  
   private boolean vsCPU;
   private JLabel lblTurn;
   private JLabel pointsX;
@@ -79,16 +79,16 @@ public class TicTacToe extends JDialog implements ActionListener {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(new Resources().getImage("triqui.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("triqui.png")).getImage());
 
-    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(310, 300, 86, 30);
 
-    btnReset = resources.getButton("Reset", TEXT_COLOR, this, this);
+    btnReset = Resources.getButton("Reset", TEXT_COLOR, this, this);
     btnReset.setEnabled(false);
     btnReset.setBounds(180, 300, 86, 30);
 
-    btnPlay = resources.getButton("Play", TEXT_COLOR, this, this);
+    btnPlay = Resources.getButton("Play", TEXT_COLOR, this, this);
     btnPlay.setBounds(50, 300, 86, 30);
 
     int x = 50;
@@ -96,7 +96,7 @@ public class TicTacToe extends JDialog implements ActionListener {
 
     for (int f = 0; f < 3; f++) {
       for (int c = 0; c < 3; c++) {
-        board[f][c] = resources.getButton("", null, this, this);
+        board[f][c] = Resources.getButton("", null, this, this);
         board[f][c].setBounds(x, y, 70, 70);
         board[f][c].setFont(new Font("Times New Roman", Font.PLAIN, 45));
         board[f][c].setOpaque(true);
@@ -106,34 +106,34 @@ public class TicTacToe extends JDialog implements ActionListener {
       y = y + 70;
     }
 
-    JLabel lblName1 = resources
+    JLabel lblName1 = Resources
         .getLabel("<html><em><strong>Player X</strong></em></html>", colorX, this,
             MEDIUM);
     lblName1.setBounds(50, 10, 100, 30);
 
-    pointsX = resources.getLabel("", color, this, BIG);
+    pointsX = Resources.getLabel("", color, this, BIG);
     pointsX.setBounds(130, 10, 100, 30);
 
     JLabel lblName2;
     if (!vsCPU) {
-      lblName2 = resources
+      lblName2 = Resources
           .getLabel("<html><em><strong>Player O</strong></em></html>", colorO, this,
               MEDIUM);
       lblName2.setBounds(260, 10, 100, 30);
     } else {
-      lblName2 = resources
+      lblName2 = Resources
           .getLabel("<html><em><strong>CPU O</strong></em></html>", colorO, this,
               MEDIUM);
       lblName2.setBounds(273, 10, 100, 30);
     }
 
-    pointsO = resources.getLabel("", color, this, BIG);
+    pointsO = Resources.getLabel("", color, this, BIG);
     pointsO.setBounds(340, 10, 100, 30);
 
-    lblTurn = resources.getLabel("", null, this, MEDIUM);
+    lblTurn = Resources.getLabel("", null, this, MEDIUM);
     lblTurn.setBounds(270, 200, 200, 100);
 
-    image = resources.getLabel("", null, this, null);
+    image = Resources.getLabel("", null, this, null);
     image.setBounds(300, 90, 96, 96);
 
     txtName1.setText("X");
@@ -196,7 +196,7 @@ public class TicTacToe extends JDialog implements ActionListener {
       if (pointsNumberX == 5) {
         lblTurn.setText(
             "<html><em><strong>Champion " + txtName1.getText() + "!</strong></em></html>");
-        image.setIcon(new ImageIcon(new Resources().getImage("triquito.png")));
+        image.setIcon(new ImageIcon(Resources.getImage("triquito.png")));
       }
 
     } else {
@@ -229,7 +229,7 @@ public class TicTacToe extends JDialog implements ActionListener {
       if (pointsNumberO == 5) {
         lblTurn.setText(
             "<html><em><strong>Champion " + txtName2.getText() + "!</strong></em></html>");
-        image.setIcon(new ImageIcon(new Resources().getImage("triquito.png")));
+        image.setIcon(new ImageIcon(Resources.getImage("triquito.png")));
       }
     }
   }

@@ -95,7 +95,7 @@ Git was used for version control, applying GitFlow 🔀
 
 ## Author ✒
 
-* **Santiago Moncada** - [santiago.moncada.dev@gmail.com]()
+* **Santiago Moncada** - [Contact](mailto:santiago.moncada.dev@gmail.com)
 
 ## Collaborators 🙂
 

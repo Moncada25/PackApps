@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 
 public class GuessNumber extends JDialog implements ActionListener {
 
-  private Resources resources = new Resources();
+  
   private JButton btnPlay, btnReturn;
   private JLabel message, response, help, question;
   private JTextField txtNumber;
@@ -53,12 +53,12 @@ public class GuessNumber extends JDialog implements ActionListener {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(resources.getImage("adivinar.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("adivinar.png")).getImage());
 
-    btnReturn = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnReturn = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnReturn.setBounds(310, 245, 86, 30);
 
-    btnPlay = resources.getButton("Play", TEXT_COLOR, this, this);
+    btnPlay = Resources.getButton("Play", TEXT_COLOR, this, this);
     btnPlay.setBounds(310, 200, 86, 30);
 
     txtNumber = new JTextField();
@@ -114,16 +114,16 @@ public class GuessNumber extends JDialog implements ActionListener {
       }
     });
 
-    message = resources.getLabel("", MAIN_COLOR, this, BIG);
+    message = Resources.getLabel("", MAIN_COLOR, this, BIG);
     message.setBounds(90, 5, 320, 100);
 
-    response = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
+    response = Resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     response.setBounds(90, 110, 300, 70);
 
-    help = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
+    help = Resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     help.setBounds(90, 110, 300, 70);
 
-    question = resources.getLabel("", null, this, null);
+    question = Resources.getLabel("", null, this, null);
     question.setBounds(30, 200, 80, 80);
   }
 
@@ -153,7 +153,7 @@ public class GuessNumber extends JDialog implements ActionListener {
         + "<center><strong>What number am I thinking?</strong></center>"
         + "</html>");
     help.setVisible(true);
-    question.setIcon(new ImageIcon(resources.getImage("x.png")));
+    question.setIcon(new ImageIcon(Resources.getImage("x.png")));
 
     txtNumber.setVisible(true);
     btnPlay.setEnabled(false);

@@ -31,7 +31,7 @@ public class DicesGameView extends JDialog implements ActionListener {
   private JLabel dice1, dice2, dice3, lblPoints1, lblPoints2, lblPoints3;
   private JButton btnExit, btnThrow, btnReset;
   private JTextField player1, player2, player3;
-  private Resources resources = new Resources();
+  
 
   public DicesGameView(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -47,25 +47,25 @@ public class DicesGameView extends JDialog implements ActionListener {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(resources.getImage("dado.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("dado.png")).getImage());
 
-    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(330, 320, 86, 30);
 
-    btnThrow = resources.getButton("Throw", TEXT_COLOR, this, this);
+    btnThrow = Resources.getButton("Throw", TEXT_COLOR, this, this);
     btnThrow.setBounds(25, 320, 86, 30);
 
-    btnReset = resources.getButton("Reset", TEXT_COLOR, this, this);
+    btnReset = Resources.getButton("Reset", TEXT_COLOR, this, this);
     btnReset.setBounds(185, 320, 86, 30);
     btnReset.setEnabled(false);
 
-    dice1 = resources.getLabel("", null, this, null);
+    dice1 = Resources.getLabel("", null, this, null);
     dice1.setBounds(25, 10, 80, 80);
 
-    dice2 = resources.getLabel("", null, this, null);
+    dice2 = Resources.getLabel("", null, this, null);
     dice2.setBounds(185, 10, 80, 80);
 
-    dice3 = resources.getLabel("", null, this, null);
+    dice3 = Resources.getLabel("", null, this, null);
     dice3.setBounds(330, 10, 80, 80);
 
     player1 = new JTextField("Player 1");
@@ -84,7 +84,7 @@ public class DicesGameView extends JDialog implements ActionListener {
       }
     });
 
-    lblPoints1 = resources.getLabel("", MAIN_COLOR, this, MEDIUM);
+    lblPoints1 = Resources.getLabel("", MAIN_COLOR, this, MEDIUM);
     lblPoints1.setBounds(45, 185, 120, 60);
 
     player2 = new JTextField("Player 2");
@@ -103,7 +103,7 @@ public class DicesGameView extends JDialog implements ActionListener {
       }
     });
 
-    lblPoints2 = resources.getLabel("", MAIN_COLOR, this, MEDIUM);
+    lblPoints2 = Resources.getLabel("", MAIN_COLOR, this, MEDIUM);
     lblPoints2.setBounds(195, 189, 120, 60);
 
     player3 = new JTextField("Player 3");
@@ -122,7 +122,7 @@ public class DicesGameView extends JDialog implements ActionListener {
       }
     });
 
-    lblPoints3 = resources.getLabel("", MAIN_COLOR, this, MEDIUM);
+    lblPoints3 = Resources.getLabel("", MAIN_COLOR, this, MEDIUM);
     lblPoints3.setBounds(340, 185, 120, 60);
   }
 

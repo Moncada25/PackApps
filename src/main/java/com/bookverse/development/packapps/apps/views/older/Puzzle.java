@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 
 public class Puzzle extends JDialog implements Runnable, ActionListener {
 
-  Resources resources = new Resources();
+  
   private JButton[][] board;
   private JLabel time, lblTurn;
   private JButton btnExit, btnPlay, btnReset;
@@ -84,22 +84,22 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(resources.getImage("rompecabezas.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("rompecabezas.png")).getImage());
 
-    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(330, 300, 86, 30);
 
-    btnPlay = resources.getButton("Play", TEXT_COLOR, this, this);
+    btnPlay = Resources.getButton("Play", TEXT_COLOR, this, this);
     btnPlay.setBounds(70, 300, 86, 30);
 
-    btnReset = resources.getButton("Stop", MAIN_COLOR, this, this);
+    btnReset = Resources.getButton("Stop", MAIN_COLOR, this, this);
     btnReset.setBounds(200, 300, 86, 30);
     btnReset.setEnabled(false);
 
-    lblTurn = resources.getLabel("", MAIN_COLOR, this, Styles.MEDIUM);
+    lblTurn = Resources.getLabel("", MAIN_COLOR, this, Styles.MEDIUM);
     lblTurn.setBounds(335, 90, 200, 100);
 
-    time = resources.getLabel("", MAIN_COLOR, this, new Font("Times New Roman", Font.PLAIN, 45));
+    time = Resources.getLabel("", MAIN_COLOR, this, new Font("Times New Roman", Font.PLAIN, 45));
     time.setBounds(335, 5, 200, 60);
 
     board = new JButton[size][size];
@@ -109,7 +109,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
 
     for (int f = 0; f < board.length; f++) {
       for (int c = 0; c < board.length; c++) {
-        board[f][c] = resources.getButton(".", null, this, this);
+        board[f][c] = Resources.getButton(".", null, this, this);
         board[f][c].setBounds(x, y, side, side);
         board[f][c].setEnabled(false);
 

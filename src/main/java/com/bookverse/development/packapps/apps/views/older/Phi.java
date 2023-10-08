@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 
 public class Phi extends JDialog implements ActionListener, MouseListener {
 
-  private Resources resources = new Resources();
+  
   private JButton btnCalculateFirst, btnCalculateSecond, btnProportion;
   private JLabel message;
   private JLabel value;
@@ -38,15 +38,15 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
 
     setLayout(null);
 
-    JLabel lblFirst = resources
+    JLabel lblFirst = Resources
         .getLabel("<html><strong>Fibonacci's series</strong></html>", MAIN_COLOR, this, MEDIUM);
     lblFirst.setBounds(25, 70, 260, 30);
 
-    JLabel firstFormula = resources
+    JLabel firstFormula = Resources
         .getLabel("<html><strong>Nth Fibonacci number</strong></html>", MAIN_COLOR, this, MEDIUM);
     firstFormula.setBounds(25, 120, 260, 30);
 
-    btnCalculateFirst = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnCalculateFirst = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnCalculateFirst.setBounds(360, 75, 70, 25);
 
     txtFirst = new JTextField();
@@ -81,21 +81,21 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
       }
     });
 
-    JLabel lblSecond = resources
+    JLabel lblSecond = Resources
         .getLabel("<html><strong>Approximate value</strong></html>", MAIN_COLOR, this, MEDIUM);
     lblSecond.setBounds(25, 220, 260, 30);
 
-    value = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
+    value = Resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     value.setBounds(200, 220, 280, 30);
 
-    JLabel secondFormula = resources
+    JLabel secondFormula = Resources
         .getLabel("<html><strong>Golden ratio</strong></html>", MAIN_COLOR, this, MEDIUM);
     secondFormula.setBounds(25, 170, 280, 30);
 
-    btnProportion = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnProportion = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnProportion.setBounds(360, 175, 70, 25);
 
-    btnCalculateSecond = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnCalculateSecond = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnCalculateSecond.setBounds(360, 125, 70, 25);
 
     txtSecond = new JTextField();
@@ -160,7 +160,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
       }
     });
 
-    message = resources
+    message = Resources
         .getLabel("<html><em><strong>Approach to φ</strong></em></html>", MAIN_COLOR, this,
             BIG);
     message.addMouseListener(this);

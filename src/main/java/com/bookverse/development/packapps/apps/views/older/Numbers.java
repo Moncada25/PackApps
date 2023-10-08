@@ -30,7 +30,7 @@ public class Numbers extends JDialog implements MouseListener {
 
   private JLabel btnPrimeNumbers, btnCalculator, btnPhi, btnPi, btnOther, welcome;
 
-  private Resources resources = new Resources();
+  
 
   public Numbers(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -44,23 +44,23 @@ public class Numbers extends JDialog implements MouseListener {
     panel.setBackground(new Color(0, 0, 0));
     panel.setBorder(getBorder("Select action"));
 
-    btnPhi = resources.getLabel("  Phi φ  ", TEXT_COLOR, panel, MEDIUM);
+    btnPhi = Resources.getLabel("  Phi φ  ", TEXT_COLOR, panel, MEDIUM);
     btnPhi.setBorder(BORDER_BLUE);
     btnPhi.addMouseListener(this);
 
-    btnPrimeNumbers = resources.getLabel("  Primes  ", TEXT_COLOR, panel, MEDIUM);
+    btnPrimeNumbers = Resources.getLabel("  Primes  ", TEXT_COLOR, panel, MEDIUM);
     btnPrimeNumbers.setBorder(BORDER_BLUE);
     btnPrimeNumbers.addMouseListener(this);
 
-    btnCalculator = resources.getLabel("  Calculator  ", MAIN_COLOR, panel, MEDIUM);
+    btnCalculator = Resources.getLabel("  Calculator  ", MAIN_COLOR, panel, MEDIUM);
     btnCalculator.setBorder(BORDER_RED);
     btnCalculator.addMouseListener(this);
 
-    btnOther = resources.getLabel("  Hacks  ", TEXT_COLOR, panel, MEDIUM);
+    btnOther = Resources.getLabel("  Hacks  ", TEXT_COLOR, panel, MEDIUM);
     btnOther.setBorder(BORDER_BLUE);
     btnOther.addMouseListener(this);
 
-    btnPi = resources.getLabel("  Pi π  ", TEXT_COLOR, panel, MEDIUM);
+    btnPi = Resources.getLabel("  Pi π  ", TEXT_COLOR, panel, MEDIUM);
     btnPi.setBorder(BORDER_BLUE);
     btnPi.addMouseListener(this);
 
@@ -82,7 +82,7 @@ public class Numbers extends JDialog implements MouseListener {
 
     add(getPanel(), BorderLayout.SOUTH);
 
-    ImageIcon image = new ImageIcon(resources.getImage("math.jpg"));
+    ImageIcon image = new ImageIcon(Resources.getImage("math.jpg"));
     welcome = new JLabel();
     welcome.setIcon(image);
     welcome.setSize(1280, 720);

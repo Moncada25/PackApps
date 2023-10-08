@@ -34,7 +34,6 @@ import org.junit.runner.JUnitCore;
 
 public class ConsultBook extends JDialog implements ActionListener {
 
-  private final Resources resources = new Resources();
   private final JComboBox<String> listBooksBox = new JComboBox<>();
   private JTextField txtUser;
   private JButton btnRun, btnReturn;
@@ -60,18 +59,18 @@ public class ConsultBook extends JDialog implements ActionListener {
     setLayout(null);
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-    btnRun = resources.getButton("Run", TEXT_COLOR, this, this);
+    btnRun = Resources.getButton("Run", TEXT_COLOR, this, this);
     btnRun.setBounds(60, 215, 100, 30);
 
-    btnReturn = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnReturn = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnReturn.setBounds(300, 215, 86, 30);
 
-    JLabel title = resources
+    JLabel title = Resources
         .getLabel("<html><strong><em>Search book</em></strong></html>", MAIN_COLOR, this,
             BIG);
     title.setBounds(95, 5, 250, 40);
 
-    JLabel user = resources
+    JLabel user = Resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
     user.setBounds(30, 60, 120, 30);
 
@@ -90,7 +89,7 @@ public class ConsultBook extends JDialog implements ActionListener {
       }
     });
 
-    JLabel password = resources
+    JLabel password = Resources
         .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
     password.setBounds(30, 113, 120, 30);
 

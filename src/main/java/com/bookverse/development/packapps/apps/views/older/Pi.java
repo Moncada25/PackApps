@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 public class Pi extends JDialog implements ActionListener, MouseListener {
 
-  private Resources resources = new Resources();
+  
   private JButton btnCalculateFirst, btnCalculateSecond;
   private JLabel message;
   private JTextField txtFirst, txtSecond;
@@ -47,15 +47,15 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
 
     setLayout(null);
 
-    JLabel lblFirst = resources
+    JLabel lblFirst = Resources
         .getLabel("<html><strong>First sum of series</strong></html>", MAIN_COLOR, this, MEDIUM);
     lblFirst.setBounds(25, 70, 280, 30);
 
-    JLabel firstFormula = resources
+    JLabel firstFormula = Resources
         .getLabel("π = 4/1 - 4/3 + 4/5 - 4/7 + 4/9...", TEXT_COLOR, this, MEDIUM);
     firstFormula.setBounds(25, 90, 280, 60);
 
-    btnCalculateFirst = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnCalculateFirst = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnCalculateFirst.setBounds(315, 110, 75, 25);
 
     txtFirst = new JTextField();
@@ -89,15 +89,15 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
       }
     });
 
-    JLabel lblSecond = resources
+    JLabel lblSecond = Resources
         .getLabel("<html><strong>Second sum of series</strong></html>", MAIN_COLOR, this, MEDIUM);
     lblSecond.setBounds(25, 160, 280, 30);
 
-    JLabel secondFormula = resources
+    JLabel secondFormula = Resources
         .getLabel("π²/6 = 1/1² + 1/2² + 1/3² + 1/4²...", TEXT_COLOR, this, MEDIUM);
     secondFormula.setBounds(25, 180, 280, 60);
 
-    btnCalculateSecond = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnCalculateSecond = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnCalculateSecond.setBounds(315, 200, 75, 25);
 
     txtSecond = new JTextField();
@@ -131,7 +131,7 @@ public class Pi extends JDialog implements ActionListener, MouseListener {
       }
     });
 
-    message = resources
+    message = Resources
         .getLabel("<html><em><strong>Approach to π</strong></em></html>", MAIN_COLOR, this,
             BIG);
     message.addMouseListener(this);

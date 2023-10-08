@@ -18,11 +18,10 @@ public class ProfessionalCardView extends JDialog implements MouseListener {
   public ProfessionalCardView(JFrame parent, boolean modal) {
     super(parent, modal);
 
-    Resources resources = new Resources();
-    setIconImage(new ImageIcon(resources.getImage("about.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("about.png")).getImage());
 
     ((JPanel) getContentPane()).setOpaque(false);
-    ImageIcon image = new ImageIcon(resources.getImage("business.jpg"));
+    ImageIcon image = new ImageIcon(Resources.getImage("business.jpg"));
     imageCard = new JLabel();
     imageCard.setIcon(image);
     imageCard.setSize(940, 352);

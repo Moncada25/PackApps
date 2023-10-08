@@ -36,7 +36,7 @@ public class LoansTable extends JDialog {
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(new Resources().getImage("prestar.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("prestar.png")).getImage());
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 

@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "idea"
-    id "net.serenity-bdd.serenity-gradle-plugin" version "3.9.8"
+    id "net.serenity-bdd.serenity-gradle-plugin" version "4.0.14"
     id "io.freefair.lombok" version "8.1.0"
 }
 
@@ -31,14 +31,6 @@ idea {
     }
 }
 
-test {
-    systemProperties System.getProperties()
-    systemProperty "file.encoding", "UTF-8"
-    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
-    systemProperty "cucumber.options", System.getProperty("cucumber.options")
-    testLogging.showStandardStreams = true
-}
-
 jar {
     manifest {
         attributes(
@@ -52,11 +44,11 @@ jar {
     }
 }
 
-sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/images", "src/main/resources/data"]
+sourceSets.main.resources.srcDirs = ["src/main/Resources", "src/main/Resources/images", "src/main/Resources/data"]
 sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties"]
 
 ext {
-    serenityVersion = "3.9.8"
+    serenityVersion = "4.0.14"
 }
 
 dependencies {

@@ -53,7 +53,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
   private JLabel[] tables = new JLabel[5];
   private JMenuItem create, read, delete, update;
   private String[] columns = {"ID", "NICKNAME", "MISTAKES", "STATE", "CATEGORY", "DATE"};
-  private Resources resources = new Resources();
+  
 
   public HangmanTable(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -80,7 +80,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
     IntStream.range(0, tables.length).forEach(i -> {
       tables[i] = new JLabel();
-      tables[i].setIcon(new ImageIcon(resources.getImage(images[i])));
+      tables[i].setIcon(new ImageIcon(Resources.getImage(images[i])));
       tables[i].addMouseListener(this);
       row.add(tables[i]);
     });
@@ -95,7 +95,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
   private void createComponents() {
 
     add(getPanel(), BorderLayout.SOUTH);
-    setIconImage(new ImageIcon(resources.getImage("ahorcado.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("ahorcado.png")).getImage());
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
@@ -109,11 +109,11 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
     JMenuBar menuBar = new JMenuBar();
 
-    JMenu crud = resources.getMenu("CRUD", "mysql");
-    create = resources.getMenuItem("Create", "create", this);
-    read = resources.getMenuItem("Read", "read", this);
-    update = resources.getMenuItem("Update", "update", this);
-    delete = resources.getMenuItem("Delete", "delete", this);
+    JMenu crud = Resources.getMenu("CRUD", "mysql");
+    create = Resources.getMenuItem("Create", "create", this);
+    read = Resources.getMenuItem("Read", "read", this);
+    update = Resources.getMenuItem("Update", "update", this);
+    delete = Resources.getMenuItem("Delete", "delete", this);
 
     crud.add(create);
     crud.addSeparator();

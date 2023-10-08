@@ -40,7 +40,7 @@ public class QueueView extends JDialog implements ActionListener, MouseListener 
 
   private JLabel[] actions = new JLabel[8];
   private boolean sw = true;
-  private Resources resources = new Resources();
+  
   private JLabel title, message, bonus;
   private JButton[] queue = new JButton[50];
 
@@ -71,7 +71,7 @@ public class QueueView extends JDialog implements ActionListener, MouseListener 
 
     IntStream.range(0, actions.length).forEach(i -> {
       actions[i] = new JLabel();
-      actions[i].setIcon(new ImageIcon(resources.getImage(images[i])));
+      actions[i].setIcon(new ImageIcon(Resources.getImage(images[i])));
       actions[i].addMouseListener(this);
       panel.add(actions[i]);
     });
@@ -86,7 +86,7 @@ public class QueueView extends JDialog implements ActionListener, MouseListener 
 
     for (int j = 0; j < queue.length; j++) {
 
-      queue[j] = resources.getButton("", null, this, this);
+      queue[j] = Resources.getButton("", null, this, this);
       queue[j].setBounds(x, y, 80, 40);
       queue[j].setForeground(MAIN_COLOR);
       queue[j].setVisible(false);
@@ -117,15 +117,15 @@ public class QueueView extends JDialog implements ActionListener, MouseListener 
 
     bonus = new JLabel();
     bonus.setBounds(0, 380, 80, 80);
-    bonus.setIcon(new ImageIcon(resources.getImage("puerta.png")));
+    bonus.setIcon(new ImageIcon(Resources.getImage("puerta.png")));
     bonus.addMouseListener(this);
     bonus.setVisible(false);
     add(bonus);
 
-    title = resources.getLabel("", MAIN_COLOR, this, BIG);
+    title = Resources.getLabel("", MAIN_COLOR, this, BIG);
     title.setBounds(50, 0, 900, 160);
 
-    message = resources.getLabel("", MAIN_COLOR, this, BIG);
+    message = Resources.getLabel("", MAIN_COLOR, this, BIG);
     message.setBounds(620, 480, 200, 85);
   }
 

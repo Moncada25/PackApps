@@ -36,7 +36,7 @@ public class CashRegisterTable extends JDialog {
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(new Resources().getImage("registradora.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("registradora.png")).getImage());
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 

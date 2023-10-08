@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class StructuresView extends JDialog implements MouseListener {
 
-  private Resources resources = new Resources();
+  
   private JLabel btnStack;
   private JLabel btnQueue;
   private JLabel btnExit;
@@ -34,22 +34,22 @@ public class StructuresView extends JDialog implements MouseListener {
     JPanel panel = new JPanel(new FlowLayout());
     panel.setBorder(Resources.getBorder("Select structure"));
 
-    btnStack = resources
+    btnStack = Resources
         .getLabel("  Stack  ", Styles.TEXT_COLOR, panel, Styles.MEDIUM);
     btnStack.setBorder(Styles.BORDER_BLUE);
     btnStack.addMouseListener(this);
 
-    btnQueue = resources
+    btnQueue = Resources
         .getLabel("  Queue  ", Styles.TEXT_COLOR, panel, Styles.MEDIUM);
     btnQueue.setBorder(Styles.BORDER_BLUE);
     btnQueue.addMouseListener(this);
 
-    btnArrays = resources
+    btnArrays = Resources
         .getLabel("  Arrays  ", Styles.TEXT_COLOR, panel, Styles.MEDIUM);
     btnArrays.setBorder(Styles.BORDER_BLUE);
     btnArrays.addMouseListener(this);
 
-    btnExit = resources
+    btnExit = Resources
         .getLabel("  Return  ", Styles.MAIN_COLOR, panel, Styles.MEDIUM);
     btnExit.setBorder(Styles.BORDER_RED);
     btnExit.addMouseListener(this);
@@ -71,11 +71,11 @@ public class StructuresView extends JDialog implements MouseListener {
   private void createComponents() {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(resources.getImage("estructuras.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("estructuras.png")).getImage());
 
     add(getPanel(), BorderLayout.SOUTH);
 
-    ImageIcon image = new ImageIcon(resources.getImage("estructuras_datos.jpg"));
+    ImageIcon image = new ImageIcon(Resources.getImage("estructuras_datos.jpg"));
     JLabel wallpaper = new JLabel();
     wallpaper.setIcon(image);
     wallpaper.setSize(711, 284);

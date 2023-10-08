@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PrimeNumber extends JDialog implements Runnable, ActionListener, MouseListener {
 
-  private Resources resources = new Resources();
+  
   private JButton btnStartChronometer, btnSearchPrime, btnVerifyPrime;
   private JLabel title;
   private JLabel chronometer;
@@ -40,17 +40,17 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
 
     setLayout(null);
 
-    btnStartChronometer = resources.getButton("Start", TEXT_COLOR, this, this);
+    btnStartChronometer = Resources.getButton("Start", TEXT_COLOR, this, this);
     btnStartChronometer.setBounds(315, 195, 75, 25);
 
-    JLabel lblSearchPrime = resources
+    JLabel lblSearchPrime = Resources
         .getLabel("<html><strong>Search range</strong></html>", MAIN_COLOR, this, MEDIUM);
     lblSearchPrime.setBounds(25, 70, 120, 30);
 
-    btnSearchPrime = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnSearchPrime = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnSearchPrime.setBounds(315, 75, 75, 25);
 
-    JLabel lblVerifyPrime = resources
+    JLabel lblVerifyPrime = Resources
         .getLabel("<html><strong>Verify</strong></html>", MAIN_COLOR, this, MEDIUM);
     lblVerifyPrime.setBounds(25, 130, 100, 30);
 
@@ -85,7 +85,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
       }
     });
 
-    btnVerifyPrime = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnVerifyPrime = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnVerifyPrime.setBounds(315, 135, 75, 25);
 
     txtSince = new JTextField();
@@ -115,7 +115,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
       }
     });
 
-    JLabel since = resources
+    JLabel since = Resources
         .getLabel("<html><strong>Since</strong></html>", TEXT_COLOR, this, SMALL);
     since.setBounds(160, 90, 60, 30);
 
@@ -146,18 +146,18 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
       }
     });
 
-    JLabel until = resources
+    JLabel until = Resources
         .getLabel("<html><strong>Until</strong></html>", TEXT_COLOR, this, SMALL);
     until.setBounds(220, 90, 60, 30);
 
-    JLabel btnChronometer = resources
+    JLabel btnChronometer = Resources
         .getLabel("<html><strong>Chronometer</strong></html>", MAIN_COLOR, this, MEDIUM);
     btnChronometer.setBounds(25, 190, 130, 30);
 
-    chronometer = resources.getLabel("00:00:000", TEXT_COLOR, this, MEDIUM);
+    chronometer = Resources.getLabel("00:00:000", TEXT_COLOR, this, MEDIUM);
     chronometer.setBounds(160, 190, 100, 30);
 
-    title = resources
+    title = Resources
         .getLabel("<html><em><strong>Prime Numbers</strong></em></html>", MAIN_COLOR, this, BIG);
     title.addMouseListener(this);
     title.setBounds(110, 8, 280, 40);

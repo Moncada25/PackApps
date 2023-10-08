@@ -27,8 +27,6 @@ import javax.swing.JTextField;
 
 public class LoginStore extends JDialog implements ActionListener {
 
-  Resources resources = new Resources();
-
   private JButton btnLogin, btnExit, btnRegister;
   private JTextField txtUser;
   private JPasswordField txtPassword;
@@ -52,26 +50,26 @@ public class LoginStore extends JDialog implements ActionListener {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(resources.getImage("compraventa.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("compraventa.png")).getImage());
 
-    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(200, 225, 90, 30);
 
-    JLabel alreadyRegister = resources
+    JLabel alreadyRegister = Resources
         .getLabel("<html><strong>Are you not registered?</strong></html>", MAIN_COLOR, this, SMALL);
     alreadyRegister.setBounds(110, 260, 300, 50);
 
-    btnRegister = resources.getButton("Sign up", TEXT_COLOR, this, this);
+    btnRegister = Resources.getButton("Sign up", TEXT_COLOR, this, this);
     btnRegister.setBounds(135, 300, 100, 30);
 
-    btnLogin = resources.getButton("Enter", TEXT_COLOR, this, this);
+    btnLogin = Resources.getButton("Enter", TEXT_COLOR, this, this);
     btnLogin.setBounds(80, 225, 90, 30);
 
-    JLabel title = resources
+    JLabel title = Resources
         .getLabel("<html><strong><em>Login</em></strong></html>", MAIN_COLOR, this, BIG);
     title.setBounds(152, 5, 200, 40);
 
-    JLabel user = resources
+    JLabel user = Resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this,
             MEDIUM);
     user.setBounds(145, 68, 100, 30);
@@ -106,7 +104,7 @@ public class LoginStore extends JDialog implements ActionListener {
       }
     });
 
-    JLabel password = resources
+    JLabel password = Resources
         .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this,
             MEDIUM);
     password.setBounds(145, 143, 120, 30);

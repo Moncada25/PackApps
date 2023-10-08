@@ -32,7 +32,7 @@ public class QrView extends JDialog implements MouseListener {
   private JLabel generateQR;
   private JLabel exit;
   private JTextArea text;
-  private Resources resources = new Resources();
+  
 
   public QrView(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -66,15 +66,15 @@ public class QrView extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
 
-    readQR = resources.getLabel("  READ QR  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    readQR = Resources.getLabel("  READ QR  ", TEXT_COLOR, panel, Styles.MEDIUM);
     readQR.setBorder(Styles.BORDER_BLUE);
     readQR.addMouseListener(this);
 
-    generateQR = resources.getLabel("  GENERATE QR  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    generateQR = Resources.getLabel("  GENERATE QR  ", TEXT_COLOR, panel, Styles.MEDIUM);
     generateQR.setBorder(Styles.BORDER_BLUE);
     generateQR.addMouseListener(this);
 
-    exit = resources.getLabel("  RETURN  ", MAIN_COLOR, panel, Styles.MEDIUM);
+    exit = Resources.getLabel("  RETURN  ", MAIN_COLOR, panel, Styles.MEDIUM);
     exit.setBorder(Styles.BORDER_RED);
     exit.addMouseListener(this);
 
@@ -84,7 +84,7 @@ public class QrView extends JDialog implements MouseListener {
   private void showQR() {
 
     JLabel code = new JLabel();
-    code.setIcon(new ImageIcon(resources.getImage("qr-code-generated.jpg")));
+    code.setIcon(new ImageIcon(Resources.getImage("qr-code-generated.jpg")));
     code.setSize(400, 400);
 
     JDialog result = new JDialog(this, true);
@@ -132,7 +132,7 @@ public class QrView extends JDialog implements MouseListener {
         text.requestFocus();
       } else {
 
-        final String PATH = "src/main/resources/images/qr-code-generated.jpg";
+        final String PATH = "src/main/Resources/images/qr-code-generated.jpg";
 
         createQR(text.getText(), PATH, 400, 400);
         Alerts.message("Pass", "QR creado");

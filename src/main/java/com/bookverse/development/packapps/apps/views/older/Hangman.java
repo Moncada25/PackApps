@@ -40,7 +40,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
   private JLabel attempts, time, lyricsNumber, lyricsPressed, image;
   private JTextField txtWord;
   private JButton btnPlay, btnExit;
-  private Resources resources = new Resources();
+  
   private int countAttempts = 0;
   private boolean lyricsEquals = false, chronometerActive;
   private String lines = "", randomWord, lyrics = "";
@@ -61,27 +61,27 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(resources.getImage("ahorcado.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("ahorcado.png")).getImage());
 
-    btnPlay = resources.getButton("Play", TEXT_COLOR, this, this);
+    btnPlay = Resources.getButton("Play", TEXT_COLOR, this, this);
     btnPlay.setBounds(30, 160, 86, 30);
 
-    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(140, 160, 86, 30);
 
-    JLabel title = resources.getLabel("<html>"
+    JLabel title = Resources.getLabel("<html>"
         + "<strong><em>Category</em></strong>" +
         "</html>", MAIN_COLOR, this, BIG);
     title.setBounds(30, 10, 120, 35);
 
-    attempts = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
+    attempts = Resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     attempts.setBounds(30, 200, 250, 30);
 
-    time = resources.getLabel("", MAIN_COLOR, this, new Font("Times New Roman",
+    time = Resources.getLabel("", MAIN_COLOR, this, new Font("Times New Roman",
         PLAIN, 50));
     time.setBounds(75, 220, 200, 120);
 
-    lyricsPressed = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
+    lyricsPressed = Resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     lyricsPressed.setBounds(30, 400, 600, 40);
 
     options = new JComboBox<>();
@@ -103,7 +103,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     txtWord.setBounds(30, 100, 220, 40);
     add(txtWord);
 
-    lyricsNumber = resources.getLabel("", TEXT_COLOR, this, MEDIUM);
+    lyricsNumber = Resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     lyricsNumber.setBounds(260, 100, 130, 60);
 
     addKeyListener(this);
@@ -111,7 +111,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
     txtWord.setEditable(false);
 
-    image = resources.getLabel("", null, this, null);
+    image = Resources.getLabel("", null, this, null);
     image.setBounds(620, 20, 96, 96);
   }
 
@@ -267,7 +267,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
       txtWord.setText("");
       lines = "";
 
-      image.setIcon(new ImageIcon(resources.getImage("dead.png")));
+      image.setIcon(new ImageIcon(Resources.getImage("dead.png")));
 
       Alerts.message("You lose", "Correct word: " + randomWord);
 
@@ -298,7 +298,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
       stopChronometer();
 
-      image.setIcon(new ImageIcon(resources.getImage("win.png")));
+      image.setIcon(new ImageIcon(Resources.getImage("win.png")));
 
       if (countAttempts >= 0 && countAttempts <= 4) {
         Alerts.message("You win!", "Pretty easy, right?");

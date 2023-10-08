@@ -38,7 +38,7 @@ public class EmailView extends JDialog implements ActionListener, MouseListener 
   private JTextArea text;
   private JTextField txtUser;
   private JPasswordField password;
-  private Resources resources = new Resources();
+  
   private JRadioButton toDeveloper, toOther;
 
   public EmailView(JFrame parent, boolean modal) {
@@ -59,36 +59,36 @@ public class EmailView extends JDialog implements ActionListener, MouseListener 
   public void createComponents() {
 
     setLayout(null);
-    setIconImage(new ImageIcon(resources.getImage("email.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("email.png")).getImage());
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-    btnSend = resources.getButton("Send", TEXT_COLOR, this, this);
+    btnSend = Resources.getButton("Send", TEXT_COLOR, this, this);
     btnSend.setBounds(140, 400, 86, 30);
 
-    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(250, 400, 86, 30);
 
-    JLabel title = resources
+    JLabel title = Resources
         .getLabel("<html><strong><em>Write email</em></strong></html>", MAIN_COLOR, this, BIG);
     title.setBounds(160, 10, 370, 30);
 
-    JLabel username = resources
+    JLabel username = Resources
         .getLabel("<html><strong>Email</strong></html>", TEXT_COLOR, this, MEDIUM);
     username.setBounds(105, 60, 100, 50);
 
-    JLabel password = resources
+    JLabel password = Resources
         .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
     password.setBounds(310, 60, 370, 50);
 
-    required1 = resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
+    required1 = Resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
     required1.setBounds(152, 74, 12, 12);
     required1.addMouseListener(this);
 
-    required2 = resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
+    required2 = Resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
     required2.setBounds(389, 74, 12, 12);
     required2.addMouseListener(this);
 
-    JLabel lblReceiver = resources
+    JLabel lblReceiver = Resources
         .getLabel("<html><strong>Receiver: </strong></html>", MAIN_COLOR, this, SMALL);
     lblReceiver.setBounds(30, 135, 65, 30);
     add(lblReceiver);
@@ -122,7 +122,7 @@ public class EmailView extends JDialog implements ActionListener, MouseListener 
     this.password.setHorizontalAlignment(JTextField.CENTER);
     add(this.password);
 
-    JLabel message = resources
+    JLabel message = Resources
         .getLabel("<html><strong>Message</strong></html>", TEXT_COLOR, this, MEDIUM);
     message.setBounds(30, 165, 370, 30);
 

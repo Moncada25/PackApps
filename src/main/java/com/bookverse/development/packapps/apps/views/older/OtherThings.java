@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 
 public class OtherThings extends JDialog implements ActionListener, MouseListener {
 
-  private Resources resources = new Resources();
+  
   private JButton btnChangeColor, btnStart1, btnStart2, btnStart3;
   private JLabel title;
   private JTextField txtIntToBinary, txtBinaryToInt, txtDigits;
@@ -40,23 +40,23 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
 
     setLayout(null);
 
-    btnStart1 = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnStart1 = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnStart1.setBounds(330, 125, 75, 25);
 
-    btnStart3 = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnStart3 = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnStart3.setBounds(330, 225, 75, 25);
 
-    btnStart2 = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnStart2 = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnStart2.setBounds(330, 175, 75, 25);
 
-    JLabel changeRGB = resources
+    JLabel changeRGB = Resources
         .getLabel("<html><strong>RGB Generator</strong></html>", MAIN_COLOR, this, MEDIUM);
     changeRGB.setBounds(25, 70, 280, 30);
 
-    btnChangeColor = resources.getButton("Color", null, this, this);
+    btnChangeColor = Resources.getButton("Color", null, this, this);
     btnChangeColor.setBounds(350, 75, 70, 25);
 
-    JLabel lblRed = resources
+    JLabel lblRed = Resources
         .getLabel("<html><strong>Red</strong></html>", MAIN_COLOR, this, null);
     lblRed.setBounds(170, 95, 50, 20);
 
@@ -65,7 +65,7 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
     IntStream.rangeClosed(0, 255).forEach(i -> listRed.addItem(String.valueOf(i)));
     add(listRed);
 
-    JLabel lblGreen = resources
+    JLabel lblGreen = Resources
         .getLabel("<html><strong>Green</strong></html>", new Color(100, 220, 0), this, null);
     lblGreen.setBounds(230, 95, 50, 20);
 
@@ -74,7 +74,7 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
     IntStream.rangeClosed(0, 255).forEach(i -> listGreen.addItem(String.valueOf(i)));
     add(listGreen);
 
-    JLabel lblBlue = resources
+    JLabel lblBlue = Resources
         .getLabel("<html><strong>Blue</strong></html>", TEXT_COLOR, this, null);
     lblBlue.setBounds(290, 95, 50, 20);
 
@@ -83,15 +83,15 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
     IntStream.rangeClosed(0, 255).forEach(i -> listBlue.addItem(String.valueOf(i)));
     add(listBlue);
 
-    JLabel intToBinary = resources
+    JLabel intToBinary = Resources
         .getLabel("<html><strong>Int to Binary</strong></html>", MAIN_COLOR, this, MEDIUM);
     intToBinary.setBounds(25, 120, 200, 30);
 
-    JLabel revertDigits = resources
+    JLabel revertDigits = Resources
         .getLabel("<html><strong>Revert digits</strong></html>", MAIN_COLOR, this, MEDIUM);
     revertDigits.setBounds(25, 220, 260, 30);
 
-    JLabel binaryToInt = resources
+    JLabel binaryToInt = Resources
         .getLabel("<html><strong>Binary to Int</strong></html>", MAIN_COLOR, this, MEDIUM);
     binaryToInt.setBounds(25, 170, 280, 30);
 
@@ -188,7 +188,7 @@ public class OtherThings extends JDialog implements ActionListener, MouseListene
       }
     });
 
-    title = resources
+    title = Resources
         .getLabel("<html><em><strong>Other things...</strong></em></html>", MAIN_COLOR, this, BIG);
     title.addMouseListener(this);
     title.setBounds(120, 8, 200, 35);

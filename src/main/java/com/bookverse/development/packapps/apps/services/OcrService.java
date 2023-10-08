@@ -10,7 +10,7 @@ public final class OcrService {
   public static String readText(String image) {
 
     Tesseract tesseract = new Tesseract();
-    tesseract.setDatapath("src/main/resources/tessdata");
+    tesseract.setDatapath("src/main/Resources/tessdata");
     tesseract.setPageSegMode(1);
     tesseract.setOcrEngineMode(1);
 

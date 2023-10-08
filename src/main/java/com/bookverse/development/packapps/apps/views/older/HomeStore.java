@@ -26,7 +26,7 @@ import javax.swing.JMenuItem;
 
 public class HomeStore extends JDialog implements ActionListener {
 
-  Resources resources = new Resources();
+  
   private static String userLogged;
   private JMenuItem sell, buy, lend, cashRegister, inventory, loans, purchases, sales, users, exit;
 
@@ -43,7 +43,7 @@ public class HomeStore extends JDialog implements ActionListener {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-    ImageIcon wallpaper = new ImageIcon(resources.getImage("tienda.jpg"));
+    ImageIcon wallpaper = new ImageIcon(Resources.getImage("tienda.jpg"));
     JLabel welcome = new JLabel();
     welcome.setIcon(wallpaper);
     welcome.setSize(620, 300);
@@ -51,10 +51,10 @@ public class HomeStore extends JDialog implements ActionListener {
 
     JMenuBar menuBar = new JMenuBar();
 
-    JMenu actions = resources.getMenu("Services", "services");
-    buy = resources.getMenuItem("Buy", "comprar", this);
-    lend = resources.getMenuItem("Lend", "prestar", this);
-    sell = resources.getMenuItem("Sell", "vender", this);
+    JMenu actions = Resources.getMenu("Services", "services");
+    buy = Resources.getMenuItem("Buy", "comprar", this);
+    lend = Resources.getMenuItem("Lend", "prestar", this);
+    sell = Resources.getMenuItem("Sell", "vender", this);
 
     actions.add(buy);
     actions.addSeparator();
@@ -62,13 +62,13 @@ public class HomeStore extends JDialog implements ActionListener {
     actions.addSeparator();
     actions.add(sell);
 
-    JMenu records = resources.getMenu("Records", "data");
-    inventory = resources.getMenuItem(INVENTORY, "inventario", this);
-    cashRegister = resources.getMenuItem(CASH_REGISTER, "registradora", this);
-    loans = resources.getMenuItem(LOANS, "prestamos", this);
-    purchases = resources.getMenuItem(PURCHASES, "comprar", this);
-    sales = resources.getMenuItem(SALES, "vender", this);
-    users = resources.getMenuItem(USERS, "usuario", this);
+    JMenu records = Resources.getMenu("Records", "data");
+    inventory = Resources.getMenuItem(INVENTORY, "inventario", this);
+    cashRegister = Resources.getMenuItem(CASH_REGISTER, "registradora", this);
+    loans = Resources.getMenuItem(LOANS, "prestamos", this);
+    purchases = Resources.getMenuItem(PURCHASES, "comprar", this);
+    sales = Resources.getMenuItem(SALES, "vender", this);
+    users = Resources.getMenuItem(USERS, "usuario", this);
 
     records.add(purchases);
     records.addSeparator();
@@ -82,8 +82,8 @@ public class HomeStore extends JDialog implements ActionListener {
     records.addSeparator();
     records.add(sales);
 
-    JMenu exit = resources.getMenu("Logout", "exit");
-    this.exit = resources.getMenuItem("Exit", "logout", this);
+    JMenu exit = Resources.getMenu("Logout", "exit");
+    this.exit = Resources.getMenuItem("Exit", "logout", this);
 
     exit.add(this.exit);
 
