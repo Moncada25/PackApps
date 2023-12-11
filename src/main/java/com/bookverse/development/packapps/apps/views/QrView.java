@@ -13,18 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-
-import static com.bookverse.development.packapps.apps.services.QrService.createQR;
-import static com.bookverse.development.packapps.apps.services.QrService.readQR;
-import static com.bookverse.development.packapps.apps.utils.ui.Resources.getFile;
-
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
+import com.bookverse.development.packapps.apps.services.QrService;
 
 public class QrView extends JDialog implements MouseListener {
 
@@ -66,25 +59,25 @@ public class QrView extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
 
-    readQR = Resources.getLabel("  READ QR  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    readQR = Resources.getLabel("  READ QR  ", Styles.TEXT_COLOR, panel, Styles.MEDIUM);
     readQR.setBorder(Styles.BORDER_BLUE);
     readQR.addMouseListener(this);
 
-    generateQR = Resources.getLabel("  GENERATE QR  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    generateQR = Resources.getLabel("  GENERATE QR  ", Styles.TEXT_COLOR, panel, Styles.MEDIUM);
     generateQR.setBorder(Styles.BORDER_BLUE);
     generateQR.addMouseListener(this);
 
-    exit = Resources.getLabel("  RETURN  ", MAIN_COLOR, panel, Styles.MEDIUM);
+    exit = Resources.getLabel("  RETURN  ", Styles.MAIN_COLOR, panel, Styles.MEDIUM);
     exit.setBorder(Styles.BORDER_RED);
     exit.addMouseListener(this);
 
     return panel;
   }
 
-  private void showQR() {
+  private void showQR(String image) {
 
     JLabel code = new JLabel();
-    code.setIcon(new ImageIcon(Resources.getImage("qr-code-generated.jpg")));
+    code.setIcon(new ImageIcon(image));
     code.setSize(400, 400);
 
     JDialog result = new JDialog(this, true);
@@ -107,7 +100,7 @@ public class QrView extends JDialog implements MouseListener {
 
     if (e.getSource() == readQR) {
 
-      String response = readQR(getFile(this));
+      String response = QrService.readQR(Resources.getFile(this));
 
       if ("Error".equals(response)) {
         Alerts.message("Message", "File not found");
@@ -131,12 +124,9 @@ public class QrView extends JDialog implements MouseListener {
         Alerts.message("Verify!", "Ingrese un texto para convertirlo en QR");
         text.requestFocus();
       } else {
-
-        final String PATH = "src/main/Resources/images/qr-code-generated.jpg";
-
-        createQR(text.getText(), PATH, 400, 400);
+        String qr = QrService.createQR(text.getText(), 400, 400);
         Alerts.message("Pass", "QR creado");
-        showQR();
+        showQR(qr);
       }
 
     } else if (e.getSource() == exit) {

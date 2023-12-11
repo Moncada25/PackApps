@@ -3,10 +3,11 @@ package com.bookverse.development.packapps.apps.services;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.imageio.ImageIO;
-
 import lombok.SneakyThrows;
-
+import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
@@ -38,20 +39,30 @@ public final class QrService {
   }
 
   @SneakyThrows
-  public static void createQR(String data, String path, int height, int width) {
+  public static String createQR(String data, int height, int width) {
 
-    final String CHARSET = "UTF-8";
+    String folder = "target/qrs/";
+    String file = Format.getNow() + ".jpg";
+    String charset = "UTF-8";
+    File fileToCreate = new File(folder + file);
 
-    BitMatrix matrix = new MultiFormatWriter().encode(
-        new String(data.getBytes(CHARSET), CHARSET), BarcodeFormat.QR_CODE, width, height);
+    if (!Files.exists(Paths.get(folder))) {
+      new File(folder).mkdirs();
+    }
+
+    BitMatrix matrix = new MultiFormatWriter().encode(new String(
+        data.getBytes(charset), charset), BarcodeFormat.QR_CODE, width, height
+    );
 
     MatrixToImageWriter.writeToPath(
         matrix,
-        path.substring(path.lastIndexOf('.') + 1),
-        new File(path).toPath()
+        file.substring(file.lastIndexOf('.') + 1),
+        fileToCreate.toPath()
     );
+
+    return fileToCreate.getPath();
   }
 
-  private QrService(){
+  private QrService() {
   }
 }
