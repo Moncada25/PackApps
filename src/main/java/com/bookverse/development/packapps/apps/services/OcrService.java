@@ -2,6 +2,7 @@ package com.bookverse.development.packapps.apps.services;
 
 import java.io.File;
 
+import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
@@ -9,8 +10,8 @@ public final class OcrService {
 
   public static String readText(String image) {
 
-    Tesseract tesseract = new Tesseract();
-    tesseract.setDatapath("src/main/Resources/tessdata");
+    ITesseract tesseract = new Tesseract();
+    tesseract.setDatapath("src/main/resources/tessdata");
     tesseract.setPageSegMode(1);
     tesseract.setOcrEngineMode(1);
 

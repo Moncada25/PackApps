@@ -54,7 +54,7 @@ jar {
     }
 }
 
-sourceSets.main.resources.srcDirs = ["src/main/Resources", "src/main/Resources/images", "src/main/Resources/data"]
+sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/images", "src/main/resources/data"]
 sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties"]
 
 ext {

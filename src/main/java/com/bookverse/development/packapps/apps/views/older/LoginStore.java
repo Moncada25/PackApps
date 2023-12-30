@@ -142,8 +142,8 @@ public class LoginStore extends JDialog implements ActionListener {
 
   private void btnEnterAP() {
 
-    if (txtUser.getText().trim().equals("") || String.valueOf(txtPassword.getPassword()).trim()
-        .equals("")) {
+    if (txtUser.getText().trim().isEmpty() || String.valueOf(txtPassword.getPassword()).trim()
+        .isEmpty()) {
       Alerts.inputSomethingText();
     } else {
 

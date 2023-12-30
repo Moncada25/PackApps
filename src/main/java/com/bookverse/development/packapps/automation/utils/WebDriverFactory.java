@@ -4,7 +4,6 @@ import static com.bookverse.development.packapps.automation.utils.Constants.CHRO
 import static com.bookverse.development.packapps.automation.utils.Constants.DEFAULT_BROWSER;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -37,7 +36,6 @@ public class WebDriverFactory {
 
     return WebDriverManager.chromedriver()
         .capabilities(chromeOptions)
-        .driverVersion("117.0.5938.62")
         .arm64()
         .create();
   }
