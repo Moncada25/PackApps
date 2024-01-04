@@ -31,7 +31,6 @@ public class DicesGameView extends JDialog implements ActionListener {
   private JLabel dice1, dice2, dice3, lblPoints1, lblPoints2, lblPoints3;
   private JButton btnExit, btnThrow, btnReset;
   private JTextField player1, player2, player3;
-  
 
   public DicesGameView(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -85,7 +84,7 @@ public class DicesGameView extends JDialog implements ActionListener {
     });
 
     lblPoints1 = Resources.getLabel("", MAIN_COLOR, this, MEDIUM);
-    lblPoints1.setBounds(45, 185, 120, 60);
+    lblPoints1.setBounds(25, 185, 100, 30);
 
     player2 = new JTextField("Player 2");
     player2.setBounds(170, 150, 100, 30);
@@ -104,7 +103,7 @@ public class DicesGameView extends JDialog implements ActionListener {
     });
 
     lblPoints2 = Resources.getLabel("", MAIN_COLOR, this, MEDIUM);
-    lblPoints2.setBounds(195, 189, 120, 60);
+    lblPoints2.setBounds(170, 185, 100, 30);
 
     player3 = new JTextField("Player 3");
     player3.setBounds(317, 150, 100, 30);
@@ -123,7 +122,7 @@ public class DicesGameView extends JDialog implements ActionListener {
     });
 
     lblPoints3 = Resources.getLabel("", MAIN_COLOR, this, MEDIUM);
-    lblPoints3.setBounds(340, 185, 120, 60);
+    lblPoints3.setBounds(317, 185, 100, 30);
   }
 
   public void start(JFrame parent) {

@@ -1,18 +1,16 @@
 package com.bookverse.development.packapps.apps.services;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import com.bookverse.development.packapps.apps.models.Dice;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
 
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
@@ -21,9 +19,9 @@ import static com.bookverse.development.packapps.apps.utils.other.Format.getDate
 
 public final class DicesGameService {
 
-  private static Dice d1 = new Dice();
-  private static Dice d2 = new Dice();
-  private static Dice d3 = new Dice();
+  private static final Dice d1 = new Dice();
+  private static final Dice d2 = new Dice();
+  private static final Dice d3 = new Dice();
   private static int points1 = 0, points2 = 0, points3 = 0, round = 1, turn = 1;
   private static boolean winner = false;
   
@@ -34,8 +32,8 @@ public final class DicesGameService {
   ) {
 
     if (!player1.getText().equals(player2.getText()) && !player1.getText().equals(player3.getText())
-        && !player2.getText().equals(player3.getText()) && !player1.getText().equals("") && !player2
-        .getText().equals("") && !player3.getText().equals("")) {
+        && !player2.getText().equals(player3.getText()) && !player1.getText().isEmpty() && !player2
+        .getText().isEmpty() && !player3.getText().isEmpty()) {
 
       if (btnThrow.getText().equals("Throw")) {
         clickOnStart(player1, player2, player3, btnThrow, btnExit, dice1, dice2, dice3, parent);
@@ -86,82 +84,31 @@ public final class DicesGameService {
 
       if (turn == 1) {
 
-        dice1.setIcon(getIcon(d1.throwDices()));
-        dice2.setIcon(getIcon(d2.throwDices()));
-        dice3.setIcon(getIcon(d3.throwDices()));
-
-        if ((d1.getValue() == d2.getValue()) && (d1.getValue() == d3.getValue())) {
-          Alerts.message("Congratulations",
-              player1.getText() + " has won, took all three equals dices!");
-
-          dice1.setIcon(null);
-          dice2.setIcon(null);
-          dice3.setIcon(null);
-
-          insertResults(player1.getText(), "Equals dices!");
-          winner = true;
-          btnReset.setEnabled(true);
-          btnThrow.setEnabled(false);
-
-        } else {
+        if (addPoints(player1, btnThrow, btnReset, dice1, dice2, dice3)) {
           points1 += d1.getValue() + d2.getValue() + d3.getValue();
-          lblPoints1.setText("<html><center><strong>Points</strong><br>" + points1
-              + "</center></html>");
+          lblPoints1.setText("<html><center><strong>" + points1 + "</strong></center></html>");
         }
+
         turn = 2;
       } else if (turn == 2) {
 
-        dice1.setIcon(getIcon(d1.throwDices()));
-        dice2.setIcon(getIcon(d2.throwDices()));
-        dice3.setIcon(getIcon(d3.throwDices()));
-
-        if ((d1.getValue() == d2.getValue()) && (d1.getValue() == d3.getValue())) {
-          Alerts.message("Congratulations",
-              player2.getText() + " has won, took all three equals dices!");
-
-          dice1.setIcon(null);
-          dice2.setIcon(null);
-          dice3.setIcon(null);
-
-          insertResults(player2.getText(), "Equals dices!");
-          btnReset.setEnabled(true);
-          btnThrow.setEnabled(false);
-          winner = true;
-
-        } else {
+        if (addPoints(player1, btnThrow, btnReset, dice1, dice2, dice3)) {
           points2 += d1.getValue() + d2.getValue() + d3.getValue();
-          lblPoints2.setText("<html><center><strong>Points</strong><br>" + points2
-              + "</center></html>");
+          lblPoints2.setText("<html><center><strong>" + points2 + "</strong></center></html>");
         }
+
         turn = 3;
       } else if (turn == 3) {
 
-        dice1.setIcon(getIcon(d1.throwDices()));
-        dice2.setIcon(getIcon(d2.throwDices()));
-        dice3.setIcon(getIcon(d3.throwDices()));
-
-        if ((d1.getValue() == d2.getValue()) && (d1.getValue() == d3.getValue())) {
-          Alerts.message("Congratulations",
-              player3.getText() + " has won, took all three equals dices!");
-
-          dice1.setIcon(null);
-          dice2.setIcon(null);
-          dice3.setIcon(null);
-
-          insertResults(player3.getText(), "Equals dices!");
-          btnReset.setEnabled(true);
-          btnThrow.setEnabled(false);
-          winner = true;
-
-        } else {
+        if (addPoints(player1, btnThrow, btnReset, dice1, dice2, dice3)) {
           points3 += d1.getValue() + d2.getValue() + d3.getValue();
-          lblPoints3.setText("<html><center><strong>Points</strong><br>" + points3
-              + "</center></html>");
+          lblPoints3.setText("<html><center><strong>" + points3 + "</strong></center></html>");
         }
+
         turn = 1;
         round++;
       }
-    } else if (!winner && round > 5) {
+    } else if (!winner) {
 
       dice1.setIcon(null);
       dice2.setIcon(null);
@@ -179,9 +126,29 @@ public final class DicesGameService {
     }
   }
 
-  @NotNull
-  @Contract("_ -> new")
-  private static ImageIcon getIcon(int n) {
+  private static boolean addPoints(JTextField player, JButton btnThrow, JButton btnReset, JLabel dice1, JLabel dice2, JLabel dice3) {
+
+    dice1.setIcon(getIcon(d1.throwDices()));
+    dice2.setIcon(getIcon(d2.throwDices()));
+    dice3.setIcon(getIcon(d3.throwDices()));
+
+    if ((d1.getValue() == d2.getValue()) && (d1.getValue() == d3.getValue())) {
+      Alerts.message("Congratulations", player.getText() + " has won, took all three equals dices!");
+
+      dice1.setIcon(null);
+      dice2.setIcon(null);
+      dice3.setIcon(null);
+
+      insertResults(player.getText(), "Equals dices!");
+      btnReset.setEnabled(true);
+      btnThrow.setEnabled(false);
+      winner = true;
+    }
+
+    return (d1.getValue() != d2.getValue()) || (d1.getValue() != d3.getValue());
+  }
+
+    private static ImageIcon getIcon(int n) {
     return new ImageIcon(Resources.getImage(n + ".png"));
   }
 
