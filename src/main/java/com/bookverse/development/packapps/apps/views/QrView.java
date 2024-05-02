@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.apps.views;
 
-import java.net.URL;
+import java.net.URI;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.FlowLayout;
@@ -84,7 +84,7 @@ public class QrView extends JDialog implements MouseListener {
 
     result.setLayout(null);
     result.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    result.setSize(400, 400);
+    result.setSize(412, 427);
     result.setTitle("QR code generated");
     result.setResizable(false);
     result.setLocationRelativeTo(null);
@@ -111,7 +111,7 @@ public class QrView extends JDialog implements MouseListener {
         if (response.contains("www") || response.contains("http")) {
 
           try {
-            Desktop.getDesktop().browse(new URL(response).toURI());
+            Desktop.getDesktop().browse(URI.create(response));
           } catch (Exception ex) {
             Alerts.error(ex, "Opening URL");
           }

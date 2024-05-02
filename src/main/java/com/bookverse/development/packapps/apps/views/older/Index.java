@@ -43,7 +43,7 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
+import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
@@ -61,7 +61,7 @@ import org.jetbrains.annotations.NotNull;
 public class Index extends JFrame implements ActionListener {
 
   protected static int background = 2;
-    private static JLabel welcome;
+  private static JLabel welcome;
   protected HangmanTable hangmanTable = new HangmanTable(this, true);
   protected GuessNumberTable guessNumberTable = new GuessNumberTable(this, true);
   protected PuzzleTable puzzleTable = new PuzzleTable(this, true);
@@ -193,7 +193,7 @@ public class Index extends JFrame implements ActionListener {
       UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
 
     } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-        | IllegalAccessException e) {
+             | IllegalAccessException e) {
       Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, e);
     }
 
@@ -230,13 +230,8 @@ public class Index extends JFrame implements ActionListener {
     moreSystems = Resources.getMenuItem("My Systems", "mysystems", this);
     moreBookverse = Resources.getMenuItem("Bookverse", "books", this);
 
-    more.add(moreBookverse);
-    more.addSeparator();
-    more.add(moreSystems);
-
-    about.add(read);
-    about.addSeparator();
-    about.add(more);
+    createMenu(more, moreSystems, moreBookverse);
+    createMenu(about, read, more);
 
     JMenu exit = Resources.getMenu("Exit", "exit");
     yesExit = Resources.getMenuItem("Are you sure?", "salir", this);
@@ -245,13 +240,8 @@ public class Index extends JFrame implements ActionListener {
     email = Resources.getMenuItem("Email", "email", this);
     comment = Resources.getMenuItem("Comment", "feedback", this);
 
-    send.add(comment);
-    send.addSeparator();
-    send.add(email);
-
-    exit.add(yesExit);
-    exit.addSeparator();
-    exit.add(send);
+    createMenu(send, email, comment);
+    createMenu(exit, yesExit, send);
 
     JMenu games = Resources.getMenu("Games", "games");
     hangman = Resources.getMenuItem(HANGMAN, "ahorcado", this);
@@ -262,41 +252,21 @@ public class Index extends JFrame implements ActionListener {
     guessNumber = Resources.getMenuItem("Easy", "easy", this);
     guessNumberHard = Resources.getMenuItem("Hard", "hard", this);
 
-    guessNumberMenu.add(guessNumber);
-    guessNumberMenu.addSeparator();
-    guessNumberMenu.add(guessNumberHard);
+    createMenu(guessNumberMenu, guessNumber, guessNumberHard);
 
     JMenu puzzle = Resources.getMenu(PUZZLE, "rompecabezas");
     puzzle4x4 = Resources.getMenuItem("Easy", "easy", this);
     puzzle5x5 = Resources.getMenuItem("Medium", "medio", this);
     puzzle6x6 = Resources.getMenuItem("Hard", "hard", this);
 
-    puzzle.add(puzzle4x4);
-    puzzle.addSeparator();
-    puzzle.add(puzzle5x5);
-    puzzle.addSeparator();
-    puzzle.add(puzzle6x6);
+    createMenu(puzzle, puzzle4x4, puzzle5x5, puzzle6x6);
 
     JMenu ticTacToe = Resources.getMenu("Tic Tac Toe", "triqui");
     ticTacToePvsP = Resources.getMenuItem("Player vs Player", "jvsj", this);
     ticTacToePvsCPU = Resources.getMenuItem("Player vs CPU (beta)", "jvscpu", this);
 
-    ticTacToe.add(ticTacToePvsP);
-    ticTacToe.addSeparator();
-    ticTacToe.add(ticTacToePvsCPU);
-
-    games.add(dices);
-    games.addSeparator();
-    games.add(guessNumberMenu);
-    games.addSeparator();
-    games.add(hangman);
-    games.addSeparator();
-    games.add(puzzle);
-    games.addSeparator();
-    games.addSeparator();
-    games.add(roulette);
-    games.addSeparator();
-    games.add(ticTacToe);
+    createMenu(ticTacToe, ticTacToePvsP, ticTacToePvsCPU);
+    createMenu(games, hangman, dices, roulette, guessNumberMenu, puzzle, ticTacToe);
 
     JMenu scores = Resources.getMenu("Data", "data");
     tables = Resources.getMenuItem("Database", "tabla", this);
@@ -325,25 +295,8 @@ public class Index extends JFrame implements ActionListener {
     loansTXT = Resources.getMenuItem(LOANS, "prestamos", this);
     salesTXT = Resources.getMenuItem(SALES, "vender", this);
 
-    exportTXT.add(guessNumberTXT);
-    exportTXT.addSeparator();
-    exportTXT.add(hangmanTXT);
-    exportTXT.addSeparator();
-    exportTXT.add(purchasesTXT);
-    exportTXT.addSeparator();
-    exportTXT.add(dicesTXT);
-    exportTXT.addSeparator();
-    exportTXT.add(inventoryTXT);
-    exportTXT.addSeparator();
-    exportTXT.add(notesTXT);
-    exportTXT.addSeparator();
-    exportTXT.add(loansTXT);
-    exportTXT.addSeparator();
-    exportTXT.add(cashRegisterTXT);
-    exportTXT.addSeparator();
-    exportTXT.add(puzzleTXT);
-    exportTXT.addSeparator();
-    exportTXT.add(salesTXT);
+    createMenu(exportTXT, guessNumberTXT, hangmanTXT, purchasesTXT, dicesTXT, notesTXT, puzzleTXT,
+        inventoryTXT, cashRegisterTXT, loansTXT, salesTXT);
 
     JMenu exportEXCEL = Resources.getMenu("Document XLS", "excel");
     guessNumberEXCEL = Resources.getMenuItem(GUESS_NUMBER, "adivinar", this);
@@ -357,25 +310,8 @@ public class Index extends JFrame implements ActionListener {
     loansEXCEL = Resources.getMenuItem(LOANS, "prestamos", this);
     salesEXCEL = Resources.getMenuItem(SALES, "vender", this);
 
-    exportEXCEL.add(guessNumberEXCEL);
-    exportEXCEL.addSeparator();
-    exportEXCEL.add(hangmanEXCEL);
-    exportEXCEL.addSeparator();
-    exportEXCEL.add(purchasesEXCEL);
-    exportEXCEL.addSeparator();
-    exportEXCEL.add(dicesEXCEL);
-    exportEXCEL.addSeparator();
-    exportEXCEL.add(inventoryEXCEL);
-    exportEXCEL.addSeparator();
-    exportEXCEL.add(notesEXCEL);
-    exportEXCEL.addSeparator();
-    exportEXCEL.add(loansEXCEL);
-    exportEXCEL.addSeparator();
-    exportEXCEL.add(cashRegisterEXCEL);
-    exportEXCEL.addSeparator();
-    exportEXCEL.add(puzzleEXCEL);
-    exportEXCEL.addSeparator();
-    exportEXCEL.add(salesEXCEL);
+    createMenu(exportEXCEL, guessNumberEXCEL, hangmanEXCEL, purchasesEXCEL, dicesEXCEL, notesEXCEL,
+        puzzleEXCEL, inventoryEXCEL, cashRegisterEXCEL, loansEXCEL, salesEXCEL);
 
     JMenu exportPDF = Resources.getMenu("Document PDF", "pdf");
     guessNumberPDF = Resources.getMenuItem(GUESS_NUMBER, "adivinar", this);
@@ -389,40 +325,15 @@ public class Index extends JFrame implements ActionListener {
     loansPDF = Resources.getMenuItem(LOANS, "prestamos", this);
     salesPDF = Resources.getMenuItem(SALES, "vender", this);
 
-    exportPDF.add(guessNumberPDF);
-    exportPDF.addSeparator();
-    exportPDF.add(hangmanPDF);
-    exportPDF.addSeparator();
-    exportPDF.add(purchasesPDF);
-    exportPDF.addSeparator();
-    exportPDF.add(dicesPDF);
-    exportPDF.addSeparator();
-    exportPDF.add(inventoryPDF);
-    exportPDF.addSeparator();
-    exportPDF.add(notesPDF);
-    exportPDF.addSeparator();
-    exportPDF.add(loansPDF);
-    exportPDF.addSeparator();
-    exportPDF.add(cashRegisterPDF);
-    exportPDF.addSeparator();
-    exportPDF.add(puzzlePDF);
-    exportPDF.addSeparator();
-    exportPDF.add(salesPDF);
-
-    export.add(exportTXT);
-    export.addSeparator();
-    export.add(exportPDF);
-    export.addSeparator();
-    export.add(exportEXCEL);
+    createMenu(exportPDF, guessNumberPDF, hangmanPDF, purchasesPDF, dicesPDF, notesPDF, puzzlePDF,
+        inventoryPDF, cashRegisterPDF, loansPDF, salesPDF);
+    createMenu(export, exportTXT, exportEXCEL, exportPDF);
 
     JMenu tasks = Resources.getMenu("Tasks", "task");
     searchBook = Resources.getMenuItem("Search Book", "searchBook", this);
     registerUser = Resources.getMenuItem("Register User", "añadir_usuario", this);
 
-    tasks.addSeparator();
-    tasks.add(searchBook);
-    tasks.addSeparator();
-    tasks.add(registerUser);
+    createMenu(tasks, searchBook, registerUser);
 
     changeBackground = Resources.getMenu("Background", "background");
 
@@ -444,50 +355,17 @@ public class Index extends JFrame implements ActionListener {
     mintMode = Resources.getMenuItem("Mint", "mint", this);
     classicMode = Resources.getMenuItem("Classic", "classic", this);
 
-    mode.add(classicMode);
-    mode.addSeparator();
-    mode.add(darkMode);
-    mode.addSeparator();
-    mode.add(defaultMode);
-    mode.addSeparator();
-    mode.add(macMode);
-    mode.addSeparator();
-    mode.add(grayMode);
-    mode.addSeparator();
-    mode.add(mintMode);
-    mode.addSeparator();
-    mode.add(textureMode);
+    createMenu(mode, defaultMode, darkMode, textureMode, macMode, grayMode, mintMode, classicMode);
 
     JMenu changeUI = Resources.getMenu("Change UI", "UI");
-    changeUI.add(mode);
-    changeUI.addSeparator();
-    changeUI.add(changeBackground);
+
+    createMenu(changeUI, mode, changeBackground);
 
     ocr = Resources.getMenuItem("OCR", "ocr", this);
-
     qr = Resources.getMenuItem("QR", "qr", this);
 
-    tools.add(changeUI);
-    tools.addSeparator();
-    tools.add(export);
-    tools.addSeparator();
-    tools.add(notes);
-    tools.addSeparator();
-    tools.add(numbers);
-    tools.addSeparator();
-    tools.add(ocr);
-    tools.addSeparator();
-    tools.add(qr);
-    tools.addSeparator();
-    tools.add(store);
-    tools.addSeparator();
-    tools.add(sendWhatsApp);
-    tools.addSeparator();
-    tools.add(structures);
-    tools.addSeparator();
-    tools.add(tasks);
-    tools.addSeparator();
-    tools.add(texts);
+    createMenu(tools, changeUI, export, notes, ocr, qr, store, sendWhatsApp, structures, tasks,
+        texts);
 
     menuBar.add(games);
     menuBar.add(scores);
@@ -496,6 +374,13 @@ public class Index extends JFrame implements ActionListener {
     menuBar.add(exit);
 
     add(menuBar, BorderLayout.NORTH);
+  }
+
+  private void createMenu(JMenu menu, JMenuItem... items) {
+    for (JMenuItem item : items) {
+      menu.add(item);
+      menu.addSeparator();
+    }
   }
 
   private void changeBackgroundAP(String name, int width, int length) {
@@ -514,8 +399,8 @@ public class Index extends JFrame implements ActionListener {
         image.setForeground(TEXT_COLOR);
       }
 
-    } catch (Exception ignored) {
-      Alerts.error(ignored, "Change Background");
+    } catch (Exception exception) {
+      Alerts.error(exception, "Change Background");
     }
   }
 
@@ -588,7 +473,8 @@ public class Index extends JFrame implements ActionListener {
     notesTable.cleanTable();
 
     try {
-      OlderRepository.readTable(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)), true);
+      OlderRepository.readTable(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)),
+          true);
     } catch (Exception e1) {
       Alerts.error(e1, NOTES);
     }
@@ -606,7 +492,8 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.cleanTable();
 
     try {
-      OlderRepository.readTable(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)), true);
+      OlderRepository.readTable(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)),
+          true);
     } catch (Exception e1) {
       Alerts.error(e1, PUZZLE);
     }
@@ -732,7 +619,7 @@ public class Index extends JFrame implements ActionListener {
           Alerts.changeUI("Gray");
 
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-            | IllegalAccessException eq) {
+                 | IllegalAccessException eq) {
           Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
         }
 
@@ -773,7 +660,7 @@ public class Index extends JFrame implements ActionListener {
           Alerts.changeUI("Texture");
 
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-            | IllegalAccessException eq) {
+                 | IllegalAccessException eq) {
           Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
         }
 
@@ -815,7 +702,7 @@ public class Index extends JFrame implements ActionListener {
 
 
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-            | IllegalAccessException eq) {
+                 | IllegalAccessException eq) {
           Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
         }
 
@@ -856,7 +743,7 @@ public class Index extends JFrame implements ActionListener {
           Alerts.changeUI("Mac OS");
 
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-            | IllegalAccessException eq) {
+                 | IllegalAccessException eq) {
           Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
         }
 
@@ -901,7 +788,7 @@ public class Index extends JFrame implements ActionListener {
           Alerts.changeUI("Mint");
 
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-            | IllegalAccessException eq) {
+                 | IllegalAccessException eq) {
           Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
         }
 
@@ -946,7 +833,7 @@ public class Index extends JFrame implements ActionListener {
           Alerts.changeUI("Classic");
 
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-            | IllegalAccessException eq) {
+                 | IllegalAccessException eq) {
           Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
         }
 
@@ -1091,7 +978,7 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           Desktop.getDesktop()
-              .browse(new URL("https://mypackapps.000webhostapp.com/ruleta.php").toURI());
+              .browse(URI.create("https://mypackapps.000webhostapp.com/ruleta.php"));
         } catch (Exception ex) {
           Alerts.error(ex, "Opening URL");
         }
@@ -1099,7 +986,7 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == moreSystems) {
 
         try {
-          Desktop.getDesktop().browse(new URL("https://mypackapps.000webhostapp.com").toURI());
+          Desktop.getDesktop().browse(URI.create("https://mypackapps.000webhostapp.com"));
         } catch (Exception ex) {
           Alerts.error(ex, "Opening URL");
         }
@@ -1107,7 +994,7 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == moreBookverse) {
 
         try {
-          Desktop.getDesktop().browse(new URL("http://bookverse.vzpla.net").toURI());
+          Desktop.getDesktop().browse(URI.create("http://bookverse.vzpla.net"));
         } catch (Exception ex) {
           Alerts.error(ex, "Opening URL");
         }
@@ -1122,7 +1009,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           guessNumberTable.cleanTable();
-          ExportFile.txt(guessNumberTable.viewTable, Queries.getAllData(Format.tableName(GUESS_NUMBER)),
+          ExportFile.txt(guessNumberTable.viewTable,
+              Queries.getAllData(Format.tableName(GUESS_NUMBER)),
               ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, GUESS_NUMBER);
@@ -1132,7 +1020,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           hangmanTable.cleanTable();
-          ExportFile.txt(hangmanTable.viewTable, Queries.getAllData(Format.tableName(HANGMAN)), ".txt");
+          ExportFile.txt(hangmanTable.viewTable, Queries.getAllData(Format.tableName(HANGMAN)),
+              ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, HANGMAN);
         }
@@ -1181,7 +1070,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           puzzleTable.cleanTable();
-          ExportFile.txt(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)), ".txt");
+          ExportFile.txt(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)),
+              ".txt");
         } catch (Exception ex) {
           Alerts.error(ex, PUZZLE);
         }
@@ -1230,7 +1120,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           hangmanTable.cleanTable();
-          ExportFile.pdf(hangmanTable.viewTable, HANGMAN, Queries.getAllData(Format.tableName(HANGMAN)),
+          ExportFile.pdf(hangmanTable.viewTable, HANGMAN, Queries.getAllData(Format.tableName(
+                  HANGMAN)),
               ".pdf");
         } catch (Exception ex) {
           Alerts.error(ex, HANGMAN);
@@ -1364,7 +1255,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           dicesTable.cleanTable();
-          ExportFile.excel(dicesTable.viewTable, Queries.getAllData(Format.tableName(DICES)), ".xls");
+          ExportFile.excel(dicesTable.viewTable, Queries.getAllData(Format.tableName(DICES)),
+              ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, DICES);
         }
@@ -1373,7 +1265,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           notesTable.cleanTable();
-          ExportFile.excel(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)), ".xls");
+          ExportFile.excel(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)),
+              ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, NOTES);
         }
@@ -1382,7 +1275,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           puzzleTable.cleanTable();
-          ExportFile.excel(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)), ".xls");
+          ExportFile.excel(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)),
+              ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, PUZZLE);
         }
@@ -1390,7 +1284,8 @@ public class Index extends JFrame implements ActionListener {
 
         try {
           inventoryTable.cleanTable();
-          ExportFile.excel(inventoryTable.viewTable, Queries.getAllData(Format.tableName(INVENTORY)),
+          ExportFile.excel(inventoryTable.viewTable,
+              Queries.getAllData(Format.tableName(INVENTORY)),
               ".xls");
         } catch (Exception ex) {
           Alerts.error(ex, INVENTORY);

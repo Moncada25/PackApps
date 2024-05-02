@@ -3,8 +3,6 @@ package com.bookverse.development.packapps.apps.services;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import javax.imageio.ImageIO;
 import lombok.SneakyThrows;
 import com.bookverse.development.packapps.apps.utils.other.Format;
@@ -44,10 +42,15 @@ public final class QrService {
     String folder = "target/qrs/";
     String file = Format.getNow() + ".jpg";
     String charset = "UTF-8";
+    File folderFile = new File(folder);
     File fileToCreate = new File(folder + file);
 
-    if (!Files.exists(Paths.get(folder))) {
-      new File(folder).mkdirs();
+    if (!folderFile.exists()) {
+      boolean foldercreated = folderFile.mkdirs();
+
+      if (!foldercreated) {
+        throw new IOException("Error creating folder");
+      }
     }
 
     BitMatrix matrix = new MultiFormatWriter().encode(new String(

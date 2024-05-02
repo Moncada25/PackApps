@@ -80,7 +80,7 @@ public class OcrView extends JDialog implements MouseListener {
 
     if (e.getSource() == searchFile) {
 
-      String response = readText(getFile(this));
+      String response = readText(getFile(this), true);
 
       if ("Error".equals(response)) {
         Alerts.message("Message", "File not found");
