@@ -1,5 +1,8 @@
 package com.bookverse.development.packapps.apps.utils.constants;
 
+import lombok.Getter;
+
+@Getter
 public enum AppConfig {
 
   TITLE("titleApp"),
@@ -15,7 +18,4 @@ public enum AppConfig {
     this.property = property;
   }
 
-  public String getProperty() {
-    return property;
-  }
 }

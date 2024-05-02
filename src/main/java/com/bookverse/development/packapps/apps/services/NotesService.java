@@ -16,8 +16,6 @@ import com.bookverse.development.packapps.apps.utils.ui.Resources;
 public final class NotesService {
 
   public static final int MAX_NOTES = 10;
-
-  public static Resources resources = new Resources();
   private static int maxNote;
   private static int minNote;
   private static int thereAreNotes = 1;
@@ -123,9 +121,9 @@ public final class NotesService {
       if (totalPercentage == 100) {
 
         if (totalNote < minNote) {
-          image.setIcon(new ImageIcon(resources.getImage("dead.png")));
+          image.setIcon(new ImageIcon(Resources.getImage("dead.png")));
         } else {
-          image.setIcon(new ImageIcon(resources.getImage("win.png")));
+          image.setIcon(new ImageIcon(Resources.getImage("win.png")));
         }
 
         Alerts.message(
@@ -150,7 +148,7 @@ public final class NotesService {
 
       } else if (missingNote > maxNote) {
 
-        image.setIcon(new ImageIcon(resources.getImage("dead.png")));
+        image.setIcon(new ImageIcon(Resources.getImage("dead.png")));
 
         Alerts.message("Ay :(", "<html>" + Format.style()
             + "<strong>There is nothing to do, better cancel...</strong><br><br>"
@@ -178,7 +176,7 @@ public final class NotesService {
 
         } else if (totalNote >= minNote) {
 
-          image.setIcon(new ImageIcon(resources.getImage("win.png")));
+          image.setIcon(new ImageIcon(Resources.getImage("win.png")));
 
           Alerts.message("You won!", "<html>" + Format.style()
               + "<strong>Congratulations, you've already approved it!</strong><br><br>"

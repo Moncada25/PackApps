@@ -36,7 +36,7 @@ public class SalesTable extends JDialog {
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(new Resources().getImage("vender.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("vender.png")).getImage());
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 

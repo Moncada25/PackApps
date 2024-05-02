@@ -26,7 +26,7 @@ import javax.swing.JTextField;
 
 public class Loans extends JDialog implements ActionListener {
 
-  Resources resources = new Resources();
+  
   private JButton btnLoan, btnExit;
   private JTextField txtReference, txtDocument, txtPhone, txtValue, txtName;
   private JComboBox<String> weeks, months;
@@ -50,19 +50,19 @@ public class Loans extends JDialog implements ActionListener {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(resources.getImage("prestar.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("prestar.png")).getImage());
 
-    btnExit = resources.getButton("Return", Styles.MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", Styles.MAIN_COLOR, this, this);
     btnExit.setBounds(330, 320, 86, 30);
 
-    btnLoan = resources.getButton("Lend", Styles.TEXT_COLOR, this, this);
+    btnLoan = Resources.getButton("Lend", Styles.TEXT_COLOR, this, this);
     btnLoan.setBounds(30, 320, 86, 30);
 
-    JLabel title = resources.getLabel("<html><strong><em>Register loan</em></strong></html>",
+    JLabel title = Resources.getLabel("<html><strong><em>Register loan</em></strong></html>",
         Styles.MAIN_COLOR, this, Styles.BIG);
     title.setBounds(135, 5, 300, 40);
 
-    JLabel product = resources
+    JLabel product = Resources
         .getLabel("<html><strong>Client</strong></html>", Styles.TEXT_COLOR,
             this, Styles.MEDIUM);
     product.setBounds(30, 60, 140, 30);
@@ -83,7 +83,7 @@ public class Loans extends JDialog implements ActionListener {
 
     });
 
-    JLabel document = resources
+    JLabel document = Resources
         .getLabel("<html><strong>Document</strong></html>", Styles.TEXT_COLOR,
             this, Styles.MEDIUM);
     document.setBounds(30, 100, 140, 30);
@@ -103,7 +103,7 @@ public class Loans extends JDialog implements ActionListener {
       }
     });
 
-    JLabel reference = resources
+    JLabel reference = Resources
         .getLabel("<html><strong>Reference</strong></html>", Styles.TEXT_COLOR,
             this, Styles.MEDIUM);
     reference.setBounds(30, 140, 130, 30);
@@ -123,7 +123,7 @@ public class Loans extends JDialog implements ActionListener {
       }
     });
 
-    JLabel phone = resources
+    JLabel phone = Resources
         .getLabel("<html><strong>Phone</strong></html>", Styles.TEXT_COLOR,
             this, Styles.MEDIUM);
     phone.setBounds(30, 180, 130, 30);
@@ -144,7 +144,7 @@ public class Loans extends JDialog implements ActionListener {
 
     });
 
-    JLabel time = resources
+    JLabel time = Resources
         .getLabel("<html><strong>Time</strong></html>", Styles.TEXT_COLOR, this,
             Styles.MEDIUM);
     time.setBounds(30, 220, 130, 30);
@@ -160,7 +160,7 @@ public class Loans extends JDialog implements ActionListener {
         .setModel(new DefaultComboBoxModel<>(new String[]{"Months", "1", "2", "3", "4", "5", "6"}));
     add(months);
 
-    JLabel price = resources
+    JLabel price = Resources
         .getLabel("<html><strong>Loan of</strong></html>", Styles.TEXT_COLOR,
             this, Styles.MEDIUM);
     price.setBounds(30, 260, 130, 30);

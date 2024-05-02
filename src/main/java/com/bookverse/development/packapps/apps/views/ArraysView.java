@@ -31,7 +31,7 @@ public class ArraysView extends JDialog implements ActionListener {
 
   private JButton btnDeterminant, btnAction, btnAuto, btnClean, btnTransposed, btnDiagonals, btnMultiply;
   private JTextField txtRows, txtColumns;
-  private Resources resources = new Resources();
+  
   private JButton[][] arrayBoard;
 
   public ArraysView(JDialog parent, boolean modal) {
@@ -49,7 +49,7 @@ public class ArraysView extends JDialog implements ActionListener {
 
     for (int f = 0; f < arrayBoard.length; f++) {
       for (int c = 0; c < arrayBoard.length; c++) {
-        arrayBoard[f][c] = resources.getButton("", null, this, this);
+        arrayBoard[f][c] = Resources.getButton("", null, this, this);
         arrayBoard[f][c].setBounds(x, y, 45, 45);
         arrayBoard[f][c].setVisible(false);
         x = x + 45;
@@ -59,39 +59,39 @@ public class ArraysView extends JDialog implements ActionListener {
       y = y + 45;
     }
 
-    JLabel welcome = resources
+    JLabel welcome = Resources
         .getLabel("<html><em><strong>Matrix operations</strong></em></html>", MAIN_COLOR, this,
             BIG);
     welcome.setBounds(320, 10, 500, 40);
 
-    btnAction = resources.getButton("Show", TEXT_COLOR, this, this);
+    btnAction = Resources.getButton("Show", TEXT_COLOR, this, this);
     btnAction.setBounds(20, 190, 70, 25);
 
-    btnAuto = resources.getButton("Auto fill", TEXT_COLOR, this, this);
+    btnAuto = Resources.getButton("Auto fill", TEXT_COLOR, this, this);
     btnAuto.setBounds(120, 100, 90, 25);
     btnAuto.setEnabled(false);
 
-    btnClean = resources.getButton("Clean", MAIN_COLOR, this, this);
+    btnClean = Resources.getButton("Clean", MAIN_COLOR, this, this);
     btnClean.setBounds(120, 150, 90, 25);
     btnClean.setEnabled(false);
 
-    btnTransposed = resources.getButton("Transpose", TEXT_COLOR, this, this);
+    btnTransposed = Resources.getButton("Transpose", TEXT_COLOR, this, this);
     btnTransposed.setBounds(720, 100, 120, 25);
     btnTransposed.setEnabled(false);
 
-    btnMultiply = resources.getButton("Multiply", TEXT_COLOR, this, this);
+    btnMultiply = Resources.getButton("Multiply", TEXT_COLOR, this, this);
     btnMultiply.setBounds(720, 200, 120, 25);
     btnMultiply.setEnabled(false);
 
-    btnDeterminant = resources.getButton("|A|", TEXT_COLOR, this, this);
+    btnDeterminant = Resources.getButton("|A|", TEXT_COLOR, this, this);
     btnDeterminant.setBounds(720, 250, 120, 25);
     btnDeterminant.setEnabled(false);
 
-    btnDiagonals = resources.getButton("Diagonals", TEXT_COLOR, this, this);
+    btnDiagonals = Resources.getButton("Diagonals", TEXT_COLOR, this, this);
     btnDiagonals.setBounds(720, 150, 120, 25);
     btnDiagonals.setEnabled(false);
 
-    JLabel rows = resources
+    JLabel rows = Resources
         .getLabel("<html><em>Rows</em></html>", TEXT_COLOR, this,
             SMALL);
     rows.setBounds(38, 80, 100, 25);
@@ -112,7 +112,7 @@ public class ArraysView extends JDialog implements ActionListener {
       }
     });
 
-    JLabel columns = resources.getLabel("<html><em>Columns</em></html>", TEXT_COLOR, this,
+    JLabel columns = Resources.getLabel("<html><em>Columns</em></html>", TEXT_COLOR, this,
         SMALL);
     columns.setBounds(27, 130, 100, 25);
 

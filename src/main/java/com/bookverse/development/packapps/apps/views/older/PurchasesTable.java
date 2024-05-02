@@ -36,7 +36,7 @@ public class PurchasesTable extends JDialog {
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(new Resources().getImage("comprar.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("comprar.png")).getImage());
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 

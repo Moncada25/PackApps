@@ -31,7 +31,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEX
 
 public class WhatsAppView extends JDialog implements ActionListener {
 
-  private Resources resources = new Resources();
+  
   private JTextArea message;
   private JTextField txtNumber;
   private JButton btnOpen, btnReturn;
@@ -57,13 +57,13 @@ public class WhatsAppView extends JDialog implements ActionListener {
     setLayout(null);
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-    btnOpen = resources.getButton("Open", TEXT_COLOR, this, this);
+    btnOpen = Resources.getButton("Open", TEXT_COLOR, this, this);
     btnOpen.setBounds(60, 290, 100, 30);
 
-    btnReturn = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnReturn = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnReturn.setBounds(300, 290, 86, 30);
 
-    JLabel lblPhone = resources
+    JLabel lblPhone = Resources
         .getLabel("<html><strong>Phone</strong></html>", TEXT_COLOR, this, MEDIUM);
     lblPhone.setBounds(204, 12, 60, 30);
 
@@ -89,7 +89,7 @@ public class WhatsAppView extends JDialog implements ActionListener {
       }
     });
 
-    JLabel lblMessage = resources
+    JLabel lblMessage = Resources
         .getLabel("<html><strong>Message</strong></html>", TEXT_COLOR, this, MEDIUM);
     lblMessage.setBounds(195, 80, 85, 30);
 

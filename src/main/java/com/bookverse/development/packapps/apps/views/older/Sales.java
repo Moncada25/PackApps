@@ -37,7 +37,7 @@ public class Sales extends JDialog implements ActionListener {
   private JTextField txtReference, txtPhone, txtDocument, txtPrice;
   private InventoryTable inventoryTable = new InventoryTable(this, true, true);
   private JButton btnSearch, btnSubmit, btReturn;
-  private Resources resources = new Resources();
+  
   private JLabel available, more, less, unitsAvailable, unitsActual;
   private ButtonGroup btnGroup;
   private JRadioButton radioNew, radioUsed;
@@ -51,23 +51,23 @@ public class Sales extends JDialog implements ActionListener {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(resources.getImage("vender.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("vender.png")).getImage());
 
-    btReturn = resources.getButton("Return", MAIN_COLOR, this, this);
+    btReturn = Resources.getButton("Return", MAIN_COLOR, this, this);
     btReturn.setBounds(310, 320, 86, 30);
 
-    btnSubmit = resources.getButton("Sell", TEXT_COLOR, this, this);
+    btnSubmit = Resources.getButton("Sell", TEXT_COLOR, this, this);
     btnSubmit.setBounds(30, 320, 86, 30);
     btnSubmit.setEnabled(false);
 
-    btnSearch = resources.getButton("Search", TEXT_COLOR, this, this);
+    btnSearch = Resources.getButton("Search", TEXT_COLOR, this, this);
     btnSearch.setBounds(340, 65, 86, 25);
 
-    JLabel title = resources.getLabel("<html><strong><em>Register sale</em></strong></html>",
+    JLabel title = Resources.getLabel("<html><strong><em>Register sale</em></strong></html>",
         MAIN_COLOR, this, BIG);
     title.setBounds(138, 5, 300, 40);
 
-    JLabel reference = resources
+    JLabel reference = Resources
         .getLabel("<html><strong>Reference</strong></html>", TEXT_COLOR, this, MEDIUM);
     reference.setBounds(30, 60, 100, 30);
 
@@ -77,7 +77,7 @@ public class Sales extends JDialog implements ActionListener {
     txtReference.setEnabled(false);
     add(txtReference);
 
-    JLabel state = resources
+    JLabel state = Resources
         .getLabel("<html><strong>State</strong></html>", TEXT_COLOR, this,
             MEDIUM);
     state.setBounds(30, 100, 140, 30);
@@ -98,7 +98,7 @@ public class Sales extends JDialog implements ActionListener {
     btnGroup.add(radioNew);
     btnGroup.add(radioUsed);
 
-    JLabel document = resources
+    JLabel document = Resources
         .getLabel("<html><strong>Document</strong></html>", TEXT_COLOR, this,
             MEDIUM);
     document.setBounds(30, 140, 130, 30);
@@ -118,7 +118,7 @@ public class Sales extends JDialog implements ActionListener {
       }
     });
 
-    JLabel phone = resources
+    JLabel phone = Resources
         .getLabel("<html><strong>Phone</strong></html>", TEXT_COLOR, this,
             MEDIUM);
     phone.setBounds(30, 180, 130, 30);
@@ -138,15 +138,15 @@ public class Sales extends JDialog implements ActionListener {
       }
     });
 
-    JLabel lblUnits = resources
+    JLabel lblUnits = Resources
         .getLabel("<html><strong>Units</strong></html>", TEXT_COLOR, this,
             MEDIUM);
     lblUnits.setBounds(30, 220, 130, 30);
 
-    unitsActual = resources.getLabel("1", TEXT_COLOR, this, BIG);
+    unitsActual = Resources.getLabel("1", TEXT_COLOR, this, BIG);
     unitsActual.setBounds(213, 230, 40, 20);
 
-    more = resources.getLabel("<html><strong>+</strong></html>", MAIN_COLOR, this,
+    more = Resources.getLabel("<html><strong>+</strong></html>", MAIN_COLOR, this,
         BIG);
     more.setBounds(260, 225, 25, 25);
 
@@ -190,7 +190,7 @@ public class Sales extends JDialog implements ActionListener {
       }
     });
 
-    less = resources
+    less = Resources
         .getLabel("<html><strong>-</strong></html>", MAIN_COLOR, this, BIG);
     less.setBounds(180, 224, 25, 25);
 
@@ -230,15 +230,15 @@ public class Sales extends JDialog implements ActionListener {
 
     });
 
-    available = resources
+    available = Resources
         .getLabel("<html><strong>Available: </strong></html>", TEXT_COLOR, this, SMALL);
     available.setBounds(340, 224, 130, 30);
     available.setVisible(false);
 
-    unitsAvailable = resources.getLabel("", TEXT_COLOR, this, SMALL);
+    unitsAvailable = Resources.getLabel("", TEXT_COLOR, this, SMALL);
     unitsAvailable.setBounds(408, 224, 130, 30);
 
-    JLabel price = resources
+    JLabel price = Resources
         .getLabel("<html><strong>Price</strong></html>", TEXT_COLOR, this,
             MEDIUM);
     price.setBounds(30, 260, 130, 30);

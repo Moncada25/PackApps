@@ -25,7 +25,6 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEX
 
 public class OcrView extends JDialog implements MouseListener {
 
-  private Resources resources = new Resources();
   private JLabel searchFile;
   private JLabel exit;
   private JTextArea text;
@@ -65,11 +64,11 @@ public class OcrView extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
 
-    searchFile = resources.getLabel("  SEARCH FILE  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    searchFile = Resources.getLabel("  SEARCH FILE  ", TEXT_COLOR, panel, Styles.MEDIUM);
     searchFile.setBorder(Styles.BORDER_BLUE);
     searchFile.addMouseListener(this);
 
-    exit = resources.getLabel("  RETURN  ", MAIN_COLOR, panel, Styles.MEDIUM);
+    exit = Resources.getLabel("  RETURN  ", MAIN_COLOR, panel, Styles.MEDIUM);
     exit.setBorder(Styles.BORDER_RED);
     exit.addMouseListener(this);
 
@@ -81,7 +80,7 @@ public class OcrView extends JDialog implements MouseListener {
 
     if (e.getSource() == searchFile) {
 
-      String response = readText(getFile(this));
+      String response = readText(getFile(this), true);
 
       if ("Error".equals(response)) {
         Alerts.message("Message", "File not found");

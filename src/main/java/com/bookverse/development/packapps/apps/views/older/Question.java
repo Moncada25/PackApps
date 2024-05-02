@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 public class Question extends JDialog implements MouseListener {
 
   private JLabel btnYes, btnNo;
-  private Resources resources = new Resources();
+  
   private String question;
 
   public Question(JFrame parent, boolean modal) {
@@ -43,11 +43,11 @@ public class Question extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
 
-    btnYes = resources.getLabel("  Yes  ", TEXT_COLOR, panel, MEDIUM);
+    btnYes = Resources.getLabel("  Yes  ", TEXT_COLOR, panel, MEDIUM);
     btnYes.setBorder(BORDER_BLUE);
     btnYes.addMouseListener(this);
 
-    btnNo = resources.getLabel("  No  ", TEXT_COLOR, panel, MEDIUM);
+    btnNo = Resources.getLabel("  No  ", TEXT_COLOR, panel, MEDIUM);
     btnNo.setBorder(BORDER_BLUE);
     btnNo.addMouseListener(this);
 
@@ -56,10 +56,10 @@ public class Question extends JDialog implements MouseListener {
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(resources.getImage("question.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("question.png")).getImage());
     add(getPanel(), BorderLayout.SOUTH);
 
-    JLabel lblQuestion = resources
+    JLabel lblQuestion = Resources
         .getLabel("<html><strong><em><center>" + question + "</center></em></strong></html>",
             TEXT_COLOR, this,
             MEDIUM);

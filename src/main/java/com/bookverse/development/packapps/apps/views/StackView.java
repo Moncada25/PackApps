@@ -40,7 +40,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEX
 public class StackView extends JDialog implements MouseListener, ActionListener {
 
   private JLabel[] actions = new JLabel[8];
-  private Resources resources = new Resources();
+  
   private JLabel title, message;
   private JButton[] stack = new JButton[50];
 
@@ -61,7 +61,7 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
 
     IntStream.range(0, actions.length).forEach(i -> {
       actions[i] = new JLabel();
-      actions[i].setIcon(new ImageIcon(resources.getImage(images[i])));
+      actions[i].setIcon(new ImageIcon(Resources.getImage(images[i])));
       actions[i].addMouseListener(this);
       panel.add(actions[i]);
     });
@@ -77,7 +77,7 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
     int c = 0;
 
     for (int j = 0; j < stack.length; j++) {
-      stack[j] = resources.getButton("", null, this, this);
+      stack[j] = Resources.getButton("", null, this, this);
       stack[j].setBounds(x, y, 80, 40);
       stack[j].setForeground(MAIN_COLOR);
       stack[j].setVisible(false);
@@ -95,10 +95,10 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
 
     getPanel();
 
-    title = resources.getLabel("", MAIN_COLOR, this, BIG);
+    title = Resources.getLabel("", MAIN_COLOR, this, BIG);
     title.setBounds(550, 70, 600, 200);
 
-    message = resources.getLabel("", MAIN_COLOR, this, BIG);
+    message = Resources.getLabel("", MAIN_COLOR, this, BIG);
     message.setBounds(620, 480, 200, 85);
   }
 

@@ -46,7 +46,7 @@ public class InventoryTable extends JDialog implements MouseListener {
   private JLabel title;
   private TableRowSorter<TableModel> rowSorter;
   private String[] columns = {"REFERENCE", "STATE", "PRICE", "QUANTITY"};
-  private Resources resources = new Resources();
+  
   private boolean search;
 
   public InventoryTable(JDialog parent, boolean modal, boolean search) {
@@ -81,7 +81,7 @@ public class InventoryTable extends JDialog implements MouseListener {
 
     IntStream.range(0, actions.length).forEach(i -> {
       actions[i] = new JLabel();
-      actions[i].setIcon(new ImageIcon(resources.getImage(images[i])));
+      actions[i].setIcon(new ImageIcon(Resources.getImage(images[i])));
       actions[i].addMouseListener(this);
       row.add(actions[i]);
     });
@@ -102,7 +102,7 @@ public class InventoryTable extends JDialog implements MouseListener {
   private void createComponents() {
 
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    setIconImage(new ImageIcon(resources.getImage("inventario.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("inventario.png")).getImage());
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 

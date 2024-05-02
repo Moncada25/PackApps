@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.views;
 
+import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -72,22 +73,22 @@ public class NotesView extends JDialog implements ActionListener {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(NotesService.resources.getImage("notas.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("notas.png")).getImage());
 
-    btnExit = NotesService.resources.getButton("Return", Styles.MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", Styles.MAIN_COLOR, this, this);
     btnExit.setBounds(248, 330, 86, 30);
 
-    btnCalculate = NotesService.resources.getButton("Show", Styles.TEXT_COLOR, this, this);
+    btnCalculate = Resources.getButton("Show", Styles.TEXT_COLOR, this, this);
     btnCalculate.setBounds(200, 280, 86, 30);
 
-    btnAddNote = NotesService.resources.getButton("Add", Styles.TEXT_COLOR, this, this);
+    btnAddNote = Resources.getButton("Add", Styles.TEXT_COLOR, this, this);
     btnAddNote.setBounds(200, 220, 86, 30);
 
-    btnDeleteNote = NotesService.resources.getButton("Delete", Styles.MAIN_COLOR, this, this);
+    btnDeleteNote = Resources.getButton("Delete", Styles.MAIN_COLOR, this, this);
     btnDeleteNote.setBounds(300, 220, 86, 30);
     btnDeleteNote.setEnabled(false);
 
-    btnReset = NotesService.resources.getButton("Reset", Styles.MAIN_COLOR, this, this);
+    btnReset = Resources.getButton("Reset", Styles.MAIN_COLOR, this, this);
     btnReset.setBounds(300, 280, 86, 30);
     btnReset.setEnabled(false);
 
@@ -140,16 +141,16 @@ public class NotesView extends JDialog implements ActionListener {
       y += 40;
     }
 
-    JLabel lblNotes = NotesService.resources
+    JLabel lblNotes = Resources
         .getLabel("<html><strong>Notes</strong></html>", Styles.MAIN_COLOR, this,
             Styles.MEDIUM);
     lblNotes.setBounds(30, 30, 100, 30);
 
-    JLabel lblPercentages = NotesService.resources.getLabel(
+    JLabel lblPercentages = Resources.getLabel(
         "<html><strong>%</strong></html>", Styles.MAIN_COLOR, this, Styles.MEDIUM);
     lblPercentages.setBounds(145, 30, 100, 30);
 
-    JLabel name = NotesService.resources.getLabel(
+    JLabel name = Resources.getLabel(
         "<html><strong>Name</strong></html>", Styles.MAIN_COLOR, this, Styles.MEDIUM);
     name.setBounds(270, 30, 100, 30);
 
@@ -169,7 +170,7 @@ public class NotesView extends JDialog implements ActionListener {
       }
     });
 
-    JLabel scale = NotesService.resources.getLabel(
+    JLabel scale = Resources.getLabel(
         "<html><strong>Scale</strong></html>", Styles.MAIN_COLOR, this, Styles.MEDIUM);
     scale.setBounds(270, 110, 100, 30);
 
@@ -188,7 +189,7 @@ public class NotesView extends JDialog implements ActionListener {
     add(scale2);
     buttonGroup.add(scale2);
 
-    image = NotesService.resources.getLabel("", null, this, null);
+    image = Resources.getLabel("", null, this, null);
     image.setBounds(240, 360, 96, 96);
   }
 

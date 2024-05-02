@@ -59,7 +59,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
   private JLabel title, message;
   private JMenuItem create, read, delete, update;
   private String[] columns = {"ID", "NICKNAME", "LIMIT", "LEVEL", "DATE"};
-  private Resources resources = new Resources();
+  
 
   public GuessNumberTable(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -86,7 +86,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
     IntStream.range(0, tables.length).forEach(i -> {
       tables[i] = new JLabel();
-      tables[i].setIcon(new ImageIcon(resources.getImage(images[i])));
+      tables[i].setIcon(new ImageIcon(Resources.getImage(images[i])));
       tables[i].addMouseListener(this);
       row.add(tables[i]);
     });
@@ -101,7 +101,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
   private void createComponents() {
 
     add(getPanel(), BorderLayout.SOUTH);
-    setIconImage(new ImageIcon(resources.getImage("adivinar.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("adivinar.png")).getImage());
 
     Arrays.stream(columns).forEach(column -> model.addColumn(column));
 
@@ -115,11 +115,11 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
 
     JMenuBar menuBar = new JMenuBar();
 
-    JMenu crud = resources.getMenu("CRUD", "mysql");
-    create = resources.getMenuItem("Create", "create", this);
-    read = resources.getMenuItem("Read", "read", this);
-    update = resources.getMenuItem("Update", "update", this);
-    delete = resources.getMenuItem("Delete", "delete", this);
+    JMenu crud = Resources.getMenu("CRUD", "mysql");
+    create = Resources.getMenuItem("Create", "create", this);
+    read = Resources.getMenuItem("Read", "read", this);
+    update = Resources.getMenuItem("Update", "update", this);
+    delete = Resources.getMenuItem("Delete", "delete", this);
 
     crud.add(create);
     crud.addSeparator();

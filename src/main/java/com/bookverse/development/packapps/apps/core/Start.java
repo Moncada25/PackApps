@@ -18,7 +18,7 @@
 11912 view p = 321.9 : 37 files
 956 model p = 478 : 2 files
 2773 controller p = 554.6 : 5 files
-19 resources : 1 file & 93 images
+19 Resources : 1 file & 93 images
 15660 total  : 45 files
 
 @Release: 2.0
@@ -26,7 +26,7 @@
 13430 view p = 344.3 : 39 files
 954 model p = 477 : 2 files
 1375 controller p = 1375 : 1 file
-100 resources p = 33.3 : 3 files & 108 images
+100 Resources p = 33.3 : 3 files & 108 images
 15859 total  : 45 files
 
 @Refactor

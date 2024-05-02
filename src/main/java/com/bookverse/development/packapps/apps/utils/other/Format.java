@@ -2,12 +2,12 @@ package com.bookverse.development.packapps.apps.utils.other;
 
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
 public final class Format {
@@ -183,5 +183,9 @@ public final class Format {
 
     return dateFormat.format(date.getTime()) + " - " + date.get(Calendar.HOUR_OF_DAY) + ":"
         + date.get(Calendar.MINUTE);
+  }
+
+  public static String getNow() {
+    return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"));
   }
 }

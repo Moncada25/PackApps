@@ -58,7 +58,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
   private JLabel title, message;
   private JMenuItem create, read, delete, update;
   private String[] columns = {"ID", "NAME", "SCALE", "% TOTAL", "TOTAL", "STATE", "DATE"};
-  private Resources resources = new Resources();
+  
   private JLabel[] tables = new JLabel[5];
 
   public NotesTable(JFrame parent, boolean modal) {
@@ -88,7 +88,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
 
     IntStream.range(0, tables.length).forEach(i -> {
       tables[i] = new JLabel();
-      tables[i].setIcon(new ImageIcon(resources.getImage(images[i])));
+      tables[i].setIcon(new ImageIcon(Resources.getImage(images[i])));
       tables[i].addMouseListener(this);
       row.add(tables[i]);
     });
@@ -102,7 +102,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(resources.getImage("notas.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("notas.png")).getImage());
     add(getPanel(), BorderLayout.SOUTH);
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
@@ -117,11 +117,11 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
 
     JMenuBar menuBar = new JMenuBar();
 
-    JMenu crud = resources.getMenu("CRUD", "mysql");
-    create = resources.getMenuItem("Create", "create", this);
-    read = resources.getMenuItem("Read", "read", this);
-    update = resources.getMenuItem("Update", "update", this);
-    delete = resources.getMenuItem("Delete", "delete", this);
+    JMenu crud = Resources.getMenu("CRUD", "mysql");
+    create = Resources.getMenuItem("Create", "create", this);
+    read = Resources.getMenuItem("Read", "read", this);
+    update = Resources.getMenuItem("Update", "update", this);
+    delete = Resources.getMenuItem("Delete", "delete", this);
 
     crud.add(create);
     crud.addSeparator();

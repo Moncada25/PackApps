@@ -18,17 +18,17 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 
 public class Resources {
 
-  private static Object object;
+  private Resources(){}
 
-  public static Object getObject() {
-    return object;
-  }
+  @Getter
+  private static Object object;
 
   public static void setObject(Object object) {
     Resources.object = object;
@@ -46,24 +46,24 @@ public class Resources {
     return border;
   }
 
-  public URL getImage(String image) {
-    return this.getClass().getResource("/" + image);
+  public static URL getImage(String image) {
+    return Resources.class.getResource("/" + image);
   }
 
-  public JMenuItem getMenuItem(String name, String image, ActionListener listener) {
+  public static JMenuItem getMenuItem(String name, String image, ActionListener listener) {
     JMenuItem item = new JMenuItem(name);
     item.setIcon(new ImageIcon(getImage(image + ".png")));
     item.addActionListener(listener);
     return item;
   }
 
-  public JMenu getMenu(String name, String image) {
+  public static JMenu getMenu(String name, String image) {
     JMenu menu = new JMenu(name);
     menu.setIcon(new ImageIcon(getImage(image + ".png")));
     return menu;
   }
 
-  public JButton getButton(String name, Color color, ActionListener listener,
+  public static JButton getButton(String name, Color color, ActionListener listener,
       @NotNull Container container) {
     JButton button = new JButton(name);
     button.setBackground(color);
@@ -72,7 +72,7 @@ public class Resources {
     return button;
   }
 
-  public JLabel getLabel(String text, Color color, @NotNull Container container, Font font) {
+  public static JLabel getLabel(String text, Color color, @NotNull Container container, Font font) {
     JLabel label = new JLabel(text, SwingConstants.CENTER);
     label.setForeground(color);
     label.setFont(font);

@@ -33,7 +33,7 @@ public class FeedbackView extends JDialog implements ActionListener, MouseListen
   private JButton btnSend, btnExit;
   private JTextArea text;
   private JTextField txtUser;
-  private Resources resources = new Resources();
+  
 
   public FeedbackView(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -53,26 +53,26 @@ public class FeedbackView extends JDialog implements ActionListener, MouseListen
   private void createComponents() {
 
     setLayout(null);
-    setIconImage(new ImageIcon(resources.getImage("feedback.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("feedback.png")).getImage());
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-    btnSend = resources.getButton("Send", TEXT_COLOR, this, this);
+    btnSend = Resources.getButton("Send", TEXT_COLOR, this, this);
     btnSend.setBounds(140, 400, 86, 30);
 
-    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(250, 400, 86, 30);
 
-    JLabel title = resources
+    JLabel title = Resources
         .getLabel("<html><strong><em>Write commentary</em></strong></html>",
             MAIN_COLOR, this, BIG);
     title.setBounds(130, 10, 370, 50);
 
-    JLabel lblUser = resources
+    JLabel lblUser = Resources
         .getLabel("<html><strong>User</strong></html>", TEXT_COLOR, this,
             MEDIUM);
     lblUser.setBounds(100, 60, 100, 50);
 
-    required = resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
+    required = Resources.getLabel("*", MAIN_COLOR, this, MEDIUM);
     required.setBounds(139, 78, 12, 12);
     required.addMouseListener(this);
 
@@ -92,7 +92,7 @@ public class FeedbackView extends JDialog implements ActionListener, MouseListen
       }
     });
 
-    JLabel message = resources
+    JLabel message = Resources
         .getLabel("<html><strong>Message</strong></html>", TEXT_COLOR, this, MEDIUM);
     message.setBounds(30, 150, 370, 30);
 

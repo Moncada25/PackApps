@@ -3,10 +3,11 @@ package com.bookverse.development.packapps.automation.utils;
 import static com.bookverse.development.packapps.automation.utils.Constants.CHROME;
 import static com.bookverse.development.packapps.automation.utils.Constants.DEFAULT_BROWSER;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
+import java.util.List;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 
 public class WebDriverFactory {
@@ -27,26 +28,16 @@ public class WebDriverFactory {
 
   private static WebDriver getChromeDriver() {
 
-    ChromeOptions chromeOptions = new ChromeOptions();
-
-    chromeOptions.addArguments(
+    List<String> options = List.of(
         "--incognito",
         "--disable-infobars",
         "enable-automation",
         "--disable-browser-side-navigation");
 
-    return WebDriverManager.chromedriver()
-        .capabilities(chromeOptions)
-        .driverVersion("117.0.5938.62")
-        .arm64()
-        .create();
+    return new ChromeDriver(new ChromeOptions().addArguments(options));
   }
 
   private static WebDriver getEdgeDriver() {
-
-    EdgeOptions edgeOptions = new EdgeOptions();
-    edgeOptions.setCapability("inprivate", true);
-
-    return WebDriverManager.edgedriver().capabilities(edgeOptions).create();
+    return new EdgeDriver(new EdgeOptions().addArguments(List.of("inprivate")));
   }
 }

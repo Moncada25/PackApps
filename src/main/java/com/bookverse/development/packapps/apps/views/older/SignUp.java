@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 
 public class SignUp extends JDialog implements ActionListener {
 
-  Resources resources = new Resources();
+  
 
   private JTextField txtUser;
   private JButton btnSignUp, btnReturn;
@@ -41,20 +41,20 @@ public class SignUp extends JDialog implements ActionListener {
   private void createComponents() {
 
     setLayout(null);
-    setIconImage(new ImageIcon(resources.getImage("añadir_usuario.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("añadir_usuario.png")).getImage());
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-    btnSignUp = resources.getButton("Save", TEXT_COLOR, this, this);
+    btnSignUp = Resources.getButton("Save", TEXT_COLOR, this, this);
     btnSignUp.setBounds(75, 215, 86, 30);
 
-    btnReturn = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnReturn = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnReturn.setBounds(300, 215, 86, 30);
 
-    JLabel title = resources
+    JLabel title = Resources
         .getLabel("<html><strong><em>Sign Up</em></strong></html>", MAIN_COLOR, this, BIG);
     title.setBounds(175, 5, 200, 40);
 
-    JLabel lblUser = resources
+    JLabel lblUser = Resources
         .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
     lblUser.setBounds(30, 60, 180, 30);
 
@@ -73,7 +73,7 @@ public class SignUp extends JDialog implements ActionListener {
       }
     });
 
-    JLabel lblPassword = resources
+    JLabel lblPassword = Resources
         .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
     lblPassword.setBounds(30, 110, 120, 30);
 
@@ -92,7 +92,7 @@ public class SignUp extends JDialog implements ActionListener {
       }
     });
 
-    JLabel codManager = resources
+    JLabel codManager = Resources
         .getLabel("<html><strong>Manager Key</strong></html>", TEXT_COLOR, this, MEDIUM);
     codManager.setBounds(30, 160, 180, 30);
 

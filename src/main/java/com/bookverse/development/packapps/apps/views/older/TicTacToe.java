@@ -1,13 +1,5 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.apps.utils.ui.Effects.fadeIn;
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtilities.getIntRandom;
-import static com.bookverse.development.packapps.apps.utils.ui.Alerts.instruccionesTriqui;
-
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.utils.other.TicTacToeCPU;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
@@ -21,7 +13,15 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
+
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.apps.utils.ui.Effects.fadeIn;
+import static com.bookverse.development.packapps.apps.utils.other.GeneralUtilities.getIntRandom;
+import static com.bookverse.development.packapps.apps.utils.ui.Alerts.instruccionesTriqui;
 
 public class TicTacToe extends JDialog implements ActionListener {
 
@@ -30,9 +30,10 @@ public class TicTacToe extends JDialog implements ActionListener {
   public static final Color colorO = MAIN_COLOR;
   public static final Color colorX = TEXT_COLOR;
   public static final Color color = new Color(100, 220, 0);
+  @Getter
   private static final JButton[][] board = new JButton[3][3];
-  Resources resources = new Resources();
-  private boolean vsCPU;
+
+  private final boolean vsCPU;
   private JLabel lblTurn;
   private JLabel pointsX;
   private JLabel pointsO;
@@ -56,10 +57,6 @@ public class TicTacToe extends JDialog implements ActionListener {
     createComponents();
   }
 
-  public static JButton[][] getBoard() {
-    return board;
-  }
-
   public void start(JFrame parent) {
     setSize(450, 400);
     setResizable(false);
@@ -79,16 +76,16 @@ public class TicTacToe extends JDialog implements ActionListener {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(new Resources().getImage("triqui.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("triqui.png")).getImage());
 
-    btnExit = resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
     btnExit.setBounds(310, 300, 86, 30);
 
-    btnReset = resources.getButton("Reset", TEXT_COLOR, this, this);
+    btnReset = Resources.getButton("Reset", TEXT_COLOR, this, this);
     btnReset.setEnabled(false);
     btnReset.setBounds(180, 300, 86, 30);
 
-    btnPlay = resources.getButton("Play", TEXT_COLOR, this, this);
+    btnPlay = Resources.getButton("Play", TEXT_COLOR, this, this);
     btnPlay.setBounds(50, 300, 86, 30);
 
     int x = 50;
@@ -96,7 +93,7 @@ public class TicTacToe extends JDialog implements ActionListener {
 
     for (int f = 0; f < 3; f++) {
       for (int c = 0; c < 3; c++) {
-        board[f][c] = resources.getButton("", null, this, this);
+        board[f][c] = Resources.getButton("", null, this, this);
         board[f][c].setBounds(x, y, 70, 70);
         board[f][c].setFont(new Font("Times New Roman", Font.PLAIN, 45));
         board[f][c].setOpaque(true);
@@ -106,35 +103,35 @@ public class TicTacToe extends JDialog implements ActionListener {
       y = y + 70;
     }
 
-    JLabel lblName1 = resources
-        .getLabel("<html><em><strong>Player X</strong></em></html>", colorX, this,
+    JLabel lblName1 = Resources
+        .getLabel("<html><em><strong>Player X → </strong></em></html>", colorX, this,
             MEDIUM);
-    lblName1.setBounds(50, 10, 100, 30);
+    lblName1.setBounds(50, 10, 120, 40);
 
-    pointsX = resources.getLabel("", color, this, BIG);
-    pointsX.setBounds(130, 10, 100, 30);
+    pointsX = Resources.getLabel("<html><em><strong>0</strong></em></html>", colorX, this, MEDIUM);
+    pointsX.setBounds(110, 10, 120, 40);
 
     JLabel lblName2;
     if (!vsCPU) {
-      lblName2 = resources
-          .getLabel("<html><em><strong>Player O</strong></em></html>", colorO, this,
+      lblName2 = Resources
+          .getLabel("<html><em><strong>Player O → </strong></em></html>", colorO, this,
               MEDIUM);
-      lblName2.setBounds(260, 10, 100, 30);
+      lblName2.setBounds(255, 10, 120, 40);
     } else {
-      lblName2 = resources
-          .getLabel("<html><em><strong>CPU O</strong></em></html>", colorO, this,
+      lblName2 = Resources
+          .getLabel("<html><em><strong>CPU O → </strong></em></html>", colorO, this,
               MEDIUM);
-      lblName2.setBounds(273, 10, 100, 30);
+      lblName2.setBounds(273, 10, 120, 40);
     }
 
-    pointsO = resources.getLabel("", color, this, BIG);
-    pointsO.setBounds(340, 10, 100, 30);
+    pointsO = Resources.getLabel("<html><em><strong>0</strong></em></html>", colorO, this, MEDIUM);
+    pointsO.setBounds(315, 10, 120, 40);
 
-    lblTurn = resources.getLabel("", null, this, MEDIUM);
-    lblTurn.setBounds(270, 200, 200, 100);
+    lblTurn = Resources.getLabel("", null, this, MEDIUM);
+    lblTurn.setBounds(245, 200, 200, 100);
 
-    image = resources.getLabel("", null, this, null);
-    image.setBounds(300, 90, 96, 96);
+    image = Resources.getLabel("", null, this, null);
+    image.setBounds(270, 80, 150, 150);
 
     txtName1.setText("X");
 
@@ -164,73 +161,40 @@ public class TicTacToe extends JDialog implements ActionListener {
     turn = 0;
   }
 
+  private void count(String winner) {
+
+    if (winner.equals("X")) {
+      pointsNumberX++;
+      pointsX.setText("<html><em><strong>"+pointsNumberX+"</strong></em></html>");
+    } else {
+      pointsNumberO++;
+      pointsO.setText("<html><em><strong>"+pointsNumberO+"</strong></em></html>");
+    }
+  }
+
   private void countPoints(@NotNull String winner) {
 
     if (winner.equals("X")) {
 
-      switch (pointsNumberX) {
-        case 0:
-          pointsX.setText("<html><em><strong>|</strong></em></html>");
-          pointsNumberX++;
-          break;
-        case 1:
-          pointsX.setText("<html><em><strong>||</strong></em></html>");
-          pointsNumberX++;
-          break;
-        case 2:
-          pointsX.setText("<html><em><strong>|||</strong></em></html>");
-          pointsNumberX++;
-          break;
-        case 3:
-          pointsX.setText("<html><em><strong>||||</strong></em></html>");
-          pointsNumberX++;
-          break;
-        case 4:
-          pointsX.setText("<html><em><strong>|||||</strong></em></html>");
-          pointsNumberX++;
-          break;
-        default:
-          break;
-      }
+      count("X");
 
-      if (pointsNumberX == 5) {
-        lblTurn.setText(
-            "<html><em><strong>Champion " + txtName1.getText() + "!</strong></em></html>");
-        image.setIcon(new ImageIcon(new Resources().getImage("triquito.png")));
-      }
+      printImage(pointsNumberX, txtName1.getText());
 
     } else {
 
-      switch (pointsNumberO) {
-        case 0:
-          pointsO.setText("<html><em><strong>|</strong></em></html>");
-          pointsNumberO++;
-          break;
-        case 1:
-          pointsO.setText("<html><em><strong>||</strong></em></html>");
-          pointsNumberO++;
-          break;
-        case 2:
-          pointsO.setText("<html><em><strong>|||</strong></em></html>");
-          pointsNumberO++;
-          break;
-        case 3:
-          pointsO.setText("<html><em><strong>||||</strong></em></html>");
-          pointsNumberO++;
-          break;
-        case 4:
-          pointsO.setText("<html><em><strong>|||||</strong></em></html>");
-          pointsNumberO++;
-          break;
-        default:
-          break;
-      }
+      count("O");
 
-      if (pointsNumberO == 5) {
-        lblTurn.setText(
-            "<html><em><strong>Champion " + txtName2.getText() + "!</strong></em></html>");
-        image.setIcon(new ImageIcon(new Resources().getImage("triquito.png")));
-      }
+      printImage(pointsNumberO, txtName2.getText());
+    }
+  }
+
+  private void printImage(int points, String name) {
+    if (points == 5) {
+      lblTurn.setText("<html><em><strong>Champion " + name + "!</strong></em></html>");
+      image.setIcon(new ImageIcon(Resources.getImage("triquito.png")));
+    } else {
+      lblTurn.setText("<html><em><strong>Winner " + name + "!</strong></em></html>");
+      image.setIcon(new ImageIcon(Resources.getImage("cr7.png")));
     }
   }
 
@@ -345,7 +309,7 @@ public class TicTacToe extends JDialog implements ActionListener {
 
           if (e.getSource() == board[f][c]) {
 
-            if (board[f][c].getText().equals("")) {
+            if (board[f][c].getText().isEmpty()) {
 
               if (limitMoves1 != 1) {
                 board[f][c].setText("X");
@@ -390,27 +354,7 @@ public class TicTacToe extends JDialog implements ActionListener {
               winner();
             } else if (board[f][c].getText().equals("X")) {
 
-              if (!moveMade && limitMoves1 == 1) {
-                board[f][c].setBackground(color);
-                newF = f;
-                newC = c;
-
-                lblTurn.setText("<html><em><strong>Move to</strong></em></html>");
-
-                moveMade = true;
-              } else if (moveMade && limitMoves1 == 1) {
-
-                if (board[f][c].getBackground() == color) {
-                  board[f][c].setBackground(getBackground());
-                  lblTurn.setText("<html><em><strong>Select one</strong></em></html>");
-                  moveMade = false;
-                } else if (board[newF][newC].getBackground() == color) {
-                  board[newF][newC].setBackground(getBackground());
-                  board[f][c].setBackground(color);
-                  newF = f;
-                  newC = c;
-                }
-              }
+              limitMoves(f, c);
 
             } else {
               lblTurn.setText("<html><em><strong>Try again</strong></em></html>");
@@ -423,7 +367,7 @@ public class TicTacToe extends JDialog implements ActionListener {
 
             if (e.getSource() == board[f][c]) {
 
-              if (board[f][c].getText().equals("")) {
+              if (board[f][c].getText().isEmpty()) {
 
                 if (limitMoves2 != 1) {
                   board[f][c].setText("O");
@@ -459,27 +403,7 @@ public class TicTacToe extends JDialog implements ActionListener {
                 winner();
               } else if (board[f][c].getText().equals("O")) {
 
-                if (!moveMade && limitMoves2 == 1) {
-                  board[f][c].setBackground(color);
-                  newF = f;
-                  newC = c;
-
-                  lblTurn.setText("<html><em><strong>Move to</strong></em></html>");
-
-                  moveMade = true;
-                } else if (moveMade && limitMoves2 == 1) {
-
-                  if (board[f][c].getBackground() == color) {
-                    board[f][c].setBackground(getBackground());
-                    lblTurn.setText("<html><em><strong>Select one</strong></em></html>");
-                    moveMade = false;
-                  } else if (board[newF][newC].getBackground() == color) {
-                    board[newF][newC].setBackground(getBackground());
-                    board[f][c].setBackground(color);
-                    newF = f;
-                    newC = c;
-                  }
-                }
+                limitMoves(f, c);
 
               } else {
                 lblTurn.setText("<html><em><strong>Try again</strong></em></html>");
@@ -503,7 +427,30 @@ public class TicTacToe extends JDialog implements ActionListener {
     }
   }
 
-  @NotNull
+  private void limitMoves(int f, int c) {
+    if (!moveMade && limitMoves1 == 1) {
+      board[f][c].setBackground(color);
+      newF = f;
+      newC = c;
+
+      lblTurn.setText("<html><em><strong>Move to</strong></em></html>");
+
+      moveMade = true;
+    } else if (moveMade && limitMoves1 == 1) {
+
+      if (board[f][c].getBackground() == color) {
+        board[f][c].setBackground(getBackground());
+        lblTurn.setText("<html><em><strong>Select one</strong></em></html>");
+        moveMade = false;
+      } else if (board[newF][newC].getBackground() == color) {
+        board[newF][newC].setBackground(getBackground());
+        board[f][c].setBackground(color);
+        newF = f;
+        newC = c;
+      }
+    }
+  }
+
   private int[] getBestMove() {
 
     int[] position = new int[2];
@@ -526,7 +473,6 @@ public class TicTacToe extends JDialog implements ActionListener {
     makeMoveCPU();
   }
 
-  @NotNull
   private int[][] getPoints() {
 
     int[][] points = new int[3][2];
@@ -574,13 +520,13 @@ public class TicTacToe extends JDialog implements ActionListener {
 
     } else {
 
-      if (board[1][1].getText().equals("")) {
+      if (board[1][1].getText().isEmpty()) {
         board[1][1].setText("O");
         board[1][1].setForeground(colorO);
-      } else if (board[0][0].getText().equals("")) {
+      } else if (board[0][0].getText().isEmpty()) {
         board[0][0].setText("O");
         board[0][0].setForeground(colorO);
-      } else if (board[2][2].getText().equals("")) {
+      } else if (board[2][2].getText().isEmpty()) {
         board[2][2].setText("O");
         board[2][2].setForeground(colorO);
       }

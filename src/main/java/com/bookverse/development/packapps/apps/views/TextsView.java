@@ -26,7 +26,7 @@ public class TextsView extends JDialog implements MouseListener {
 
   private JLabel encrypt, decrypt, upperCase, lowerCase, exit;
   private JTextArea text;
-  private Resources resources = new Resources();
+  
 
   public TextsView(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -49,23 +49,23 @@ public class TextsView extends JDialog implements MouseListener {
     JPanel panel = new JPanel(new FlowLayout());
     panel.setBorder(Resources.getBorder("Select action"));
 
-    encrypt = resources.getLabel("  Encrypt  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    encrypt = Resources.getLabel("  Encrypt  ", TEXT_COLOR, panel, Styles.MEDIUM);
     encrypt.setBorder(Styles.BORDER_BLUE);
     encrypt.addMouseListener(this);
 
-    upperCase = resources.getLabel("  UpperCase  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    upperCase = Resources.getLabel("  UpperCase  ", TEXT_COLOR, panel, Styles.MEDIUM);
     upperCase.setBorder(Styles.BORDER_BLUE);
     upperCase.addMouseListener(this);
 
-    exit = resources.getLabel("  Return  ", MAIN_COLOR, panel, Styles.MEDIUM);
+    exit = Resources.getLabel("  Return  ", MAIN_COLOR, panel, Styles.MEDIUM);
     exit.setBorder(Styles.BORDER_RED);
     exit.addMouseListener(this);
 
-    lowerCase = resources.getLabel("  LowerCase  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    lowerCase = Resources.getLabel("  LowerCase  ", TEXT_COLOR, panel, Styles.MEDIUM);
     lowerCase.setBorder(Styles.BORDER_BLUE);
     lowerCase.addMouseListener(this);
 
-    decrypt = resources.getLabel("  Decrypt  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    decrypt = Resources.getLabel("  Decrypt  ", TEXT_COLOR, panel, Styles.MEDIUM);
     decrypt.setBorder(Styles.BORDER_BLUE);
     decrypt.addMouseListener(this);
 
@@ -76,7 +76,7 @@ public class TextsView extends JDialog implements MouseListener {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-    JLabel title = resources
+    JLabel title = Resources
         .getLabel("<html><strong>Write Text...</strong></html>", MAIN_COLOR,
             this, Styles.MEDIUM);
     title.setBounds(30, 15, 370, 50);

@@ -1,12 +1,25 @@
 plugins {
     id "java"
     id "idea"
-    id "net.serenity-bdd.serenity-gradle-plugin" version "3.9.8"
-    id "io.freefair.lombok" version "8.1.0"
+    id "net.serenity-bdd.serenity-gradle-plugin" version "4.0.30"
+    id "io.freefair.lombok" version "8.6"
 }
 
-sourceCompatibility = 17
-targetCompatibility = 17
+java {
+    sourceCompatibility = 21
+    targetCompatibility = 21
+}
+
+idea {
+    project {
+        jdkName = "21"
+        languageLevel = "21"
+    }
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
 
 repositories {
     mavenCentral()
@@ -20,23 +33,14 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
 }
 
-idea {
-    project {
-        jdkName = "17"
-        languageLevel = "17"
-    }
-    module {
-        downloadJavadoc = true
-        downloadSources = true
-    }
-}
-
 test {
     systemProperties System.getProperties()
     systemProperty "file.encoding", "UTF-8"
     systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
     systemProperty "cucumber.options", System.getProperty("cucumber.options")
     testLogging.showStandardStreams = true
+
+    finalizedBy(aggregate)
 }
 
 jar {
@@ -56,7 +60,7 @@ sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/i
 sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties"]
 
 ext {
-    serenityVersion = "3.9.8"
+    serenityVersion = "4.0.30"
 }
 
 dependencies {
@@ -67,22 +71,21 @@ dependencies {
     implementation "net.serenity-bdd:serenity-reports:${serenityVersion}"
     implementation "net.serenity-bdd:serenity-ensure:${serenityVersion}"
 
-    implementation "org.slf4j:slf4j-simple:2.0.7"
-    implementation "commons-codec:commons-codec:1.10"
-    implementation "org.apache.commons:commons-dbcp2:2.5.0"
-    implementation "org.apache.commons:commons-pool2:2.7.0"
+    implementation "org.slf4j:slf4j-simple:2.0.9"
+    implementation "commons-codec:commons-codec:1.16.0"
+    implementation "org.apache.commons:commons-dbcp2:2.11.0"
+    implementation "org.apache.commons:commons-pool2:2.12.0"
     implementation "com.itextpdf:itextpdf:5.5.13.3"
     implementation "com.sun.mail:jakarta.mail:2.0.1"
     implementation "com.jtattoo:JTattoo:1.6.13"
-    implementation "com.mysql:mysql-connector-j:8.1.0"
-    implementation "org.apache.poi:poi:5.2.3"
-    implementation "net.sourceforge.tess4j:tess4j:5.8.0"
-    implementation "io.github.bonigarcia:webdrivermanager:5.5.3"
-    implementation "net.datafaker:datafaker:2.0.1"
-    implementation "com.google.zxing:core:3.5.0"
-    implementation "com.google.zxing:javase:3.5.0"
+    implementation "com.mysql:mysql-connector-j:8.4.0"
+    implementation "org.apache.poi:poi:5.2.5"
+    implementation "net.sourceforge.tess4j:tess4j:5.11.0"
+    implementation "net.datafaker:datafaker:2.0.2"
+    implementation "com.google.zxing:core:3.5.2"
+    implementation "com.google.zxing:javase:3.5.2"
+
+    implementation(files("libs/Tess4J-5.11.0.jar"))
 }
 
 gradle.startParameter.continueOnFailure = true
-
-//test.finalizedBy(aggregate, reports)

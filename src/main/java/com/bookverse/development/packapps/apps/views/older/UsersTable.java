@@ -44,7 +44,7 @@ public class UsersTable extends JDialog implements MouseListener {
   private JLabel title;
   private JLabel[] actions = new JLabel[3];
   private String[] columns = {"ID", "USERNAME", "PASSWORD", "STATUS"};
-  private Resources resources = new Resources();
+  
 
   public UsersTable(JDialog parent, boolean modal) {
     super(parent, modal);
@@ -70,7 +70,7 @@ public class UsersTable extends JDialog implements MouseListener {
 
     IntStream.range(0, actions.length).forEach(i -> {
       actions[i] = new JLabel();
-      actions[i].setIcon(new ImageIcon(resources.getImage(images[i])));
+      actions[i].setIcon(new ImageIcon(Resources.getImage(images[i])));
       actions[i].addMouseListener(this);
       row.add(actions[i]);
     });
@@ -84,7 +84,7 @@ public class UsersTable extends JDialog implements MouseListener {
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(resources.getImage("usuario.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("usuario.png")).getImage());
     add(getPanel(), BorderLayout.SOUTH);
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
