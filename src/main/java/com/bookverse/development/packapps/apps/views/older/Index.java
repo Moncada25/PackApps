@@ -16,6 +16,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PUZZLE;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.SALES;
 
+import com.bookverse.development.packapps.apps.utils.ui.Themes;
 import com.bookverse.development.packapps.apps.views.DicesGameView;
 import com.bookverse.development.packapps.apps.views.EmailView;
 import com.bookverse.development.packapps.apps.views.FeedbackView;
@@ -60,8 +61,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class Index extends JFrame implements ActionListener {
 
-  protected static int background = 2;
-  private static JLabel welcome;
   protected HangmanTable hangmanTable = new HangmanTable(this, true);
   protected GuessNumberTable guessNumberTable = new GuessNumberTable(this, true);
   protected PuzzleTable puzzleTable = new PuzzleTable(this, true);
@@ -72,17 +71,9 @@ public class Index extends JFrame implements ActionListener {
   protected LoansTable loansTable = new LoansTable(this, true);
   protected PurchasesTable purchasesTable = new PurchasesTable(this, true);
   protected SalesTable salesTable = new SalesTable(this, true);
-  protected JMenuItem[] wallpapers = new JMenuItem[14];
   protected JMenu changeBackground;
   protected JMenuItem moreSystems;
   protected JMenuItem moreBookverse;
-  protected JMenuItem darkMode;
-  protected JMenuItem defaultMode;
-  protected JMenuItem textureMode;
-  protected JMenuItem mintMode;
-  protected JMenuItem classicMode;
-  protected JMenuItem macMode;
-  protected JMenuItem grayMode;
   protected JMenuItem texts;
   protected JMenuItem guessNumber;
   protected JMenuItem guessNumberHard;
@@ -138,7 +129,6 @@ public class Index extends JFrame implements ActionListener {
   protected JMenuItem searchBook;
   protected JMenuItem registerUser;
   protected JMenuItem sendWhatsApp;
-  private boolean isWork = true;
 
   public Index() {
     createComponents();
@@ -199,20 +189,20 @@ public class Index extends JFrame implements ActionListener {
 
     Index window = new Index();
 
-    welcome = new JLabel();
-    window.setSize(ArrayData.getWidthBackground(background - 1),
-        ArrayData.getLongBackground(background - 1));
-    window.add(welcome, BorderLayout.CENTER);
-    window.changeBackgroundAP(ArrayData.getPathBackground(background - 1),
-        ArrayData.getWidthBackground(background - 1),
-        ArrayData.getLongBackground(background - 1));
+    Themes.welcome = new JLabel();
+    window.setSize(ArrayData.getWidthBackground(Themes.background - 1),
+        ArrayData.getLongBackground(Themes.background - 1));
+    window.add(Themes.welcome, BorderLayout.CENTER);
+    Themes.changeBackgroundAP(ArrayData.getPathBackground(Themes.background - 1),
+        ArrayData.getWidthBackground(Themes.background - 1),
+        ArrayData.getLongBackground(Themes.background - 1), window);
 
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
     window.setTitle(Config.get(TITLE.getProperty()));
-    window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-    window.classicMode.setForeground(MAIN_COLOR);
+    Themes.wallpapers[Themes.background - 1].setForeground(MAIN_COLOR);
+    Themes.classicMode.setForeground(MAIN_COLOR);
     Effects.fadeIn(window);
     window.setVisible(true);
   }
@@ -337,25 +327,34 @@ public class Index extends JFrame implements ActionListener {
 
     changeBackground = Resources.getMenu("Background", "background");
 
-    IntStream.range(0, wallpapers.length).forEach(i -> {
-      wallpapers[i] = new JMenuItem("Image " + (i + 1));
-      wallpapers[i].setForeground(TEXT_COLOR);
-      wallpapers[i].setIcon(new ImageIcon(Resources.getImage("backs.png")));
-      wallpapers[i].addActionListener(this);
-      changeBackground.add(wallpapers[i]);
+    IntStream.range(0, Themes.wallpapers.length).forEach(i -> {
+      Themes.wallpapers[i] = new JMenuItem("Image " + (i + 1));
+      Themes.wallpapers[i].setForeground(TEXT_COLOR);
+      Themes.wallpapers[i].setIcon(new ImageIcon(Resources.getImage("backs.png")));
+      Themes.wallpapers[i].addActionListener(this);
+      changeBackground.add(Themes.wallpapers[i]);
       changeBackground.addSeparator();
     });
 
     JMenu mode = Resources.getMenu("Theme", "mode");
-    defaultMode = Resources.getMenuItem("Default", "default_theme", this);
-    darkMode = Resources.getMenuItem("Dark", "dark", this);
-    textureMode = Resources.getMenuItem("Texture", "texture", this);
-    macMode = Resources.getMenuItem("Mac OS", "mac", this);
-    grayMode = Resources.getMenuItem("Metallic", "gray", this);
-    mintMode = Resources.getMenuItem("Mint", "mint", this);
-    classicMode = Resources.getMenuItem("Classic", "classic", this);
+    Themes.defaultMode = Resources.getMenuItem("Default", "default_theme", this);
+    Themes.darkMode = Resources.getMenuItem("Dark", "dark", this);
+    Themes.textureMode = Resources.getMenuItem("Texture", "texture", this);
+    Themes.macMode = Resources.getMenuItem("Mac OS", "mac", this);
+    Themes.grayMode = Resources.getMenuItem("Metallic", "gray", this);
+    Themes.mintMode = Resources.getMenuItem("Mint", "mint", this);
+    Themes.classicMode = Resources.getMenuItem("Classic", "classic", this);
 
-    createMenu(mode, defaultMode, darkMode, textureMode, macMode, grayMode, mintMode, classicMode);
+    createMenu(
+        mode,
+        Themes.defaultMode,
+        Themes.darkMode,
+        Themes.textureMode,
+        Themes.macMode,
+        Themes.grayMode,
+        Themes.mintMode,
+        Themes.classicMode
+    );
 
     JMenu changeUI = Resources.getMenu("Change UI", "UI");
 
@@ -380,27 +379,6 @@ public class Index extends JFrame implements ActionListener {
     for (JMenuItem item : items) {
       menu.add(item);
       menu.addSeparator();
-    }
-  }
-
-  private void changeBackgroundAP(String name, int width, int length) {
-
-    try {
-      Effects.fadeIn(this);
-      setVisible(false);
-      ((JPanel) getContentPane()).setOpaque(false);
-      welcome.setIcon(new ImageIcon(Resources.getImage(name)));
-      welcome.setSize(width, length);
-      setSize(width, length + 80);
-      setLocationRelativeTo(null);
-      isWork = false;
-
-      for (JMenuItem image : wallpapers) {
-        image.setForeground(TEXT_COLOR);
-      }
-
-    } catch (Exception exception) {
-      Alerts.error(exception, "Change Background");
     }
   }
 
@@ -508,344 +486,11 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.setVisible(true);
   }
 
-  private void paintUI() {
-    darkMode.setForeground(TEXT_COLOR);
-    textureMode.setForeground(TEXT_COLOR);
-    mintMode.setForeground(TEXT_COLOR);
-    classicMode.setForeground(TEXT_COLOR);
-    macMode.setForeground(TEXT_COLOR);
-    grayMode.setForeground(TEXT_COLOR);
-  }
-
-  private void paintBackground(ActionEvent e) {
-
-    IntStream.range(0, wallpapers.length).filter(i -> e.getSource() == wallpapers[i]).forEach(i -> {
-      if (wallpapers[i].getForeground() != MAIN_COLOR) {
-        changeBackgroundAP(ArrayData.getPathBackground(i), ArrayData.getWidthBackground(i),
-            ArrayData.getLongBackground(i));
-        wallpapers[i].setForeground(MAIN_COLOR);
-        background = i + 1;
-        setVisible(true);
-      } else {
-        Alerts.elementApplied(false);
-      }
-    });
-  }
-
-  private void setUI(@NotNull String selectedUI) {
-
-    paintUI();
-
-    switch (selectedUI) {
-
-      case "Default":
-
-        try {
-          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-          UIManager.put("ComboBox.foreground", new Color(0, 0, 0));
-          UIManager.put("MenuItem.foreground", TEXT_COLOR);
-          UIManager.put("Menu.foreground", MAIN_COLOR);
-          UIManager.put("Button.foreground", new Color(0, 0, 0));
-
-          UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
-          UIManager.put("TableHeader.foreground", MAIN_COLOR);
-          UIManager.put("Table.foreground", TEXT_COLOR);
-          UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
-
-          dispose();
-          Index window = new Index();
-
-          welcome = new JLabel();
-          window.setSize(ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-          window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(ArrayData.getPathBackground(background - 1),
-              ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-
-          window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-          window.setResizable(false);
-          window.setLocationRelativeTo(null);
-          window.setTitle(getTitle());
-          window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-          window.grayMode.setForeground(MAIN_COLOR);
-          Effects.fadeIn(window);
-          window.setVisible(true);
-          Alerts.changeUI("Default");
-
-        } catch (UnsupportedLookAndFeelException eq) {
-          Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-          throw new RuntimeException(e);
-        }
-
-        break;
-
-      case "Gray":
-
-        try {
-          UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
-
-          UIManager.put("ComboBox.foreground", new Color(0, 0, 0));
-          UIManager.put("MenuItem.foreground", TEXT_COLOR);
-          UIManager.put("Menu.foreground", MAIN_COLOR);
-          UIManager.put("Button.foreground", new Color(0, 0, 0));
-
-          UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
-          UIManager.put("TableHeader.foreground", MAIN_COLOR);
-          UIManager.put("Table.foreground", TEXT_COLOR);
-          UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
-
-          dispose();
-          Index window = new Index();
-
-          welcome = new JLabel();
-          window.setSize(ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-          window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(ArrayData.getPathBackground(background - 1),
-              ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-
-          window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-          window.setResizable(false);
-          window.setLocationRelativeTo(null);
-          window.setTitle(getTitle());
-          window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-          window.grayMode.setForeground(MAIN_COLOR);
-          Effects.fadeIn(window);
-          window.setVisible(true);
-          Alerts.changeUI("Gray");
-
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-                 | IllegalAccessException eq) {
-          Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
-        }
-
-        break;
-
-      case "Texture":
-
-        try {
-          UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
-
-          UIManager.put("MenuItem.foreground", Color.WHITE);
-          UIManager.put("Menu.foreground", MAIN_COLOR);
-
-          UIManager.put("ComboBox.foreground", TEXT_COLOR);
-          UIManager.put("Table.foreground", TEXT_COLOR);
-          UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
-          UIManager.put("Button.foreground", Color.BLACK);
-
-          dispose();
-          Index window = new Index();
-
-          welcome = new JLabel();
-          window.setSize(ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-          window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(ArrayData.getPathBackground(background - 1),
-              ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-
-          window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-          window.setResizable(false);
-          window.setLocationRelativeTo(null);
-          window.setTitle(getTitle());
-          window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-          window.textureMode.setForeground(MAIN_COLOR);
-          Effects.fadeIn(window);
-          window.setVisible(true);
-          Alerts.changeUI("Texture");
-
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-                 | IllegalAccessException eq) {
-          Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
-        }
-
-        break;
-
-      case "Dark":
-
-        try {
-          UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
-
-          UIManager.put("Menu.foreground", MAIN_COLOR);
-          UIManager.put("ComboBox.foreground", Color.WHITE);
-          UIManager.put("Table.foreground", Color.WHITE);
-          UIManager.put("OptionPane.messageForeground", Color.WHITE);
-          UIManager.put("Button.foreground", Color.WHITE);
-          UIManager.put("MenuItem.foreground", Color.WHITE);
-
-          dispose();
-          Index window = new Index();
-
-          welcome = new JLabel();
-          window.setSize(ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-          window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(ArrayData.getPathBackground(background - 1),
-              ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-
-          window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-          window.setResizable(false);
-          window.setLocationRelativeTo(null);
-          window.setTitle(getTitle());
-          window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-          window.darkMode.setForeground(MAIN_COLOR);
-          Effects.fadeIn(window);
-          window.setVisible(true);
-
-          Alerts.changeUI("Dark");
-
-
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-                 | IllegalAccessException eq) {
-          Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
-        }
-
-        break;
-
-      case "Mac":
-
-        try {
-          UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-
-          UIManager.put("MenuItem.foreground", TEXT_COLOR);
-          UIManager.put("Menu.foreground", MAIN_COLOR);
-
-          UIManager.put("ComboBox.foreground", TEXT_COLOR);
-          UIManager.put("Table.foreground", TEXT_COLOR);
-          UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
-          UIManager.put("Button.foreground", Color.BLACK);
-
-          dispose();
-          Index window = new Index();
-
-          welcome = new JLabel();
-          window.setSize(ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-          window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(ArrayData.getPathBackground(background - 1),
-              ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-
-          window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-          window.setResizable(false);
-          window.setLocationRelativeTo(null);
-          window.setTitle(getTitle());
-          window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-          window.macMode.setForeground(MAIN_COLOR);
-          Effects.fadeIn(window);
-          window.setVisible(true);
-          Alerts.changeUI("Mac OS");
-
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-                 | IllegalAccessException eq) {
-          Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
-        }
-
-        break;
-
-      case "Mint":
-
-        try {
-          UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
-
-          UIManager.put("ComboBox.foreground", Color.BLACK);
-
-          UIManager.put("MenuItem.foreground", TEXT_COLOR);
-          UIManager.put("Menu.foreground", MAIN_COLOR);
-
-          UIManager.put("Button.foreground", Color.BLACK);
-
-          UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
-          UIManager.put("TableHeader.foreground", MAIN_COLOR);
-          UIManager.put("Table.foreground", TEXT_COLOR);
-          UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
-
-          dispose();
-          Index window = new Index();
-
-          welcome = new JLabel();
-          window.setSize(ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-          window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(ArrayData.getPathBackground(background - 1),
-              ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-
-          window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-          window.setResizable(false);
-          window.setLocationRelativeTo(null);
-          window.setTitle(getTitle());
-          window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-          window.mintMode.setForeground(MAIN_COLOR);
-          Effects.fadeIn(window);
-          window.setVisible(true);
-          Alerts.changeUI("Mint");
-
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-                 | IllegalAccessException eq) {
-          Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
-        }
-
-        break;
-
-      case "Classic":
-
-        try {
-          UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
-
-          UIManager.put("ComboBox.foreground", Color.BLACK);
-
-          UIManager.put("Button.foreground", Color.BLACK);
-
-          UIManager.put("MenuItem.foreground", TEXT_COLOR);
-          UIManager.put("Menu.foreground", MAIN_COLOR);
-
-          UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
-          UIManager.put("TableHeader.foreground", MAIN_COLOR);
-          UIManager.put("Table.foreground", TEXT_COLOR);
-          UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
-
-          dispose();
-          Index window = new Index();
-
-          welcome = new JLabel();
-          window.setSize(ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-          window.add(welcome, BorderLayout.CENTER);
-          window.changeBackgroundAP(ArrayData.getPathBackground(background - 1),
-              ArrayData.getWidthBackground(background - 1),
-              ArrayData.getLongBackground(background - 1));
-
-          window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-          window.setResizable(false);
-          window.setLocationRelativeTo(null);
-          window.setTitle(getTitle());
-          window.wallpapers[background - 1].setForeground(MAIN_COLOR);
-          window.classicMode.setForeground(MAIN_COLOR);
-          Effects.fadeIn(window);
-          window.setVisible(true);
-          Alerts.changeUI("Classic");
-
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
-                 | IllegalAccessException eq) {
-          Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, eq);
-        }
-
-        break;
-    }
-  }
-
   @Override
   public void actionPerformed(ActionEvent e) {
 
-    isWork = true;
-    paintBackground(e);
+    Themes.isWork = true;
+    Themes.paintBackground(e, this);
 
     if (e.getSource() == yesExit) {
       Effects.fadeOut(this);
@@ -863,58 +508,58 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == qr) {
       new QrView(this, true).start(this);
       setVisible(true);
-    } else if (e.getSource() == defaultMode) {
+    } else if (e.getSource() == Themes.defaultMode) {
 
-      if (defaultMode.getForeground() != MAIN_COLOR) {
-        setUI("Default");
+      if (Themes.defaultMode.getForeground() != MAIN_COLOR) {
+        Themes.setUI(Themes.DEFAULT, this);
       } else {
         Alerts.elementApplied(true);
       }
 
-    } else if (e.getSource() == grayMode) {
+    } else if (e.getSource() == Themes.grayMode) {
 
-      if (grayMode.getForeground() != MAIN_COLOR) {
-        setUI("Gray");
+      if (Themes.grayMode.getForeground() != MAIN_COLOR) {
+        Themes.setUI(Themes.GRAY, this);
       } else {
         Alerts.elementApplied(true);
       }
 
-    } else if (e.getSource() == darkMode) {
+    } else if (e.getSource() == Themes.darkMode) {
 
-      if (darkMode.getForeground() != MAIN_COLOR) {
-        setUI("Dark");
+      if (Themes.darkMode.getForeground() != MAIN_COLOR) {
+        Themes.setUI(Themes.DARK, this);
       } else {
         Alerts.elementApplied(true);
       }
 
-    } else if (e.getSource() == textureMode) {
+    } else if (e.getSource() == Themes.textureMode) {
 
-      if (textureMode.getForeground() != MAIN_COLOR) {
-        setUI("Texture");
+      if (Themes.textureMode.getForeground() != MAIN_COLOR) {
+        Themes.setUI(Themes.TEXTURE, this);
       } else {
         Alerts.elementApplied(true);
       }
 
-    } else if (e.getSource() == macMode) {
+    } else if (e.getSource() == Themes.macMode) {
 
-      if (macMode.getForeground() != MAIN_COLOR) {
-        setUI("Mac");
+      if (Themes.macMode.getForeground() != MAIN_COLOR) {
+        Themes.setUI(Themes.MAC, this);
       } else {
         Alerts.elementApplied(true);
       }
 
-    } else if (e.getSource() == mintMode) {
+    } else if (e.getSource() == Themes.mintMode) {
 
-      if (mintMode.getForeground() != MAIN_COLOR) {
-        setUI("Mint");
+      if (Themes.mintMode.getForeground() != MAIN_COLOR) {
+        Themes.setUI(Themes.MINT, this);
       } else {
         Alerts.elementApplied(true);
       }
 
-    } else if (e.getSource() == classicMode) {
+    } else if (e.getSource() == Themes.classicMode) {
 
-      if (classicMode.getForeground() != MAIN_COLOR) {
-        setUI("Classic");
+      if (Themes.classicMode.getForeground() != MAIN_COLOR) {
+        Themes.setUI(Themes.CLASSIC, this);
       } else {
         Alerts.elementApplied(true);
       }
@@ -970,7 +615,7 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == read) {
       new ProfessionalCardView(this, true).start(this);
       setVisible(true);
-    } else if (GeneralUtilities.verifyConnection("Connect to see more!", isWork)) {
+    } else if (GeneralUtilities.verifyConnection("Connect to see more!", Themes.isWork)) {
 
       if (e.getSource() == roulette) {
 

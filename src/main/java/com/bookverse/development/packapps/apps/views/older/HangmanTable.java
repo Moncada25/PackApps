@@ -104,8 +104,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
     add(scroll, BorderLayout.CENTER);
 
     int[] sizes = {20, 170, 40, 20, 75, 100};
-    IntStream.range(0, viewTable.getColumnCount())
-        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
+    IntStream.range(0, viewTable.getColumnCount()).forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
     JMenuBar menuBar = new JMenuBar();
 

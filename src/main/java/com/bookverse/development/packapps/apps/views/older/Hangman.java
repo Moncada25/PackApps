@@ -72,7 +72,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     JLabel title = Resources.getLabel("<html>"
         + "<strong><em>Category</em></strong>" +
         "</html>", MAIN_COLOR, this, BIG);
-    title.setBounds(30, 10, 120, 35);
+    title.setBounds(30, 10, 140, 35);
 
     attempts = Resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     attempts.setBounds(30, 200, 250, 30);

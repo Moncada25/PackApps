@@ -12,28 +12,20 @@ Set of small applications for different purposes. Games, tools and even a store;
   - Sending emails to any recipient.
 
 ## Pre requirements 📋
-- Java version 1.8, update 151 or higher and JDK (environment variables configured).
-- Eclipse IDE or IntelliJ IDEA (version 2018.3 or higher).
-- Gradle version 4.9 or higher (environment variables configured).
-- ChromeDriver version 80.0.3987.106 for local runs of automations.
+- Java version 21 (environment variables configured).
+- IntelliJ IDEA.
+- Gradle version 8.7 (environment variables configured).
 - Xampp and database.
 
 ## Installation 🔧
 - To clone this repository locally, the following command must be run: 
 ```git clone https://github.com/Moncada25/PackApps.git``` 
-- Import the project from Eclipse or IntelliJ IDE under the structure of an existing Gradle project. 
-- Configure JRE System Library with JavaSE-1.8.
-- Configure the encoding to UTF-8 to the project once it is imported.
 
 ## Compile the project and generate Wrapper 🔨
 - To build the project you must run the command:
 ```gradle clean build -x test```
 - To generate the project wrapper files, you must run the command:
 ```gradle wrapper --gradle-distribution-url https://services.gradle.org/distributions/gradle-5.2.1-all.zip```
-
-## Web browser 🌐
-Automation currently runs in the following browsers:
-- Google Chrome v80 or higher.
 
 ## Project structure 🚧
 
