@@ -11,7 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
 public final class EmailService {
@@ -57,7 +57,7 @@ public final class EmailService {
 
   public static void clickOnSend(JTextArea area, JTextField user, JPasswordField password, boolean toDeveloper) {
 
-    if (GeneralUtilities.verifyConnection("Make sure you are connected to a network", true)) {
+    if (GeneralUtils.verifyConnection("Make sure you are connected to a network", true)) {
 
       if (area.getText().trim().length() < 5 || user.getText().trim().length() < 10) {
         Alerts.message("Verify", "Fields too short");

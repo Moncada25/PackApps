@@ -12,7 +12,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.NOTES;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
@@ -213,7 +213,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (GeneralUtilities.loginDBA()) {
+        if (GeneralUtils.loginDBA()) {
           OlderRepository.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(DICES));
 
@@ -239,7 +239,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        if (GeneralUtilities.loginDBA()) {
+        if (GeneralUtils.loginDBA()) {
           OlderRepository.deleteData(IDs, Format.tableName(DICES));
           dispose();
           new Index().dicesTableAP();

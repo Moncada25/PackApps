@@ -75,7 +75,7 @@ public final class CalculatorService {
 
   public static void clickOnAdd(JTextField field) {
 
-    if (!field.getText().equals("")) {
+    if (!field.getText().isEmpty()) {
       firstNumber = field.getText();
       sign = "+";
       field.setText("");
@@ -84,7 +84,7 @@ public final class CalculatorService {
 
   public static void clickOnLess(JTextField field) {
 
-    if (!field.getText().equals("")) {
+    if (!field.getText().isEmpty()) {
       firstNumber = field.getText();
       sign = "-";
       field.setText("");
@@ -95,7 +95,7 @@ public final class CalculatorService {
 
     try {
 
-      if (!field.getText().equals("")) {
+      if (!field.getText().isEmpty()) {
         firstNumber = field.getText();
         sign = "x^y";
         field.setText("");
@@ -129,7 +129,7 @@ public final class CalculatorService {
 
   public static void clickOnMultiply(JTextField field) {
 
-    if (!field.getText().equals("")) {
+    if (!field.getText().isEmpty()) {
       firstNumber = field.getText();
       sign = "*";
       field.setText("");
@@ -138,7 +138,7 @@ public final class CalculatorService {
 
   public static void clickOnDivide(JTextField field) {
 
-    if (!field.getText().equals("")) {
+    if (!field.getText().isEmpty()) {
       firstNumber = field.getText();
       sign = "/";
       field.setText("");
@@ -175,7 +175,7 @@ public final class CalculatorService {
 
   public static void clickOnDelete(JTextField field) {
 
-    if (!field.getText().equals("") && !field.getText().equals("0")) {
+    if (!field.getText().isEmpty() && !field.getText().equals("0")) {
       field.setText(field.getText().substring(0, field.getText().length() - 1));
     } else {
       field.setText("");
@@ -192,7 +192,7 @@ public final class CalculatorService {
 
       String secondNumber = field.getText();
 
-      if (!secondNumber.equals("")) {
+      if (!secondNumber.isEmpty()) {
         field.setText(operations(firstNumber, secondNumber, sign));
       }
 

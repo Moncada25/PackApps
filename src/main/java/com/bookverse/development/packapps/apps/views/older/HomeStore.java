@@ -7,7 +7,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.SALES;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
@@ -257,7 +257,7 @@ public class HomeStore extends JDialog implements ActionListener {
       logout();
     } else {
 
-      if (GeneralUtilities.verifyConnection("Make sure you are connected to a network", true)) {
+      if (GeneralUtils.verifyConnection("Make sure you are connected to a network", true)) {
 
         if (e.getSource() == buy) {
           new Purchases(this, true).start(this);

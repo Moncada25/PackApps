@@ -35,9 +35,9 @@ public class Resources {
   }
 
   @NotNull
-  public static Border getBorder(String tittle) {
+  public static Border getBorder(String title) {
 
-    TitledBorder border = BorderFactory.createTitledBorder(Styles.BORDER_BLUE, tittle);
+    TitledBorder border = BorderFactory.createTitledBorder(Styles.BORDER_BLUE, title);
 
     border.setTitleColor(Styles.MAIN_COLOR);
     border.setTitleFont(Styles.MEDIUM);

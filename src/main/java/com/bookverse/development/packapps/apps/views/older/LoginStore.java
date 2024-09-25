@@ -7,7 +7,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.SMA
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
 import com.bookverse.development.packapps.apps.utils.other.Crypto;
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
@@ -170,7 +170,7 @@ public class LoginStore extends JDialog implements ActionListener {
 
     if (e.getSource() == btnExit) {
       Effects.fadeOut(this);
-    } else if (GeneralUtilities.verifyConnection("Make sure you are connected to a network", true)) {
+    } else if (GeneralUtils.verifyConnection("Make sure you are connected to a network", true)) {
 
       if (e.getSource() == btnLogin) {
         btnEnterAP();

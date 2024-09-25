@@ -7,7 +7,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEX
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.HANGMAN;
 import static java.awt.Font.PLAIN;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
@@ -72,7 +72,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
     JLabel title = Resources.getLabel("<html>"
         + "<strong><em>Category</em></strong>" +
         "</html>", MAIN_COLOR, this, BIG);
-    title.setBounds(30, 10, 120, 35);
+    title.setBounds(30, 10, 140, 35);
 
     attempts = Resources.getLabel("", TEXT_COLOR, this, MEDIUM);
     attempts.setBounds(30, 200, 250, 30);
@@ -330,7 +330,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
 
   private void insert(String state) {
 
-    if (GeneralUtilities.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (GeneralUtils.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
       String[] data = {HANGMAN, Alerts.inputText("Enter a Nickname", 20),
           String.valueOf(countAttempts), state,
@@ -366,7 +366,7 @@ public class Hangman extends JDialog implements ActionListener, KeyListener, Run
   public void keyTyped(KeyEvent e) {
 
     if (!options.getSelectedItem().toString().equals("Select a option") && !txtWord.getText()
-        .equals("")) {
+        .isEmpty()) {
       onlyLyrics(e.getKeyChar(), e);
       repaint();
     }

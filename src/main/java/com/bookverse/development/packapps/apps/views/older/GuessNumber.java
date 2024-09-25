@@ -6,8 +6,8 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.MED
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.apps.utils.ui.Effects.fadeIn;
 import static com.bookverse.development.packapps.apps.utils.other.Format.getDate;
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtilities.getIntRandom;
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtilities.verifyConnection;
+import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.getIntRandom;
+import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.verifyConnection;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.GUESS_NUMBER;
 
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
@@ -79,7 +79,7 @@ public class GuessNumber extends JDialog implements ActionListener {
 
           try {
 
-            if (!txtNumber.getText().equals("")) {
+            if (!txtNumber.getText().isEmpty()) {
               numberUser = Integer.parseInt(txtNumber.getText());
               guessNumber();
               txtNumber.setText("");

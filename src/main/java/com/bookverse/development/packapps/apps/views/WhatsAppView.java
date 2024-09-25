@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.views;
 
+import com.bookverse.development.packapps.apps.utils.ui.KeyBindingsUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -40,6 +41,7 @@ public class WhatsAppView extends JDialog implements ActionListener {
   public WhatsAppView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
+    KeyBindingsUtil.addCopyPasteKeyBindings(message, null, null);
   }
 
   public void start(JFrame parent) {

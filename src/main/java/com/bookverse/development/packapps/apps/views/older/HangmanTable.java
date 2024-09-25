@@ -8,7 +8,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.DatabaseCo
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.NOTES;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
@@ -104,8 +104,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
     add(scroll, BorderLayout.CENTER);
 
     int[] sizes = {20, 170, 40, 20, 75, 100};
-    IntStream.range(0, viewTable.getColumnCount())
-        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
+    IntStream.range(0, viewTable.getColumnCount()).forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
     JMenuBar menuBar = new JMenuBar();
 
@@ -187,7 +186,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (GeneralUtilities.loginDBA()) {
+        if (GeneralUtils.loginDBA()) {
           OlderRepository.updateData(Alerts.inputText("Enter a Nickname", 20),
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(HANGMAN));
 
@@ -213,7 +212,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        if (GeneralUtilities.loginDBA()) {
+        if (GeneralUtils.loginDBA()) {
           OlderRepository.deleteData(IDs, Format.tableName(HANGMAN));
           dispose();
           new Index().hangmanTableAP();

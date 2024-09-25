@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "idea"
-    id "net.serenity-bdd.serenity-gradle-plugin" version "4.0.30"
+    id "net.serenity-bdd.serenity-gradle-plugin" version "4.1.14"
     id "io.freefair.lombok" version "8.6"
 }
 
@@ -60,7 +60,7 @@ sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/i
 sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties"]
 
 ext {
-    serenityVersion = "4.0.30"
+    serenityVersion = "4.1.20"
 }
 
 dependencies {
@@ -84,6 +84,7 @@ dependencies {
     implementation "net.datafaker:datafaker:2.0.2"
     implementation "com.google.zxing:core:3.5.2"
     implementation "com.google.zxing:javase:3.5.2"
+    implementation("org.apache.logging.log4j:log4j-core:2.23.1")
 
     implementation(files("libs/Tess4J-5.11.0.jar"))
 }

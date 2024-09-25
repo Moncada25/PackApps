@@ -9,7 +9,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.RES
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.apps.utils.ui.Resources.getBorder;
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtilities.loginDBA;
+import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.loginDBA;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.GUESS_NUMBER;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.HANGMAN;

@@ -8,7 +8,7 @@ import static com.bookverse.development.packapps.apps.utils.ui.Resources.getBord
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.apps.utils.other.Crypto;
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Table;
@@ -236,7 +236,7 @@ public class UsersTable extends JDialog implements MouseListener {
           String[] IDs = Arrays.stream(selectedRows).mapToObj(selectedRow ->
               String.valueOf(model.getValueAt(selectedRow, 0))).toArray(String[]::new);
 
-          if (GeneralUtilities.loginDBA()) {
+          if (GeneralUtils.loginDBA()) {
             OlderRepository.deleteData(IDs, USERS);
             dispose();
             new HomeStore().btnUsersTableAP();

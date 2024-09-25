@@ -6,7 +6,7 @@ import javax.swing.JTextField;
 
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.other.Format;
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.FEEDBACK;
@@ -15,7 +15,7 @@ public final class FeedbackService {
 
   public static void sendCommentary(String username, String commentary) {
 
-    if (GeneralUtilities.verifyConnection("Make sure you are connected to a network", true)) {
+    if (GeneralUtils.verifyConnection("Make sure you are connected to a network", true)) {
 
       String[] data = {FEEDBACK, username, commentary, Format.getDate()};
 
@@ -33,7 +33,7 @@ public final class FeedbackService {
 
   public static void clickOnSend(JTextArea area, JTextField user) {
 
-    if (user.getText().equals("")) {
+    if (user.getText().isEmpty()) {
 
       JOptionPane.showMessageDialog(null,
           "<html>" + Format.style() + "<strong>Username empty</strong></html>",

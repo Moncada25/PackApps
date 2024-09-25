@@ -2,6 +2,7 @@ package com.bookverse.development.packapps.apps.utils.other;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -16,91 +17,57 @@ import static com.bookverse.development.packapps.apps.utils.constants.AppConfig.
 public final class Crypto {
 
   public static String encrypt(String text, boolean useDefaultKey) {
-
-    String base64EncryptedString = "";
-
     try {
-
-      MessageDigest md = MessageDigest.getInstance("MD5");
-      byte[] digestOfPassword = md
-          .digest(getSecretKey(useDefaultKey).getBytes(StandardCharsets.UTF_8));
-      byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
-
-      SecretKey key = new SecretKeySpec(keyBytes, "AES");
+      SecretKey key = generateKey(getSecretKey(useDefaultKey));
       Cipher cipher = Cipher.getInstance("AES");
       cipher.init(Cipher.ENCRYPT_MODE, key);
 
       byte[] plainTextBytes = text.getBytes(StandardCharsets.UTF_8);
       byte[] buf = cipher.doFinal(plainTextBytes);
-      byte[] base64Bytes = Base64.encodeBase64(buf);
-      base64EncryptedString = new String(base64Bytes);
+      return Base64.encodeBase64String(buf);
 
-    } catch (Exception ex) {
-      Alerts.message("Error", ex.getMessage());
+    } catch (Exception e) {
+      Alerts.message("Verify!", "The text entered does not have encrypted content or the key is incorrect");
+      return "";
     }
-    return base64EncryptedString;
   }
 
   public static String decrypt(String text, boolean isEmail) {
-
-    String base64EncryptedString = "";
-
     try {
       byte[] message = Base64.decodeBase64(text.getBytes(StandardCharsets.UTF_8));
-      MessageDigest md = MessageDigest.getInstance("MD5");
-      byte[] digestOfPassword = md.digest(getSecretKey(isEmail).getBytes(StandardCharsets.UTF_8));
-      byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
-      SecretKey key = new SecretKeySpec(keyBytes, "AES");
-
+      SecretKey key = generateKey(getSecretKey(isEmail));
       Cipher decipher = Cipher.getInstance("AES");
       decipher.init(Cipher.DECRYPT_MODE, key);
 
       byte[] plainText = decipher.doFinal(message);
+      return new String(plainText, StandardCharsets.UTF_8);
 
-      base64EncryptedString = new String(plainText, StandardCharsets.UTF_8);
-
-    } catch (Exception ex) {
-      Alerts.message("Error", ex.getMessage());
-    }
-
-    if (base64EncryptedString.equals("")) {
-
-      Alerts.message("Verify!",
-          "The text entered does not have encrypted content or the key is incorrect");
+    } catch (Exception e) {
+      Alerts.message("Verify!", "The text entered does not have encrypted content or the key is incorrect");
       return text;
-    } else {
-      return base64EncryptedString;
     }
   }
 
+  private static SecretKey generateKey(String secret) throws NoSuchAlgorithmException {
+    MessageDigest md = MessageDigest.getInstance("MD5");
+    byte[] digestOfPassword = md.digest(secret.getBytes(StandardCharsets.UTF_8));
+    byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+    return new SecretKeySpec(keyBytes, "AES");
+  }
+
   private static String setSecretKey() {
-
-    boolean canContinue;
     String value;
-
     do {
-
       value = Alerts.inputPassword("Enter secret key");
-
-      if (value.length() >= 2) {
-        canContinue = true;
-      } else {
+      if (value.length() < 2) {
         Alerts.message("Warnings", "Invalid text or length too short.");
-        canContinue = false;
       }
-
-    } while (!canContinue);
-
+    } while (value.length() < 2);
     return value;
   }
 
   private static String getSecretKey(boolean useDefaultKey) {
-
-    if (!useDefaultKey) {
-      return setSecretKey();
-    } else {
-      return Config.get(DEFAULT_ENCRYPT_KEY.getProperty());
-    }
+    return useDefaultKey ? Config.get(DEFAULT_ENCRYPT_KEY.getProperty()) : setSecretKey();
   }
 
   private Crypto() {

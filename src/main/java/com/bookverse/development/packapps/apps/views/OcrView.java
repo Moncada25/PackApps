@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.views;
 
+import com.bookverse.development.packapps.apps.utils.ui.KeyBindingsUtil;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -32,6 +33,7 @@ public class OcrView extends JDialog implements MouseListener {
   public OcrView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
+    KeyBindingsUtil.addCopyPasteKeyBindings(text, null, null);
   }
 
   private void createComponents() {

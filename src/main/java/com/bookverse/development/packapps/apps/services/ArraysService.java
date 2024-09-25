@@ -13,7 +13,7 @@ import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtilities.getIntRandom;
+import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.getIntRandom;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.SMALL;
@@ -146,7 +146,7 @@ public final class ArraysService {
       if (isSquared(f, c)) {
 
         String principal = "";
-        String secundaria = "";
+        StringBuilder secundaria = new StringBuilder();
         int sumaSuperior = 0;
         int sumaInferior = 0;
 
@@ -159,7 +159,7 @@ public final class ArraysService {
             }
 
             if (i + j == f - 1) {
-              secundaria += "[" + board[i][j].getText() + "]";
+              secundaria.append("[").append(board[i][j].getText()).append("]");
               board[i][j].setBackground(TEXT_COLOR);
             }
           }
@@ -228,9 +228,7 @@ public final class ArraysService {
 
     if (f != c) {
 
-      JOptionPane
-          .showMessageDialog(null,
-              "<html>" + Format.style() + "<strong><center>Invalid matrix</center></strong><br>"
+      JOptionPane.showMessageDialog(null, "<html>" + Format.style() + "<strong><center>Invalid matrix</center></strong><br>"
                   + "The current matrix is not square." + "</html>",
               "Verify!", JOptionPane.PLAIN_MESSAGE);
 
@@ -255,14 +253,13 @@ public final class ArraysService {
     }
   }
 
-  @NotNull
-  public static int[][] multiplyMatrix(double[][] a, double[][] b) {
+  public static int[] @NotNull [] multiplyMatrix(double[][] a, double[][] b) {
     int[][] c = new int[a.length][b[0].length];
 
     for (int i = 0; i < a.length; i++) {
       for (int j = 0; j < b[0].length; j++) {
         for (int k = 0; k < a[0].length; k++) {
-          c[i][j] += a[i][k] * b[k][j];
+          c[i][j] += (int) (a[i][k] * b[k][j]);
         }
       }
     }
@@ -270,8 +267,7 @@ public final class ArraysService {
     return c;
   }
 
-  @NotNull
-  public static double[][] getMatrixB(int filas, int columnas, JDialog parent) {
+  public static double[] @NotNull [] getMatrixB(int filas, int columnas, JDialog parent) {
 
     JDialog result = new JDialog(parent, true);
     result.setLayout(null);
@@ -381,7 +377,7 @@ public final class ArraysService {
 
     for (int i = 0; i < f; i++) {
       for (int j = 0; j < c; j++) {
-        if (matriz[i][j].getText().equals("")) {
+        if (matriz[i][j].getText().isEmpty()) {
 
           JOptionPane.showMessageDialog(null,
               "<html>" + Format.style()
@@ -426,7 +422,7 @@ public final class ArraysService {
 
     if (btnAction.getText().equals("Show")) {
 
-      if (txtRows.getText().equals("") || txtColumns.getText().equals("")) {
+      if (txtRows.getText().isEmpty() || txtColumns.getText().isEmpty()) {
         Alerts.inputSomethingText();
         isWork = false;
       } else {
@@ -463,9 +459,7 @@ public final class ArraysService {
         btnAction.setBackground(MAIN_COLOR);
       }
 
-    } else if (btnAction.getText().equals("New")) {
-
-      if (isWork) {
+    } else if (btnAction.getText().equals("New") && isWork) {
 
         clickOnClear(board, txtRows, txtColumns, parent);
 
@@ -484,7 +478,7 @@ public final class ArraysService {
         btnAction.setText("Show");
         btnAction.setBackground(TEXT_COLOR);
       }
-    }
+
   }
 
   public static void deleteAll(JButton[][] board, JDialog parent) {
@@ -502,7 +496,7 @@ public final class ArraysService {
   private ArraysService() {
   }
 
-  public static double determinant(@NotNull double[][] matrix) {
+  public static double determinant(double[] @NotNull [] matrix) {
 
     double determinantValue = 0.0;
 
@@ -524,8 +518,7 @@ public final class ArraysService {
     return determinantValue;
   }
 
-  @NotNull
-  public static double[][] getSubMatrix(double[][] matrix, int rows, int columns, int column) {
+  public static double[] @NotNull [] getSubMatrix(double[][] matrix, int rows, int columns, int column) {
     double[][] subMatrix = new double[rows - 1][columns - 1];
     int count = 0;
     for (int j = 0; j < columns; j++) {

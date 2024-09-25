@@ -16,7 +16,7 @@ public final class TicTacToeCPU {
       positions[0] = 0;
       positions[1] = 2;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -29,7 +29,7 @@ public final class TicTacToeCPU {
       positions[0] = 0;
       positions[1] = 1;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -42,7 +42,7 @@ public final class TicTacToeCPU {
       positions[0] = 0;
       positions[1] = 0;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -55,7 +55,7 @@ public final class TicTacToeCPU {
       positions[0] = 1;
       positions[1] = 2;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -68,7 +68,7 @@ public final class TicTacToeCPU {
       positions[0] = 1;
       positions[1] = 1;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -81,7 +81,7 @@ public final class TicTacToeCPU {
       positions[0] = 1;
       positions[1] = 0;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -94,7 +94,7 @@ public final class TicTacToeCPU {
       positions[0] = 2;
       positions[1] = 2;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -107,7 +107,7 @@ public final class TicTacToeCPU {
       positions[0] = 2;
       positions[1] = 1;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -120,7 +120,7 @@ public final class TicTacToeCPU {
       positions[0] = 2;
       positions[1] = 0;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -133,7 +133,7 @@ public final class TicTacToeCPU {
       positions[0] = 2;
       positions[1] = 0;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -146,7 +146,7 @@ public final class TicTacToeCPU {
       positions[0] = 1;
       positions[1] = 0;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -159,7 +159,7 @@ public final class TicTacToeCPU {
       positions[0] = 0;
       positions[1] = 0;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -172,7 +172,7 @@ public final class TicTacToeCPU {
       positions[0] = 2;
       positions[1] = 1;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -185,7 +185,7 @@ public final class TicTacToeCPU {
       positions[0] = 1;
       positions[1] = 1;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -198,7 +198,7 @@ public final class TicTacToeCPU {
       positions[0] = 0;
       positions[1] = 1;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -211,7 +211,7 @@ public final class TicTacToeCPU {
       positions[0] = 2;
       positions[1] = 2;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -224,7 +224,7 @@ public final class TicTacToeCPU {
       positions[0] = 1;
       positions[1] = 2;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -237,7 +237,7 @@ public final class TicTacToeCPU {
       positions[0] = 0;
       positions[1] = 2;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -250,7 +250,7 @@ public final class TicTacToeCPU {
       positions[0] = 2;
       positions[1] = 2;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -263,7 +263,7 @@ public final class TicTacToeCPU {
       positions[0] = 1;
       positions[1] = 1;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -276,7 +276,7 @@ public final class TicTacToeCPU {
       positions[0] = 0;
       positions[1] = 0;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -289,7 +289,7 @@ public final class TicTacToeCPU {
       positions[0] = 0;
       positions[1] = 2;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -302,7 +302,7 @@ public final class TicTacToeCPU {
       positions[0] = 1;
       positions[1] = 1;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
@@ -314,7 +314,7 @@ public final class TicTacToeCPU {
       positions[0] = 2;
       positions[1] = 0;
 
-      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().equals("")) {
+      if (TicTacToe.getBoard()[positions[0]][positions[1]].getText().isEmpty()) {
         thereIsDanger = true;
 
         return thereIsDanger;
