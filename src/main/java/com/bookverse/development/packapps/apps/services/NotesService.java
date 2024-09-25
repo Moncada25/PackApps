@@ -40,9 +40,9 @@ public final class NotesService {
   }
 
   private static boolean validateFields(JTextField txtName, JTextField[] notesFields) {
-    return IntStream.range(0, thereAreNotes).noneMatch(i -> notesFields[i].getText().equals("")
+    return IntStream.range(0, thereAreNotes).noneMatch(i -> notesFields[i].getText().isEmpty()
         || Float.parseFloat(notesFields[i].getText()) > maxNote
-        || txtName.getText().trim().equals(""));
+        || txtName.getText().trim().isEmpty());
   }
 
   public static void clickOnAdd(

@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.views;
 
+import com.bookverse.development.packapps.apps.utils.ui.KeyBindingsUtil;
 import java.net.URI;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
@@ -25,11 +26,11 @@ public class QrView extends JDialog implements MouseListener {
   private JLabel generateQR;
   private JLabel exit;
   private JTextArea text;
-  
 
   public QrView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
+    KeyBindingsUtil.addCopyPasteKeyBindings(text, null, null);
   }
 
   private void createComponents() {
@@ -63,7 +64,7 @@ public class QrView extends JDialog implements MouseListener {
     readQR.setBorder(Styles.BORDER_BLUE);
     readQR.addMouseListener(this);
 
-    generateQR = Resources.getLabel("  GENERATE QR  ", Styles.TEXT_COLOR, panel, Styles.MEDIUM);
+    generateQR = Resources.getLabel("  CREATE QR  ", Styles.TEXT_COLOR, panel, Styles.MEDIUM);
     generateQR.setBorder(Styles.BORDER_BLUE);
     generateQR.addMouseListener(this);
 

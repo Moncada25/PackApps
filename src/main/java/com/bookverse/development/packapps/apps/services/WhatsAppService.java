@@ -7,7 +7,7 @@ import javax.swing.JDialog;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
@@ -23,7 +23,7 @@ public final class WhatsAppService {
   public static void clickOnOpen(JTextField number, JComboBox<String> listCountry,
       JTextArea message) {
 
-    if (GeneralUtilities.verifyConnection("Connect to see more!", true)) {
+    if (GeneralUtils.verifyConnection("Connect to see more!", true)) {
 
       if (number.getText().length() >= 8) {
 

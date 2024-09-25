@@ -10,7 +10,7 @@ import com.bookverse.development.packapps.apps.models.Dice;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.DICES;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
@@ -191,7 +191,7 @@ public final class DicesGameService {
 
   public static void insertResults(String name, String win) {
 
-    if (GeneralUtilities.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (GeneralUtils.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
       try {
         String[] data = {DICES, name, win, String.valueOf(round), getDate()};
         OlderRepository.insertData(data);

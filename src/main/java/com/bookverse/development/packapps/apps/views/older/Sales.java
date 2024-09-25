@@ -157,7 +157,7 @@ public class Sales extends JDialog implements ActionListener {
 
       public void moreClicked() {
 
-        if (!unitsAvailable.getText().equals("")) {
+        if (!unitsAvailable.getText().isEmpty()) {
 
           String formatUnitsAvailable = unitsAvailable.getText().replace("<html><strong>", "")
               .replace("</strong></html>", "");
@@ -201,7 +201,7 @@ public class Sales extends JDialog implements ActionListener {
 
       public void lessClicked() {
 
-        if (!unitsAvailable.getText().equals("")) {
+        if (!unitsAvailable.getText().isEmpty()) {
 
           if (Integer.parseInt(unitsActual.getText()) > 1) {
             unitsActual.setText(String.valueOf(Integer.parseInt(unitsActual.getText()) - 1));

@@ -13,7 +13,7 @@ import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtilities.getIntRandom;
+import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.getIntRandom;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.SMALL;

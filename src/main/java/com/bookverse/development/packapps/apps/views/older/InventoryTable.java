@@ -7,7 +7,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEX
 import static com.bookverse.development.packapps.apps.utils.ui.Resources.getBorder;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.INVENTORY;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Table;
@@ -196,7 +196,7 @@ public class InventoryTable extends JDialog implements MouseListener {
 
     String search = searchProduct();
 
-    if (!search.equals("")) {
+    if (!search.isEmpty()) {
       rowSorter.setRowFilter(RowFilter.regexFilter(search, 0));
     }
   }
@@ -211,7 +211,7 @@ public class InventoryTable extends JDialog implements MouseListener {
       Alerts.message("Delete", "No record selected");
     } else {
 
-      if (GeneralUtilities.loginDBA()) {
+      if (GeneralUtils.loginDBA()) {
 
         int[] rows = viewTable.getSelectedRows();
         String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import com.bookverse.development.packapps.apps.database.DatabaseConnection;
 import com.bookverse.development.packapps.apps.utils.constants.Queries;
 import com.bookverse.development.packapps.apps.utils.other.Format;
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
 public final class NotesRepository {
@@ -14,7 +14,7 @@ public final class NotesRepository {
   public static void insert(
       String state, String scale, String name, double totalPercentage, double totalNote) {
 
-    if (GeneralUtilities.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (GeneralUtils.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
       try {
 

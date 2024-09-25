@@ -5,6 +5,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEX
 
 import com.bookverse.development.packapps.apps.utils.other.Crypto;
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
+import com.bookverse.development.packapps.apps.utils.ui.KeyBindingsUtil;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
@@ -21,22 +22,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class TextsView extends JDialog implements MouseListener {
 
-  private JLabel encrypt, decrypt, upperCase, lowerCase, exit;
+  private JLabel encrypt, decrypt, upperCase, title, lowerCase, exit;
   private JTextArea text;
-  
 
   public TextsView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
+    KeyBindingsUtil.addCopyPasteKeyBindings(text, title, "<html><strong>Write Text... %s</strong></html>");
   }
 
   public void start(JFrame parent) {
     setSize(530, 330);
     setLocationRelativeTo(parent);
-    setMinimumSize(new Dimension(530, 330));
+    setMinimumSize(new Dimension(650, 450));
     setMaximumSize(new Dimension(1280, 720));
     setTitle("Texts");
     Effects.fadeIn(this);
@@ -53,7 +56,7 @@ public class TextsView extends JDialog implements MouseListener {
     encrypt.setBorder(Styles.BORDER_BLUE);
     encrypt.addMouseListener(this);
 
-    upperCase = Resources.getLabel("  UpperCase  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    upperCase = Resources.getLabel("  UPPERCASE  ", TEXT_COLOR, panel, Styles.MEDIUM);
     upperCase.setBorder(Styles.BORDER_BLUE);
     upperCase.addMouseListener(this);
 
@@ -61,7 +64,7 @@ public class TextsView extends JDialog implements MouseListener {
     exit.setBorder(Styles.BORDER_RED);
     exit.addMouseListener(this);
 
-    lowerCase = Resources.getLabel("  LowerCase  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    lowerCase = Resources.getLabel("  lowercase  ", TEXT_COLOR, panel, Styles.MEDIUM);
     lowerCase.setBorder(Styles.BORDER_BLUE);
     lowerCase.addMouseListener(this);
 
@@ -76,9 +79,7 @@ public class TextsView extends JDialog implements MouseListener {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
-    JLabel title = Resources
-        .getLabel("<html><strong>Write Text...</strong></html>", MAIN_COLOR,
-            this, Styles.MEDIUM);
+    title = Resources.getLabel("<html><strong>Write Text... 0</strong></html>", MAIN_COLOR, this, Styles.MEDIUM);
     title.setBounds(30, 15, 370, 50);
     add(title, BorderLayout.NORTH);
 
@@ -114,7 +115,7 @@ public class TextsView extends JDialog implements MouseListener {
 
     if (e.getSource() == upperCase) {
 
-      if (!text.getText().equals("")) {
+      if (!text.getText().isEmpty()) {
         text.setText(text.getText().toUpperCase());
       } else {
         Alerts.inputSomethingText();
@@ -122,7 +123,7 @@ public class TextsView extends JDialog implements MouseListener {
 
     } else if (e.getSource() == lowerCase) {
 
-      if (!text.getText().equals("")) {
+      if (!text.getText().isEmpty()) {
         text.setText(text.getText().toLowerCase());
       } else {
         Alerts.inputSomethingText();
@@ -130,7 +131,7 @@ public class TextsView extends JDialog implements MouseListener {
 
     } else if (e.getSource() == encrypt) {
 
-      if (!text.getText().equals("")) {
+      if (!text.getText().isEmpty()) {
         text.setText(Crypto.encrypt(text.getText(), false));
       } else {
         Alerts.inputSomethingText();
@@ -138,7 +139,7 @@ public class TextsView extends JDialog implements MouseListener {
 
     } else if (e.getSource() == decrypt) {
 
-      if (!text.getText().equals("")) {
+      if (!text.getText().isEmpty()) {
         text.setText(Crypto.decrypt(text.getText(), false));
       } else {
         Alerts.inputSomethingText();

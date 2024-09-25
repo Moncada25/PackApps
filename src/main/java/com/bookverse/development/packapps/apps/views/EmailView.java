@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.apps.views;
 
 import com.bookverse.development.packapps.apps.utils.other.Config;
+import com.bookverse.development.packapps.apps.utils.ui.KeyBindingsUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -44,6 +45,7 @@ public class EmailView extends JDialog implements ActionListener, MouseListener 
   public EmailView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
+    KeyBindingsUtil.addCopyPasteKeyBindings(text, null, null);
   }
 
   public void start(JFrame parent) {
@@ -156,7 +158,7 @@ public class EmailView extends JDialog implements ActionListener, MouseListener 
     if (e.getSource() == toOther) {
       receiver = Alerts.inputText("Input receiver email");
 
-      if (receiver == null || receiver.trim().equals("") || !receiver.contains("@") || !receiver.contains(".")) {
+      if (receiver == null || receiver.trim().isEmpty() || !receiver.contains("@") || !receiver.contains(".")) {
         receiver = Config.get(DEVELOPER_EMAIL.getProperty());
         toDeveloper.setSelected(true);
         toOther.setText("<html><strong>Other</strong></html>");

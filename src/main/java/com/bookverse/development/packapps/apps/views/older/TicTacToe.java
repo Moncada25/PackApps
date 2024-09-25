@@ -20,7 +20,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAI
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.apps.utils.ui.Effects.fadeIn;
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtilities.getIntRandom;
+import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.getIntRandom;
 import static com.bookverse.development.packapps.apps.utils.ui.Alerts.instruccionesTriqui;
 
 public class TicTacToe extends JDialog implements ActionListener {

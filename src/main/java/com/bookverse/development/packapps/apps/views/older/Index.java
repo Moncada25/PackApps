@@ -28,7 +28,7 @@ import com.bookverse.development.packapps.apps.views.StructuresView;
 import com.bookverse.development.packapps.apps.views.TextsView;
 import com.bookverse.development.packapps.apps.views.WhatsAppView;
 import com.bookverse.development.packapps.automation.utils.StartTests;
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.other.Config;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
@@ -54,10 +54,8 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import org.jetbrains.annotations.NotNull;
 
 public class Index extends JFrame implements ActionListener {
 
@@ -615,7 +613,7 @@ public class Index extends JFrame implements ActionListener {
     } else if (e.getSource() == read) {
       new ProfessionalCardView(this, true).start(this);
       setVisible(true);
-    } else if (GeneralUtilities.verifyConnection("Connect to see more!", Themes.isWork)) {
+    } else if (GeneralUtils.verifyConnection("Connect to see more!", Themes.isWork)) {
 
       if (e.getSource() == roulette) {
 

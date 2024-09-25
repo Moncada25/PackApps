@@ -20,7 +20,7 @@ public final class Alerts {
 
       text = Alerts.inputText(request);
 
-      if (text != null && !text.trim().equals("") && Pattern.matches("^[a-zA-Z]*$", text)) {
+      if (text != null && !text.trim().isEmpty() && Pattern.matches("^[a-zA-Z]*$", text)) {
 
         if (text.length() <= length) {
           canContinue = true;
@@ -145,7 +145,7 @@ public final class Alerts {
 
   public static String inputPassword(String request) {
     JPasswordField password = new JPasswordField(10);
-    JOptionPane.showConfirmDialog(null, password, request, JOptionPane.PLAIN_MESSAGE,
+    JOptionPane.showConfirmDialog(null, password, request, JOptionPane.DEFAULT_OPTION,
         JOptionPane.PLAIN_MESSAGE);
 
     return new String(password.getPassword());

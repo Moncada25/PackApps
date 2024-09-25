@@ -4,7 +4,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAI
 import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtilities;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.repositories.OlderRepository;
@@ -149,7 +149,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     for (JButton[] jButtons : board) {
       for (int c = 0; c < board.length; c++) {
 
-        if (!jButtons[c].getText().equals("")) {
+        if (!jButtons[c].getText().isEmpty()) {
           jButtons[c].setText(String.valueOf(n));
           n--;
         }
@@ -243,7 +243,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
 
   private void insert(String state) {
 
-    if (GeneralUtilities.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (GeneralUtils.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
 
       String[] data = {PUZZLE, Alerts.inputText("Enter a Nickname", 20), state,
           getLevel(), String.valueOf(moves), Format.getDate()};
@@ -267,7 +267,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board.length; j++) {
 
-        if (board[i][j].getText().equals("")) {
+        if (board[i][j].getText().isEmpty()) {
 
           if ((i == 0 && j == 0)) {
             board[0][1].setEnabled(true);
@@ -352,7 +352,7 @@ public class Puzzle extends JDialog implements Runnable, ActionListener {
     for (JButton[] jButtons : board) {
       for (int j = 0; j < board.length; j++) {
 
-        if (jButtons[j].getText().equals("")) {
+        if (jButtons[j].getText().isEmpty()) {
           jButtons[j].setText(board[f][c].getText());
           jButtons[j].setEnabled(true);
           board[f][c].setEnabled(false);
