@@ -1,36 +1,36 @@
 package com.bookverse.development.packapps.apps.views;
 
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
+import javax.swing.SwingConstants;
 import org.jetbrains.annotations.NotNull;
-
+import com.bookverse.development.packapps.apps.services.DicesGameService;
+import com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
 import com.bookverse.development.packapps.apps.utils.other.Format;
-
-import static com.bookverse.development.packapps.apps.services.DicesGameService.btnResetAP;
-import static com.bookverse.development.packapps.apps.services.DicesGameService.clickOnThrow;
-
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.DICES;
+import com.bookverse.development.packapps.apps.utils.constants.Styles;
 
 public class DicesGameView extends JDialog implements ActionListener {
 
-  private JLabel dice1, dice2, dice3, lblPoints1, lblPoints2, lblPoints3;
-  private JButton btnExit, btnThrow, btnReset;
-  private JTextField player1, player2, player3;
+  private List<JLabel> dices;
+  private List<JTextField> players;
+  private List<JLabel> lblPoints;
+  private JButton btnExit;
+  private JButton btnThrow;
+  private JButton btnReset;
 
   public DicesGameView(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -43,104 +43,87 @@ public class DicesGameView extends JDialog implements ActionListener {
   }
 
   private void createComponents() {
-
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(Resources.getImage("dado.png")).getImage());
 
-    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
+    btnExit = Resources.getButton("Return", Styles.MAIN_COLOR, this, this);
     btnExit.setBounds(330, 320, 86, 30);
 
-    btnThrow = Resources.getButton("Throw", TEXT_COLOR, this, this);
+    btnThrow = Resources.getButton("Throw", Styles.TEXT_COLOR, this, this);
     btnThrow.setBounds(25, 320, 86, 30);
 
-    btnReset = Resources.getButton("Reset", TEXT_COLOR, this, this);
+    btnReset = Resources.getButton("Reset", Styles.TEXT_COLOR, this, this);
     btnReset.setBounds(185, 320, 86, 30);
     btnReset.setEnabled(false);
 
-    dice1 = Resources.getLabel("", null, this, null);
+    dices = new ArrayList<>();
+    players = new ArrayList<>();
+    lblPoints = new ArrayList<>();
+
+    JLabel dice1 = Resources.getLabel("", null, this, null);
     dice1.setBounds(25, 10, 80, 80);
+    dices.add(dice1);
 
-    dice2 = Resources.getLabel("", null, this, null);
+    JLabel dice2 = Resources.getLabel("", null, this, null);
     dice2.setBounds(185, 10, 80, 80);
+    dices.add(dice2);
 
-    dice3 = Resources.getLabel("", null, this, null);
+    JLabel dice3 = Resources.getLabel("", null, this, null);
     dice3.setBounds(330, 10, 80, 80);
+    dices.add(dice3);
 
-    player1 = new JTextField("Player 1");
+    JTextField player1 = new JTextField("Player 1");
     player1.setBounds(25, 150, 100, 30);
-    player1.setHorizontalAlignment(JTextField.CENTER);
-    add(player1);
+    createPlayer(player1);
 
-    player1.addKeyListener(new KeyAdapter() {
-
-      public void keyTyped(KeyEvent e) {
-        player1KeyTyped(e);
-      }
-
-      private void player1KeyTyped(KeyEvent e) {
-        Format.onlyText(e.getKeyChar(), e, player1.getText(), 10);
-      }
-    });
-
-    lblPoints1 = Resources.getLabel("", MAIN_COLOR, this, MEDIUM);
+    JLabel lblPoints1 = Resources.getLabel("", Styles.MAIN_COLOR, this, Styles.MEDIUM);
     lblPoints1.setBounds(25, 185, 100, 30);
+    lblPoints.add(lblPoints1);
 
-    player2 = new JTextField("Player 2");
+    JTextField player2 = new JTextField("Player 2");
     player2.setBounds(170, 150, 100, 30);
-    player2.setHorizontalAlignment(JTextField.CENTER);
-    add(player2);
+    createPlayer(player2);
 
-    player2.addKeyListener(new KeyAdapter() {
-
-      public void keyTyped(KeyEvent e) {
-        player2KeyTyped(e);
-      }
-
-      private void player2KeyTyped(KeyEvent e) {
-        Format.onlyText(e.getKeyChar(), e, player2.getText(), 10);
-      }
-    });
-
-    lblPoints2 = Resources.getLabel("", MAIN_COLOR, this, MEDIUM);
+    JLabel lblPoints2 = Resources.getLabel("", Styles.MAIN_COLOR, this, Styles.MEDIUM);
     lblPoints2.setBounds(170, 185, 100, 30);
+    lblPoints.add(lblPoints2);
 
-    player3 = new JTextField("Player 3");
+    JTextField player3 = new JTextField("Player 3");
     player3.setBounds(317, 150, 100, 30);
-    player3.setHorizontalAlignment(JTextField.CENTER);
-    add(player3);
+    createPlayer(player3);
 
-    player3.addKeyListener(new KeyAdapter() {
+    JLabel lblPoints3 = Resources.getLabel("", Styles.MAIN_COLOR, this, Styles.MEDIUM);
+    lblPoints3.setBounds(317, 185, 100, 30);
+    lblPoints.add(lblPoints3);
+  }
 
+  private void createPlayer(JTextField player) {
+    player.setHorizontalAlignment(SwingConstants.CENTER);
+    players.add(player);
+    add(player);
+
+    player.addKeyListener(new KeyAdapter() {
+      @Override
       public void keyTyped(KeyEvent e) {
-        player3KeyTyped(e);
-      }
-
-      private void player3KeyTyped(KeyEvent e) {
-        Format.onlyText(e.getKeyChar(), e, player3.getText(), 10);
+        Format.onlyText(e.getKeyChar(), e, player.getText(), 10);
       }
     });
-
-    lblPoints3 = Resources.getLabel("", MAIN_COLOR, this, MEDIUM);
-    lblPoints3.setBounds(317, 185, 100, 30);
   }
 
   public void start(JFrame parent) {
-    setSize(450, 400);
-    setResizable(false);
-    setLocationRelativeTo(parent);
-    setTitle(DICES + ", throw them!");
-    Effects.fadeIn(this);
-    parent.setVisible(false);
-    Alerts.instruccionesDados();
-    setVisible(true);
+    initializeWindow(parent);
   }
 
   public void start(JDialog parent) {
+    initializeWindow(parent);
+  }
+
+  private void initializeWindow(Window parent) {
     setSize(450, 400);
     setResizable(false);
     setLocationRelativeTo(parent);
-    setTitle(DICES + ", throw them!");
+    setTitle(DatabaseConstants.DICES + ", throw them!");
     Effects.fadeIn(this);
     parent.setVisible(false);
     Alerts.instruccionesDados();
@@ -151,9 +134,7 @@ public class DicesGameView extends JDialog implements ActionListener {
   public void actionPerformed(@NotNull ActionEvent e) {
 
     if (e.getSource() == btnThrow) {
-      clickOnThrow(player1, player2, player3, btnExit, btnThrow, btnReset,
-          lblPoints1, lblPoints2, lblPoints3, dice1, dice2, dice3, this
-      );
+      DicesGameService.clickOnThrow(players, btnExit, btnThrow, btnReset, lblPoints, dices, this);
     }
 
     if (e.getSource() == btnExit) {
@@ -161,8 +142,7 @@ public class DicesGameView extends JDialog implements ActionListener {
     }
 
     if (e.getSource() == btnReset) {
-      btnResetAP(player1, player2, player3, btnExit, btnThrow, btnReset,
-          lblPoints1, lblPoints2, lblPoints3, dice1, dice2, dice3, this);
+      DicesGameService.btnResetAP(players, btnExit, btnThrow, btnReset, lblPoints, dices, this);
     }
   }
 }

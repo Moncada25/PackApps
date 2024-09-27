@@ -3,20 +3,21 @@ package com.bookverse.development.packapps.apps.services;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-
 import org.jetbrains.annotations.NotNull;
-
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-
-import static com.bookverse.development.packapps.apps.utils.ui.Alerts.inputNumber;
-
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
+import com.bookverse.development.packapps.apps.utils.constants.Styles;
 
 public final class StackService {
 
-  public static int i = 0, y = 400, x = 50, countPairs = 0, con = 0;
-  public static double add = 0, addTotal = 0, sum = 0;
+  public static int i = 0;
+  public static int y = 400;
+  public static int x = 50;
+  public static int countPairs = 0;
+  public static int con = 0;
+  public static double add = 0;
+  public static double addTotal = 0;
+  public static double sum = 0;
   public static String result = "";
 
   public static void clickOnPush(JButton[] stack, JLabel title) {
@@ -26,7 +27,7 @@ public final class StackService {
     if (stack.length > i) {
 
       do {
-        int num = Integer.parseInt(inputNumber("Enter a numeric data", 6));
+        int num = Integer.parseInt(Alerts.inputNumber("Enter a numeric data", 6));
 
         push(num, stack, title);
       } while (Alerts.requestResponse("Do you want to enter more data?", "Enter data")
@@ -46,7 +47,7 @@ public final class StackService {
 
       title.setText("<html><strong>Unstacked → " + pop(stack, i) + "</strong></html>");
 
-      if (stack[i - 1].getBackground() == TEXT_COLOR) {
+      if (stack[i - 1].getBackground() == Styles.TEXT_COLOR) {
         con--;
         sum -= Double.parseDouble((stack[i - 1].getText()));
         stack[i - 1].setBackground(parent.getBackground());
@@ -147,15 +148,18 @@ public final class StackService {
 
   public static void clickOnPairs(JButton[] stack, JLabel title) {
 
+    StringBuilder resultBuilder = new StringBuilder();
+
     for (int n = 0; n < i; n++) {
 
       if (Integer.parseInt(stack[n].getText()) % 2 == 0) {
 
         if (countPairs % 10 == 0) {
-          result += "\n";
+          resultBuilder.append("\n");
         }
-
-        result += "[" + stack[n].getText() + "]";
+        result = resultBuilder.append("[").append(
+            Integer.parseInt(stack[n].getText())).append("]"
+        ).toString();
         countPairs++;
       }
     }

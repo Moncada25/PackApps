@@ -1,6 +1,9 @@
 package com.bookverse.development.packapps.apps.views;
 
 import com.bookverse.development.packapps.apps.utils.ui.KeyBindingsUtil;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -10,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -32,7 +36,6 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEX
 
 public class WhatsAppView extends JDialog implements ActionListener {
 
-  
   private JTextArea message;
   private JTextField txtNumber;
   private JButton btnOpen, btnReturn;
@@ -46,7 +49,7 @@ public class WhatsAppView extends JDialog implements ActionListener {
 
   public void start(JFrame parent) {
     setSize(460, 360);
-    setResizable(false);
+    setResizable(true);
     setLocationRelativeTo(parent);
     setTitle("Open conversation on WhatsApp");
     Effects.fadeIn(this);
@@ -55,53 +58,37 @@ public class WhatsAppView extends JDialog implements ActionListener {
   }
 
   private void createComponents() {
-
-    setLayout(null);
+    setLayout(new GridBagLayout());
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(5, 5, 5, 5);
+    gbc.fill = GridBagConstraints.HORIZONTAL;
 
     btnOpen = Resources.getButton("Open", TEXT_COLOR, this, this);
-    btnOpen.setBounds(60, 290, 100, 30);
-
     btnReturn = Resources.getButton("Return", MAIN_COLOR, this, this);
-    btnReturn.setBounds(300, 290, 86, 30);
 
-    JLabel lblPhone = Resources
-        .getLabel("<html><strong>Phone</strong></html>", TEXT_COLOR, this, MEDIUM);
-    lblPhone.setBounds(204, 12, 60, 30);
-
+    JLabel lblPhone = Resources.getLabel("<html><strong>Phone</strong></html>", TEXT_COLOR, this, MEDIUM);
     txtNumber = new JTextField();
-    txtNumber.setBounds(155, 45, 150, 30);
     txtNumber.setHorizontalAlignment(CENTER);
-    add(txtNumber);
-
     txtNumber.addKeyListener(new KeyAdapter() {
-
+      @Override
       public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == ENTER) {
           message.requestFocus();
         }
       }
 
+      @Override
       public void keyTyped(KeyEvent evt) {
-        txtUserKeyTyped(evt);
-      }
-
-      private void txtUserKeyTyped(KeyEvent evt) {
         Format.onlyNumbers(evt.getKeyChar(), evt, txtNumber.getText(), 20);
       }
     });
 
-    JLabel lblMessage = Resources
-        .getLabel("<html><strong>Message</strong></html>", TEXT_COLOR, this, MEDIUM);
-    lblMessage.setBounds(195, 80, 85, 30);
-
+    JLabel lblMessage = Resources.getLabel("<html><strong>Message</strong></html>", TEXT_COLOR, this, MEDIUM);
     message = new JTextArea();
     JScrollPane scroll = new JScrollPane(message);
-    scroll.setBounds(10, 118, 432, 100);
-    add(scroll);
-
     message.addKeyListener(new KeyAdapter() {
-
+      @Override
       public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == ENTER) {
           clickOnOpen(txtNumber, listCountry, message);
@@ -120,16 +107,57 @@ public class WhatsAppView extends JDialog implements ActionListener {
     listCountry.addItem("España");
     listCountry.addItem("Estados Unidos");
     listCountry.addItem("Venezuela");
-
     listCountry.setFont(MEDIUM);
-    listCountry.setBounds(130, 240, 200, 30);
     ((JLabel) listCountry.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-    add(listCountry);
+
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.gridwidth = 2;
+    add(lblPhone, gbc);
+
+    gbc.gridx = 0;
+    gbc.gridy = 1;
+    gbc.gridwidth = 2;
+    add(txtNumber, gbc);
+
+    gbc.gridx = 0;
+    gbc.gridy = 2;
+    gbc.gridwidth = 2;
+    add(lblMessage, gbc);
+
+    gbc.gridx = 0;
+    gbc.gridy = 3;
+    gbc.gridwidth = 2;
+    gbc.fill = GridBagConstraints.BOTH;
+    gbc.weightx = 1.0;
+    gbc.weighty = 1.0;
+    add(scroll, gbc);
+
+    JPanel footerPanel = new JPanel(new GridBagLayout());
+    GridBagConstraints footerGbc = new GridBagConstraints();
+    footerGbc.insets = new Insets(5, 5, 5, 5);
+    footerGbc.gridx = 0;
+    footerGbc.gridy = 0;
+    footerGbc.gridwidth = 2;
+    footerPanel.add(listCountry, footerGbc);
+
+    footerGbc.gridx = 0;
+    footerGbc.gridy = 1;
+    footerGbc.gridwidth = 1;
+    footerPanel.add(btnOpen, footerGbc);
+
+    footerGbc.gridx = 1;
+    footerPanel.add(btnReturn, footerGbc);
+
+    gbc.gridx = 0;
+    gbc.gridy = 4;
+    gbc.gridwidth = 2;
+    gbc.fill = GridBagConstraints.NONE;
+    add(footerPanel, gbc);
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-
     if (e.getSource() == btnReturn) {
       clickOnReturn(txtNumber, this);
     } else if (e.getSource() == btnOpen) {

@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.views;
 
+import com.bookverse.development.packapps.apps.services.StackService;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,11 +23,6 @@ import static com.bookverse.development.packapps.apps.services.StackService.x;
 import static com.bookverse.development.packapps.apps.services.StackService.y;
 import static com.bookverse.development.packapps.apps.services.StackService.con;
 import static com.bookverse.development.packapps.apps.services.StackService.sum;
-import static com.bookverse.development.packapps.apps.services.StackService.average;
-import static com.bookverse.development.packapps.apps.services.StackService.clickOnAdd;
-import static com.bookverse.development.packapps.apps.services.StackService.clickOnClean;
-import static com.bookverse.development.packapps.apps.services.StackService.clickOnCount;
-import static com.bookverse.development.packapps.apps.services.StackService.clickOnPairs;
 import static com.bookverse.development.packapps.apps.services.StackService.clickOnPeek;
 import static com.bookverse.development.packapps.apps.services.StackService.clickOnPop;
 import static com.bookverse.development.packapps.apps.services.StackService.clickOnPush;
@@ -39,8 +35,7 @@ import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEX
 
 public class StackView extends JDialog implements MouseListener, ActionListener {
 
-  private JLabel[] actions = new JLabel[8];
-  
+  private JLabel[] stackActions = new JLabel[8];
   private JLabel title, message;
   private JButton[] stack = new JButton[50];
 
@@ -53,20 +48,27 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
 
     JPanel panel = new JPanel(new FlowLayout());
 
-    String[] images = {"push.png", "pop.png", "peek.png", "contar.png", "sumar.png", "promedio.png",
+    String[] images = {
+        "push.png",
+        "pop.png",
+        "peek.png",
+        "contar.png",
+        "sumar.png",
+        "promedio.png",
         "pares.png",
-        "vaciar.png"};
+        "vaciar.png"
+    };
 
     panel.setBorder(getBorder("Select action"));
 
-    IntStream.range(0, actions.length).forEach(i -> {
-      actions[i] = new JLabel();
-      actions[i].setIcon(new ImageIcon(Resources.getImage(images[i])));
-      actions[i].addMouseListener(this);
-      panel.add(actions[i]);
+    IntStream.range(0, stackActions.length).forEach(i -> {
+      stackActions[i] = new JLabel();
+      stackActions[i].setIcon(new ImageIcon(Resources.getImage(images[i])));
+      stackActions[i].addMouseListener(this);
+      panel.add(stackActions[i]);
     });
 
-    panel.setBounds(50, 480, 480, 100);
+    panel.setBounds(0, 480, 480, 100);
     add(panel);
   }
 
@@ -96,7 +98,7 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
     getPanel();
 
     title = Resources.getLabel("", MAIN_COLOR, this, BIG);
-    title.setBounds(550, 70, 600, 200);
+    title.setBounds(470, 20, 400, 200);
 
     message = Resources.getLabel("", MAIN_COLOR, this, BIG);
     message.setBounds(620, 480, 200, 85);
@@ -115,50 +117,50 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
   @Override
   public void mouseClicked(@NotNull MouseEvent e) {
 
-    if (e.getSource() == actions[0]) {
+    if (e.getSource() == stackActions[0]) {
       clickOnPush(stack, title);
-    } else if (e.getSource() == actions[1]) {
+    } else if (e.getSource() == stackActions[1]) {
       clickOnPop(stack, title, this);
-    } else if (e.getSource() == actions[2]) {
+    } else if (e.getSource() == stackActions[2]) {
       clickOnPeek(stack, title);
-    } else if (e.getSource() == actions[3]) {
-      clickOnCount(title);
-    } else if (e.getSource() == actions[4]) {
-      clickOnAdd(stack, title);
-    } else if (e.getSource() == actions[5]) {
-      average(stack, title);
-    } else if (e.getSource() == actions[6]) {
-      clickOnPairs(stack, title);
-    } else if (e.getSource() == actions[7]) {
-      clickOnClean(stack, title, this);
+    } else if (e.getSource() == stackActions[3]) {
+      StackService.clickOnCount(title);
+    } else if (e.getSource() == stackActions[4]) {
+      StackService.clickOnAdd(stack, title);
+    } else if (e.getSource() == stackActions[5]) {
+      StackService.average(stack, title);
+    } else if (e.getSource() == stackActions[6]) {
+      StackService.clickOnPairs(stack, title);
+    } else if (e.getSource() == stackActions[7]) {
+      StackService.clickOnClean(stack, title, this);
     }
   }
 
   @Override
   public void mouseEntered(@NotNull MouseEvent e) {
-    if (e.getSource() == actions[0]) {
-      actions[0].setCursor(HAND);
+    if (e.getSource() == stackActions[0]) {
+      stackActions[0].setCursor(HAND);
       message.setText("<html><strong>Push( )</strong></html>");
-    } else if (e.getSource() == actions[1]) {
-      actions[1].setCursor(HAND);
+    } else if (e.getSource() == stackActions[1]) {
+      stackActions[1].setCursor(HAND);
       message.setText("<html><strong>Pop( )</strong></html>");
-    } else if (e.getSource() == actions[2]) {
-      actions[2].setCursor(HAND);
+    } else if (e.getSource() == stackActions[2]) {
+      stackActions[2].setCursor(HAND);
       message.setText("<html><strong>Peek( )</strong></html>");
-    } else if (e.getSource() == actions[3]) {
-      actions[3].setCursor(HAND);
+    } else if (e.getSource() == stackActions[3]) {
+      stackActions[3].setCursor(HAND);
       message.setText("<html><strong>Count</strong></html>");
-    } else if (e.getSource() == actions[4]) {
-      actions[4].setCursor(HAND);
+    } else if (e.getSource() == stackActions[4]) {
+      stackActions[4].setCursor(HAND);
       message.setText("<html><strong>Sum</strong></html>");
-    } else if (e.getSource() == actions[5]) {
-      actions[5].setCursor(HAND);
+    } else if (e.getSource() == stackActions[5]) {
+      stackActions[5].setCursor(HAND);
       message.setText("<html><strong>Average</strong></html>");
-    } else if (e.getSource() == actions[6]) {
-      actions[6].setCursor(HAND);
+    } else if (e.getSource() == stackActions[6]) {
+      stackActions[6].setCursor(HAND);
       message.setText("<html><strong>Pairs numbers</strong></html>");
-    } else if (e.getSource() == actions[7]) {
-      actions[7].setCursor(HAND);
+    } else if (e.getSource() == stackActions[7]) {
+      stackActions[7].setCursor(HAND);
       message.setText("<html><strong>Clean</strong></html>");
     }
   }
@@ -166,21 +168,21 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
   @Override
   public void mouseExited(@NotNull MouseEvent e) {
 
-    if (e.getSource() == actions[0]) {
+    if (e.getSource() == stackActions[0]) {
       message.setText("");
-    } else if (e.getSource() == actions[1]) {
+    } else if (e.getSource() == stackActions[1]) {
       message.setText("");
-    } else if (e.getSource() == actions[2]) {
+    } else if (e.getSource() == stackActions[2]) {
       message.setText("");
-    } else if (e.getSource() == actions[3]) {
+    } else if (e.getSource() == stackActions[3]) {
       message.setText("");
-    } else if (e.getSource() == actions[4]) {
+    } else if (e.getSource() == stackActions[4]) {
       message.setText("");
-    } else if (e.getSource() == actions[5]) {
+    } else if (e.getSource() == stackActions[5]) {
       message.setText("");
-    } else if (e.getSource() == actions[6]) {
+    } else if (e.getSource() == stackActions[6]) {
       message.setText("");
-    } else if (e.getSource() == actions[7]) {
+    } else if (e.getSource() == stackActions[7]) {
       message.setText("");
     }
   }

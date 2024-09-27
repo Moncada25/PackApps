@@ -5,19 +5,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
+import javax.swing.WindowConstants;
 import org.jetbrains.annotations.NotNull;
-
+import com.bookverse.development.packapps.apps.utils.constants.Styles;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.getIntRandom;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.SMALL;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
 public final class ArraysService {
 
@@ -57,6 +50,64 @@ public final class ArraysService {
     }
   }
 
+  private static void scalarCase(JButton[][] board, JTextField txtRows, JTextField txtColumns) {
+    int scalar = Integer.parseInt(
+        Alerts.inputNumber("Enter the scalar by which you want to multiply the matrix", 2));
+
+    for (int i = 0; i < Integer.parseInt(txtRows.getText()); i++) {
+      for (int j = 0; j < Integer.parseInt(txtColumns.getText()); j++) {
+
+        if (board[i][j].getText().length() == 1) {
+          board[i][j]
+              .setText(
+                  String.valueOf(Integer.parseInt(board[i][j].getText()) * scalar));
+          board[i][j].setFont(Styles.MEDIUM);
+        } else if (board[i][j].getText().length() == 2) {
+          board[i][j]
+              .setText(
+                  String.valueOf(Integer.parseInt(board[i][j].getText()) * scalar));
+          board[i][j].setFont(Styles.SMALL);
+        }
+      }
+    }
+  }
+
+  private static void vectorCase(JButton[][] board, JTextField txtRows, JTextField txtColumns, JDialog parent) {
+    int fv = Integer.parseInt(txtRows.getText());
+    int cv = Integer.parseInt(txtColumns.getText());
+
+    double[][] matrizO = new double[fv][cv];
+    double[][] vectorB = getMatrixB(cv, 1, parent);
+
+    for (int i = 0; i < fv; i++) {
+      for (int j = 0; j < cv; j++) {
+        matrizO[i][j] = Double.parseDouble(board[i][j].getText());
+      }
+    }
+
+    showMatrixC(multiplyMatrix(matrizO, vectorB), fv, 1, parent);
+  }
+
+  private static void matrixCase(JButton[][] board, JTextField txtRows, JTextField txtColumns, JDialog parent) {
+    int columnsB = Integer
+        .parseInt(
+            Alerts.inputNumber("Enter the number of columns that matrix B will have", 1));
+
+    int f = Integer.parseInt(txtRows.getText());
+    int c = Integer.parseInt(txtColumns.getText());
+
+    double[][] matrixA = new double[f][c];
+    double[][] matrixB = getMatrixB(c, columnsB, parent);
+
+    for (int i = 0; i < f; i++) {
+      for (int j = 0; j < c; j++) {
+        matrixA[i][j] = Double.parseDouble(board[i][j].getText());
+      }
+    }
+
+    showMatrixC(multiplyMatrix(matrixA, matrixB), f, columnsB, parent);
+  }
+
   private static void getMenu(JButton[][] board, JTextField txtRows, JTextField txtColumns, Object option, JDialog parent) {
 
     if (option != null) {
@@ -64,67 +115,15 @@ public final class ArraysService {
       switch (option.toString()) {
 
         case "A scalar":
-
-          int scalar = Integer.parseInt(
-              Alerts.inputNumber("Enter the scalar by which you want to multiply the matrix", 2));
-
-          for (int i = 0; i < Integer.parseInt(txtRows.getText()); i++) {
-            for (int j = 0; j < Integer.parseInt(txtColumns.getText()); j++) {
-
-              if (board[i][j].getText().length() == 1) {
-                board[i][j]
-                    .setText(
-                        String.valueOf(Integer.parseInt(board[i][j].getText()) * scalar));
-                board[i][j].setFont(MEDIUM);
-              } else if (board[i][j].getText().length() == 2) {
-                board[i][j]
-                    .setText(
-                        String.valueOf(Integer.parseInt(board[i][j].getText()) * scalar));
-                board[i][j].setFont(SMALL);
-              }
-            }
-          }
-
+          scalarCase(board, txtRows, txtColumns);
           break;
 
         case "A vector":
-
-          int fv = Integer.parseInt(txtRows.getText());
-          int cv = Integer.parseInt(txtColumns.getText());
-
-          double[][] matrizO = new double[fv][cv];
-          double[][] vectorB = getMatrixB(cv, 1, parent);
-
-          for (int i = 0; i < fv; i++) {
-            for (int j = 0; j < cv; j++) {
-              matrizO[i][j] = Double.parseDouble(board[i][j].getText());
-            }
-          }
-
-          showMatrixC(multiplyMatrix(matrizO, vectorB), fv, 1, parent);
-
+          vectorCase(board, txtRows, txtColumns, parent);
           break;
 
         case "A matrix":
-
-          int columnsB = Integer
-              .parseInt(
-                  Alerts.inputNumber("Enter the number of columns that matrix B will have", 1));
-
-          int f = Integer.parseInt(txtRows.getText());
-          int c = Integer.parseInt(txtColumns.getText());
-
-          double[][] matrixA = new double[f][c];
-          double[][] matrixB = getMatrixB(c, columnsB, parent);
-
-          for (int i = 0; i < f; i++) {
-            for (int j = 0; j < c; j++) {
-              matrixA[i][j] = Double.parseDouble(board[i][j].getText());
-            }
-          }
-
-          showMatrixC(multiplyMatrix(matrixA, matrixB), f, columnsB, parent);
-
+          matrixCase(board, txtRows, txtColumns, parent);
           break;
 
         default:
@@ -137,8 +136,7 @@ public final class ArraysService {
 
   public static void clickOnDiagonals(JButton[][] board, JTextField txtRows, JTextField txtColumns) {
 
-    if (fullInputs(board, Integer.parseInt(txtRows.getText()),
-        Integer.parseInt(txtColumns.getText()))) {
+    if (fullInputs(board, Integer.parseInt(txtRows.getText()), Integer.parseInt(txtColumns.getText()))) {
 
       int f = Integer.parseInt(txtRows.getText());
       int c = Integer.parseInt(txtColumns.getText());
@@ -155,12 +153,12 @@ public final class ArraysService {
 
             if (i == j) {
               principal += "[" + board[i][j].getText() + "]";
-              board[i][j].setBackground(MAIN_COLOR);
+              board[i][j].setBackground(Styles.MAIN_COLOR);
             }
 
             if (i + j == f - 1) {
               secundaria.append("[").append(board[i][j].getText()).append("]");
-              board[i][j].setBackground(TEXT_COLOR);
+              board[i][j].setBackground(Styles.TEXT_COLOR);
             }
           }
         }
@@ -207,7 +205,7 @@ public final class ArraysService {
         matrizResult[f][c] = new JButton();
         matrizResult[f][c].setBounds(x, y, 45, 45);
         matrizResult[f][c].setText(String.valueOf(matrixC[f][c]));
-        matrizResult[f][c].setFont(SMALL);
+        matrizResult[f][c].setFont(Styles.SMALL);
         result.add(matrizResult[f][c]);
         x = x + 45;
       }
@@ -216,7 +214,7 @@ public final class ArraysService {
       y = y + 45;
     }
 
-    result.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    result.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     result.setSize(480, 480);
     result.setTitle("Result of multiplying A x B");
     result.setResizable(false);
@@ -285,7 +283,7 @@ public final class ArraysService {
 
         matrizResult[f][c].addActionListener(e -> manualFill(e, matrizResult, filas, columnas));
 
-        matrizResult[f][c].setFont(MEDIUM);
+        matrizResult[f][c].setFont(Styles.MEDIUM);
         result.add(matrizResult[f][c]);
         x = x + 45;
       }
@@ -295,7 +293,7 @@ public final class ArraysService {
     }
 
     JButton btnSend = new JButton("Finished");
-    btnSend.setBackground(MAIN_COLOR);
+    btnSend.setBackground(Styles.MAIN_COLOR);
     btnSend.setBounds(250, 455, 120, 25);
     result.add(btnSend);
     btnSend.addActionListener(e -> {
@@ -313,12 +311,12 @@ public final class ArraysService {
     });
 
     JButton btnAuto = new JButton("Auto fill");
-    btnAuto.setBackground(TEXT_COLOR);
+    btnAuto.setBackground(Styles.TEXT_COLOR);
     btnAuto.setBounds(100, 455, 120, 25);
     result.add(btnAuto);
     btnAuto.addActionListener(e -> clickOnAutoFill(matrizResult, filas, columnas, parent));
 
-    result.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    result.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     result.setSize(480, 530);
     result.setTitle("Fill in B");
     result.setResizable(false);
@@ -354,7 +352,7 @@ public final class ArraysService {
         for (int c = 0; c < ci; c++) {
           matrizResult[f][c] = new JButton();
           matrizResult[f][c].setBounds(x, y, 45, 45);
-          matrizResult[f][c].setFont(MEDIUM);
+          matrizResult[f][c].setFont(Styles.MEDIUM);
           matrizResult[f][c].setText(board[c][f].getText());
           result.add(matrizResult[f][c]);
           x = x + 45;
@@ -364,7 +362,7 @@ public final class ArraysService {
         y = y + 45;
       }
 
-      result.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+      result.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
       result.setSize(480, 480);
       result.setTitle("Transposed matrix result");
       result.setResizable(false);
@@ -400,7 +398,7 @@ public final class ArraysService {
       for (int j = 0; j < Integer.parseInt(txtColumns.getText()); j++) {
         board[i][j].setText("");
         board[i][j].setBackground(parent.getBackground());
-        board[i][j].setFont(MEDIUM);
+        board[i][j].setFont(Styles.MEDIUM);
       }
     }
   }
@@ -409,9 +407,9 @@ public final class ArraysService {
 
     for (int i = 0; i < f; i++) {
       for (int j = 0; j < c; j++) {
-        matrix[i][j].setText(String.valueOf(getIntRandom(0, 9)));
+        matrix[i][j].setText(String.valueOf(GeneralUtils.getIntRandom(0, 9)));
         matrix[i][j].setBackground(parent.getBackground());
-        matrix[i][j].setFont(MEDIUM);
+        matrix[i][j].setFont(Styles.MEDIUM);
       }
     }
   }
@@ -456,7 +454,7 @@ public final class ArraysService {
         txtColumns.setEnabled(false);
 
         btnAction.setText("New");
-        btnAction.setBackground(MAIN_COLOR);
+        btnAction.setBackground(Styles.MAIN_COLOR);
       }
 
     } else if (btnAction.getText().equals("New") && isWork) {
@@ -476,7 +474,7 @@ public final class ArraysService {
         txtColumns.setEnabled(true);
 
         btnAction.setText("Show");
-        btnAction.setBackground(TEXT_COLOR);
+        btnAction.setBackground(Styles.TEXT_COLOR);
       }
 
   }
@@ -488,7 +486,7 @@ public final class ArraysService {
         jButtons[j].setVisible(false);
         jButtons[j].setText("");
         jButtons[j].setBackground(parent.getBackground());
-        jButtons[j].setFont(MEDIUM);
+        jButtons[j].setFont(Styles.MEDIUM);
       }
     }
   }

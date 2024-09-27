@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.services;
 
+import java.util.Objects;
 import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -7,7 +8,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-
 import com.bookverse.development.packapps.apps.repositories.NotesRepository;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
@@ -81,7 +81,9 @@ public final class NotesService {
 
   private static void parseData(JTextField[] notesFields, JComboBox<String>[] percentagesBoxes) {
     IntStream.range(0, thereAreNotes).forEach(i -> {
-      percentagesNumbers[i] = Integer.parseInt(percentagesBoxes[i].getSelectedItem().toString());
+      percentagesNumbers[i] = Integer.parseInt(
+          Objects.requireNonNull(percentagesBoxes[i].getSelectedItem()).toString()
+      );
       notesNumbers[i] = Float.parseFloat(notesFields[i].getText());
     });
   }
@@ -97,7 +99,16 @@ public final class NotesService {
   }
 
   public static void clickOnCalculate(
-      JRadioButton scale1, JRadioButton scale2, JLabel image, JTextField txtName, JTextField[] notesFields, JComboBox<String>[] percentagesBoxes, JButton btnAddNote, JButton btnDeleteNote, JButton btnReset) {
+      JRadioButton scale1,
+      JRadioButton scale2,
+      JLabel image,
+      JTextField txtName,
+      JTextField[] notesFields,
+      JComboBox<String>[] percentagesBoxes,
+      JButton btnAddNote,
+      JButton btnDeleteNote,
+      JButton btnReset
+  ) {
 
     setScale(scale1, scale2);
 
@@ -107,7 +118,6 @@ public final class NotesService {
       totalPercentage = 0;
 
       parseData(notesFields, percentagesBoxes);
-
       addNotes();
 
       String scale = "";
@@ -118,47 +128,22 @@ public final class NotesService {
         scale = "1 to 9";
       }
 
-      if (totalPercentage == 100) {
-
-        if (totalNote < minNote) {
-          image.setIcon(new ImageIcon(Resources.getImage("dead.png")));
-        } else {
-          image.setIcon(new ImageIcon(Resources.getImage("win.png")));
-        }
-
+      if (totalPercentage > 100) {
         Alerts.message(
-            "Definitive",
-            "<html>" + Format.style() + "<strong>Name: </strong>" + txtName.getText()
-            + "<br>" + "<strong>Note: </strong>"
-            + String.format("%.2f", totalNote) + "</html>"
+            "Verify!", "<html>" + Format.style() + "<strong>Percentage exceeded</strong></html>"
+        );
+        return;
+      }
+
+      if (totalPercentage == 100) {
+        fullPercentage(
+            image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset, scale
         );
 
-        if (totalNote < minNote) {
-          NotesRepository.insert("Reproved", scale, txtName.getText(), totalPercentage, totalNote);
-        } else {
-          NotesRepository.insert("Approved", scale, txtName.getText(), totalPercentage, totalNote);
-        }
-
-        clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset);
-
-      } else if (totalPercentage > 100) {
-
-        Alerts.message("Verify!", "<html>" + Format.style()
-            + "<strong>Percentage exceeded</strong></html>");
-
       } else if (missingNote > maxNote) {
-
-        image.setIcon(new ImageIcon(Resources.getImage("dead.png")));
-
-        Alerts.message("Ay :(", "<html>" + Format.style()
-            + "<strong>There is nothing to do, better cancel...</strong><br><br>"
-            + "<strong>Accumulated note: </strong>" + String.format("%.2f", totalNote) + "<br>"
-            + "<strong>You would have to get " + String.format("%.2f", missingNote) + " in the "
-            + String.format("%.0f", 100 - totalPercentage) + " % remaining</strong></html>");
-
-        NotesRepository.insert("Reproved", scale, txtName.getText(), totalPercentage, totalNote);
-        clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset);
-
+        isImposible(
+            image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset, scale
+        );
       } else {
 
         if (totalNote >= 0 && totalNote < minNote) {
@@ -197,6 +182,46 @@ public final class NotesService {
           + "<strong>Notes: </strong>less than or equal to " + maxNote + "<br>"
           + "<strong>Fields: </strong>empty" + "</html>");
     }
+  }
+
+  private static void isImposible(JLabel image, JTextField txtName, JTextField[] notesFields,
+      JComboBox<String>[] percentagesBoxes, JButton btnAddNote, JButton btnDeleteNote,
+      JButton btnReset, String scale) {
+    image.setIcon(new ImageIcon(Resources.getImage("dead.png")));
+
+    Alerts.message("Ay :(", "<html>" + Format.style()
+        + "<strong>There is nothing to do, better cancel...</strong><br><br>"
+        + "<strong>Accumulated note: </strong>" + String.format("%.2f", totalNote) + "<br>"
+        + "<strong>You would have to get " + String.format("%.2f", missingNote) + " in the "
+        + String.format("%.0f", 100 - totalPercentage) + " % remaining</strong></html>");
+
+    NotesRepository.insert("Reproved", scale, txtName.getText(), totalPercentage, totalNote);
+    clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset);
+  }
+
+  private static void fullPercentage(JLabel image, JTextField txtName, JTextField[] notesFields,
+      JComboBox<String>[] percentagesBoxes, JButton btnAddNote, JButton btnDeleteNote,
+      JButton btnReset, String scale) {
+    if (totalNote < minNote) {
+      image.setIcon(new ImageIcon(Resources.getImage("dead.png")));
+    } else {
+      image.setIcon(new ImageIcon(Resources.getImage("win.png")));
+    }
+
+    Alerts.message(
+        "Definitive",
+        "<html>" + Format.style() + "<strong>Name: </strong>" + txtName.getText()
+        + "<br>" + "<strong>Note: </strong>"
+        + String.format("%.2f", totalNote) + "</html>"
+    );
+
+    if (totalNote < minNote) {
+      NotesRepository.insert("Reproved", scale, txtName.getText(), totalPercentage, totalNote);
+    } else {
+      NotesRepository.insert("Approved", scale, txtName.getText(), totalPercentage, totalNote);
+    }
+
+    clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset);
   }
 
   public static void clickOnReset(

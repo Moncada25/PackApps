@@ -10,7 +10,6 @@ import jakarta.mail.internet.MimeMessage;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
 import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
@@ -44,8 +43,10 @@ public final class EmailService {
       transport.close();
 
       if(toDeveloper){
-        Alerts.message("Success!", "<center>Email sent</center> <br>"
-            + "Feedback sent successfully, your opinion is very important to us.");
+        Alerts.message(
+            "Success!", "<center>Email sent</center> <br>" +
+                "Feedback sent successfully, your opinion is very important to us."
+        );
       }else{
         Alerts.message("Success!", "Your email was sent successfully.");
       }

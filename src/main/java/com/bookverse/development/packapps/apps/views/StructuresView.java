@@ -17,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class StructuresView extends JDialog implements MouseListener {
 
-  
   private JLabel btnStack;
   private JLabel btnQueue;
   private JLabel btnExit;

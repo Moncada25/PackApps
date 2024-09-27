@@ -2,7 +2,6 @@ package com.bookverse.development.packapps.apps.services;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
-
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 
 public final class CalculatorService {
@@ -11,34 +10,20 @@ public final class CalculatorService {
   private static boolean point = false;
   private static String firstNumber;
   private static String sign;
-  public static int sw = 1, s = 1;
+  public static int sw = 1;
+  public static int s = 1;
   
   private static String operations(String firstNumber, String secondNumber, String sign) {
 
-    double result;
-
-    switch (sign) {
-      case "+":
-        result = Double.parseDouble(firstNumber) + Double.parseDouble(secondNumber);
-        break;
-      case "-":
-        result = Double.parseDouble(firstNumber) - Double.parseDouble(secondNumber);
-        break;
-      case "*":
-        result = Double.parseDouble(firstNumber) * Double.parseDouble(secondNumber);
-        break;
-      case "/":
-        result = Double.parseDouble(firstNumber) / Double.parseDouble(secondNumber);
-        break;
-      case "x^y":
-        result = Math.pow(Double.parseDouble(firstNumber), Double.parseDouble(secondNumber));
-        break;
-      case "√":
-        result = Math.sqrt(Double.parseDouble(firstNumber));
-        break;
-      default:
-        throw new IllegalStateException("Unexpected value: " + sign);
-    }
+    double result = switch (sign) {
+      case "+" -> Double.parseDouble(firstNumber) + Double.parseDouble(secondNumber);
+      case "-" -> Double.parseDouble(firstNumber) - Double.parseDouble(secondNumber);
+      case "*" -> Double.parseDouble(firstNumber) * Double.parseDouble(secondNumber);
+      case "/" -> Double.parseDouble(firstNumber) / Double.parseDouble(secondNumber);
+      case "x^y" -> Math.pow(Double.parseDouble(firstNumber), Double.parseDouble(secondNumber));
+      case "√" -> Math.sqrt(Double.parseDouble(firstNumber));
+      default -> throw new IllegalStateException("Unexpected value: " + sign);
+    };
 
     return String.valueOf(result);
   }
@@ -110,7 +95,7 @@ public final class CalculatorService {
 
     try {
       
-      if (field.getText().length() > 0) {
+      if (!field.getText().isEmpty()) {
         result = Double.parseDouble(operations(field.getText(), "0" , "√"));
         field.setText(String.valueOf(result));
       }
@@ -149,7 +134,7 @@ public final class CalculatorService {
 
     try {
 
-      if (field.getText().length() > 0) {
+      if (!field.getText().isEmpty()) {
         result = Math.exp(Double.parseDouble(field.getText()));
         field.setText(String.valueOf(result));
       }
@@ -163,7 +148,7 @@ public final class CalculatorService {
 
     try {
 
-      if (field.getText().length() > 0) {
+      if (!field.getText().isEmpty()) {
         result = (-1) * Double.parseDouble(field.getText());
         field.setText(String.valueOf(result));
       }

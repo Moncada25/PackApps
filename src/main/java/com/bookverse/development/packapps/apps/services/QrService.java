@@ -24,9 +24,8 @@ public final class QrService {
 
     try {
 
-      binaryBitmap = new BinaryBitmap(
-          new HybridBinarizer(new BufferedImageLuminanceSource(
-              ImageIO.read(new FileInputStream(image))))
+      binaryBitmap = new BinaryBitmap(new HybridBinarizer(
+          new BufferedImageLuminanceSource(ImageIO.read(new FileInputStream(image))))
       );
 
       return new MultiFormatReader().decode(binaryBitmap).getText();

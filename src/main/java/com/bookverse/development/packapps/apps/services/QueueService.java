@@ -3,18 +3,20 @@ package com.bookverse.development.packapps.apps.services;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-
-import static com.bookverse.development.packapps.apps.utils.ui.Alerts.inputNumber;
-
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
+import com.bookverse.development.packapps.apps.utils.constants.Styles;
 
 public final class QueueService {
 
-  public static int i = 0, x = 50, y = 400, countPairs = 0, selectedDate = 0;
-  public static double add = 0, totalAdd = 0, sum = 0;
+  public static int i = 0;
+  public static int x = 50;
+  public static int y = 400;
+  public static int countPairs = 0;
+  public static int selectedDate = 0;
+  public static double add = 0;
+  public static double totalAdd = 0;
+  public static double sum = 0;
   public static String result = "";
 
   private static Object peek(JButton[] elements) {
@@ -61,15 +63,15 @@ public final class QueueService {
 
   public static void clickOnPairs(JButton[] elements, JLabel title) {
 
+    StringBuilder resultBuilder = new StringBuilder();
+
     for (int n = 0; n < i; n++) {
-
-      if (Integer.parseInt(elements[n].getText()) % 2 == 0) {
-
+      int elementValue = Integer.parseInt(elements[n].getText());
+      if (elementValue % 2 == 0) {
         if (countPairs % 10 == 0) {
-          result += "\n";
+          resultBuilder.append("\n");
         }
-
-        result += "[" + elements[n].getText() + "]";
+        result = resultBuilder.append("[").append(elementValue).append("]").toString();
         countPairs++;
       }
     }
@@ -141,7 +143,7 @@ public final class QueueService {
 
     i--;
 
-    if (elements[0].getBackground() == TEXT_COLOR) {
+    if (elements[0].getBackground() == Styles.TEXT_COLOR) {
       selectedDate--;
       sum -= Double.parseDouble((elements[0].getText()));
       elements[0].setBackground(parent.getBackground());
@@ -187,7 +189,7 @@ public final class QueueService {
 
     if (i < elements.length) {
       do {
-        int num = Integer.parseInt(inputNumber("Enter a numeric data", 6));
+        int num = Integer.parseInt(Alerts.inputNumber("Enter a numeric data", 6));
         push(num, elements, title, bonus, parent);
         i++;
 

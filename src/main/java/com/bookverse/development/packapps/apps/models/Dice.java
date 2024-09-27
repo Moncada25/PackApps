@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.apps.models;
 
 import lombok.Getter;
+import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
 
 @Getter
 public class Dice {
@@ -8,7 +9,7 @@ public class Dice {
   private int value;
 
   public int throwDices() {
-    value = (1 + (int) (Math.random() * 6));
+    value = GeneralUtils.getIntRandom(1, 6);
     return value;
   }
 }

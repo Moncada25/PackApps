@@ -13,6 +13,9 @@ import com.bookverse.development.packapps.apps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -24,10 +27,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class LoginStore extends JDialog implements ActionListener {
 
-  private JButton btnLogin, btnExit, btnRegister;
+  private JButton btnLogin;
+  private JButton btnExit;
+  private JButton btnRegister;
   private JTextField txtUser;
   private JPasswordField txtPassword;
 
@@ -37,8 +43,8 @@ public class LoginStore extends JDialog implements ActionListener {
   }
 
   public void start(JFrame parent) {
-    setSize(375, 400);
-    setResizable(false);
+    setSize(400, 350);
+    setResizable(true);
     setLocationRelativeTo(parent);
     setTitle("Store");
     Effects.fadeIn(this);
@@ -47,115 +53,113 @@ public class LoginStore extends JDialog implements ActionListener {
   }
 
   private void createComponents() {
-
-    setLayout(null);
+    setLayout(new GridBagLayout());
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     setIconImage(new ImageIcon(Resources.getImage("compraventa.png")).getImage());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(10, 20, 10, 20); // Add padding between elements and side borders
+    gbc.fill = GridBagConstraints.BOTH; // Make components fill the space
+    gbc.weightx = 1.0; // Allow horizontal expansion
+    gbc.weighty = 1.0; // Allow vertical expansion
 
-    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
-    btnExit.setBounds(200, 225, 90, 30);
+    // Header
+    JLabel title = Resources.getLabel("<html><strong><em>Login</em></strong></html>", MAIN_COLOR, this, BIG);
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.gridwidth = 2;
+    gbc.anchor = GridBagConstraints.CENTER;
+    add(title, gbc);
 
-    JLabel alreadyRegister = Resources
-        .getLabel("<html><strong>Are you not registered?</strong></html>", MAIN_COLOR, this, SMALL);
-    alreadyRegister.setBounds(110, 260, 300, 50);
-
-    btnRegister = Resources.getButton("Sign up", TEXT_COLOR, this, this);
-    btnRegister.setBounds(135, 300, 100, 30);
-
-    btnLogin = Resources.getButton("Enter", TEXT_COLOR, this, this);
-    btnLogin.setBounds(80, 225, 90, 30);
-
-    JLabel title = Resources
-        .getLabel("<html><strong><em>Login</em></strong></html>", MAIN_COLOR, this, BIG);
-    title.setBounds(152, 5, 200, 40);
-
-    JLabel user = Resources
-        .getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this,
-            MEDIUM);
-    user.setBounds(145, 68, 100, 30);
+    // Center
+    JLabel user = Resources.getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
+    gbc.gridx = 0;
+    gbc.gridy = 1;
+    gbc.gridwidth = 1;
+    gbc.anchor = GridBagConstraints.WEST;
+    add(user, gbc);
 
     txtUser = new JTextField();
-    txtUser.setBounds(110, 100, 150, 30);
-    txtUser.setHorizontalAlignment(JTextField.CENTER);
-    add(txtUser);
-
+    txtUser.setHorizontalAlignment(SwingConstants.CENTER);
     txtUser.addKeyListener(new KeyAdapter() {
-
+      @Override
       public void keyPressed(KeyEvent e) {
-        txtUserKeyPressed(e);
-      }
-
-      private void txtUserKeyPressed(KeyEvent e) {
-
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
           btnEnterAP();
-          setVisible(true);
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
           dispose();
         }
       }
 
+      @Override
       public void keyTyped(KeyEvent evt) {
-        txtUsuarioKeyTyped(evt);
-      }
-
-      private void txtUsuarioKeyTyped(KeyEvent evt) {
         Format.onlyAlfa(evt.getKeyChar(), evt, txtUser.getText(), 12);
       }
     });
+    gbc.gridx = 1;
+    gbc.gridy = 1;
+    add(txtUser, gbc);
 
-    JLabel password = Resources
-        .getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this,
-            MEDIUM);
-    password.setBounds(145, 143, 120, 30);
+    JLabel password = Resources.getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
+    gbc.gridx = 0;
+    gbc.gridy = 2;
+    add(password, gbc);
 
     txtPassword = new JPasswordField();
-    txtPassword.setBounds(110, 175, 150, 30);
-    txtPassword.setHorizontalAlignment(JTextField.CENTER);
-    add(txtPassword);
-
+    txtPassword.setHorizontalAlignment(SwingConstants.CENTER);
     txtPassword.addKeyListener(new KeyAdapter() {
-
+      @Override
       public void keyPressed(KeyEvent e) {
-        txtPassKeyPressed(e);
-      }
-
-      private void txtPassKeyPressed(KeyEvent e) {
-
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
           btnEnterAP();
-          setVisible(true);
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
           dispose();
         }
       }
 
+      @Override
       public void keyTyped(KeyEvent evt) {
-        txtCodKeyTyped(evt);
-      }
-
-      private void txtCodKeyTyped(KeyEvent evt) {
         Format.onlyAlfa(evt.getKeyChar(), evt, String.valueOf(txtPassword.getPassword()), 20);
       }
     });
+    gbc.gridx = 1;
+    gbc.gridy = 2;
+    add(txtPassword, gbc);
+
+    btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
+    gbc.gridx = 0;
+    gbc.gridy = 3;
+    add(btnExit, gbc);
+
+    btnLogin = Resources.getButton("Enter", TEXT_COLOR, this, this);
+    gbc.gridx = 1;
+    gbc.gridy = 3;
+    gbc.gridwidth = 1;
+    add(btnLogin, gbc);
+
+    // Footer
+    JLabel alreadyRegister = Resources.getLabel("<html><strong>Are you not registered?</strong></html>", MAIN_COLOR, this, SMALL);
+    gbc.gridx = 0;
+    gbc.gridy = 4;
+    gbc.gridwidth = 2;
+    gbc.anchor = GridBagConstraints.CENTER;
+    add(alreadyRegister, gbc);
+
+    btnRegister = Resources.getButton("Sign up", TEXT_COLOR, this, this);
+    gbc.gridx = 0;
+    gbc.gridy = 5;
+    gbc.gridwidth = 2;
+    add(btnRegister, gbc);
   }
 
   private void btnEnterAP() {
-
-    if (txtUser.getText().trim().isEmpty() || String.valueOf(txtPassword.getPassword()).trim()
-        .isEmpty()) {
+    if (txtUser.getText().trim().isEmpty() || String.valueOf(txtPassword.getPassword()).trim().isEmpty()) {
       Alerts.inputSomethingText();
     } else {
-
-      if (OlderRepository.searchUserRegister(txtUser.getText(),
-          Crypto.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
-
+      if (OlderRepository.searchUserRegister(txtUser.getText(), Crypto.encrypt(String.valueOf(txtPassword.getPassword()), true))) {
         OlderRepository.recordLogin("Online", txtUser.getText());
         new HomeStore(this, true).start(this, txtUser.getText());
-
         txtPassword.setText("");
         txtUser.setText("");
-
       } else {
         Alerts.message("Verify!", "Incorrect data, try again.");
         txtPassword.setText("");
@@ -167,17 +171,13 @@ public class LoginStore extends JDialog implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-
     if (e.getSource() == btnExit) {
       Effects.fadeOut(this);
     } else if (GeneralUtils.verifyConnection("Make sure you are connected to a network", true)) {
-
       if (e.getSource() == btnLogin) {
         btnEnterAP();
-        setVisible(true);
       } else if (e.getSource() == btnRegister) {
         new SignUp(this, true).start(this);
-        setVisible(true);
       }
     }
   }

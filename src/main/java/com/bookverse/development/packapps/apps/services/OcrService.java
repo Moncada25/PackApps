@@ -1,7 +1,6 @@
 package com.bookverse.development.packapps.apps.services;
 
 import java.io.File;
-
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
