@@ -8,37 +8,29 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
-
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
-
-import static com.bookverse.development.packapps.apps.utils.other.Format.isNumber;
-import static com.bookverse.development.packapps.apps.utils.other.Format.onlyAPoint;
-import static com.bookverse.development.packapps.apps.utils.other.Format.onlyNumberCalc;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnAdd;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnClean;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnDelete;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnDivide;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnEqual;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnEuler;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnLess;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnMultiply;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnNegative;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnPoint;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnPotency;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnRoot;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.clickOnZero;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.keyPoint;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.s;
-import static com.bookverse.development.packapps.apps.services.CalculatorService.sw;
+import com.bookverse.development.packapps.apps.services.CalculatorService;
+import com.bookverse.development.packapps.apps.utils.other.Format;
+import javax.swing.SwingConstants;
 
 public class CalculatorView extends JDialog implements ActionListener {
 
-  
   private JButton[][] numbers;
-  private JButton btnZero, btnPoint, btnAdd, btnLess, btnDivide, btnMultiply, btnNegative, btnRoot, btnEuler, btnPower, btnEqual, btnDelete, btnClean;
+  private JButton btnZero;
+  private JButton btnPoint;
+  private JButton btnAdd;
+  private JButton btnLess;
+  private JButton btnDivide;
+  private JButton btnMultiply;
+  private JButton btnNegative;
+  private JButton btnRoot;
+  private JButton btnEuler;
+  private JButton btnPower;
+  private JButton btnEqual;
+  private JButton btnDelete;
+  private JButton btnClean;
   private JTextField txtResult;
 
   public CalculatorView(JDialog parent, boolean modal) {
@@ -53,11 +45,12 @@ public class CalculatorView extends JDialog implements ActionListener {
 
     txtResult = new JTextField("");
     txtResult.setBounds(50, 14, 215, 43);
-    txtResult.setHorizontalAlignment(JTextField.CENTER);
+    txtResult.setHorizontalAlignment(SwingConstants.CENTER);
     add(txtResult);
 
     txtResult.addKeyListener(new KeyAdapter() {
 
+      @Override
       public void keyPressed(KeyEvent e) {
         txtResultKeyPressed(e);
       }
@@ -65,31 +58,33 @@ public class CalculatorView extends JDialog implements ActionListener {
       private void txtResultKeyPressed(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_ADD) {
-          clickOnAdd(txtResult);
+          CalculatorService.clickOnAdd(txtResult);
         } else if (e.getKeyCode() == KeyEvent.VK_SUBTRACT) {
-          clickOnLess(txtResult);
+          CalculatorService.clickOnLess(txtResult);
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-          clickOnEqual(txtResult);
+          CalculatorService.clickOnEqual(txtResult);
         } else if (e.getKeyCode() == KeyEvent.VK_DIVIDE) {
-          clickOnDivide(txtResult);
+          CalculatorService.clickOnDivide(txtResult);
         } else if (e.getKeyCode() == KeyEvent.VK_MULTIPLY) {
-          clickOnMultiply(txtResult);
+          CalculatorService.clickOnMultiply(txtResult);
         } else if (e.getKeyCode() == 110 || e.getKeyCode() == 46) {
-          keyPoint(txtResult);
+          CalculatorService.keyPoint(txtResult);
         } else if (e.getKeyCode() == 8) {
-          clickOnDelete(txtResult);
+          CalculatorService.clickOnDelete(txtResult);
         } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
           dispose();
         }
       }
 
+      @Override
       public void keyTyped(KeyEvent e) {
+        Format.onlyNumbersAndPoint(e.getKeyChar(), e, txtResult.getText(), 15);
         txtResultKeyTyped(e);
       }
 
       private void txtResultKeyTyped(KeyEvent e) {
-        onlyNumberCalc(e.getKeyChar(), e, txtResult.getText(), 15);
-        onlyAPoint(e.getKeyChar(), e, txtResult.getText());
+        Format.onlyNumberCalc(e.getKeyChar(), e, txtResult.getText(), 15);
+        Format.onlyAPoint(e.getKeyChar(), e, txtResult.getText());
       }
     });
 
@@ -164,31 +159,31 @@ public class CalculatorView extends JDialog implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == btnZero) {
-      clickOnZero(btnZero);
+      CalculatorService.clickOnZero(btnZero);
     } else if (e.getSource() == btnPoint) {
-      clickOnPoint(txtResult);
+      CalculatorService.clickOnPoint(txtResult);
     } else if (e.getSource() == btnDelete) {
-      clickOnDelete(txtResult);
+      CalculatorService.clickOnDelete(txtResult);
     } else if (e.getSource() == btnClean) {
-      clickOnClean(txtResult);
+      CalculatorService.clickOnClean(txtResult);
     } else if (e.getSource() == btnNegative) {
-      clickOnNegative(txtResult);
+      CalculatorService.clickOnNegative(txtResult);
     } else if (e.getSource() == btnEuler) {
-      clickOnEuler(txtResult);
+      CalculatorService.clickOnEuler(txtResult);
     } else if (e.getSource() == btnDivide) {
-      clickOnDivide(txtResult);
+      CalculatorService.clickOnDivide(txtResult);
     } else if (e.getSource() == btnMultiply) {
-      clickOnMultiply(txtResult);
+      CalculatorService.clickOnMultiply(txtResult);
     } else if (e.getSource() == btnLess) {
-      clickOnLess(txtResult);
+      CalculatorService.clickOnLess(txtResult);
     } else if (e.getSource() == btnAdd) {
-      clickOnAdd(txtResult);
+      CalculatorService.clickOnAdd(txtResult);
     } else if (e.getSource() == btnRoot) {
-      clickOnRoot(txtResult);
+      CalculatorService.clickOnRoot(txtResult);
     } else if (e.getSource() == btnPower) {
-      clickOnPotency(txtResult);
+      CalculatorService.clickOnPotency(txtResult);
     } else if (e.getSource() == btnEqual) {
-      clickOnEqual(txtResult);
+      CalculatorService.clickOnEqual(txtResult);
     }
 
     for (int f = 0; f < 3; f++) {
@@ -198,20 +193,15 @@ public class CalculatorView extends JDialog implements ActionListener {
           break;
         }
 
-        if (!isNumber(txtResult.getText()) && !txtResult.getText().isEmpty()){
-          Alerts.message("Number invalid", "Try again");
+        if (e.getSource() == numbers[f][c] && CalculatorService.sw == 1 && CalculatorService.s == 1) {
+
           txtResult.setText("");
-        } else {
+          txtResult.setText(txtResult.getText() + numbers[f][c].getText());
+          CalculatorService.sw = 0;
 
-          if (e.getSource() == numbers[f][c] && sw == 1 && s == 1) {
-
-            txtResult.setText("");
-            txtResult.setText(txtResult.getText() + numbers[f][c].getText());
-            sw = 0;
-
-          } else if (e.getSource() == numbers[f][c] && (sw == 0 || s == 0)) {
-            txtResult.setText(txtResult.getText() + numbers[f][c].getText());
-          }
+        } else if (e.getSource() == numbers[f][c] && (
+            CalculatorService.sw == 0 || CalculatorService.s == 0)) {
+          txtResult.setText(txtResult.getText() + numbers[f][c].getText());
         }
       }
     }

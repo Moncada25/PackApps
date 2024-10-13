@@ -24,4 +24,7 @@ public final class DatabaseConstants {
   public static final String PORT_DB = "3306";
   public static final String URL_DRIVER_DB =
       "jdbc:mysql://" + HOSTNAME_DB + ":" + PORT_DB + "/" + NAME_DB+ "?serverTimezone=UTC";
+
+  private DatabaseConstants() {
+  }
 }

@@ -12,7 +12,7 @@ public final class CalculatorService {
   private static String sign;
   public static int sw = 1;
   public static int s = 1;
-  
+
   private static String operations(String firstNumber, String secondNumber, String sign) {
 
     double result = switch (sign) {

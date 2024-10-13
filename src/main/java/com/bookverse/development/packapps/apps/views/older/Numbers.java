@@ -28,9 +28,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class Numbers extends JDialog implements MouseListener {
 
-  private JLabel btnPrimeNumbers, btnCalculator, btnPhi, btnPi, btnOther, welcome;
-
-  
+  private JLabel btnPrimeNumbers;
+  private JLabel btnCalculator;
+  private JLabel btnPhi;
+  private JLabel btnPi;
+  private JLabel btnOther;
+  private JLabel welcome;
 
   public Numbers(JFrame parent, boolean modal) {
     super(parent, modal);

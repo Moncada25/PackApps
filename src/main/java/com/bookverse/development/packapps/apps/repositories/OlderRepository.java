@@ -197,7 +197,6 @@ public final class OlderRepository {
       }
 
     } catch (SQLException e) {
-      System.out.println(e.getMessage());
       Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
     }
 

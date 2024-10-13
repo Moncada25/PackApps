@@ -9,6 +9,10 @@ import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -19,15 +23,19 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class Phi extends JDialog implements ActionListener, MouseListener {
 
-  
-  private JButton btnCalculateFirst, btnCalculateSecond, btnProportion;
+  private JButton btnCalculateFirst;
+  private JButton btnCalculateSecond;
+  private JButton btnProportion;
   private JLabel message;
   private JLabel value;
-  private JTextField txtFirst, txtSecond, txtProportion;
-  private double phi;
+  private JTextField txtFirst;
+  private JTextField txtSecond;
+  private JTextField txtProportion;
+  private String phi;
 
   public Phi(JDialog parent, boolean modal) {
     super(parent, modal);
@@ -35,27 +43,44 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
   }
 
   private void createComponents() {
+    // Cambiamos el layout a GridBagLayout
+    setLayout(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(10, 10, 10, 10); // Añadimos espacio entre componentes
 
-    setLayout(null);
+    // Inicializamos los elementos globales
 
-    JLabel lblFirst = Resources
-        .getLabel("<html><strong>Fibonacci's series</strong></html>", MAIN_COLOR, this, MEDIUM);
-    lblFirst.setBounds(25, 70, 260, 30);
+    // Etiqueta "Approach to φ"
+    message = new JLabel("<html><em><strong>Approach to φ</strong></em></html>", SwingConstants.CENTER);
+    message.setForeground(MAIN_COLOR);
+    message.setFont(BIG);
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.gridwidth = 3;
+    gbc.anchor = GridBagConstraints.CENTER;
+    add(message, gbc);
 
-    JLabel firstFormula = Resources
-        .getLabel("<html><strong>Nth Fibonacci number</strong></html>", MAIN_COLOR, this, MEDIUM);
-    firstFormula.setBounds(25, 120, 260, 30);
+    // Etiqueta "Fibonacci's series"
+    JLabel lblFirst = new JLabel("<html><strong>Fibonacci's series</strong></html>", SwingConstants.LEFT);
+    lblFirst.setForeground(MAIN_COLOR);
+    lblFirst.setFont(MEDIUM);
+    gbc.gridx = 0;
+    gbc.gridy = 1;
+    gbc.gridwidth = 1;
+    gbc.anchor = GridBagConstraints.WEST;
+    add(lblFirst, gbc);
 
-    btnCalculateFirst = Resources.getButton("Show", TEXT_COLOR, this, this);
-    btnCalculateFirst.setBounds(360, 75, 70, 25);
-
-    txtFirst = new JTextField();
-    txtFirst.setBounds(295, 75, 50, 25);
-    txtFirst.setHorizontalAlignment(JTextField.CENTER);
-    add(txtFirst);
+    // Campo de texto para "Fibonacci's series"
+    txtFirst = new JTextField(5); // Define el número de columnas
+    txtFirst.setHorizontalAlignment(SwingConstants.CENTER);
+    gbc.gridx = 1;
+    gbc.gridy = 1;
+    gbc.fill = GridBagConstraints.HORIZONTAL;
+    add(txtFirst, gbc);
 
     txtFirst.addKeyListener(new KeyAdapter() {
 
+      @Override
       public void keyPressed(KeyEvent e) {
         txt1KeyPressed(e);
       }
@@ -72,6 +97,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
         }
       }
 
+      @Override
       public void keyTyped(KeyEvent e) {
         txt1KeyTyped(e);
       }
@@ -81,27 +107,31 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
       }
     });
 
-    JLabel lblSecond = Resources
-        .getLabel("<html><strong>Approximate value</strong></html>", MAIN_COLOR, this, MEDIUM);
-    lblSecond.setBounds(25, 220, 260, 30);
+    // Botón "Show" para Fibonacci's series
+    btnCalculateFirst = new JButton("Show");
+    btnCalculateFirst.setBackground(TEXT_COLOR); // Color de fondo
+    btnCalculateFirst.addActionListener(this); // Añadir ActionListener
+    btnCalculateFirst.setPreferredSize(new Dimension(70, 25));
+    gbc.gridx = 2;
+    gbc.gridy = 1;
+    gbc.fill = GridBagConstraints.NONE;
+    add(btnCalculateFirst, gbc);
 
-    value = Resources.getLabel("", TEXT_COLOR, this, MEDIUM);
-    value.setBounds(200, 220, 280, 30);
+    // Etiqueta "Nth Fibonacci number"
+    JLabel firstFormula = new JLabel("<html><strong>Nth Fibonacci number</strong></html>", SwingConstants.LEFT);
+    firstFormula.setForeground(MAIN_COLOR);
+    firstFormula.setFont(MEDIUM);
+    gbc.gridx = 0;
+    gbc.gridy = 2;
+    add(firstFormula, gbc);
 
-    JLabel secondFormula = Resources
-        .getLabel("<html><strong>Golden ratio</strong></html>", MAIN_COLOR, this, MEDIUM);
-    secondFormula.setBounds(25, 170, 280, 30);
-
-    btnProportion = Resources.getButton("Show", TEXT_COLOR, this, this);
-    btnProportion.setBounds(360, 175, 70, 25);
-
-    btnCalculateSecond = Resources.getButton("Show", TEXT_COLOR, this, this);
-    btnCalculateSecond.setBounds(360, 125, 70, 25);
-
-    txtSecond = new JTextField();
-    txtSecond.setBounds(295, 125, 50, 25);
-    txtSecond.setHorizontalAlignment(JTextField.CENTER);
-    add(txtSecond);
+    // Campo de texto para "Nth Fibonacci number"
+    txtSecond = new JTextField(); // Define el número de columnas
+    txtSecond.setHorizontalAlignment(SwingConstants.CENTER);
+    gbc.gridx = 1;
+    gbc.gridy = 2;
+    gbc.fill = GridBagConstraints.HORIZONTAL;
+    add(txtSecond, gbc);
 
     txtSecond.addKeyListener(new KeyAdapter() {
 
@@ -129,10 +159,39 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
       }
     });
 
-    txtProportion = new JTextField();
-    txtProportion.setBounds(295, 175, 50, 25);
+    // Botón "Show" para Nth Fibonacci number
+    btnCalculateSecond = new JButton("Show");
+    btnCalculateSecond.setBackground(TEXT_COLOR); // Color de fondo
+    btnCalculateSecond.addActionListener(this); // Añadir ActionListener
+    btnCalculateSecond.setPreferredSize(new Dimension(70, 25));
+    gbc.gridx = 2;
+    gbc.gridy = 2;
+    add(btnCalculateSecond, gbc);
+
+    // Etiqueta "Golden ratio"
+    JLabel secondFormula = new JLabel("<html><strong>Golden ratio</strong></html>", SwingConstants.LEFT);
+    secondFormula.setForeground(MAIN_COLOR);
+    secondFormula.setFont(MEDIUM);
+    gbc.gridx = 0;
+    gbc.gridy = 3;
+    add(secondFormula, gbc);
+
+    // Campo de texto para "Golden ratio"
+    txtProportion = new JTextField(); // Define el número de columnas
     txtProportion.setHorizontalAlignment(JTextField.CENTER);
-    add(txtProportion);
+    gbc.gridx = 1;
+    gbc.gridy = 3;
+    gbc.fill = GridBagConstraints.HORIZONTAL;
+    add(txtProportion, gbc);
+
+    // Botón "Show" para Golden ratio
+    btnProportion = new JButton("Show");
+    btnProportion.setBackground(TEXT_COLOR); // Color de fondo
+    btnProportion.addActionListener(this); // Añadir ActionListener
+    btnProportion.setPreferredSize(new Dimension(70, 25));
+    gbc.gridx = 2;
+    gbc.gridy = 3;
+    add(btnProportion, gbc);
 
     txtProportion.addKeyListener(new KeyAdapter() {
 
@@ -160,17 +219,29 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
       }
     });
 
-    message = Resources
-        .getLabel("<html><em><strong>Approach to φ</strong></em></html>", MAIN_COLOR, this,
-            BIG);
-    message.addMouseListener(this);
-    message.setBounds(120, 8, 250, 30);
+    // Etiqueta "Approximate value"
+    JLabel lblSecond = new JLabel("<html><strong>Approximate value</strong></html>", SwingConstants.LEFT);
+    lblSecond.setForeground(MAIN_COLOR);
+    lblSecond.setFont(MEDIUM);
+    gbc.gridx = 0;
+    gbc.gridy = 4;
+    gbc.anchor = GridBagConstraints.WEST;
+    add(lblSecond, gbc);
+
+    // Valor aproximado
+    value = new JLabel();
+    value.setForeground(TEXT_COLOR); // Color de texto
+    value.setFont(MEDIUM); // Establece el formato igual que los demás labels
+    gbc.gridx = 1;
+    gbc.gridy = 4;
+    gbc.gridwidth = 2;
+    gbc.anchor = GridBagConstraints.WEST;
+    add(value, gbc);
   }
 
   public void start(JDialog parent) {
-    setBounds(0, 0, 440, 300);
-    setBounds(0, 0, 440, 300);
-    setResizable(false);
+    setSize(450, 310); // Tamaño fijo inicial
+    setResizable(false); // Hacer la ventana redimensionable
     setLocationRelativeTo(parent);
     setTitle("Phi φ");
     Effects.fadeIn(this);
@@ -198,7 +269,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     }
 
     if(num2 != 0)
-      phi = num1 / num2;
+      phi = String.format("%.10f", num1 / num2);
 
     Alerts.message("Result", numbers);
   }
@@ -221,7 +292,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     a = length / ((1 + Math.sqrt(5)) / 2);
     b = length - a;
     Alerts.message("Result",
-        "Portion A: " + String.format("%.2f", a) + " <br>Portion B: " + String.format("%.2f", b));
+        "Portion A: " + String.format("%.2f", a) + " | Portion B: " + String.format("%.2f", b));
   }
 
   @Override
@@ -229,7 +300,7 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
 
     if (e.getSource() == btnCalculateFirst) {
 
-      if (txtFirst.getText().length() > 0) {
+      if (!txtFirst.getText().isEmpty()) {
         generateFibonacci(Integer.parseInt(txtFirst.getText()));
         value.setText(phi + "...");
       } else {

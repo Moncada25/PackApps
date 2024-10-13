@@ -38,9 +38,11 @@ public final class DatabaseConnection {
       basicDataSource.setMinIdle(50);
 
       connection = basicDataSource.getConnection();
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
     }
 
-    return connection;
+      return connection;
   }
 
   public static void close(ResultSet rs) {

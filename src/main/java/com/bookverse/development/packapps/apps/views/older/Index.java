@@ -1,21 +1,8 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import static com.bookverse.development.packapps.apps.utils.constants.AppConfig.TITLE;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.BORDER_BLUE;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.DICES;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.HANGMAN;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.INVENTORY;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.LOANS;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.NOTES;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PURCHASES;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PUZZLE;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.SALES;
-
+import com.bookverse.development.packapps.apps.utils.constants.AppConfig;
+import com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants;
+import com.bookverse.development.packapps.apps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.utils.ui.Themes;
 import com.bookverse.development.packapps.apps.views.DicesGameView;
 import com.bookverse.development.packapps.apps.views.EmailView;
@@ -47,7 +34,6 @@ import java.awt.event.ActionListener;
 import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -136,49 +122,48 @@ public class Index extends JFrame implements ActionListener {
 
     try {
 
-      UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+      UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 
-      UIManager.put("PasswordField.border", BORDER_BLUE);
-      UIManager.put("PasswordField.font", MEDIUM);
+      UIManager.put("PasswordField.border", Styles.BORDER_BLUE);
+      UIManager.put("PasswordField.font", Styles.MEDIUM);
 
-      UIManager.put("TextField.border", BORDER_BLUE);
-      UIManager.put("TextField.font", MEDIUM);
+      UIManager.put("TextField.border", Styles.BORDER_BLUE);
+      UIManager.put("TextField.font", Styles.MEDIUM);
 
       UIManager.put("FileChooser.saveButtonText", "Save");
       UIManager.put("FileChooser.cancelButtonText", "Cancel");
 
-      UIManager.put("RadioButton.font", MEDIUM);
+      UIManager.put("RadioButton.font", Styles.MEDIUM);
 
-      UIManager.put("TextArea.font", MEDIUM);
+      UIManager.put("TextArea.font", Styles.MEDIUM);
 
-      UIManager.put("ComboBox.font", MEDIUM);
-      UIManager.put("ComboBox.foreground", Color.BLACK);
+      UIManager.put("ComboBox.font", Styles.MEDIUM);
+      UIManager.put("ComboBox.foreground", Styles.TEXT_COLOR);
 
-      UIManager.put("ScrollPane.border", BORDER_BLUE);
+      UIManager.put("ScrollPane.border", Styles.BORDER_BLUE);
 
       UIManager.put("MenuItem.foreground", Color.WHITE);
-      UIManager.put("MenuItem.font", MEDIUM);
+      UIManager.put("MenuItem.font", Styles.MEDIUM);
 
-      UIManager.put("MenuItem.foreground", TEXT_COLOR);
-      UIManager.put("Menu.foreground", MAIN_COLOR);
-      UIManager.put("Menu.font", MEDIUM);
+      UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
+      UIManager.put("Menu.font", Styles.MEDIUM);
 
-      UIManager.put("Button.font", MEDIUM);
+      UIManager.put("Button.font", Styles.MEDIUM);
       UIManager.put("Button.foreground", Color.BLACK);
 
-      UIManager.put("Table.focusCellHighlightBorder", BORDER_BLUE);
-      UIManager.put("TableHeader.foreground", MAIN_COLOR);
-      UIManager.put("TableHeader.font", MEDIUM);
-      UIManager.put("Table.font", MEDIUM);
-      UIManager.put("Table.foreground", TEXT_COLOR);
+      UIManager.put("Table.focusCellHighlightBorder", Styles.BORDER_BLUE);
+      UIManager.put("TableHeader.foreground", Styles.MAIN_COLOR);
+      UIManager.put("TableHeader.font", Styles.MEDIUM);
+      UIManager.put("Table.font", Styles.MEDIUM);
+      UIManager.put("Table.foreground", Styles.TEXT_COLOR);
 
       UIManager.put("OptionPane.okButtonText", "Done");
       UIManager.put("OptionPane.cancelButtonText", "No, thanks.");
       UIManager.put("OptionPane.yesButtonText", "Yes, it's okay.");
       UIManager.put("OptionPane.noButtonText", "No, thanks.");
-      UIManager.put("OptionPane.messageFont", MEDIUM);
-      UIManager.put("OptionPane.buttonFont", MEDIUM);
-      UIManager.put("OptionPane.messageForeground", TEXT_COLOR);
+      UIManager.put("OptionPane.messageFont", Styles.MEDIUM);
+      UIManager.put("OptionPane.buttonFont", Styles.MEDIUM);
+      UIManager.put("OptionPane.messageForeground", Styles.TEXT_COLOR);
 
     } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
              | IllegalAccessException e) {
@@ -188,19 +173,16 @@ public class Index extends JFrame implements ActionListener {
     Index window = new Index();
 
     Themes.welcome = new JLabel();
-    window.setSize(ArrayData.getWidthBackground(Themes.background - 1),
-        ArrayData.getLongBackground(Themes.background - 1));
+    window.setSize(ArrayData.getWidthBackground(Themes.background - 1), ArrayData.getLongBackground(Themes.background - 1));
     window.add(Themes.welcome, BorderLayout.CENTER);
-    Themes.changeBackgroundAP(ArrayData.getPathBackground(Themes.background - 1),
-        ArrayData.getWidthBackground(Themes.background - 1),
-        ArrayData.getLongBackground(Themes.background - 1), window);
+    Themes.changeBackgroundAP(ArrayData.getPathBackground(Themes.background - 1), ArrayData.getWidthBackground(Themes.background - 1), ArrayData.getLongBackground(Themes.background - 1), window);
 
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
-    window.setTitle(Config.get(TITLE.getProperty()));
-    Themes.wallpapers[Themes.background - 1].setForeground(MAIN_COLOR);
-    Themes.classicMode.setForeground(MAIN_COLOR);
+    window.setTitle(Config.get(AppConfig.TITLE.getProperty()));
+    Themes.wallpapers[Themes.background - 1].setForeground(Styles.MAIN_COLOR);
+    Themes.textureMode.setForeground(Styles.MAIN_COLOR);
     Effects.fadeIn(window);
     window.setVisible(true);
   }
@@ -218,8 +200,8 @@ public class Index extends JFrame implements ActionListener {
     moreSystems = Resources.getMenuItem("My Systems", "mysystems", this);
     moreBookverse = Resources.getMenuItem("Bookverse", "books", this);
 
-    createMenu(more, moreSystems, moreBookverse);
-    createMenu(about, read, more);
+    Resources.addMenu(more, moreSystems, moreBookverse);
+    Resources.addMenu(about, read, more);
 
     JMenu exit = Resources.getMenu("Exit", "exit");
     yesExit = Resources.getMenuItem("Are you sure?", "salir", this);
@@ -228,33 +210,33 @@ public class Index extends JFrame implements ActionListener {
     email = Resources.getMenuItem("Email", "email", this);
     comment = Resources.getMenuItem("Comment", "feedback", this);
 
-    createMenu(send, email, comment);
-    createMenu(exit, yesExit, send);
+    Resources.addMenu(send, email, comment);
+    Resources.addMenu(exit, yesExit, send);
 
     JMenu games = Resources.getMenu("Games", "games");
-    hangman = Resources.getMenuItem(HANGMAN, "ahorcado", this);
-    dices = Resources.getMenuItem(DICES, "dado", this);
+    hangman = Resources.getMenuItem(DatabaseConstants.HANGMAN, "ahorcado", this);
+    dices = Resources.getMenuItem(DatabaseConstants.DICES, "dado", this);
     roulette = Resources.getMenuItem("Roulette", "ruleta", this);
 
-    JMenu guessNumberMenu = Resources.getMenu(GUESS_NUMBER, "adivinar");
+    JMenu guessNumberMenu = Resources.getMenu(DatabaseConstants.GUESS_NUMBER, "adivinar");
     guessNumber = Resources.getMenuItem("Easy", "easy", this);
     guessNumberHard = Resources.getMenuItem("Hard", "hard", this);
 
-    createMenu(guessNumberMenu, guessNumber, guessNumberHard);
+    Resources.addMenu(guessNumberMenu, guessNumber, guessNumberHard);
 
-    JMenu puzzle = Resources.getMenu(PUZZLE, "rompecabezas");
+    JMenu puzzle = Resources.getMenu(DatabaseConstants.PUZZLE, "rompecabezas");
     puzzle4x4 = Resources.getMenuItem("Easy", "easy", this);
     puzzle5x5 = Resources.getMenuItem("Medium", "medio", this);
     puzzle6x6 = Resources.getMenuItem("Hard", "hard", this);
 
-    createMenu(puzzle, puzzle4x4, puzzle5x5, puzzle6x6);
+    Resources.addMenu(puzzle, puzzle4x4, puzzle5x5, puzzle6x6);
 
     JMenu ticTacToe = Resources.getMenu("Tic Tac Toe", "triqui");
     ticTacToePvsP = Resources.getMenuItem("Player vs Player", "jvsj", this);
     ticTacToePvsCPU = Resources.getMenuItem("Player vs CPU (beta)", "jvscpu", this);
 
-    createMenu(ticTacToe, ticTacToePvsP, ticTacToePvsCPU);
-    createMenu(games, hangman, dices, roulette, guessNumberMenu, puzzle, ticTacToe);
+    Resources.addMenu(ticTacToe, ticTacToePvsP, ticTacToePvsCPU);
+    Resources.addMenu(games, hangman, dices, roulette, guessNumberMenu, puzzle, ticTacToe);
 
     JMenu scores = Resources.getMenu("Data", "data");
     tables = Resources.getMenuItem("Database", "tabla", this);
@@ -266,103 +248,123 @@ public class Index extends JFrame implements ActionListener {
     sendWhatsApp = Resources.getMenuItem("Send Message", "whatsapp", this);
     structures = Resources.getMenuItem("Structures", "estructuras", this);
     numbers = Resources.getMenuItem("Numbers", "numeritos", this);
-    notes = Resources.getMenuItem(NOTES, "notas", this);
+    notes = Resources.getMenuItem(DatabaseConstants.NOTES, "notas", this);
     texts = Resources.getMenuItem("Texts", "textos", this);
 
     JMenu export = Resources.getMenu("Export Data", "export");
 
     JMenu exportTXT = Resources.getMenu("Document TXT", "txt");
-    guessNumberTXT = Resources.getMenuItem(GUESS_NUMBER, "adivinar", this);
-    hangmanTXT = Resources.getMenuItem(HANGMAN, "ahorcado", this);
-    purchasesTXT = Resources.getMenuItem(PURCHASES, "comprar", this);
-    dicesTXT = Resources.getMenuItem(DICES, "dado", this);
-    notesTXT = Resources.getMenuItem(NOTES, "notas", this);
-    puzzleTXT = Resources.getMenuItem(PUZZLE, "rompecabezas", this);
-    inventoryTXT = Resources.getMenuItem(INVENTORY, "inventario", this);
-    cashRegisterTXT = Resources.getMenuItem(CASH_REGISTER, "registradora", this);
-    loansTXT = Resources.getMenuItem(LOANS, "prestamos", this);
-    salesTXT = Resources.getMenuItem(SALES, "vender", this);
+    guessNumberTXT = Resources.getMenuItem(DatabaseConstants.GUESS_NUMBER, "adivinar", this);
+    hangmanTXT = Resources.getMenuItem(DatabaseConstants.HANGMAN, "ahorcado", this);
+    purchasesTXT = Resources.getMenuItem(DatabaseConstants.PURCHASES, "comprar", this);
+    dicesTXT = Resources.getMenuItem(DatabaseConstants.DICES, "dado", this);
+    notesTXT = Resources.getMenuItem(DatabaseConstants.NOTES, "notas", this);
+    puzzleTXT = Resources.getMenuItem(DatabaseConstants.PUZZLE, "rompecabezas", this);
+    inventoryTXT = Resources.getMenuItem(DatabaseConstants.INVENTORY, "inventario", this);
+    cashRegisterTXT = Resources.getMenuItem(DatabaseConstants.CASH_REGISTER, "registradora", this);
+    loansTXT = Resources.getMenuItem(DatabaseConstants.LOANS, "prestamos", this);
+    salesTXT = Resources.getMenuItem(DatabaseConstants.SALES, "vender", this);
 
-    createMenu(exportTXT, guessNumberTXT, hangmanTXT, purchasesTXT, dicesTXT, notesTXT, puzzleTXT,
-        inventoryTXT, cashRegisterTXT, loansTXT, salesTXT);
+    Resources.addMenu(
+        exportTXT,
+        guessNumberTXT,
+        hangmanTXT,
+        purchasesTXT,
+        dicesTXT,
+        notesTXT,
+        puzzleTXT,
+        inventoryTXT,
+        cashRegisterTXT,
+        loansTXT,
+        salesTXT
+    );
 
     JMenu exportEXCEL = Resources.getMenu("Document XLS", "excel");
-    guessNumberEXCEL = Resources.getMenuItem(GUESS_NUMBER, "adivinar", this);
-    hangmanEXCEL = Resources.getMenuItem(HANGMAN, "ahorcado", this);
-    purchasesEXCEL = Resources.getMenuItem(PURCHASES, "comprar", this);
-    dicesEXCEL = Resources.getMenuItem(DICES, "dado", this);
-    notesEXCEL = Resources.getMenuItem(NOTES, "notas", this);
-    puzzleEXCEL = Resources.getMenuItem(PUZZLE, "rompecabezas", this);
-    inventoryEXCEL = Resources.getMenuItem(INVENTORY, "inventario", this);
-    cashRegisterEXCEL = Resources.getMenuItem(CASH_REGISTER, "registradora", this);
-    loansEXCEL = Resources.getMenuItem(LOANS, "prestamos", this);
-    salesEXCEL = Resources.getMenuItem(SALES, "vender", this);
+    guessNumberEXCEL = Resources.getMenuItem(DatabaseConstants.GUESS_NUMBER, "adivinar", this);
+    hangmanEXCEL = Resources.getMenuItem(DatabaseConstants.HANGMAN, "ahorcado", this);
+    purchasesEXCEL = Resources.getMenuItem(DatabaseConstants.PURCHASES, "comprar", this);
+    dicesEXCEL = Resources.getMenuItem(DatabaseConstants.DICES, "dado", this);
+    notesEXCEL = Resources.getMenuItem(DatabaseConstants.NOTES, "notas", this);
+    puzzleEXCEL = Resources.getMenuItem(DatabaseConstants.PUZZLE, "rompecabezas", this);
+    inventoryEXCEL = Resources.getMenuItem(DatabaseConstants.INVENTORY, "inventario", this);
+    cashRegisterEXCEL = Resources.getMenuItem(DatabaseConstants.CASH_REGISTER, "registradora", this);
+    loansEXCEL = Resources.getMenuItem(DatabaseConstants.LOANS, "prestamos", this);
+    salesEXCEL = Resources.getMenuItem(DatabaseConstants.SALES, "vender", this);
 
-    createMenu(exportEXCEL, guessNumberEXCEL, hangmanEXCEL, purchasesEXCEL, dicesEXCEL, notesEXCEL,
-        puzzleEXCEL, inventoryEXCEL, cashRegisterEXCEL, loansEXCEL, salesEXCEL);
+    Resources.addMenu(
+        exportEXCEL,
+        guessNumberEXCEL,
+        hangmanEXCEL,
+        purchasesEXCEL,
+        dicesEXCEL,
+        notesEXCEL,
+        puzzleEXCEL,
+        inventoryEXCEL,
+        cashRegisterEXCEL,
+        loansEXCEL,
+        salesEXCEL
+    );
 
     JMenu exportPDF = Resources.getMenu("Document PDF", "pdf");
-    guessNumberPDF = Resources.getMenuItem(GUESS_NUMBER, "adivinar", this);
-    hangmanPDF = Resources.getMenuItem(HANGMAN, "ahorcado", this);
-    purchasesPDF = Resources.getMenuItem(PURCHASES, "comprar", this);
-    dicesPDF = Resources.getMenuItem(DICES, "dado", this);
-    notesPDF = Resources.getMenuItem(NOTES, "notas", this);
-    puzzlePDF = Resources.getMenuItem(PUZZLE, "rompecabezas", this);
-    inventoryPDF = Resources.getMenuItem(INVENTORY, "inventario", this);
-    cashRegisterPDF = Resources.getMenuItem(CASH_REGISTER, "registradora", this);
-    loansPDF = Resources.getMenuItem(LOANS, "prestamos", this);
-    salesPDF = Resources.getMenuItem(SALES, "vender", this);
+    guessNumberPDF = Resources.getMenuItem(DatabaseConstants.GUESS_NUMBER, "adivinar", this);
+    hangmanPDF = Resources.getMenuItem(DatabaseConstants.HANGMAN, "ahorcado", this);
+    purchasesPDF = Resources.getMenuItem(DatabaseConstants.PURCHASES, "comprar", this);
+    dicesPDF = Resources.getMenuItem(DatabaseConstants.DICES, "dado", this);
+    notesPDF = Resources.getMenuItem(DatabaseConstants.NOTES, "notas", this);
+    puzzlePDF = Resources.getMenuItem(DatabaseConstants.PUZZLE, "rompecabezas", this);
+    inventoryPDF = Resources.getMenuItem(DatabaseConstants.INVENTORY, "inventario", this);
+    cashRegisterPDF = Resources.getMenuItem(DatabaseConstants.CASH_REGISTER, "registradora", this);
+    loansPDF = Resources.getMenuItem(DatabaseConstants.LOANS, "prestamos", this);
+    salesPDF = Resources.getMenuItem(DatabaseConstants.SALES, "vender", this);
 
-    createMenu(exportPDF, guessNumberPDF, hangmanPDF, purchasesPDF, dicesPDF, notesPDF, puzzlePDF,
-        inventoryPDF, cashRegisterPDF, loansPDF, salesPDF);
-    createMenu(export, exportTXT, exportEXCEL, exportPDF);
+    Resources.addMenu(
+        exportPDF,
+        guessNumberPDF,
+        hangmanPDF,
+        purchasesPDF,
+        dicesPDF,
+        notesPDF,
+        puzzlePDF,
+        inventoryPDF,
+        cashRegisterPDF,
+        loansPDF,
+        salesPDF
+    );
+
+    Resources.addMenu(export, exportTXT, exportEXCEL, exportPDF);
 
     JMenu tasks = Resources.getMenu("Tasks", "task");
     searchBook = Resources.getMenuItem("Search Book", "searchBook", this);
     registerUser = Resources.getMenuItem("Register User", "añadir_usuario", this);
 
-    createMenu(tasks, searchBook, registerUser);
+    Resources.addMenu(tasks, searchBook, registerUser);
 
     changeBackground = Resources.getMenu("Background", "background");
-
-    IntStream.range(0, Themes.wallpapers.length).forEach(i -> {
-      Themes.wallpapers[i] = new JMenuItem("Image " + (i + 1));
-      Themes.wallpapers[i].setForeground(TEXT_COLOR);
-      Themes.wallpapers[i].setIcon(new ImageIcon(Resources.getImage("backs.png")));
-      Themes.wallpapers[i].addActionListener(this);
-      changeBackground.add(Themes.wallpapers[i]);
-      changeBackground.addSeparator();
-    });
+    Themes.setWallpapers(this, changeBackground);
 
     JMenu mode = Resources.getMenu("Theme", "mode");
-    Themes.defaultMode = Resources.getMenuItem("Default", "default_theme", this);
-    Themes.darkMode = Resources.getMenuItem("Dark", "dark", this);
-    Themes.textureMode = Resources.getMenuItem("Texture", "texture", this);
-    Themes.macMode = Resources.getMenuItem("Mac OS", "mac", this);
-    Themes.grayMode = Resources.getMenuItem("Metallic", "gray", this);
-    Themes.mintMode = Resources.getMenuItem("Mint", "mint", this);
-    Themes.classicMode = Resources.getMenuItem("Classic", "classic", this);
-
-    createMenu(
-        mode,
-        Themes.defaultMode,
-        Themes.darkMode,
-        Themes.textureMode,
-        Themes.macMode,
-        Themes.grayMode,
-        Themes.mintMode,
-        Themes.classicMode
-    );
+    Themes.setThemes(this, mode);
 
     JMenu changeUI = Resources.getMenu("Change UI", "UI");
-
-    createMenu(changeUI, mode, changeBackground);
+    Resources.addMenu(changeUI, mode, changeBackground);
 
     ocr = Resources.getMenuItem("OCR", "ocr", this);
     qr = Resources.getMenuItem("QR", "qr", this);
 
-    createMenu(tools, changeUI, export, notes, ocr, qr, store, sendWhatsApp, structures, tasks,
-        texts);
+    Resources.addMenu(
+        tools,
+        changeUI,
+        export,
+        notes,
+        ocr,
+        qr,
+        numbers,
+        store,
+        sendWhatsApp,
+        structures,
+        tasks,
+        texts
+    );
 
     menuBar.add(games);
     menuBar.add(scores);
@@ -373,29 +375,22 @@ public class Index extends JFrame implements ActionListener {
     add(menuBar, BorderLayout.NORTH);
   }
 
-  private void createMenu(JMenu menu, JMenuItem... items) {
-    for (JMenuItem item : items) {
-      menu.add(item);
-      menu.addSeparator();
-    }
-  }
-
   protected void guessNumberTableAP() {
 
     guessNumberTable.cleanTable();
 
     try {
       OlderRepository.readTable(guessNumberTable.viewTable,
-          Queries.getAllData(Format.tableName(GUESS_NUMBER)), true);
+          Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)), true);
     } catch (Exception e1) {
-      Alerts.error(e1, GUESS_NUMBER);
+      Alerts.error(e1, DatabaseConstants.GUESS_NUMBER);
     }
 
     guessNumberTable.setSize(830, 400);
     guessNumberTable.setLocationRelativeTo(null);
     guessNumberTable.setMinimumSize(new Dimension(830, 400));
     guessNumberTable.setMaximumSize(new Dimension(1280, 720));
-    guessNumberTable.setTitle(GUESS_NUMBER + " Information");
+    guessNumberTable.setTitle(DatabaseConstants.GUESS_NUMBER + " Information");
     Effects.fadeIn(guessNumberTable);
     guessNumberTable.setVisible(true);
   }
@@ -406,16 +401,17 @@ public class Index extends JFrame implements ActionListener {
 
     try {
       OlderRepository
-          .readTable(hangmanTable.viewTable, Queries.getAllData(Format.tableName(HANGMAN)), true);
+          .readTable(hangmanTable.viewTable, Queries.getAllData(Format.tableName(
+              DatabaseConstants.HANGMAN)), true);
     } catch (Exception e1) {
-      Alerts.error(e1, HANGMAN);
+      Alerts.error(e1, DatabaseConstants.HANGMAN);
     }
 
     hangmanTable.setSize(830, 400);
     hangmanTable.setLocationRelativeTo(null);
     hangmanTable.setMinimumSize(new Dimension(830, 400));
     hangmanTable.setMaximumSize(new Dimension(1280, 720));
-    hangmanTable.setTitle(HANGMAN + " Information");
+    hangmanTable.setTitle(DatabaseConstants.HANGMAN + " Information");
     Effects.fadeIn(hangmanTable);
     hangmanTable.setVisible(true);
   }
@@ -426,9 +422,9 @@ public class Index extends JFrame implements ActionListener {
     dicesTable.cleanTable();
 
     try {
-      aux = OlderRepository.readTable(dicesTable.viewTable, Queries.getAllData(DICES), true);
+      aux = OlderRepository.readTable(dicesTable.viewTable, Queries.getAllData(DatabaseConstants.DICES), true);
     } catch (Exception e1) {
-      Alerts.error(e1, DICES);
+      Alerts.error(e1, DatabaseConstants.DICES);
     }
 
     if (aux) {
@@ -437,7 +433,7 @@ public class Index extends JFrame implements ActionListener {
       dicesTable.setLocationRelativeTo(null);
       dicesTable.setMinimumSize(new Dimension(830, 400));
       dicesTable.setMaximumSize(new Dimension(1280, 720));
-      dicesTable.setTitle(DICES + " Information");
+      dicesTable.setTitle(DatabaseConstants.DICES + " Information");
       Effects.fadeIn(dicesTable);
       dicesTable.setVisible(true);
     }
@@ -449,17 +445,18 @@ public class Index extends JFrame implements ActionListener {
     notesTable.cleanTable();
 
     try {
-      OlderRepository.readTable(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)),
+      OlderRepository.readTable(notesTable.viewTable, Queries.getAllData(Format.tableName(
+              DatabaseConstants.NOTES)),
           true);
     } catch (Exception e1) {
-      Alerts.error(e1, NOTES);
+      Alerts.error(e1, DatabaseConstants.NOTES);
     }
 
     notesTable.setSize(830, 400);
     notesTable.setLocationRelativeTo(null);
     notesTable.setMinimumSize(new Dimension(830, 400));
     notesTable.setMaximumSize(new Dimension(1280, 720));
-    notesTable.setTitle(NOTES + " Information");
+    notesTable.setTitle(DatabaseConstants.NOTES + " Information");
     Effects.fadeIn(notesTable);
     notesTable.setVisible(true);
   }
@@ -468,17 +465,18 @@ public class Index extends JFrame implements ActionListener {
     puzzleTable.cleanTable();
 
     try {
-      OlderRepository.readTable(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)),
+      OlderRepository.readTable(puzzleTable.viewTable, Queries.getAllData(Format.tableName(
+              DatabaseConstants.PUZZLE)),
           true);
     } catch (Exception e1) {
-      Alerts.error(e1, PUZZLE);
+      Alerts.error(e1, DatabaseConstants.PUZZLE);
     }
 
     puzzleTable.setSize(830, 400);
     puzzleTable.setLocationRelativeTo(null);
     puzzleTable.setMinimumSize(new Dimension(830, 400));
     puzzleTable.setMaximumSize(new Dimension(1280, 720));
-    puzzleTable.setTitle(PUZZLE + " Information");
+    puzzleTable.setTitle(DatabaseConstants.PUZZLE + " Information");
     setVisible(false);
     Effects.fadeIn(puzzleTable);
     puzzleTable.setVisible(true);
@@ -487,7 +485,6 @@ public class Index extends JFrame implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
 
-    Themes.isWork = true;
     Themes.paintBackground(e, this);
 
     if (e.getSource() == yesExit) {
@@ -508,7 +505,7 @@ public class Index extends JFrame implements ActionListener {
       setVisible(true);
     } else if (e.getSource() == Themes.defaultMode) {
 
-      if (Themes.defaultMode.getForeground() != MAIN_COLOR) {
+      if (Themes.defaultMode.getForeground() != Styles.MAIN_COLOR) {
         Themes.setUI(Themes.DEFAULT, this);
       } else {
         Alerts.elementApplied(true);
@@ -516,7 +513,7 @@ public class Index extends JFrame implements ActionListener {
 
     } else if (e.getSource() == Themes.grayMode) {
 
-      if (Themes.grayMode.getForeground() != MAIN_COLOR) {
+      if (Themes.grayMode.getForeground() != Styles.MAIN_COLOR) {
         Themes.setUI(Themes.GRAY, this);
       } else {
         Alerts.elementApplied(true);
@@ -524,7 +521,7 @@ public class Index extends JFrame implements ActionListener {
 
     } else if (e.getSource() == Themes.darkMode) {
 
-      if (Themes.darkMode.getForeground() != MAIN_COLOR) {
+      if (Themes.darkMode.getForeground() != Styles.MAIN_COLOR) {
         Themes.setUI(Themes.DARK, this);
       } else {
         Alerts.elementApplied(true);
@@ -532,7 +529,7 @@ public class Index extends JFrame implements ActionListener {
 
     } else if (e.getSource() == Themes.textureMode) {
 
-      if (Themes.textureMode.getForeground() != MAIN_COLOR) {
+      if (Themes.textureMode.getForeground() != Styles.MAIN_COLOR) {
         Themes.setUI(Themes.TEXTURE, this);
       } else {
         Alerts.elementApplied(true);
@@ -540,7 +537,7 @@ public class Index extends JFrame implements ActionListener {
 
     } else if (e.getSource() == Themes.macMode) {
 
-      if (Themes.macMode.getForeground() != MAIN_COLOR) {
+      if (Themes.macMode.getForeground() != Styles.MAIN_COLOR) {
         Themes.setUI(Themes.MAC, this);
       } else {
         Alerts.elementApplied(true);
@@ -548,7 +545,7 @@ public class Index extends JFrame implements ActionListener {
 
     } else if (e.getSource() == Themes.mintMode) {
 
-      if (Themes.mintMode.getForeground() != MAIN_COLOR) {
+      if (Themes.mintMode.getForeground() != Styles.MAIN_COLOR) {
         Themes.setUI(Themes.MINT, this);
       } else {
         Alerts.elementApplied(true);
@@ -556,7 +553,7 @@ public class Index extends JFrame implements ActionListener {
 
     } else if (e.getSource() == Themes.classicMode) {
 
-      if (Themes.classicMode.getForeground() != MAIN_COLOR) {
+      if (Themes.classicMode.getForeground() != Styles.MAIN_COLOR) {
         Themes.setUI(Themes.CLASSIC, this);
       } else {
         Alerts.elementApplied(true);
@@ -637,7 +634,7 @@ public class Index extends JFrame implements ActionListener {
       } else if (e.getSource() == moreBookverse) {
 
         try {
-          Desktop.getDesktop().browse(URI.create("http://bookverse.vzpla.net"));
+          Desktop.getDesktop().browse(URI.create("https://bookverse.vzpla.net"));
         } catch (Exception ex) {
           Alerts.error(ex, "Opening URL");
         }
@@ -653,20 +650,21 @@ public class Index extends JFrame implements ActionListener {
         try {
           guessNumberTable.cleanTable();
           ExportFile.txt(guessNumberTable.viewTable,
-              Queries.getAllData(Format.tableName(GUESS_NUMBER)),
+              Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)),
               ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, GUESS_NUMBER);
+          Alerts.error(ex, DatabaseConstants.GUESS_NUMBER);
         }
 
       } else if (e.getSource() == hangmanTXT) {
 
         try {
           hangmanTable.cleanTable();
-          ExportFile.txt(hangmanTable.viewTable, Queries.getAllData(Format.tableName(HANGMAN)),
+          ExportFile.txt(hangmanTable.viewTable, Queries.getAllData(Format.tableName(
+                  DatabaseConstants.HANGMAN)),
               ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, HANGMAN);
+          Alerts.error(ex, DatabaseConstants.HANGMAN);
         }
 
       } else if (e.getSource() == purchasesTXT) {
@@ -674,10 +672,10 @@ public class Index extends JFrame implements ActionListener {
         try {
           purchasesTable.cleanTable();
           ExportFile.txt(purchasesTable.viewTable,
-              Queries.getAllData(Format.tableName(PURCHASES)),
+              Queries.getAllData(Format.tableName(DatabaseConstants.PURCHASES)),
               ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, PURCHASES);
+          Alerts.error(ex, DatabaseConstants.PURCHASES);
         }
 
       } else if (e.getSource() == salesTXT) {
@@ -685,181 +683,186 @@ public class Index extends JFrame implements ActionListener {
         try {
           salesTable.cleanTable();
           ExportFile.txt(salesTable.viewTable,
-              Queries.getAllData(Format.tableName(SALES)),
+              Queries.getAllData(Format.tableName(DatabaseConstants.SALES)),
               ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, SALES);
+          Alerts.error(ex, DatabaseConstants.SALES);
         }
 
       } else if (e.getSource() == dicesTXT) {
 
         try {
           dicesTable.cleanTable();
-          ExportFile.txt(dicesTable.viewTable, Queries.getAllData(Format.tableName(DICES)), ".txt");
+          ExportFile.txt(dicesTable.viewTable, Queries.getAllData(Format.tableName(
+              DatabaseConstants.DICES)), ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, DICES);
+          Alerts.error(ex, DatabaseConstants.DICES);
         }
 
       } else if (e.getSource() == notesTXT) {
 
         try {
           notesTable.cleanTable();
-          ExportFile.txt(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)), ".txt");
+          ExportFile.txt(notesTable.viewTable, Queries.getAllData(Format.tableName(
+              DatabaseConstants.NOTES)), ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, NOTES);
+          Alerts.error(ex, DatabaseConstants.NOTES);
         }
 
       } else if (e.getSource() == puzzleTXT) {
 
         try {
           puzzleTable.cleanTable();
-          ExportFile.txt(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)),
+          ExportFile.txt(puzzleTable.viewTable, Queries.getAllData(Format.tableName(
+                  DatabaseConstants.PUZZLE)),
               ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, PUZZLE);
+          Alerts.error(ex, DatabaseConstants.PUZZLE);
         }
       } else if (e.getSource() == inventoryTXT) {
 
         try {
           inventoryTable.cleanTable();
-          ExportFile.txt(inventoryTable.viewTable, Queries.getAllData(Format.tableName(INVENTORY)),
+          ExportFile.txt(inventoryTable.viewTable, Queries.getAllData(Format.tableName(
+                  DatabaseConstants.INVENTORY)),
               ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, INVENTORY);
+          Alerts.error(ex, DatabaseConstants.INVENTORY);
         }
       } else if (e.getSource() == cashRegisterTXT) {
 
         try {
           cashRegisterTable.cleanTable();
           ExportFile.txt(cashRegisterTable.viewTable,
-              Queries.getAllData(Format.tableName(CASH_REGISTER)),
+              Queries.getAllData(Format.tableName(DatabaseConstants.CASH_REGISTER)),
               ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, CASH_REGISTER);
+          Alerts.error(ex, DatabaseConstants.CASH_REGISTER);
         }
       } else if (e.getSource() == loansTXT) {
 
         try {
           loansTable.cleanTable();
           ExportFile.txt(loansTable.viewTable,
-              Queries.getAllData(Format.tableName(LOANS)),
+              Queries.getAllData(Format.tableName(DatabaseConstants.LOANS)),
               ".txt");
         } catch (Exception ex) {
-          Alerts.error(ex, LOANS);
+          Alerts.error(ex, DatabaseConstants.LOANS);
         }
 
       } else if (e.getSource() == guessNumberPDF) {
 
         try {
           guessNumberTable.cleanTable();
-          ExportFile.pdf(guessNumberTable.viewTable, GUESS_NUMBER,
-              Queries.getAllData(Format.tableName(GUESS_NUMBER)),
+          ExportFile.pdf(guessNumberTable.viewTable, DatabaseConstants.GUESS_NUMBER,
+              Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)),
               ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, GUESS_NUMBER);
+          Alerts.error(ex, DatabaseConstants.GUESS_NUMBER);
         }
 
       } else if (e.getSource() == hangmanPDF) {
 
         try {
           hangmanTable.cleanTable();
-          ExportFile.pdf(hangmanTable.viewTable, HANGMAN, Queries.getAllData(Format.tableName(
-                  HANGMAN)),
+          ExportFile.pdf(hangmanTable.viewTable, DatabaseConstants.HANGMAN, Queries.getAllData(Format.tableName(
+                  DatabaseConstants.HANGMAN)),
               ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, HANGMAN);
+          Alerts.error(ex, DatabaseConstants.HANGMAN);
         }
 
       } else if (e.getSource() == purchasesPDF) {
 
         try {
           purchasesTable.cleanTable();
-          ExportFile.pdf(purchasesTable.viewTable, PURCHASES,
-              Queries.getAllData(Format.tableName(PURCHASES)),
+          ExportFile.pdf(purchasesTable.viewTable, DatabaseConstants.PURCHASES,
+              Queries.getAllData(Format.tableName(DatabaseConstants.PURCHASES)),
               ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, PURCHASES);
+          Alerts.error(ex, DatabaseConstants.PURCHASES);
         }
 
       } else if (e.getSource() == salesPDF) {
 
         try {
           salesTable.cleanTable();
-          ExportFile.pdf(salesTable.viewTable, SALES,
-              Queries.getAllData(Format.tableName(SALES)),
+          ExportFile.pdf(salesTable.viewTable, DatabaseConstants.SALES,
+              Queries.getAllData(Format.tableName(DatabaseConstants.SALES)),
               ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, SALES);
+          Alerts.error(ex, DatabaseConstants.SALES);
         }
 
       } else if (e.getSource() == dicesPDF) {
 
         try {
           dicesTable.cleanTable();
-          ExportFile.pdf(dicesTable.viewTable, DICES, Queries.getAllData(
-              Format.tableName(DICES)), ".pdf");
+          ExportFile.pdf(dicesTable.viewTable, DatabaseConstants.DICES, Queries.getAllData(
+              Format.tableName(DatabaseConstants.DICES)), ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, DICES);
+          Alerts.error(ex, DatabaseConstants.DICES);
         }
 
       } else if (e.getSource() == notesPDF) {
 
         try {
           notesTable.cleanTable();
-          ExportFile.pdf(notesTable.viewTable, NOTES, Queries
-                  .getAllData(Format.tableName(NOTES)),
+          ExportFile.pdf(notesTable.viewTable, DatabaseConstants.NOTES, Queries
+                  .getAllData(Format.tableName(DatabaseConstants.NOTES)),
               ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, NOTES);
+          Alerts.error(ex, DatabaseConstants.NOTES);
         }
 
       } else if (e.getSource() == puzzlePDF) {
 
         try {
           puzzleTable.cleanTable();
-          ExportFile.pdf(puzzleTable.viewTable, PUZZLE,
-              Queries.getAllData(Format.tableName(PUZZLE)), ".pdf");
+          ExportFile.pdf(puzzleTable.viewTable, DatabaseConstants.PUZZLE,
+              Queries.getAllData(Format.tableName(DatabaseConstants.PUZZLE)), ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, PUZZLE);
+          Alerts.error(ex, DatabaseConstants.PUZZLE);
         }
       } else if (e.getSource() == inventoryPDF) {
 
         try {
           inventoryTable.cleanTable();
-          ExportFile.pdf(inventoryTable.viewTable, INVENTORY,
-              Queries.getAllData(Format.tableName(INVENTORY)), ".pdf");
+          ExportFile.pdf(inventoryTable.viewTable, DatabaseConstants.INVENTORY,
+              Queries.getAllData(Format.tableName(DatabaseConstants.INVENTORY)), ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, INVENTORY);
+          Alerts.error(ex, DatabaseConstants.INVENTORY);
         }
       } else if (e.getSource() == cashRegisterPDF) {
 
         try {
           cashRegisterTable.cleanTable();
-          ExportFile.pdf(cashRegisterTable.viewTable, CASH_REGISTER,
-              Queries.getAllData(Format.tableName(CASH_REGISTER)),
+          ExportFile.pdf(cashRegisterTable.viewTable, DatabaseConstants.CASH_REGISTER,
+              Queries.getAllData(Format.tableName(DatabaseConstants.CASH_REGISTER)),
               ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, CASH_REGISTER);
+          Alerts.error(ex, DatabaseConstants.CASH_REGISTER);
         }
       } else if (e.getSource() == loansPDF) {
 
         try {
           loansTable.cleanTable();
-          ExportFile.pdf(loansTable.viewTable, LOANS,
-              Queries.getAllData(Format.tableName(LOANS)),
+          ExportFile.pdf(loansTable.viewTable, DatabaseConstants.LOANS,
+              Queries.getAllData(Format.tableName(DatabaseConstants.LOANS)),
               ".pdf");
         } catch (Exception ex) {
-          Alerts.error(ex, LOANS);
+          Alerts.error(ex, DatabaseConstants.LOANS);
         }
       } else if (e.getSource() == guessNumberEXCEL) {
 
         try {
           guessNumberTable.cleanTable();
           ExportFile
-              .excel(guessNumberTable.viewTable, Queries.getAllData(Format.tableName(GUESS_NUMBER)),
+              .excel(guessNumberTable.viewTable, Queries.getAllData(Format.tableName(
+                      DatabaseConstants.GUESS_NUMBER)),
                   ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, GUESS_NUMBER);
+          Alerts.error(ex, DatabaseConstants.GUESS_NUMBER);
         }
 
       } else if (e.getSource() == hangmanEXCEL) {
@@ -867,9 +870,10 @@ public class Index extends JFrame implements ActionListener {
         try {
           hangmanTable.cleanTable();
           ExportFile
-              .excel(hangmanTable.viewTable, Queries.getAllData(Format.tableName(HANGMAN)), ".xls");
+              .excel(hangmanTable.viewTable, Queries.getAllData(Format.tableName(
+                  DatabaseConstants.HANGMAN)), ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, HANGMAN);
+          Alerts.error(ex, DatabaseConstants.HANGMAN);
         }
 
       } else if (e.getSource() == purchasesEXCEL) {
@@ -877,10 +881,10 @@ public class Index extends JFrame implements ActionListener {
         try {
           purchasesTable.cleanTable();
           ExportFile.excel(purchasesTable.viewTable,
-              Queries.getAllData(Format.tableName(PURCHASES)),
+              Queries.getAllData(Format.tableName(DatabaseConstants.PURCHASES)),
               ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, PURCHASES);
+          Alerts.error(ex, DatabaseConstants.PURCHASES);
         }
 
       } else if (e.getSource() == salesEXCEL) {
@@ -888,70 +892,73 @@ public class Index extends JFrame implements ActionListener {
         try {
           salesTable.cleanTable();
           ExportFile.excel(salesTable.viewTable,
-              Queries.getAllData(Format.tableName(SALES)),
+              Queries.getAllData(Format.tableName(DatabaseConstants.SALES)),
               ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, SALES);
+          Alerts.error(ex, DatabaseConstants.SALES);
         }
 
       } else if (e.getSource() == dicesEXCEL) {
 
         try {
           dicesTable.cleanTable();
-          ExportFile.excel(dicesTable.viewTable, Queries.getAllData(Format.tableName(DICES)),
+          ExportFile.excel(dicesTable.viewTable, Queries.getAllData(Format.tableName(
+                  DatabaseConstants.DICES)),
               ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, DICES);
+          Alerts.error(ex, DatabaseConstants.DICES);
         }
 
       } else if (e.getSource() == notesEXCEL) {
 
         try {
           notesTable.cleanTable();
-          ExportFile.excel(notesTable.viewTable, Queries.getAllData(Format.tableName(NOTES)),
+          ExportFile.excel(notesTable.viewTable, Queries.getAllData(Format.tableName(
+                  DatabaseConstants.NOTES)),
               ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, NOTES);
+          Alerts.error(ex, DatabaseConstants.NOTES);
         }
 
       } else if (e.getSource() == puzzleEXCEL) {
 
         try {
           puzzleTable.cleanTable();
-          ExportFile.excel(puzzleTable.viewTable, Queries.getAllData(Format.tableName(PUZZLE)),
+          ExportFile.excel(puzzleTable.viewTable, Queries.getAllData(Format.tableName(
+                  DatabaseConstants.PUZZLE)),
               ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, PUZZLE);
+          Alerts.error(ex, DatabaseConstants.PUZZLE);
         }
       } else if (e.getSource() == inventoryEXCEL) {
 
         try {
           inventoryTable.cleanTable();
           ExportFile.excel(inventoryTable.viewTable,
-              Queries.getAllData(Format.tableName(INVENTORY)),
+              Queries.getAllData(Format.tableName(DatabaseConstants.INVENTORY)),
               ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, INVENTORY);
+          Alerts.error(ex, DatabaseConstants.INVENTORY);
         }
       } else if (e.getSource() == cashRegisterEXCEL) {
 
         try {
           cashRegisterTable.cleanTable();
           ExportFile.excel(cashRegisterTable.viewTable,
-              Queries.getAllData(Format.tableName(CASH_REGISTER)),
+              Queries.getAllData(Format.tableName(DatabaseConstants.CASH_REGISTER)),
               ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, CASH_REGISTER);
+          Alerts.error(ex, DatabaseConstants.CASH_REGISTER);
         }
       } else if (e.getSource() == loansEXCEL) {
 
         try {
           loansTable.cleanTable();
           ExportFile.excel(loansTable.viewTable,
-              Queries.getAllData(Format.tableName(LOANS)),
+              Queries.getAllData(Format.tableName(DatabaseConstants.LOANS)),
               ".xls");
         } catch (Exception ex) {
-          Alerts.error(ex, LOANS);
+          Alerts.error(ex, DatabaseConstants.LOANS);
         }
       }
     }

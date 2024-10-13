@@ -1,6 +1,5 @@
 package com.bookverse.development.packapps.apps.views;
 
-import com.bookverse.development.packapps.apps.utils.ui.KeyBindingsUtil;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -19,26 +18,19 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-
+import com.bookverse.development.packapps.apps.services.WhatsAppService;
+import com.bookverse.development.packapps.apps.utils.constants.Styles;
+import com.bookverse.development.packapps.apps.utils.ui.KeyBindingsUtil;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Effects;
-
-import static com.bookverse.development.packapps.apps.services.WhatsAppService.clickOnOpen;
-import static com.bookverse.development.packapps.apps.services.WhatsAppService.clickOnReturn;
-
-import static java.awt.Event.ENTER;
-import static javax.swing.SwingConstants.CENTER;
-
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
 
 public class WhatsAppView extends JDialog implements ActionListener {
 
   private JTextArea message;
   private JTextField txtNumber;
-  private JButton btnOpen, btnReturn;
+  private JButton btnOpen;
+  private JButton btnReturn;
   private JComboBox<String> listCountry = new JComboBox<>();
 
   public WhatsAppView(JFrame parent, boolean modal) {
@@ -64,16 +56,16 @@ public class WhatsAppView extends JDialog implements ActionListener {
     gbc.insets = new Insets(5, 5, 5, 5);
     gbc.fill = GridBagConstraints.HORIZONTAL;
 
-    btnOpen = Resources.getButton("Open", TEXT_COLOR, this, this);
-    btnReturn = Resources.getButton("Return", MAIN_COLOR, this, this);
+    btnOpen = Resources.getButton("Open", Styles.TEXT_COLOR, this, this);
+    btnReturn = Resources.getButton("Return", Styles.MAIN_COLOR, this, this);
 
-    JLabel lblPhone = Resources.getLabel("<html><strong>Phone</strong></html>", TEXT_COLOR, this, MEDIUM);
+    JLabel lblPhone = Resources.getLabel("<html><strong>Phone</strong></html>", Styles.TEXT_COLOR, this, Styles.MEDIUM);
     txtNumber = new JTextField();
-    txtNumber.setHorizontalAlignment(CENTER);
+    txtNumber.setHorizontalAlignment(SwingConstants.CENTER);
     txtNumber.addKeyListener(new KeyAdapter() {
       @Override
       public void keyPressed(KeyEvent event) {
-        if (event.getKeyCode() == ENTER) {
+        if (event.getKeyCode() == KeyEvent.VK_ENTER) {
           message.requestFocus();
         }
       }
@@ -84,14 +76,14 @@ public class WhatsAppView extends JDialog implements ActionListener {
       }
     });
 
-    JLabel lblMessage = Resources.getLabel("<html><strong>Message</strong></html>", TEXT_COLOR, this, MEDIUM);
+    JLabel lblMessage = Resources.getLabel("<html><strong>Message</strong></html>", Styles.TEXT_COLOR, this, Styles.MEDIUM);
     message = new JTextArea();
     JScrollPane scroll = new JScrollPane(message);
     message.addKeyListener(new KeyAdapter() {
       @Override
       public void keyPressed(KeyEvent event) {
-        if (event.getKeyCode() == ENTER) {
-          clickOnOpen(txtNumber, listCountry, message);
+        if (event.getKeyCode() == KeyEvent.VK_ENTER) {
+          WhatsAppService.clickOnOpen(txtNumber, listCountry, message);
         }
       }
     });
@@ -107,7 +99,7 @@ public class WhatsAppView extends JDialog implements ActionListener {
     listCountry.addItem("España");
     listCountry.addItem("Estados Unidos");
     listCountry.addItem("Venezuela");
-    listCountry.setFont(MEDIUM);
+    listCountry.setFont(Styles.MEDIUM);
     ((JLabel) listCountry.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
     gbc.gridx = 0;
@@ -159,9 +151,9 @@ public class WhatsAppView extends JDialog implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == btnReturn) {
-      clickOnReturn(txtNumber, this);
+      WhatsAppService.clickOnReturn(txtNumber, this);
     } else if (e.getSource() == btnOpen) {
-      clickOnOpen(txtNumber, listCountry, message);
+      WhatsAppService.clickOnOpen(txtNumber, listCountry, message);
     }
   }
 }

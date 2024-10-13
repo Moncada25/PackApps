@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.bookverse.development.packapps.apps.utils.constants.Styles;
 
-public class Resources {
+public final class Resources {
 
   private Resources(){}
 
@@ -63,8 +63,12 @@ public class Resources {
     return menu;
   }
 
-  public static JButton getButton(String name, Color color, ActionListener listener,
-      @NotNull Container container) {
+  public static JButton getButton(
+      String name,
+      Color color,
+      ActionListener listener,
+      @NotNull Container container
+  ) {
     JButton button = new JButton(name);
     button.setBackground(color);
     container.add(button);
@@ -98,5 +102,12 @@ public class Resources {
       Alerts.error(ex, "OCR");
     }
     return path;
+  }
+
+  public static void addMenu(JMenu menu, JMenuItem... items) {
+    for (JMenuItem item : items) {
+      menu.add(item);
+      menu.addSeparator();
+    }
   }
 }
