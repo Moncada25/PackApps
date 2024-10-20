@@ -18,106 +18,100 @@ public final class Format {
   }
 
   public static void onlyAPoint(char num, KeyEvent evt, String data) {
-
     if (num == '.' && data.contains(".")) {
       evt.consume();
     }
   }
 
   public static void onlyText(char txt, KeyEvent evt, String data, int length) {
-    if ((txt < 'a' || txt > 'z') && (txt < 'A' || txt > 'Z') && txt != KeyEvent.VK_ESCAPE
-        && txt != KeyEvent.VK_ENTER && txt != KeyEvent.VK_DELETE && txt != ' '
-        || data.length() > length - 1) {
+    boolean isInvalid = !isLetterOrSpecial(txt) || data.length() >= length;
 
-      if (data.length() > length - 1 && txt != KeyEvent.VK_ENTER) {
-        Alerts.inputLarge();
-      } else if (txt == KeyEvent.VK_DELETE) {
-        Alerts.invalidInput();
-      }
-      evt.consume();
+    if (isInvalid) {
+      handleInvalidInput(data, length, txt, evt);
     }
   }
 
   public static void onlyNumbers(char num, KeyEvent evt, String data, int length) {
-    boolean match =
-        (num < '0' || num > '9') && num != KeyEvent.VK_ESCAPE && num != KeyEvent.VK_ENTER
-            && num != KeyEvent.VK_DELETE && num != KeyEvent.VK_BACK_SPACE;
+    boolean isInvalid = !isDigit(num) || data.length() >= length;
 
-    if (match || data.length() > length - 1) {
-
-      if (data.length() > length - 1 && num != KeyEvent.VK_ENTER) {
-        Alerts.inputLarge();
-      } else if (match) {
-        Alerts.invalidInput();
-      }
-      evt.consume();
+    if (isInvalid) {
+      handleInvalidInput(data, length, num, evt);
     }
   }
 
   public static void onlyAlfa(char txt, KeyEvent evt, String data, int length) {
-    if ((txt < 'a' || txt > 'z') && (txt < 'A' || txt > 'Z') && (txt < '0' || txt > '9')
-        && txt != KeyEvent.VK_ESCAPE && txt != KeyEvent.VK_ENTER && txt != KeyEvent.VK_DELETE
-        && txt != ' ' || data.length() > length - 1) {
+    boolean isInvalid = !isLetterOrDigit(txt) || data.length() >= length;
 
-      if (data.length() > length - 1 && txt != KeyEvent.VK_ENTER) {
-        Alerts.inputLarge();
-      } else if ((txt < 'a' || txt > 'z') && (txt < '0' || txt > '9') && txt != KeyEvent.VK_ESCAPE
-          && txt != KeyEvent.VK_ENTER && txt != KeyEvent.VK_DELETE && txt != KeyEvent.VK_BACK_SPACE) {
-        Alerts.invalidInput();
-      }
-      evt.consume();
+    if (isInvalid) {
+      handleInvalidInput(data, length, txt, evt);
     }
   }
 
   public static void onlyNumbersAndPoint(char num, KeyEvent evt, String data, int length) {
-    boolean match =
-        (num < '0' || num > '9') && num != KeyEvent.VK_ESCAPE && num != KeyEvent.VK_ENTER
-            && num != KeyEvent.VK_DELETE && num != KeyEvent.VK_BACK_SPACE && num != '.';
-    if (match || data.length() > length - 1) {
+    boolean isInvalid = !isDigit(num) && num != '.' || data.length() >= length;
 
-      if (data.length() > length - 1 && num != KeyEvent.VK_ENTER && num != KeyEvent.VK_ESCAPE) {
-        Alerts.inputLarge();
-      } else if (match) {
-        Alerts.invalidInput();
-      }
-      evt.consume();
+    if (isInvalid) {
+      handleInvalidInput(data, length, num, evt);
     }
   }
 
   public static void onlyNumberCalc(char num, KeyEvent evt, String data, int length) {
-    if ((num < '0' || num > '9') && num != '+' && num != '-' && num != '*' && num != '/'
-        && num != KeyEvent.VK_ESCAPE && num != KeyEvent.VK_ENTER && num != KeyEvent.VK_DELETE
-        && num != KeyEvent.VK_BACK_SPACE && (num != '.')
-        || data.length() > length - 1) {
+    boolean isInvalid = !isCalculatorInput(num) || data.length() >= length;
 
-      if (data.length() > length - 1 && num != KeyEvent.VK_ENTER && num != KeyEvent.VK_ESCAPE) {
-        Alerts.inputLarge();
-      } else if ((num < '0' || num > '9') && num != KeyEvent.VK_ESCAPE && num != KeyEvent.VK_ENTER
-          && num != KeyEvent.VK_DELETE && num != KeyEvent.VK_BACK_SPACE && (num != '.') && num != '+' && num != '-' && num != '*' && num != '/') {
-        Alerts.invalidInput();
-      }
-      evt.consume();
+    if (isInvalid) {
+      handleInvalidInput(data, length, num, evt);
     }
   }
 
   public static void middlePoint(char num, KeyEvent evt, String data) {
-
     if (num == '.' && (data.contains(".") || data.isEmpty() || data.length() > 1)) {
       evt.consume();
     }
   }
 
   public static void onlyBinary(char num, KeyEvent evt, String data) {
-    if ((num < '0' || num > '1') && num != KeyEvent.VK_ESCAPE && num != KeyEvent.VK_ENTER
-        && num != KeyEvent.VK_DELETE && num != KeyEvent.VK_BACK_SPACE || data.length() > 8) {
+    boolean isInvalid = !isBinary(num) || data.length() > 8;
 
-      if (data.length() > 8 && num != KeyEvent.VK_ENTER) {
-        Alerts.inputLarge();
-      } else if (num != KeyEvent.VK_ENTER) {
-        Alerts.invalidInput();
-      }
-      evt.consume();
+    if (isInvalid) {
+      handleInvalidInput(data, 8, num, evt);
     }
+  }
+
+  private static void handleInvalidInput(String data, int length, char input, KeyEvent evt) {
+    if (data.length() >= length && input != KeyEvent.VK_ENTER) {
+      Alerts.inputLarge();
+    } else if (!isAllowedKey(input)) {
+      Alerts.invalidInput();
+    }
+    evt.consume();
+  }
+
+  private static boolean isAllowedKey(char key) {
+    return key == KeyEvent.VK_ESCAPE || key == KeyEvent.VK_ENTER || key == KeyEvent.VK_DELETE || key == KeyEvent.VK_BACK_SPACE;
+  }
+
+  private static boolean isDigit(char c) {
+    return c >= '0' && c <= '9';
+  }
+
+  private static boolean isLetter(char c) {
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == 'ñ' || c == 'Ñ' || c == 'á' || c == 'é' || c == 'í' || c == 'ó' || c == 'ú' || c == 'Á' || c == 'É' || c == 'Í' || c == 'Ó' || c == 'Ú';
+  }
+
+  private static boolean isLetterOrDigit(char c) {
+    return isLetter(c) || isDigit(c);
+  }
+
+  private static boolean isLetterOrSpecial(char c) {
+    return isLetter(c) || c == ' ';
+  }
+
+  private static boolean isCalculatorInput(char c) {
+    return isDigit(c) || c == '.' || c == '+' || c == '-' || c == '*' || c == '/';
+  }
+
+  private static boolean isBinary(char c) {
+    return c >= '0' && c <= '1';
   }
 
   @NotNull
@@ -132,16 +126,6 @@ public final class Format {
             "text-decoration: underline"
             + "}" +
             "</style>";
-  }
-
-  public static boolean isNumber(String text){
-
-    try {
-      int number = Integer.parseInt(text);
-      return true;
-    }catch (NumberFormatException e){
-      return false;
-    }
   }
 
   public static boolean verifyDocument(String document) {
@@ -176,5 +160,9 @@ public final class Format {
 
   public static String getNow() {
     return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"));
+  }
+
+  private Format() {
+    throw new IllegalStateException("Utility class");
   }
 }

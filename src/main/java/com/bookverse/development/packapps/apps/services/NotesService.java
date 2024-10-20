@@ -1,5 +1,7 @@
 package com.bookverse.development.packapps.apps.services;
 
+import java.awt.Container;
+import lombok.Data;
 import java.util.Objects;
 import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
@@ -13,22 +15,20 @@ import com.bookverse.development.packapps.apps.utils.other.Format;
 import com.bookverse.development.packapps.apps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.utils.ui.Resources;
 
-public final class NotesService {
+@Data
+public class NotesService {
 
-  public static final int MAX_NOTES = 10;
-  private static int maxNote;
-  private static int minNote;
-  private static int thereAreNotes = 1;
-  private static float missingNote = 0;
-  private static float totalNote = 0;
-  private static float totalPercentage = 0;
-  private static float[] percentagesNumbers = new float[MAX_NOTES];
-  private static float[] notesNumbers = new float[MAX_NOTES];
+  private int allNotes = 10;
+  private int maxNote;
+  private int minNote;
+  private int thereAreNotes = 1;
+  private float missingNote = 0;
+  private float totalNote = 0;
+  private float totalPercentage = 0;
+  private float[] percentagesNumbers = new float[allNotes];
+  private float[] notesNumbers = new float[allNotes];
 
-  private NotesService() {
-  }
-
-  private static void setScale(JRadioButton scale1, JRadioButton scale2) {
+  private void setScale(JRadioButton scale1, JRadioButton scale2) {
 
     if (scale1.isSelected()) {
       maxNote = 5;
@@ -39,14 +39,24 @@ public final class NotesService {
     }
   }
 
-  private static boolean validateFields(JTextField txtName, JTextField[] notesFields) {
-    return IntStream.range(0, thereAreNotes).noneMatch(i -> notesFields[i].getText().isEmpty()
-        || Float.parseFloat(notesFields[i].getText()) > maxNote
-        || txtName.getText().trim().isEmpty());
+  private boolean validateFields(JTextField txtName, JTextField[] notesFields) {
+
+    if (txtName.getText().trim().isEmpty()) {
+      return false;
+    }
+
+    for (int i = 0; i < thereAreNotes; i++) {
+      if (notesFields[i].getText().isEmpty() || Float.parseFloat(notesFields[i].getText()) > maxNote) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
-  public static void clickOnAdd(
-      JTextField[] notesFields, JComboBox<String>[] percentagesBoxes, JButton btnAddNote, JButton btnDeleteNote, JButton btnReset
+  public void clickOnAdd(
+      JTextField[] notesFields, JComboBox<String>[] percentagesBoxes, JButton btnAddNote,
+      JButton btnDeleteNote, JButton btnReset
   ) {
 
     notesFields[thereAreNotes].setVisible(true);
@@ -61,14 +71,14 @@ public final class NotesService {
     }
   }
 
-  public static void clickOnDelete(
+  public void clickOnDelete(
       JTextField[] notesFields, JComboBox<String>[] percentagesBoxes, JButton btnAddNote, JButton btnDeleteNote, JButton btnReset
   ) {
 
     notesFields[thereAreNotes - 1].setVisible(false);
     percentagesBoxes[thereAreNotes - 1].setVisible(false);
     notesFields[thereAreNotes - 1].setText("");
-    percentagesBoxes[thereAreNotes - 1].setSelectedIndex(19);
+    percentagesBoxes[thereAreNotes - 1].setSelectedIndex(1);
     btnAddNote.setEnabled(true);
 
     thereAreNotes--;
@@ -79,7 +89,7 @@ public final class NotesService {
     }
   }
 
-  private static void parseData(JTextField[] notesFields, JComboBox<String>[] percentagesBoxes) {
+  private void parseData(JTextField[] notesFields, JComboBox<String>[] percentagesBoxes) {
     IntStream.range(0, thereAreNotes).forEach(i -> {
       percentagesNumbers[i] = Integer.parseInt(
           Objects.requireNonNull(percentagesBoxes[i].getSelectedItem()).toString()
@@ -88,7 +98,7 @@ public final class NotesService {
     });
   }
 
-  private static void addNotes() {
+  private void addNotes() {
 
     IntStream.range(0, thereAreNotes).forEach(i -> {
       totalPercentage += percentagesNumbers[i];
@@ -98,7 +108,7 @@ public final class NotesService {
     missingNote = (minNote - totalNote) / ((100 - totalPercentage) / 100);
   }
 
-  public static void clickOnCalculate(
+  public void clickOnCalculate(
       JRadioButton scale1,
       JRadioButton scale2,
       JLabel image,
@@ -107,7 +117,8 @@ public final class NotesService {
       JComboBox<String>[] percentagesBoxes,
       JButton btnAddNote,
       JButton btnDeleteNote,
-      JButton btnReset
+      JButton btnReset,
+      Container container
   ) {
 
     setScale(scale1, scale2);
@@ -137,12 +148,12 @@ public final class NotesService {
 
       if (totalPercentage == 100) {
         fullPercentage(
-            image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset, scale
+            image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset, scale, container
         );
 
       } else if (missingNote > maxNote) {
         isImposible(
-            image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset, scale
+            image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset, scale, container
         );
       } else {
 
@@ -157,9 +168,11 @@ public final class NotesService {
               + "%" + "</html>");
 
           NotesRepository.insert("Maybe", scale, txtName.getText(), totalPercentage, totalNote);
-          clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset);
+          clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset, container);
 
         } else if (totalNote >= minNote) {
+
+          container.setSize(container.getWidth(), container.getHeight() + 90);
 
           image.setIcon(new ImageIcon(Resources.getImage("win.png")));
 
@@ -171,7 +184,7 @@ public final class NotesService {
               + "</html>");
 
           NotesRepository.insert("Approved", scale, txtName.getText(), totalPercentage, totalNote);
-          clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset);
+          clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset, container);
         }
       }
 
@@ -184,9 +197,11 @@ public final class NotesService {
     }
   }
 
-  private static void isImposible(JLabel image, JTextField txtName, JTextField[] notesFields,
+  private void isImposible(JLabel image, JTextField txtName, JTextField[] notesFields,
       JComboBox<String>[] percentagesBoxes, JButton btnAddNote, JButton btnDeleteNote,
-      JButton btnReset, String scale) {
+      JButton btnReset, String scale, Container container) {
+
+    container.setSize(container.getWidth(), container.getHeight() + 90);
     image.setIcon(new ImageIcon(Resources.getImage("dead.png")));
 
     Alerts.message("Ay :(", "<html>" + Format.style()
@@ -196,12 +211,15 @@ public final class NotesService {
         + String.format("%.0f", 100 - totalPercentage) + " % remaining</strong></html>");
 
     NotesRepository.insert("Reproved", scale, txtName.getText(), totalPercentage, totalNote);
-    clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset);
+    clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset, container);
   }
 
-  private static void fullPercentage(JLabel image, JTextField txtName, JTextField[] notesFields,
+  private void fullPercentage(JLabel image, JTextField txtName, JTextField[] notesFields,
       JComboBox<String>[] percentagesBoxes, JButton btnAddNote, JButton btnDeleteNote,
-      JButton btnReset, String scale) {
+      JButton btnReset, String scale, Container container) {
+
+    container.setSize(container.getWidth(), container.getHeight() + 90);
+
     if (totalNote < minNote) {
       image.setIcon(new ImageIcon(Resources.getImage("dead.png")));
     } else {
@@ -221,27 +239,32 @@ public final class NotesService {
       NotesRepository.insert("Approved", scale, txtName.getText(), totalPercentage, totalNote);
     }
 
-    clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset);
+    clickOnReset(image, txtName, notesFields, percentagesBoxes, btnAddNote, btnDeleteNote, btnReset, container);
   }
 
-  public static void clickOnReset(
-      JLabel image, JTextField txtName, JTextField[] notesFields, JComboBox<String>[] percentagesBoxes, JButton btnAddNote, JButton btnDeleteNote, JButton btnReset
+  public void clickOnReset(
+      JLabel image, JTextField txtName, JTextField[] notesFields, JComboBox<String>[] percentagesBoxes, JButton btnAddNote, JButton btnDeleteNote, JButton btnReset, Container container
   ) {
 
-    IntStream.range(1, thereAreNotes).forEach(i -> {
+    IntStream.range(0, thereAreNotes).forEach(i -> {
       notesFields[i].setVisible(false);
       percentagesBoxes[i].setVisible(false);
       notesFields[i].setText("");
-      percentagesBoxes[i].setSelectedIndex(19);
+      percentagesBoxes[i].setSelectedIndex(1);
     });
+
+    notesFields[0].setVisible(true);
+    percentagesBoxes[0].setVisible(true);
 
     txtName.setText("");
     notesFields[0].setText("");
-    percentagesBoxes[0].setSelectedIndex(19);
+    percentagesBoxes[0].setSelectedIndex(1);
     thereAreNotes = 1;
     image.setIcon(null);
     btnAddNote.setEnabled(true);
     btnDeleteNote.setEnabled(false);
     btnReset.setEnabled(false);
+
+    container.setSize(300, 400);
   }
 }
