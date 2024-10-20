@@ -1,16 +1,16 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.BORDER_BLUE;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.BORDER_RED;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.HAND;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.apps.utils.ui.Resources.getBorder;
+import static com.bookverse.development.packapps.utils.constants.Styles.BORDER_BLUE;
+import static com.bookverse.development.packapps.utils.constants.Styles.BORDER_RED;
+import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 
 import com.bookverse.development.packapps.apps.views.CalculatorView;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

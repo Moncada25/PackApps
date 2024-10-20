@@ -7,10 +7,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import org.jetbrains.annotations.NotNull;
-import com.bookverse.development.packapps.apps.utils.constants.Styles;
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
-import com.bookverse.development.packapps.apps.utils.other.Format;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.constants.Styles;
+import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 
 public final class ArraysService {
 

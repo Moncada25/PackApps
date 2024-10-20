@@ -1,14 +1,14 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.LOANS;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.LOANS;
 
-import com.bookverse.development.packapps.apps.utils.constants.Styles;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.OlderRepository;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.utils.other.Format;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.constants.Styles;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.repositories.OlderRepository;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;

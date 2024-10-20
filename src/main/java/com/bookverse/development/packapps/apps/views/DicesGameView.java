@@ -16,12 +16,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import org.jetbrains.annotations.NotNull;
 import com.bookverse.development.packapps.apps.services.DicesGameService;
-import com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
-import com.bookverse.development.packapps.apps.utils.other.Format;
-import com.bookverse.development.packapps.apps.utils.constants.Styles;
+import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.constants.Styles;
 
 public class DicesGameView extends JDialog implements ActionListener {
 

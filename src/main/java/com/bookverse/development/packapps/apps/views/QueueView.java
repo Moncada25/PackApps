@@ -12,10 +12,10 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import com.bookverse.development.packapps.apps.services.QueueService;
-import com.bookverse.development.packapps.apps.utils.constants.Styles;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.constants.Styles;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Effects;
 
 public class QueueView extends JDialog implements ActionListener, MouseListener {
 

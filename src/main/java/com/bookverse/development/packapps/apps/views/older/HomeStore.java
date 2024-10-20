@@ -1,18 +1,20 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.CASH_REGISTER;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.INVENTORY;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.LOANS;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PURCHASES;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.SALES;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.USERS;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.LOANS;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PURCHASES;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.OlderRepository;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.utils.constants.Queries;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import com.bookverse.development.packapps.apps.tables.InventoryTable;
+import com.bookverse.development.packapps.apps.tables.LoansTable;
+import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.repositories.OlderRepository;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.constants.Queries;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;

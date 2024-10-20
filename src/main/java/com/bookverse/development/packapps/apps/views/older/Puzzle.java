@@ -1,16 +1,16 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
-import com.bookverse.development.packapps.apps.utils.constants.Styles;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.OlderRepository;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.utils.other.Format;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.constants.Styles;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.repositories.OlderRepository;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

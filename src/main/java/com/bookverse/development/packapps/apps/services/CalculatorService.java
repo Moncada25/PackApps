@@ -2,7 +2,7 @@ package com.bookverse.development.packapps.apps.services;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 
 public final class CalculatorService {
 

@@ -1,19 +1,19 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import static com.bookverse.development.packapps.apps.utils.constants.AppConfig.STORE_MANAGER_KEY;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.USERS;
+import static com.bookverse.development.packapps.utils.constants.AppConfig.STORE_MANAGER_KEY;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.apps.utils.other.Crypto;
-import com.bookverse.development.packapps.apps.utils.other.Config;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.OlderRepository;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.utils.other.Format;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.other.Crypto;
+import com.bookverse.development.packapps.utils.other.Config;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.repositories.OlderRepository;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;

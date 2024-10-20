@@ -8,11 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JTextField;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.utils.constants.Styles;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.constants.Styles;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.apps.services.CalculatorService;
-import com.bookverse.development.packapps.apps.utils.other.Format;
+import com.bookverse.development.packapps.utils.other.Format;
 import javax.swing.SwingConstants;
 
 public class CalculatorView extends JDialog implements ActionListener {

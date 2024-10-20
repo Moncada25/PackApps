@@ -1,20 +1,20 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.apps.utils.ui.Effects.fadeIn;
-import static com.bookverse.development.packapps.apps.utils.other.Format.getDate;
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.getIntRandom;
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.verifyConnection;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ui.Effects.fadeIn;
+import static com.bookverse.development.packapps.utils.other.Format.getDate;
+import static com.bookverse.development.packapps.utils.other.GeneralUtils.getIntRandom;
+import static com.bookverse.development.packapps.utils.other.GeneralUtils.verifyConnection;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
 
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.OlderRepository;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.utils.other.Format;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.repositories.OlderRepository;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -165,7 +165,7 @@ public class GuessNumber extends JDialog implements ActionListener {
     txtNumber.setText("");
   }
 
-  protected void start(JFrame parent) {
+  public void start(JFrame parent) {
 
     if (isHard) {
       setTitle(GUESS_NUMBER + " - Level Hard");
@@ -182,7 +182,7 @@ public class GuessNumber extends JDialog implements ActionListener {
     setVisible(true);
   }
 
-  protected void start(JDialog parent) {
+  public void start(JDialog parent) {
 
     if (isHard) {
       setTitle(GUESS_NUMBER + " - Level Hard");

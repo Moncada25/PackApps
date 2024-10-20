@@ -1,27 +1,28 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.HAND;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.LOADER;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.POINT;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.RESIZE;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.apps.utils.ui.Resources.getBorder;
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.loginDBA;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.DICES;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.HANGMAN;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.NOTES;
-import static com.bookverse.development.packapps.apps.utils.constants.DatabaseConstants.PUZZLE;
+import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
+import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
+import static com.bookverse.development.packapps.utils.constants.Styles.LOADER;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.POINT;
+import static com.bookverse.development.packapps.utils.constants.Styles.RESIZE;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
+import static com.bookverse.development.packapps.utils.other.GeneralUtils.loginDBA;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.HANGMAN;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.NOTES;
+import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.repositories.OlderRepository;
-import com.bookverse.development.packapps.apps.utils.ui.Table;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.utils.other.Format;
-import com.bookverse.development.packapps.apps.utils.constants.Queries;
+import com.bookverse.development.packapps.apps.home.HomeService;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.repositories.OlderRepository;
+import com.bookverse.development.packapps.utils.ui.Table;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.constants.Queries;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -55,6 +56,7 @@ import org.jetbrains.annotations.NotNull;
 public class PuzzleTable extends JDialog implements ActionListener, MouseListener {
 
   private Table model = new Table();
+  private HomeService service = new HomeService();
   public final JTable viewTable = new JTable(model);
   private JLabel title, message;
   private JMenuItem create, read, delete, update;
@@ -221,7 +223,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
               String.valueOf(model.getValueAt(selectedRow, 0)), PUZZLE);
 
           dispose();
-          new Index().puzzleTableAP();
+          service.puzzleTableAP(this);
         }
       }
 
@@ -246,7 +248,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
           OlderRepository.deleteData(IDs, PUZZLE);
 
           dispose();
-          new Index().puzzleTableAP();
+          service.puzzleTableAP(this);
         }
       }
 
@@ -323,16 +325,16 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
 
     if (e.getSource() == tables[0]) {
       setVisible(false);
-      new Index().guessNumberTableAP();
+      service.guessNumberTableAP();
     } else if (e.getSource() == tables[1]) {
       setVisible(false);
-      new Index().hangmanTableAP();
+      service.hangmanTableAP();
     } else if (e.getSource() == tables[2]) {
       setVisible(false);
-      new Index().dicesTableAP();
+      service.dicesTableAP(this);
     } else if (e.getSource() == tables[3]) {
       setVisible(false);
-      new Index().notesTableAP();
+      service.notesTableAP();
     } else if (e.getSource() == tables[4]) {
       Alerts.message("Message", "You're here!");
     }

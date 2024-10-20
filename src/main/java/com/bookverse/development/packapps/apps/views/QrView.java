@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.apps.views;
 
-import com.bookverse.development.packapps.apps.utils.ui.KeyBindingsUtil;
+import com.bookverse.development.packapps.utils.ui.KeyBindingsUtil;
 import java.net.URI;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
@@ -14,10 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import com.bookverse.development.packapps.apps.utils.constants.Styles;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.constants.Styles;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.services.QrService;
 
 public class QrView extends JDialog implements MouseListener {

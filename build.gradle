@@ -46,7 +46,7 @@ test {
 jar {
     manifest {
         attributes(
-                "Main-Class": "com.bookverse.development.packapps.apps.core.Start",
+                "Main-Class": "com.bookverse.development.packapps.core.Start",
                 "Built-By": "Santiago Moncada" + " (" + System.properties["user.name"] + ")",
                 "Build-Revision": 3.0,
                 "Created-By": "Gradle ${gradle.gradleVersion}",

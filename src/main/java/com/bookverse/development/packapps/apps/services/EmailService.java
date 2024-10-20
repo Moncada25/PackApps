@@ -10,8 +10,8 @@ import jakarta.mail.internet.MimeMessage;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import com.bookverse.development.packapps.apps.utils.other.GeneralUtils;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 
 public final class EmailService {
 

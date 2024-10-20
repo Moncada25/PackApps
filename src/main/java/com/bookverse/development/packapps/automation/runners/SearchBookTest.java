@@ -7,16 +7,14 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.hamcrest.Matchers.is;
 
-import com.bookverse.development.packapps.automation.exceptions.BookNotFound;
 import com.bookverse.development.packapps.automation.models.Bookverse;
 import com.bookverse.development.packapps.automation.questions.TheTitle;
 import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
 import com.bookverse.development.packapps.automation.tasks.SearchBook;
 import com.bookverse.development.packapps.automation.utils.Constants;
-import com.bookverse.development.packapps.automation.utils.ExceptionsMessages;
 import com.bookverse.development.packapps.automation.utils.WebDriverFactory;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.ui.Alerts;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.Cast;
@@ -40,12 +38,10 @@ public class SearchBookTest {
   public void searchBook() {
     theActorInTheSpotlight().wasAbleTo(LoginBookverse.withCredentials(bookverse));
     theActorInTheSpotlight().attemptsTo(SearchBook.inBookverse(bookverse.getBook()));
-    theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverse.getBook())).
-        orComplainWith(BookNotFound.class,
-            ExceptionsMessages.SEARCH_BOOK_ERROR.getProperty()));
-    Alerts.message("Test passed!", ""
-        + "Book → " + bookverse.getBook() + "\n"
-        + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
+    theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverse.getBook())));
+    Alerts.message(
+        "Test passed!",
+        "Book → " + bookverse.getBook() + "\n" + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
   }
 
   @After

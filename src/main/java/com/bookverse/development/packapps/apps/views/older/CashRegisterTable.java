@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.utils.ui.Table;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.ui.Table;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;

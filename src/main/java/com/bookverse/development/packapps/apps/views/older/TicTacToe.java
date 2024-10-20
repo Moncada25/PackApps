@@ -1,8 +1,8 @@
 package com.bookverse.development.packapps.apps.views.older;
 
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
-import com.bookverse.development.packapps.apps.utils.other.TicTacToeCPU;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.other.TicTacToeCPU;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,12 +16,12 @@ import javax.swing.JTextField;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MEDIUM;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.apps.utils.ui.Effects.fadeIn;
-import static com.bookverse.development.packapps.apps.utils.other.GeneralUtils.getIntRandom;
-import static com.bookverse.development.packapps.apps.utils.ui.Alerts.instruccionesTriqui;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.ui.Effects.fadeIn;
+import static com.bookverse.development.packapps.utils.other.GeneralUtils.getIntRandom;
+import static com.bookverse.development.packapps.utils.ui.Alerts.instruccionesTriqui;
 
 public class TicTacToe extends JDialog implements ActionListener {
 

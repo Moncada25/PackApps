@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.apps.views;
 
-import com.bookverse.development.packapps.apps.utils.ui.KeyBindingsUtil;
+import com.bookverse.development.packapps.utils.ui.KeyBindingsUtil;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -13,16 +13,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import com.bookverse.development.packapps.apps.utils.constants.Styles;
-import com.bookverse.development.packapps.apps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.utils.ui.Effects;
-import com.bookverse.development.packapps.apps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.constants.Styles;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.utils.ui.Resources;
 
 import static com.bookverse.development.packapps.apps.services.OcrService.readText;
-import static com.bookverse.development.packapps.apps.utils.ui.Resources.getFile;
+import static com.bookverse.development.packapps.utils.ui.Resources.getFile;
 
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.apps.utils.constants.Styles.TEXT_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
+import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 
 public class OcrView extends JDialog implements MouseListener {
 

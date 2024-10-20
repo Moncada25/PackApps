@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import lombok.SneakyThrows;
-import com.bookverse.development.packapps.apps.utils.other.Format;
+import com.bookverse.development.packapps.utils.other.Format;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
