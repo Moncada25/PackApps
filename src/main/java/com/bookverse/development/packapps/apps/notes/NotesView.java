@@ -1,5 +1,8 @@
 package com.bookverse.development.packapps.apps.notes;
 
+import java.awt.Component;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
 import javax.swing.SwingConstants;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -21,7 +24,7 @@ import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.other.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
-import com.bookverse.development.packapps.utils.ui.ButtonBuilder;
+import com.bookverse.development.packapps.utils.ui.factory.Button;
 
 @SuppressWarnings("unchecked")
 public class NotesView extends JDialog {
@@ -71,7 +74,6 @@ public class NotesView extends JDialog {
     gbc.weightx = 1.0;
     gbc.weighty = 1.0;
 
-    // Header
     JLabel name = Resources.getLabel("<html><strong>Name</strong></html>", Styles.MAIN_COLOR, this, Styles.MEDIUM);
     gbc.gridx = 0;
     gbc.gridy = 0;
@@ -125,7 +127,6 @@ public class NotesView extends JDialog {
     JTextField[] notesFields = new JTextField[service.getAllNotes()];
     JComboBox<String>[] percentagesBoxes = new JComboBox[service.getAllNotes()];
 
-    // Center
     gbc.gridwidth = 1;
     for (int i = 0; i < notesFields.length; i++) {
       notesFields[i] = new JTextField();
@@ -144,8 +145,15 @@ public class NotesView extends JDialog {
 
       percentagesBoxes[i] = new JComboBox<>(service.getPercentages());
       percentagesBoxes[i].setSelectedIndex(1);
-      percentagesBoxes[i].setAlignmentY(SwingConstants.CENTER);
-      percentagesBoxes[i].setAlignmentX(SwingConstants.CENTER);
+      percentagesBoxes[i].setRenderer(new DefaultListCellRenderer() {
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+          JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+          label.setHorizontalAlignment(SwingConstants.CENTER);
+          return label;
+        }
+      });
+
       gbc.gridx = 1;
       gbc.gridy = 5 + i;
       add(percentagesBoxes[i], gbc);
@@ -157,8 +165,7 @@ public class NotesView extends JDialog {
     notesFields[0].setVisible(true);
     percentagesBoxes[0].setVisible(true);
 
-    // Footer
-    JButton btnAddNote = new ButtonBuilder().setText("Add").setColor(Styles.TEXT_COLOR).build();
+    JButton btnAddNote = new Button().setText("Add").setColor(Styles.TEXT_COLOR).build();
     gbc.gridx = 0;
     gbc.gridy = 6 + service.getAllNotes();
     add(btnAddNote, gbc);
@@ -169,7 +176,7 @@ public class NotesView extends JDialog {
       notes.setText("<html><strong>Notes "+service.getThereAreNotes()+"</strong></html>");
     });
 
-    JButton btnDeleteNote = new ButtonBuilder().setText("Delete").setColor(Styles.MAIN_COLOR).build();
+    JButton btnDeleteNote = new Button().setText("Delete").setColor(Styles.MAIN_COLOR).build();
     btnDeleteNote.setEnabled(false);
     gbc.gridx = 1;
     gbc.gridy = 6 + service.getAllNotes();
@@ -181,20 +188,20 @@ public class NotesView extends JDialog {
       notes.setText("<html><strong>Notes "+service.getThereAreNotes()+"</strong></html>");
     });
 
-    JButton btnCalculate = new ButtonBuilder().setText("Show").setColor(Styles.TEXT_COLOR).build();
+    JButton btnCalculate = new Button().setText("Show").setColor(Styles.TEXT_COLOR).build();
     gbc.gridx = 0;
     gbc.gridy = 7 + service.getAllNotes();
     add(btnCalculate, gbc);
     btnCalculate.addActionListener(e -> service.clickOnCalculate(model));
 
-    JButton btnReset = new ButtonBuilder().setText("Reset").setColor(Styles.MAIN_COLOR).build();
+    JButton btnReset = new Button().setText("Reset").setColor(Styles.MAIN_COLOR).build();
     btnReset.setEnabled(false);
     gbc.gridx = 1;
     gbc.gridy = 7 + service.getAllNotes();
     add(btnReset, gbc);
     btnReset.addActionListener(e -> service.clickOnReset(model));
 
-    JButton btnExit = new ButtonBuilder().setText("Return").setColor(Styles.MAIN_COLOR).build();
+    JButton btnExit = new Button().setText("Return").setColor(Styles.MAIN_COLOR).build();
     gbc.gridx = 0;
     gbc.gridy = 8 + service.getAllNotes();
     gbc.gridwidth = 2;

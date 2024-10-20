@@ -57,12 +57,6 @@ public final class Resources {
     return item;
   }
 
-  public static JMenuItem getMenuItem(String name, String image) {
-    JMenuItem item = new JMenuItem(name);
-    item.setIcon(new ImageIcon(getImage(image + ".png")));
-    return item;
-  }
-
   public static JMenu getMenu(String name, String image) {
     JMenu menu = new JMenu(name);
     menu.setIcon(new ImageIcon(getImage(image + ".png")));

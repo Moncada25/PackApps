@@ -142,7 +142,7 @@ public class NotesService {
   }
 
   public String[] getPercentages() {
-    return new String[]{"10", "20", "30", "40", "50", "60", "70", "80", "90", "100"};
+    return new String[]{"10 %", "20 %", "30 %", "40 %", "50 %", "60 %", "70 %", "80 %", "90 %", "100 %"};
   }
 
   private void isImposible(NotesViewModel model) {
@@ -163,7 +163,7 @@ public class NotesService {
   private void parseData(NotesViewModel model) {
     IntStream.range(0, thereAreNotes).forEach(i -> {
       percentagesNumbers[i] = Integer.parseInt(
-          Objects.requireNonNull(model.getPercentagesBoxes()[i].getSelectedItem()).toString()
+          Objects.requireNonNull(model.getPercentagesBoxes()[i].getSelectedItem()).toString().replace(" %", "")
       );
       notesNumbers[i] = Float.parseFloat(model.getNotesFields()[i].getText());
     });

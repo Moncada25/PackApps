@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.utils.ui;
+package com.bookverse.development.packapps.utils.ui.factory;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,29 +6,29 @@ import java.awt.Font;
 import javax.swing.JButton;
 import com.bookverse.development.packapps.utils.constants.Styles;
 
-public class ButtonBuilder {
+public class Button {
   private String text;
   private Color color = Styles.MAIN_COLOR;
   private Font font = Styles.MEDIUM;
   private int width = 0;
   private int height = 0;
 
-  public ButtonBuilder setText(String text) {
+  public Button setText(String text) {
     this.text = text;
     return this;
   }
 
-  public ButtonBuilder setColor(Color color) {
+  public Button setColor(Color color) {
     this.color = color;
     return this;
   }
 
-  public ButtonBuilder setFont(Font font) {
+  public Button setFont(Font font) {
     this.font = font;
     return this;
   }
 
-  public ButtonBuilder setSize(int width, int height) {
+  public Button setSize(int width, int height) {
     this.width = width;
     this.height = height;
     return this;

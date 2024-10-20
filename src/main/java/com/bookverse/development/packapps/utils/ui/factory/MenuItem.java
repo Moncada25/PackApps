@@ -1,19 +1,20 @@
-package com.bookverse.development.packapps.utils.ui;
+package com.bookverse.development.packapps.utils.ui.factory;
 
+import com.bookverse.development.packapps.utils.ui.Resources;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 
-public class MenuItemBuilder {
+public class MenuItem {
 
   private String text;
   private String image;
 
-  public MenuItemBuilder setText(String text) {
+  public MenuItem setText(String text) {
     this.text = text;
     return this;
   }
 
-  public MenuItemBuilder setImage(String image) {
+  public MenuItem setImage(String image) {
     this.image = image;
     return this;
   }
