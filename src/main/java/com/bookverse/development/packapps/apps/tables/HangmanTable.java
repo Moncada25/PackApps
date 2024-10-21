@@ -9,6 +9,7 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PUZZLE;
 
 import com.bookverse.development.packapps.apps.home.HomeService;
+import com.bookverse.development.packapps.apps.home.HomeView;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
@@ -16,9 +17,9 @@ import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Table;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.other.Format;
-import com.bookverse.development.packapps.utils.constants.Queries;
-import com.bookverse.development.packapps.apps.views.older.Hangman;
-import com.bookverse.development.packapps.apps.views.older.TableResult;
+import com.bookverse.development.packapps.database.Queries;
+import com.bookverse.development.packapps.views.older.Hangman;
+import com.bookverse.development.packapps.views.older.TableResult;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -193,7 +194,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(HANGMAN));
 
           dispose();
-          service.hangmanTableAP();
+          new HomeView().openHangmanTable();
         }
       }
 
@@ -217,7 +218,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
         if (GeneralUtils.loginDBA()) {
           OlderRepository.deleteData(IDs, Format.tableName(HANGMAN));
           dispose();
-          service.hangmanTableAP();
+          new HomeView().openHangmanTable();
         }
       }
 
@@ -267,18 +268,18 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
     if (e.getSource() == tables[0]) {
       setVisible(false);
-      service.guessNumberTableAP();
+      new HomeView().openGuessNumberTable();
     } else if (e.getSource() == tables[1]) {
       Alerts.message("Message", "You're here!");
     } else if (e.getSource() == tables[2]) {
       setVisible(false);
-      service.dicesTableAP(this);
+      new HomeView().openDicesTable(this);
     } else if (e.getSource() == tables[3]) {
       setVisible(false);
-      service.notesTableAP();
+      new HomeView().openNotesTable();
     } else if (e.getSource() == tables[4]) {
       setVisible(false);
-      service.puzzleTableAP(this);
+      new HomeView().openPuzzleTable(this);
     }
   }
 

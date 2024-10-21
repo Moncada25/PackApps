@@ -12,7 +12,7 @@ import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Table;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.views.older.HomeStore;
+import com.bookverse.development.packapps.views.older.HomeStore;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

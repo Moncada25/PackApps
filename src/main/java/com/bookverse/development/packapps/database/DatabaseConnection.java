@@ -39,10 +39,10 @@ public final class DatabaseConnection {
 
       connection = basicDataSource.getConnection();
     } catch (SQLException e) {
-        throw new RuntimeException(e);
+      throw new RuntimeException(e);
     }
 
-      return connection;
+    return connection;
   }
 
   public static void close(ResultSet rs) {

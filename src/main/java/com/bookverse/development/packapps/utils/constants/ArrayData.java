@@ -101,4 +101,8 @@ public final class ArrayData {
 
     return countryCodes.get(key);
   }
+
+  private ArrayData() {
+    throw new IllegalStateException("Utility class");
+  }
 }

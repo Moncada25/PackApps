@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.utils.other;
 
-import com.bookverse.development.packapps.apps.views.older.TicTacToe;
+import com.bookverse.development.packapps.views.older.TicTacToe;
 
 public final class TicTacToeCPU {
 

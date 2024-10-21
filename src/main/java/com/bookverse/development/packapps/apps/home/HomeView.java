@@ -2,6 +2,9 @@ package com.bookverse.development.packapps.apps.home;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.Window;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
@@ -16,16 +19,16 @@ import javax.swing.UnsupportedLookAndFeelException;
 import com.bookverse.development.packapps.utils.constants.AppConfig;
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.utils.constants.Styles;
-import com.bookverse.development.packapps.apps.views.DicesGameView;
-import com.bookverse.development.packapps.apps.views.EmailView;
-import com.bookverse.development.packapps.apps.views.FeedbackView;
+import com.bookverse.development.packapps.views.DicesGameView;
+import com.bookverse.development.packapps.views.EmailView;
+import com.bookverse.development.packapps.views.FeedbackView;
 import com.bookverse.development.packapps.apps.notes.NotesView;
-import com.bookverse.development.packapps.apps.views.ProfessionalCardView;
-import com.bookverse.development.packapps.apps.views.OcrView;
+import com.bookverse.development.packapps.views.ProfessionalCardView;
+import com.bookverse.development.packapps.views.OcrView;
 import com.bookverse.development.packapps.apps.qr.QrView;
-import com.bookverse.development.packapps.apps.views.StructuresView;
-import com.bookverse.development.packapps.apps.views.TextsView;
-import com.bookverse.development.packapps.apps.views.WhatsAppView;
+import com.bookverse.development.packapps.views.StructuresView;
+import com.bookverse.development.packapps.views.TextsView;
+import com.bookverse.development.packapps.views.WhatsAppView;
 import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.utils.other.Config;
@@ -33,24 +36,45 @@ import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.other.ExportFile;
 import com.bookverse.development.packapps.utils.other.Format;
-import com.bookverse.development.packapps.utils.constants.Queries;
+import com.bookverse.development.packapps.database.Queries;
 import com.bookverse.development.packapps.utils.ui.Effects;
-import com.bookverse.development.packapps.apps.views.older.ConsultBook;
-import com.bookverse.development.packapps.apps.views.older.GuessNumber;
-import com.bookverse.development.packapps.apps.views.older.Hangman;
-import com.bookverse.development.packapps.apps.views.older.LoginStore;
-import com.bookverse.development.packapps.apps.views.older.Numbers;
-import com.bookverse.development.packapps.apps.views.older.Puzzle;
-import com.bookverse.development.packapps.apps.views.older.TicTacToe;
+import com.bookverse.development.packapps.views.older.ConsultBook;
+import com.bookverse.development.packapps.views.older.GuessNumber;
+import com.bookverse.development.packapps.views.older.Hangman;
+import com.bookverse.development.packapps.views.older.LoginStore;
+import com.bookverse.development.packapps.views.older.Numbers;
+import com.bookverse.development.packapps.views.older.Puzzle;
+import com.bookverse.development.packapps.views.older.TicTacToe;
 import com.bookverse.development.packapps.utils.ui.factory.Menu;
 import com.bookverse.development.packapps.utils.ui.factory.MenuItem;
 import com.bookverse.development.packapps.utils.constants.AppThemes;
 import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.apps.tables.DicesTable;
+import com.bookverse.development.packapps.apps.tables.GuessNumberTable;
+import com.bookverse.development.packapps.apps.tables.HangmanTable;
+import com.bookverse.development.packapps.apps.tables.InventoryTable;
+import com.bookverse.development.packapps.apps.tables.LoansTable;
+import com.bookverse.development.packapps.apps.tables.NotesTable;
+import com.bookverse.development.packapps.repositories.OlderRepository;
+import com.bookverse.development.packapps.views.older.CashRegisterTable;
+import com.bookverse.development.packapps.views.older.PurchasesTable;
+import com.bookverse.development.packapps.views.older.PuzzleTable;
+import com.bookverse.development.packapps.views.older.SalesTable;
 
 public class HomeView extends JFrame {
 
   private static HomeService service = new HomeService();
   private static HomeViewModel model = new HomeViewModel();
+  private HangmanTable hangmanTable = new HangmanTable(this, true);
+  private GuessNumberTable guessNumberTable = new GuessNumberTable(this, true);
+  private PuzzleTable puzzleTable = new PuzzleTable(this, true);
+  private DicesTable dicesTable = new DicesTable(this, true);
+  private NotesTable notesTable = new NotesTable(this, true);
+  private InventoryTable inventoryTable = new InventoryTable(this, true);
+  private CashRegisterTable cashRegisterTable = new CashRegisterTable(this, true);
+  private LoansTable loansTable = new LoansTable(this, true);
+  private PurchasesTable purchasesTable = new PurchasesTable(this, true);
+  private SalesTable salesTable = new SalesTable(this, true);
 
   public HomeView() {
     createComponents();
@@ -131,6 +155,124 @@ public class HomeView extends JFrame {
     model.getTextureMode().setForeground(Styles.MAIN_COLOR);
     Effects.fadeIn(window);
     window.setVisible(true);
+  }
+
+  public void openGuessNumberTable() {
+
+    guessNumberTable.cleanTable();
+
+    try {
+      OlderRepository.readTable(
+          guessNumberTable.viewTable,
+          Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)),
+          true
+      );
+    } catch (Exception e1) {
+      Alerts.error(e1, DatabaseConstants.GUESS_NUMBER);
+    }
+
+    guessNumberTable.setSize(830, 400);
+    guessNumberTable.setLocationRelativeTo(null);
+    guessNumberTable.setMinimumSize(new Dimension(830, 400));
+    guessNumberTable.setMaximumSize(new Dimension(1280, 720));
+    guessNumberTable.setTitle(DatabaseConstants.GUESS_NUMBER + " Information");
+    Effects.fadeIn(guessNumberTable);
+    guessNumberTable.setVisible(true);
+  }
+
+  public void openHangmanTable() {
+
+    hangmanTable.cleanTable();
+
+    try {
+      OlderRepository.readTable(
+          hangmanTable.viewTable,
+          Queries.getAllData(Format.tableName(DatabaseConstants.HANGMAN)),
+          true
+      );
+    } catch (Exception e1) {
+      Alerts.error(e1, DatabaseConstants.HANGMAN);
+    }
+
+    hangmanTable.setSize(830, 400);
+    hangmanTable.setLocationRelativeTo(null);
+    hangmanTable.setMinimumSize(new Dimension(830, 400));
+    hangmanTable.setMaximumSize(new Dimension(1280, 720));
+    hangmanTable.setTitle(DatabaseConstants.HANGMAN + " Information");
+    Effects.fadeIn(hangmanTable);
+    hangmanTable.setVisible(true);
+  }
+
+  public boolean openDicesTable(Window parent) {
+    boolean aux = false;
+
+    dicesTable.cleanTable();
+
+    try {
+      aux = OlderRepository.readTable(
+          dicesTable.viewTable, Queries.getAllData(DatabaseConstants.DICES), true
+      );
+    } catch (Exception e1) {
+      Alerts.error(e1, DatabaseConstants.DICES);
+    }
+
+    if (aux) {
+      parent.setVisible(false);
+      dicesTable.setSize(830, 400);
+      dicesTable.setLocationRelativeTo(null);
+      dicesTable.setMinimumSize(new Dimension(830, 400));
+      dicesTable.setMaximumSize(new Dimension(1280, 720));
+      dicesTable.setTitle(DatabaseConstants.DICES + " Information");
+      Effects.fadeIn(dicesTable);
+      dicesTable.setVisible(true);
+    }
+
+    return aux;
+  }
+
+  public void openNotesTable() {
+    notesTable.cleanTable();
+
+    try {
+      OlderRepository.readTable(
+          notesTable.viewTable,
+          Queries.getAllData(Format.tableName(DatabaseConstants.NOTES)),
+          true
+      );
+    } catch (Exception e1) {
+      Alerts.error(e1, DatabaseConstants.NOTES);
+    }
+
+    notesTable.setSize(830, 400);
+    notesTable.setLocationRelativeTo(null);
+    notesTable.setMinimumSize(new Dimension(830, 400));
+    notesTable.setMaximumSize(new Dimension(1280, 720));
+    notesTable.setTitle(DatabaseConstants.NOTES + " Information");
+    Effects.fadeIn(notesTable);
+    notesTable.setVisible(true);
+  }
+
+  public void openPuzzleTable(Dialog parent) {
+    puzzleTable.cleanTable();
+
+    try {
+      OlderRepository.readTable(
+          puzzleTable.viewTable,
+          Queries.getAllData(Format.tableName(DatabaseConstants.PUZZLE)),
+          true
+      );
+    } catch (Exception e1) {
+      Alerts.error(e1, DatabaseConstants.PUZZLE);
+    }
+
+    puzzleTable.setSize(830, 400);
+    puzzleTable.setLocationRelativeTo(null);
+    puzzleTable.setMinimumSize(new Dimension(830, 400));
+    puzzleTable.setMaximumSize(new Dimension(1280, 720));
+    puzzleTable.setTitle(DatabaseConstants.PUZZLE + " Information");
+    parent.setVisible(false);
+    Effects.fadeIn(puzzleTable);
+    puzzleTable.setVisible(true);
   }
 
   private void createComponents() {
@@ -271,7 +413,7 @@ public class HomeView extends JFrame {
 
     JMenuItem database = new MenuItem().setText("Database").setImage("tabla").build();
     database.addActionListener(e -> {
-      if (service.dicesTableAP(this)) {
+      if (openDicesTable(this)) {
         setVisible(true);
       }
     });
@@ -316,90 +458,90 @@ public class HomeView extends JFrame {
 
     JMenuItem guessNumberTXT = new MenuItem().setText("Guess Number").setImage("adivinar").build();
     guessNumberTXT.addActionListener(e -> {
-      service.getGuessNumberTable().cleanTable();
+      guessNumberTable.cleanTable();
       ExportFile.txt(
-          service.getGuessNumberTable().viewTable,
+          guessNumberTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)), ".txt"
       );
     });
 
     JMenuItem hangmanTXT = new MenuItem().setText("Hangman").setImage("ahorcado").build();
     hangmanTXT.addActionListener(e -> {
-      service.getHangmanTable().cleanTable();
+      hangmanTable.cleanTable();
       ExportFile.txt(
-          service.getHangmanTable().viewTable,
+          hangmanTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.HANGMAN)), ".txt"
       );
     });
 
     JMenuItem purchasesTXT = new MenuItem().setText("Purchases").setImage("comprar").build();
     purchasesTXT.addActionListener(e -> {
-      service.getPurchasesTable().cleanTable();
+      purchasesTable.cleanTable();
       ExportFile.txt(
-          service.getPurchasesTable().viewTable,
+          purchasesTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.PURCHASES)), ".txt"
       );
     });
 
     JMenuItem dicesTXT = new MenuItem().setText("Dices").setImage("dado").build();
     dicesTXT.addActionListener(e -> {
-      service.getDicesTable().cleanTable();
+      dicesTable.cleanTable();
       ExportFile.txt(
-          service.getDicesTable().viewTable,
+          dicesTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.DICES)), ".txt"
       );
     });
 
     JMenuItem notesTXT = new MenuItem().setText("Notes").setImage("notas").build();
     notesTXT.addActionListener(e -> {
-      service.getNotesTable().cleanTable();
+      notesTable.cleanTable();
       ExportFile.txt(
-          service.getNotesTable().viewTable,
+          notesTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.NOTES)), ".txt"
       );
     });
 
     JMenuItem puzzleTXT = new MenuItem().setText("Puzzle").setImage("rompecabezas").build();
     puzzleTXT.addActionListener(e -> {
-      service.getPuzzleTable().cleanTable();
+      puzzleTable.cleanTable();
       ExportFile.txt(
-          service.getPuzzleTable().viewTable,
+          puzzleTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.PUZZLE)), ".txt"
       );
     });
 
     JMenuItem inventoryTXT = new MenuItem().setText("Inventory").setImage("inventario").build();
     inventoryTXT.addActionListener(e -> {
-      service.getInventoryTable().cleanTable();
+      inventoryTable.cleanTable();
       ExportFile.txt(
-          service.getInventoryTable().viewTable,
+          inventoryTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.INVENTORY)), ".txt"
       );
     });
 
     JMenuItem cashRegisterTXT = new MenuItem().setText("Cash Register").setImage("registradora").build();
     cashRegisterTXT.addActionListener(e -> {
-      service.getCashRegisterTable().cleanTable();
+      cashRegisterTable.cleanTable();
       ExportFile.txt(
-          service.getCashRegisterTable().viewTable,
+          cashRegisterTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.CASH_REGISTER)), ".txt"
       );
     });
 
     JMenuItem loansTXT = new MenuItem().setText("Loans").setImage("prestamos").build();
     loansTXT.addActionListener(e -> {
-      service.getLoansTable().cleanTable();
+      loansTable.cleanTable();
       ExportFile.txt(
-          service.getLoansTable().viewTable,
+          loansTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.LOANS)), ".txt"
       );
     });
 
     JMenuItem salesTXT = new MenuItem().setText("Sales").setImage("vender").build();
     salesTXT.addActionListener(e -> {
-      service.getSalesTable().cleanTable();
+      salesTable.cleanTable();
       ExportFile.txt(
-          service.getSalesTable().viewTable,
+          salesTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.SALES)), ".txt"
       );
     });
@@ -420,9 +562,9 @@ public class HomeView extends JFrame {
 
     JMenuItem guessNumberEXCEL = new MenuItem().setText("Guess Number").setImage("adivinar").build();
     guessNumberEXCEL.addActionListener(e -> {
-      service.getGuessNumberTable().cleanTable();
+      guessNumberTable.cleanTable();
       ExportFile.excel(
-          service.getGuessNumberTable().viewTable,
+          guessNumberTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)),
           ".xls"
       );
@@ -430,9 +572,9 @@ public class HomeView extends JFrame {
 
     JMenuItem hangmanEXCEL = new MenuItem().setText("Hangman").setImage("ahorcado").build();
     hangmanEXCEL.addActionListener(e -> {
-      service.getHangmanTable().cleanTable();
+      hangmanTable.cleanTable();
       ExportFile.excel(
-          service.getHangmanTable().viewTable,
+          hangmanTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.HANGMAN)),
           ".xls"
       );
@@ -440,9 +582,9 @@ public class HomeView extends JFrame {
 
     JMenuItem purchasesEXCEL = new MenuItem().setText("Purchases").setImage("comprar").build();
     purchasesEXCEL.addActionListener(e -> {
-      service.getPurchasesTable().cleanTable();
+      purchasesTable.cleanTable();
       ExportFile.excel(
-          service.getPurchasesTable().viewTable,
+          purchasesTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.PURCHASES)),
           ".xls"
       );
@@ -450,9 +592,9 @@ public class HomeView extends JFrame {
 
     JMenuItem dicesEXCEL = new MenuItem().setText("Dices").setImage("dado").build();
     dicesEXCEL.addActionListener(e -> {
-      service.getDicesTable().cleanTable();
+      dicesTable.cleanTable();
       ExportFile.excel(
-          service.getDicesTable().viewTable,
+          dicesTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.DICES)),
           ".xls"
       );
@@ -460,9 +602,9 @@ public class HomeView extends JFrame {
 
     JMenuItem notesEXCEL = new MenuItem().setText("Notes").setImage("notas").build();
     notesEXCEL.addActionListener(e -> {
-      service.getNotesTable().cleanTable();
+      notesTable.cleanTable();
       ExportFile.excel(
-          service.getNotesTable().viewTable,
+          notesTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.NOTES)),
           ".xls"
       );
@@ -470,9 +612,9 @@ public class HomeView extends JFrame {
 
     JMenuItem puzzleEXCEL = new MenuItem().setText("Puzzle").setImage("rompecabezas").build();
     puzzleEXCEL.addActionListener(e -> {
-      service.getPuzzleTable().cleanTable();
+      puzzleTable.cleanTable();
       ExportFile.excel(
-          service.getPuzzleTable().viewTable,
+          puzzleTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.PUZZLE)),
           ".xls"
       );
@@ -480,9 +622,9 @@ public class HomeView extends JFrame {
 
     JMenuItem inventoryEXCEL = new MenuItem().setText("Inventory").setImage("inventario").build();
     inventoryEXCEL.addActionListener(e -> {
-      service.getInventoryTable().cleanTable();
+      inventoryTable.cleanTable();
       ExportFile.excel(
-          service.getInventoryTable().viewTable,
+          inventoryTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.INVENTORY)),
           ".xls"
       );
@@ -490,9 +632,9 @@ public class HomeView extends JFrame {
 
     JMenuItem cashRegisterEXCEL = new MenuItem().setText("Cash Register").setImage("registradora").build();
     cashRegisterEXCEL.addActionListener(e -> {
-      service.getCashRegisterTable().cleanTable();
+      cashRegisterTable.cleanTable();
       ExportFile.excel(
-          service.getCashRegisterTable().viewTable,
+          cashRegisterTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.CASH_REGISTER)),
           ".xls"
       );
@@ -500,9 +642,9 @@ public class HomeView extends JFrame {
 
     JMenuItem loansEXCEL = new MenuItem().setText("Loans").setImage("prestamos").build();
     loansEXCEL.addActionListener(e -> {
-      service.getLoansTable().cleanTable();
+      loansTable.cleanTable();
       ExportFile.excel(
-          service.getLoansTable().viewTable,
+          loansTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.LOANS)),
           ".xls"
       );
@@ -510,9 +652,9 @@ public class HomeView extends JFrame {
 
     JMenuItem salesEXCEL = new MenuItem().setText("Sales").setImage("vender").build();
     salesEXCEL.addActionListener(e -> {
-      service.getSalesTable().cleanTable();
+      salesTable.cleanTable();
       ExportFile.excel(
-          service.getSalesTable().viewTable,
+          salesTable.viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.SALES)),
           ".xls"
       );
@@ -534,9 +676,9 @@ public class HomeView extends JFrame {
 
     JMenuItem guessNumberPDF = new MenuItem().setText("Guess Number").setImage("adivinar").build();
     guessNumberPDF.addActionListener(e -> {
-      service.getGuessNumberTable().cleanTable();
+      guessNumberTable.cleanTable();
       ExportFile.pdf(
-          service.getGuessNumberTable().viewTable,
+          guessNumberTable.viewTable,
           DatabaseConstants.GUESS_NUMBER,
           Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)),
           ".pdf"
@@ -545,9 +687,9 @@ public class HomeView extends JFrame {
 
     JMenuItem hangmanPDF = new MenuItem().setText("Hangman").setImage("ahorcado").build();
     hangmanPDF.addActionListener(e -> {
-      service.getHangmanTable().cleanTable();
+      hangmanTable.cleanTable();
       ExportFile.pdf(
-          service.getHangmanTable().viewTable,
+          hangmanTable.viewTable,
           DatabaseConstants.HANGMAN,
           Queries.getAllData(Format.tableName(DatabaseConstants.HANGMAN)),
           ".pdf"
@@ -556,9 +698,9 @@ public class HomeView extends JFrame {
 
     JMenuItem purchasesPDF = new MenuItem().setText("Purchases").setImage("comprar").build();
     purchasesPDF.addActionListener(e -> {
-      service.getPurchasesTable().cleanTable();
+      purchasesTable.cleanTable();
       ExportFile.pdf(
-          service.getPurchasesTable().viewTable,
+          purchasesTable.viewTable,
           DatabaseConstants.PURCHASES,
           Queries.getAllData(Format.tableName(DatabaseConstants.PURCHASES)),
           ".pdf"
@@ -567,9 +709,9 @@ public class HomeView extends JFrame {
 
     JMenuItem dicesPDF = new MenuItem().setText("Dices").setImage("dado").build();
     dicesPDF.addActionListener(e -> {
-      service.getDicesTable().cleanTable();
+      dicesTable.cleanTable();
       ExportFile.pdf(
-          service.getDicesTable().viewTable,
+          dicesTable.viewTable,
           DatabaseConstants.DICES,
           Queries.getAllData(Format.tableName(DatabaseConstants.DICES)),
           ".pdf"
@@ -578,9 +720,9 @@ public class HomeView extends JFrame {
 
     JMenuItem notesPDF = new MenuItem().setText("Notes").setImage("notas").build();
     notesPDF.addActionListener(e -> {
-      service.getNotesTable().cleanTable();
+      notesTable.cleanTable();
       ExportFile.pdf(
-          service.getNotesTable().viewTable,
+          notesTable.viewTable,
           DatabaseConstants.NOTES,
           Queries.getAllData(Format.tableName(DatabaseConstants.NOTES)),
           ".pdf"
@@ -589,9 +731,9 @@ public class HomeView extends JFrame {
 
     JMenuItem puzzlePDF = new MenuItem().setText("Puzzle").setImage("rompecabezas").build();
     puzzlePDF.addActionListener(e -> {
-      service.getPuzzleTable().cleanTable();
+      puzzleTable.cleanTable();
       ExportFile.pdf(
-          service.getPuzzleTable().viewTable,
+          puzzleTable.viewTable,
           DatabaseConstants.PUZZLE,
           Queries.getAllData(Format.tableName(DatabaseConstants.PUZZLE)),
           ".pdf"
@@ -600,9 +742,9 @@ public class HomeView extends JFrame {
 
     JMenuItem inventoryPDF = new MenuItem().setText("Inventory").setImage("inventario").build();
     inventoryPDF.addActionListener(e -> {
-      service.getInventoryTable().cleanTable();
+      inventoryTable.cleanTable();
       ExportFile.pdf(
-          service.getInventoryTable().viewTable,
+          inventoryTable.viewTable,
           DatabaseConstants.INVENTORY,
           Queries.getAllData(Format.tableName(DatabaseConstants.INVENTORY)),
           ".pdf"
@@ -611,9 +753,9 @@ public class HomeView extends JFrame {
 
     JMenuItem cashRegisterPDF = new MenuItem().setText("Cash Register").setImage("registradora").build();
     cashRegisterPDF.addActionListener(e -> {
-      service.getCashRegisterTable().cleanTable();
+      cashRegisterTable.cleanTable();
       ExportFile.pdf(
-          service.getCashRegisterTable().viewTable,
+          cashRegisterTable.viewTable,
           DatabaseConstants.CASH_REGISTER,
           Queries.getAllData(Format.tableName(DatabaseConstants.CASH_REGISTER)),
           ".pdf"
@@ -622,9 +764,9 @@ public class HomeView extends JFrame {
 
     JMenuItem loansPDF = new MenuItem().setText("Loans").setImage("prestamos").build();
     loansPDF.addActionListener(e -> {
-      service.getLoansTable().cleanTable();
+      loansTable.cleanTable();
       ExportFile.pdf(
-          service.getLoansTable().viewTable,
+          loansTable.viewTable,
           DatabaseConstants.LOANS,
           Queries.getAllData(Format.tableName(DatabaseConstants.LOANS)),
           ".pdf"
@@ -633,9 +775,9 @@ public class HomeView extends JFrame {
 
     JMenuItem salesPDF = new MenuItem().setText("Sales").setImage("vender").build();
     salesPDF.addActionListener(e -> {
-      service.getSalesTable().cleanTable();
+      salesTable.cleanTable();
       ExportFile.pdf(
-          service.getSalesTable().viewTable,
+          salesTable.viewTable,
           DatabaseConstants.SALES,
           Queries.getAllData(Format.tableName(DatabaseConstants.SALES)),
           ".pdf"
@@ -719,8 +861,6 @@ public class HomeView extends JFrame {
     menuBar.add(exit);
 
     add(menuBar, BorderLayout.NORTH);
-
-    service.setTables(this);
   }
 
   private void createThemes() {

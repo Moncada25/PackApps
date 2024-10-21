@@ -23,6 +23,16 @@ public class CalculatorView extends JDialog {
     createComponents();
   }
 
+  public void start(JDialog parent) {
+    setBounds(0, 0, 320, 320);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Calculator");
+    Effects.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
+  }
+
   private void createComponents() {
 
     setLayout(null);
@@ -140,16 +150,6 @@ public class CalculatorView extends JDialog {
     btnNegative.setBounds(50, 57, 43, 43);
     add(btnNegative);
     btnNegative.addActionListener(e -> service.clickOnNegative(txtResult));
-  }
-
-  public void start(JDialog parent) {
-    setBounds(0, 0, 320, 320);
-    setResizable(false);
-    setLocationRelativeTo(parent);
-    setTitle("Calculator");
-    Effects.fadeIn(this);
-    parent.setVisible(false);
-    setVisible(true);
   }
 
   private void createNumbers() {

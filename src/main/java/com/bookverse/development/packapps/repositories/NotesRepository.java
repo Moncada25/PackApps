@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.bookverse.development.packapps.database.DatabaseConnection;
-import com.bookverse.development.packapps.utils.constants.Queries;
+import com.bookverse.development.packapps.database.Queries;
 import com.bookverse.development.packapps.utils.other.Format;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.utils.ui.Alerts;

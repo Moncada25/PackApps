@@ -16,7 +16,7 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import com.bookverse.development.packapps.database.DatabaseConnection;
 import com.bookverse.development.packapps.models.Store;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.constants.Queries;
+import com.bookverse.development.packapps.database.Queries;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -149,23 +149,14 @@ public final class OlderRepository {
           preparedStatement.execute();
           break;
         default:
-          Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+          return false;
       }
 
       return true;
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      Alerts.error(e, "Database");
       return false;
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
     }
   }
 
@@ -197,7 +188,7 @@ public final class OlderRepository {
       }
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
+      Alerts.error(e, "Database");
     }
 
     return false;
@@ -212,16 +203,7 @@ public final class OlderRepository {
       preparedStatement = connection.prepareStatement(Queries.updateNickname(nickname, id, table));
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
   }
 
@@ -237,16 +219,7 @@ public final class OlderRepository {
       }
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
   }
 
@@ -267,16 +240,8 @@ public final class OlderRepository {
       preparedStatement = connection.prepareStatement(Queries.updateInventory(reference, trueUnits));
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
+      
     }
   }
 
@@ -297,16 +262,7 @@ public final class OlderRepository {
       }
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
 
     return reference.equals(store.getReference());
@@ -324,16 +280,7 @@ public final class OlderRepository {
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
   }
 
@@ -349,16 +296,7 @@ public final class OlderRepository {
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
   }
 
@@ -373,16 +311,7 @@ public final class OlderRepository {
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
   }
 
@@ -396,16 +325,7 @@ public final class OlderRepository {
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
   }
 
@@ -428,16 +348,7 @@ public final class OlderRepository {
       }
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
 
     return user.equals(store.getUser());
@@ -455,16 +366,7 @@ public final class OlderRepository {
       return resultSet.next();
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
 
     return false;
@@ -482,16 +384,7 @@ public final class OlderRepository {
       return resultSet.next();
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
 
     return false;
@@ -507,16 +400,7 @@ public final class OlderRepository {
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
   }
 
@@ -530,16 +414,7 @@ public final class OlderRepository {
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
   }
 
@@ -561,16 +436,7 @@ public final class OlderRepository {
       return listBook;
 
     } catch (SQLException e) {
-      Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-    } finally {
-
-      try {
-        if (null != connection) {
-          connection.close();
-        }
-      } catch (SQLException e) {
-        Alerts.message("Database not found", "Sorry, there was an error. Try again later.");
-      }
+      Alerts.error(e, "Database");
     }
 
     return listBook;
