@@ -1,11 +1,15 @@
-package com.bookverse.development.packapps.apps.services;
+package com.bookverse.development.packapps.apps.qr;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import lombok.SneakyThrows;
-import com.bookverse.development.packapps.utils.other.Format;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
@@ -15,10 +19,11 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.bookverse.development.packapps.utils.other.Format;
 
-public final class QrService {
+public class QrService {
 
-  public static String readQR(String image) {
+  public String readQR(String image) {
 
     BinaryBitmap binaryBitmap;
 
@@ -36,7 +41,7 @@ public final class QrService {
   }
 
   @SneakyThrows
-  public static String createQR(String data, int height, int width) {
+  public String createQR(String data, int height, int width) {
 
     String folder = "target/qrs/";
     String file = Format.getNow() + ".jpg";
@@ -65,6 +70,24 @@ public final class QrService {
     return fileToCreate.getPath();
   }
 
-  private QrService() {
+  public void showQRGenerated(String image, JDialog parent) {
+
+    JLabel code = new JLabel();
+    code.setIcon(new ImageIcon(image));
+    code.setSize(400, 400);
+
+    JDialog result = new JDialog(parent, true);
+
+    result.setLayout(null);
+    result.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    result.setSize(412, 427);
+    result.setTitle("QR code generated");
+    result.setResizable(false);
+    result.setLocationRelativeTo(null);
+
+    ((JPanel) result.getContentPane()).setOpaque(false);
+
+    result.add(code);
+    result.setVisible(true);
   }
 }

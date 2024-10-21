@@ -99,7 +99,7 @@ public final class Resources {
       }
 
     } catch (Exception ex) {
-      Alerts.error(ex, "OCR");
+      Alerts.error(ex, "Select file");
     }
     return path;
   }
