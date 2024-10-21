@@ -8,7 +8,7 @@ import com.bookverse.development.packapps.utils.constants.Styles;
 
 public class Button {
   private String text;
-  private Color color = Styles.MAIN_COLOR;
+  private Color color = null;
   private Font font = Styles.MEDIUM;
   private int width = 0;
   private int height = 0;

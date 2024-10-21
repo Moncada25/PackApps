@@ -1,17 +1,18 @@
-package com.bookverse.development.packapps.apps.services;
+package com.bookverse.development.packapps.apps.calculator;
 
-import javax.swing.JButton;
 import javax.swing.JTextField;
+import lombok.Data;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 
-public final class CalculatorService {
+@Data
+public class CalculatorService {
 
-  private static double result;
-  private static boolean point = false;
-  private static String firstNumber;
-  private static String sign;
-  public static int sw = 1;
-  public static int s = 1;
+  private double result;
+  private boolean point = false;
+  private String firstNumber;
+  private String sign;
+  private int sw = 1;
+  private int s = 1;
 
   private static String operations(String firstNumber, String secondNumber, String sign) {
 
@@ -28,14 +29,14 @@ public final class CalculatorService {
     return String.valueOf(result);
   }
 
-  public static void clickOnZero(JButton button) {
+  public void clickOnZero(CalculatorViewModel model) {
 
-    if (button.getText().length() < 15) {
-      button.setText(button.getText() + "0");
+    if (model.getTxtResult().getText().length() < 15) {
+      model.getTxtResult().setText(model.getTxtResult().getText() + "0");
     }
   }
 
-  public static void clickOnPoint(JTextField field) {
+  public void clickOnPoint(JTextField field) {
     
     if (field.getText().length() < 15) {
 
@@ -48,7 +49,7 @@ public final class CalculatorService {
     }
   }
 
-  public static void keyPoint(JTextField field) {
+  public void keyPoint(JTextField field) {
     
     if (field.getText().isEmpty() && !point) {
       field.setText("0");
@@ -58,7 +59,7 @@ public final class CalculatorService {
     }
   }
 
-  public static void clickOnAdd(JTextField field) {
+  public void clickOnAdd(JTextField field) {
 
     if (!field.getText().isEmpty()) {
       firstNumber = field.getText();
@@ -67,7 +68,7 @@ public final class CalculatorService {
     }
   }
 
-  public static void clickOnLess(JTextField field) {
+  public void clickOnLess(JTextField field) {
 
     if (!field.getText().isEmpty()) {
       firstNumber = field.getText();
@@ -76,7 +77,7 @@ public final class CalculatorService {
     }
   }
 
-  public static void clickOnPotency(JTextField field) {
+  public void clickOnPotency(JTextField field) {
 
     try {
 
@@ -91,7 +92,7 @@ public final class CalculatorService {
     }
   }
 
-  public static void clickOnRoot(JTextField field) {
+  public void clickOnRoot(JTextField field) {
 
     try {
       
@@ -105,14 +106,14 @@ public final class CalculatorService {
     }
   }
 
-  public static void clickOnClean(JTextField field) {
+  public void clickOnClean(JTextField field) {
     field.setText("");
     point = false;
     result = 0;
     field.requestFocus();
   }
 
-  public static void clickOnMultiply(JTextField field) {
+  public void clickOnMultiply(JTextField field) {
 
     if (!field.getText().isEmpty()) {
       firstNumber = field.getText();
@@ -121,7 +122,7 @@ public final class CalculatorService {
     }
   }
 
-  public static void clickOnDivide(JTextField field) {
+  public void clickOnDivide(JTextField field) {
 
     if (!field.getText().isEmpty()) {
       firstNumber = field.getText();
@@ -130,7 +131,7 @@ public final class CalculatorService {
     }
   }
 
-  public static void clickOnEuler(JTextField field) {
+  public void clickOnEuler(JTextField field) {
 
     try {
 
@@ -144,7 +145,7 @@ public final class CalculatorService {
     }
   }
 
-  public static void clickOnNegative(JTextField field) {
+  public void clickOnNegative(JTextField field) {
 
     try {
 
@@ -158,7 +159,7 @@ public final class CalculatorService {
     }
   }
 
-  public static void clickOnDelete(JTextField field) {
+  public void clickOnDelete(JTextField field) {
 
     if (!field.getText().isEmpty() && !field.getText().equals("0")) {
       field.setText(field.getText().substring(0, field.getText().length() - 1));
@@ -171,7 +172,7 @@ public final class CalculatorService {
     }
   }
 
-  public static void clickOnEqual(JTextField field) {
+  public void clickOnEqual(JTextField field) {
 
     try {
 
@@ -184,8 +185,5 @@ public final class CalculatorService {
     } catch (Exception e) {
       Alerts.error(e, "Calculator");
     }
-  }
-
-  private CalculatorService(){
   }
 }

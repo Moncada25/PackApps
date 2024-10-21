@@ -8,7 +8,7 @@ import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
 import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 
-import com.bookverse.development.packapps.apps.views.CalculatorView;
+import com.bookverse.development.packapps.apps.calculator.CalculatorView;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.BorderLayout;
@@ -153,7 +153,6 @@ public class Numbers extends JDialog implements MouseListener {
 
   @Override
   public void mouseExited(MouseEvent arg0) {
-
   }
 
   @Override
