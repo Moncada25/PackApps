@@ -6,6 +6,10 @@ import java.util.Map;
 
 public final class ArrayData {
 
+  private ArrayData() {
+    throw new IllegalStateException("Utility class");
+  }
+
   public static String getPathBackground(int index) {
 
     String[] backgrounds = {
@@ -48,25 +52,6 @@ public final class ArrayData {
     return longBackgrounds[index];
   }
 
-  public static String getSecretWord(int x, int y) {
-
-    String[][] listWord =
-        {{"pera", "mango", "limon", "sandia", "banana", "manzana", "naranja", "mandarina", "fresa",
-            "coco", "papaya", "kiwi", "cereza", "uva", "ciruela"},
-            {"gato", "perro", "ardilla", "pez", "pajaro", "lombris", "zorra", "elefante", "leon",
-                "paloma", "rana", "panda", "tortuga", "leopardo", "jirafa"},
-            {"colombia", "rusia", "venezuela", "brasil", "francia", "italia", "china", "uruguay",
-                "japon", "españa", "argentina", "alemania", "suiza", "suecia", "inglaterra"},
-            {"amarillo", "azul", "verde", "rojo", "morado", "blanco", "negro", "cafe", "naranjado",
-                "gris", "rosado", "celeste", "turquesa", "dorado", "plateado"},
-            {"begin", "break", "choose", "draw", "drive", "understand", "spend", "speak", "write",
-                "wear", "mean", "build", "bring", "find", "leave"},
-            {"futbol", "baloncesto", "tenis", "natacion", "voleibol", "ciclismo", "golf", "hockey",
-                "karate", "esgrima", "boxeo", "atletismo", "rugby", "beisbol", "paracaidismo"}};
-
-    return listWord[x][y];
-  }
-
   public static String getDataUser(String key) {
 
     Faker faker = new Faker();
@@ -77,7 +62,7 @@ public final class ArrayData {
     dataNewUser.put("Phone", faker.phoneNumber().cellPhone());
     dataNewUser.put("Occupation", "Otro");
     dataNewUser.put("Address", faker.address().fullAddress());
-    dataNewUser.put("Username", faker.name().username());
+    dataNewUser.put("Username", faker.internet().username());
     dataNewUser.put("Password", faker.random().hex());
     dataNewUser.put("Email", faker.internet().emailAddress());
     dataNewUser.put("Gender", "Masculino");
@@ -100,9 +85,5 @@ public final class ArrayData {
     countryCodes.put("Venezuela", "58");
 
     return countryCodes.get(key);
-  }
-
-  private ArrayData() {
-    throw new IllegalStateException("Utility class");
   }
 }

@@ -1,12 +1,12 @@
 package com.bookverse.development.packapps.apps.hangman;
 
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
 import lombok.Data;
 import com.bookverse.development.packapps.repositories.OlderRepository;
-import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.utils.other.Format;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
@@ -15,7 +15,6 @@ import com.bookverse.development.packapps.utils.ui.Resources;
 
 @Data
 public class HangmanService {
-
   private int minutesTimer = 2;
   private int secondsTimer = 0;
   private int countAttempts = 0;
@@ -26,6 +25,14 @@ public class HangmanService {
   private String lyrics = "";
   private char[] secretWord = new char[13];
   private char[] word = new char[13];
+  public List<String> categories = List.of(
+      "Animals",
+      "Colors",
+      "Sports",
+      "Fruits",
+      "Verbs",
+      "Countries"
+  );
 
   public boolean btnPlayAP(HangmanViewModel model) {
     if ("Select a option".equals(Objects.requireNonNull(model.getOptions().getSelectedItem()).toString())) {
@@ -39,7 +46,7 @@ public class HangmanService {
 
     String option = model.getOptions().getSelectedItem().toString();
     int randomInt = GeneralUtils.getIntRandom(0, 14);
-    randomWord = ArrayData.getSecretWord(getCategoryIndex(option), randomInt);
+    randomWord = getSecretWord(option, randomInt);
 
     StringBuilder linesBuilder = new StringBuilder();
     int size = randomWord.length() - 1;
@@ -82,18 +89,6 @@ public class HangmanService {
       word[i] = ' ';
       secretWord[i] = ' ';
     });
-  }
-
-  private int getCategoryIndex(String option) {
-    return switch (option) {
-      case "Fruits" -> 0;
-      case "Animals" -> 1;
-      case "Countries" -> 2;
-      case "Colors" -> 3;
-      case "Irregular Verbs" -> 4;
-      case "Sports" -> 5;
-      default -> throw new IllegalStateException("Unexpected value: " + option);
-    };
   }
 
   private boolean compare(HangmanViewModel model, char lyricActual) {
@@ -217,5 +212,33 @@ public class HangmanService {
       }
       return compare(model, lyric);
     }
+  }
+
+  private String getSecretWord(String category, int index) {
+    return switch (category) {
+      case "Animals" -> List.of(
+          "gato", "perro", "ardilla", "pez", "pajaro", "lombris", "zorra", "elefante", "leon",
+          "paloma", "rana", "panda", "tortuga", "leopardo", "jirafa"
+      ).get(index);
+      case "Colors" -> List.of("amarillo", "azul", "verde", "rojo", "morado", "blanco", "negro", "cafe", "naranjado",
+          "gris", "rosado", "celeste", "turquesa", "dorado", "plateado").get(index);
+      case "Sports" -> List.of(
+          "futbol", "baloncesto", "tenis", "natacion", "voleibol", "ciclismo", "golf", "hockey",
+          "karate", "esgrima", "boxeo", "atletismo", "rugby", "beisbol", "paracaidismo"
+      ).get(index);
+      case "Fruits" -> List.of(
+          "pera", "mango", "limon", "sandia", "banana", "manzana", "naranja", "mandarina", "fresa",
+          "coco", "papaya", "kiwi", "cereza", "uva", "ciruela"
+      ).get(index);
+      case "Verbs" -> List.of(
+          "begin", "break", "choose", "draw", "drive", "understand", "spend", "speak", "write",
+          "wear", "mean", "build", "bring", "find", "leave"
+      ).get(index);
+      case "Countries" -> List.of(
+          "colombia", "rusia", "venezuela", "brasil", "francia", "italia", "china", "uruguay",
+          "japon", "españa", "argentina", "alemania", "suiza", "suecia", "inglaterra"
+      ).get(index);
+      default -> throw new IllegalStateException("Unexpected value: " + category);
+    };
   }
 }

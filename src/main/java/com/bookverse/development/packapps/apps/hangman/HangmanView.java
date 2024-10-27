@@ -92,22 +92,12 @@ public class HangmanView extends JDialog implements Runnable {
     options.setFont(Styles.MEDIUM);
     add(options);
 
-    options.addItem("Fruits");
-    options.addItem("Animals");
-    options.addItem("Countries");
-    options.addItem("Colors");
-    options.addItem("Sports");
-    options.addItem("Irregular Verbs");
+    service.categories.forEach(options::addItem);
 
-    options.setModel(new DefaultComboBoxModel<>(new String[]{
-        "Select a option",
-        "Animals",
-        "Colors",
-        "Sports",
-        "Fruits",
-        "Irregular Verbs",
-        "Countries"})
-    );
+    DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
+    comboBoxModel.addElement("Select a option");
+    service.categories.forEach(comboBoxModel::addElement);
+    options.setModel(comboBoxModel);
 
     JTextField txtWord = new JTextField();
     txtWord.setBounds(30, 100, 220, 40);
