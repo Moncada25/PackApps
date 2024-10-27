@@ -5,6 +5,8 @@ import java.awt.Desktop;
 import java.net.Socket;
 import java.net.URI;
 import java.security.SecureRandom;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
 
 import static com.bookverse.development.packapps.utils.constants.AppConfig.PASSWORD_DBA;
 
@@ -58,5 +60,9 @@ public final class GeneralUtils {
     } catch (Exception e) {
       Alerts.error(e, "Can't open the URL " + url);
     }
+  }
+
+  public static void waitSeconds(int seconds) {
+    LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(seconds * 1000L));
   }
 }

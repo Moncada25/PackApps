@@ -18,7 +18,7 @@ import com.bookverse.development.packapps.utils.ui.Table;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.other.Format;
 import com.bookverse.development.packapps.database.Queries;
-import com.bookverse.development.packapps.views.older.Hangman;
+import com.bookverse.development.packapps.apps.hangman.HangmanView;
 import com.bookverse.development.packapps.views.older.TableResult;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -259,7 +259,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
       btnConsultAP();
     } else if (e.getSource() == create) {
       setVisible(false);
-      new Hangman(this, true).start(this);
+      new HangmanView(this, true).start(this);
     }
   }
 
@@ -268,7 +268,7 @@ public class HangmanTable extends JDialog implements ActionListener, MouseListen
 
     if (e.getSource() == tables[0]) {
       setVisible(false);
-      new HomeView().openGuessNumberTable();
+      new GuessNumberTable(this, true).openTable();
     } else if (e.getSource() == tables[1]) {
       Alerts.message("Message", "You're here!");
     } else if (e.getSource() == tables[2]) {

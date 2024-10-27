@@ -40,7 +40,7 @@ import com.bookverse.development.packapps.database.Queries;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.views.older.ConsultBook;
 import com.bookverse.development.packapps.views.older.GuessNumber;
-import com.bookverse.development.packapps.views.older.Hangman;
+import com.bookverse.development.packapps.apps.hangman.HangmanView;
 import com.bookverse.development.packapps.views.older.LoginStore;
 import com.bookverse.development.packapps.views.older.Numbers;
 import com.bookverse.development.packapps.views.older.Puzzle;
@@ -155,29 +155,6 @@ public class HomeView extends JFrame {
     model.getTextureMode().setForeground(Styles.MAIN_COLOR);
     Effects.fadeIn(window);
     window.setVisible(true);
-  }
-
-  public void openGuessNumberTable() {
-
-    guessNumberTable.cleanTable();
-
-    try {
-      OlderRepository.readTable(
-          guessNumberTable.viewTable,
-          Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)),
-          true
-      );
-    } catch (Exception e1) {
-      Alerts.error(e1, DatabaseConstants.GUESS_NUMBER);
-    }
-
-    guessNumberTable.setSize(830, 400);
-    guessNumberTable.setLocationRelativeTo(null);
-    guessNumberTable.setMinimumSize(new Dimension(830, 400));
-    guessNumberTable.setMaximumSize(new Dimension(1280, 720));
-    guessNumberTable.setTitle(DatabaseConstants.GUESS_NUMBER + " Information");
-    Effects.fadeIn(guessNumberTable);
-    guessNumberTable.setVisible(true);
   }
 
   public void openHangmanTable() {
@@ -344,7 +321,7 @@ public class HomeView extends JFrame {
 
     JMenuItem hangman = new MenuItem().setText("Hangman").setImage("ahorcado").build();
     hangman.addActionListener(e -> {
-      new Hangman(this, true).start(this);
+      new HangmanView(this, true).start(this);
       setVisible(true);
     });
 

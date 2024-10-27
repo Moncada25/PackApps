@@ -296,7 +296,7 @@ public class DicesTable extends JDialog implements ActionListener, MouseListener
 
     if (e.getSource() == tables[0]) {
       setVisible(false);
-      new HomeView().openGuessNumberTable();
+      new GuessNumberTable(this, true).openTable();
     } else if (e.getSource() == tables[1]) {
       setVisible(false);
       new HomeView().openHangmanTable();

@@ -15,9 +15,10 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.NOTES;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.apps.home.HomeService;
 import com.bookverse.development.packapps.apps.home.HomeView;
+import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Table;
@@ -58,11 +59,14 @@ import javax.swing.table.TableRowSorter;
 public class GuessNumberTable extends JDialog implements ActionListener, MouseListener {
 
   private Table model = new Table();
-  private HomeService service = new HomeService();
   public final JTable viewTable = new JTable(model);
   private JLabel[] tables = new JLabel[5];
-  private JLabel title, message;
-  private JMenuItem create, read, delete, update;
+  private JLabel title;
+  private JLabel message;
+  private JMenuItem create;
+  private JMenuItem read;
+  private JMenuItem delete;
+  private JMenuItem update;
   private String[] columns = {"ID", "NICKNAME", "LIMIT", "LEVEL", "DATE"};
 
   public GuessNumberTable(JFrame parent, boolean modal) {
@@ -70,10 +74,14 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
     createComponents();
   }
 
+  public GuessNumberTable(JDialog parent, boolean modal) {
+    super(parent, modal);
+    createComponents();
+  }
+
   private JPanel getPanel() {
 
     JPanel panel = new JPanel(new GridLayout());
-
     JPanel row = new JPanel(new FlowLayout());
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
@@ -114,8 +122,8 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
     add(scroll, BorderLayout.CENTER);
 
     int[] sizes = {20, 200, 20, 20, 100};
-    IntStream.range(0, viewTable.getColumnCount())
-        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
+    IntStream.range(0, viewTable.getColumnCount()
+    ).forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
 
     JMenuBar menuBar = new JMenuBar();
 
@@ -203,7 +211,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
               String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(GUESS_NUMBER));
 
           dispose();
-          new HomeView().openGuessNumberTable();
+          openTable();
         }
       }
 
@@ -227,7 +235,7 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
         if (GeneralUtils.loginDBA()) {
           OlderRepository.deleteData(IDs, Format.tableName(GUESS_NUMBER));
           dispose();
-          new HomeView().openGuessNumberTable();
+          openTable();
         }
       }
 
@@ -335,6 +343,29 @@ public class GuessNumberTable extends JDialog implements ActionListener, MouseLi
       tables[4].setCursor(HAND);
       title.setText("    " + PUZZLE);
     }
+  }
+
+  public void openTable() {
+
+    cleanTable();
+
+    try {
+      OlderRepository.readTable(
+          viewTable,
+          Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)),
+          true
+      );
+    } catch (Exception e1) {
+      Alerts.error(e1, DatabaseConstants.GUESS_NUMBER);
+    }
+
+    setSize(830, 400);
+    setLocationRelativeTo(null);
+    setMinimumSize(new Dimension(830, 400));
+    setMaximumSize(new Dimension(1280, 720));
+    setTitle(DatabaseConstants.GUESS_NUMBER + " Information");
+    Effects.fadeIn(this);
+    setVisible(true);
   }
 
   @Override

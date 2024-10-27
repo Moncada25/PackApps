@@ -290,20 +290,22 @@ public final class Alerts {
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
-  public static void instruccionesAhorcado() {
+  public static void instruccionesAhorcado(int minutes, int seconds, int maxAttepmts) {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style() + "<strong><center>Ahorcadito</center></strong><br>"
             + "<strong>Jugadores: </strong>1<br><br>"
-            + "El juego empieza cuando se selecciona una<br>"
-            + "categoría de palabras para jugar. Tendrás que ir<br>"
-            + "digitando letra por letra la palabra secreta,<br>"
-            + "¡pero no te tardes! tendrás 60 segundo para ganar." + "</html>",
+            + "El juego empieza cuando se selecciona una categoría<br>"
+            + "de palabras para jugar. Tienes " + maxAttepmts + " intentos para digitar<br>"
+            + "letra por letra la palabra secreta, ¡pero no te tardes!<br>"
+            + "tendrás " + (minutes * 60 + seconds) + " segundos para ganar."
+            + "</html>",
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }
 
   public static void instruccionesPreguntas() {
     JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong><center>Quién quiere ser millonario</center></strong><br>"
+        "<html>" + Format.style()
+            + "<strong><center>Quién quiere ser millonario</center></strong><br>"
             + "<strong>Jugadores: </strong>1<br><br>"
             + "El juego empieza cuando se selecciona una categoría<br>"
             + "de preguntas para jugar. Tendrás que adivinar<br>"

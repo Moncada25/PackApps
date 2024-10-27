@@ -18,6 +18,7 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 
 import com.bookverse.development.packapps.apps.home.HomeService;
 import com.bookverse.development.packapps.apps.home.HomeView;
+import com.bookverse.development.packapps.apps.tables.GuessNumberTable;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Table;
@@ -326,7 +327,7 @@ public class PuzzleTable extends JDialog implements ActionListener, MouseListene
 
     if (e.getSource() == tables[0]) {
       setVisible(false);
-      new HomeView().openGuessNumberTable();
+      new GuessNumberTable(this, true).openTable();
     } else if (e.getSource() == tables[1]) {
       setVisible(false);
       new HomeView().openHangmanTable();
