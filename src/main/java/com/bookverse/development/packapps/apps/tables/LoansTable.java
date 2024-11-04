@@ -1,7 +1,6 @@
 package com.bookverse.development.packapps.apps.tables;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.ui.Table;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -19,7 +18,7 @@ import javax.swing.table.TableRowSorter;
 
 public class LoansTable extends JDialog {
 
-  private Table model = new Table();
+  private DefaultTable model = new DefaultTable();
   public final JTable viewTable = new JTable(model);
   private String[] columns = {"ID", "USER", "CLIENT", "DOCUMENT", "REFERENCE", "PHONE", "TIME",
       "VALUE"};

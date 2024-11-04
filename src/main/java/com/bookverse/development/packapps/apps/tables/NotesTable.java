@@ -1,184 +1,79 @@
 package com.bookverse.development.packapps.apps.tables;
 
-import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
-import static com.bookverse.development.packapps.utils.constants.Styles.LOADER;
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.POINT;
-import static com.bookverse.development.packapps.utils.constants.Styles.RESIZE;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
-import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
-import static com.bookverse.development.packapps.utils.other.GeneralUtils.loginDBA;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.DICES;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.HANGMAN;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.NOTES;
-import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PUZZLE;
-
-import com.bookverse.development.packapps.apps.home.HomeService;
-import com.bookverse.development.packapps.apps.home.HomeView;
-import com.bookverse.development.packapps.utils.ui.Resources;
+import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JTable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
+import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.repositories.OlderRepository;
-import com.bookverse.development.packapps.utils.ui.Table;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.other.Format;
 import com.bookverse.development.packapps.database.Queries;
 import com.bookverse.development.packapps.apps.notes.NotesView;
-import com.bookverse.development.packapps.views.older.TableResult;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Arrays;
-import java.util.stream.IntStream;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
+import com.bookverse.development.packapps.utils.ui.factory.MenuItem;
 
-public class NotesTable extends JDialog implements ActionListener, MouseListener {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class NotesTable extends JDialog implements MouseListener {
 
-  private Table model = new Table();
-  private HomeService service = new HomeService();
-  public final JTable viewTable = new JTable(model);
-  private JLabel title, message;
-  private JMenuItem create, read, delete, update;
-  private String[] columns = {"ID", "NAME", "SCALE", "% TOTAL", "TOTAL", "STATE", "DATE"};
-  
-  private JLabel[] tables = new JLabel[5];
+  private DefaultTable defaultTable = new DefaultTable();
+  private JTable viewTable = new JTable(defaultTable);
+  private LinkedHashMap<String, Integer> columns = new LinkedHashMap<>();
 
   public NotesTable(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
 
-  private JPanel getPanel() {
-
-    JPanel panel = new JPanel(new GridLayout());
-
-    JPanel row = new JPanel(new FlowLayout());
-
-    String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};
-
-    panel.setBorder(getBorder("Select table"));
-
-    title = new JLabel();
-    title.setFont(BIG);
-    title.setForeground(MAIN_COLOR);
-    title.addMouseListener(this);
-
-    message = new JLabel();
-    message.setFont(BIG);
-    message.setForeground(TEXT_COLOR);
-    message.addMouseListener(this);
-
-    IntStream.range(0, tables.length).forEach(i -> {
-      tables[i] = new JLabel();
-      tables[i].setIcon(new ImageIcon(Resources.getImage(images[i])));
-      tables[i].addMouseListener(this);
-      row.add(tables[i]);
-    });
-
-    panel.add(title, BorderLayout.EAST);
-    panel.add(row, BorderLayout.CENTER);
-    panel.add(message, BorderLayout.WEST);
-
-    return panel;
+  public NotesTable(JDialog parent, boolean modal) {
+    super(parent, modal);
+    createComponents();
   }
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(Resources.getImage("notas.png")).getImage());
-    add(getPanel(), BorderLayout.SOUTH);
+    columns.put("ID", 20);
+    columns.put("NAME", 140);
+    columns.put("SCALE", 20);
+    columns.put("% TOTAL", 30);
+    columns.put("TOTAL", 30);
+    columns.put("STATE", 40);
+    columns.put("DATE", 120);
 
-    IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
+    defaultTable.createTable(this, "notas.png", columns, this, viewTable);
 
-    viewTable.getTableHeader().setReorderingAllowed(false);
-    JScrollPane scroll = new JScrollPane(viewTable);
-    add(scroll, BorderLayout.CENTER);
-
-    int[] sizes = {20, 140, 20, 30, 30, 40, 100};
-    IntStream.range(0, viewTable.getColumnCount())
-        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
-
-    JMenuBar menuBar = new JMenuBar();
-
-    JMenu crud = Resources.getMenu("CRUD", "mysql");
-    create = Resources.getMenuItem("Create", "create", this);
-    read = Resources.getMenuItem("Read", "read", this);
-    update = Resources.getMenuItem("Update", "update", this);
-    delete = Resources.getMenuItem("Delete", "delete", this);
-
-    crud.add(create);
-    crud.addSeparator();
-    crud.add(read);
-    crud.addSeparator();
-    crud.add(update);
-    crud.addSeparator();
-    crud.add(delete);
-
-    menuBar.add(crud);
-    add(menuBar, BorderLayout.NORTH);
-
-    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-    pack();
-
-    TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(model);
-    viewTable.setRowSorter(rowSorter);
-
-    IntStream.range(0, columns.length).forEach(i -> {
-      DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-      tcr.setHorizontalAlignment(SwingConstants.CENTER);
-      viewTable.getColumnModel().getColumn(i).setCellRenderer(tcr);
-    });
-
-    repaint();
-  }
-
-  @Override
-  public void paint(Graphics g) {
-    Dimension d = getSize();
-    Dimension m = getMaximumSize();
-    boolean resize = d.width > m.width || d.height > m.height;
-    d.width = Math.min(m.width, d.width);
-    d.height = Math.min(m.height, d.height);
-    if (resize) {
-      Point p = getLocation();
+    JMenuItem create = new MenuItem().setText("Create").setImage("create").build();
+    create.addActionListener(e -> {
       setVisible(false);
-      setSize(d);
-      setLocation(p);
-      setVisible(true);
-    }
-    super.paint(g);
+      new NotesView(this, true).start(this);
+    });
+    JMenuItem read = new MenuItem().setText("Read").setImage("read").build();
+    read.addActionListener(e -> btnConsultNotesTable());
+    JMenuItem update = new MenuItem().setText("Update").setImage("update").build();
+    update.addActionListener(e -> btnUpdateNotesTable());
+    JMenuItem delete = new MenuItem().setText("Delete").setImage("delete").build();
+    delete.addActionListener(e -> btnDeleteNotesTable());
+
+    defaultTable.createCrud(this, columns, viewTable, create, read, update, delete);
   }
 
   public void cleanTable() {
 
-    while (model.getRowCount() > 0) {
-      model.removeRow(0);
+    while (defaultTable.getRowCount() > 0) {
+      defaultTable.removeRow(0);
     }
   }
 
-  private void btnConsultAP() {
+  private void btnConsultNotesTable() {
 
     if (viewTable.getRowCount() != 0) {
 
@@ -189,15 +84,17 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
         try {
 
           if (option.toString().equals("ID")) {
-            searchResult(90, Queries.getDataByID(Format.tableName(NOTES)));
+            defaultTable.searchResult(this, 90, Queries.getDataByID(Format.tableName(
+                DatabaseConstants.NOTES)), columns);
             setVisible(true);
           } else if (option.toString().equals("Nickname")) {
-            searchResult(250, Queries.getDataByNickname(Format.tableName(NOTES)));
+            defaultTable.searchResult(this, 250, Queries.getDataByNickname(Format.tableName(
+                DatabaseConstants.NOTES)), columns);
             setVisible(true);
           }
 
         } catch (Exception e) {
-          Alerts.error(e, NOTES);
+          Alerts.error(e, DatabaseConstants.NOTES);
         }
       }
 
@@ -206,7 +103,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
     }
   }
 
-  private void btnUpdateAP() {
+  private void btnUpdateNotesTable() {
 
     if (viewTable.getRowCount() != 0) {
 
@@ -216,12 +113,13 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
         Alerts.message("Update", "No record selected");
       } else {
 
-        if (loginDBA()) {
+        if (GeneralUtils.loginDBA()) {
           OlderRepository.updateData(Alerts.inputText("Enter a Nickname", 20),
-              String.valueOf(model.getValueAt(selectedRow, 0)), Format.tableName(NOTES));
+              String.valueOf(defaultTable.getValueAt(selectedRow, 0)), Format.tableName(
+                  DatabaseConstants.NOTES));
 
           dispose();
-          new HomeView().openNotesTable();
+          openTable();
         }
       }
 
@@ -230,7 +128,7 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
     }
   }
 
-  private void btnDeleteAP() {
+  private void btnDeleteNotesTable() {
 
     if (viewTable.getRowCount() != 0) {
 
@@ -239,14 +137,15 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
       } else {
 
         int[] rows = viewTable.getSelectedRows();
-        String[] IDs = Arrays.stream(rows).mapToObj(row -> String.valueOf(model.getValueAt(row, 0)))
+        String[] allIds = Arrays.stream(rows).mapToObj(row -> String.valueOf(
+                defaultTable.getValueAt(row, 0)))
             .toArray(String[]::new);
 
-        if (loginDBA()) {
-          OlderRepository.deleteData(IDs, Format.tableName(NOTES));
+        if (GeneralUtils.loginDBA()) {
+          OlderRepository.deleteData(allIds, Format.tableName(DatabaseConstants.NOTES));
 
           dispose();
-          new HomeView().openNotesTable();
+          openTable();
         }
       }
 
@@ -255,98 +154,54 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
     }
   }
 
-  private void searchResult(int alto, String sql) {
-
-    TableResult table = new TableResult(this, true, columns);
-    table.cleanTable((DefaultTableModel) table.tabResult.getModel());
-
-    try {
-
-      if (OlderRepository.readTable(table.tabResult, sql, false)) {
-        table.setBounds(0, 0, 780, alto);
-        table.setResizable(false);
-        table.setLocationRelativeTo(null);
-        table.setTitle("Search result");
-        setVisible(false);
-        table.setVisible(true);
-      }
-
-    } catch (Exception e1) {
-      Alerts.error(e1, NOTES);
-    }
-  }
-
-  @Override
-  public void actionPerformed(ActionEvent e) {
-
-    if (e.getSource() == delete) {
-      btnDeleteAP();
-    } else if (e.getSource() == update) {
-      btnUpdateAP();
-    } else if (e.getSource() == read) {
-      btnConsultAP();
-    } else if (e.getSource() == create) {
-      setVisible(false);
-      new NotesView(this, true).start(this);
-    }
-  }
-
   @Override
   public void mouseClicked(MouseEvent e) {
 
-    if (e.getSource() == tables[0]) {
+    if (e.getSource() == defaultTable.getTables()[0]) {
       setVisible(false);
       new GuessNumberTable(this, true).openTable();
-    } else if (e.getSource() == tables[1]) {
+    } else if (e.getSource() == defaultTable.getTables()[1]) {
       setVisible(false);
-      new HomeView().openHangmanTable();
-    } else if (e.getSource() == tables[2]) {
+      new HangmanTable(this, true).openTable();
+    } else if (e.getSource() == defaultTable.getTables()[2]) {
       setVisible(false);
-      new HomeView().openDicesTable(this);
-    } else if (e.getSource() == tables[3]) {
+      new DicesTable(this, true).openTable(this);
+    } else if (e.getSource() == defaultTable.getTables()[3]) {
       Alerts.message("Message", "You're here!");
-    } else if (e.getSource() == tables[4]) {
+    } else if (e.getSource() == defaultTable.getTables()[4]) {
       setVisible(false);
-      new HomeView().openPuzzleTable(this);
+      new PuzzleTable(this, true).openTable();
     }
   }
 
+  @Override
   public void mouseEntered(MouseEvent e) {
 
-    if (e.getSource() == tables[0]) {
-      tables[0].setCursor(POINT);
-      title.setText("    " + GUESS_NUMBER);
-    } else if (e.getSource() == tables[1]) {
-      tables[1].setCursor(LOADER);
-      title.setText("    " + HANGMAN);
-    } else if (e.getSource() == tables[2]) {
-      tables[2].setCursor(RESIZE);
-      title.setText("    " + DICES);
-    } else if (e.getSource() == tables[3]) {
-      tables[3].setCursor(TEXT);
-      title.setText("    " + NOTES);
-      message.setText("       You're here");
-    } else if (e.getSource() == tables[4]) {
-      tables[4].setCursor(HAND);
-      title.setText("    " + PUZZLE);
+    int index = 3;
+
+    if (e.getSource() == defaultTable.getTables()[0]) {
+      index = 0;
+    } else if (e.getSource() == defaultTable.getTables()[1]) {
+      index = 1;
+    } else if (e.getSource() == defaultTable.getTables()[2]) {
+      index = 2;
+    } else if (e.getSource() == defaultTable.getTables()[3]) {
+      defaultTable.getLblMessage().setText("       You're here");
+    } else if (e.getSource() == defaultTable.getTables()[4]) {
+      index = 4;
     }
+
+    defaultTable.getLblTitleTable().setText("    " + defaultTable.getTableTitles()[index]);
   }
 
   @Override
   public void mouseExited(MouseEvent e) {
 
-    if (e.getSource() == tables[0]) {
-      title.setText("");
-    } else if (e.getSource() == tables[1]) {
-      title.setText("");
-    } else if (e.getSource() == tables[2]) {
-      title.setText("");
-    } else if (e.getSource() == tables[3]) {
-      title.setText("");
-      message.setText("");
-    } else if (e.getSource() == tables[4]) {
-      title.setText("");
+    if (e.getSource() == defaultTable.getTables()[3]) {
+      defaultTable.getLblMessage().setText("");
     }
+
+    defaultTable.getLblTitleTable().setText("");
   }
 
   @Override
@@ -355,5 +210,27 @@ public class NotesTable extends JDialog implements ActionListener, MouseListener
 
   @Override
   public void mouseReleased(MouseEvent e) {
+  }
+
+  public void openTable() {
+    cleanTable();
+
+    try {
+      OlderRepository.readTable(
+          viewTable,
+          Queries.getAllData(Format.tableName(DatabaseConstants.NOTES)),
+          true
+      );
+    } catch (Exception e1) {
+      Alerts.error(e1, DatabaseConstants.NOTES);
+    }
+
+    setSize(900, 400);
+    setLocationRelativeTo(null);
+    setMinimumSize(new Dimension(900, 400));
+    setMaximumSize(new Dimension(1280, 720));
+    setTitle(DatabaseConstants.NOTES + " Information");
+    Effects.fadeIn(this);
+    setVisible(true);
   }
 }

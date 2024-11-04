@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.views.older;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.ui.Table;
+import com.bookverse.development.packapps.apps.tables.DefaultTable;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -19,7 +19,7 @@ import javax.swing.table.TableRowSorter;
 
 public class PurchasesTable extends JDialog {
 
-  private Table model = new Table();
+  private DefaultTable model = new DefaultTable();
   public final JTable viewTable = new JTable(model);
   private String[] columns = {"ID", "PRODUCT", "USER", "DOCUMENT", "PHONE", "DATE", "UNITS",
       "TOTAL"};

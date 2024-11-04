@@ -15,7 +15,6 @@ import lombok.Data;
 import lombok.SneakyThrows;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
-import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.constants.AppThemes;
@@ -55,9 +54,9 @@ public class HomeService {
       if (model.getWallpapers()[i].getForeground() != Styles.MAIN_COLOR) {
         changeBackgroundAP(
             model,
-            ArrayData.getPathBackground(i),
-            ArrayData.getWidthBackground(i),
-            ArrayData.getLongBackground(i),
+            getPathBackground(i),
+            getWidthBackground(i),
+            getLongBackground(i),
             parent
         );
         model.getWallpapers()[i].setForeground(Styles.MAIN_COLOR);
@@ -157,16 +156,15 @@ public class HomeService {
     model.setWelcome(new JLabel());
 
     window.setSize(
-        ArrayData.getWidthBackground(background - 1),
-        ArrayData.getLongBackground(background - 1)
+        getWidthBackground(background - 1), getLongBackground(background - 1)
     );
     window.add(model.getWelcome(), BorderLayout.CENTER);
 
     changeBackgroundAP(
         model,
-        ArrayData.getPathBackground(background - 1),
-        ArrayData.getWidthBackground(background - 1),
-        ArrayData.getLongBackground(background - 1),
+        getPathBackground(background - 1),
+        getWidthBackground(background - 1),
+        getLongBackground(background - 1),
         parent
     );
 
@@ -190,5 +188,47 @@ public class HomeService {
     Effects.fadeIn(window);
     window.setVisible(true);
     Alerts.changeUI(selectedUI);
+  }
+
+  public String getPathBackground(int index) {
+
+    String[] backgrounds = {
+        "img1.jpg",
+        "img2.jpg",
+        "img3.jpg",
+        "img4.jpg",
+        "img5.jpg",
+        "img6.jpg",
+        "img7.jpg",
+        "img8.jpg",
+        "img9.jpg",
+        "img10.jpg",
+        "img11.jpg",
+        "img12.jpg",
+        "img13.jpg",
+        "img14.jpg"
+    };
+
+    return backgrounds[index];
+  }
+
+  public int getWidthBackground(int index) {
+
+    int[] widthBackgrounds = {
+        529, 1100, 960, 800, 1150,
+        1150, 700, 600, 640, 650,
+        920, 650, 600, 538};
+
+    return widthBackgrounds[index];
+  }
+
+  public int getLongBackground(int index) {
+
+    int[] longBackgrounds = {
+        660, 618, 540, 531, 646,
+        646, 648, 625, 427, 650,
+        602, 650, 644, 660};
+
+    return longBackgrounds[index];
   }
 }

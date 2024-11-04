@@ -1,6 +1,7 @@
 package com.bookverse.development.packapps.apps.notes;
 
 import java.awt.Component;
+import java.awt.Container;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.SwingConstants;
@@ -42,20 +43,9 @@ public class NotesView extends JDialog {
     createComponents();
   }
 
-  public void start(JFrame parent) {
+  public void start(Container parent) {
     setSize(300, 400);
     setResizable(true);
-    setLocationRelativeTo(parent);
-    setTitle(DatabaseConstants.NOTES);
-    Effects.fadeIn(this);
-    parent.setVisible(false);
-    Alerts.instruccionesNotas();
-    setVisible(true);
-  }
-
-  public void start(JDialog parent) {
-    setSize(300, 400);
-    setResizable(false);
     setLocationRelativeTo(parent);
     setTitle(DatabaseConstants.NOTES);
     Effects.fadeIn(this);

@@ -3,7 +3,7 @@ package com.bookverse.development.packapps.automation.questions;
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.USER_LOGGED;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
-import com.bookverse.development.packapps.automation.interactions.WaitTime;
+import com.bookverse.development.packapps.utils.other.GeneralUtils;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.annotations.Subject;
@@ -20,10 +20,9 @@ public class TheUser implements Question<String> {
   @Override
   public String answeredBy(Actor actor) {
 
-    actor.attemptsTo(
-        WaitUntil.the(USER_LOGGED, isVisible()),
-        WaitTime.inSeconds(5)
-    );
+    actor.attemptsTo(WaitUntil.the(USER_LOGGED, isVisible()));
+
+    GeneralUtils.waitSeconds(5);
 
     return Text.of(USER_LOGGED).answeredBy(actor);
   }

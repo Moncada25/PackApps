@@ -10,48 +10,6 @@ public final class ArrayData {
     throw new IllegalStateException("Utility class");
   }
 
-  public static String getPathBackground(int index) {
-
-    String[] backgrounds = {
-        "img1.jpg",
-        "img2.jpg",
-        "img3.jpg",
-        "img4.jpg",
-        "img5.jpg",
-        "img6.jpg",
-        "img7.jpg",
-        "img8.jpg",
-        "img9.jpg",
-        "img10.jpg",
-        "img11.jpg",
-        "img12.jpg",
-        "img13.jpg",
-        "img14.jpg"
-    };
-
-    return backgrounds[index];
-  }
-
-  public static int getWidthBackground(int index) {
-
-    int[] widthBackgrounds = {
-        529, 1100, 960, 800, 1150,
-        1150, 700, 600, 640, 650,
-        920, 650, 600, 538};
-
-    return widthBackgrounds[index];
-  }
-
-  public static int getLongBackground(int index) {
-
-    int[] longBackgrounds = {
-        660, 618, 540, 531, 646,
-        646, 648, 625, 427, 650,
-        602, 650, 644, 660};
-
-    return longBackgrounds[index];
-  }
-
   public static String getDataUser(String key) {
 
     Faker faker = new Faker();

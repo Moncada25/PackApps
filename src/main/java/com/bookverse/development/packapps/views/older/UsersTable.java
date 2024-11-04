@@ -11,7 +11,7 @@ import com.bookverse.development.packapps.utils.other.Crypto;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
-import com.bookverse.development.packapps.utils.ui.Table;
+import com.bookverse.development.packapps.apps.tables.DefaultTable;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.other.Format;
 import java.awt.BorderLayout;
@@ -39,7 +39,7 @@ import javax.swing.table.TableRowSorter;
 
 public class UsersTable extends JDialog implements MouseListener {
 
-  private Table model = new Table();
+  private DefaultTable model = new DefaultTable();
   public final JTable viewTable = new JTable(model);
   private JLabel title;
   private JLabel[] actions = new JLabel[3];

@@ -2,9 +2,6 @@ package com.bookverse.development.packapps.apps.home;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dialog;
-import java.awt.Dimension;
-import java.awt.Window;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
@@ -33,7 +30,6 @@ import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.utils.other.Config;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.constants.ArrayData;
 import com.bookverse.development.packapps.utils.other.ExportFile;
 import com.bookverse.development.packapps.utils.other.Format;
 import com.bookverse.development.packapps.database.Queries;
@@ -55,20 +51,19 @@ import com.bookverse.development.packapps.apps.tables.HangmanTable;
 import com.bookverse.development.packapps.apps.tables.InventoryTable;
 import com.bookverse.development.packapps.apps.tables.LoansTable;
 import com.bookverse.development.packapps.apps.tables.NotesTable;
-import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.views.older.CashRegisterTable;
 import com.bookverse.development.packapps.views.older.PurchasesTable;
-import com.bookverse.development.packapps.views.older.PuzzleTable;
+import com.bookverse.development.packapps.apps.tables.PuzzleTable;
 import com.bookverse.development.packapps.views.older.SalesTable;
 
 public class HomeView extends JFrame {
 
   private static HomeService service = new HomeService();
   private static HomeViewModel model = new HomeViewModel();
+  private DicesTable dicesTable = new DicesTable(this, true);
   private HangmanTable hangmanTable = new HangmanTable(this, true);
   private GuessNumberTable guessNumberTable = new GuessNumberTable(this, true);
   private PuzzleTable puzzleTable = new PuzzleTable(this, true);
-  private DicesTable dicesTable = new DicesTable(this, true);
   private NotesTable notesTable = new NotesTable(this, true);
   private InventoryTable inventoryTable = new InventoryTable(this, true);
   private CashRegisterTable cashRegisterTable = new CashRegisterTable(this, true);
@@ -136,15 +131,15 @@ public class HomeView extends JFrame {
 
     model.setWelcome(new JLabel());
     window.setSize(
-        ArrayData.getWidthBackground(service.getBackground() - 1),
-        ArrayData.getLongBackground(service.getBackground() - 1)
+        service.getWidthBackground(service.getBackground() - 1),
+        service.getLongBackground(service.getBackground() - 1)
     );
     window.add(model.getWelcome(), BorderLayout.CENTER);
     service.changeBackgroundAP(
         model,
-        ArrayData.getPathBackground(service.getBackground() - 1),
-        ArrayData.getWidthBackground(service.getBackground() - 1),
-        ArrayData.getLongBackground(service.getBackground() - 1), window
+        service.getPathBackground(service.getBackground() - 1),
+        service.getWidthBackground(service.getBackground() - 1),
+        service.getLongBackground(service.getBackground() - 1), window
     );
 
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -155,101 +150,6 @@ public class HomeView extends JFrame {
     model.getTextureMode().setForeground(Styles.MAIN_COLOR);
     Effects.fadeIn(window);
     window.setVisible(true);
-  }
-
-  public void openHangmanTable() {
-
-    hangmanTable.cleanTable();
-
-    try {
-      OlderRepository.readTable(
-          hangmanTable.viewTable,
-          Queries.getAllData(Format.tableName(DatabaseConstants.HANGMAN)),
-          true
-      );
-    } catch (Exception e1) {
-      Alerts.error(e1, DatabaseConstants.HANGMAN);
-    }
-
-    hangmanTable.setSize(830, 400);
-    hangmanTable.setLocationRelativeTo(null);
-    hangmanTable.setMinimumSize(new Dimension(830, 400));
-    hangmanTable.setMaximumSize(new Dimension(1280, 720));
-    hangmanTable.setTitle(DatabaseConstants.HANGMAN + " Information");
-    Effects.fadeIn(hangmanTable);
-    hangmanTable.setVisible(true);
-  }
-
-  public boolean openDicesTable(Window parent) {
-    boolean aux = false;
-
-    dicesTable.cleanTable();
-
-    try {
-      aux = OlderRepository.readTable(
-          dicesTable.viewTable, Queries.getAllData(DatabaseConstants.DICES), true
-      );
-    } catch (Exception e1) {
-      Alerts.error(e1, DatabaseConstants.DICES);
-    }
-
-    if (aux) {
-      parent.setVisible(false);
-      dicesTable.setSize(830, 400);
-      dicesTable.setLocationRelativeTo(null);
-      dicesTable.setMinimumSize(new Dimension(830, 400));
-      dicesTable.setMaximumSize(new Dimension(1280, 720));
-      dicesTable.setTitle(DatabaseConstants.DICES + " Information");
-      Effects.fadeIn(dicesTable);
-      dicesTable.setVisible(true);
-    }
-
-    return aux;
-  }
-
-  public void openNotesTable() {
-    notesTable.cleanTable();
-
-    try {
-      OlderRepository.readTable(
-          notesTable.viewTable,
-          Queries.getAllData(Format.tableName(DatabaseConstants.NOTES)),
-          true
-      );
-    } catch (Exception e1) {
-      Alerts.error(e1, DatabaseConstants.NOTES);
-    }
-
-    notesTable.setSize(830, 400);
-    notesTable.setLocationRelativeTo(null);
-    notesTable.setMinimumSize(new Dimension(830, 400));
-    notesTable.setMaximumSize(new Dimension(1280, 720));
-    notesTable.setTitle(DatabaseConstants.NOTES + " Information");
-    Effects.fadeIn(notesTable);
-    notesTable.setVisible(true);
-  }
-
-  public void openPuzzleTable(Dialog parent) {
-    puzzleTable.cleanTable();
-
-    try {
-      OlderRepository.readTable(
-          puzzleTable.viewTable,
-          Queries.getAllData(Format.tableName(DatabaseConstants.PUZZLE)),
-          true
-      );
-    } catch (Exception e1) {
-      Alerts.error(e1, DatabaseConstants.PUZZLE);
-    }
-
-    puzzleTable.setSize(830, 400);
-    puzzleTable.setLocationRelativeTo(null);
-    puzzleTable.setMinimumSize(new Dimension(830, 400));
-    puzzleTable.setMaximumSize(new Dimension(1280, 720));
-    puzzleTable.setTitle(DatabaseConstants.PUZZLE + " Information");
-    parent.setVisible(false);
-    Effects.fadeIn(puzzleTable);
-    puzzleTable.setVisible(true);
   }
 
   private void createComponents() {
@@ -390,7 +290,7 @@ public class HomeView extends JFrame {
 
     JMenuItem database = new MenuItem().setText("Database").setImage("tabla").build();
     database.addActionListener(e -> {
-      if (openDicesTable(this)) {
+      if (dicesTable.openTable(this)) {
         setVisible(true);
       }
     });
@@ -437,7 +337,7 @@ public class HomeView extends JFrame {
     guessNumberTXT.addActionListener(e -> {
       guessNumberTable.cleanTable();
       ExportFile.txt(
-          guessNumberTable.viewTable,
+          guessNumberTable.getViewTable(),
           Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)), ".txt"
       );
     });
@@ -446,7 +346,7 @@ public class HomeView extends JFrame {
     hangmanTXT.addActionListener(e -> {
       hangmanTable.cleanTable();
       ExportFile.txt(
-          hangmanTable.viewTable,
+          hangmanTable.getViewTable(),
           Queries.getAllData(Format.tableName(DatabaseConstants.HANGMAN)), ".txt"
       );
     });
@@ -464,7 +364,7 @@ public class HomeView extends JFrame {
     dicesTXT.addActionListener(e -> {
       dicesTable.cleanTable();
       ExportFile.txt(
-          dicesTable.viewTable,
+          dicesTable.getViewTable(),
           Queries.getAllData(Format.tableName(DatabaseConstants.DICES)), ".txt"
       );
     });
@@ -473,7 +373,7 @@ public class HomeView extends JFrame {
     notesTXT.addActionListener(e -> {
       notesTable.cleanTable();
       ExportFile.txt(
-          notesTable.viewTable,
+          notesTable.getViewTable(),
           Queries.getAllData(Format.tableName(DatabaseConstants.NOTES)), ".txt"
       );
     });
@@ -482,7 +382,7 @@ public class HomeView extends JFrame {
     puzzleTXT.addActionListener(e -> {
       puzzleTable.cleanTable();
       ExportFile.txt(
-          puzzleTable.viewTable,
+          puzzleTable.getViewTable(),
           Queries.getAllData(Format.tableName(DatabaseConstants.PUZZLE)), ".txt"
       );
     });
@@ -541,7 +441,7 @@ public class HomeView extends JFrame {
     guessNumberEXCEL.addActionListener(e -> {
       guessNumberTable.cleanTable();
       ExportFile.excel(
-          guessNumberTable.viewTable,
+          guessNumberTable.getViewTable(),
           Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)),
           ".xls"
       );
@@ -551,7 +451,7 @@ public class HomeView extends JFrame {
     hangmanEXCEL.addActionListener(e -> {
       hangmanTable.cleanTable();
       ExportFile.excel(
-          hangmanTable.viewTable,
+          hangmanTable.getViewTable(),
           Queries.getAllData(Format.tableName(DatabaseConstants.HANGMAN)),
           ".xls"
       );
@@ -571,7 +471,7 @@ public class HomeView extends JFrame {
     dicesEXCEL.addActionListener(e -> {
       dicesTable.cleanTable();
       ExportFile.excel(
-          dicesTable.viewTable,
+          dicesTable.getViewTable(),
           Queries.getAllData(Format.tableName(DatabaseConstants.DICES)),
           ".xls"
       );
@@ -581,7 +481,7 @@ public class HomeView extends JFrame {
     notesEXCEL.addActionListener(e -> {
       notesTable.cleanTable();
       ExportFile.excel(
-          notesTable.viewTable,
+          notesTable.getViewTable(),
           Queries.getAllData(Format.tableName(DatabaseConstants.NOTES)),
           ".xls"
       );
@@ -591,7 +491,7 @@ public class HomeView extends JFrame {
     puzzleEXCEL.addActionListener(e -> {
       puzzleTable.cleanTable();
       ExportFile.excel(
-          puzzleTable.viewTable,
+          puzzleTable.getViewTable(),
           Queries.getAllData(Format.tableName(DatabaseConstants.PUZZLE)),
           ".xls"
       );
@@ -655,7 +555,7 @@ public class HomeView extends JFrame {
     guessNumberPDF.addActionListener(e -> {
       guessNumberTable.cleanTable();
       ExportFile.pdf(
-          guessNumberTable.viewTable,
+          guessNumberTable.getViewTable(),
           DatabaseConstants.GUESS_NUMBER,
           Queries.getAllData(Format.tableName(DatabaseConstants.GUESS_NUMBER)),
           ".pdf"
@@ -666,7 +566,7 @@ public class HomeView extends JFrame {
     hangmanPDF.addActionListener(e -> {
       hangmanTable.cleanTable();
       ExportFile.pdf(
-          hangmanTable.viewTable,
+          hangmanTable.getViewTable(),
           DatabaseConstants.HANGMAN,
           Queries.getAllData(Format.tableName(DatabaseConstants.HANGMAN)),
           ".pdf"
@@ -688,7 +588,7 @@ public class HomeView extends JFrame {
     dicesPDF.addActionListener(e -> {
       dicesTable.cleanTable();
       ExportFile.pdf(
-          dicesTable.viewTable,
+          dicesTable.getViewTable(),
           DatabaseConstants.DICES,
           Queries.getAllData(Format.tableName(DatabaseConstants.DICES)),
           ".pdf"
@@ -699,7 +599,7 @@ public class HomeView extends JFrame {
     notesPDF.addActionListener(e -> {
       notesTable.cleanTable();
       ExportFile.pdf(
-          notesTable.viewTable,
+          notesTable.getViewTable(),
           DatabaseConstants.NOTES,
           Queries.getAllData(Format.tableName(DatabaseConstants.NOTES)),
           ".pdf"
@@ -710,7 +610,7 @@ public class HomeView extends JFrame {
     puzzlePDF.addActionListener(e -> {
       puzzleTable.cleanTable();
       ExportFile.pdf(
-          puzzleTable.viewTable,
+          puzzleTable.getViewTable(),
           DatabaseConstants.PUZZLE,
           Queries.getAllData(Format.tableName(DatabaseConstants.PUZZLE)),
           ".pdf"

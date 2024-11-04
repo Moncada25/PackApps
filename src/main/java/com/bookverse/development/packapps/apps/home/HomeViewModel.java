@@ -8,7 +8,7 @@ import com.bookverse.development.packapps.apps.tables.LoansTable;
 import com.bookverse.development.packapps.apps.tables.NotesTable;
 import com.bookverse.development.packapps.views.older.CashRegisterTable;
 import com.bookverse.development.packapps.views.older.PurchasesTable;
-import com.bookverse.development.packapps.views.older.PuzzleTable;
+import com.bookverse.development.packapps.apps.tables.PuzzleTable;
 import com.bookverse.development.packapps.views.older.SalesTable;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;

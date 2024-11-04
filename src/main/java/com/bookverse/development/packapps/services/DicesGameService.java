@@ -48,8 +48,7 @@ public final class DicesGameService {
         && !players.get(1).getText().equals(players.get(2).getText())
         && !players.getFirst().getText().isEmpty()
         && !players.get(1).getText().isEmpty()
-        && !players.get(2).getText().isEmpty())
-    {
+        && !players.get(2).getText().isEmpty()) {
 
       if (btnThrow.getText().equals("Throw")) {
         clickOnStart(players, btnThrow, btnExit, dices, parent);
@@ -231,17 +230,22 @@ public final class DicesGameService {
 
       if (points1 == points2 && points1 == points3) {
         Alerts.message("Congratulations", "The game ended, there was a triple tie!");
-        insertResults(players.getFirst().getText() + ", " + players.get(1).getText() + " & " + players.get(2).getText(),
+        insertResults(
+            players.getFirst().getText() + ", " + players.get(1).getText() + " & " + players.get(2)
+                .getText(),
             points1 + " points");
       } else if (points1 == points2) {
         Alerts.message("Congratulations", "The game ended, there was a tie!");
-        insertResults(players.getFirst().getText() + " & " + players.get(1).getText(), points1 + " points");
+        insertResults(players.getFirst().getText() + " & " + players.get(1).getText(),
+            points1 + " points");
       } else if (points1 == points3) {
         Alerts.message("Congratulations", "The game ended, there was a tie!");
-        insertResults(players.getFirst().getText() + " & " + players.get(2).getText(), points1 + " points");
+        insertResults(players.getFirst().getText() + " & " + players.get(2).getText(),
+            points1 + " points");
       } else {
         Alerts.message("Congratulations", "The game ended, there was a tie!");
-        insertResults(players.get(1).getText() + " & " + players.get(2).getText(), points2 + " points");
+        insertResults(players.get(1).getText() + " & " + players.get(2).getText(),
+            points2 + " points");
       }
     }
 
