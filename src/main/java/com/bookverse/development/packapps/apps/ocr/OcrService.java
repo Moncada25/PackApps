@@ -1,13 +1,13 @@
-package com.bookverse.development.packapps.services;
+package com.bookverse.development.packapps.apps.ocr;
 
 import java.io.File;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
-public final class OcrService {
+public class OcrService {
 
-  public static String readText(String image, boolean onlyText) {
+  public String readText(String image, boolean onlyText) {
 
     ITesseract tesseract = new Tesseract();
     tesseract.setDatapath("src/main/resources/tessdata");
@@ -23,8 +23,5 @@ public final class OcrService {
     } catch (TesseractException e) {
       return "Error";
     }
-  }
-
-  private OcrService(){
   }
 }

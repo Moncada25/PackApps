@@ -21,7 +21,7 @@ import com.bookverse.development.packapps.views.EmailView;
 import com.bookverse.development.packapps.views.FeedbackView;
 import com.bookverse.development.packapps.apps.notes.NotesView;
 import com.bookverse.development.packapps.views.ProfessionalCardView;
-import com.bookverse.development.packapps.views.OcrView;
+import com.bookverse.development.packapps.apps.ocr.OcrView;
 import com.bookverse.development.packapps.apps.qr.QrView;
 import com.bookverse.development.packapps.views.StructuresView;
 import com.bookverse.development.packapps.views.TextsView;

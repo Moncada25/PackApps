@@ -9,5 +9,5 @@ public class QrViewModel {
   private JLabel readQR;
   private JLabel generateQR;
   private JLabel exit;
-  private JTextArea text;
+  private JTextArea textArea;
 }

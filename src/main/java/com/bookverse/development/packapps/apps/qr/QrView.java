@@ -27,7 +27,7 @@ public class QrView extends JDialog {
   public QrView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
-    KeyBindingsUtil.addCopyPasteKeyBindings(model.getText(), null, null);
+    KeyBindingsUtil.addCopyPasteKeyBindings(model.getTextArea(), null, null);
   }
 
   public void start(JFrame parent) {
@@ -50,7 +50,7 @@ public class QrView extends JDialog {
     add(scroll, BorderLayout.CENTER);
     add(getPanel(), BorderLayout.SOUTH);
 
-    model.setText(text);
+    model.setTextArea(text);
 
     repaint();
   }
@@ -72,9 +72,9 @@ public class QrView extends JDialog {
 
         if ("Error".equals(response)) {
           Alerts.message("Message", "File not found");
-          model.getText().setText("");
+          model.getTextArea().setText("");
         } else {
-          model.getText().setText(response);
+          model.getTextArea().setText(response);
 
           if (response.contains("www") || response.contains("http")) {
 
@@ -102,11 +102,11 @@ public class QrView extends JDialog {
     generateQR.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        if (model.getText().getText().isEmpty()) {
+        if (model.getTextArea().getText().isEmpty()) {
           Alerts.message("Verify!", "Ingrese un texto para convertirlo en QR");
-          model.getText().requestFocus();
+          model.getTextArea().requestFocus();
         } else {
-          String qr = service.createQR(model.getText().getText(), 400, 400);
+          String qr = service.createQR(model.getTextArea().getText(), 400, 400);
           Alerts.message("Pass", "QR creado");
           service.showQRGenerated(qr, QrView.this);
         }

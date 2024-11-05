@@ -1,6 +1,5 @@
-package com.bookverse.development.packapps.views;
+package com.bookverse.development.packapps.apps.ocr;
 
-import com.bookverse.development.packapps.utils.ui.KeyBindingsUtil;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -12,20 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.Resources;
-
-import static com.bookverse.development.packapps.services.OcrService.readText;
-import static com.bookverse.development.packapps.utils.ui.Resources.getFile;
-
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
+import com.bookverse.development.packapps.utils.ui.KeyBindingsUtil;
 
 public class OcrView extends JDialog implements MouseListener {
 
+  private transient OcrService service = new OcrService();
   private JLabel searchFile;
   private JLabel exit;
   private JTextArea text;
@@ -66,11 +60,11 @@ public class OcrView extends JDialog implements MouseListener {
 
     JPanel panel = new JPanel(new FlowLayout());
 
-    searchFile = Resources.getLabel("  SEARCH FILE  ", TEXT_COLOR, panel, Styles.MEDIUM);
+    searchFile = Resources.getLabel("  SEARCH FILE  ", Styles.TEXT_COLOR, panel, Styles.MEDIUM);
     searchFile.setBorder(Styles.BORDER_BLUE);
     searchFile.addMouseListener(this);
 
-    exit = Resources.getLabel("  RETURN  ", MAIN_COLOR, panel, Styles.MEDIUM);
+    exit = Resources.getLabel("  RETURN  ", Styles.MAIN_COLOR, panel, Styles.MEDIUM);
     exit.setBorder(Styles.BORDER_RED);
     exit.addMouseListener(this);
 
@@ -82,7 +76,7 @@ public class OcrView extends JDialog implements MouseListener {
 
     if (e.getSource() == searchFile) {
 
-      String response = readText(getFile(this), true);
+      String response = service.readText(Resources.getFile(this), true);
 
       if ("Error".equals(response)) {
         Alerts.message("Message", "File not found");
