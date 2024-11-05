@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.arrays;
 
+import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
@@ -58,8 +59,8 @@ public class ArraysView extends JDialog {
         .setColor(Styles.MAIN_COLOR)
         .setFont(Styles.BIG)
         .build();
-    title.setBounds(220, 10, 500, 40);
-    add(title);
+    title.setBounds(200, 10, 500, 40);
+    add(title, BorderLayout.NORTH);
 
     JButton btnAction = new Button().setText("Show").setColor(Styles.TEXT_COLOR).build();
     btnAction.setBounds(20, 190, 70, 25);

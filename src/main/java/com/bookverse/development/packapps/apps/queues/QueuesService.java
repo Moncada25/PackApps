@@ -1,24 +1,25 @@
 package com.bookverse.development.packapps.apps.queues;
 
-import com.bookverse.development.packapps.utils.other.Format;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.Styles;
+import lombok.Data;
 
+@Data
 public class QueuesService {
 
-  public int i = 0;
-  public int countPairs = 0;
-  public int dataSelected = 0;
-  public double add = 0;
-  public double totalAdd = 0;
-  public double sum = 0;
-  public String result = "";
+  private int i = 0;
+  private int countPairs = 0;
+  private int dataSelected = 0;
+  private double add = 0;
+  private double totalAdd = 0;
+  private double sum = 0;
+  private String result = "";
 
   public void clickOnPeek(QueuesViewModel model) {
 
     if (i > 0) {
       model.getQueueTitle().setText(
-          "<html>" + Format.style() + "<strong>Next data → " + peek(model) + "</strong></html>"
+          "<html>Next element → " + peek(model) + "</html>"
       );
     } else {
       Alerts.message("Message", "The queue is empty");
@@ -39,13 +40,13 @@ public class QueuesService {
 
     if (dataSelected > 0) {
       model.getQueueTitle().setText(
-          "<html><strong>Selected data → " + dataSelected + "<br>" + "Sum → "
+          "<html>Elements selected → " + dataSelected + "<br>" + "Sum → "
               + sum
               + "<br>" + "Average → " + String.format("%.2f",
               sum / dataSelected)
-              + "</strong></html>");
+              + "</html>");
     } else {
-      model.getQueueTitle().setText("<html><strong>Nothing selected</strong></html>");
+      model.getQueueTitle().setText("<html>No elements selected</html>");
     }
   }
 
@@ -59,10 +60,9 @@ public class QueuesService {
         model.getQueue()[j].setBackground(model.getParent().getBackground());
       }
 
-      model.getBonus().setVisible(false);
       reset();
 
-      model.getQueueTitle().setText("<html><strong>Queue empty</strong></html>");
+      model.getQueueTitle().setText("<html>Queue empty</html>");
 
     } else {
       Alerts.message("Message", "The queue is empty");
@@ -89,14 +89,14 @@ public class QueuesService {
       Alerts.message("Message", "The queue is empty");
     } else if (countPairs == 0) {
       model.getQueueTitle().setText(
-          "<html>" + Format.style() + "<strong>There is not pairs in the queue</strong></html>"
+          "<html>There is not pairs in the queue</html>"
       );
     } else {
       model.getQueueTitle().setText(
-          "<html>" + Format.style() + "<strong>Number of pairs → " + countPairs + "</strong></html>"
+          "<html>Number of pairs → " + countPairs + "</html>"
       );
 
-      Alerts.message("Result", "Numbers pairs in the queue <br> " + result);
+      Alerts.message("Result", "<html>Numbers pairs in the queue <br> " + result + "</html>");
     }
 
     countPairs = 0;
@@ -114,8 +114,8 @@ public class QueuesService {
       if(count != 0){
 
         model.getQueueTitle().setText(
-            "<html>" + Format.style() + "<strong>Average of the queue → " +
-                String.format("%.2f", clickOnAdd(model) / count) + "</strong></html>"
+            "<html>Average of the queue → " +
+                String.format("%.2f", clickOnAdd(model) / count) + "</html>"
         );
       }
     }
@@ -132,7 +132,7 @@ public class QueuesService {
       }
 
       model.getQueueTitle().setText(
-          "<html>" + Format.style() + "<strong>Queue items add up → " + add + "</strong></html>"
+          "<html>Queue elements add up → " + add + "</html>"
       );
 
       totalAdd = add;
@@ -147,7 +147,7 @@ public class QueuesService {
       Alerts.message("Message", "The queue is empty");
     } else {
       model.getQueueTitle().setText(
-          "<html><strong>There are " + i + " items in the queue</strong></html>"
+          "<html>There are " + i + " elements in the queue</html>"
       );
     }
 
@@ -159,7 +159,7 @@ public class QueuesService {
     model.getQueueTitle().setText("");
 
     if (i > 0) {
-      model.getQueueTitle().setText("<html><strong>Decouples → " + pop(model) + "</strong></html>");
+      model.getQueueTitle().setText("<html>Decouples → " + pop(model) + "</html>");
     } else {
       Alerts.message("Message", "The queue is empty");
       reset();
@@ -196,12 +196,11 @@ public class QueuesService {
   }
 
   private void push(int data, QueuesViewModel model) {
-    model.getBonus().setVisible(true);
     model.getQueue()[i].setVisible(true);
     model.getQueue()[i].setBackground(model.getParent().getBackground());
     model.getQueue()[i].setText(String.valueOf(data));
     model.getQueueTitle().setText(
-        "<html><strong>Is coupled → " + model.getQueue()[i].getText() + "</strong></html>"
+        "<html>Is coupled → " + model.getQueue()[i].getText() + "</html>"
     );
   }
 
@@ -218,10 +217,6 @@ public class QueuesService {
     }
 
     model.getQueue()[i].setVisible(false);
-
-    if (i < 1) {
-      model.getBonus().setVisible(false);
-    }
 
     for (int k = 0; k < i; k++) {
       model.getQueue()[k].setText(model.getQueue()[k + 1].getText());

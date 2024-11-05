@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.apps.queues;
+package com.bookverse.development.packapps.apps.stacks;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -8,8 +8,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class QueuesViewModel {
-  private JLabel queueTitle;
-  private JButton[] queue;
+public class StacksViewModel {
+  private JButton[] stack;
+  private JLabel stackTitle;
   private JDialog parent;
 }
