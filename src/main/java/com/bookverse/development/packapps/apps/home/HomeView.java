@@ -24,7 +24,7 @@ import com.bookverse.development.packapps.views.ProfessionalCardView;
 import com.bookverse.development.packapps.apps.ocr.OcrView;
 import com.bookverse.development.packapps.apps.qr.QrView;
 import com.bookverse.development.packapps.apps.structures.StructuresView;
-import com.bookverse.development.packapps.views.TextsView;
+import com.bookverse.development.packapps.apps.texts.TextsView;
 import com.bookverse.development.packapps.views.WhatsAppView;
 import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
