@@ -137,7 +137,6 @@ public class DefaultTable extends DefaultTableModel {
   private JPanel getTablesPanel(MouseListener parent) {
 
     JPanel panel = new JPanel(new GridLayout());
-
     JPanel row = new JPanel(new FlowLayout());
 
     String[] images = {"adivinar.png", "ahorcado.png", "dado.png", "notas.png", "rompecabezas.png"};

@@ -1,6 +1,5 @@
 package com.bookverse.development.packapps.views;
 
-import com.bookverse.development.packapps.services.StackService;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,36 +11,31 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import org.jetbrains.annotations.NotNull;
-
+import com.bookverse.development.packapps.services.StackService;
+import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Effects;
-
-import static com.bookverse.development.packapps.services.StackService.i;
-import static com.bookverse.development.packapps.services.StackService.x;
-import static com.bookverse.development.packapps.services.StackService.y;
-import static com.bookverse.development.packapps.services.StackService.con;
-import static com.bookverse.development.packapps.services.StackService.sum;
-import static com.bookverse.development.packapps.services.StackService.clickOnPeek;
-import static com.bookverse.development.packapps.services.StackService.clickOnPop;
-import static com.bookverse.development.packapps.services.StackService.clickOnPush;
-import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
-
-import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
-import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
-import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COLOR;
-import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 
 public class StackView extends JDialog implements MouseListener, ActionListener {
 
   private JLabel[] stackActions = new JLabel[8];
-  private JLabel title, message;
+  private JLabel title;
+  private JLabel message;
   private JButton[] stack = new JButton[50];
 
   public StackView(JDialog parent, boolean modal) {
     super(parent, modal);
     createComponents();
+  }
+
+  public void start(JDialog parent) {
+    setBounds(0, 0, 900, 600);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle("Stack");
+    Effects.fadeIn(this);
+    parent.setVisible(false);
+    setVisible(true);
   }
 
   private void getPanel() {
@@ -59,7 +53,7 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
         "vaciar.png"
     };
 
-    panel.setBorder(getBorder("Select action"));
+    panel.setBorder(Resources.getBorder("Select action"));
 
     IntStream.range(0, stackActions.length).forEach(i -> {
       stackActions[i] = new JLabel();
@@ -80,16 +74,16 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
 
     for (int j = 0; j < stack.length; j++) {
       stack[j] = Resources.getButton("", null, this, this);
-      stack[j].setBounds(x, y, 80, 40);
-      stack[j].setForeground(MAIN_COLOR);
+      stack[j].setBounds(StackService.x, StackService.y, 80, 40);
+      stack[j].setForeground(Styles.MAIN_COLOR);
       stack[j].setVisible(false);
-      y -= 40;
+      StackService.y -= 40;
 
       c++;
 
       if (c == 10) {
-        x += 100;
-        y = 400;
+        StackService.x += 100;
+        StackService.y = 400;
 
         c = 0;
       }
@@ -97,32 +91,22 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
 
     getPanel();
 
-    title = Resources.getLabel("", MAIN_COLOR, this, BIG);
+    title = Resources.getLabel("", Styles.MAIN_COLOR, this, Styles.BIG);
     title.setBounds(470, 20, 400, 200);
 
-    message = Resources.getLabel("", MAIN_COLOR, this, BIG);
+    message = Resources.getLabel("", Styles.MAIN_COLOR, this, Styles.BIG);
     message.setBounds(620, 480, 200, 85);
   }
 
-  public void start(JDialog parent) {
-    setBounds(0, 0, 900, 600);
-    setResizable(false);
-    setLocationRelativeTo(parent);
-    setTitle("Stack");
-    Effects.fadeIn(this);
-    parent.setVisible(false);
-    setVisible(true);
-  }
-
   @Override
-  public void mouseClicked(@NotNull MouseEvent e) {
+  public void mouseClicked(MouseEvent e) {
 
     if (e.getSource() == stackActions[0]) {
-      clickOnPush(stack, title);
+      StackService.clickOnPush(stack, title);
     } else if (e.getSource() == stackActions[1]) {
-      clickOnPop(stack, title, this);
+      StackService.clickOnPop(stack, title, this);
     } else if (e.getSource() == stackActions[2]) {
-      clickOnPeek(stack, title);
+      StackService.clickOnPeek(stack, title);
     } else if (e.getSource() == stackActions[3]) {
       StackService.clickOnCount(title);
     } else if (e.getSource() == stackActions[4]) {
@@ -137,36 +121,36 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
   }
 
   @Override
-  public void mouseEntered(@NotNull MouseEvent e) {
+  public void mouseEntered(MouseEvent e) {
     if (e.getSource() == stackActions[0]) {
-      stackActions[0].setCursor(HAND);
+      stackActions[0].setCursor(Styles.HAND);
       message.setText("<html><strong>Push( )</strong></html>");
     } else if (e.getSource() == stackActions[1]) {
-      stackActions[1].setCursor(HAND);
+      stackActions[1].setCursor(Styles.HAND);
       message.setText("<html><strong>Pop( )</strong></html>");
     } else if (e.getSource() == stackActions[2]) {
-      stackActions[2].setCursor(HAND);
+      stackActions[2].setCursor(Styles.HAND);
       message.setText("<html><strong>Peek( )</strong></html>");
     } else if (e.getSource() == stackActions[3]) {
-      stackActions[3].setCursor(HAND);
+      stackActions[3].setCursor(Styles.HAND);
       message.setText("<html><strong>Count</strong></html>");
     } else if (e.getSource() == stackActions[4]) {
-      stackActions[4].setCursor(HAND);
+      stackActions[4].setCursor(Styles.HAND);
       message.setText("<html><strong>Sum</strong></html>");
     } else if (e.getSource() == stackActions[5]) {
-      stackActions[5].setCursor(HAND);
+      stackActions[5].setCursor(Styles.HAND);
       message.setText("<html><strong>Average</strong></html>");
     } else if (e.getSource() == stackActions[6]) {
-      stackActions[6].setCursor(HAND);
+      stackActions[6].setCursor(Styles.HAND);
       message.setText("<html><strong>Pairs numbers</strong></html>");
     } else if (e.getSource() == stackActions[7]) {
-      stackActions[7].setCursor(HAND);
+      stackActions[7].setCursor(Styles.HAND);
       message.setText("<html><strong>Clean</strong></html>");
     }
   }
 
   @Override
-  public void mouseExited(@NotNull MouseEvent e) {
+  public void mouseExited(MouseEvent e) {
 
     if (e.getSource() == stackActions[0]) {
       message.setText("");
@@ -200,24 +184,24 @@ public class StackView extends JDialog implements MouseListener, ActionListener 
   @Override
   public void actionPerformed(ActionEvent e) {
 
-    for (int j = 0; j < i; j++) {
+    for (int j = 0; j < StackService.i; j++) {
 
       if (e.getSource() == stack[j]) {
 
-        if (stack[j].getBackground() == TEXT_COLOR) {
+        if (stack[j].getBackground() == Styles.TEXT_COLOR) {
           stack[j].setBackground(getBackground());
-          con--;
-          sum -= Double.parseDouble(stack[j].getText());
+          StackService.con--;
+          StackService.sum -= Double.parseDouble(stack[j].getText());
         } else {
-          stack[j].setBackground(TEXT_COLOR);
-          con++;
-          sum += Double.parseDouble(stack[j].getText());
+          stack[j].setBackground(Styles.TEXT_COLOR);
+          StackService.con++;
+          StackService.sum += Double.parseDouble(stack[j].getText());
         }
 
-        if (con > 0) {
+        if (StackService.con > 0) {
           title.setText(
-              "<html><strong>Data selected → " + con + "<br>" + "Sum up → " + (int) sum
-                  + "<br>" + "Average → " + String.format("%.2f", sum / con)
+              "<html><strong>Data selected → " + StackService.con + "<br>" + "Sum up → " + (int) StackService.sum
+                  + "<br>" + "Average → " + String.format("%.2f", StackService.sum / StackService.con)
                   + "</strong></html>");
         } else {
           title.setText("<html><strong>No data selected</strong></html>");
