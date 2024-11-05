@@ -1,6 +1,5 @@
 package com.bookverse.development.packapps.utils.constants;
 
-import net.datafaker.Faker;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,24 +7,6 @@ public final class ArrayData {
 
   private ArrayData() {
     throw new IllegalStateException("Utility class");
-  }
-
-  public static String getDataUser(String key) {
-
-    Faker faker = new Faker();
-
-    Map<String, String> dataNewUser = new HashMap<>();
-    dataNewUser.put("Name", faker.name().firstName());
-    dataNewUser.put("LastName", faker.name().lastName());
-    dataNewUser.put("Phone", faker.phoneNumber().cellPhone());
-    dataNewUser.put("Occupation", "Otro");
-    dataNewUser.put("Address", faker.address().fullAddress());
-    dataNewUser.put("Username", faker.internet().username());
-    dataNewUser.put("Password", faker.random().hex());
-    dataNewUser.put("Email", faker.internet().emailAddress());
-    dataNewUser.put("Gender", "Masculino");
-
-    return dataNewUser.get(key);
   }
 
   public static String getCountryCode(String key) {

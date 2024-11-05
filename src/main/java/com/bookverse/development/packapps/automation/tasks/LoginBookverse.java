@@ -6,7 +6,7 @@ import static com.bookverse.development.packapps.automation.userinterfaces.Bookv
 import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLogin.USERNAME_FIELD;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
-import com.bookverse.development.packapps.automation.models.Bookverse;
+import com.bookverse.development.packapps.automation.models.BookverseUser;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
@@ -17,14 +17,14 @@ import net.serenitybdd.annotations.Step;
 
 public class LoginBookverse implements Task {
 
-  private final Bookverse bookverse;
+  private final BookverseUser bookverseUser;
 
-  public LoginBookverse(Bookverse bookverse) {
-    this.bookverse = bookverse;
+  public LoginBookverse(BookverseUser bookverseUser) {
+    this.bookverseUser = bookverseUser;
   }
 
-  public static LoginBookverse withCredentials(Bookverse bookverse) {
-    return Tasks.instrumented(LoginBookverse.class, bookverse);
+  public static LoginBookverse withCredentials(BookverseUser bookverseUser) {
+    return Tasks.instrumented(LoginBookverse.class, bookverseUser);
   }
 
   @Step("Login Bookverse")
@@ -33,8 +33,8 @@ public class LoginBookverse implements Task {
 
     actor.wasAbleTo(
         WaitUntil.the(USERNAME_FIELD, isVisible()),
-        Enter.theValue(bookverse.getUsername()).into(USERNAME_FIELD),
-        Enter.theValue(bookverse.getPassword()).into(PASSWORD_FIELD),
+        Enter.theValue(bookverseUser.username()).into(USERNAME_FIELD),
+        Enter.theValue(bookverseUser.password()).into(PASSWORD_FIELD),
         Click.on(LOGIN_BUTTON),
         WaitUntil.the(IMAGE, isVisible()).forNoMoreThan(5).seconds());
   }

@@ -20,7 +20,7 @@ import static com.bookverse.development.packapps.automation.utils.Constants.USER
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
-import com.bookverse.development.packapps.automation.models.Bookverse;
+import com.bookverse.development.packapps.automation.models.BookverseUser;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
@@ -36,14 +36,14 @@ import net.serenitybdd.annotations.Step;
 
 public class RegisterUser implements Task {
 
-  private final Bookverse bookverse;
+  private final BookverseUser bookverseUser;
 
-  public RegisterUser(Bookverse bookverse) {
-    this.bookverse = bookverse;
+  public RegisterUser(BookverseUser bookverseUser) {
+    this.bookverseUser = bookverseUser;
   }
 
-  public static RegisterUser inBookverse(Bookverse bookverse) {
-    return Tasks.instrumented(RegisterUser.class, bookverse);
+  public static RegisterUser inBookverse(BookverseUser bookverseUser) {
+    return Tasks.instrumented(RegisterUser.class, bookverseUser);
   }
 
   @Step("Register new user in Bookverse")
@@ -57,20 +57,20 @@ public class RegisterUser implements Task {
 
     actor.attemptsTo(
         WaitUntil.the(NAME_FIELD, isVisible()).forNoMoreThan(5).seconds(),
-        Enter.theValue(bookverse.getName()).into(NAME_FIELD),
-        Enter.theValue(bookverse.getLastName()).into(LAST_NAME_FIELD),
+        Enter.theValue(bookverseUser.name()).into(NAME_FIELD),
+        Enter.theValue(bookverseUser.lastName()).into(LAST_NAME_FIELD),
         Enter.theValue("1234567").into(PHONE_FIELD),
-        SelectFromOptions.byValue(bookverse.getOccupation()).from(OCCUPATION_LIST),
-        Enter.theValue(bookverse.getAddress()).into(ADDRESS_FIELD)
+        SelectFromOptions.byValue(bookverseUser.occupation()).from(OCCUPATION_LIST),
+        Enter.theValue(bookverseUser.address()).into(ADDRESS_FIELD)
     );
 
     actor.attemptsTo(
         Scroll.to(USERNAME_FIELD).andAlignToTop(),
-        Enter.theValue(bookverse.getName()).into(USERNAME_FIELD),
-        Enter.theValue(bookverse.getPassword()).into(FIRST_PASSWORD_FIELD),
-        Enter.theValue(bookverse.getPassword()).into(SECOND_PASSWORD_FIELD),
-        Enter.theValue(bookverse.getEmail()).into(EMAIL_FIELD),
-        Click.on(GENDER_CHECK.of(bookverse.getGender())),
+        Enter.theValue(bookverseUser.name()).into(USERNAME_FIELD),
+        Enter.theValue(bookverseUser.password()).into(FIRST_PASSWORD_FIELD),
+        Enter.theValue(bookverseUser.password()).into(SECOND_PASSWORD_FIELD),
+        Enter.theValue(bookverseUser.email()).into(EMAIL_FIELD),
+        Click.on(GENDER_CHECK.of(bookverseUser.gender())),
         Click.on(REGISTER_SUBMIT)
     );
 
@@ -87,6 +87,6 @@ public class RegisterUser implements Task {
         Click.on(ENTER_LOGIN)
     );
 
-    Serenity.setSessionVariable(USER_REGISTERED).to(bookverse.getName() + " " + bookverse.getLastName());
+    Serenity.setSessionVariable(USER_REGISTERED).to(bookverseUser.name() + " " + bookverseUser.lastName());
   }
 }

@@ -7,7 +7,7 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.hamcrest.Matchers.is;
 
-import com.bookverse.development.packapps.automation.models.Bookverse;
+import com.bookverse.development.packapps.automation.models.BookverseUser;
 import com.bookverse.development.packapps.automation.questions.TheTitle;
 import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
 import com.bookverse.development.packapps.automation.tasks.SearchBook;
@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
 @RunWith(SerenityRunner.class)
 public class SearchBookTest {
 
-  Bookverse bookverse = (Bookverse) Resources.getObject();
+  BookverseUser bookverseUser = (BookverseUser) Resources.getObject();
 
   @Before
   public void config() {
@@ -36,12 +36,12 @@ public class SearchBookTest {
 
   @Test
   public void searchBook() {
-    theActorInTheSpotlight().wasAbleTo(LoginBookverse.withCredentials(bookverse));
-    theActorInTheSpotlight().attemptsTo(SearchBook.inBookverse(bookverse.getBook()));
-    theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverse.getBook())));
+    theActorInTheSpotlight().wasAbleTo(LoginBookverse.withCredentials(bookverseUser));
+    theActorInTheSpotlight().attemptsTo(SearchBook.inBookverse(bookverseUser.book()));
+    theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverseUser.book())));
     Alerts.message(
         "Test passed!",
-        "Book → " + bookverse.getBook() + "\n" + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
+        "Book → " + bookverseUser.book() + "\n" + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
   }
 
   @After

@@ -19,7 +19,7 @@ import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.other.Format;
 import com.bookverse.development.packapps.database.Queries;
-import com.bookverse.development.packapps.views.DicesGameView;
+import com.bookverse.development.packapps.apps.dices.DicesGameView;
 import com.bookverse.development.packapps.utils.ui.factory.MenuItem;
 
 @Data

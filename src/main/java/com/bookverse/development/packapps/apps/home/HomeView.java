@@ -16,7 +16,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import com.bookverse.development.packapps.utils.constants.AppConfig;
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.utils.constants.Styles;
-import com.bookverse.development.packapps.views.DicesGameView;
+import com.bookverse.development.packapps.apps.dices.DicesGameView;
 import com.bookverse.development.packapps.views.EmailView;
 import com.bookverse.development.packapps.views.FeedbackView;
 import com.bookverse.development.packapps.apps.notes.NotesView;

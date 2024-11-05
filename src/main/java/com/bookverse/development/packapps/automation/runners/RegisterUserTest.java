@@ -1,12 +1,12 @@
 package com.bookverse.development.packapps.automation.runners;
 
-import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
-import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
-import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static org.hamcrest.Matchers.is;
-
-import com.bookverse.development.packapps.automation.models.Bookverse;
+import net.serenitybdd.core.Serenity;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
+import net.serenitybdd.screenplay.actors.Cast;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import com.bookverse.development.packapps.automation.models.BookverseUser;
 import com.bookverse.development.packapps.automation.questions.TheUser;
 import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
 import com.bookverse.development.packapps.automation.tasks.RegisterUser;
@@ -14,17 +14,17 @@ import com.bookverse.development.packapps.automation.utils.Constants;
 import com.bookverse.development.packapps.automation.utils.WebDriverFactory;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import net.serenitybdd.core.Serenity;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actors.Cast;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
+import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
+import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(SerenityRunner.class)
 public class RegisterUserTest {
 
-  Bookverse bookverse = (Bookverse) Resources.getObject();
+  BookverseUser bookverseUser = (BookverseUser) Resources.getObject();
 
   @Test
   public void registerNewUser() {
@@ -34,10 +34,10 @@ public class RegisterUserTest {
     );
     theActorCalled(Constants.ACTOR);
 
-    theActorInTheSpotlight().wasAbleTo(RegisterUser.inBookverse(bookverse));
-    theActorInTheSpotlight().attemptsTo(LoginBookverse.withCredentials(bookverse));
+    theActorInTheSpotlight().wasAbleTo(RegisterUser.inBookverse(bookverseUser));
+    theActorInTheSpotlight().attemptsTo(LoginBookverse.withCredentials(bookverseUser));
     theActorInTheSpotlight().should(
-        seeThat(TheUser.logged(), is(bookverse.getName() + " " + bookverse.getLastName()))
+        seeThat(TheUser.logged(), is(bookverseUser.name() + " " + bookverseUser.lastName()))
     );
 
     BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();

@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.automation.utils;
 
-import com.bookverse.development.packapps.automation.models.Bookverse;
+import com.bookverse.development.packapps.automation.models.BookverseUser;
 import com.bookverse.development.packapps.automation.runners.RegisterUserTest;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Alerts;
@@ -10,22 +10,22 @@ public class StartTests {
 
   public static void startRegisterUser() {
 
-    Bookverse bookverse = SetUser.toRegister();
+    BookverseUser bookverseUser = UserData.toRegister();
 
     if (Alerts.requestResponse(
         "Register new user with following data...\n\n"
-            + "Name → " + bookverse.getName() + "\n"
-            + "Last name → " + bookverse.getLastName() + "\n"
-            + "Phone → " + bookverse.getPhone() + "\n"
-            + "Occupation → " + bookverse.getOccupation() + "\n"
-            + "Address → " + bookverse.getAddress() + "\n"
-            + "Username → " + bookverse.getUsername() + "\n"
-            + "Password → " + bookverse.getPassword() + "\n"
-            + "Email → " + bookverse.getEmail() + "\n"
-            + "Gender → " + bookverse.getGender() + "\n\n"
+            + "Name → " + bookverseUser.name() + "\n"
+            + "Last name → " + bookverseUser.lastName() + "\n"
+            + "Phone → " + bookverseUser.phone() + "\n"
+            + "Occupation → " + bookverseUser.occupation() + "\n"
+            + "Address → " + bookverseUser.address() + "\n"
+            + "Username → " + bookverseUser.username() + "\n"
+            + "Password → " + bookverseUser.password() + "\n"
+            + "Email → " + bookverseUser.email() + "\n"
+            + "Gender → " + bookverseUser.gender() + "\n\n"
             + "Do you want run test?", "Bookverse Test")) {
 
-      Resources.setObject(bookverse);
+      Resources.setObject(bookverseUser);
 
       JUnitCore.runClasses(RegisterUserTest.class);
     }
