@@ -8,8 +8,8 @@ import javax.swing.JTextField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 public class HangmanViewModel {
   private JComboBox<String> options;
   private JLabel attempts;
