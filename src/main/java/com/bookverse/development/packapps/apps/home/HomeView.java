@@ -17,8 +17,8 @@ import com.bookverse.development.packapps.utils.constants.AppConfig;
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.apps.dices.DicesGameView;
-import com.bookverse.development.packapps.views.EmailView;
-import com.bookverse.development.packapps.views.FeedbackView;
+import com.bookverse.development.packapps.apps.email.SendEmailView;
+import com.bookverse.development.packapps.apps.feedback.FeedbackView;
 import com.bookverse.development.packapps.apps.notes.NotesView;
 import com.bookverse.development.packapps.views.ProfessionalCardView;
 import com.bookverse.development.packapps.apps.ocr.OcrView;
@@ -206,7 +206,7 @@ public class HomeView extends JFrame {
 
     JMenuItem email = new MenuItem().setText("Email").setImage("email").build();
     email.addActionListener(e -> {
-      new EmailView(this, true).start(this);
+      new SendEmailView(this, true).start(this);
       setVisible(true);
     });
 

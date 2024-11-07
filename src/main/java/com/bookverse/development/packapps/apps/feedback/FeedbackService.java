@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.services;
+package com.bookverse.development.packapps.apps.feedback;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;

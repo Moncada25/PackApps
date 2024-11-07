@@ -78,14 +78,8 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     add(txtFirst, gbc);
 
     txtFirst.addKeyListener(new KeyAdapter() {
-
       @Override
       public void keyPressed(KeyEvent e) {
-        txt1KeyPressed(e);
-      }
-
-      private void txt1KeyPressed(KeyEvent e) {
-
         if (e.getKeyCode() == KeyEvent.VK_ENTER && txtFirst.getText().length() > 0) {
           generateFibonacci(Integer.parseInt(txtFirst.getText()));
           value.setText(phi + " ...");
@@ -98,10 +92,6 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
 
       @Override
       public void keyTyped(KeyEvent e) {
-        txt1KeyTyped(e);
-      }
-
-      private void txt1KeyTyped(KeyEvent e) {
         Format.onlyNumbers(e.getKeyChar(), e, txtFirst.getText(), 2);
       }
     });
@@ -133,13 +123,8 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
     add(txtSecond, gbc);
 
     txtSecond.addKeyListener(new KeyAdapter() {
-
+      @Override
       public void keyPressed(KeyEvent e) {
-        txt2KeyPressed(e);
-      }
-
-      private void txt2KeyPressed(KeyEvent e) {
-
         if (e.getKeyCode() == KeyEvent.VK_ENTER && txtSecond.getText().length() > 0) {
           getFibonacci(Integer.parseInt(txtSecond.getText()));
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -149,11 +134,8 @@ public class Phi extends JDialog implements ActionListener, MouseListener {
         }
       }
 
+      @Override
       public void keyTyped(KeyEvent e) {
-        txt2KeyTyped(e);
-      }
-
-      private void txt2KeyTyped(KeyEvent e) {
         Format.onlyNumbers(e.getKeyChar(), e, txtSecond.getText(), 2);
       }
     });

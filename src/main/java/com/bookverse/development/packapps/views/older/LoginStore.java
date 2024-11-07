@@ -13,6 +13,7 @@ import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.other.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -63,7 +64,7 @@ public class LoginStore extends JDialog implements ActionListener {
     gbc.weighty = 1.0; // Allow vertical expansion
 
     // Header
-    JLabel title = Resources.getLabel("<html><strong><em>Login</em></strong></html>", MAIN_COLOR, this, BIG);
+    JLabel title = Resources.getLabel("Login", MAIN_COLOR, this, BIG);
     gbc.gridx = 0;
     gbc.gridy = 0;
     gbc.gridwidth = 2;
@@ -71,7 +72,7 @@ public class LoginStore extends JDialog implements ActionListener {
     add(title, gbc);
 
     // Center
-    JLabel user = Resources.getLabel("<html><strong>Username</strong></html>", TEXT_COLOR, this, MEDIUM);
+    JLabel user = Resources.getLabel("Username", TEXT_COLOR, this, MEDIUM);
     gbc.gridx = 0;
     gbc.gridy = 1;
     gbc.gridwidth = 1;
@@ -99,7 +100,7 @@ public class LoginStore extends JDialog implements ActionListener {
     gbc.gridy = 1;
     add(txtUser, gbc);
 
-    JLabel password = Resources.getLabel("<html><strong>Password</strong></html>", TEXT_COLOR, this, MEDIUM);
+    JLabel password = Resources.getLabel("Password", TEXT_COLOR, this, MEDIUM);
     gbc.gridx = 0;
     gbc.gridy = 2;
     add(password, gbc);
@@ -128,16 +129,19 @@ public class LoginStore extends JDialog implements ActionListener {
     btnExit = Resources.getButton("Return", MAIN_COLOR, this, this);
     gbc.gridx = 0;
     gbc.gridy = 3;
+    gbc.gridwidth = 1;
+    btnExit.setPreferredSize(new Dimension(100, 30));
     add(btnExit, gbc);
 
     btnLogin = Resources.getButton("Enter", TEXT_COLOR, this, this);
     gbc.gridx = 1;
     gbc.gridy = 3;
     gbc.gridwidth = 1;
+    btnLogin.setPreferredSize(new Dimension(100, 30));
     add(btnLogin, gbc);
 
     // Footer
-    JLabel alreadyRegister = Resources.getLabel("<html><strong>Are you not registered?</strong></html>", MAIN_COLOR, this, SMALL);
+    JLabel alreadyRegister = Resources.getLabel("Are you not registered?", MAIN_COLOR, this, SMALL);
     gbc.gridx = 0;
     gbc.gridy = 4;
     gbc.gridwidth = 2;
@@ -148,6 +152,7 @@ public class LoginStore extends JDialog implements ActionListener {
     gbc.gridx = 0;
     gbc.gridy = 5;
     gbc.gridwidth = 2;
+    btnRegister.setPreferredSize(new Dimension(100, 30));
     add(btnRegister, gbc);
   }
 
