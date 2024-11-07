@@ -1,6 +1,6 @@
 package com.bookverse.development.packapps.utils.constants;
 
-public final class AppThemes {
+public final class Themes {
 
   public static final String DEFAULT = "Default";
   public static final String GRAY = "Gray";
@@ -10,6 +10,6 @@ public final class AppThemes {
   public static final String CLASSIC = "Classic";
   public static final String MAC = "Mac";
 
-  private AppThemes() {
+  private Themes() {
   }
 }

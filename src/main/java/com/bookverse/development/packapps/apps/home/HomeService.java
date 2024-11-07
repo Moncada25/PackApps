@@ -17,7 +17,7 @@ import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.constants.AppThemes;
+import com.bookverse.development.packapps.utils.constants.Themes;
 
 @Data
 public class HomeService {
@@ -80,9 +80,9 @@ public class HomeService {
 
     switch (selectedUI) {
 
-      case AppThemes.DEFAULT -> UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-      case AppThemes.GRAY -> UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
-      case AppThemes.TEXTURE -> {
+      case Themes.DEFAULT -> UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+      case Themes.GRAY -> UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+      case Themes.TEXTURE -> {
         UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
         UIManager.put("MenuItem.foreground", Color.WHITE);
         UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
@@ -92,7 +92,7 @@ public class HomeService {
         UIManager.put("Button.foreground", Color.BLACK);
       }
 
-      case AppThemes.DARK -> {
+      case Themes.DARK -> {
         UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
         UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
         UIManager.put("ComboBox.foreground", Color.WHITE);
@@ -102,7 +102,7 @@ public class HomeService {
         UIManager.put("MenuItem.foreground", Color.WHITE);
       }
 
-      case AppThemes.MAC -> {
+      case Themes.MAC -> {
         UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
         UIManager.put("MenuItem.foreground", Styles.TEXT_COLOR);
         UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
@@ -112,7 +112,7 @@ public class HomeService {
         UIManager.put("Button.foreground", Color.BLACK);
       }
 
-      case AppThemes.MINT -> {
+      case Themes.MINT -> {
         UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
         UIManager.put("ComboBox.foreground", Color.BLACK);
         UIManager.put("MenuItem.foreground", Styles.TEXT_COLOR);
@@ -124,7 +124,7 @@ public class HomeService {
         UIManager.put("OptionPane.messageForeground", Styles.TEXT_COLOR);
       }
 
-      case AppThemes.CLASSIC -> {
+      case Themes.CLASSIC -> {
         UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
         UIManager.put("ComboBox.foreground", Color.BLACK);
         UIManager.put("Button.foreground", Color.BLACK);
@@ -139,7 +139,7 @@ public class HomeService {
       default -> throw new IllegalStateException("Unexpected value: " + selectedUI);
     }
 
-    if (selectedUI.equals(AppThemes.DEFAULT) || selectedUI.equals(AppThemes.GRAY)) {
+    if (selectedUI.equals(Themes.DEFAULT) || selectedUI.equals(Themes.GRAY)) {
       UIManager.put("ComboBox.foreground", new Color(0, 0, 0));
       UIManager.put("MenuItem.foreground", Styles.TEXT_COLOR);
       UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
@@ -175,13 +175,13 @@ public class HomeService {
     model.getWallpapers()[background - 1].setForeground(Styles.MAIN_COLOR);
 
     switch (selectedUI) {
-      case AppThemes.DEFAULT -> model.getDefaultMode().setForeground(Styles.MAIN_COLOR);
-      case AppThemes.GRAY -> model.getGrayMode().setForeground(Styles.MAIN_COLOR);
-      case AppThemes.TEXTURE -> model.getTextureMode().setForeground(Styles.MAIN_COLOR);
-      case AppThemes.DARK -> model.getDarkMode().setForeground(Styles.MAIN_COLOR);
-      case AppThemes.MAC -> model.getMacMode().setForeground(Styles.MAIN_COLOR);
-      case AppThemes.MINT -> model.getMintMode().setForeground(Styles.MAIN_COLOR);
-      case AppThemes.CLASSIC -> model.getClassicMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.DEFAULT -> model.getDefaultMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.GRAY -> model.getGrayMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.TEXTURE -> model.getTextureMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.DARK -> model.getDarkMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.MAC -> model.getMacMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.MINT -> model.getMintMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.CLASSIC -> model.getClassicMode().setForeground(Styles.MAIN_COLOR);
       default -> throw new IllegalStateException("Unexpected value: " + selectedUI);
     }
 

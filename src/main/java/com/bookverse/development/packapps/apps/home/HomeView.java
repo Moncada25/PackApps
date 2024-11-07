@@ -25,7 +25,7 @@ import com.bookverse.development.packapps.apps.ocr.OcrView;
 import com.bookverse.development.packapps.apps.qr.QrView;
 import com.bookverse.development.packapps.apps.structures.StructuresView;
 import com.bookverse.development.packapps.apps.texts.TextsView;
-import com.bookverse.development.packapps.views.WhatsAppView;
+import com.bookverse.development.packapps.apps.whatsapp.WhatsappView;
 import com.bookverse.development.packapps.automation.utils.StartTests;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.utils.other.Config;
@@ -43,7 +43,7 @@ import com.bookverse.development.packapps.views.older.Puzzle;
 import com.bookverse.development.packapps.views.older.TicTacToe;
 import com.bookverse.development.packapps.utils.ui.factory.Menu;
 import com.bookverse.development.packapps.utils.ui.factory.MenuItem;
-import com.bookverse.development.packapps.utils.constants.AppThemes;
+import com.bookverse.development.packapps.utils.constants.Themes;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.apps.tables.DicesTable;
 import com.bookverse.development.packapps.apps.tables.GuessNumberTable;
@@ -305,7 +305,7 @@ public class HomeView extends JFrame {
 
     JMenuItem whatsApp = new MenuItem().setText("Send Message").setImage("whatsapp").build();
     whatsApp.addActionListener(e -> {
-      new WhatsAppView(this, true).start(this);
+      new WhatsappView(this, true).start(this);
       setVisible(true);
     });
 
@@ -749,7 +749,7 @@ public class HomeView extends JFrame {
         return;
       }
 
-      service.setTheme(model, AppThemes.DEFAULT, this);
+      service.setTheme(model, Themes.DEFAULT, this);
     });
 
     model.setDarkMode(new MenuItem().setText("Dark").setImage("dark").build());
@@ -759,7 +759,7 @@ public class HomeView extends JFrame {
         return;
       }
 
-      service.setTheme(model, AppThemes.DARK, this);
+      service.setTheme(model, Themes.DARK, this);
     });
 
     model.setTextureMode(new MenuItem().setText("Texture").setImage("texture").build());
@@ -769,7 +769,7 @@ public class HomeView extends JFrame {
         return;
       }
 
-      service.setTheme(model, AppThemes.TEXTURE, this);
+      service.setTheme(model, Themes.TEXTURE, this);
     });
 
     model.setMacMode(new MenuItem().setText("Mac OS").setImage("mac").build());
@@ -779,7 +779,7 @@ public class HomeView extends JFrame {
         return;
       }
 
-      service.setTheme(model, AppThemes.MAC, this);
+      service.setTheme(model, Themes.MAC, this);
     });
 
     model.setGrayMode(new MenuItem().setText("Metallic").setImage("gray").build());
@@ -789,7 +789,7 @@ public class HomeView extends JFrame {
         return;
       }
 
-      service.setTheme(model, AppThemes.GRAY, this);
+      service.setTheme(model, Themes.GRAY, this);
     });
 
     model.setMintMode(new MenuItem().setText("Mint").setImage("mint").build());
@@ -799,7 +799,7 @@ public class HomeView extends JFrame {
         return;
       }
 
-      service.setTheme(model, AppThemes.MINT, this);
+      service.setTheme(model, Themes.MINT, this);
     });
 
     model.setClassicMode(new MenuItem().setText("Classic").setImage("classic").build());
@@ -809,7 +809,7 @@ public class HomeView extends JFrame {
         return;
       }
 
-      service.setTheme(model, AppThemes.CLASSIC, this);
+      service.setTheme(model, Themes.CLASSIC, this);
     });
   }
 
