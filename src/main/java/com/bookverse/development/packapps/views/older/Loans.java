@@ -3,6 +3,7 @@ package com.bookverse.development.packapps.views.older;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.LOANS;
 
+import com.bookverse.development.packapps.apps.store.HomeStore;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
@@ -118,7 +119,7 @@ public class Loans extends JDialog implements ActionListener {
       }
 
       private void txtRefKeyTyped(KeyEvent evt) {
-        Format.onlyAlfa(evt.getKeyChar(), evt, txtReference.getText(), 15);
+        Format.numbersAndText(evt.getKeyChar(), evt, txtReference.getText(), 15);
       }
     });
 

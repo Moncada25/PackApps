@@ -85,7 +85,7 @@ public class ConsultBook extends JDialog implements ActionListener {
       }
 
       private void txtUserKeyTyped(KeyEvent evt) {
-        Format.onlyAlfa(evt.getKeyChar(), evt, txtUser.getText(), 20);
+        Format.numbersAndText(evt.getKeyChar(), evt, txtUser.getText(), 20);
       }
     });
 
@@ -111,7 +111,7 @@ public class ConsultBook extends JDialog implements ActionListener {
       }
 
       private void txtCodKeyTyped(KeyEvent evt) {
-        Format.onlyAlfa(evt.getKeyChar(), evt, String.valueOf(txtPassword.getPassword()), 30);
+        Format.numbersAndText(evt.getKeyChar(), evt, String.valueOf(txtPassword.getPassword()), 30);
       }
     });
 

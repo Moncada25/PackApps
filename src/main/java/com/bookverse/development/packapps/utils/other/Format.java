@@ -39,7 +39,7 @@ public final class Format {
     }
   }
 
-  public static void onlyAlfa(char txt, KeyEvent evt, String data, int length) {
+  public static void numbersAndText(char txt, KeyEvent evt, String data, int length) {
     boolean isInvalid = !isLetterOrDigit(txt) || data.length() >= length;
 
     if (isInvalid) {
@@ -145,7 +145,7 @@ public final class Format {
   }
 
   public static boolean verifyPrice(double price) {
-    return !(price > 10);
+    return price <= 10;
   }
 
   @NotNull
@@ -160,6 +160,10 @@ public final class Format {
 
   public static String getNow() {
     return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"));
+  }
+
+  public static boolean isEmail(String email) {
+    return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
   }
 
   private Format() {

@@ -7,6 +7,8 @@ import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COL
 import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
+import com.bookverse.development.packapps.apps.store.HomeStore;
+import com.bookverse.development.packapps.apps.store.signup.SignUpView;
 import com.bookverse.development.packapps.utils.other.Crypto;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.utils.ui.Resources;
@@ -151,7 +153,7 @@ public class UsersTable extends JDialog implements MouseListener {
 
         try {
 
-          if (OlderRepository.searchUserRegister(user,
+          if (OlderRepository.searchStoreUser(user,
               Crypto.encrypt(Alerts.inputPassword("Enter password"), true))) {
 
             Object option = null;
@@ -253,7 +255,7 @@ public class UsersTable extends JDialog implements MouseListener {
 
     if (e.getSource() == actions[0]) {
       setVisible(false);
-      new SignUp(this, true).start(this);
+      new SignUpView(this, true).start(this);
       new HomeStore().btnUsersTableAP();
     } else if (e.getSource() == actions[1]) {
       editUser();

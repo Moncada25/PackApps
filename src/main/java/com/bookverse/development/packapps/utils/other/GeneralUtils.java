@@ -56,7 +56,7 @@ public final class GeneralUtils {
 
   public static void openUrl(String url) {
     try {
-      Desktop.getDesktop().browse(new URI(url));
+      Desktop.getDesktop().browse(URI.create(url));
     } catch (Exception e) {
       Alerts.error(e, "Can't open the URL " + url);
     }

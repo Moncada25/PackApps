@@ -6,13 +6,15 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.JTextComponent;
 
 public final class KeyBindingsUtil {
 
-  public static void addCopyPasteKeyBindings(JTextArea textArea, JLabel title, String text) {
+  public static void addCopyPasteKeyBindings(JTextComponent textArea, JLabel title, String text) {
     KeyStroke copy = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.META_DOWN_MASK);
     KeyStroke paste = KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.META_DOWN_MASK);
     KeyStroke cut = KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.META_DOWN_MASK);

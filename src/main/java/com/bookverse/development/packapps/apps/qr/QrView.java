@@ -1,9 +1,7 @@
 package com.bookverse.development.packapps.apps.qr;
 
 import java.awt.event.MouseAdapter;
-import java.net.URI;
 import java.awt.BorderLayout;
-import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import javax.swing.JDialog;
@@ -18,6 +16,7 @@ import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.KeyBindingsUtil;
 import com.bookverse.development.packapps.utils.ui.factory.Label;
 import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.utils.other.GeneralUtils;
 
 public class QrView extends JDialog {
 
@@ -79,7 +78,7 @@ public class QrView extends JDialog {
           if (response.contains("www") || response.contains("http")) {
 
             try {
-              Desktop.getDesktop().browse(URI.create(response));
+              GeneralUtils.openUrl(response);
             } catch (Exception ex) {
               Alerts.error(ex, "Opening URL");
             }

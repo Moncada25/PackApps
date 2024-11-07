@@ -1,7 +1,5 @@
 package com.bookverse.development.packapps.apps.email;
 
-import com.bookverse.development.packapps.utils.constants.AppConfig;
-import com.bookverse.development.packapps.utils.other.Config;
 import java.util.Properties;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
@@ -11,22 +9,30 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.utils.constants.AppConfig;
+import com.bookverse.development.packapps.utils.other.Config;
+import com.bookverse.development.packapps.utils.other.Format;
 
 public class SendEmailService {
 
-  public String receiver;
+  private String receiver;
 
   public void sendEmailToOther(SendEmailViewModel model) {
 
     receiver = Alerts.inputText("Input receiver email");
 
-    if (receiver == null || receiver.trim().isEmpty() || !receiver.contains("@") || !receiver.contains(".")) {
+    if (receiver == null || receiver.isEmpty()) {
+      model.getToDeveloper().setSelected(true);
+      return;
+    }
+
+    if (Format.isEmail(receiver)) {
+      model.getToOther().setText(receiver);
+    } else {
       receiver = Config.get(AppConfig.DEVELOPER_EMAIL.getProperty());
       model.getToDeveloper().setSelected(true);
       model.getToOther().setText("Other");
-      Alerts.message("Verify!", "Email invalid");
-    } else {
-      model.getToOther().setText(receiver);
+      Alerts.message("Verify!", "Invalid email, make sure it's Gmail.");
     }
   }
 
@@ -66,8 +72,7 @@ public class SendEmailService {
 
       if(model.getToDeveloper().isSelected()){
         Alerts.message(
-            "Success!",
-            "<center>Email sent</center> <br>" +
+            "Success!", "<center>Email sent</center> <br>" +
                 "Feedback sent successfully, your opinion is very important to us."
         );
       }else{
@@ -75,7 +80,9 @@ public class SendEmailService {
       }
 
     } catch (MessagingException me) {
-      Alerts.message("Error", "Email not sent");
+      model.getToDeveloper().setSelected(true);
+      model.getToOther().setText("Other");
+      Alerts.error(me, "Send Email");
     }
   }
 

@@ -372,7 +372,7 @@ public final class OlderRepository {
     return false;
   }
 
-  public static boolean searchUserRegister(String user, String password) {
+  public static boolean searchStoreUser(String user, String password) {
 
     try {
       

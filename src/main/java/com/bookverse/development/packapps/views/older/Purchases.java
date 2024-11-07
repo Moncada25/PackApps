@@ -10,6 +10,7 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PURCHASES;
 
+import com.bookverse.development.packapps.apps.store.HomeStore;
 import com.bookverse.development.packapps.apps.tables.InventoryTable;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
@@ -82,7 +83,7 @@ public class Purchases extends JDialog implements ActionListener {
       }
 
       private void txtRefKeyTyped(KeyEvent evt) {
-        Format.onlyAlfa(evt.getKeyChar(), evt, txtReference.getText(), 15);
+        Format.numbersAndText(evt.getKeyChar(), evt, txtReference.getText(), 15);
       }
     });
 

@@ -1,7 +1,5 @@
 package com.bookverse.development.packapps.apps.whatsapp;
 
-import java.awt.Desktop;
-import java.net.URI;
 import java.util.Map;
 import java.util.Objects;
 import javax.swing.JComboBox;
@@ -49,12 +47,10 @@ public class WhatsappService {
           Alerts.message("Verify!", "Select a country");
         } else {
 
-          Desktop.getDesktop().browse(
-              URI.create(String.format(
-                  URL,
-                  COUNTRIES.get(country) + number.getText(),
-                  message.getText().replaceAll("\\s", "+"))
-              )
+          GeneralUtils.openUrl(String.format(
+              URL,
+              COUNTRIES.get(country) + number.getText(),
+              message.getText().replaceAll("\\s", "+"))
           );
         }
 

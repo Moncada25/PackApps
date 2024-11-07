@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -29,12 +27,13 @@ public class SendEmailView extends JDialog {
 
   private transient SendEmailService service = new SendEmailService();
   private transient SendEmailViewModel model = null;
-  private JTextArea text;
 
   public SendEmailView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
-    KeyBindingsUtil.addCopyPasteKeyBindings(text, null, null);
+    KeyBindingsUtil.addCopyPasteKeyBindings(model.getText(), null, null);
+    KeyBindingsUtil.addCopyPasteKeyBindings(model.getTxtEmail(), null, null);
+    KeyBindingsUtil.addCopyPasteKeyBindings(model.getTxtPassword(), null, null);
   }
 
   public void start(JFrame parent) {
@@ -72,7 +71,6 @@ public class SendEmailView extends JDialog {
         .build();
     gbc.gridx = 0;
     gbc.gridy = 1;
-    gbc.gridwidth = 1;
     gbc.anchor = GridBagConstraints.WEST;
     add(lblEmail, gbc);
 
@@ -80,8 +78,9 @@ public class SendEmailView extends JDialog {
     txtEmail.setHorizontalAlignment(SwingConstants.CENTER);
     gbc.gridx = 1;
     gbc.gridy = 1;
-    gbc.fill = GridBagConstraints.HORIZONTAL;
-    gbc.weightx = 1.0;
+    gbc.fill = GridBagConstraints.NONE;
+    txtEmail.setPreferredSize(new Dimension(270, 30));
+    txtEmail.setFont(Styles.SMALL);
     add(txtEmail, gbc);
 
     JLabel lblPassword = new Label().setText("Password")
@@ -90,15 +89,17 @@ public class SendEmailView extends JDialog {
         .build();
     gbc.gridx = 0;
     gbc.gridy = 2;
-    gbc.fill = GridBagConstraints.NONE;
+    gbc.anchor = GridBagConstraints.WEST;
     add(lblPassword, gbc);
 
     JPasswordField txtPassword = new JPasswordField();
     txtPassword.setHorizontalAlignment(SwingConstants.CENTER);
     gbc.gridx = 1;
     gbc.gridy = 2;
-    gbc.fill = GridBagConstraints.HORIZONTAL;
     gbc.weightx = 1.0;
+    gbc.fill = GridBagConstraints.NONE;
+    txtPassword.setPreferredSize(new Dimension(270, 30));
+    txtPassword.setFont(Styles.SMALL);
     add(txtPassword, gbc);
 
     JLabel lblReceiver = new Label().setText("Receiver")
@@ -115,12 +116,7 @@ public class SendEmailView extends JDialog {
     JRadioButton toDeveloper = new JRadioButton("Developer");
     toDeveloper.setForeground(Styles.TEXT_COLOR);
     toDeveloper.setFont(Styles.SMALL);
-    toDeveloper.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        service.sendEmailToDeveloper(model);
-      }
-    });
+    toDeveloper.addActionListener(e -> service.sendEmailToDeveloper(model));
     gbc.gridx = 0;
     gbc.gridy = 4;
     gbc.gridwidth = 1;
@@ -131,12 +127,7 @@ public class SendEmailView extends JDialog {
     JRadioButton toOther = new JRadioButton("Other");
     toOther.setFont(Styles.SMALL);
     toOther.setForeground(Styles.TEXT_COLOR);
-    toOther.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        service.sendEmailToOther(model);
-      }
-    });
+    toOther.addActionListener(e -> service.sendEmailToOther(model));
     gbc.gridx = 1;
     gbc.gridy = 4;
     gbc.gridwidth = 1;
@@ -153,7 +144,7 @@ public class SendEmailView extends JDialog {
     gbc.anchor = GridBagConstraints.CENTER;
     add(message, gbc);
 
-    text = new JTextArea();
+    JTextArea text = new JTextArea();
     JScrollPane scroll = new JScrollPane(text);
     gbc.gridx = 0;
     gbc.gridy = 6;
@@ -166,8 +157,6 @@ public class SendEmailView extends JDialog {
     gbc.gridx = 0;
     gbc.gridy = 10;
     gbc.gridwidth = 1;
-    gbc.weightx = 0;
-    gbc.weighty = 0;
     gbc.fill = GridBagConstraints.NONE;
     btnSend.addActionListener(e -> service.clickOnSend(model));
     btnSend.setPreferredSize(new Dimension(120, 30));

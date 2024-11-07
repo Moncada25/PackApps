@@ -75,7 +75,7 @@ public class NotesView extends JDialog {
     txtName.addKeyListener(new KeyAdapter() {
       @Override
       public void keyTyped(KeyEvent e) {
-        Format.onlyAlfa(e.getKeyChar(), e, txtName.getText(), 20);
+        Format.numbersAndText(e.getKeyChar(), e, txtName.getText(), 20);
       }
     });
     gbc.gridx = 0;

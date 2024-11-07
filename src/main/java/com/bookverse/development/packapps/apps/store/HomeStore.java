@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.views.older;
+package com.bookverse.development.packapps.apps.store;
 
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
@@ -15,6 +15,13 @@ import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.database.Queries;
 import com.bookverse.development.packapps.utils.ui.Effects;
+import com.bookverse.development.packapps.views.older.CashRegisterTable;
+import com.bookverse.development.packapps.views.older.Loans;
+import com.bookverse.development.packapps.views.older.Purchases;
+import com.bookverse.development.packapps.views.older.PurchasesTable;
+import com.bookverse.development.packapps.views.older.Sales;
+import com.bookverse.development.packapps.views.older.SalesTable;
+import com.bookverse.development.packapps.views.older.UsersTable;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -30,7 +37,16 @@ public class HomeStore extends JDialog implements ActionListener {
 
   
   private static String userLogged;
-  private JMenuItem sell, buy, lend, cashRegister, inventory, loans, purchases, sales, users, exit;
+  private JMenuItem sell;
+  private JMenuItem buy;
+  private JMenuItem lend;
+  private JMenuItem cashRegister;
+  private JMenuItem inventory;
+  private JMenuItem loans;
+  private JMenuItem purchases;
+  private JMenuItem sales;
+  private JMenuItem users;
+  private JMenuItem exit;
 
   public HomeStore(JDialog parent, boolean modal) {
     super(parent, modal);

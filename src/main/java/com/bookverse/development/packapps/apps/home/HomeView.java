@@ -37,7 +37,7 @@ import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.views.older.ConsultBook;
 import com.bookverse.development.packapps.views.older.GuessNumber;
 import com.bookverse.development.packapps.apps.hangman.HangmanView;
-import com.bookverse.development.packapps.views.older.LoginStore;
+import com.bookverse.development.packapps.apps.store.login.LoginView;
 import com.bookverse.development.packapps.views.older.Numbers;
 import com.bookverse.development.packapps.views.older.Puzzle;
 import com.bookverse.development.packapps.views.older.TicTacToe;
@@ -299,7 +299,7 @@ public class HomeView extends JFrame {
 
     JMenuItem store = new MenuItem().setText("Store").setImage("compraventa").build();
     store.addActionListener(e -> {
-      new LoginStore(this, true).start(this);
+      new LoginView(this, true).start(this);
       setVisible(true);
     });
 
