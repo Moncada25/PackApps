@@ -20,7 +20,7 @@ import com.bookverse.development.packapps.apps.dices.DicesGameView;
 import com.bookverse.development.packapps.apps.email.SendEmailView;
 import com.bookverse.development.packapps.apps.feedback.FeedbackView;
 import com.bookverse.development.packapps.apps.notes.NotesView;
-import com.bookverse.development.packapps.views.ProfessionalCardView;
+import com.bookverse.development.packapps.apps.feedback.BusinessCardView;
 import com.bookverse.development.packapps.apps.ocr.OcrView;
 import com.bookverse.development.packapps.apps.qr.QrView;
 import com.bookverse.development.packapps.apps.structures.StructuresView;
@@ -178,7 +178,7 @@ public class HomeView extends JFrame {
 
     JMenuItem card = new MenuItem().setText("Developer").setImage("developer").build();
     card.addActionListener(e -> {
-      new ProfessionalCardView(this, true).start(this);
+      new BusinessCardView(this, true).start(this);
       setVisible(true);
     });
 

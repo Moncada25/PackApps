@@ -1,10 +1,11 @@
 {
-  "BusinessCard": {
+  "card": {
     "name": "Santiago Moncada",
     "email": "santiago.moncada.dev@gmail.com",
-    "mobile": "+573012499315",
+    "phone": "+573012499315",
     "company": "Bookverse",
-    "link": "https://github.com/Moncada25/",
-    "role": "Senior Software Development Engineer in Test"
+    "github": "https://github.com/Moncada25/",
+    "linkedin": "https://www.linkedin.com/in/santiagomoncadavelez/",
+    "role": "Senior SDET"
   }
 }
