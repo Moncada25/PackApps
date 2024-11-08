@@ -4,7 +4,7 @@ import javax.swing.JDialog;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import lombok.Data;
-import com.bookverse.development.packapps.apps.store.HomeStore;
+import com.bookverse.development.packapps.apps.store.home.HomeView;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.other.Crypto;
 import com.bookverse.development.packapps.utils.ui.Alerts;
@@ -21,7 +21,7 @@ public class LoginService {
 
       if (OlderRepository.searchStoreUser(txtUser.getText(), password)) {
         OlderRepository.recordLogin("Online", txtUser.getText());
-        new HomeStore(parent, true).start(parent, txtUser.getText());
+        new HomeView(parent, true).start(parent, txtUser.getText());
         txtUser.setText("");
         txtUser.requestFocus();
         txtPassword.setText("");

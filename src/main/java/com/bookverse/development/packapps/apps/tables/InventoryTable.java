@@ -7,11 +7,12 @@ import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COL
 import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
 
+import com.bookverse.development.packapps.apps.store.home.HomeService;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.store.HomeStore;
+import com.bookverse.development.packapps.apps.store.home.HomeView;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -38,6 +39,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class InventoryTable extends JDialog implements MouseListener {
 
+  private HomeService service = new HomeService();
   protected static final JLabel[] actions = new JLabel[4];
   private int status = 0;
   private String reference = "";
@@ -219,14 +221,14 @@ public class InventoryTable extends JDialog implements MouseListener {
 
         OlderRepository.deleteData(IDs, INVENTORY);
         dispose();
-        new HomeStore().btnInventoryTableAP(false);
+        service.clickOnInventoryTable(this, false);
       }
     }
   }
 
   private void btnRefreshAP() {
     dispose();
-    new HomeStore().btnInventoryTableAP(search);
+    service.clickOnInventoryTable(this, search);
   }
 
   public String searchProduct() {

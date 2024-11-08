@@ -11,7 +11,8 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 
-import com.bookverse.development.packapps.apps.store.HomeStore;
+import com.bookverse.development.packapps.apps.store.home.HomeService;
+import com.bookverse.development.packapps.apps.store.home.HomeView;
 import com.bookverse.development.packapps.apps.tables.InventoryTable;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
@@ -36,6 +37,7 @@ import javax.swing.JTextField;
 
 public class Sales extends JDialog implements ActionListener {
 
+  private HomeService service = new HomeService();
   private JTextField txtReference, txtPhone, txtDocument, txtPrice;
   private InventoryTable inventoryTable = new InventoryTable(this, true, true);
   private JButton btnSearch, btnSubmit, btReturn;
@@ -229,7 +231,6 @@ public class Sales extends JDialog implements ActionListener {
       @Override
       public void mouseReleased(MouseEvent e) {
       }
-
     });
 
     available = Resources
@@ -252,7 +253,8 @@ public class Sales extends JDialog implements ActionListener {
     add(txtPrice);
   }
 
-  public void start(JDialog parent) {
+  public void start(JDialog parent, HomeService service) {
+    this.service = service;
     setSize(440, 400);
     setResizable(false);
     setLocationRelativeTo(parent);
@@ -288,7 +290,7 @@ public class Sales extends JDialog implements ActionListener {
         OlderRepository
             .updateInventory(Integer.parseInt(formatUnitsAvailable), txtReference.getText(), false);
 
-        String user = new HomeStore().getUserLogged();
+        String user = service.getUserLogged();
 
         if (OlderRepository.searchDataUserInCashRegister(user)) {
           OlderRepository.updateSales(user, Integer.parseInt(unitsActual.getText()),

@@ -3,7 +3,8 @@ package com.bookverse.development.packapps.views.older;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.LOANS;
 
-import com.bookverse.development.packapps.apps.store.HomeStore;
+import com.bookverse.development.packapps.apps.store.home.HomeService;
+import com.bookverse.development.packapps.apps.store.home.HomeView;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
@@ -27,6 +28,7 @@ import javax.swing.JTextField;
 
 public class Loans extends JDialog implements ActionListener {
 
+  private HomeService service = new HomeService();
   private JButton btnLoan, btnExit;
   private JTextField txtReference, txtDocument, txtPhone, txtValue, txtName;
   private JComboBox<String> weeks, months;
@@ -36,7 +38,8 @@ public class Loans extends JDialog implements ActionListener {
     createComponents();
   }
 
-  public void start(JDialog parent) {
+  public void start(JDialog parent, HomeService service) {
+    this.service = service;
     setSize(450, 400);
     setResizable(false);
     setLocationRelativeTo(parent);
@@ -239,7 +242,7 @@ public class Loans extends JDialog implements ActionListener {
                       Integer.parseInt(String.valueOf(months.getSelectedItem())));
                 }
 
-                String user = new HomeStore().getUserLogged();
+                String user = service.getUserLogged();
 
                 if (OlderRepository.searchDataUserInCashRegister(user)) {
                   OlderRepository.updateLoan(user, Double.parseDouble(txtValue.getText()));

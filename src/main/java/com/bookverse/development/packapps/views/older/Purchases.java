@@ -10,7 +10,8 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PURCHASES;
 
-import com.bookverse.development.packapps.apps.store.HomeStore;
+import com.bookverse.development.packapps.apps.store.home.HomeService;
+import com.bookverse.development.packapps.apps.store.home.HomeView;
 import com.bookverse.development.packapps.apps.tables.InventoryTable;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
@@ -36,7 +37,8 @@ import javax.swing.JTextField;
 public class Purchases extends JDialog implements ActionListener {
 
   private InventoryTable inventoryTable = new InventoryTable(this, true, true);
-  
+  private HomeService service = new HomeService();
+
   private JLabel more, less, lblUnits;
   private JButton btnSubmit, btnExit, btnSearch;
   private JTextField txtReference, txtDocument, txtPhone, txtPrice;
@@ -307,7 +309,7 @@ public class Purchases extends JDialog implements ActionListener {
             }
 
             if (!existProduct) {
-              String user = HomeStore.getUserLogged();
+              String user = service.getUserLogged();
 
               if (OlderRepository.searchDataUserInCashRegister(user)) {
                 OlderRepository.updatePurchases(user, productCount, totalPurchase);
@@ -392,7 +394,8 @@ public class Purchases extends JDialog implements ActionListener {
     }
   }
 
-  public void start(JDialog parent) {
+  public void start(JDialog parent, HomeService service) {
+    this.service = service;
     setSize(440, 400);
     setResizable(false);
     setLocationRelativeTo(parent);

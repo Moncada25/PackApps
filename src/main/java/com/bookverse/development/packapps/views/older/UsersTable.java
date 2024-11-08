@@ -7,7 +7,8 @@ import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COL
 import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.apps.store.HomeStore;
+import com.bookverse.development.packapps.apps.store.home.HomeService;
+import com.bookverse.development.packapps.apps.store.home.HomeView;
 import com.bookverse.development.packapps.apps.store.signup.SignUpView;
 import com.bookverse.development.packapps.utils.other.Crypto;
 import com.bookverse.development.packapps.utils.other.GeneralUtils;
@@ -41,6 +42,7 @@ import javax.swing.table.TableRowSorter;
 
 public class UsersTable extends JDialog implements MouseListener {
 
+  private HomeService service = new HomeService();
   private DefaultTable model = new DefaultTable();
   public final JTable viewTable = new JTable(model);
   private JLabel title;
@@ -178,7 +180,7 @@ public class UsersTable extends JDialog implements MouseListener {
                   OlderRepository.updatePassword(user, Crypto.encrypt(newPassword, true));
                   Alerts.message("Success", "Password updated!");
                   dispose();
-                  new HomeStore().btnUsersTableAP();
+                  service.clickOnUsersTable(this);
                 }
 
               } else if (option.toString().equals("Username")) {
@@ -191,7 +193,7 @@ public class UsersTable extends JDialog implements MouseListener {
                   OlderRepository.updateUsername(user, newUsername);
                   Alerts.message("Success", "Username updated!");
                   dispose();
-                  new HomeStore().btnUsersTableAP();
+                  service.clickOnUsersTable(this);
                 }
               }
             }
@@ -240,7 +242,7 @@ public class UsersTable extends JDialog implements MouseListener {
           if (GeneralUtils.loginDBA()) {
             OlderRepository.deleteData(IDs, USERS);
             dispose();
-            new HomeStore().btnUsersTableAP();
+            service.clickOnUsersTable(this);
           }
         }
 
@@ -256,7 +258,7 @@ public class UsersTable extends JDialog implements MouseListener {
     if (e.getSource() == actions[0]) {
       setVisible(false);
       new SignUpView(this, true).start(this);
-      new HomeStore().btnUsersTableAP();
+      service.clickOnUsersTable(this);
     } else if (e.getSource() == actions[1]) {
       editUser();
     } else if (e.getSource() == actions[2]) {

@@ -50,19 +50,6 @@ public final class Resources {
     return Resources.class.getResource("/" + image);
   }
 
-  public static JMenuItem getMenuItem(String name, String image, ActionListener listener) {
-    JMenuItem item = new JMenuItem(name);
-    item.setIcon(new ImageIcon(getImage(image + ".png")));
-    item.addActionListener(listener);
-    return item;
-  }
-
-  public static JMenu getMenu(String name, String image) {
-    JMenu menu = new JMenu(name);
-    menu.setIcon(new ImageIcon(getImage(image + ".png")));
-    return menu;
-  }
-
   public static JButton getButton(
       String name,
       Color color,
