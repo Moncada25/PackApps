@@ -9,8 +9,8 @@ import javax.swing.WindowConstants;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 import com.bookverse.development.packapps.utils.constants.Styles;
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.GeneralUtils;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 
 @Data

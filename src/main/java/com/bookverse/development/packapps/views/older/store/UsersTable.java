@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.views.older;
+package com.bookverse.development.packapps.views.older.store;
 
 import static com.bookverse.development.packapps.utils.constants.Styles.BIG;
 import static com.bookverse.development.packapps.utils.constants.Styles.HAND;
@@ -8,15 +8,14 @@ import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.apps.store.home.HomeService;
-import com.bookverse.development.packapps.apps.store.home.HomeView;
 import com.bookverse.development.packapps.apps.store.signup.SignUpView;
-import com.bookverse.development.packapps.utils.other.Crypto;
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.Crypto;
+import com.bookverse.development.packapps.utils.GeneralUtils;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.apps.tables.DefaultTable;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

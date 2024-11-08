@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.utils.other;
+package com.bookverse.development.packapps.utils;
 
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import java.awt.Desktop;

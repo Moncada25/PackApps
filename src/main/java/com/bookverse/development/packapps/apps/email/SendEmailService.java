@@ -7,11 +7,11 @@ import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.GeneralUtils;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.AppConfig;
-import com.bookverse.development.packapps.utils.other.Config;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Config;
+import com.bookverse.development.packapps.utils.Format;
 
 public class SendEmailService {
 

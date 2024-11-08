@@ -11,4 +11,9 @@ public record BookverseUser(
     String email,
     String gender,
     String book
-) {}
+) {
+
+  public BookverseUser(String name, String password, String book) {
+    this(name, "", "", "", "", "", password, "", "", book);
+  }
+}

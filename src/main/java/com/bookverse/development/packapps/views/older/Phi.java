@@ -6,7 +6,7 @@ import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
 import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

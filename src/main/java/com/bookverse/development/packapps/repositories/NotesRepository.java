@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 import com.bookverse.development.packapps.database.DatabaseConnection;
 import com.bookverse.development.packapps.database.Queries;
-import com.bookverse.development.packapps.utils.other.Format;
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.Format;
+import com.bookverse.development.packapps.utils.GeneralUtils;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 
 public final class NotesRepository {

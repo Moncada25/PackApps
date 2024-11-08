@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.constants.Styles;
 
 public class Form {

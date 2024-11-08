@@ -8,7 +8,7 @@ import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COL
 
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

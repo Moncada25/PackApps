@@ -1,15 +1,14 @@
-package com.bookverse.development.packapps.views.older;
+package com.bookverse.development.packapps.views.older.store;
 
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.LOANS;
 
 import com.bookverse.development.packapps.apps.store.home.HomeService;
-import com.bookverse.development.packapps.apps.store.home.HomeView;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

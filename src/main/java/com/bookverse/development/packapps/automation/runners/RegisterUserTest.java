@@ -1,53 +1,64 @@
 package com.bookverse.development.packapps.automation.runners;
 
-import net.serenitybdd.core.Serenity;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actors.Cast;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.actors.OnStage;
+import net.thucydides.core.steps.StepEventBus;
 import com.bookverse.development.packapps.automation.models.BookverseUser;
 import com.bookverse.development.packapps.automation.questions.TheUser;
-import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
+import com.bookverse.development.packapps.automation.tasks.Login;
 import com.bookverse.development.packapps.automation.tasks.RegisterUser;
-import com.bookverse.development.packapps.automation.utils.Constants;
-import com.bookverse.development.packapps.automation.utils.WebDriverFactory;
-import com.bookverse.development.packapps.utils.ui.Resources;
+import com.bookverse.development.packapps.automation.utils.constants.GeneralConstants;
 import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.automation.utils.SerenitySession;
+import com.bookverse.development.packapps.automation.utils.WebApp;
+import com.bookverse.development.packapps.automation.utils.SerenityConf;
+import com.bookverse.development.packapps.automation.utils.constants.SessionVariables;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
-import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
-import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(SerenityRunner.class)
 public class RegisterUserTest {
 
-  BookverseUser bookverseUser = (BookverseUser) Resources.getObject();
+  private Actor actor;
+
+  @Before
+  public void setUp() {
+    SerenitySession.createActorForWeb(SerenityConf.getDevUrl(), false, GeneralConstants.ACTOR);
+    actor = OnStage.theActorInTheSpotlight();
+  }
 
   @Test
   public void registerNewUser() {
+    actor.wasAbleTo(RegisterUser.inBookverse());
 
-    setTheStage(Cast.whereEveryoneCan(
-        BrowseTheWeb.with(WebDriverFactory.goToWeb(Constants.BOOKVERSE_DEV)))
-    );
-    theActorCalled(Constants.ACTOR);
+    BookverseUser bookverseUser = SerenitySession.get(SessionVariables.USER_REGISTERED);
 
-    theActorInTheSpotlight().wasAbleTo(RegisterUser.inBookverse(bookverseUser));
-    theActorInTheSpotlight().attemptsTo(LoginBookverse.withCredentials(bookverseUser));
-    theActorInTheSpotlight().should(
+    actor.attemptsTo(Login.user(bookverseUser));
+    actor.should(
         seeThat(TheUser.logged(), is(bookverseUser.name() + " " + bookverseUser.lastName()))
     );
+  }
 
-    BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
+  @After
+  public void close() {
+    WebApp.stop();
+    String testStatus = StepEventBus.getEventBus()
+        .getBaseStepListener()
+        .getCurrentTestOutcome()
+        .getResult()
+        .toString();
 
-    String user = Serenity.sessionVariableCalled(Constants.USER_REGISTERED);
+    BookverseUser newUser = SerenitySession.get(SessionVariables.USER_REGISTERED);
+    String message = newUser == null
+        ? "User no registered"
+        : "User " + newUser.name() + " was registered!";
 
-    if (user == null) {
-      Alerts.message("Test failed!", "User no registered");
-    } else {
-      Alerts.message("Test passed!", "User " + user + " is registered!");
-    }
+    Alerts.message(testStatus, message);
   }
 }

@@ -1,24 +1,34 @@
 package com.bookverse.development.packapps.automation.questions;
 
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseSearch.TITLE_MODAL;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-
+import lombok.AllArgsConstructor;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.annotations.Subject;
+import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.waits.WaitUntil;
+import com.bookverse.development.packapps.automation.userinterfaces.SearchElements;
 
-public class TheTitle implements Question<String> {
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
-  public static TheTitle ofModalWindow() {
-    return new TheTitle();
+@AllArgsConstructor
+public class TheTitle implements Question<Boolean> {
+
+  private String title;
+
+  public static TheTitle ofModalIs(String title) {
+    return new TheTitle(title);
   }
 
-  @Subject("Verify title of modal book is #title")
+  @Subject("Validates that title of modal book is #title")
   @Override
-  public String answeredBy(Actor actor) {
-    actor.attemptsTo(WaitUntil.the(TITLE_MODAL, isVisible()));
-    return Text.of(TITLE_MODAL).answeredBy(actor);
+  public Boolean answeredBy(Actor actor) {
+    actor.attemptsTo(WaitUntil.the(SearchElements.TITLE_MODAL, isVisible()));
+
+    actor.attemptsTo(
+        Ensure.that(Text.of(SearchElements.TITLE_MODAL).answeredBy(actor)).isEqualTo(title)
+    );
+
+    return true;
   }
 }

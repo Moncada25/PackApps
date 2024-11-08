@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.views.older;
+package com.bookverse.development.packapps.views.older.store;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.tables.DefaultTable;
@@ -17,26 +17,26 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-public class PurchasesTable extends JDialog {
+public class CashRegisterTable extends JDialog {
 
   private DefaultTable model = new DefaultTable();
   public final JTable viewTable = new JTable(model);
-  private String[] columns = {"ID", "PRODUCT", "USER", "DOCUMENT", "PHONE", "DATE", "UNITS",
-      "TOTAL"};
+  private String[] columns = {"ID", "USER", "SOLD", "TOTAL SALES", "PURCHASED", "TOTAL PURCHASES",
+      "TOTAL LOANS"};
 
-  public PurchasesTable(JDialog parent, boolean modal) {
+  public CashRegisterTable(JDialog parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
 
-  public PurchasesTable(JFrame parent, boolean modal) {
+  public CashRegisterTable(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(Resources.getImage("comprar.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("registradora.png")).getImage());
 
     IntStream.range(0, columns.length).forEach(i -> model.addColumn(columns[i]));
 
@@ -44,9 +44,10 @@ public class PurchasesTable extends JDialog {
     JScrollPane scroll = new JScrollPane(viewTable);
     getContentPane().add(scroll, BorderLayout.CENTER);
 
-    int[] sizes = {30, 70, 40, 70, 70, 140, 30, 70};
-    IntStream.range(0, viewTable.getColumnCount())
-        .forEach(i -> viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]));
+    int[] sizes = {30, 30, 20, 80, 20, 80, 100};
+    for (int i = 0; i < viewTable.getColumnCount(); i++) {
+      viewTable.getColumnModel().getColumn(i).setPreferredWidth(sizes[i]);
+    }
 
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -82,7 +83,6 @@ public class PurchasesTable extends JDialog {
   }
 
   public void cleanTable() {
-
     while (model.getRowCount() > 0) {
       model.removeRow(0);
     }

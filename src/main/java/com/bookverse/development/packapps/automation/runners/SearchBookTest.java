@@ -1,51 +1,62 @@
 package com.bookverse.development.packapps.automation.runners;
 
-import static com.bookverse.development.packapps.automation.utils.Constants.BOOKVERSE_DEV;
-import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
-import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
-import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static org.hamcrest.Matchers.is;
-
-import com.bookverse.development.packapps.automation.models.BookverseUser;
-import com.bookverse.development.packapps.automation.questions.TheTitle;
-import com.bookverse.development.packapps.automation.tasks.LoginBookverse;
-import com.bookverse.development.packapps.automation.tasks.SearchBook;
-import com.bookverse.development.packapps.automation.utils.Constants;
-import com.bookverse.development.packapps.automation.utils.WebDriverFactory;
-import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.ui.Alerts;
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
-import net.serenitybdd.screenplay.actors.Cast;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.steps.StepEventBus;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.actors.OnStage;
+import com.bookverse.development.packapps.automation.models.BookverseUser;
+import com.bookverse.development.packapps.automation.questions.TheTitle;
+import com.bookverse.development.packapps.automation.tasks.SearchBook;
+import com.bookverse.development.packapps.automation.utils.constants.GeneralConstants;
+import com.bookverse.development.packapps.automation.utils.WebApp;
+import com.bookverse.development.packapps.utils.ui.Alerts;
+import com.bookverse.development.packapps.automation.utils.SerenitySession;
+import com.bookverse.development.packapps.automation.tasks.Login;
+import com.bookverse.development.packapps.automation.utils.GeneralUtils;
+import com.bookverse.development.packapps.automation.utils.SerenityConf;
+import com.bookverse.development.packapps.automation.utils.constants.SessionVariables;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
 @RunWith(SerenityRunner.class)
 public class SearchBookTest {
 
-  BookverseUser bookverseUser = (BookverseUser) Resources.getObject();
+  private Actor actor;
 
   @Before
-  public void config() {
-    setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(WebDriverFactory.goToWeb(BOOKVERSE_DEV))));
-    theActorCalled(Constants.ACTOR);
+  public void setUp() {
+    SerenitySession.createActorForWeb(SerenityConf.getDevUrl(), false, GeneralConstants.ACTOR);
+    actor = OnStage.theActorInTheSpotlight();
   }
 
   @Test
   public void searchBook() {
-    theActorInTheSpotlight().wasAbleTo(LoginBookverse.withCredentials(bookverseUser));
-    theActorInTheSpotlight().attemptsTo(SearchBook.inBookverse(bookverseUser.book()));
-    theActorInTheSpotlight().should(seeThat(TheTitle.ofModalWindow(), is(bookverseUser.book())));
-    Alerts.message(
-        "Test passed!",
-        "Book → " + bookverseUser.book() + "\n" + "Author → " + theActorInTheSpotlight().recall("AUTHOR"));
+
+    BookverseUser bookverseUser = GeneralUtils.getUser();
+
+    actor.wasAbleTo(Login.user(bookverseUser));
+    actor.attemptsTo(SearchBook.inBookverse(bookverseUser.book()));
+    actor.should(seeThat(TheTitle.ofModalIs(bookverseUser.book())));
   }
 
   @After
   public void close() {
-    BrowseTheWeb.as(theActorInTheSpotlight()).getDriver().close();
+    WebApp.stop();
+    String testStatus = StepEventBus.getEventBus()
+        .getBaseStepListener()
+        .getCurrentTestOutcome()
+        .getResult()
+        .toString();
+
+    BookverseUser bookverseUser = SerenitySession.get(SessionVariables.USER_LOGGED);
+    String author = SerenitySession.get(SessionVariables.AUTHOR);
+
+    Alerts.message(
+        testStatus, "Book → " + bookverseUser.book() + "\n" + "Author → " + author
+    );
   }
 }

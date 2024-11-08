@@ -20,7 +20,7 @@ import javax.swing.WindowConstants;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.KeyBindingsUtil;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.factory.Button;
 

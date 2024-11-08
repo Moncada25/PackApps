@@ -7,7 +7,7 @@ import javax.swing.JDialog;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import lombok.SneakyThrows;
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.GeneralUtils;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
 

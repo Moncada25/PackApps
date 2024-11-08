@@ -1,27 +1,5 @@
 package com.bookverse.development.packapps.automation.tasks;
 
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.ALERT_ACCEPT;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseHome.ALERT_TITLE;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseLogin.REGISTER_BUTTON;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.ADDRESS_FIELD;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.EMAIL_FIELD;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.ENTER_LOGIN;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.FIRST_PASSWORD_FIELD;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.GENDER_CHECK;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.LAST_NAME_FIELD;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.NAME_FIELD;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.OCCUPATION_LIST;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.PHONE_FIELD;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.REGISTER_SUBMIT;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.SECOND_PASSWORD_FIELD;
-import static com.bookverse.development.packapps.automation.userinterfaces.BookverseRegister.USERNAME_FIELD;
-import static com.bookverse.development.packapps.automation.utils.Constants.ALERT_ERROR;
-import static com.bookverse.development.packapps.automation.utils.Constants.USER_REGISTERED;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
-
-import com.bookverse.development.packapps.automation.models.BookverseUser;
-import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
@@ -33,60 +11,68 @@ import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.serenitybdd.annotations.Step;
+import com.bookverse.development.packapps.automation.models.BookverseUser;
+import com.bookverse.development.packapps.automation.userinterfaces.HomeElements;
+import com.bookverse.development.packapps.automation.userinterfaces.LoginElements;
+import com.bookverse.development.packapps.automation.userinterfaces.SignUpElements;
+import com.bookverse.development.packapps.automation.utils.constants.GeneralConstants;
+import com.bookverse.development.packapps.automation.utils.SerenitySession;
+import com.bookverse.development.packapps.automation.utils.GeneralUtils;
+import com.bookverse.development.packapps.automation.utils.constants.SessionVariables;
+
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 public class RegisterUser implements Task {
 
-  private final BookverseUser bookverseUser;
-
-  public RegisterUser(BookverseUser bookverseUser) {
-    this.bookverseUser = bookverseUser;
+  public static RegisterUser inBookverse() {
+    return Tasks.instrumented(RegisterUser.class);
   }
 
-  public static RegisterUser inBookverse(BookverseUser bookverseUser) {
-    return Tasks.instrumented(RegisterUser.class, bookverseUser);
-  }
-
-  @Step("Register new user in Bookverse")
+  @Step("{0} registers new account in Bookverse")
   @Override
   public <T extends Actor> void performAs(T actor) {
 
+    BookverseUser bookverseUser = GeneralUtils.getRegisterUser();
+
     actor.attemptsTo(
-        WaitUntil.the(REGISTER_BUTTON, isVisible()).forNoMoreThan(5).seconds(),
-        Click.on(REGISTER_BUTTON)
+        WaitUntil.the(LoginElements.BTN_SIGN_UP, isVisible()).forNoMoreThan(5).seconds(),
+        Click.on(LoginElements.BTN_SIGN_UP)
     );
 
     actor.attemptsTo(
-        WaitUntil.the(NAME_FIELD, isVisible()).forNoMoreThan(5).seconds(),
-        Enter.theValue(bookverseUser.name()).into(NAME_FIELD),
-        Enter.theValue(bookverseUser.lastName()).into(LAST_NAME_FIELD),
-        Enter.theValue("1234567").into(PHONE_FIELD),
-        SelectFromOptions.byValue(bookverseUser.occupation()).from(OCCUPATION_LIST),
-        Enter.theValue(bookverseUser.address()).into(ADDRESS_FIELD)
+        WaitUntil.the(SignUpElements.TXT_NAME, isVisible()).forNoMoreThan(5).seconds(),
+        Enter.theValue(bookverseUser.name()).into(SignUpElements.TXT_NAME),
+        Enter.theValue(bookverseUser.lastName()).into(SignUpElements.TXT_LAST_NAME),
+        Enter.theValue("1234567").into(SignUpElements.TXT_PHONE),
+        SelectFromOptions.byValue(bookverseUser.occupation()).from(SignUpElements.LIST_OCCUPATION),
+        Enter.theValue(bookverseUser.address()).into(SignUpElements.TXT_ADDRESS)
     );
 
     actor.attemptsTo(
-        Scroll.to(USERNAME_FIELD).andAlignToTop(),
-        Enter.theValue(bookverseUser.name()).into(USERNAME_FIELD),
-        Enter.theValue(bookverseUser.password()).into(FIRST_PASSWORD_FIELD),
-        Enter.theValue(bookverseUser.password()).into(SECOND_PASSWORD_FIELD),
-        Enter.theValue(bookverseUser.email()).into(EMAIL_FIELD),
-        Click.on(GENDER_CHECK.of(bookverseUser.gender())),
-        Click.on(REGISTER_SUBMIT)
+        Scroll.to(SignUpElements.TXT_USERNAME).andAlignToTop(),
+        Enter.theValue(bookverseUser.name()).into(SignUpElements.TXT_USERNAME),
+        Enter.theValue(bookverseUser.password()).into(SignUpElements.TXT_FIRST_PASSWORD),
+        Enter.theValue(bookverseUser.password()).into(SignUpElements.TXT_SECOND_PASSWORD),
+        Enter.theValue(bookverseUser.email()).into(SignUpElements.TXT_EMAIL),
+        Click.on(SignUpElements.CHK_GENDER.of(bookverseUser.gender())),
+        Click.on(SignUpElements.BTN_SIGN_UP)
     );
 
     actor.attemptsTo(
-        WaitUntil.the(ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
-        Click.on(ALERT_ACCEPT)
+        WaitUntil.the(HomeElements.ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
+        Click.on(HomeElements.ALERT_ACCEPT)
     );
 
     actor.attemptsTo(
-        WaitUntil.the(ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
-        Ensure.that(Text.of(ALERT_TITLE).answeredBy(actor)).isNotEqualTo(ALERT_ERROR),
-        Click.on(ALERT_ACCEPT),
-        WaitUntil.the(ENTER_LOGIN, isClickable()).forNoMoreThan(5).seconds(),
-        Click.on(ENTER_LOGIN)
+        WaitUntil.the(HomeElements.ALERT_ACCEPT, isVisible()).forNoMoreThan(2).seconds(),
+        Ensure.that(Text.of(HomeElements.ALERT_TITLE).answeredBy(actor)
+        ).isNotEqualTo(GeneralConstants.ALERT_ERROR),
+        Click.on(HomeElements.ALERT_ACCEPT),
+        WaitUntil.the(SignUpElements.BTN_LOGIN_BACK, isClickable()).forNoMoreThan(5).seconds(),
+        Click.on(SignUpElements.BTN_LOGIN_BACK)
     );
 
-    Serenity.setSessionVariable(USER_REGISTERED).to(bookverseUser.name() + " " + bookverseUser.lastName());
+    SerenitySession.set(SessionVariables.USER_REGISTERED, bookverseUser);
   }
 }

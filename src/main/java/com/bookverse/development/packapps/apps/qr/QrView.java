@@ -16,7 +16,7 @@ import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.KeyBindingsUtil;
 import com.bookverse.development.packapps.utils.ui.factory.Label;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.GeneralUtils;
 
 public class QrView extends JDialog {
 

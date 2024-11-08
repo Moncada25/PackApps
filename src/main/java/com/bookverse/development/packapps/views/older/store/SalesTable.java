@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.views.older;
+package com.bookverse.development.packapps.views.older.store;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.apps.tables.DefaultTable;

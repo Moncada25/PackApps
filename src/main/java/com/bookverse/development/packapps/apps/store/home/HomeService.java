@@ -10,10 +10,10 @@ import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
-import com.bookverse.development.packapps.views.older.CashRegisterTable;
-import com.bookverse.development.packapps.views.older.PurchasesTable;
-import com.bookverse.development.packapps.views.older.SalesTable;
-import com.bookverse.development.packapps.views.older.UsersTable;
+import com.bookverse.development.packapps.views.older.store.CashRegisterTable;
+import com.bookverse.development.packapps.views.older.store.PurchasesTable;
+import com.bookverse.development.packapps.views.older.store.SalesTable;
+import com.bookverse.development.packapps.views.older.store.UsersTable;
 
 @Data
 public class HomeService {

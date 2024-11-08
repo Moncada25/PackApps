@@ -8,11 +8,10 @@ import static com.bookverse.development.packapps.utils.ui.Resources.getBorder;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.INVENTORY;
 
 import com.bookverse.development.packapps.apps.store.home.HomeService;
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.GeneralUtils;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.apps.store.home.HomeView;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

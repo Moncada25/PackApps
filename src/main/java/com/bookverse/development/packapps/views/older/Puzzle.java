@@ -4,12 +4,12 @@ import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COL
 import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.PUZZLE;
 
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.GeneralUtils;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

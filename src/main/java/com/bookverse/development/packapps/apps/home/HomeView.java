@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.home;
 
+import com.bookverse.development.packapps.automation.runners.RegisterUserTest;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.logging.Level;
@@ -26,15 +27,14 @@ import com.bookverse.development.packapps.apps.qr.QrView;
 import com.bookverse.development.packapps.apps.structures.StructuresView;
 import com.bookverse.development.packapps.apps.texts.TextsView;
 import com.bookverse.development.packapps.apps.whatsapp.WhatsappView;
-import com.bookverse.development.packapps.automation.utils.StartTests;
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
-import com.bookverse.development.packapps.utils.other.Config;
+import com.bookverse.development.packapps.utils.GeneralUtils;
+import com.bookverse.development.packapps.utils.Config;
 import com.bookverse.development.packapps.utils.ui.Resources;
-import com.bookverse.development.packapps.utils.other.ExportFile;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.ExportFile;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.database.Queries;
 import com.bookverse.development.packapps.utils.ui.Effects;
-import com.bookverse.development.packapps.views.older.ConsultBook;
+import com.bookverse.development.packapps.apps.tasks.SearchBookView;
 import com.bookverse.development.packapps.views.older.GuessNumber;
 import com.bookverse.development.packapps.apps.hangman.HangmanView;
 import com.bookverse.development.packapps.apps.store.login.LoginView;
@@ -51,10 +51,11 @@ import com.bookverse.development.packapps.apps.tables.HangmanTable;
 import com.bookverse.development.packapps.apps.tables.InventoryTable;
 import com.bookverse.development.packapps.apps.tables.LoansTable;
 import com.bookverse.development.packapps.apps.tables.NotesTable;
-import com.bookverse.development.packapps.views.older.CashRegisterTable;
-import com.bookverse.development.packapps.views.older.PurchasesTable;
+import com.bookverse.development.packapps.views.older.store.CashRegisterTable;
+import com.bookverse.development.packapps.views.older.store.PurchasesTable;
 import com.bookverse.development.packapps.apps.tables.PuzzleTable;
-import com.bookverse.development.packapps.views.older.SalesTable;
+import com.bookverse.development.packapps.views.older.store.SalesTable;
+import org.junit.runner.JUnitCore;
 
 public class HomeView extends JFrame {
 
@@ -198,8 +199,8 @@ public class HomeView extends JFrame {
         }
     );
 
-    Resources.addMenu(more, moreSystems, moreBookverse);
-    Resources.addMenu(about, card, more);
+    addMenu(more, moreSystems, moreBookverse);
+    addMenu(about, card, more);
 
     JMenuItem yesExit = new MenuItem().setText("Are you sure?").setImage("salir").build();
     yesExit.addActionListener(e -> Effects.fadeOut(this));
@@ -216,8 +217,8 @@ public class HomeView extends JFrame {
       setVisible(true);
     });
 
-    Resources.addMenu(send, email, comment);
-    Resources.addMenu(exit, yesExit, send);
+    addMenu(send, email, comment);
+    addMenu(exit, yesExit, send);
 
     JMenuItem hangman = new MenuItem().setText("Hangman").setImage("ahorcado").build();
     hangman.addActionListener(e -> {
@@ -251,7 +252,7 @@ public class HomeView extends JFrame {
       setVisible(true);
     });
 
-    Resources.addMenu(guessNumberMenu, guessNumber, guessNumberHard);
+    addMenu(guessNumberMenu, guessNumber, guessNumberHard);
 
     JMenuItem puzzle4x4 = new MenuItem().setText("Easy").setImage("easy").build();
     puzzle4x4.addActionListener(e -> {
@@ -271,7 +272,7 @@ public class HomeView extends JFrame {
       setVisible(true);
     });
 
-    Resources.addMenu(puzzle, puzzle4x4, puzzle5x5, puzzle6x6);
+    addMenu(puzzle, puzzle4x4, puzzle5x5, puzzle6x6);
 
     JMenuItem ticTacToePvsP = new MenuItem().setText("Player vs Player").setImage("jvsj").build();
     ticTacToePvsP.addActionListener(e -> {
@@ -285,8 +286,8 @@ public class HomeView extends JFrame {
       setVisible(true);
     });
 
-    Resources.addMenu(ticTacToe, ticTacToePvsP, ticTacToePvsCPU);
-    Resources.addMenu(games, hangman, dices, roulette, guessNumberMenu, puzzle, ticTacToe);
+    addMenu(ticTacToe, ticTacToePvsP, ticTacToePvsCPU);
+    addMenu(games, hangman, dices, roulette, guessNumberMenu, puzzle, ticTacToe);
 
     JMenuItem database = new MenuItem().setText("Database").setImage("tabla").build();
     database.addActionListener(e -> {
@@ -423,7 +424,7 @@ public class HomeView extends JFrame {
       );
     });
 
-    Resources.addMenu(
+    addMenu(
         exportTXT,
         guessNumberTXT,
         hangmanTXT,
@@ -537,7 +538,7 @@ public class HomeView extends JFrame {
       );
     });
 
-    Resources.addMenu(
+    addMenu(
         exportEXCEL,
         guessNumberEXCEL,
         hangmanEXCEL,
@@ -661,7 +662,7 @@ public class HomeView extends JFrame {
       );
     });
 
-    Resources.addMenu(
+    addMenu(
         exportPDF,
         guessNumberPDF,
         hangmanPDF,
@@ -675,23 +676,23 @@ public class HomeView extends JFrame {
         salesPDF
     );
 
-    Resources.addMenu(export, exportTXT, exportEXCEL, exportPDF);
+    addMenu(export, exportTXT, exportEXCEL, exportPDF);
 
     JMenuItem searchBook = new MenuItem().setText("Search Book").setImage("searchBook").build();
     searchBook.addActionListener(e -> {
-      new ConsultBook(this, true).start(this);
+      new SearchBookView(this, true).start(this);
       setVisible(true);
     });
 
     JMenuItem registerUser = new MenuItem().setText("Register User").setImage("añadir_usuario").build();
-    registerUser.addActionListener(e -> StartTests.startRegisterUser());
+    registerUser.addActionListener(e -> JUnitCore.runClasses(RegisterUserTest.class));
 
-    Resources.addMenu(tasks, searchBook, registerUser);
+    addMenu(tasks, searchBook, registerUser);
 
     createWallpapers(changeBackground);
     createThemes();
 
-    Resources.addMenu(
+    addMenu(
         themes,
         model.getDefaultMode(),
         model.getDarkMode(),
@@ -702,7 +703,7 @@ public class HomeView extends JFrame {
         model.getClassicMode()
     );
 
-    Resources.addMenu(changeUI, themes, changeBackground);
+    addMenu(changeUI, themes, changeBackground);
 
     JMenuItem ocr = new MenuItem().setText("OCR").setImage("ocr").build();
     ocr.addActionListener(e -> {
@@ -716,7 +717,7 @@ public class HomeView extends JFrame {
       setVisible(true);
     });
 
-    Resources.addMenu(
+    addMenu(
         tools,
         changeUI,
         export,
@@ -822,5 +823,12 @@ public class HomeView extends JFrame {
       changeBackground.add(model.getWallpapers()[i]);
       changeBackground.addSeparator();
     });
+  }
+
+  private void addMenu(JMenu menu, JMenuItem... items) {
+    for (JMenuItem item : items) {
+      menu.add(item);
+      menu.addSeparator();
+    }
   }
 }

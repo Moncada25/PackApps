@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.net.URL;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -18,7 +17,6 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import com.bookverse.development.packapps.utils.constants.Styles;
@@ -26,13 +24,6 @@ import com.bookverse.development.packapps.utils.constants.Styles;
 public final class Resources {
 
   private Resources(){}
-
-  @Getter
-  private static Object object;
-
-  public static void setObject(Object object) {
-    Resources.object = object;
-  }
 
   @NotNull
   public static Border getBorder(String title) {
@@ -89,12 +80,5 @@ public final class Resources {
       Alerts.error(ex, "Select file");
     }
     return path;
-  }
-
-  public static void addMenu(JMenu menu, JMenuItem... items) {
-    for (JMenuItem item : items) {
-      menu.add(item);
-      menu.addSeparator();
-    }
   }
 }

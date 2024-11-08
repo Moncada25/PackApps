@@ -14,7 +14,7 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.SALES;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

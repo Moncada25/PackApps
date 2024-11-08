@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.apps.stacks;
 
 import lombok.Data;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.constants.Styles;
 

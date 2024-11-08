@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
 import com.bookverse.development.packapps.repositories.NotesRepository;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Resources;
 

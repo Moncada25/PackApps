@@ -1,7 +1,7 @@
 package com.bookverse.development.packapps.models;
 
 import lombok.Getter;
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.GeneralUtils;
 
 @Getter
 public class Dice {

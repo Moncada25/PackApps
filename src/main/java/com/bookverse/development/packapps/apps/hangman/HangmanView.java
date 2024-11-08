@@ -23,7 +23,7 @@ import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.factory.Button;
 import com.bookverse.development.packapps.utils.ui.factory.Label;
-import com.bookverse.development.packapps.utils.other.GeneralUtils;
+import com.bookverse.development.packapps.utils.GeneralUtils;
 
 public class HangmanView extends JDialog implements Runnable {
 

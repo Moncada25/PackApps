@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.utils.other;
+package com.bookverse.development.packapps.utils;
 
 import java.io.BufferedWriter;
 import java.io.File;

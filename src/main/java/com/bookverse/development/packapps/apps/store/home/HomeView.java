@@ -11,9 +11,9 @@ import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.factory.Menu;
 import com.bookverse.development.packapps.utils.ui.factory.MenuItem;
-import com.bookverse.development.packapps.views.older.Loans;
-import com.bookverse.development.packapps.views.older.Purchases;
-import com.bookverse.development.packapps.views.older.Sales;
+import com.bookverse.development.packapps.views.older.store.Loans;
+import com.bookverse.development.packapps.views.older.store.Purchases;
+import com.bookverse.development.packapps.views.older.store.Sales;
 
 public class HomeView extends JDialog {
 

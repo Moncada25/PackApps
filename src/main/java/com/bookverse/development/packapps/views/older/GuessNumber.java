@@ -5,15 +5,15 @@ import static com.bookverse.development.packapps.utils.constants.Styles.MAIN_COL
 import static com.bookverse.development.packapps.utils.constants.Styles.MEDIUM;
 import static com.bookverse.development.packapps.utils.constants.Styles.TEXT_COLOR;
 import static com.bookverse.development.packapps.utils.ui.Effects.fadeIn;
-import static com.bookverse.development.packapps.utils.other.Format.getDate;
-import static com.bookverse.development.packapps.utils.other.GeneralUtils.getIntRandom;
-import static com.bookverse.development.packapps.utils.other.GeneralUtils.verifyConnection;
+import static com.bookverse.development.packapps.utils.Format.getDate;
+import static com.bookverse.development.packapps.utils.GeneralUtils.getIntRandom;
+import static com.bookverse.development.packapps.utils.GeneralUtils.verifyConnection;
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.GUESS_NUMBER;
 
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

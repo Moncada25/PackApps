@@ -23,7 +23,7 @@ import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Alerts;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.factory.Button;
 

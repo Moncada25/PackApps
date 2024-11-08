@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import com.bookverse.development.packapps.utils.other.Crypto;
+import com.bookverse.development.packapps.utils.Crypto;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.KeyBindingsUtil;
 import com.bookverse.development.packapps.utils.ui.Resources;

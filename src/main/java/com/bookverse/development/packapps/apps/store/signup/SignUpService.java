@@ -3,9 +3,9 @@ package com.bookverse.development.packapps.apps.store.signup;
 import com.bookverse.development.packapps.repositories.OlderRepository;
 import com.bookverse.development.packapps.utils.constants.AppConfig;
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
-import com.bookverse.development.packapps.utils.other.Config;
-import com.bookverse.development.packapps.utils.other.Crypto;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Config;
+import com.bookverse.development.packapps.utils.Crypto;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
 

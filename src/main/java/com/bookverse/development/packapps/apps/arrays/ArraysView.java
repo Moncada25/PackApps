@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import com.bookverse.development.packapps.utils.constants.Styles;
-import com.bookverse.development.packapps.utils.other.Format;
+import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.factory.Button;
 import com.bookverse.development.packapps.utils.ui.factory.Label;
