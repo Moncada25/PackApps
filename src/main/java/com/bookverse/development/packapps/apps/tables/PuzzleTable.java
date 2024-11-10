@@ -55,6 +55,7 @@ public class PuzzleTable extends JDialog implements MouseListener {
     create.addActionListener(e -> {
       setVisible(false);
       btnCreateAP();
+      setVisible(true);
     });
     JMenuItem read = new MenuItem().setText("Read").setImage("read").build();
     read.addActionListener(e -> btnConsultPuzzleTable());

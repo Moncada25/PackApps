@@ -163,10 +163,12 @@ public class GuessNumberTable extends JDialog implements MouseListener {
         case "Easy":
           setVisible(false);
           new GuessNumber(this, true, false).start(this);
+          setVisible(true);
           break;
         case "Hard":
           setVisible(false);
           new GuessNumber(this, true, true).start(this);
+          setVisible(true);
           break;
         default:
           throw new IllegalStateException("Unexpected value: " + option);

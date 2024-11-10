@@ -16,7 +16,7 @@ public final class GeneralUtils {
   }
 
   public static int getIntRandom(int min, int max) {
-    return new SecureRandom().nextInt(max - min + 1) + 1;
+    return new SecureRandom().nextInt(max - min + 1) + min;
   }
 
   public static boolean loginDBA() {

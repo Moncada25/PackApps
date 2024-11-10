@@ -54,6 +54,7 @@ public class HangmanTable extends JDialog implements MouseListener {
     create.addActionListener(e -> {
       setVisible(false);
       new HangmanView(this, true).start(this);
+      setVisible(true);
     });
     JMenuItem read = new MenuItem().setText("Read").setImage("read").build();
     read.addActionListener(e -> btnConsultHangmanTable());
