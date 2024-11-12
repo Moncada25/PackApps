@@ -20,7 +20,7 @@ import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.database.Queries;
 import com.bookverse.development.packapps.utils.ui.factory.MenuItem;
-import com.bookverse.development.packapps.views.older.GuessNumber;
+import com.bookverse.development.packapps.apps.guessnumber.GuessNumberView;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -162,12 +162,12 @@ public class GuessNumberTable extends JDialog implements MouseListener {
       switch (option.toString()) {
         case "Easy":
           setVisible(false);
-          new GuessNumber(this, true, false).start(this);
+          new GuessNumberView(this, true, false).start(this);
           setVisible(true);
           break;
         case "Hard":
           setVisible(false);
-          new GuessNumber(this, true, true).start(this);
+          new GuessNumberView(this, true, true).start(this);
           setVisible(true);
           break;
         default:

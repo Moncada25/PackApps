@@ -24,10 +24,6 @@ public class HomeView extends JDialog {
     createComponents();
   }
 
-  public HomeView() {
-    createComponents();
-  }
-
   private void createComponents() {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

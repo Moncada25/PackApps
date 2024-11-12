@@ -35,7 +35,7 @@ import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.database.Queries;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.apps.tasks.SearchBookView;
-import com.bookverse.development.packapps.views.older.GuessNumber;
+import com.bookverse.development.packapps.apps.guessnumber.GuessNumberView;
 import com.bookverse.development.packapps.apps.hangman.HangmanView;
 import com.bookverse.development.packapps.apps.store.login.LoginView;
 import com.bookverse.development.packapps.views.older.Numbers;
@@ -242,13 +242,13 @@ public class HomeView extends JFrame {
 
     JMenuItem guessNumber = new MenuItem().setText("Easy").setImage("easy").build();
     guessNumber.addActionListener(e -> {
-      new GuessNumber(this, true, false).start(this);
+      new GuessNumberView(this, true, false).start(this);
       setVisible(true);
     });
 
     JMenuItem guessNumberHard = new MenuItem().setText("Hard").setImage("hard").build();
     guessNumberHard.addActionListener(e -> {
-      new GuessNumber(this, true, true).start(this);
+      new GuessNumberView(this, true, true).start(this);
       setVisible(true);
     });
 

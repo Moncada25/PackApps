@@ -64,7 +64,7 @@ public final class Format {
   }
 
   public static void middlePoint(char num, KeyEvent evt, String data) {
-    if (num == '.' && (data.contains(".") || data.isEmpty() || data.length() > 1)) {
+    if (num == '.' && (data.contains(".") || data.length() != 1)) {
       evt.consume();
     }
   }
