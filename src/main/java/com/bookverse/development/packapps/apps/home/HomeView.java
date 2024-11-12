@@ -38,7 +38,7 @@ import com.bookverse.development.packapps.apps.tasks.SearchBookView;
 import com.bookverse.development.packapps.apps.guessnumber.GuessNumberView;
 import com.bookverse.development.packapps.apps.hangman.HangmanView;
 import com.bookverse.development.packapps.apps.store.login.LoginView;
-import com.bookverse.development.packapps.views.older.Numbers;
+import com.bookverse.development.packapps.apps.numbers.Numbers;
 import com.bookverse.development.packapps.views.older.Puzzle;
 import com.bookverse.development.packapps.views.older.TicTacToe;
 import com.bookverse.development.packapps.utils.ui.factory.Menu;
