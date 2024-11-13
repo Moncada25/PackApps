@@ -20,7 +20,7 @@ public class TheTitle implements Question<Boolean> {
     return new TheTitle(title);
   }
 
-  @Subject("Validates that title of modal book is #title")
+  @Subject("validates that title of modal book is #title")
   @Override
   public Boolean answeredBy(Actor actor) {
     actor.attemptsTo(WaitUntil.the(SearchElements.TITLE_MODAL, isVisible()));

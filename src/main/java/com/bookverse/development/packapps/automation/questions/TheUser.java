@@ -15,7 +15,7 @@ public class TheUser implements Question<String> {
     return new TheUser();
   }
 
-  @Subject("Verify that user is registered")
+  @Subject("verify that user is registered")
   @Override
   public String answeredBy(Actor actor) {
 

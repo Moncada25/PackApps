@@ -40,7 +40,7 @@ import com.bookverse.development.packapps.apps.hangman.HangmanView;
 import com.bookverse.development.packapps.apps.store.login.LoginView;
 import com.bookverse.development.packapps.apps.numbers.Numbers;
 import com.bookverse.development.packapps.views.older.Puzzle;
-import com.bookverse.development.packapps.views.older.TicTacToe;
+import com.bookverse.development.packapps.apps.tictactoe.TicTacToeView;
 import com.bookverse.development.packapps.utils.ui.factory.Menu;
 import com.bookverse.development.packapps.utils.ui.factory.MenuItem;
 import com.bookverse.development.packapps.utils.constants.Themes;
@@ -276,13 +276,13 @@ public class HomeView extends JFrame {
 
     JMenuItem ticTacToePvsP = new MenuItem().setText("Player vs Player").setImage("jvsj").build();
     ticTacToePvsP.addActionListener(e -> {
-      new TicTacToe(this, true, false).start(this);
+      new TicTacToeView(this, true, false).start(this);
       setVisible(true);
     });
 
     JMenuItem ticTacToePvsCPU = new MenuItem().setText("Player vs CPU (beta)").setImage("jvscpu").build();
     ticTacToePvsCPU.addActionListener(e -> {
-      new TicTacToe(this, true, true).start(this);
+      new TicTacToeView(this, true, true).start(this);
       setVisible(true);
     });
 
