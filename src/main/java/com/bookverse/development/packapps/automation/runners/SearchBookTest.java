@@ -1,13 +1,17 @@
 package com.bookverse.development.packapps.automation.runners;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.steps.StepEventBus;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
+import net.serenitybdd.annotations.Feature;
+import net.serenitybdd.annotations.Title;
+import net.serenitybdd.annotations.WithTag;
+import net.serenitybdd.annotations.WithTags;
 import com.bookverse.development.packapps.automation.models.BookverseUser;
 import com.bookverse.development.packapps.automation.questions.TheTitle;
 import com.bookverse.development.packapps.automation.tasks.SearchBook;
@@ -22,20 +26,24 @@ import com.bookverse.development.packapps.automation.utils.constants.SessionVari
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
+@Feature
 @RunWith(SerenityRunner.class)
 public class SearchBookTest {
 
-  private Actor actor;
-
-  @Before
-  public void setUp() {
+  @BeforeClass
+  public static void setUp() {
     SerenitySession.createActorForWeb(SerenityConf.getDevUrl(), false, GeneralConstants.ACTOR);
-    actor = OnStage.theActorInTheSpotlight();
   }
 
   @Test
+  @Title("Search a book in Bookverse")
+  @WithTags({
+      @WithTag("Bookverse"),
+      @WithTag("SearchBook")
+  })
   public void searchBook() {
 
+    Actor actor = OnStage.theActorInTheSpotlight();
     BookverseUser bookverseUser = GeneralUtils.getUser();
 
     actor.wasAbleTo(Login.user(bookverseUser));
@@ -43,8 +51,8 @@ public class SearchBookTest {
     actor.should(seeThat(TheTitle.ofModalIs(bookverseUser.book())));
   }
 
-  @After
-  public void close() {
+  @AfterClass
+  public static void close() {
     WebApp.stop();
     String testStatus = StepEventBus.getEventBus()
         .getBaseStepListener()
