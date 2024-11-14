@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 object SerenityConf {
     private val logger = LoggerFactory.getLogger(SerenityConf::class.java)
     private const val CONF_ENVIRONMENT = "environment."
+    private const val CONF_DATABASE = "database."
     const val CHROME = "Chrome"
     const val FIREFOX = "Firefox"
     const val EDGE = "Edge"
@@ -29,6 +30,11 @@ object SerenityConf {
     @JvmStatic
     fun getEnvironmentConfig(config: String): String? {
         return getConfig("$CONF_ENVIRONMENT$config")
+    }
+
+    @JvmStatic
+    fun getDatabaseConfig(config: String): String? {
+        return getConfig("$CONF_DATABASE$config")
     }
 
     @JvmStatic

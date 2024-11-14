@@ -215,8 +215,10 @@ public final class OlderRepository {
 
       for (String row : rows) {
         preparedStatement = connection.prepareStatement(Queries.deleteDataByID(row, table));
-        preparedStatement.executeUpdate();
+        preparedStatement.addBatch();
       }
+
+      preparedStatement.executeBatch();
 
     } catch (SQLException e) {
       Alerts.error(e, "Database");

@@ -47,7 +47,7 @@ public class NotesTable extends JDialog implements MouseListener {
     columns.put("% TOTAL", 30);
     columns.put("TOTAL", 30);
     columns.put("STATE", 40);
-    columns.put("DATE", 120);
+    columns.put("DATE", 140);
 
     defaultTable.createTable(this, "notas.png", columns, this, viewTable);
 

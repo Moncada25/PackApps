@@ -4,14 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import lombok.SneakyThrows;
-
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
+import com.bookverse.development.packapps.automation.utils.SerenityConf;
 
 public final class DatabaseConnection {
 
@@ -29,17 +27,17 @@ public final class DatabaseConnection {
     }
 
     try (BasicDataSource basicDataSource = new BasicDataSource()) {
-      basicDataSource.setDriverClassName(DatabaseConstants.DRIVER_DB);
-      basicDataSource.setUsername(DatabaseConstants.USER_DB);
-      basicDataSource.setPassword(DatabaseConstants.PASSWORD_DB);
-      basicDataSource.setUrl(DatabaseConstants.URL_DRIVER_DB);
+      basicDataSource.setDriverClassName(DatabaseConstants.JDBC_DRIVER);
+      basicDataSource.setUsername(SerenityConf.getDatabaseConfig("username"));
+      basicDataSource.setPassword(SerenityConf.getDatabaseConfig("password"));
+      basicDataSource.setUrl(DatabaseConstants.JDBC_URL);
       basicDataSource.setMaxTotal(250);
       basicDataSource.setMaxIdle(100);
       basicDataSource.setMinIdle(50);
 
       connection = basicDataSource.getConnection();
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      throw new SQLException("Failed to connect to database ", e);
     }
 
     return connection;

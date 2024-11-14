@@ -77,12 +77,6 @@ public final class Queries {
   }
 
   @NotNull
-  public static String insertNote() {
-    return "INSERT INTO " + Format.tableName(NOTES)
-        + " (Nickname,Scale,Percent,Note,State,Date) VALUES (?,?,?,?,?,?)";
-  }
-
-  @NotNull
   public static String insertFeedback() {
     return "INSERT INTO " + Format.tableName(FEEDBACK) + " (Username,Message,Date) VALUES (?,?,?)";
   }
