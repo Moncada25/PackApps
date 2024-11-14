@@ -14,7 +14,7 @@ import static com.bookverse.development.packapps.utils.constants.DatabaseConstan
 import static com.bookverse.development.packapps.utils.constants.DatabaseConstants.USERS;
 
 import com.bookverse.development.packapps.database.DatabaseConnection;
-import com.bookverse.development.packapps.models.Store;
+import com.bookverse.development.packapps.apps.store.StoreData;
 import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.database.Queries;
 import java.sql.Connection;
@@ -34,7 +34,7 @@ public final class OlderRepository {
   private OlderRepository() {
   }
 
-  public static final Store store = new Store();
+  public static final StoreData store = new StoreData();
   private static Connection connection = null;
   private static ResultSet resultSet;
   private static PreparedStatement preparedStatement;

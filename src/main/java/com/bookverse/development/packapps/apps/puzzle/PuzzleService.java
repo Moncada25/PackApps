@@ -60,7 +60,7 @@ public class PuzzleService {
       }
     }
 
-    unlock(model);
+    unlock(model.getBoard());
 
     model.getLblTurn().setText("");
     moviments = 0;
@@ -78,7 +78,7 @@ public class PuzzleService {
         if (e.getSource() == model.getBoard()[f][c]) {
           moviments++;
           makeMovement(f, c, model);
-          unlock(model);
+          unlock(model.getBoard());
           getWinner(model);
         }
       }
@@ -156,14 +156,12 @@ public class PuzzleService {
     }
   }
 
-  private void unlock(PuzzleViewModel model) {
+  private void unlock(JButton[][] board) {
 
-    JButton[][] board = model.getBoard();
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board.length; j++) {
 
-    for (int i = 0; i < model.getBoard().length; i++) {
-      for (int j = 0; j < model.getBoard().length; j++) {
-
-        if (model.getBoard()[i][j].getText().isEmpty()) {
+        if (board[i][j].getText().isEmpty()) {
 
           if (i == 0 && j == 0) {
             board[0][1].setEnabled(true);

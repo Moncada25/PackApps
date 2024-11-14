@@ -7,8 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import lombok.SneakyThrows;
-import com.bookverse.development.packapps.utils.GeneralUtils;
+import com.bookverse.development.packapps.utils.Timer;
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
@@ -17,12 +16,12 @@ import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.factory.Button;
 import com.bookverse.development.packapps.utils.ui.factory.Label;
 
-public class PuzzleView extends JDialog implements Runnable {
+public class PuzzleView extends JDialog {
 
   private transient PuzzleService service = new PuzzleService();
   private transient PuzzleViewModel model = null;
-  private JLabel timer;
-  private boolean chronometerActive;
+  private transient Timer timer;
+  private JLabel lblTimer;
 
   public PuzzleView(JFrame parent, boolean modal, Levels level) {
     super(parent, modal);
@@ -90,9 +89,9 @@ public class PuzzleView extends JDialog implements Runnable {
     lblTurn.setBounds(250, 90, 200, 150);
     add(lblTurn);
 
-    timer = Resources.getLabel("", Styles.MAIN_COLOR, this,
+    lblTimer = Resources.getLabel("", Styles.MAIN_COLOR, this,
         new Font("Times New Roman", Font.PLAIN, 45));
-    timer.setBounds(250, 5, 200, 80);
+    lblTimer.setBounds(250, 5, 200, 80);
 
     JButton[][] board = new JButton[service.getSize()][service.getSize()];
 
@@ -118,53 +117,22 @@ public class PuzzleView extends JDialog implements Runnable {
       y = y + service.getSide();
     }
 
-    model = new PuzzleViewModel(board, lblTurn, btnPlay, btnStop, btnExit, timer);
+    model = new PuzzleViewModel(board, lblTurn, btnPlay, btnStop, btnExit, lblTimer);
   }
 
-  private void startChronometer() {
-    chronometerActive = true;
-    Thread timeThread = new Thread(this);
-    timeThread.start();
+  public void startChronometer() {
+    timer = new Timer(
+        service.getMinutesTimer(),
+        service.getSecondsTimer(),
+        () -> service.btnResetAP(model),
+        timerText -> lblTimer.setText(timerText)
+    );
+    timer.start();
   }
 
-  private void stopChronometer() {
-    chronometerActive = false;
+  public void stopChronometer() {
+    timer.stop();
     service.setSecondsTimer(0);
     service.setMinutesTimer(2);
-  }
-
-  @Override
-  @SneakyThrows
-  public void run() {
-
-    String min;
-    String seg;
-
-    while (chronometerActive) {
-      min = (service.getMinutesTimer() < 10)
-          ? "0" + service.getMinutesTimer()
-          : Integer.toString(service.getMinutesTimer());
-      seg = (service.getSecondsTimer() < 10)
-          ? "0" + service.getSecondsTimer()
-          : Integer.toString(service.getSecondsTimer());
-
-      timer.setText(min + ":" + seg);
-
-      if (service.getMinutesTimer() == 0 && service.getSecondsTimer() == 0) {
-        stopChronometer();
-        service.btnResetAP(model);
-      }
-
-      GeneralUtils.waitSeconds(1);
-
-      if (service.getSecondsTimer() > 0) {
-        service.setSecondsTimer(service.getSecondsTimer() - 1);
-      }
-
-      if (service.getSecondsTimer() == 0 && service.getMinutesTimer() > 0) {
-        service.setSecondsTimer(59);
-        service.setMinutesTimer(service.getMinutesTimer() - 1);
-      }
-    }
   }
 }

@@ -1,9 +1,9 @@
-package com.bookverse.development.packapps.models;
+package com.bookverse.development.packapps.apps.store;
 
 import lombok.Data;
 
 @Data
-public class Store {
+public class StoreData {
   private String reference;
   private String productState;
   private String document;

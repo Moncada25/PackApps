@@ -15,7 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import lombok.SneakyThrows;
+import com.bookverse.development.packapps.utils.Timer;
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
@@ -23,14 +23,13 @@ import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.ui.factory.Button;
 import com.bookverse.development.packapps.utils.ui.factory.Label;
-import com.bookverse.development.packapps.utils.GeneralUtils;
 
-public class HangmanView extends JDialog implements Runnable {
+public class HangmanView extends JDialog {
 
   private transient HangmanService service = new HangmanService();
   private transient HangmanViewModel model = null;
-  private JLabel timer;
-  private boolean chronometerActive = false;
+  private transient Timer timer;
+  private JLabel lblTimer;
 
   public HangmanView(JFrame parent, boolean modal) {
     super(parent, modal);
@@ -42,11 +41,26 @@ public class HangmanView extends JDialog implements Runnable {
     createComponents();
   }
 
+  public void start(Container parent) {
+    setSize(750, 500);
+    setResizable(false);
+    setLocationRelativeTo(parent);
+    setTitle(DatabaseConstants.HANGMAN);
+    Effects.fadeIn(this);
+    parent.setVisible(false);
+    Alerts.instruccionesAhorcado(
+        service.getMinutesTimer(),
+        service.getSecondsTimer(),
+        service.getMaxAttempts()
+    );
+    setVisible(true);
+  }
+
   private void createComponents() {
     JButton btnExit;
 
     setLayout(null);
-    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     setIconImage(new ImageIcon(Resources.getImage("ahorcado.png")).getImage());
 
     JButton btnPlay = new Button().setText("Play").setColor(Styles.TEXT_COLOR).build();
@@ -76,9 +90,9 @@ public class HangmanView extends JDialog implements Runnable {
     attempts.setBounds(30, 200, 250, 30);
     add(attempts);
 
-    timer = new Label().setText("").setColor(Styles.MAIN_COLOR).setFont(Styles.BIG).build();
-    timer.setBounds(75, 220, 200, 120);
-    add(timer);
+    lblTimer = new Label().setText("").setColor(Styles.MAIN_COLOR).setFont(Styles.BIG).build();
+    lblTimer.setBounds(75, 220, 200, 120);
+    add(lblTimer);
 
     JLabel lyricsPressed = new Label().setText("")
         .setColor(Styles.TEXT_COLOR)
@@ -116,7 +130,7 @@ public class HangmanView extends JDialog implements Runnable {
     model = new HangmanViewModel(
         options,
         attempts,
-        timer,
+        lblTimer,
         lyricsNumber,
         lyricsPressed,
         image,
@@ -152,70 +166,6 @@ public class HangmanView extends JDialog implements Runnable {
     });
   }
 
-  public void start(Container parent) {
-    setSize(750, 500);
-    setResizable(false);
-    setLocationRelativeTo(parent);
-    setTitle(DatabaseConstants.HANGMAN);
-    Effects.fadeIn(this);
-    parent.setVisible(false);
-    Alerts.instruccionesAhorcado(
-        service.getMinutesTimer(),
-        service.getSecondsTimer(),
-        service.getMaxAttempts()
-    );
-    setVisible(true);
-  }
-
-  @Override
-  @SneakyThrows
-  public void run() {
-
-    String min;
-    String seg;
-
-    while (chronometerActive) {
-      min = (service.getMinutesTimer() < 10)
-          ? "0" + service.getMinutesTimer()
-          : Integer.toString(service.getMinutesTimer());
-      seg = (service.getSecondsTimer() < 10)
-          ? "0" + service.getSecondsTimer()
-          : Integer.toString(service.getSecondsTimer());
-
-      timer.setText(min + ":" + seg);
-
-      if (service.getMinutesTimer() == 0 && service.getSecondsTimer() == 0) {
-        Alerts.message("You lose!", "Right word: " + service.getRandomWord());
-        service.insert("Loser", model);
-        service.reset(model);
-        stopChronometer();
-      }
-
-      GeneralUtils.waitSeconds(1);
-
-      if (service.getSecondsTimer() > 0) {
-        service.setSecondsTimer(service.getSecondsTimer() - 1);
-      }
-
-      if (service.getSecondsTimer() == 0 && service.getMinutesTimer() > 0) {
-        service.setSecondsTimer(59);
-        service.setMinutesTimer(service.getMinutesTimer() - 1);
-      }
-    }
-  }
-
-  public void startChronometer() {
-    chronometerActive = true;
-    Thread timeThread = new Thread(this);
-    timeThread.start();
-  }
-
-  public void stopChronometer() {
-    chronometerActive = false;
-    service.setSecondsTimer(0);
-    service.setMinutesTimer(2);
-  }
-
   @Override
   public void paint(Graphics g) {
     super.paint(g);
@@ -248,6 +198,26 @@ public class HangmanView extends JDialog implements Runnable {
       g.drawLine(600, 420, 550, 320);
       g.drawLine(500, 420, 550, 320);
     }
+  }
+
+  public void startChronometer() {
+    timer = new Timer(
+        service.getMinutesTimer(),
+        service.getSecondsTimer(),
+        () -> {
+          Alerts.message("You lose!", "Right word: " + service.getRandomWord());
+          service.insert("Loser", model);
+          service.reset(model);
+        },
+        timerText -> lblTimer.setText(timerText)
+    );
+    timer.start();
+  }
+
+  public void stopChronometer() {
+    timer.stop();
+    service.setSecondsTimer(0);
+    service.setMinutesTimer(2);
   }
 
   private void drawLine(Graphics g) {

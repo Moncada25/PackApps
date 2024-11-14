@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.models;
+package com.bookverse.development.packapps.apps.dices;
 
 import lombok.Getter;
 import com.bookverse.development.packapps.utils.GeneralUtils;
