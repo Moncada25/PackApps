@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.home;
 
+import com.bookverse.development.packapps.apps.puzzle.Levels;
 import com.bookverse.development.packapps.automation.runners.RegisterUserTest;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -39,7 +40,7 @@ import com.bookverse.development.packapps.apps.guessnumber.GuessNumberView;
 import com.bookverse.development.packapps.apps.hangman.HangmanView;
 import com.bookverse.development.packapps.apps.store.login.LoginView;
 import com.bookverse.development.packapps.apps.numbers.Numbers;
-import com.bookverse.development.packapps.views.older.Puzzle;
+import com.bookverse.development.packapps.apps.puzzle.PuzzleView;
 import com.bookverse.development.packapps.apps.tictactoe.TicTacToeView;
 import com.bookverse.development.packapps.utils.ui.factory.Menu;
 import com.bookverse.development.packapps.utils.ui.factory.MenuItem;
@@ -256,19 +257,19 @@ public class HomeView extends JFrame {
 
     JMenuItem puzzle4x4 = new MenuItem().setText("Easy").setImage("easy").build();
     puzzle4x4.addActionListener(e -> {
-      new Puzzle(this, true, 4, 55, 3).start(this);
+      new PuzzleView(this, true, Levels.EASY).start(this);
       setVisible(true);
     });
 
     JMenuItem puzzle5x5 = new MenuItem().setText("Medium").setImage("medio").build();
     puzzle5x5.addActionListener(e -> {
-      new Puzzle(this, true, 5, 50, 6).start(this);
+      new PuzzleView(this, true, Levels.MEDIUM).start(this);
       setVisible(true);
     });
 
     JMenuItem puzzle6x6 = new MenuItem().setText("Hard").setImage("hard").build();
     puzzle6x6.addActionListener(e -> {
-      new Puzzle(this, true, 6, 45, 10).start(this);
+      new PuzzleView(this, true, Levels.HARD).start(this);
       setVisible(true);
     });
 

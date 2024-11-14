@@ -1,5 +1,6 @@
 package com.bookverse.development.packapps.apps.tables;
 
+import com.bookverse.development.packapps.apps.puzzle.Levels;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,7 +21,7 @@ import com.bookverse.development.packapps.utils.ui.Alerts;
 import com.bookverse.development.packapps.utils.Format;
 import com.bookverse.development.packapps.database.Queries;
 import com.bookverse.development.packapps.utils.ui.factory.MenuItem;
-import com.bookverse.development.packapps.views.older.Puzzle;
+import com.bookverse.development.packapps.apps.puzzle.PuzzleView;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -169,15 +170,15 @@ public class PuzzleTable extends JDialog implements MouseListener {
       switch (option.toString()) {
         case "Easy":
           setVisible(false);
-          new Puzzle(this, true, 4, 55, 3).start(this);
+          new PuzzleView(this, true, Levels.EASY).start(this);
           break;
         case "Medium":
           setVisible(false);
-          new Puzzle(this, true, 5, 50, 6).start(this);
+          new PuzzleView(this, true, Levels.MEDIUM).start(this);
           break;
         case "Hard":
           setVisible(false);
-          new Puzzle(this, true, 6, 45, 10).start(this);
+          new PuzzleView(this, true, Levels.HARD).start(this);
           break;
         default:
           throw new IllegalStateException("Unexpected value: " + option);

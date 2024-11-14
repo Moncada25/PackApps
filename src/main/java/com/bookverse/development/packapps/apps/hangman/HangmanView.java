@@ -63,7 +63,7 @@ public class HangmanView extends JDialog implements Runnable {
     add(btnExit);
     btnExit.addActionListener(e -> Effects.fadeOut(this));
 
-    JLabel title = new Label().setText("<html><strong><em>Category</em></strong></html>")
+    JLabel title = new Label().setText("Category")
         .setColor(Styles.MAIN_COLOR)
         .setFont(Styles.BIG)
         .setColor(Styles.MAIN_COLOR)
@@ -171,11 +171,14 @@ public class HangmanView extends JDialog implements Runnable {
   @SneakyThrows
   public void run() {
 
+    String min;
+    String seg;
+
     while (chronometerActive) {
-      String min = (service.getMinutesTimer() < 10)
+      min = (service.getMinutesTimer() < 10)
           ? "0" + service.getMinutesTimer()
           : Integer.toString(service.getMinutesTimer());
-      String seg = (service.getSecondsTimer() < 10)
+      seg = (service.getSecondsTimer() < 10)
           ? "0" + service.getSecondsTimer()
           : Integer.toString(service.getSecondsTimer());
 
