@@ -13,7 +13,7 @@ import net.serenitybdd.annotations.Title;
 import net.serenitybdd.annotations.WithTag;
 import net.serenitybdd.annotations.WithTags;
 import com.bookverse.development.packapps.automation.models.BookverseUser;
-import com.bookverse.development.packapps.automation.questions.TheTitle;
+import com.bookverse.development.packapps.automation.questions.TheBook;
 import com.bookverse.development.packapps.automation.tasks.SearchBook;
 import com.bookverse.development.packapps.automation.utils.constants.GeneralConstants;
 import com.bookverse.development.packapps.automation.utils.WebApp;
@@ -25,6 +25,7 @@ import com.bookverse.development.packapps.automation.utils.SerenityConf;
 import com.bookverse.development.packapps.automation.utils.constants.SessionVariables;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static org.hamcrest.Matchers.is;
 
 @Feature
 @RunWith(SerenityRunner.class)
@@ -48,7 +49,7 @@ public class SearchBookTest {
 
     actor.wasAbleTo(Login.user(bookverseUser));
     actor.attemptsTo(SearchBook.inBookverse(bookverseUser.book()));
-    actor.should(seeThat(TheTitle.ofModalIs(bookverseUser.book())));
+    actor.should(seeThat(TheBook.hasTitle(), is(bookverseUser.name())));
   }
 
   @AfterClass

@@ -15,7 +15,7 @@ import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.views.older.OtherThings;
-import com.bookverse.development.packapps.views.older.Phi;
+import com.bookverse.development.packapps.apps.phi.PhiView;
 import com.bookverse.development.packapps.views.older.Pi;
 import com.bookverse.development.packapps.views.older.PrimeNumber;
 import com.bookverse.development.packapps.utils.ui.factory.Label;
@@ -68,7 +68,7 @@ public class Numbers extends JDialog {
     btnPhi.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new Phi(Numbers.this, true).start(Numbers.this);
+        new PhiView(Numbers.this, true).start(Numbers.this);
         setVisible(true);
       }
 
