@@ -1,7 +1,5 @@
 package com.bookverse.development.packapps.apps.home;
 
-import com.bookverse.development.packapps.apps.puzzle.Levels;
-import com.bookverse.development.packapps.automation.runners.RegisterUserTest;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.logging.Level;
@@ -15,6 +13,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import com.bookverse.development.packapps.apps.puzzle.Levels;
+import com.bookverse.development.packapps.automation.runners.RegisterUserTest;
+import com.bookverse.development.packapps.utils.ui.Wallpaper;
 import com.bookverse.development.packapps.utils.constants.AppConfig;
 import com.bookverse.development.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.development.packapps.utils.constants.Styles;
@@ -82,40 +83,28 @@ public class HomeView extends JFrame {
     try {
 
       UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
-
       UIManager.put("PasswordField.border", Styles.BORDER_BLUE);
       UIManager.put("PasswordField.font", Styles.MEDIUM);
-
       UIManager.put("TextField.border", Styles.BORDER_BLUE);
       UIManager.put("TextField.font", Styles.MEDIUM);
-
       UIManager.put("FileChooser.saveButtonText", "Save");
       UIManager.put("FileChooser.cancelButtonText", "Cancel");
-
       UIManager.put("RadioButton.font", Styles.MEDIUM);
-
       UIManager.put("TextArea.font", Styles.MEDIUM);
-
       UIManager.put("ComboBox.font", Styles.MEDIUM);
       UIManager.put("ComboBox.foreground", Styles.TEXT_COLOR);
-
       UIManager.put("ScrollPane.border", Styles.BORDER_BLUE);
-
       UIManager.put("MenuItem.foreground", Color.WHITE);
       UIManager.put("MenuItem.font", Styles.MEDIUM);
-
       UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
       UIManager.put("Menu.font", Styles.MEDIUM);
-
       UIManager.put("Button.font", Styles.MEDIUM);
       UIManager.put("Button.foreground", Color.BLACK);
-
       UIManager.put("Table.focusCellHighlightBorder", Styles.BORDER_BLUE);
       UIManager.put("TableHeader.foreground", Styles.MAIN_COLOR);
       UIManager.put("TableHeader.font", Styles.MEDIUM);
       UIManager.put("Table.font", Styles.MEDIUM);
       UIManager.put("Table.foreground", Styles.TEXT_COLOR);
-
       UIManager.put("OptionPane.okButtonText", "Done");
       UIManager.put("OptionPane.cancelButtonText", "No, thanks.");
       UIManager.put("OptionPane.yesButtonText", "Yes, it's okay.");
@@ -130,18 +119,18 @@ public class HomeView extends JFrame {
     }
 
     HomeView window = new HomeView();
+    Wallpaper wallpaper = service.getWallpaper(service.getBackground() - 1);
 
     model.setWelcome(new JLabel());
-    window.setSize(
-        service.getWidthBackground(service.getBackground() - 1),
-        service.getLongBackground(service.getBackground() - 1)
-    );
+    window.setSize(wallpaper.width(), wallpaper.height());
     window.add(model.getWelcome(), BorderLayout.CENTER);
+
     service.changeBackgroundAP(
         model,
-        service.getPathBackground(service.getBackground() - 1),
-        service.getWidthBackground(service.getBackground() - 1),
-        service.getLongBackground(service.getBackground() - 1), window
+        wallpaper.name(),
+        wallpaper.width(),
+        wallpaper.height(),
+        window
     );
 
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

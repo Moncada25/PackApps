@@ -24,11 +24,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class PrimeNumber extends JDialog implements Runnable, ActionListener, MouseListener {
 
-  
-  private JButton btnStartChronometer, btnSearchPrime, btnVerifyPrime;
-  private JLabel title;
+  private JButton btnStartChronometer;
+  private JButton btnSearchPrime;
+  private JButton btnVerifyPrime;
+  private JLabel titleView;
   private JLabel chronometer;
-  private JTextField txtSince, txtUntil, txtVerify;
+  private JTextField txtSince;
+  private JTextField txtUntil;
+  private JTextField txtVerify;
   private boolean chronometerActive;
 
   public PrimeNumber(JDialog parent, boolean modal) {
@@ -157,10 +160,10 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
     chronometer = Resources.getLabel("00:00:000", TEXT_COLOR, this, MEDIUM);
     chronometer.setBounds(160, 190, 100, 30);
 
-    title = Resources
+    titleView = Resources
         .getLabel("<html><em><strong>Prime Numbers</strong></em></html>", MAIN_COLOR, this, BIG);
-    title.addMouseListener(this);
-    title.setBounds(110, 8, 280, 40);
+    titleView.addMouseListener(this);
+    titleView.setBounds(110, 8, 280, 40);
   }
 
   private void verifyPrimeNumber(int num) {
@@ -335,7 +338,7 @@ public class PrimeNumber extends JDialog implements Runnable, ActionListener, Mo
   @Override
   public void mouseClicked(MouseEvent e) {
 
-    if (e.getSource() == title) {
+    if (e.getSource() == titleView) {
       Effects.fadeOut(this);
     }
   }

@@ -3,6 +3,7 @@ package com.bookverse.development.packapps.apps.home;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.util.List;
 import java.util.stream.IntStream;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -18,14 +19,37 @@ import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.constants.Themes;
+import com.bookverse.development.packapps.utils.ui.Wallpaper;
 
 @Data
 public class HomeService {
 
   private boolean isWork = true;
   private int background = 2;
+  private static final List<Wallpaper> WALLPAPERS = List.of(
+      new Wallpaper("img1.jpg", 529, 660),
+      new Wallpaper("img2.jpg", 1100, 618),
+      new Wallpaper("img3.jpg", 960, 540),
+      new Wallpaper("img4.jpg", 800, 531),
+      new Wallpaper("img5.jpg", 1150, 646),
+      new Wallpaper("img6.jpg", 1150, 646),
+      new Wallpaper("img7.jpg", 700, 648),
+      new Wallpaper("img8.jpg", 600, 625),
+      new Wallpaper("img9.jpg", 640, 427),
+      new Wallpaper("img10.jpg", 650, 650),
+      new Wallpaper("img11.jpg", 920, 602),
+      new Wallpaper("img12.jpg", 650, 650),
+      new Wallpaper("img13.jpg", 600, 644),
+      new Wallpaper("img14.jpg", 538, 660)
+  );
 
-  public void changeBackgroundAP(HomeViewModel model, String name, int width, int length, JFrame parent) {
+  public void changeBackgroundAP(
+      HomeViewModel model,
+      String name,
+      int width,
+      int length,
+      JFrame parent
+  ) {
 
     try {
       Effects.fadeIn(parent);
@@ -50,22 +74,26 @@ public class HomeService {
 
     isWork = true;
 
-    IntStream.range(0, model.getWallpapers().length).filter(i -> e.getSource() == model.getWallpapers()[i]).forEach(i -> {
-      if (model.getWallpapers()[i].getForeground() != Styles.MAIN_COLOR) {
-        changeBackgroundAP(
-            model,
-            getPathBackground(i),
-            getWidthBackground(i),
-            getLongBackground(i),
-            parent
-        );
-        model.getWallpapers()[i].setForeground(Styles.MAIN_COLOR);
-        background = i + 1;
-        parent.setVisible(true);
-      } else {
-        Alerts.elementApplied(false);
-      }
-    });
+    IntStream.range(0, model.getWallpapers().length)
+        .filter(i -> e.getSource() == model.getWallpapers()[i]).forEach(i -> {
+          if (model.getWallpapers()[i].getForeground() != Styles.MAIN_COLOR) {
+
+            Wallpaper wallpaper = getWallpaper(i);
+
+            changeBackgroundAP(
+                model,
+                wallpaper.name(),
+                wallpaper.width(),
+                wallpaper.height(),
+                parent
+            );
+            model.getWallpapers()[i].setForeground(Styles.MAIN_COLOR);
+            background = i + 1;
+            parent.setVisible(true);
+          } else {
+            Alerts.elementApplied(false);
+          }
+        });
   }
 
   @SneakyThrows
@@ -80,8 +108,10 @@ public class HomeService {
 
     switch (selectedUI) {
 
-      case Themes.DEFAULT -> UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-      case Themes.GRAY -> UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+      case Themes.DEFAULT ->
+          UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+      case Themes.GRAY ->
+          UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
       case Themes.TEXTURE -> {
         UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
         UIManager.put("MenuItem.foreground", Color.WHITE);
@@ -155,16 +185,16 @@ public class HomeService {
     HomeView window = new HomeView();
     model.setWelcome(new JLabel());
 
-    window.setSize(
-        getWidthBackground(background - 1), getLongBackground(background - 1)
-    );
+    Wallpaper wallpaper = getWallpaper(background - 1);
+
+    window.setSize(wallpaper.width(), wallpaper.height());
     window.add(model.getWelcome(), BorderLayout.CENTER);
 
     changeBackgroundAP(
         model,
-        getPathBackground(background - 1),
-        getWidthBackground(background - 1),
-        getLongBackground(background - 1),
+        wallpaper.name(),
+        wallpaper.width(),
+        wallpaper.height(),
         parent
     );
 
@@ -190,45 +220,7 @@ public class HomeService {
     Alerts.changeUI(selectedUI);
   }
 
-  public String getPathBackground(int index) {
-
-    String[] backgrounds = {
-        "img1.jpg",
-        "img2.jpg",
-        "img3.jpg",
-        "img4.jpg",
-        "img5.jpg",
-        "img6.jpg",
-        "img7.jpg",
-        "img8.jpg",
-        "img9.jpg",
-        "img10.jpg",
-        "img11.jpg",
-        "img12.jpg",
-        "img13.jpg",
-        "img14.jpg"
-    };
-
-    return backgrounds[index];
-  }
-
-  public int getWidthBackground(int index) {
-
-    int[] widthBackgrounds = {
-        529, 1100, 960, 800, 1150,
-        1150, 700, 600, 640, 650,
-        920, 650, 600, 538};
-
-    return widthBackgrounds[index];
-  }
-
-  public int getLongBackground(int index) {
-
-    int[] longBackgrounds = {
-        660, 618, 540, 531, 646,
-        646, 648, 625, 427, 650,
-        602, 650, 644, 660};
-
-    return longBackgrounds[index];
+  public Wallpaper getWallpaper(int index) {
+    return WALLPAPERS.get(index);
   }
 }
