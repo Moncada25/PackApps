@@ -10,19 +10,19 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import com.bookverse.development.packapps.apps.calculator.CalculatorView;
+import com.bookverse.development.packapps.apps.numbers.calculator.CalculatorView;
 import com.bookverse.development.packapps.utils.constants.Styles;
 import com.bookverse.development.packapps.utils.ui.Resources;
 import com.bookverse.development.packapps.utils.ui.Effects;
 import com.bookverse.development.packapps.views.older.OtherThings;
-import com.bookverse.development.packapps.apps.phi.PhiView;
+import com.bookverse.development.packapps.apps.numbers.phi.PhiView;
 import com.bookverse.development.packapps.views.older.Pi;
-import com.bookverse.development.packapps.views.older.PrimeNumber;
+import com.bookverse.development.packapps.apps.numbers.primenumber.PrimeNumberView;
 import com.bookverse.development.packapps.utils.ui.factory.Label;
 
-public class Numbers extends JDialog {
+public class NumbersView extends JDialog {
 
-  public Numbers(JFrame parent, boolean modal) {
+  public NumbersView(JFrame parent, boolean modal) {
     super(parent, modal);
     createComponents();
   }
@@ -48,7 +48,7 @@ public class Numbers extends JDialog {
     welcome.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        Effects.fadeOut(Numbers.this);
+        Effects.fadeOut(NumbersView.this);
       }
     });
     add(welcome, BorderLayout.CENTER);
@@ -68,7 +68,7 @@ public class Numbers extends JDialog {
     btnPhi.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new PhiView(Numbers.this, true).start(Numbers.this);
+        new PhiView(NumbersView.this, true).start(NumbersView.this);
         setVisible(true);
       }
 
@@ -87,7 +87,7 @@ public class Numbers extends JDialog {
     btnPrimeNumbers.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new PrimeNumber(Numbers.this, true).start(Numbers.this);
+        new PrimeNumberView(NumbersView.this, true).start(NumbersView.this);
         setVisible(true);
       }
 
@@ -106,7 +106,7 @@ public class Numbers extends JDialog {
     btnCalculator.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new CalculatorView(Numbers.this, true).start(Numbers.this);
+        new CalculatorView(NumbersView.this, true).start(NumbersView.this);
         setVisible(true);
       }
 
@@ -125,7 +125,7 @@ public class Numbers extends JDialog {
     btnOther.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new OtherThings(Numbers.this, true).start(Numbers.this);
+        new OtherThings(NumbersView.this, true).start(NumbersView.this);
         setVisible(true);
       }
 
@@ -144,7 +144,7 @@ public class Numbers extends JDialog {
     btnPi.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        new Pi(Numbers.this, true).start(Numbers.this);
+        new Pi(NumbersView.this, true).start(NumbersView.this);
         setVisible(true);
       }
 

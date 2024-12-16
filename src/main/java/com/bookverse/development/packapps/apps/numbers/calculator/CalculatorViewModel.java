@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.apps.calculator;
+package com.bookverse.development.packapps.apps.numbers.calculator;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;

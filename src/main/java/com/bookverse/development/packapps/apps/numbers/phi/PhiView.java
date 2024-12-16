@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.apps.phi;
+package com.bookverse.development.packapps.apps.numbers.phi;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

@@ -40,7 +40,7 @@ import com.bookverse.development.packapps.apps.tasks.SearchBookView;
 import com.bookverse.development.packapps.apps.guessnumber.GuessNumberView;
 import com.bookverse.development.packapps.apps.hangman.HangmanView;
 import com.bookverse.development.packapps.apps.store.login.LoginView;
-import com.bookverse.development.packapps.apps.numbers.Numbers;
+import com.bookverse.development.packapps.apps.numbers.NumbersView;
 import com.bookverse.development.packapps.apps.puzzle.PuzzleView;
 import com.bookverse.development.packapps.apps.tictactoe.TicTacToeView;
 import com.bookverse.development.packapps.utils.ui.factory.Menu;
@@ -308,7 +308,7 @@ public class HomeView extends JFrame {
 
     JMenuItem numbers = new MenuItem().setText("Numbers").setImage("numeritos").build();
     numbers.addActionListener(e -> {
-      new Numbers(this, true).start(this);
+      new NumbersView(this, true).start(this);
       setVisible(true);
     });
 

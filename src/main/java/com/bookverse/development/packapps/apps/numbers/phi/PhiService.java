@@ -1,4 +1,4 @@
-package com.bookverse.development.packapps.apps.phi;
+package com.bookverse.development.packapps.apps.numbers.phi;
 
 import lombok.Data;
 import com.bookverse.development.packapps.utils.ui.Alerts;
