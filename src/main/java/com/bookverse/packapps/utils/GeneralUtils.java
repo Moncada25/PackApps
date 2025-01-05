@@ -1,14 +1,14 @@
 package com.bookverse.packapps.utils;
 
-import com.bookverse.packapps.utils.ui.Alerts;
 import java.awt.Desktop;
 import java.net.Socket;
 import java.net.URI;
 import java.security.SecureRandom;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
-
-import static com.bookverse.packapps.utils.constants.AppConfig.PASSWORD_DBA;
+import com.bookverse.packapps.utils.constants.Configs;
+import com.bookverse.packapps.utils.ui.Alerts;
 
 public final class GeneralUtils {
 
@@ -29,7 +29,7 @@ public final class GeneralUtils {
 
       if (!password.isEmpty()) {
 
-        if (Config.get(PASSWORD_DBA.getProperty()).equals(password)) {
+        if (getConfig(Configs.PASSWORD_DBA).equals(password)) {
           return true;
         } else {
           Alerts.message("Error", "Incorrect password");
@@ -64,5 +64,18 @@ public final class GeneralUtils {
 
   public static void waitSeconds(int seconds) {
     LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(seconds * 1000L));
+  }
+
+  public static String getConfig(String key) {
+
+    Properties properties = new Properties();
+
+    try {
+      properties.load(GeneralUtils.class.getResourceAsStream(Configs.FILE_PROPERTIES));
+    } catch (Exception e) {
+      Alerts.error(e, "Failure reading config properties file");
+    }
+
+    return properties.getProperty(key);
   }
 }
