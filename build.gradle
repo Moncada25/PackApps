@@ -10,7 +10,7 @@ plugins {
 
 ext {
     serenityVersion = "4.2.11"
-    mainClass = "com.bookverse.packapps.core.Start"
+    startClass = "com.bookverse.packapps.core.Start"
 }
 
 java {
@@ -52,7 +52,7 @@ tasks.register("start", JavaExec) {
     group = "Execution"
     description = "Start application"
     classpath = sourceSets.main.runtimeClasspath
-    mainClass.set($ { mainClass })
+    mainClass.set(startClass)
 }
 
 jar {
@@ -61,7 +61,7 @@ jar {
     }
     manifest {
         attributes(
-                "Main-Class": "${mainClass}",
+                "Main-Class": "${startClass}",
                 "Built-By": "Santiago Moncada" + " (" + System.properties["user.name"] + ")",
                 "Build-Revision": 4.0,
                 "Created-By": "Gradle ${gradle.gradleVersion}",
@@ -73,7 +73,7 @@ jar {
 
 shadowJar {
     archiveClassifier.set('')
-    mainClassName = mainClass
+    mainClassName = startClass
     zip64 true
 }
 
