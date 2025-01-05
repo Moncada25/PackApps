@@ -21,6 +21,8 @@ Thumbs.db
 build/
 .kotlin/
 
+bin
+
 # Compiled class file
 tokens/
 

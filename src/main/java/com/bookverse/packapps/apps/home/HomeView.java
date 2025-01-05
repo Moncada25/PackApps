@@ -148,8 +148,7 @@ public class HomeView extends JFrame {
     setIconImage(new ImageIcon(Resources.getImage("more.png")).getImage());
 
     JMenuBar menuBar = new JMenuBar();
-    JMenu about = new Menu().setText("About").setImage("about").build();
-    JMenu more = new Menu().setText("See More").setImage("more").build();
+    JMenu about = new Menu().setText("About").setImage("more").build();
     JMenu exit = new Menu().setText("Exit").setImage("exit").build();
     JMenu send = new Menu().setText("Send Feedback").setImage("send").build();
     JMenu games = new Menu().setText("Games").setImage("games").build();
@@ -167,16 +166,16 @@ public class HomeView extends JFrame {
     JMenu themes = new Menu().setText("Theme").setImage("mode").build();
     JMenu changeUI = new Menu().setText("Change UI").setImage("UI").build();
 
-    JMenuItem card = new MenuItem().setText("Developer").setImage("developer").build();
-    card.addActionListener(e -> {
+    JMenuItem contact = new MenuItem().setText("Contact").setImage("developer").build();
+    contact.addActionListener(e -> {
       new BusinessCardView(this, true).start(this);
       setVisible(true);
     });
 
-    JMenuItem moreSystems = new MenuItem().setText("My Systems").setImage("mysystems").build();
-    moreSystems.addActionListener(e -> {
+    JMenuItem github = new MenuItem().setText("GitHub").setImage("github").build();
+    github.addActionListener(e -> {
           if (GeneralUtils.verifyConnection("Connect to see more!", service.isWork())) {
-            GeneralUtils.openUrl("https://mypackapps.000webhostapp.com");
+            GeneralUtils.openUrl("https://github.com/Moncada25/Bookverse");
           }
         }
     );
@@ -184,13 +183,12 @@ public class HomeView extends JFrame {
     JMenuItem moreBookverse = new MenuItem().setText("Bookverse").setImage("books").build();
     moreBookverse.addActionListener(e -> {
           if (GeneralUtils.verifyConnection("Connect to see more!", service.isWork())) {
-            GeneralUtils.openUrl("https://bookverse.vzpla.net");
+            GeneralUtils.openUrl("http://localhost/Bookverse/home/");
           }
         }
     );
 
-    addMenu(more, moreSystems, moreBookverse);
-    addMenu(about, card, more);
+    addMenu(about, contact, github, moreBookverse);
 
     JMenuItem yesExit = new MenuItem().setText("Are you sure?").setImage("salir").build();
     yesExit.addActionListener(e -> Effects.fadeOut(this));
@@ -221,14 +219,6 @@ public class HomeView extends JFrame {
       new DicesGameView(this, true).start(this);
       setVisible(true);
     });
-
-    JMenuItem roulette = new MenuItem().setText("Roulette").setImage("ruleta").build();
-    roulette.addActionListener(e -> {
-          if (GeneralUtils.verifyConnection("Connect to see more!", service.isWork())) {
-            GeneralUtils.openUrl("https://mypackapps.000webhostapp.com/ruleta.php");
-          }
-        }
-    );
 
     JMenuItem guessNumber = new MenuItem().setText("Easy").setImage("easy").build();
     guessNumber.addActionListener(e -> {
@@ -277,7 +267,7 @@ public class HomeView extends JFrame {
     });
 
     addMenu(ticTacToe, ticTacToePvsP, ticTacToePvsCPU);
-    addMenu(games, hangman, dices, roulette, guessNumberMenu, puzzle, ticTacToe);
+    addMenu(games, hangman, dices, guessNumberMenu, puzzle, ticTacToe);
 
     JMenuItem database = new MenuItem().setText("Database").setImage("tabla").build();
     database.addActionListener(e -> {
@@ -722,10 +712,10 @@ public class HomeView extends JFrame {
         texts
     );
 
+    menuBar.add(about);
     menuBar.add(games);
     menuBar.add(scores);
     menuBar.add(tools);
-    menuBar.add(about);
     menuBar.add(exit);
 
     add(menuBar, BorderLayout.NORTH);
