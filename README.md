@@ -3,7 +3,7 @@
 ## Introduction 🚀
 This repository contains a collection of applications and utilities developed in Java, organized into various modules. It is designed to demonstrate concepts such as modular programming, data structures, algorithms, graphical user interface development, and automated testing. Additionally, it includes integrations with databases and other tools.
 
-## Project Content 📦
+## Project Content ✅
 ### Apps and Utilities
 Independent modules implementing various functionalities or interactive games:
 - **Arrays:** Management and visualization of array operations.
@@ -106,12 +106,70 @@ Verify Gradle installation with:
 - If starting from scratch, initialize the database using the .sql scripts provided in the resources/data folder.
 - Verify database paths in config.properties. Update this file if needed to point to the correct database file.
 
-## Run the application
+## Run the application 🔥
 Navigate to the root directory and execute:
-    
 ```shell 
   ./gradlew start
 ```
+
+## Build and Packaging 📦
+
+### Generate the Executable JAR File
+To generate a runnable JAR file for the application:
+
+1. Ensure all dependencies are included in `build/libs` by running: ```./gradlew clean build```
+2. Locate the JAR file in build/libs. It will typically be named something like PackApps.jar.
+3. Run the JAR file with the following command to verify it works: ```java -jar build/libs/PackApps.jar```
+
+### Package the Application as a MacOS `.app`
+Use jpackage to create a `.app` bundle for MacOS.
+
+**Prerequisites:** <br>
+- Java 14+ (for jpackage) and Java 21 (to run the application).
+- Install jpackage if not included in your JDK.
+
+**Command:** <br>
+Run the following in the terminal from the root directory of the project:
+```shell 
+  jpackage \
+  --input build/libs \
+  --name "Bookverse" \
+  --main-jar PackApps.jar \
+  --main-class com.bookverse.packapps.core.Start \
+  --type app-image \
+  --vendor "Bookverse" \
+  --icon src/main/resources/icons/cat.icns \
+  --resource-dir src/main/resources \
+  --resource-dir libs
+```
+
+**Output:** <br>
+The `.app` bundle will be generated in the build directory. You can move it to `/Applications` or distribute it as needed.
+
+### Package the Application as a Windows `.exe`
+You can also create a Windows .exe installer using jpackage.
+
+**Prerequisites:** <br>
+- Java 14+ (with jpackage) installed.
+- A Windows system for building the .exe.
+
+**Command:** <br>
+Run the following in the terminal (Command Prompt or PowerShell):
+```shell 
+  jpackage \
+  --input build/libs \
+  --name "Bookverse" \
+  --main-jar PackApps.jar \
+  --main-class com.bookverse.packapps.core.Start \
+  --type exe \
+  --vendor "Bookverse" \
+  --icon src/main/resources/icons/cat.ico \
+  --resource-dir src/main/resources \
+  --resource-dir libs
+```
+
+**Output:** <br>
+The `.exe` installer will be created in the `build` directory. Run this installer to set up the application on a Windows system.
 
 ## Collaborators 🤝
 Do you want to contribute? Great! <br>
