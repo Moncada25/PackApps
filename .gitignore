@@ -19,6 +19,9 @@ Thumbs.db
 # Gradle files
 .gradle/
 build/
+.kotlin/
+
+bin
 
 # Compiled class file
 tokens/

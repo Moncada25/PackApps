@@ -29,7 +29,7 @@ Set of small applications for different purposes. Games, tools and even a store;
 
 ## Project structure 🚧
 
-* ```src/main/java/com/bookverse/development/packapps```
+* ```src/main/java/com/bookverseUser/development/packapps```
 ``` 
 + automation
     Classes needed to perform automation.
