@@ -1,5 +1,6 @@
 package com.bookverse.packapps.apps.qr;
 
+import com.bookverse.packapps.utils.GeneralUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -43,14 +44,13 @@ public class QrService {
   @SneakyThrows
   public String createQR(String data, int height, int width) {
 
-    String folder = "target/qrs/";
-    String file = Format.getNow() + ".jpg";
     String charset = "UTF-8";
-    File folderFile = new File(folder);
-    File fileToCreate = new File(folder + file);
+    String outputDir = new File(GeneralUtils.getOutputDirectory() + "qr_codes").getAbsolutePath();
+    File outputDirectory = new File(outputDir);
+    File fileToCreate = new File(outputDir + "/" + Format.getNow() + ".jpg");
 
-    if (!folderFile.exists()) {
-      boolean foldercreated = folderFile.mkdirs();
+    if (!outputDirectory.exists()) {
+      boolean foldercreated = outputDirectory.mkdirs();
 
       if (!foldercreated) {
         throw new IOException("Error creating folder");
@@ -61,11 +61,7 @@ public class QrService {
         data.getBytes(charset), charset), BarcodeFormat.QR_CODE, width, height
     );
 
-    MatrixToImageWriter.writeToPath(
-        matrix,
-        file.substring(file.lastIndexOf('.') + 1),
-        fileToCreate.toPath()
-    );
+    MatrixToImageWriter.writeToPath(matrix, "jpg", fileToCreate.toPath());
 
     return fileToCreate.getPath();
   }

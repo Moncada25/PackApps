@@ -78,4 +78,8 @@ public final class GeneralUtils {
 
     return properties.getProperty(key);
   }
+
+  public static String getOutputDirectory() {
+    return System.getProperty("user.home") + "/Documents/Bookverse/";
+  }
 }

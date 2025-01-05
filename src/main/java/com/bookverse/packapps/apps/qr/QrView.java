@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,7 +33,7 @@ public class QrView extends JDialog {
   public void start(JFrame parent) {
     setSize(500, 200);
     setLocationRelativeTo(parent);
-    setTitle("QR");
+    setTitle("QR Codes");
     Effects.fadeIn(this);
     parent.setVisible(false);
     setVisible(true);
@@ -41,6 +42,7 @@ public class QrView extends JDialog {
   private void createComponents() {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+    setIconImage(new ImageIcon(Resources.getImage("qr.png")).getImage());
 
     JTextArea text = new JTextArea();
     JScrollPane scroll = new JScrollPane(text);
@@ -106,7 +108,7 @@ public class QrView extends JDialog {
           model.getTextArea().requestFocus();
         } else {
           String qr = service.createQR(model.getTextArea().getText(), 400, 400);
-          Alerts.message("Pass", "QR creado");
+          Alerts.message("QR Code Generated", "Saved in " + GeneralUtils.getOutputDirectory() + "qr_codes/");
           service.showQRGenerated(qr, QrView.this);
         }
       }
