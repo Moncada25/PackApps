@@ -110,7 +110,7 @@ Verify Gradle installation with:
 Navigate to the root directory and execute:
     
 ```shell 
-  ./gradlew run
+  ./gradlew start
 ```
 
 ## Collaborators 🤝
