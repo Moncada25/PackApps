@@ -145,7 +145,7 @@ public class HomeView extends JFrame {
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(Resources.getImage("about.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("cat.png")).getImage());
 
     JMenuBar menuBar = new JMenuBar();
     JMenu about = new Menu().setText("About").setImage("about").build();

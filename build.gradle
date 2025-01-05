@@ -9,7 +9,7 @@ plugins {
 }
 
 ext {
-    serenityVersion = "4.2.8"
+    serenityVersion = "4.2.11"
     mainClass = "com.bookverse.packapps.core.Start"
 }
 
@@ -56,6 +56,9 @@ tasks.register("start", JavaExec) {
 }
 
 jar {
+    from('libs') {
+        into('libs')
+    }
     manifest {
         attributes(
                 "Main-Class": "${mainClass}",
@@ -90,8 +93,8 @@ tasks.named('startShadowScripts') {
     dependsOn jar
 }
 
-sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/images", "src/main/resources/data"]
-sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties"]
+sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/images", "src/main/resources/data", "src/main/resources/tessdata"]
+sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties", "**.traineddata", "**.ttf", "**.ttx"]
 
 dependencies {
     implementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
