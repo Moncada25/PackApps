@@ -93,8 +93,8 @@ tasks.named('startShadowScripts') {
     dependsOn jar
 }
 
-sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/images", "src/main/resources/data", "src/main/resources/tessdata"]
-sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties", "**.traineddata", "**.ttf", "**.ttx"]
+sourceSets.main.resources.srcDirs = ["src/main/resources", "src/main/resources/images", "src/main/resources/data", "src/main/resources/tessdata", "src/test/resources"]
+sourceSets.main.resources.includes = ["**.png", "**.jpg", "**.gif", "**.properties", "**.traineddata", "**.conf"]
 
 dependencies {
     implementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"

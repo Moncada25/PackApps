@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +34,7 @@ public class OcrView extends JDialog implements MouseListener {
   private void createComponents() {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+    setIconImage(new ImageIcon(Resources.getImage("ocr.png")).getImage());
 
     text = new JTextArea();
     text.setEnabled(false);
