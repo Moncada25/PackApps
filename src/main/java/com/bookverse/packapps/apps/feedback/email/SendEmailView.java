@@ -1,4 +1,4 @@
-package com.bookverse.packapps.apps.email;
+package com.bookverse.packapps.apps.feedback.email;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

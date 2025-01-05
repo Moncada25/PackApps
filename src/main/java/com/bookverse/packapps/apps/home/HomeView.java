@@ -20,10 +20,9 @@ import com.bookverse.packapps.utils.constants.AppConfig;
 import com.bookverse.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.packapps.utils.constants.Styles;
 import com.bookverse.packapps.apps.dices.DicesGameView;
-import com.bookverse.packapps.apps.email.SendEmailView;
-import com.bookverse.packapps.apps.feedback.FeedbackView;
+import com.bookverse.packapps.apps.feedback.email.SendEmailView;
+import com.bookverse.packapps.apps.feedback.comment.FeedbackView;
 import com.bookverse.packapps.apps.notes.NotesView;
-import com.bookverse.packapps.apps.feedback.BusinessCardView;
 import com.bookverse.packapps.apps.ocr.OcrView;
 import com.bookverse.packapps.apps.qr.QrView;
 import com.bookverse.packapps.apps.structures.StructuresView;
@@ -82,36 +81,38 @@ public class HomeView extends JFrame {
 
     try {
 
-      UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+      UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+      UIManager.put("ComboBox.foreground", new Color(0, 0, 0));
+      UIManager.put("MenuItem.foreground", Styles.TEXT_COLOR);
+      UIManager.put("OptionPane.messageForeground", Styles.TEXT_COLOR);
+      UIManager.put("TextField.border", Styles.BORDER_BLUE);
+      UIManager.put("ScrollPane.border", Styles.BORDER_BLUE);
+      UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
+      UIManager.put("Button.foreground", new Color(0, 0, 0));
+      UIManager.put("TableHeader.foreground", Styles.MAIN_COLOR);
+      UIManager.put("Table.foreground", Styles.TEXT_COLOR);
+
+      UIManager.put("Table.focusCellHighlightBorder", Styles.BORDER_BLUE);
       UIManager.put("PasswordField.border", Styles.BORDER_BLUE);
       UIManager.put("PasswordField.font", Styles.MEDIUM);
-      UIManager.put("TextField.border", Styles.BORDER_BLUE);
       UIManager.put("TextField.font", Styles.MEDIUM);
-      UIManager.put("FileChooser.saveButtonText", "Save");
-      UIManager.put("FileChooser.cancelButtonText", "Cancel");
       UIManager.put("RadioButton.font", Styles.MEDIUM);
       UIManager.put("TextArea.font", Styles.MEDIUM);
       UIManager.put("ComboBox.font", Styles.MEDIUM);
-      UIManager.put("ComboBox.foreground", Styles.TEXT_COLOR);
-      UIManager.put("ScrollPane.border", Styles.BORDER_BLUE);
-      UIManager.put("MenuItem.foreground", Color.WHITE);
       UIManager.put("MenuItem.font", Styles.MEDIUM);
-      UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
       UIManager.put("Menu.font", Styles.MEDIUM);
       UIManager.put("Button.font", Styles.MEDIUM);
-      UIManager.put("Button.foreground", Color.BLACK);
-      UIManager.put("Table.focusCellHighlightBorder", Styles.BORDER_BLUE);
-      UIManager.put("TableHeader.foreground", Styles.MAIN_COLOR);
       UIManager.put("TableHeader.font", Styles.MEDIUM);
       UIManager.put("Table.font", Styles.MEDIUM);
-      UIManager.put("Table.foreground", Styles.TEXT_COLOR);
+      UIManager.put("OptionPane.messageFont", Styles.MEDIUM);
+      UIManager.put("OptionPane.buttonFont", Styles.MEDIUM);
+      UIManager.put("OptionPane.messageForeground", Styles.TEXT_COLOR);
+      UIManager.put("FileChooser.saveButtonText", "Save");
+      UIManager.put("FileChooser.cancelButtonText", "Cancel");
       UIManager.put("OptionPane.okButtonText", "Done");
       UIManager.put("OptionPane.cancelButtonText", "No, thanks.");
       UIManager.put("OptionPane.yesButtonText", "Yes, it's okay.");
       UIManager.put("OptionPane.noButtonText", "No, thanks.");
-      UIManager.put("OptionPane.messageFont", Styles.MEDIUM);
-      UIManager.put("OptionPane.buttonFont", Styles.MEDIUM);
-      UIManager.put("OptionPane.messageForeground", Styles.TEXT_COLOR);
 
     } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException
              | IllegalAccessException e) {
@@ -138,17 +139,17 @@ public class HomeView extends JFrame {
     window.setLocationRelativeTo(null);
     window.setTitle(Config.get(AppConfig.TITLE.getProperty()));
     model.getWallpapers()[service.getBackground() - 1].setForeground(Styles.MAIN_COLOR);
-    model.getTextureMode().setForeground(Styles.MAIN_COLOR);
+    model.getGrayMode().setForeground(Styles.MAIN_COLOR);
     Effects.fadeIn(window);
     window.setVisible(true);
   }
 
   private void createComponents() {
 
-    setIconImage(new ImageIcon(Resources.getImage("more.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("about.png")).getImage());
 
     JMenuBar menuBar = new JMenuBar();
-    JMenu about = new Menu().setText("About").setImage("more").build();
+    JMenu about = new Menu().setText("About").setImage("about").build();
     JMenu exit = new Menu().setText("Exit").setImage("exit").build();
     JMenu send = new Menu().setText("Send Feedback").setImage("send").build();
     JMenu games = new Menu().setText("Games").setImage("games").build();
@@ -166,29 +167,31 @@ public class HomeView extends JFrame {
     JMenu themes = new Menu().setText("Theme").setImage("mode").build();
     JMenu changeUI = new Menu().setText("Change UI").setImage("UI").build();
 
-    JMenuItem contact = new MenuItem().setText("Contact").setImage("developer").build();
-    contact.addActionListener(e -> {
-      new BusinessCardView(this, true).start(this);
-      setVisible(true);
-    });
-
     JMenuItem github = new MenuItem().setText("GitHub").setImage("github").build();
     github.addActionListener(e -> {
           if (GeneralUtils.verifyConnection("Connect to see more!", service.isWork())) {
-            GeneralUtils.openUrl("https://github.com/Moncada25/Bookverse");
+            GeneralUtils.openUrl("https://github.com/Moncada25/PackApps");
           }
         }
     );
 
-    JMenuItem moreBookverse = new MenuItem().setText("Bookverse").setImage("books").build();
-    moreBookverse.addActionListener(e -> {
+    JMenuItem linkedin = new MenuItem().setText("LinkedIn").setImage("linkedin").build();
+    linkedin.addActionListener(e -> {
+          if (GeneralUtils.verifyConnection("Connect to see more!", service.isWork())) {
+            GeneralUtils.openUrl("https://www.linkedin.com/in/santiagomoncadavelez");
+          }
+        }
+    );
+
+    JMenuItem bookverse = new MenuItem().setText("Bookverse").setImage("books").build();
+    bookverse.addActionListener(e -> {
           if (GeneralUtils.verifyConnection("Connect to see more!", service.isWork())) {
             GeneralUtils.openUrl("http://localhost/Bookverse/home/");
           }
         }
     );
 
-    addMenu(about, contact, github, moreBookverse);
+    addMenu(about, github, linkedin, bookverse);
 
     JMenuItem yesExit = new MenuItem().setText("Are you sure?").setImage("salir").build();
     yesExit.addActionListener(e -> Effects.fadeOut(this));

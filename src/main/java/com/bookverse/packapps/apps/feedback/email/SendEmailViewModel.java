@@ -1,4 +1,4 @@
-package com.bookverse.packapps.apps.email;
+package com.bookverse.packapps.apps.feedback.email;
 
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;

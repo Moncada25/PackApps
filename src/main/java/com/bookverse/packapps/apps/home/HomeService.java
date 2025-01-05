@@ -25,7 +25,7 @@ import com.bookverse.packapps.utils.ui.Wallpaper;
 public class HomeService {
 
   private boolean isWork = true;
-  private int background = 2;
+  private int background = 8;
   private static final List<Wallpaper> WALLPAPERS = List.of(
       new Wallpaper("img1.jpg", 529, 660),
       new Wallpaper("img2.jpg", 1100, 618),
@@ -148,7 +148,6 @@ public class HomeService {
         UIManager.put("MenuItem.foreground", Styles.TEXT_COLOR);
         UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
         UIManager.put("Button.foreground", Color.BLACK);
-        UIManager.put("Table.focusCellHighlightBorder", Styles.BORDER_BLUE);
         UIManager.put("TableHeader.foreground", Styles.MAIN_COLOR);
         UIManager.put("Table.foreground", Styles.TEXT_COLOR);
         UIManager.put("OptionPane.messageForeground", Styles.TEXT_COLOR);
@@ -160,7 +159,6 @@ public class HomeService {
         UIManager.put("Button.foreground", Color.BLACK);
         UIManager.put("MenuItem.foreground", Styles.TEXT_COLOR);
         UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
-        UIManager.put("Table.focusCellHighlightBorder", Styles.BORDER_BLUE);
         UIManager.put("TableHeader.foreground", Styles.MAIN_COLOR);
         UIManager.put("Table.foreground", Styles.TEXT_COLOR);
         UIManager.put("OptionPane.messageForeground", Styles.TEXT_COLOR);
@@ -174,7 +172,6 @@ public class HomeService {
       UIManager.put("MenuItem.foreground", Styles.TEXT_COLOR);
       UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
       UIManager.put("Button.foreground", new Color(0, 0, 0));
-      UIManager.put("Table.focusCellHighlightBorder", Styles.BORDER_BLUE);
       UIManager.put("TableHeader.foreground", Styles.MAIN_COLOR);
       UIManager.put("Table.foreground", Styles.TEXT_COLOR);
       UIManager.put("OptionPane.messageForeground", Styles.TEXT_COLOR);

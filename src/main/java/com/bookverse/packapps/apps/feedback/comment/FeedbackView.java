@@ -1,4 +1,4 @@
-package com.bookverse.packapps.apps.feedback;
+package com.bookverse.packapps.apps.feedback.comment;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
