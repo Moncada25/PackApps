@@ -4,7 +4,7 @@
 This repository contains a collection of applications and utilities developed in Java, organized into various modules. It is designed to demonstrate concepts such as modular programming, data structures, algorithms, graphical user interface development, and automated testing. Additionally, it includes integrations with databases and other tools.
 
 ## Project Content 📦
-### Apps
+### Apps and Utilities
 Independent modules implementing various functionalities or interactive games:
 - **Arrays:** Management and visualization of array operations.
 - **Dices:** Dice game.
@@ -20,6 +20,8 @@ Independent modules implementing various functionalities or interactive games:
 - **Store:** Inventory and user management system.
 - **TicTacToe:** Tic-Tac-Toe game.
 - **Whatsapp:** Basic messaging service simulation.
+- **Customizable UI**: Switch between **different themes** and **wallpapers** dynamically for a personalized experience.
+- **Data Management**: Export data from the database to various formats: **Excel**, **TXT**, and **PDF** files.
 
 ### Core
 Entry point of the system with the main class to launch the application.
@@ -60,7 +62,7 @@ This project utilizes a wide range of technologies and tools for its development
 - **Java:** The main programming language for the entire project, ensuring cross-platform compatibility.
 - **Swing:** Used for building graphical user interfaces (GUIs) for the applications. This allows for interactive and user-friendly experiences in games and tools.
 - **Gradle:** Build automation tool used for dependency management, building, and running the project.
-- **Lombok:** A Java library that helps reduce boilerplate code through annotations like @Getter, @Setter, and @Builder.
+- **Lombok:** A Java library that helps reduce boilerplate code through annotations like @Data or @SneakyThrows.
 - **Serenity BDD:** A robust framework for writing and maintaining automated tests, providing detailed reports and reusable components for behavior-driven development (BDD).
 - **SonarQube:** Tool for analyzing code quality, ensuring compliance with best practices and detecting bugs, code smells, and vulnerabilities.
 - **MySQL:** Relational database management system used for storing data persistently.
@@ -134,4 +136,4 @@ This project is licensed under the terms of the MIT License.
 ## Contact 📧
 For questions or feedback, feel free to reach out: <br>
 📧 Email: [santiago.moncada.dev@gmail.com](mailto:santiago.moncada.dev@gmail.com) <br>
-📚 LinkedIn: [Santiago Moncada](https://www.linkedin.com/in/santiago-moncada-dev/)
+📚 LinkedIn: [Santiago Moncada](https://www.linkedin.com/in/santiagomoncadavelez/)
