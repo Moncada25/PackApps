@@ -7,12 +7,10 @@ import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-
 import org.apache.commons.codec.binary.Base64;
-
 import com.bookverse.packapps.utils.ui.Alerts;
 
-import static com.bookverse.packapps.utils.constants.AppConfig.DEFAULT_ENCRYPT_KEY;
+import com.bookverse.packapps.utils.constants.Configs;
 
 public final class Crypto {
 
@@ -67,7 +65,7 @@ public final class Crypto {
   }
 
   private static String getSecretKey(boolean useDefaultKey) {
-    return useDefaultKey ? Config.get(DEFAULT_ENCRYPT_KEY.getProperty()) : setSecretKey();
+    return useDefaultKey ? GeneralUtils.getConfig(Configs.DEFAULT_ENCRYPT_KEY) : setSecretKey();
   }
 
   private Crypto() {

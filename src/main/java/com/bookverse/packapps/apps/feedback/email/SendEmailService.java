@@ -1,5 +1,6 @@
 package com.bookverse.packapps.apps.feedback.email;
 
+import com.bookverse.packapps.utils.constants.Configs;
 import java.util.Properties;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
@@ -9,8 +10,6 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import com.bookverse.packapps.utils.GeneralUtils;
 import com.bookverse.packapps.utils.ui.Alerts;
-import com.bookverse.packapps.utils.constants.AppConfig;
-import com.bookverse.packapps.utils.Config;
 import com.bookverse.packapps.utils.Format;
 
 public class SendEmailService {
@@ -29,7 +28,7 @@ public class SendEmailService {
     if (Format.isEmail(receiver)) {
       model.getToOther().setText(receiver);
     } else {
-      receiver = Config.get(AppConfig.DEVELOPER_EMAIL.getProperty());
+      receiver = GeneralUtils.getConfig(Configs.DEVELOPER_EMAIL);
       model.getToDeveloper().setSelected(true);
       model.getToOther().setText("Other");
       Alerts.message("Verify!", "Invalid email, make sure it's Gmail.");
@@ -38,7 +37,7 @@ public class SendEmailService {
 
   public void sendEmailToDeveloper(SendEmailViewModel model) {
     model.getToOther().setText("Other");
-    receiver = Config.get(AppConfig.DEVELOPER_EMAIL.getProperty());
+    receiver = GeneralUtils.getConfig(Configs.DEVELOPER_EMAIL);
   }
 
   public void clickOnSend(SendEmailViewModel model) {

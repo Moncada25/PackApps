@@ -1,9 +1,9 @@
 package com.bookverse.packapps.apps.store.signup;
 
 import com.bookverse.packapps.repositories.OlderRepository;
-import com.bookverse.packapps.utils.constants.AppConfig;
+import com.bookverse.packapps.utils.GeneralUtils;
+import com.bookverse.packapps.utils.constants.Configs;
 import com.bookverse.packapps.utils.constants.DatabaseConstants;
-import com.bookverse.packapps.utils.Config;
 import com.bookverse.packapps.utils.Crypto;
 import com.bookverse.packapps.utils.Format;
 import com.bookverse.packapps.utils.ui.Alerts;
@@ -23,7 +23,7 @@ public class SignUpService {
   public void clickOnSignUp(SignUpViewModel model) {
 
     if (String.valueOf(model.getTxtCodManager().getPassword())
-        .equals(Config.get(AppConfig.STORE_MANAGER_KEY.getProperty()))) {
+        .equals(GeneralUtils.getConfig(Configs.STORE_MANAGER_KEY))) {
 
       model.getTxtUser().setEnabled(true);
       model.getTxtPassword().setEnabled(true);

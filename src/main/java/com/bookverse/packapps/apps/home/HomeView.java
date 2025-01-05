@@ -12,11 +12,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.UIManager;
+import org.junit.runner.JUnitCore;
 import javax.swing.UnsupportedLookAndFeelException;
 import com.bookverse.packapps.apps.puzzle.Levels;
 import com.bookverse.packapps.automation.runners.RegisterUserTest;
 import com.bookverse.packapps.utils.ui.Wallpaper;
-import com.bookverse.packapps.utils.constants.AppConfig;
 import com.bookverse.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.packapps.utils.constants.Styles;
 import com.bookverse.packapps.apps.dices.DicesGameView;
@@ -29,7 +29,6 @@ import com.bookverse.packapps.apps.structures.StructuresView;
 import com.bookverse.packapps.apps.texts.TextsView;
 import com.bookverse.packapps.apps.whatsapp.WhatsappView;
 import com.bookverse.packapps.utils.GeneralUtils;
-import com.bookverse.packapps.utils.Config;
 import com.bookverse.packapps.utils.ui.Resources;
 import com.bookverse.packapps.utils.ExportFile;
 import com.bookverse.packapps.utils.Format;
@@ -56,7 +55,7 @@ import com.bookverse.packapps.views.older.store.CashRegisterTable;
 import com.bookverse.packapps.views.older.store.PurchasesTable;
 import com.bookverse.packapps.apps.tables.PuzzleTable;
 import com.bookverse.packapps.views.older.store.SalesTable;
-import org.junit.runner.JUnitCore;
+import com.bookverse.packapps.utils.constants.Configs;
 
 public class HomeView extends JFrame {
 
@@ -137,7 +136,7 @@ public class HomeView extends JFrame {
     window.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     window.setResizable(false);
     window.setLocationRelativeTo(null);
-    window.setTitle(Config.get(AppConfig.TITLE.getProperty()));
+    window.setTitle(GeneralUtils.getConfig(Configs.TITLE));
     model.getWallpapers()[service.getBackground() - 1].setForeground(Styles.MAIN_COLOR);
     model.getGrayMode().setForeground(Styles.MAIN_COLOR);
     Effects.fadeIn(window);
