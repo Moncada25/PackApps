@@ -41,6 +41,13 @@ test {
     finalizedBy(aggregate)
 }
 
+tasks.register("run", JavaExec) {
+    group = "Execution"
+    description = "Create test cycle execution"
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass.set("com.bookverse.packapps.core.Start")
+}
+
 jar {
     manifest {
         attributes(
