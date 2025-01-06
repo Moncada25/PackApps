@@ -185,7 +185,7 @@ public class HomeView extends JFrame {
     JMenuItem bookverse = new MenuItem().setText("Bookverse").setImage("books").build();
     bookverse.addActionListener(e -> {
           if (GeneralUtils.verifyConnection("Connect to see more!", service.isWork())) {
-            GeneralUtils.openUrl("http://localhost/Bookverse/home/");
+            GeneralUtils.openUrl("https://www.bookverse.me/home/");
           }
         }
     );

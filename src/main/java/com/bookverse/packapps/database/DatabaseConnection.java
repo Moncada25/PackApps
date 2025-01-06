@@ -26,18 +26,24 @@ public final class DatabaseConnection {
       return connection;
     }
 
+    final String JDBC_URL = String.format(
+        "jdbc:mysql://%s:3306/%s?serverTimezone=UTC",
+        SerenityConf.getDatabaseConfig("hostname"),
+        SerenityConf.getDatabaseConfig("database")
+    );
+
     try (BasicDataSource basicDataSource = new BasicDataSource()) {
-      basicDataSource.setDriverClassName(DatabaseConstants.JDBC_DRIVER);
+      basicDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
       basicDataSource.setUsername(SerenityConf.getDatabaseConfig("username"));
       basicDataSource.setPassword(SerenityConf.getDatabaseConfig("password"));
-      basicDataSource.setUrl(DatabaseConstants.JDBC_URL);
+      basicDataSource.setUrl(JDBC_URL);
       basicDataSource.setMaxTotal(250);
       basicDataSource.setMaxIdle(100);
       basicDataSource.setMinIdle(50);
 
       connection = basicDataSource.getConnection();
     } catch (SQLException e) {
-      throw new SQLException("Failed to connect to database ", e);
+      throw new SQLException("Failed to connect to database: "+e.getMessage(), e);
     }
 
     return connection;
