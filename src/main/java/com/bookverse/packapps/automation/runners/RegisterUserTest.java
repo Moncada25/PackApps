@@ -32,7 +32,7 @@ public class RegisterUserTest {
 
   @BeforeClass
   public static void setUp() {
-    SerenitySession.createActorForWeb(SerenityConf.getDevUrl(), false, GeneralConstants.ACTOR);
+    SerenitySession.createActorForWeb(SerenityConf.getProdUrl(), false, GeneralConstants.ACTOR);
   }
 
   @Test

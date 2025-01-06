@@ -46,4 +46,9 @@ object SerenityConf {
     fun getDevUrl(): String {
         return getEnvironmentConfig("dev")!!
     }
+
+    @JvmStatic
+    fun getProdUrl(): String {
+        return getEnvironmentConfig("prod")!!
+    }
 }
