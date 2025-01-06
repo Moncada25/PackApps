@@ -311,7 +311,7 @@ public class HomeView extends JFrame {
       setVisible(true);
     });
 
-    JMenuItem texts = new MenuItem().setText("Texts").setImage("textos").build();
+    JMenuItem texts = new MenuItem().setText("Texts").setImage("texts").build();
     texts.addActionListener(e -> {
       new TextsView(this, true).start(this);
       setVisible(true);

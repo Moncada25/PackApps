@@ -4,7 +4,7 @@ import com.bookverse.packapps.repositories.OlderRepository;
 import com.bookverse.packapps.utils.GeneralUtils;
 import com.bookverse.packapps.utils.constants.Configs;
 import com.bookverse.packapps.utils.constants.DatabaseConstants;
-import com.bookverse.packapps.utils.Crypto;
+import com.bookverse.packapps.utils.Auth;
 import com.bookverse.packapps.utils.Format;
 import com.bookverse.packapps.utils.ui.Alerts;
 import com.bookverse.packapps.utils.ui.Effects;
@@ -34,7 +34,7 @@ public class SignUpService {
 
         if (!OlderRepository.userAlreadyExist(model.getTxtUser().getText())) {
 
-          String[] data = {DatabaseConstants.USERS, model.getTxtUser().getText(), Crypto.encrypt(String.valueOf(
+          String[] data = {DatabaseConstants.USERS, model.getTxtUser().getText(), Auth.encode(String.valueOf(
               model.getTxtPassword().getPassword()), true), "Offline"};
 
           OlderRepository.insertData(data);

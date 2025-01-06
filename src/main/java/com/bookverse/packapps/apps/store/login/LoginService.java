@@ -6,7 +6,7 @@ import javax.swing.JTextField;
 import lombok.Data;
 import com.bookverse.packapps.apps.store.home.HomeView;
 import com.bookverse.packapps.repositories.OlderRepository;
-import com.bookverse.packapps.utils.Crypto;
+import com.bookverse.packapps.utils.Auth;
 import com.bookverse.packapps.utils.ui.Alerts;
 
 @Data
@@ -17,7 +17,7 @@ public class LoginService {
       Alerts.inputSomethingText();
     } else {
 
-      String password = Crypto.encrypt(String.valueOf(txtPassword.getPassword()), true);
+      String password = Auth.encode(String.valueOf(txtPassword.getPassword()), true);
 
       if (OlderRepository.searchStoreUser(txtUser.getText(), password)) {
         OlderRepository.recordLogin("Online", txtUser.getText());
