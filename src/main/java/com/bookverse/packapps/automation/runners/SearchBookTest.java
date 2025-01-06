@@ -49,7 +49,7 @@ public class SearchBookTest {
 
     actor.wasAbleTo(Login.user(bookverseUser));
     actor.attemptsTo(SearchBook.inBookverse(bookverseUser.book()));
-    actor.should(seeThat(TheBook.hasTitle(), is(bookverseUser.name())));
+    actor.should(seeThat(TheBook.hasTitle(), is(bookverseUser.book())));
   }
 
   @AfterClass
