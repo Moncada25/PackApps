@@ -1,11 +1,13 @@
 package com.bookverse.packapps.apps.whatsapp;
 
+import com.bookverse.packapps.utils.ui.factory.Label;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -50,11 +52,16 @@ public class WhatsappView extends JDialog {
   private void createComponents() {
     setLayout(new GridBagLayout());
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+    setIconImage(new ImageIcon(Resources.getImage("whatsapp.png")).getImage());
+
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.insets = new Insets(10, 20, 10, 20);
     gbc.fill = GridBagConstraints.HORIZONTAL;
 
-    JLabel lblPhone = Resources.getLabel("Phone", Styles.TEXT_COLOR, this, Styles.MEDIUM);
+    JLabel lblPhone = new Label().setText("Phone without country code")
+        .setColor(Styles.TEXT_COLOR)
+        .setFont(Styles.MEDIUM)
+        .build();
     gbc.gridx = 0;
     gbc.gridy = 0;
     gbc.gridwidth = 2;
@@ -80,7 +87,11 @@ public class WhatsappView extends JDialog {
     gbc.gridwidth = 2;
     add(txtNumber, gbc);
 
-    JLabel lblMessage = Resources.getLabel("Message", Styles.TEXT_COLOR, this, Styles.MEDIUM);
+    JLabel lblMessage = new Label()
+        .setText("Message to send")
+        .setColor(Styles.TEXT_COLOR)
+        .setFont(Styles.MEDIUM)
+        .build();
     gbc.gridx = 0;
     gbc.gridy = 2;
     gbc.gridwidth = 2;

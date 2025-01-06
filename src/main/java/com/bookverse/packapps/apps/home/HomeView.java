@@ -161,7 +161,7 @@ public class HomeView extends JFrame {
     JMenu exportTXT = new Menu().setText("Plain Text").setImage("txt").build();
     JMenu exportEXCEL = new Menu().setText("Excel").setImage("excel").build();
     JMenu exportPDF = new Menu().setText("PDF").setImage("pdf").build();
-    JMenu tasks = new Menu().setText("Tasks").setImage("task").build();
+    JMenu tasks = new Menu().setText("Automation").setImage("task").build();
     JMenu changeBackground = new Menu().setText("Wallpaper").setImage("wallpaper").build();
     JMenu themes = new Menu().setText("Theme").setImage("themes").build();
     JMenu changeUI = new Menu().setText("Change UI").setImage("UI").build();
@@ -665,7 +665,7 @@ public class HomeView extends JFrame {
 
     addMenu(export, exportTXT, exportEXCEL, exportPDF);
 
-    JMenuItem searchBook = new MenuItem().setText("Search Book").setImage("searchBook").build();
+    JMenuItem searchBook = new MenuItem().setText("Search Book").setImage("search_book").build();
     searchBook.addActionListener(e -> {
       new SearchBookView(this, true).start(this);
       setVisible(true);
@@ -710,7 +710,7 @@ public class HomeView extends JFrame {
     addMenu(
         tools,
         changeUI,
-        export,
+        tasks,
         notes,
         ocr,
         qr,
@@ -718,8 +718,8 @@ public class HomeView extends JFrame {
         store,
         whatsApp,
         structures,
-        tasks,
-        texts
+        texts,
+        export
     );
 
     menuBar.add(about);

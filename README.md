@@ -114,62 +114,26 @@ Navigate to the root directory and execute:
 
 ## Build and Packaging 📦
 
-### Generate the Executable JAR File
-To generate a runnable JAR file for the application:
-
-1. Ensure all dependencies are included in `build/libs` by running: ```./gradlew clean build```
-2. Locate the JAR file in build/libs. It will typically be named something like PackApps.jar.
-3. Run the JAR file with the following command to verify it works: ```java -jar build/libs/PackApps.jar```
-
-### Package the Application as a MacOS `.app`
-Use jpackage to create a `.app` bundle for MacOS.
-
 **Prerequisites:** <br>
-- Java 14+ (for jpackage) and Java 21 (to run the application).
-- Install jpackage if not included in your JDK.
+- Java 14+ (for jpackage) and Java 21 (to run the application)
+- Install jpackage if not included in your JDK
+- For Mac builds: macOS system
+- For Windows builds: Windows system
 
-**Command:** <br>
-Run the following in the terminal from the root directory of the project:
-```shell 
-  jpackage \
-  --input build/libs \
-  --name "Bookverse" \
-  --main-jar PackApps.jar \
-  --main-class com.bookverse.packapps.core.Start \
-  --type app-image \
-  --vendor "Bookverse" \
-  --icon src/main/resources/icons/cat.icns \
-  --resource-dir src/main/resources \
-  --resource-dir libs
-```
+### Using the Packaging Script
+We provide a shell script that handles the packaging process for both MacOS and Windows. <br>
+First, make the script executable: ```chmod +x package-app.sh```
 
-**Output:** <br>
-The `.app` bundle will be generated in the build directory. You can move it to `/Applications` or distribute it as needed.
+**For MacOS builds**:
+- Ensure the `PLATFORM` variable in the script is set to "Mac"
+- Run the script: ```./package-app.sh```
+- The script will create a `.app` bundle and a `.dmg` installer in the build directory
 
-### Package the Application as a Windows `.exe`
-You can also create a Windows .exe installer using jpackage.
+**For Windows builds**:
+- Ensure the `PLATFORM` variable in the script is set to "Windows"
+- Run the script: ```./package-app.sh```
+- The script will create the application directory and an `.exe` installer in the build directory
 
-**Prerequisites:** <br>
-- Java 14+ (with jpackage) installed.
-- A Windows system for building the .exe.
-
-**Command:** <br>
-Run the following in the terminal (Command Prompt or PowerShell):
-```shell 
-  jpackage \
-  --input build/libs \
-  --name "Bookverse" \
-  --main-jar PackApps.jar \
-  --main-class com.bookverse.packapps.core.Start \
-  --type exe \
-  --vendor "Bookverse" \
-  --icon src/main/resources/icons/cat.ico \
-  --resource-dir src/main/resources \
-  --resource-dir libs
-```
-
-**Output:** <br>
-The `.exe` installer will be created in the `build` directory. Run this installer to set up the application on a Windows system.
 
 ## Collaborators 🤝
 Do you want to contribute? Great! <br>
