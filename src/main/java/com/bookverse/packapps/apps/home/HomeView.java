@@ -262,7 +262,8 @@ public class HomeView extends JFrame {
       setVisible(true);
     });
 
-    JMenuItem ticTacToePvsCPU = new MenuItem().setText("Player vs CPU (beta)").setImage("jvscpu").build();
+    JMenuItem ticTacToePvsCPU = new MenuItem().setText("Player vs CPU (beta)").setImage("jvscpu")
+        .build();
     ticTacToePvsCPU.addActionListener(e -> {
       new TicTacToeView(this, true, true).start(this);
       setVisible(true);
@@ -303,7 +304,6 @@ public class HomeView extends JFrame {
       new NumbersView(this, true).start(this);
       setVisible(true);
     });
-
 
     JMenuItem notes = new MenuItem().setText("Notes").setImage("notes").build();
     notes.addActionListener(e -> {
@@ -380,7 +380,8 @@ public class HomeView extends JFrame {
       );
     });
 
-    JMenuItem cashRegisterTXT = new MenuItem().setText("Cash Register").setImage("registradora").build();
+    JMenuItem cashRegisterTXT = new MenuItem().setText("Cash Register").setImage("registradora")
+        .build();
     cashRegisterTXT.addActionListener(e -> {
       cashRegisterTable.cleanTable();
       ExportFile.txt(
@@ -421,7 +422,8 @@ public class HomeView extends JFrame {
         salesTXT
     );
 
-    JMenuItem guessNumberEXCEL = new MenuItem().setText("Guess Number").setImage("adivinar").build();
+    JMenuItem guessNumberEXCEL = new MenuItem().setText("Guess Number").setImage("adivinar")
+        .build();
     guessNumberEXCEL.addActionListener(e -> {
       guessNumberTable.cleanTable();
       ExportFile.excel(
@@ -491,7 +493,8 @@ public class HomeView extends JFrame {
       );
     });
 
-    JMenuItem cashRegisterEXCEL = new MenuItem().setText("Cash Register").setImage("registradora").build();
+    JMenuItem cashRegisterEXCEL = new MenuItem().setText("Cash Register").setImage("registradora")
+        .build();
     cashRegisterEXCEL.addActionListener(e -> {
       cashRegisterTable.cleanTable();
       ExportFile.excel(
@@ -612,7 +615,8 @@ public class HomeView extends JFrame {
       );
     });
 
-    JMenuItem cashRegisterPDF = new MenuItem().setText("Cash Register").setImage("registradora").build();
+    JMenuItem cashRegisterPDF = new MenuItem().setText("Cash Register").setImage("registradora")
+        .build();
     cashRegisterPDF.addActionListener(e -> {
       cashRegisterTable.cleanTable();
       ExportFile.pdf(
@@ -667,7 +671,8 @@ public class HomeView extends JFrame {
       setVisible(true);
     });
 
-    JMenuItem registerUser = new MenuItem().setText("Register User").setImage("añadir_usuario").build();
+    JMenuItem registerUser = new MenuItem().setText("Register User").setImage("añadir_usuario")
+        .build();
     registerUser.addActionListener(e -> JUnitCore.runClasses(RegisterUserTest.class));
 
     addMenu(tasks, searchBook, registerUser);
@@ -677,13 +682,15 @@ public class HomeView extends JFrame {
 
     addMenu(
         themes,
-        model.getDefaultMode(),
-        model.getDarkMode(),
-        model.getTextureMode(),
-        model.getMacMode(),
+        model.getAeroMode(),
+        model.getBlackMode(),
+        model.getClassicMode(),
         model.getGrayMode(),
+        model.getTextureMode(),
+        model.getFastMode(),
         model.getMintMode(),
-        model.getClassicMode()
+        model.getMacMode(),
+        model.getDarkMode()
     );
 
     addMenu(changeUI, themes, changeBackground);
@@ -726,24 +733,14 @@ public class HomeView extends JFrame {
 
   private void createThemes() {
 
-    model.setDefaultMode(new MenuItem().setText("Default").setImage("default_theme").build());
-    model.getDefaultMode().addActionListener(e -> {
-      if (model.getDefaultMode().getForeground() == Styles.MAIN_COLOR) {
+    model.setBlackMode(new MenuItem().setText("Black").setImage("black").build());
+    model.getBlackMode().addActionListener(e -> {
+      if (model.getBlackMode().getForeground() == Styles.MAIN_COLOR) {
         Alerts.elementApplied(true);
         return;
       }
 
-      service.setTheme(model, Themes.DEFAULT, this);
-    });
-
-    model.setDarkMode(new MenuItem().setText("Dark").setImage("dark").build());
-    model.getDarkMode().addActionListener(e -> {
-      if (model.getDarkMode().getForeground() == Styles.MAIN_COLOR) {
-        Alerts.elementApplied(true);
-        return;
-      }
-
-      service.setTheme(model, Themes.DARK, this);
+      service.setTheme(model, Themes.BLACK, this);
     });
 
     model.setTextureMode(new MenuItem().setText("Texture").setImage("texture").build());
@@ -778,7 +775,7 @@ public class HomeView extends JFrame {
 
     model.setMintMode(new MenuItem().setText("Mint").setImage("mint").build());
     model.getMintMode().addActionListener(e -> {
-      if (model.getDarkMode().getForeground() == Styles.MAIN_COLOR) {
+      if (model.getBlackMode().getForeground() == Styles.MAIN_COLOR) {
         Alerts.elementApplied(true);
         return;
       }
@@ -794,6 +791,36 @@ public class HomeView extends JFrame {
       }
 
       service.setTheme(model, Themes.CLASSIC, this);
+    });
+
+    model.setFastMode(new MenuItem().setText("Fast").setImage("fast").build());
+    model.getFastMode().addActionListener(e -> {
+      if (model.getFastMode().getForeground() == Styles.MAIN_COLOR) {
+        Alerts.elementApplied(true);
+        return;
+      }
+
+      service.setTheme(model, Themes.FAST, this);
+    });
+
+    model.setDarkMode(new MenuItem().setText("Dark").setImage("dark").build());
+    model.getDarkMode().addActionListener(e -> {
+      if (model.getDarkMode().getForeground() == Styles.MAIN_COLOR) {
+        Alerts.elementApplied(true);
+        return;
+      }
+
+      service.setTheme(model, Themes.DARK, this);
+    });
+
+    model.setAeroMode(new MenuItem().setText("Aero").setImage("aero").build());
+    model.getAeroMode().addActionListener(e -> {
+      if (model.getAeroMode().getForeground() == Styles.MAIN_COLOR) {
+        Alerts.elementApplied(true);
+        return;
+      }
+
+      service.setTheme(model, Themes.AERO, this);
     });
   }
 

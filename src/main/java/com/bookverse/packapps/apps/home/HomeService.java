@@ -96,22 +96,77 @@ public class HomeService {
         });
   }
 
-  @SneakyThrows
   public void setTheme(HomeViewModel model, String selectedUI, JFrame parent) {
 
-    model.getDarkMode().setForeground(Styles.TEXT_COLOR);
+    changeTheme(selectedUI, model);
+
+    parent.dispose();
+
+    HomeView window = new HomeView();
+    model.setWelcome(new JLabel());
+
+    Wallpaper wallpaper = getWallpaper(background - 1);
+
+    window.setSize(wallpaper.width(), wallpaper.height());
+    window.add(model.getWelcome(), BorderLayout.CENTER);
+
+    changeBackgroundAP(
+        model,
+        wallpaper.name(),
+        wallpaper.width(),
+        wallpaper.height(),
+        parent
+    );
+
+    window.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+    window.setResizable(false);
+    window.setLocationRelativeTo(null);
+    window.setTitle(parent.getTitle());
+    model.getWallpapers()[background - 1].setForeground(Styles.MAIN_COLOR);
+
+    switch (selectedUI) {
+      case Themes.GRAY -> model.getGrayMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.TEXTURE -> model.getTextureMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.DARK -> model.getDarkMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.MAC -> model.getMacMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.MINT -> model.getMintMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.CLASSIC -> model.getClassicMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.BLACK -> model.getBlackMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.FAST -> model.getFastMode().setForeground(Styles.MAIN_COLOR);
+      case Themes.AERO -> model.getAeroMode().setForeground(Styles.MAIN_COLOR);
+
+      default -> throw new IllegalStateException("Unexpected value: " + selectedUI);
+    }
+
+    Effects.fadeIn(window);
+    window.setVisible(true);
+    Alerts.changeUI(selectedUI);
+  }
+
+  @SneakyThrows
+  private static void changeTheme(String selectedUI, HomeViewModel model) {
+
+    List<String> lightThemes = List.of(Themes.GRAY, Themes.FAST, Themes.AERO);
+    List<String> darkThemes = List.of(Themes.BLACK, Themes.DARK);
+
+    model.getBlackMode().setForeground(Styles.TEXT_COLOR);
     model.getTextureMode().setForeground(Styles.TEXT_COLOR);
     model.getMintMode().setForeground(Styles.TEXT_COLOR);
     model.getClassicMode().setForeground(Styles.TEXT_COLOR);
     model.getMacMode().setForeground(Styles.TEXT_COLOR);
     model.getGrayMode().setForeground(Styles.TEXT_COLOR);
+    model.getFastMode().setForeground(Styles.TEXT_COLOR);
+    model.getDarkMode().setForeground(Styles.TEXT_COLOR);
+    model.getAeroMode().setForeground(Styles.TEXT_COLOR);
 
     switch (selectedUI) {
 
-      case Themes.DEFAULT ->
-          UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-      case Themes.GRAY ->
-          UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+      case Themes.GRAY -> UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+      case Themes.FAST -> UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
+      case Themes.DARK -> UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+      case Themes.BLACK -> UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+      case Themes.AERO -> UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
+
       case Themes.TEXTURE -> {
         UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
         UIManager.put("MenuItem.foreground", Color.WHITE);
@@ -120,16 +175,6 @@ public class HomeService {
         UIManager.put("Table.foreground", Styles.TEXT_COLOR);
         UIManager.put("OptionPane.messageForeground", Styles.TEXT_COLOR);
         UIManager.put("Button.foreground", Color.BLACK);
-      }
-
-      case Themes.DARK -> {
-        UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
-        UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
-        UIManager.put("ComboBox.foreground", Color.WHITE);
-        UIManager.put("Table.foreground", Color.WHITE);
-        UIManager.put("OptionPane.messageForeground", Color.WHITE);
-        UIManager.put("Button.foreground", Color.WHITE);
-        UIManager.put("MenuItem.foreground", Color.WHITE);
       }
 
       case Themes.MAC -> {
@@ -167,7 +212,7 @@ public class HomeService {
       default -> throw new IllegalStateException("Unexpected value: " + selectedUI);
     }
 
-    if (selectedUI.equals(Themes.DEFAULT) || selectedUI.equals(Themes.GRAY)) {
+    if (lightThemes.contains(selectedUI)) {
       UIManager.put("ComboBox.foreground", new Color(0, 0, 0));
       UIManager.put("MenuItem.foreground", Styles.TEXT_COLOR);
       UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
@@ -177,44 +222,14 @@ public class HomeService {
       UIManager.put("OptionPane.messageForeground", Styles.TEXT_COLOR);
     }
 
-    parent.dispose();
-
-    HomeView window = new HomeView();
-    model.setWelcome(new JLabel());
-
-    Wallpaper wallpaper = getWallpaper(background - 1);
-
-    window.setSize(wallpaper.width(), wallpaper.height());
-    window.add(model.getWelcome(), BorderLayout.CENTER);
-
-    changeBackgroundAP(
-        model,
-        wallpaper.name(),
-        wallpaper.width(),
-        wallpaper.height(),
-        parent
-    );
-
-    window.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-    window.setResizable(false);
-    window.setLocationRelativeTo(null);
-    window.setTitle(parent.getTitle());
-    model.getWallpapers()[background - 1].setForeground(Styles.MAIN_COLOR);
-
-    switch (selectedUI) {
-      case Themes.DEFAULT -> model.getDefaultMode().setForeground(Styles.MAIN_COLOR);
-      case Themes.GRAY -> model.getGrayMode().setForeground(Styles.MAIN_COLOR);
-      case Themes.TEXTURE -> model.getTextureMode().setForeground(Styles.MAIN_COLOR);
-      case Themes.DARK -> model.getDarkMode().setForeground(Styles.MAIN_COLOR);
-      case Themes.MAC -> model.getMacMode().setForeground(Styles.MAIN_COLOR);
-      case Themes.MINT -> model.getMintMode().setForeground(Styles.MAIN_COLOR);
-      case Themes.CLASSIC -> model.getClassicMode().setForeground(Styles.MAIN_COLOR);
-      default -> throw new IllegalStateException("Unexpected value: " + selectedUI);
+    if (darkThemes.contains(selectedUI)) {
+      UIManager.put("Menu.foreground", Styles.MAIN_COLOR);
+      UIManager.put("ComboBox.foreground", Color.WHITE);
+      UIManager.put("Table.foreground", Color.WHITE);
+      UIManager.put("OptionPane.messageForeground", Color.WHITE);
+      UIManager.put("Button.foreground", Color.WHITE);
+      UIManager.put("MenuItem.foreground", Color.WHITE);
     }
-
-    Effects.fadeIn(window);
-    window.setVisible(true);
-    Alerts.changeUI(selectedUI);
   }
 
   public Wallpaper getWallpaper(int index) {
