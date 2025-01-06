@@ -43,7 +43,7 @@ public class TicTacToeView extends JDialog {
 
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(Resources.getImage("triqui.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("tictactoe.png")).getImage());
 
     JLabel lblNameX = new Label().setText("Player X → ")
         .setColor(model.getColorX())

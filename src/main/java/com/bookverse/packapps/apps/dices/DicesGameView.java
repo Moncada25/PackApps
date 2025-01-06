@@ -49,7 +49,7 @@ public class DicesGameView extends JDialog {
   private void createComponents() {
     setLayout(null);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(Resources.getImage("dado.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("dice.png")).getImage());
 
     JButton btnExit = new Button().setText("Return").setColor(Styles.MAIN_COLOR).build();
     btnExit.setBounds(330, 320, 86, 30);

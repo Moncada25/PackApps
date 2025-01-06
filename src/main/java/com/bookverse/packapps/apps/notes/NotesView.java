@@ -57,7 +57,7 @@ public class NotesView extends JDialog {
   private void createComponents() {
     setLayout(new GridBagLayout());
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    setIconImage(new ImageIcon(Resources.getImage("notas.png")).getImage());
+    setIconImage(new ImageIcon(Resources.getImage("notes.png")).getImage());
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.insets = new Insets(7, 7, 7, 7);
     gbc.fill = GridBagConstraints.BOTH;

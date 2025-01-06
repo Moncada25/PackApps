@@ -154,16 +154,16 @@ public class HomeView extends JFrame {
     JMenu games = new Menu().setText("Games").setImage("games").build();
     JMenu guessNumberMenu = new Menu().setText("Guess Number").setImage("adivinar").build();
     JMenu puzzle = new Menu().setText("Puzzle").setImage("rompecabezas").build();
-    JMenu ticTacToe = new Menu().setText("Tic Tac Toe").setImage("triqui").build();
-    JMenu scores = new Menu().setText("Data").setImage("data").build();
+    JMenu ticTacToe = new Menu().setText("Tic Tac Toe").setImage("tictactoe").build();
+    JMenu scores = new Menu().setText("Data").setImage("database").build();
     JMenu tools = new Menu().setText("Tools").setImage("tools").build();
     JMenu export = new Menu().setText("Export").setImage("export").build();
-    JMenu exportTXT = new Menu().setText("Document TXT").setImage("txt").build();
-    JMenu exportEXCEL = new Menu().setText("Document XLS").setImage("excel").build();
-    JMenu exportPDF = new Menu().setText("Document PDF").setImage("pdf").build();
+    JMenu exportTXT = new Menu().setText("Plain Text").setImage("txt").build();
+    JMenu exportEXCEL = new Menu().setText("Excel").setImage("excel").build();
+    JMenu exportPDF = new Menu().setText("PDF").setImage("pdf").build();
     JMenu tasks = new Menu().setText("Tasks").setImage("task").build();
-    JMenu changeBackground = new Menu().setText("Wallpaper").setImage("background").build();
-    JMenu themes = new Menu().setText("Theme").setImage("mode").build();
+    JMenu changeBackground = new Menu().setText("Wallpaper").setImage("wallpaper").build();
+    JMenu themes = new Menu().setText("Theme").setImage("themes").build();
     JMenu changeUI = new Menu().setText("Change UI").setImage("UI").build();
 
     JMenuItem github = new MenuItem().setText("GitHub").setImage("github").build();
@@ -216,7 +216,7 @@ public class HomeView extends JFrame {
       setVisible(true);
     });
 
-    JMenuItem dices = new MenuItem().setText("Dices").setImage("dado").build();
+    JMenuItem dices = new MenuItem().setText("Dices").setImage("dice").build();
     dices.addActionListener(e -> {
       new DicesGameView(this, true).start(this);
       setVisible(true);
@@ -271,7 +271,7 @@ public class HomeView extends JFrame {
     addMenu(ticTacToe, ticTacToePvsP, ticTacToePvsCPU);
     addMenu(games, hangman, dices, guessNumberMenu, puzzle, ticTacToe);
 
-    JMenuItem database = new MenuItem().setText("Database").setImage("tabla").build();
+    JMenuItem database = new MenuItem().setText("Database").setImage("data").build();
     database.addActionListener(e -> {
       if (dicesTable.openTable(this)) {
         setVisible(true);
@@ -304,7 +304,8 @@ public class HomeView extends JFrame {
       setVisible(true);
     });
 
-    JMenuItem notes = new MenuItem().setText("Notes").setImage("notas").build();
+
+    JMenuItem notes = new MenuItem().setText("Notes").setImage("notes").build();
     notes.addActionListener(e -> {
       new NotesView(this, true).start(this);
       setVisible(true);
@@ -343,7 +344,7 @@ public class HomeView extends JFrame {
       );
     });
 
-    JMenuItem dicesTXT = new MenuItem().setText("Dices").setImage("dado").build();
+    JMenuItem dicesTXT = new MenuItem().setText("Dices").setImage("dice").build();
     dicesTXT.addActionListener(e -> {
       dicesTable.cleanTable();
       ExportFile.txt(
@@ -352,7 +353,7 @@ public class HomeView extends JFrame {
       );
     });
 
-    JMenuItem notesTXT = new MenuItem().setText("Notes").setImage("notas").build();
+    JMenuItem notesTXT = new MenuItem().setText("Notes").setImage("notes").build();
     notesTXT.addActionListener(e -> {
       notesTable.cleanTable();
       ExportFile.txt(
@@ -450,7 +451,7 @@ public class HomeView extends JFrame {
       );
     });
 
-    JMenuItem dicesEXCEL = new MenuItem().setText("Dices").setImage("dado").build();
+    JMenuItem dicesEXCEL = new MenuItem().setText("Dices").setImage("dice").build();
     dicesEXCEL.addActionListener(e -> {
       dicesTable.cleanTable();
       ExportFile.excel(
@@ -460,7 +461,7 @@ public class HomeView extends JFrame {
       );
     });
 
-    JMenuItem notesEXCEL = new MenuItem().setText("Notes").setImage("notas").build();
+    JMenuItem notesEXCEL = new MenuItem().setText("Notes").setImage("notes").build();
     notesEXCEL.addActionListener(e -> {
       notesTable.cleanTable();
       ExportFile.excel(
@@ -567,7 +568,7 @@ public class HomeView extends JFrame {
       );
     });
 
-    JMenuItem dicesPDF = new MenuItem().setText("Dices").setImage("dado").build();
+    JMenuItem dicesPDF = new MenuItem().setText("Dices").setImage("dice").build();
     dicesPDF.addActionListener(e -> {
       dicesTable.cleanTable();
       ExportFile.pdf(
@@ -578,7 +579,7 @@ public class HomeView extends JFrame {
       );
     });
 
-    JMenuItem notesPDF = new MenuItem().setText("Notes").setImage("notas").build();
+    JMenuItem notesPDF = new MenuItem().setText("Notes").setImage("notes").build();
     notesPDF.addActionListener(e -> {
       notesTable.cleanTable();
       ExportFile.pdf(
@@ -800,7 +801,7 @@ public class HomeView extends JFrame {
     IntStream.range(0, model.getWallpapers().length).forEach(i -> {
       model.getWallpapers()[i] = new JMenuItem("Image " + (i + 1));
       model.getWallpapers()[i].setForeground(Styles.TEXT_COLOR);
-      model.getWallpapers()[i].setIcon(new ImageIcon(Resources.getImage("backs.png")));
+      model.getWallpapers()[i].setIcon(new ImageIcon(Resources.getImage("stars.png")));
       model.getWallpapers()[i].addActionListener(e -> service.setWallpaper(model, e, this));
       changeBackground.add(model.getWallpapers()[i]);
       changeBackground.addSeparator();
