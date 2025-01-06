@@ -49,7 +49,7 @@ public class NotesTable extends JDialog implements MouseListener {
     columns.put("STATE", 40);
     columns.put("DATE", 140);
 
-    defaultTable.createTable(this, "notas.png", columns, this, viewTable);
+    defaultTable.createTable(this, "notes.png", columns, this, viewTable);
 
     JMenuItem create = new MenuItem().setText("Create").setImage("create").build();
     create.addActionListener(e -> {

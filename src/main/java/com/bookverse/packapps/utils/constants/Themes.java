@@ -2,13 +2,15 @@ package com.bookverse.packapps.utils.constants;
 
 public final class Themes {
 
-  public static final String DEFAULT = "Default";
   public static final String GRAY = "Gray";
-  public static final String DARK = "Dark";
+  public static final String BLACK = "Black";
   public static final String TEXTURE = "Texture";
   public static final String MINT = "Mint";
   public static final String CLASSIC = "Classic";
   public static final String MAC = "Mac";
+  public static final String FAST = "Fast";
+  public static final String DARK = "Dark";
+  public static final String AERO = "Aero";
 
   private Themes() {
   }

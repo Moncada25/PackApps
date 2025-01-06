@@ -18,13 +18,15 @@ import lombok.Data;
 public class HomeViewModel {
   private JLabel welcome;
   private JMenuItem[] wallpapers = new JMenuItem[14];
-  private JMenuItem darkMode;
-  private JMenuItem defaultMode;
+  private JMenuItem blackMode;
   private JMenuItem textureMode;
   private JMenuItem mintMode;
   private JMenuItem classicMode;
   private JMenuItem macMode;
   private JMenuItem grayMode;
+  private JMenuItem fastMode;
+  private JMenuItem darkMode;
+  private JMenuItem aeroMode;
   private HangmanTable hangmanTable;
   private GuessNumberTable guessNumberTable;
   private PuzzleTable puzzleTable;

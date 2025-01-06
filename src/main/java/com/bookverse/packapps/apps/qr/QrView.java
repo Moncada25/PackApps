@@ -108,8 +108,8 @@ public class QrView extends JDialog {
           model.getTextArea().requestFocus();
         } else {
           String qr = service.createQR(model.getTextArea().getText(), 400, 400);
-          Alerts.message("QR Code Generated", "Saved in " + GeneralUtils.getOutputDirectory() + "qr_codes/");
           service.showQRGenerated(qr, QrView.this);
+          Alerts.export(qr);
         }
       }
 

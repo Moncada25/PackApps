@@ -9,7 +9,7 @@ import static com.bookverse.packapps.utils.constants.DatabaseConstants.USERS;
 
 import com.bookverse.packapps.apps.store.home.HomeService;
 import com.bookverse.packapps.apps.store.signup.SignUpView;
-import com.bookverse.packapps.utils.Crypto;
+import com.bookverse.packapps.utils.Auth;
 import com.bookverse.packapps.utils.GeneralUtils;
 import com.bookverse.packapps.utils.ui.Resources;
 import com.bookverse.packapps.repositories.OlderRepository;
@@ -155,7 +155,7 @@ public class UsersTable extends JDialog implements MouseListener {
         try {
 
           if (OlderRepository.searchStoreUser(user,
-              Crypto.encrypt(Alerts.inputPassword("Enter password"), true))) {
+              Auth.encode(Alerts.inputPassword("Enter password"), true))) {
 
             Object option = null;
 
@@ -176,7 +176,7 @@ public class UsersTable extends JDialog implements MouseListener {
                   Alerts.message("Message", "The password are too weak, please try again.");
                 } else {
 
-                  OlderRepository.updatePassword(user, Crypto.encrypt(newPassword, true));
+                  OlderRepository.updatePassword(user, Auth.encode(newPassword, true));
                   Alerts.message("Success", "Password updated!");
                   dispose();
                   service.clickOnUsersTable(this);

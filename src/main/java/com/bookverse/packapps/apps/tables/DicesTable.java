@@ -48,7 +48,7 @@ public class DicesTable extends JDialog implements MouseListener {
     columns.put("ROUND", 20);
     columns.put("DATE", 120);
 
-    defaultTable.createTable(this, "dado.png", columns, this, viewTable);
+    defaultTable.createTable(this, "dice.png", columns, this, viewTable);
 
     JMenuItem create = new MenuItem().setText("Create").setImage("create").build();
     create.addActionListener(e -> {

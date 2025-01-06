@@ -12,9 +12,9 @@ import com.bookverse.packapps.utils.ui.Alerts;
 
 import com.bookverse.packapps.utils.constants.Configs;
 
-public final class Crypto {
+public final class Auth {
 
-  public static String encrypt(String text, boolean useDefaultKey) {
+  public static String encode(String text, boolean useDefaultKey) {
     try {
       SecretKey key = generateKey(getSecretKey(useDefaultKey));
       Cipher cipher = Cipher.getInstance("AES");
@@ -30,7 +30,7 @@ public final class Crypto {
     }
   }
 
-  public static String decrypt(String text, boolean isEmail) {
+  public static String decode(String text, boolean isEmail) {
     try {
       byte[] message = Base64.decodeBase64(text.getBytes(StandardCharsets.UTF_8));
       SecretKey key = generateKey(getSecretKey(isEmail));
@@ -68,6 +68,6 @@ public final class Crypto {
     return useDefaultKey ? GeneralUtils.getConfig(Configs.DEFAULT_ENCRYPT_KEY) : setSecretKey();
   }
 
-  private Crypto() {
+  private Auth() {
   }
 }

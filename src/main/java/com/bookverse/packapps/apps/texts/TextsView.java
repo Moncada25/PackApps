@@ -5,13 +5,14 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import com.bookverse.packapps.utils.Crypto;
+import com.bookverse.packapps.utils.Auth;
 import com.bookverse.packapps.utils.constants.Styles;
 import com.bookverse.packapps.utils.ui.KeyBindingsUtil;
 import com.bookverse.packapps.utils.ui.Resources;
@@ -59,7 +60,7 @@ public class TextsView extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         if (!text.getText().isEmpty()) {
-          text.setText(Crypto.encrypt(text.getText(), false));
+          text.setText(Auth.encode(text.getText(), false));
         } else {
           Alerts.inputSomethingText();
         }
@@ -143,7 +144,7 @@ public class TextsView extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         if (!text.getText().isEmpty()) {
-          text.setText(Crypto.decrypt(text.getText(), false));
+          text.setText(Auth.decode(text.getText(), false));
         } else {
           Alerts.inputSomethingText();
         }
@@ -162,6 +163,7 @@ public class TextsView extends JDialog {
   private void createComponents() {
 
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+    setIconImage(new ImageIcon(Resources.getImage("texts.png")).getImage());
 
     textsTitle = Resources.getLabel("<html><strong>Write Text... 0</strong></html>", Styles.MAIN_COLOR, this, Styles.MEDIUM);
     textsTitle.setBounds(30, 15, 370, 50);
