@@ -1,8 +1,10 @@
 package com.bookverse.packapps.apps.tasks;
 
+import com.bookverse.packapps.utils.LoadingUtil;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.IntStream;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -45,11 +47,13 @@ public class SearchBookView extends JDialog {
     setLayout(null);
     setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-    JLabel searchBookTitle = new Label().setText("Search book").setColor(Styles.MAIN_COLOR).setFont(Styles.BIG).build();
+    JLabel searchBookTitle = new Label().setText("Search book").setColor(Styles.MAIN_COLOR)
+        .setFont(Styles.BIG).build();
     searchBookTitle.setBounds(95, 5, 250, 40);
     add(searchBookTitle);
 
-    JLabel user = new Label().setText("Username").setColor(Styles.TEXT_COLOR).setFont(Styles.MEDIUM).build();
+    JLabel user = new Label().setText("Username").setColor(Styles.TEXT_COLOR).setFont(Styles.MEDIUM)
+        .build();
     user.setBounds(30, 60, 120, 30);
     add(user);
 
@@ -64,7 +68,8 @@ public class SearchBookView extends JDialog {
     });
     add(txtUser);
 
-    JLabel password = new Label().setText("Password").setColor(Styles.TEXT_COLOR).setFont(Styles.MEDIUM).build();
+    JLabel password = new Label().setText("Password").setColor(Styles.TEXT_COLOR)
+        .setFont(Styles.MEDIUM).build();
     password.setBounds(30, 113, 120, 30);
     add(password);
 
@@ -87,9 +92,18 @@ public class SearchBookView extends JDialog {
     });
     add(txtPassword);
 
-    List<String> listBooks = OlderRepository.getListBook();
+    AtomicReference<List<String>> listBooks = new AtomicReference<>();
 
-    IntStream.range(0, listBooks.size()).forEach(i -> books.addItem(listBooks.get(i)));
+    Boolean result = LoadingUtil.executeWithLoading(this, () -> {
+      listBooks.set(OlderRepository.getListBook());
+      return true;
+    });
+
+    if (result != null && result) {
+      IntStream.range(0, listBooks.get().size()).forEach(i ->
+          books.addItem(listBooks.get().get(i))
+      );
+    }
 
     books.setFont(Styles.SMALL);
     books.setBounds(50, 165, 320, 30);
