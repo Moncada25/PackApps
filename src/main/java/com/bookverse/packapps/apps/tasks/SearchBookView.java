@@ -92,7 +92,7 @@ public class SearchBookView extends JDialog {
     IntStream.range(0, listBooks.size()).forEach(i -> books.addItem(listBooks.get(i)));
 
     books.setFont(Styles.SMALL);
-    books.setBounds(95, 165, 260, 30);
+    books.setBounds(50, 165, 320, 30);
     ((JLabel) books.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
     add(books);
 
