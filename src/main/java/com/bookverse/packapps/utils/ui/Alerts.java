@@ -1,7 +1,6 @@
 package com.bookverse.packapps.utils.ui;
 
 import com.bookverse.packapps.utils.Format;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +19,7 @@ public final class Alerts {
 
       text = Alerts.inputText(request);
 
-      if (text != null && !text.trim().isEmpty() && Pattern.matches("^[a-zA-Z]*$", text)) {
+      if (text != null && !text.trim().isEmpty()) {
 
         if (text.length() <= length) {
           canContinue = true;
@@ -203,30 +202,6 @@ public final class Alerts {
         "Success", JOptionPane.PLAIN_MESSAGE);
   }
 
-  public static void fieldMailRequired() {
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong><center>Secure credentials</center></strong><br>"
-            + "The use of this medium is authorized by Google through<br>"
-            + "the use of its JavaMail API, your data is protected!</html>",
-        "Required field!", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public static void instruccionesRuleta() {
-
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style() + "<strong><center>Ruleta</center></strong><br>"
-            + "<strong>Jugadores: </strong>1-9<br><br>"
-            + "Al iniciar, se pedirá el número de jugadores<br>"
-            + "que participarán. Luego, tendrá que ingresar<br>"
-            + "la información de cada jugador (nombre y saldo).<br><br>"
-            + "Finalmente, empezarán las apuestas pertinentes<br>"
-            + "teniendo en cuenta lo siguiente: de ganar se le<br>"
-            + "sumará al saldo el doble del valor de la apuesta y<br>"
-            + "<strong>¡apostar por el cero (0) implica perder x2 y ganar x4!</strong><br>"
-            + "</html>",
-        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
-  }
-
   public static void instruccionesDados() {
     JOptionPane.showMessageDialog(null,
         "<html>" + Format.style() + "<strong><center>Juego de Dados</center></strong><br>"
@@ -298,18 +273,6 @@ public final class Alerts {
             + "de palabras para jugar. Tienes " + maxAttepmts + " intentos para digitar<br>"
             + "letra por letra la palabra secreta, ¡pero no te tardes!<br>"
             + "tendrás " + (minutes * 60 + seconds) + " segundos para ganar."
-            + "</html>",
-        "Instrucciones", JOptionPane.PLAIN_MESSAGE);
-  }
-
-  public static void instruccionesPreguntas() {
-    JOptionPane.showMessageDialog(null,
-        "<html>" + Format.style()
-            + "<strong><center>Quién quiere ser millonario</center></strong><br>"
-            + "<strong>Jugadores: </strong>1<br><br>"
-            + "El juego empieza cuando se selecciona una categoría<br>"
-            + "de preguntas para jugar. Tendrás que adivinar<br>"
-            + "la respuesta correcta para avanzar de nivel,<br>"
             + "</html>",
         "Instrucciones", JOptionPane.PLAIN_MESSAGE);
   }

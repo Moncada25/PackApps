@@ -1,5 +1,6 @@
 package com.bookverse.packapps.apps.tables;
 
+import com.bookverse.packapps.utils.LoadingUtil;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -74,26 +75,25 @@ public class HangmanTable extends JDialog implements MouseListener {
   }
 
   public void openTable() {
-
-    cleanTable();
-
-    try {
+    Boolean result = LoadingUtil.executeWithLoading(this, () -> {
+      cleanTable();
       OlderRepository.readTable(
           viewTable,
           Queries.getAllData(Format.tableName(DatabaseConstants.HANGMAN)),
           true
       );
-    } catch (Exception e1) {
-      Alerts.error(e1, DatabaseConstants.HANGMAN);
-    }
+      return true;
+    });
 
-    setSize(900, 400);
-    setLocationRelativeTo(null);
-    setMinimumSize(new Dimension(900, 400));
-    setMaximumSize(new Dimension(1280, 720));
-    setTitle(DatabaseConstants.HANGMAN + " Information");
-    Effects.fadeIn(this);
-    setVisible(true);
+    if (result != null && result) {
+      setSize(900, 400);
+      setLocationRelativeTo(null);
+      setMinimumSize(new Dimension(900, 400));
+      setMaximumSize(new Dimension(1280, 720));
+      setTitle(DatabaseConstants.HANGMAN + " Information");
+      Effects.fadeIn(this);
+      setVisible(true);
+    }
   }
 
   private void btnConsultHangmanTable() {

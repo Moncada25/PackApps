@@ -21,6 +21,7 @@ import com.bookverse.packapps.utils.Format;
 import com.bookverse.packapps.database.Queries;
 import com.bookverse.packapps.apps.dices.DicesGameView;
 import com.bookverse.packapps.utils.ui.factory.MenuItem;
+import com.bookverse.packapps.utils.LoadingUtil;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -74,19 +75,16 @@ public class DicesTable extends JDialog implements MouseListener {
   }
 
   public boolean openTable(Component parent) {
-    boolean aux = false;
-
-    cleanTable();
-
-    try {
-      aux = OlderRepository.readTable(
-          viewTable, Queries.getAllData(DatabaseConstants.DICES), true
+    Boolean result = LoadingUtil.executeWithLoading(parent, () -> {
+      cleanTable();
+      return OlderRepository.readTable(
+          viewTable,
+          Queries.getAllData(DatabaseConstants.DICES),
+          true
       );
-    } catch (Exception e1) {
-      Alerts.error(e1, DatabaseConstants.DICES);
-    }
+    });
 
-    if (aux) {
+    if (result != null && result) {
       parent.setVisible(false);
       setSize(900, 400);
       setLocationRelativeTo(null);
@@ -95,9 +93,10 @@ public class DicesTable extends JDialog implements MouseListener {
       setTitle(DatabaseConstants.DICES + " Information");
       Effects.fadeIn(this);
       setVisible(true);
+      return true;
     }
 
-    return aux;
+    return false;
   }
 
   @Override

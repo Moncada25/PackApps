@@ -16,13 +16,6 @@ public final class DatabaseConstants {
   public static final String SALES = "Sales";
   public static final String BOOKS = "Libro";
 
-  public static final String NAME_DB = "packapps";
-  public static final String HOSTNAME_DB = "localhost";
-  public static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-  public static final String JDBC_URL = String.format(
-      "jdbc:mysql://%s:3306/%s?serverTimezone=UTC", HOSTNAME_DB, NAME_DB
-  );
-
   private DatabaseConstants() {
   }
 }

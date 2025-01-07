@@ -188,6 +188,7 @@ public final class OlderRepository {
       }
 
     } catch (SQLException e) {
+      System.out.println(e.getMessage());
       Alerts.error(e, "Database");
     }
 
