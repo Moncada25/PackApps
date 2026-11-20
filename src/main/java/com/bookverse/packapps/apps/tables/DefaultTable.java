@@ -1,5 +1,6 @@
 package com.bookverse.packapps.apps.tables;
 
+import com.bookverse.packapps.database.Query;
 import com.bookverse.packapps.utils.ui.factory.Menu;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -112,7 +113,7 @@ public class DefaultTable extends DefaultTableModel {
     parent.repaint();
   }
 
-  public void searchResult(JDialog parent, int size, String query, Map<String, Integer> columns) {
+  public void searchResult(JDialog parent, int size, Query query, Map<String, Integer> columns) {
 
     ResultTable resultTable = new ResultTable(parent, true, columns);
 

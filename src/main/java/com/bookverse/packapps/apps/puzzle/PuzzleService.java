@@ -147,7 +147,7 @@ public class PuzzleService {
 
   private void insert(String state, PuzzleViewModel model) {
 
-    if (GeneralUtils.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (Alerts.saveGame()) {
 
       String[] data = {DatabaseConstants.PUZZLE, Alerts.inputText("Enter a Nickname", 20), state,
           getLevel(model), String.valueOf(moviments), Format.getDate()};

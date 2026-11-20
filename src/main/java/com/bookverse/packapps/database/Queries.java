@@ -1,6 +1,5 @@
 package com.bookverse.packapps.database;
 
-import static com.bookverse.packapps.utils.constants.DatabaseConstants.BOOKS;
 import static com.bookverse.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.packapps.utils.constants.DatabaseConstants.DICES;
 import static com.bookverse.packapps.utils.constants.DatabaseConstants.FEEDBACK;
@@ -21,35 +20,27 @@ import org.jetbrains.annotations.NotNull;
 public final class Queries {
 
   @NotNull
-  public static String getDataByID(String table) {
-    return "SELECT * FROM " + Format.tableName(table) + " WHERE ID ='" + Alerts
-        .inputNumber("Enter a ID", 6) + "'";
+  public static Query getDataByID(String table) {
+    return new Query("SELECT * FROM " + Format.tableName(table) + " WHERE ID = ?", Alerts.inputNumber("Enter a ID", 6));
   }
 
   @NotNull
-  public static String getDataByNickname(String table) {
-    return "SELECT * FROM " + Format.tableName(table) + " WHERE Nickname ='" + Alerts
-        .inputText("Enter a Nickname", 20) + "'";
-  }
-
-  @NotNull
-  @Contract(pure = true)
-  public static String getAllData(String table) {
-    return "SELECT * FROM " + Format.tableName(table);
+  public static Query getDataByNickname(String table) {
+    return new Query("SELECT * FROM " + Format.tableName(table) + " WHERE Nickname = ?", Alerts.inputText("Enter a Nickname", 20));
   }
 
   @NotNull
   @Contract(pure = true)
-  public static String updateNickname(String nickname, String ID, String table) {
-    return "UPDATE " + Format.tableName(table) + " SET Nickname='" + nickname + "' WHERE ID='" + ID
-        + "'";
+  public static Query getAllData(String table) {
+    return new Query("SELECT * FROM " + Format.tableName(table));
   }
 
   @NotNull
   @Contract(pure = true)
-  public static String deleteDataByID(String id, String table) {
-    return "DELETE FROM " + Format.tableName(table) + " WHERE ID ='" + id + "'";
+  public static Query updateNickname(String nickname, String ID, String table) {
+    return new Query("UPDATE " + Format.tableName(table) + " SET Nickname=? WHERE ID=?", nickname, ID);
   }
+
 
   @NotNull
   public static String insertGuessNumber() {
@@ -115,62 +106,46 @@ public final class Queries {
         + " (IdProduct,User,Document,Phone,Date,Units,Total) VALUES (?,?,?,?,?,?,?)";
   }
 
-  public static String updateCashRegisterSales(String user, int soldProducts, double totalSales) {
-    return "UPDATE " + Format.tableName(CASH_REGISTER) + " SET SoldProducts ='" + soldProducts
-        + "', TotalSales='" + totalSales + "' WHERE User='" + user + "'";
+  public static Query updateCashRegisterSales(String user, int soldProducts, double totalSales) {
+    return new Query("UPDATE cashregister SET SoldProducts=?, TotalSales=? WHERE User=?", soldProducts, totalSales, user);
   }
 
-  public static String updateInventory(String reference, int units) {
-    return "UPDATE " + Format.tableName(INVENTORY) + " SET Quantity='" + units + "' WHERE ID='"
-        + reference + "'";
+  public static Query updateInventory(String reference, int units) {
+    return new Query("UPDATE inventory SET Quantity=? WHERE ID=?", units, reference);
   }
 
-  public static String getDataProduct(String reference, String table) {
-    return "SELECT * FROM " + Format.tableName(table) + " WHERE ID ='" + reference + "'";
+  public static Query getDataProduct(String reference, String table) {
+    return new Query("SELECT * FROM " + Format.tableName(table) + " WHERE ID=?", reference);
   }
 
-  public static String updateCashRegisterPurchases(String user, int purchasedProducts,
+  public static Query updateCashRegisterPurchases(String user, int purchasedProducts,
       double totalPurchases) {
-    return "UPDATE " + Format.tableName(CASH_REGISTER) + " SET PurchasedProducts ='"
-        + purchasedProducts + "', TotalPurchases='" + totalPurchases + "' WHERE User='" + user
-        + "'";
+    return new Query("UPDATE cashregister SET PurchasedProducts=?, TotalPurchases=? WHERE User=?", purchasedProducts,totalPurchases,user);
   }
 
-  public static String updateCashRegisterLoan(String user, double totalLoan) {
-    return "UPDATE " + Format.tableName(CASH_REGISTER) + " SET TotalLoans='" + totalLoan
-        + "' WHERE User='" + user + "'";
+  public static Query updateCashRegisterLoan(String user, double totalLoan) {
+    return new Query("UPDATE cashregister SET TotalLoans=? WHERE User=?", totalLoan,user);
   }
 
-  public static String recordLogin(String status, String user) {
-    return "UPDATE " + Format.tableName(USERS) + " SET Status='" + status + "' WHERE Username='"
-        + user + "'";
+  public static Query recordLogin(String status, String user) {
+    return new Query("UPDATE users SET Status=? WHERE Username=?", status,user);
   }
 
-  public static String searchDataUserInCashRegister(String user) {
-    return "SELECT * FROM " + Format.tableName(CASH_REGISTER) + " WHERE User='" + user + "'";
+  public static Query searchDataUserInCashRegister(String user) {
+    return new Query("SELECT * FROM cashregister WHERE User=?", user);
   }
 
-  public static String searchUser(String user) {
-    return "SELECT * FROM " + Format.tableName(USERS) + " WHERE Username ='" + user + "'";
+  public static Query searchUser(String user) {
+    return new Query("SELECT * FROM users WHERE Username=?", user);
   }
 
-  public static String searchUserRegister(String user, String password) {
-    return "SELECT * FROM " + Format.tableName(USERS) + " WHERE Username='" + user
-        + "' AND Password='" + password + "'";
+
+  public static Query updatePassword(String user, String newPassword) {
+    return new Query("UPDATE users SET Password=? WHERE Username=?", newPassword,user);
   }
 
-  public static String updatePassword(String user, String newPassword) {
-    return "UPDATE " + Format.tableName(USERS) + " SET Password='" + newPassword
-        + "' WHERE Username='" + user + "'";
+  public static Query updateUsername(String user, String newUsername) {
+    return new Query("UPDATE users SET Username=? WHERE Username=?", newUsername,user);
   }
 
-  public static String updateUsername(String user, String newUsername) {
-    return "UPDATE " + Format.tableName(USERS) + " SET Username='" + newUsername
-        + "' WHERE Username='" + user + "'";
-  }
-
-  @NotNull
-  public static String getTitleBooks() {
-    return "SELECT LibroTitulo FROM " + Format.tableName(BOOKS);
-  }
 }

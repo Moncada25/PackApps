@@ -37,28 +37,26 @@ public class WhatsappService {
   @SneakyThrows
   public void clickOnOpen(JTextField number, JComboBox<String> countries, JTextArea message) {
 
-    if (GeneralUtils.verifyConnection("Connect to see more!", true)) {
 
-      if (number.getText().length() >= 8) {
+    if (number.getText().length() >= 8) {
 
-        String country = Objects.requireNonNull(countries.getSelectedItem()).toString();
+      String country = Objects.requireNonNull(countries.getSelectedItem()).toString();
 
-        if (SELECT_COUNTRY.equals(country)) {
-          Alerts.message("Verify!", "Select a country");
-        } else {
-
-          GeneralUtils.openUrl(String.format(
-              URL,
-              COUNTRIES.get(country) + number.getText(),
-              message.getText().replaceAll("\\s", "+"))
-          );
-        }
-
+      if (SELECT_COUNTRY.equals(country)) {
+        Alerts.message("Verify!", "Select a country");
       } else {
 
-        Alerts.message("Verify!", "Phone number too short.");
-        number.requestFocus();
+        GeneralUtils.openUrl(String.format(
+            URL,
+            COUNTRIES.get(country) + number.getText(),
+            message.getText().replaceAll("\\s", "+"))
+        );
       }
+
+    } else {
+
+      Alerts.message("Verify!", "Phone number too short.");
+      number.requestFocus();
     }
   }
 

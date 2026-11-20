@@ -1,161 +1,42 @@
-# PackApps by Bookverse 🤖 
+# PackApps by Bookverse
 
-## Introduction 🚀
-This repository contains a collection of applications and utilities developed in Java, organized into various modules. It is designed to demonstrate concepts such as modular programming, data structures, algorithms, graphical user interface development, and automated testing. Additionally, it includes integrations with databases and other tools.
+[Español](README.es.md) · [Releases](https://github.com/Moncada25/PackApps/releases) · [Contribute](CONTRIBUTING.md)
 
-## Project Content ✅
-### Apps and Utilities
-Independent modules implementing various functionalities or interactive games:
-- **Arrays:** Management and visualization of array operations.
-- **Dices:** Dice game.
-- **Feedback:** Feedback and email sending.
-- **GuessNumber:** Number guessing game.
-- **Hangman:** Hangman game.
-- **Notes:** Notes management system.
-- **Numbers:** Calculator, operations with prime numbers, and constants like Phi.
-- **OCR:** Optical character recognition.
-- **Puzzle:** Puzzle-solving.
-- **QR:** QR code generation.
-- **Queues and Stacks:** Implementation of basic data structures.
-- **Store:** Inventory and user management system.
-- **TicTacToe:** Tic-Tac-Toe game.
-- **Whatsapp:** Basic messaging service simulation.
-- **Customizable UI**: Switch between **different themes** and **wallpapers** dynamically for a personalized experience.
-- **Data Management**: Export data from the database to various formats: **Excel**, **TXT**, and **PDF** files.
+PackApps began in 2018 as Santiago Moncada’s university desktop project. Open a menu and play Hangman, roll the dice or challenge the tic-tac-toe CPU. The same Swing desktop holds a tiny shop, grade calculator, data structures, OCR and QR tools. Its nine looks and fourteen space wallpapers carry the original design into version 5.
 
-### Core
-Entry point of the system with the main class to launch the application.
+![PackApps desktop with the Pillars of Creation wallpaper](docs/media/home.png)
+![Two-player tic-tac-toe board](docs/media/game.png)
 
-### Automation
-Automated tests using Serenity to validate application functionalities. Includes:
-- **Tasks:** Automated action flows.
-- **Runners:** Main test classes.
-- **Questions:** Validations for automated tests.
-- **UserInterfaces:** Interface elements used in tests.
-- **Utils:** General utilities and configurations for tests.
+## Install
 
-### Database
-Module for database connection with queries and repositories, including specific examples such as note management.
+Choose your file in **Assets** on the release page. Version 5 includes Java 25, SQLite and English and Spanish OCR. [GitHub Releases](https://github.com/Moncada25/PackApps/releases)
 
-### Resources
-- **Configuration files:** Information such as `config.properties`.
-- **Images:** Graphic resources for applications.
-- **Tessdata:** Training data files for OCR recognition.
-- **Data:** Sample data such as databases and JSON files.
+| Desktop | Download | Open |
+|---|---|---|
+| Windows x64 | `*-windows-x64.exe` | Run the per-user installer and open PackApps from Start. |
+| Mac with Apple Silicon | `*-macos-arm64.dmg` | Open the disk image and drag PackApps to Applications. |
+| Mac with Intel | `*-macos-x64.dmg` | Choose Intel if About This Mac lists an Intel processor. |
+| Debian or Ubuntu x64 | `*-linux-x64.deb` | Run `sudo apt install ./PackApps-5.0.0-linux-x64.deb`. |
+| Other Linux x64 desktops | `*-linux-x64.tar.gz` | Extract on a glibc-based desktop and run `PackApps/bin/PackApps`. |
 
-## Project Structure 📂
-```plaintext
-PackApps/
-├── README.md
-├── gradlew, gradle-wrapper.properties
-├── serenity.properties, sonar-project.properties
-├── src/
-│   ├── main/java/     # Source code for the apps.
-│   ├── resources/     # Additional resources (images, databases, etc.).
-├── libs/              # Libraries required for execution.
-├── test/resources/    # Configuration for automated tests.
-```
+Download SHA256SUMS alongside the package. On macOS use `shasum -a 256 FILE`, on Linux use `sha256sum FILE`, and on Windows use `Get-FileHash FILE -Algorithm SHA256`. Compare all 64 hexadecimal characters with the matching filename. macOS builds use an ad hoc signature, so Gatekeeper can ask you to allow the app in Privacy & Security. Windows SmartScreen can identify the publisher as unknown because the installer has no Authenticode signature.
 
-## Technologies and Tools 🛠️
-This project utilizes a wide range of technologies and tools for its development, testing, and deployment:
+## Explore the desktop
 
-- **Java:** The main programming language for the entire project, ensuring cross-platform compatibility.
-- **Swing:** Used for building graphical user interfaces (GUIs) for the applications. This allows for interactive and user-friendly experiences in games and tools.
-- **Gradle:** Build automation tool used for dependency management, building, and running the project.
-- **Lombok:** A Java library that helps reduce boilerplate code through annotations like @Data or @SneakyThrows.
-- **Serenity BDD:** A robust framework for writing and maintaining automated tests, providing detailed reports and reusable components for behavior-driven development (BDD).
-- **SonarQube:** Tool for analyzing code quality, ensuring compliance with best practices and detecting bugs, code smells, and vulnerabilities.
-- **MySQL:** Relational database management system used for storing data persistently.
-- **OCR (Optical Character Recognition):** Integrated with Tesseract to enable text recognition capabilities within images, expanding the functionality of certain applications.
-- **QRCode Generator:** Libraries such as ZXing are used for generating QR codes in the QR module.
-- **Design Patterns:** Implements design patterns like Singleton for resource management and MVC (Model-View-Controller) for applications with GUIs, ensuring separation of concerns and maintainable code.
-- **Java Native Libraries:** Utilized for specific functionalities like accessing file systems or manipulating images.
-- **JUnit:** Framework for unit testing the core logic of applications, ensuring reliable and maintainable code.
-- **Apache Commons Libraries:** Provides utility classes and methods for handling collections, IO operations, and string manipulations effectively.
-- **Tessdata:** Training datasets for improving OCR recognition accuracy.
+- **Games** includes Hangman, dice, Guess Number, sliding puzzles and tic-tac-toe with two players or the CPU.
+- **Tools** includes grade calculations, arrays, stacks, queues, number and text utilities, bilingual image OCR, QR creation and reading, WhatsApp Web links and the inventory and sales simulator.
+- **Data and Export** let you revisit records and export TXT, Excel 97–2003 XLS and PDF. The feedback form saves a comment in the selected database. Email and WhatsApp contact external services only when you use them.
 
+## Data and first use
 
-## Setup and Installation 🔧
+SQLite creates `~/.packapps/packapps.db` on launch. Set `PACKAPPS_HOME` to use a different directory. Close PackApps before copying the whole directory for backup or transfer. Keep it when replacing the application. QR images remain in `~/Documents/Bookverse/qr_codes`.
 
-### Clone the repository
+When opening protected data or registering a store user for the first time, enter a new admin or manager password of at least eight characters and confirm it. The two roles are separate. Set `PACKAPPS_ADMIN_PASSWORD` and `PACKAPPS_MANAGER_PASSWORD` in the launcher environment to supply them externally.
 
-```shell 
-  git clone https://github.com/Moncada25/PackApps.git
-``` 
+For an existing MySQL installation, set `PACKAPPS_MYSQL_URL=jdbc:mariadb://HOST:3306/DATABASE`, `PACKAPPS_MYSQL_USER` and `PACKAPPS_MYSQL_PASSWORD`, together with the role passwords above. For a new server import the [clean schema](src/main/resources/data/mysql.sql). Existing v4 users can use their previous installation’s encryption key via `PACKAPPS_LEGACY_KEY`. Changing the account password writes a salted PBKDF2 hash. Selecting MySQL keeps data on that server.
 
-### Java Configuration
-Ensure you have Java 21 or a compatible version installed. Check the version with:
+## Build from source
 
-```shell 
-  java -version
-```
+Install JDK 25, set JAVA_HOME and run `./gradlew start` or `gradlew.bat start`. Run `./gradlew clean build` for automated tests. Packaging runs on the destination OS. [Release guide](RELEASING.md)
 
-### Gradle Configuration
-
-- Use the included gradlew script for Gradle setup.
-- Alternatively, install Gradle manually if not already installed.
-Verify Gradle installation with:
-
-```shell 
-  gradle -v
-```
-
-### Database Configuration
-
-- MySQL is used for persistent data storage. Ensure the MySQL database file (.db) is present in src/resources/data/.
-- If starting from scratch, initialize the database using the .sql scripts provided in the resources/data folder.
-- Verify database paths in config.properties. Update this file if needed to point to the correct database file.
-
-## Run the application 🔥
-Navigate to the root directory and execute:
-```shell 
-  ./gradlew start
-```
-
-## Build and Packaging 📦
-
-**Prerequisites:** <br>
-- Java 14+ (for jpackage) and Java 21 (to run the application)
-- Install jpackage if not included in your JDK
-- For Mac builds: macOS system
-- For Windows builds: Windows system
-
-### Using the Packaging Script
-We provide a shell script that handles the packaging process for both MacOS and Windows. <br>
-First, make the script executable: ```chmod +x package-app.sh```
-
-**For MacOS builds**:
-- Ensure the `PLATFORM` variable in the script is set to "Mac"
-- Run the script: ```./package-app.sh```
-- The script will create a `.app` bundle and a `.dmg` installer in the build directory
-
-**For Windows builds**:
-- Ensure the `PLATFORM` variable in the script is set to "Windows"
-- Run the script: ```./package-app.sh```
-- The script will create the application directory and an `.exe` installer in the build directory
-
-
-## Collaborators 🤝
-Do you want to contribute? Great! <br>
-You found a bug? 🐛 tell me about it! or fix it yourself and open a pull request! 🚀
-
-1. Fork the repository. 
-2. Create a branch for your feature or fix: ```git checkout -b feature/new-feature```
-3. Make your changes and commit them: ```git commit -m "Added new feature"```
-4. Push your changes: ```git push origin feature/new-feature```
-5. Open a Pull Request.
-
-## Versioning 📌
-This project implements Git as version control system, applying Trunk-based Development 🔀
-
-## Author 🧙
-**Santiago Moncada** <br>
-*Software Development Engineer in Test at Rappi.*
-
-## License 📄
-This project is licensed under the terms of the MIT License.
-
-## Contact 📧
-For questions or feedback, feel free to reach out: <br>
-📧 Email: [santiago.moncada.dev@gmail.com](mailto:santiago.moncada.dev@gmail.com) <br>
-📚 LinkedIn: [Santiago Moncada](https://www.linkedin.com/in/santiagomoncadavelez/)
+PackApps source is MIT licensed. The artwork, runtime and bundled libraries have their own credits and terms. [License](LICENSE) · [Third-party credits](THIRD_PARTY.md) · [Security](SECURITY.md)

@@ -12,10 +12,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.UIManager;
-import org.junit.runner.JUnitCore;
 import javax.swing.UnsupportedLookAndFeelException;
 import com.bookverse.packapps.apps.puzzle.Levels;
-import com.bookverse.packapps.automation.runners.RegisterUserTest;
 import com.bookverse.packapps.utils.ui.Wallpaper;
 import com.bookverse.packapps.utils.constants.DatabaseConstants;
 import com.bookverse.packapps.utils.constants.Styles;
@@ -34,7 +32,6 @@ import com.bookverse.packapps.utils.ExportFile;
 import com.bookverse.packapps.utils.Format;
 import com.bookverse.packapps.database.Queries;
 import com.bookverse.packapps.utils.ui.Effects;
-import com.bookverse.packapps.apps.tasks.SearchBookView;
 import com.bookverse.packapps.apps.guessnumber.GuessNumberView;
 import com.bookverse.packapps.apps.hangman.HangmanView;
 import com.bookverse.packapps.apps.store.login.LoginView;
@@ -161,32 +158,25 @@ public class HomeView extends JFrame {
     JMenu exportTXT = new Menu().setText("Plain Text").setImage("txt").build();
     JMenu exportEXCEL = new Menu().setText("Excel").setImage("excel").build();
     JMenu exportPDF = new Menu().setText("PDF").setImage("pdf").build();
-    JMenu tasks = new Menu().setText("Automation").setImage("task").build();
     JMenu changeBackground = new Menu().setText("Wallpaper").setImage("wallpaper").build();
     JMenu themes = new Menu().setText("Theme").setImage("themes").build();
     JMenu changeUI = new Menu().setText("Change UI").setImage("UI").build();
 
     JMenuItem github = new MenuItem().setText("GitHub").setImage("github").build();
     github.addActionListener(e -> {
-          if (GeneralUtils.verifyConnection("Connect to see more!", service.isWork())) {
-            GeneralUtils.openUrl("https://github.com/Moncada25/PackApps");
-          }
+          GeneralUtils.openUrl("https://github.com/Moncada25/PackApps");
         }
     );
 
     JMenuItem linkedin = new MenuItem().setText("LinkedIn").setImage("linkedin").build();
     linkedin.addActionListener(e -> {
-          if (GeneralUtils.verifyConnection("Connect to see more!", service.isWork())) {
-            GeneralUtils.openUrl("https://www.linkedin.com/in/santiagomoncadavelez");
-          }
+          GeneralUtils.openUrl("https://www.linkedin.com/in/santiagomoncadavelez");
         }
     );
 
     JMenuItem bookverse = new MenuItem().setText("Bookverse").setImage("books").build();
     bookverse.addActionListener(e -> {
-          if (GeneralUtils.verifyConnection("Connect to see more!", service.isWork())) {
-            GeneralUtils.openUrl("https://www.bookverse.me/home/");
-          }
+          GeneralUtils.openUrl("https://www.bookverse.me/home/");
         }
     );
 
@@ -665,18 +655,6 @@ public class HomeView extends JFrame {
 
     addMenu(export, exportTXT, exportEXCEL, exportPDF);
 
-    JMenuItem searchBook = new MenuItem().setText("Search Book").setImage("search_book").build();
-    searchBook.addActionListener(e -> {
-      new SearchBookView(this, true).start(this);
-      setVisible(true);
-    });
-
-    JMenuItem registerUser = new MenuItem().setText("Register User").setImage("añadir_usuario")
-        .build();
-    registerUser.addActionListener(e -> JUnitCore.runClasses(RegisterUserTest.class));
-
-    addMenu(tasks, searchBook, registerUser);
-
     createWallpapers(changeBackground);
     createThemes();
 
@@ -710,7 +688,6 @@ public class HomeView extends JFrame {
     addMenu(
         tools,
         changeUI,
-        tasks,
         notes,
         ocr,
         qr,

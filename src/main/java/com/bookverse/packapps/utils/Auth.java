@@ -65,7 +65,7 @@ public final class Auth {
   }
 
   private static String getSecretKey(boolean useDefaultKey) {
-    return useDefaultKey ? GeneralUtils.getConfig(Configs.DEFAULT_ENCRYPT_KEY) : setSecretKey();
+    return useDefaultKey ? System.getenv("PACKAPPS_LEGACY_KEY") : setSecretKey();
   }
 
   private Auth() {

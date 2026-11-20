@@ -17,7 +17,7 @@ public class LoginService {
       Alerts.inputSomethingText();
     } else {
 
-      String password = Auth.encode(String.valueOf(txtPassword.getPassword()), true);
+      String password = String.valueOf(txtPassword.getPassword());
 
       if (OlderRepository.searchStoreUser(txtUser.getText(), password)) {
         OlderRepository.recordLogin("Online", txtUser.getText());

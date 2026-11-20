@@ -35,7 +35,7 @@ public final class Resources {
   }
 
   public static URL getImage(String image) {
-    return Resources.class.getResource("/" + image);
+    return Resources.class.getResource("/images/" + image);
   }
 
   public static JButton getButton(

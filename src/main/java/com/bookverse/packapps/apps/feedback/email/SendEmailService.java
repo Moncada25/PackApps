@@ -42,23 +42,21 @@ public class SendEmailService {
 
   public void clickOnSend(SendEmailViewModel model) {
 
-    if (GeneralUtils.verifyConnection("Make sure you are connected to a network", true)) {
 
-      if (model.getText().getText().trim().length() < 5 || model.getTxtEmail().getText().trim().length() < 10) {
-        Alerts.message("Verify", "Fields too short");
-        model.getText().requestFocus();
+    if (model.getText().getText().trim().length() < 5 || model.getTxtEmail().getText().trim().length() < 10) {
+      Alerts.message("Verify", "Fields too short");
+      model.getText().requestFocus();
+    } else {
+
+      if (model.getTxtEmail().getText().endsWith("@gmail.com")) {
+        sendEmail(model);
+
+        model.getTxtEmail().setText("");
+        model.getTxtPassword().setText("");
+        model.getText().setText("");
       } else {
-
-        if (model.getTxtEmail().getText().endsWith("@gmail.com")) {
-          sendEmail(model);
-
-          model.getTxtEmail().setText("");
-          model.getTxtPassword().setText("");
-          model.getText().setText("");
-        } else {
-          Alerts.message("Verify!", "Invalid email, make sure it's Gmail.");
-          model.getTxtEmail().requestFocus();
-        }
+        Alerts.message("Verify!", "Invalid email, make sure it's Gmail.");
+        model.getTxtEmail().requestFocus();
       }
     }
   }

@@ -187,7 +187,7 @@ public class HangmanService {
 
   public void insert(String state, HangmanViewModel model) {
 
-    if (GeneralUtils.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (Alerts.saveGame()) {
 
       String[] data = {DatabaseConstants.HANGMAN, Alerts.inputText("Enter a Nickname", 20),
           String.valueOf(countAttempts), state,
