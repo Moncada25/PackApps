@@ -6,9 +6,7 @@ import com.bookverse.packapps.database.Queries;
 import com.bookverse.packapps.database.notes.NotesQueries;
 import com.bookverse.packapps.utils.ExportFile;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.nio.file.*;
-import javax.imageio.ImageIO;
 import javax.swing.JTable;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -69,17 +67,10 @@ public final class DesktopChecks {
     }
     require(Files.readString(work.resolve("notes.txt")).contains("canción"), "TXT text");
 
-    var sample = new BufferedImage(900, 180, BufferedImage.TYPE_INT_RGB);
-    var g = sample.createGraphics();
-    g.setColor(Color.WHITE);
-    g.fillRect(0, 0, 900, 180);
-    g.setColor(Color.BLACK);
-    g.setFont(new Font("SansSerif", Font.PLAIN, 44));
-    g.drawString("English garden", 24, 65);
-    g.drawString("Español mañana", 24, 140);
-    g.dispose();
     var image = work.resolve("ocr.png");
-    ImageIO.write(sample, "png", image.toFile());
+    try (var fixture = DesktopChecks.class.getResourceAsStream("/bilingual.png")) {
+      Files.copy(fixture, image);
+    }
     String recognized = new OcrService().readText(image.toString(), true);
     require(
         recognized.contains("garden") && recognized.contains("mañana"),

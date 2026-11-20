@@ -34,7 +34,9 @@ def verify(launcher, runtime, lib, scratch):
                 runtime,
                 "--enable-native-access=ALL-UNNAMED",
                 "-cp",
-                os.pathsep.join([str(classes), str(lib / "*")]),
+                os.pathsep.join(
+                    [str(classes), str(ROOT / "build/resources/test"), str(lib / "*")]
+                ),
                 "com.bookverse.packapps.DesktopChecks",
                 directory,
                 step,
@@ -145,6 +147,11 @@ def package(scratch):
             "--linux-menu-group",
             "Utility",
         )
+        # xdg-desktop-menu expects this standard directory even on minimal Debian installations.
+        deb_tree = scratch / "deb-tree"
+        run("dpkg-deb", "--raw-extract", deb, deb_tree)
+        (deb_tree / "usr/share/desktop-directories").mkdir(parents=True, exist_ok=True)
+        run("dpkg-deb", "--root-owner-group", "--build", deb_tree, deb)
         run("sudo", "apt-get", "install", "-y", deb)
         app = Path("/opt/packapps")
         verify(

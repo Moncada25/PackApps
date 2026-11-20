@@ -31,7 +31,7 @@ public class OcrService {
   public String readText(String image, boolean onlyText) {
     if (image == null || image.isBlank()) return "Error";
     try (var api = new TessBaseAPI()) {
-      if (api.Init(models().toString(), "eng+spa") != 0) return "Error";
+      if (api.Init(models().toString(), "spa+eng") != 0) return "Error";
       var pixels = pixRead(image);
       if (pixels == null || pixels.isNull()) return "Error";
       try {

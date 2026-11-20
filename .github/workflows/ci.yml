@@ -19,12 +19,12 @@ jobs:
         ports: ['127.0.0.1:3306:3306']
         options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=3s --health-retries=30
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-java@v6.3.0
         with:
           distribution: temurin
           java-version: '25'
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6.4.1
       - name: SQLite
         run: ./gradlew clean build
       - name: MySQL
@@ -47,7 +47,7 @@ jobs:
       contents: read
       pull-requests: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - uses: gitleaks/gitleaks-action@v3
