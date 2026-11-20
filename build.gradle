@@ -29,7 +29,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-simple:2.0.17'
     runtimeOnly 'org.apache.logging.log4j:log4j-to-slf4j:2.25.3'
     runtimeOnly 'org.xerial:sqlite-jdbc:3.54.1.0'
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:3.5.7'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:4.0.0'
     implementation 'org.bytedeco:tesseract:5.5.3-1.5.14'
     runtimeOnly "org.bytedeco:tesseract:5.5.3-1.5.14:${nativePlatform}"
     runtimeOnly "org.bytedeco:leptonica:1.87.0-1.5.14:${nativePlatform}"
