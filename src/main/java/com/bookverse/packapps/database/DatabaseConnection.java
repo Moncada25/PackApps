@@ -12,24 +12,32 @@ public final class DatabaseConnection {
   private DatabaseConnection() {}
 
   public static Path dataDirectory() {
-    return Path.of(System.getenv().getOrDefault("PACKAPPS_HOME",
-        Path.of(System.getProperty("user.home"), ".packapps").toString()));
+    return Path.of(
+        System.getenv()
+            .getOrDefault(
+                "PACKAPPS_HOME", Path.of(System.getProperty("user.home"), ".packapps").toString()));
   }
 
   public static Connection getConnection() throws SQLException {
     String url = System.getenv("PACKAPPS_MYSQL_URL");
     if (url != null && !url.isBlank()) {
-      if (!url.startsWith("jdbc:mariadb://")) throw new SQLException("Expected a jdbc:mariadb:// URL");
-      return DriverManager.getConnection(url, System.getenv("PACKAPPS_MYSQL_USER"),
-          System.getenv("PACKAPPS_MYSQL_PASSWORD"));
+      if (!url.startsWith("jdbc:mariadb://"))
+        throw new SQLException("Expected a jdbc:mariadb:// URL");
+      return DriverManager.getConnection(
+          url, System.getenv("PACKAPPS_MYSQL_USER"), System.getenv("PACKAPPS_MYSQL_PASSWORD"));
     }
     try {
       Files.createDirectories(dataDirectory());
-      var connection = DriverManager.getConnection("jdbc:sqlite:" + dataDirectory().resolve("packapps.db"));
+      var connection =
+          DriverManager.getConnection("jdbc:sqlite:" + dataDirectory().resolve("packapps.db"));
       try (var statement = connection.createStatement()) {
         statement.execute("PRAGMA busy_timeout=5000");
         try (var version = statement.executeQuery("PRAGMA user_version")) {
-          if (version.next() && version.getInt(1) == 1) return connection;
+          if (!version.next()) throw new SQLException("Cannot determine database version");
+          int schemaVersion = version.getInt(1);
+          if (schemaVersion == 1) return connection;
+          if (schemaVersion > 1)
+            throw new SQLException("This database requires a newer PackApps release");
         }
         connection.setAutoCommit(false);
         try (var schema = DatabaseConnection.class.getResourceAsStream("/data/sqlite.sql")) {

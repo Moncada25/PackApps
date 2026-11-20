@@ -21,12 +21,16 @@ public final class Queries {
 
   @NotNull
   public static Query getDataByID(String table) {
-    return new Query("SELECT * FROM " + Format.tableName(table) + " WHERE ID = ?", Alerts.inputNumber("Enter a ID", 6));
+    return new Query(
+        "SELECT * FROM " + Format.tableName(table) + " WHERE ID = ?",
+        Alerts.inputNumber("Enter a ID", 6));
   }
 
   @NotNull
   public static Query getDataByNickname(String table) {
-    return new Query("SELECT * FROM " + Format.tableName(table) + " WHERE Nickname = ?", Alerts.inputText("Enter a Nickname", 20));
+    return new Query(
+        "SELECT * FROM " + Format.tableName(table) + " WHERE Nickname = ?",
+        Alerts.inputText("Enter a Nickname", 20));
   }
 
   @NotNull
@@ -38,31 +42,35 @@ public final class Queries {
   @NotNull
   @Contract(pure = true)
   public static Query updateNickname(String nickname, String ID, String table) {
-    return new Query("UPDATE " + Format.tableName(table) + " SET Nickname=? WHERE ID=?", nickname, ID);
+    return new Query(
+        "UPDATE " + Format.tableName(table) + " SET Nickname=? WHERE ID=?", nickname, ID);
   }
-
 
   @NotNull
   public static String insertGuessNumber() {
-    return "INSERT INTO " + Format.tableName(GUESS_NUMBER)
+    return "INSERT INTO "
+        + Format.tableName(GUESS_NUMBER)
         + " (Nickname,Limitation,Level,Date) VALUES (?,?,?,?)";
   }
 
   @NotNull
   public static String insertHangman() {
-    return "INSERT INTO " + Format.tableName(HANGMAN)
+    return "INSERT INTO "
+        + Format.tableName(HANGMAN)
         + " (Nickname,Mistakes,State,Category,Date) VALUES (?,?,?,?,?)";
   }
 
   @NotNull
   public static String insertDices() {
-    return "INSERT INTO " + Format.tableName(DICES)
+    return "INSERT INTO "
+        + Format.tableName(DICES)
         + " (Nickname,Winner,Round,Date) VALUES (?,?,?,?)";
   }
 
   @NotNull
   public static String insertPuzzle() {
-    return "INSERT INTO " + Format.tableName(PUZZLE)
+    return "INSERT INTO "
+        + Format.tableName(PUZZLE)
         + " (Nickname,State,Time,Attempts,Date) VALUES (?,?,?,?,?)";
   }
 
@@ -73,19 +81,23 @@ public final class Queries {
 
   @NotNull
   public static String insertInventory() {
-    return "INSERT INTO " + Format.tableName(INVENTORY)
+    return "INSERT INTO "
+        + Format.tableName(INVENTORY)
         + " (ID,State,Price,Quantity) VALUES (?,?,?,?)";
   }
 
   @NotNull
   public static String insertRecord() {
-    return "INSERT INTO " + Format.tableName(CASH_REGISTER)
-        + " (User,SoldProducts,TotalSales,PurchasedProducts,TotalPurchases,TotalLoans) VALUES (?,?,?,?,?,?)";
+    return "INSERT INTO "
+        + Format.tableName(CASH_REGISTER)
+        + " (User,SoldProducts,TotalSales,PurchasedProducts,TotalPurchases,TotalLoans) VALUES"
+        + " (?,?,?,?,?,?)";
   }
 
   @NotNull
   public static String insertLoan() {
-    return "INSERT INTO " + Format.tableName(LOANS)
+    return "INSERT INTO "
+        + Format.tableName(LOANS)
         + " (User,Name,Document,Reference,Phone,TimeLimit,Value) VALUES (?,?,?,?,?,?,?)";
   }
 
@@ -96,18 +108,24 @@ public final class Queries {
 
   @NotNull
   public static String insertPurchase() {
-    return "INSERT INTO " + Format.tableName(PURCHASES)
+    return "INSERT INTO "
+        + Format.tableName(PURCHASES)
         + " (IdProduct,User,Document,Phone,Date,Units,Total) VALUES (?,?,?,?,?,?,?)";
   }
 
   @NotNull
   public static String insertSale() {
-    return "INSERT INTO " + Format.tableName(SALES)
+    return "INSERT INTO "
+        + Format.tableName(SALES)
         + " (IdProduct,User,Document,Phone,Date,Units,Total) VALUES (?,?,?,?,?,?,?)";
   }
 
   public static Query updateCashRegisterSales(String user, int soldProducts, double totalSales) {
-    return new Query("UPDATE cashregister SET SoldProducts=?, TotalSales=? WHERE User=?", soldProducts, totalSales, user);
+    return new Query(
+        "UPDATE cashregister SET SoldProducts=?, TotalSales=? WHERE User=?",
+        soldProducts,
+        totalSales,
+        user);
   }
 
   public static Query updateInventory(String reference, int units) {
@@ -118,17 +136,21 @@ public final class Queries {
     return new Query("SELECT * FROM " + Format.tableName(table) + " WHERE ID=?", reference);
   }
 
-  public static Query updateCashRegisterPurchases(String user, int purchasedProducts,
-      double totalPurchases) {
-    return new Query("UPDATE cashregister SET PurchasedProducts=?, TotalPurchases=? WHERE User=?", purchasedProducts,totalPurchases,user);
+  public static Query updateCashRegisterPurchases(
+      String user, int purchasedProducts, double totalPurchases) {
+    return new Query(
+        "UPDATE cashregister SET PurchasedProducts=?, TotalPurchases=? WHERE User=?",
+        purchasedProducts,
+        totalPurchases,
+        user);
   }
 
   public static Query updateCashRegisterLoan(String user, double totalLoan) {
-    return new Query("UPDATE cashregister SET TotalLoans=? WHERE User=?", totalLoan,user);
+    return new Query("UPDATE cashregister SET TotalLoans=? WHERE User=?", totalLoan, user);
   }
 
   public static Query recordLogin(String status, String user) {
-    return new Query("UPDATE users SET Status=? WHERE Username=?", status,user);
+    return new Query("UPDATE users SET Status=? WHERE Username=?", status, user);
   }
 
   public static Query searchDataUserInCashRegister(String user) {
@@ -139,13 +161,11 @@ public final class Queries {
     return new Query("SELECT * FROM users WHERE Username=?", user);
   }
 
-
   public static Query updatePassword(String user, String newPassword) {
-    return new Query("UPDATE users SET Password=? WHERE Username=?", newPassword,user);
+    return new Query("UPDATE users SET Password=? WHERE Username=?", newPassword, user);
   }
 
   public static Query updateUsername(String user, String newUsername) {
-    return new Query("UPDATE users SET Username=? WHERE Username=?", newUsername,user);
+    return new Query("UPDATE users SET Username=? WHERE Username=?", newUsername, user);
   }
-
 }

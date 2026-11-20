@@ -27,6 +27,7 @@ dependencies {
     implementation 'com.google.zxing:javase:3.5.4'
     implementation 'commons-codec:commons-codec:1.19.0'
     implementation 'org.slf4j:slf4j-simple:2.0.17'
+    runtimeOnly 'org.apache.logging.log4j:log4j-to-slf4j:2.25.3'
     runtimeOnly 'org.xerial:sqlite-jdbc:3.54.1.0'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:3.5.7'
     implementation 'org.bytedeco:tesseract:5.5.3-1.5.14'
@@ -41,5 +42,5 @@ test {
     systemProperty 'packapps.testClasspath', sourceSets.test.runtimeClasspath.asPath
 }
 processResources {
-    from('LICENSE', 'THIRD_PARTY.md') { into 'META-INF/packapps' }
+    from(files('LICENSE', 'THIRD_PARTY.md')) { into 'META-INF/packapps' }
 }

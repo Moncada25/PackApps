@@ -54,26 +54,30 @@ import com.bookverse.packapps.apps.home.HomeView;
 public class Start extends HomeView {
 
   public static void main(String[] args) {
-    javax.swing.SwingUtilities.invokeLater(() -> {
-      try {
-        if (System.getenv("PACKAPPS_MYSQL_URL") == null) {
-          try (var ignored = com.bookverse.packapps.database.DatabaseConnection.getConnection()) {
-            // Initialize the local schema before opening the home window.
+    javax.swing.SwingUtilities.invokeLater(
+        () -> {
+          try {
+            if (System.getenv("PACKAPPS_MYSQL_URL") == null) {
+              try (var ignored =
+                  com.bookverse.packapps.database.DatabaseConnection.getConnection()) {
+                // Initialize the local schema before opening the home window.
+              }
+            }
+            run();
+            if (java.util.Arrays.asList(args).contains("--check-startup")) {
+              boolean visible =
+                  java.util.Arrays.stream(java.awt.Window.getWindows())
+                      .anyMatch(
+                          window -> window.isVisible() && window instanceof javax.swing.JFrame);
+              System.exit(visible ? 0 : 1);
+            }
+          } catch (Exception failure) {
+            if (java.util.Arrays.asList(args).contains("--check-startup")) {
+              failure.printStackTrace();
+              System.exit(1);
+            }
+            com.bookverse.packapps.utils.ui.Alerts.error(failure, "Start PackApps");
           }
-        }
-        run();
-        if (java.util.Arrays.asList(args).contains("--check-startup")) {
-          boolean visible = java.util.Arrays.stream(java.awt.Window.getWindows())
-              .anyMatch(window -> window.isVisible() && window instanceof javax.swing.JFrame);
-          System.exit(visible ? 0 : 1);
-        }
-      } catch (Exception failure) {
-        if (java.util.Arrays.asList(args).contains("--check-startup")) {
-          failure.printStackTrace();
-          System.exit(1);
-        }
-        com.bookverse.packapps.utils.ui.Alerts.error(failure, "Start PackApps");
-      }
-    });
+        });
   }
 }
