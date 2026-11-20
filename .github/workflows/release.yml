@@ -1,0 +1,55 @@
+name: Draft desktop release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+concurrency: release-${{ github.ref }}
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Verify tagged version
+        run: |
+          [[ "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          git merge-base --is-ancestor HEAD origin/trunk
+          grep -Fx "version=${GITHUB_REF_NAME#v}" gradle.properties
+          grep -Fx "## ${GITHUB_REF_NAME#v}" CHANGELOG.md
+  packages:
+    needs: version
+    uses: ./.github/workflows/packages.yml
+    with:
+      retain: true
+  draft:
+    needs: packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          pattern: packapps-*
+          path: dist
+          merge-multiple: true
+      - name: Verify asset set and update draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          cd dist
+          prefix="PackApps-${GITHUB_REF_NAME#v}"
+          files=("$prefix-windows-x64.exe" "$prefix-macos-arm64.dmg" "$prefix-macos-x64.dmg" "$prefix-linux-x64.deb" "$prefix-linux-x64.tar.gz")
+          sha256sum "${files[@]}" > SHA256SUMS
+          sha256sum --check SHA256SUMS
+          tag="$GITHUB_REF_NAME"
+          if gh release view "$tag" --json isDraft >/dev/null 2>&1; then
+            test "$(gh release view "$tag" --json isDraft -q .isDraft)" = true
+          else
+            gh release create "$tag" --verify-tag --draft --title "PackApps ${tag#v}" --notes-file ../CHANGELOG.md
+          fi
+          gh release upload "$tag" "${files[@]}" SHA256SUMS --clobber
+          gh release view "$tag" --json assets,isDraft -q 'select(.isDraft and (.assets|length==6))' | grep -q .

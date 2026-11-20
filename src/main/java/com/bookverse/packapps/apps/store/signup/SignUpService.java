@@ -4,7 +4,7 @@ import com.bookverse.packapps.repositories.OlderRepository;
 import com.bookverse.packapps.utils.GeneralUtils;
 import com.bookverse.packapps.utils.constants.Configs;
 import com.bookverse.packapps.utils.constants.DatabaseConstants;
-import com.bookverse.packapps.utils.Auth;
+import com.bookverse.packapps.utils.Access;
 import com.bookverse.packapps.utils.Format;
 import com.bookverse.packapps.utils.ui.Alerts;
 import com.bookverse.packapps.utils.ui.Effects;
@@ -22,8 +22,7 @@ public class SignUpService {
 
   public void clickOnSignUp(SignUpViewModel model) {
 
-    if (String.valueOf(model.getTxtCodManager().getPassword())
-        .equals(GeneralUtils.getConfig(Configs.STORE_MANAGER_KEY))) {
+    if (Access.verify("manager", String.valueOf(model.getTxtCodManager().getPassword()))) {
 
       model.getTxtUser().setEnabled(true);
       model.getTxtPassword().setEnabled(true);
@@ -34,8 +33,8 @@ public class SignUpService {
 
         if (!OlderRepository.userAlreadyExist(model.getTxtUser().getText())) {
 
-          String[] data = {DatabaseConstants.USERS, model.getTxtUser().getText(), Auth.encode(String.valueOf(
-              model.getTxtPassword().getPassword()), true), "Offline"};
+          String[] data = {DatabaseConstants.USERS, model.getTxtUser().getText(), Access.hash(String.valueOf(
+              model.getTxtPassword().getPassword())), "Offline"};
 
           OlderRepository.insertData(data);
           Alerts.message("Message", "Registered user!");

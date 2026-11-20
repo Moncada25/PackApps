@@ -22,15 +22,10 @@ public final class NotesRepository {
       double totalNote
   ) {
 
-    if (GeneralUtils.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (Alerts.saveGame()) {
 
-      PreparedStatement preparedStatement = null;
-      
-      try {
-
-        preparedStatement = DatabaseConnection.getConnection().prepareStatement(
-            NotesQueries.insertNewNote()
-        );
+      try (var connection = DatabaseConnection.getConnection();
+           var preparedStatement = connection.prepareStatement(NotesQueries.insertNewNote())) {
 
         preparedStatement.setString(1, name);
         preparedStatement.setString(2, scale);
@@ -41,9 +36,6 @@ public final class NotesRepository {
         preparedStatement.execute();
       } catch (SQLException e) {
         Alerts.message("Error", e.getMessage());
-      } finally {
-        assert preparedStatement != null;
-        DatabaseConnection.close(preparedStatement);
       }
     }
   }

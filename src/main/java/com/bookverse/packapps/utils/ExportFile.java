@@ -1,215 +1,151 @@
 package com.bookverse.packapps.utils;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import javax.swing.JFileChooser;
-import javax.swing.JTable;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import lombok.SneakyThrows;
-import com.itextpdf.text.Anchor;
-import com.itextpdf.text.Chapter;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Section;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.jetbrains.annotations.NotNull;
+import com.bookverse.packapps.database.Query;
 import com.bookverse.packapps.repositories.OlderRepository;
 import com.bookverse.packapps.utils.ui.Alerts;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.pdfbox.pdmodel.*;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 public final class ExportFile {
+  private ExportFile() {}
 
-  private static int n = 1;
-  private static String filePath;
-
-  @SneakyThrows
-  public static void pdf(JTable table, String title, String query, String file) {
-
-    filePath = verifyExist(file);
-
-    if (!filePath.equals(file) && OlderRepository.readTable(table, query, false)) {
-
-      Document document = new Document();
-
-      PdfWriter.getInstance(document, new FileOutputStream(filePath));
-
-      document.open();
-
-      document.addTitle(title);
-      document.addSubject("Made in PackApps");
-      document.addKeywords("Java, PDF, PackApps");
-      document.addAuthor("Moncada");
-      document.addCreator("PackApps");
-
-      Anchor anchor = new Anchor(title + " - PackApps");
-      anchor.setName(title);
-
-      Chapter catPart = new Chapter(new Paragraph(anchor), 1);
-      Paragraph subPara = new Paragraph();
-      Section subCatPart = catPart.addSection(subPara);
-      PdfPTable pdfPTable = new PdfPTable(table.getColumnCount());
-      PdfPCell columnHeader;
-
-      for (int column = 0; column < table.getColumnCount(); column++) {
-        columnHeader = new PdfPCell(new Phrase(table.getColumnName(column)));
-        columnHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
-        pdfPTable.addCell(columnHeader);
-      }
-      pdfPTable.setHeaderRows(1);
-
-      for (int row = 0; row < table.getRowCount(); row++) {
-        for (int column = 0; column < table.getColumnCount(); column++) {
-          pdfPTable.addCell(table.getValueAt(row, column).toString());
-        }
-      }
-      subCatPart.add(pdfPTable);
-      document.add(catPart);
-      document.close();
-
-      Alerts.export(filePath);
-    }
+  public static void pdf(JTable table, String title, Query query, String file) {
+    export(table, title, query, file);
   }
 
-  @SneakyThrows
-  public static void excel(JTable table, String query, String file) {
-
-    filePath = verifyExist(file);
-
-    if (!filePath.equals(file) && OlderRepository.readTable(table, query, false)) {
-
-      int rowCount = table.getRowCount();
-      int columnCount = table.getColumnCount();
-      try (Workbook wb = new HSSFWorkbook()) {
-        Sheet sheet = wb.createSheet(" ");
-
-        for (int i = 0; i < 2; i++) {
-          Row row = sheet.createRow(i);
-          for (int j = 0; j < columnCount; j++) {
-            Cell cell = row.createCell(j);
-
-            cell.setCellValue(String.valueOf(table.getColumnName(j)));
-            wb.write(new FileOutputStream(filePath));
-          }
-        }
-
-        for (int i = 0; i < rowCount; i++) {
-          Row row = sheet.createRow(i + 1);
-          for (int j = 0; j < columnCount; j++) {
-            Cell cell = row.createCell(j);
-
-            cell.setCellValue(String.valueOf(table.getValueAt(i, j)));
-            wb.write(new FileOutputStream(filePath));
-          }
-        }
-        Alerts.export(filePath);
-      }
-    }
+  public static void excel(JTable table, Query query, String file) {
+    export(table, "PackApps", query, file);
   }
 
-  public static void txt(JTable table, String query, String file) {
-
-    filePath = verifyExist(file);
-
-    if (!filePath.equals(file) && OlderRepository.readTable(table, query, false)) {
-
-      try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
-
-        bufferedWriter.write("{");
-        for (int k = 0; k < table.getColumnCount(); k++) {
-          bufferedWriter.write(table.getColumnName(k));
-          if (k < table.getColumnCount() - 1) {
-            bufferedWriter.write(", ");
-          }
-        }
-        bufferedWriter.write("} -> Columns");
-
-        bufferedWriter.newLine();
-        bufferedWriter.newLine();
-
-        addColumns(table, bufferedWriter);
-
-        Alerts.export(filePath);
-
-      } catch (IOException e) {
-        Alerts.error(e, "Export TXT");
-      }
-    }
+  public static void txt(JTable table, Query query, String file) {
+    export(table, "PackApps", query, file);
   }
 
-  private static void addColumns(JTable table, BufferedWriter bufferedWriter) throws IOException {
-    for (int i = 0; i < table.getRowCount(); i++) {
-      bufferedWriter.write("[");
-      for (int j = 0; j < table.getColumnCount(); j++) {
-        bufferedWriter.write(String.valueOf((table.getValueAt(i, j))));
-        if (j < table.getColumnCount() - 1) {
-          bufferedWriter.write(", ");
-        }
-      }
-      bufferedWriter.write("]");
-      bufferedWriter.newLine();
-    }
-  }
-
-  private static String setPath(@NotNull String file) {
-
-    JFileChooser chooser = new JFileChooser();
-
-    switch (file) {
-
-      case ".pdf":
-        chooser.addChoosableFileFilter(new FileNameExtensionFilter("PDF Document (.pdf)", "pdf"));
-        break;
-
-      case ".xls":
-        chooser.addChoosableFileFilter(new FileNameExtensionFilter("XLS Document (.xls)", "xls"));
-        break;
-
-      case ".txt":
-        chooser
-            .addChoosableFileFilter(new FileNameExtensionFilter("TXT Document (.txt)", "txt"));
-        break;
-
-      default:
-        throw new IllegalArgumentException("Unexpected value: " + file);
-    }
-
-    chooser.setAcceptAllFileFilterUsed(false);
-
-    String path = "";
+  private static void export(JTable table, String title, Query query, String extension) {
+    var chooser = new JFileChooser();
+    chooser.setFileFilter(
+        new FileNameExtensionFilter(extension.substring(1).toUpperCase(), extension.substring(1)));
+    if (chooser.showSaveDialog(table) != JFileChooser.APPROVE_OPTION) return;
+    String name = chooser.getSelectedFile().getAbsolutePath();
+    Path path = Path.of(name.endsWith(extension) ? name : name + extension);
+    if (Files.exists(path)
+        && JOptionPane.showConfirmDialog(
+                table, "Replace " + path.getFileName() + "?", "Export", JOptionPane.YES_NO_OPTION)
+            != JOptionPane.YES_OPTION) return;
+    ((javax.swing.table.DefaultTableModel) table.getModel()).setRowCount(0);
+    if (!OlderRepository.readTable(table, query, false)) return;
     try {
+      write(table, title, path, extension);
+      Alerts.export(path.toString());
+    } catch (IOException e) {
+      Alerts.error(e, "Export");
+    }
+  }
 
-      if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-        path = chooser.getSelectedFile().getAbsolutePath();
+  public static void write(JTable table, String title, Path path, String extension)
+      throws IOException {
+    var rows = new ArrayList<List<String>>();
+    rows.add(IntStream.range(0, table.getColumnCount()).mapToObj(table::getColumnName).toList());
+    for (int r = 0; r < table.getRowCount(); r++) {
+      var row = new ArrayList<String>();
+      for (int c = 0; c < table.getColumnCount(); c++)
+        row.add(java.util.Objects.toString(table.getValueAt(r, c), ""));
+      rows.add(row);
+    }
+    switch (extension) {
+      case ".txt" -> {
+        try (var writer = Files.newBufferedWriter(path)) {
+          writer.write("{" + String.join(", ", rows.getFirst()) + "} -> Columns\n\n");
+          for (var row : rows.subList(1, rows.size())) writer.write(row + "\n");
+        }
       }
-
-    } catch (Exception ex) {
-      Alerts.error(ex, "setPath()");
+      case ".xls" -> {
+        try (var book = new HSSFWorkbook();
+            var output = Files.newOutputStream(path)) {
+          var sheet = book.createSheet("PackApps");
+          for (int i = 0; i < rows.size(); i++) {
+            var row = sheet.createRow(i);
+            for (int j = 0; j < rows.get(i).size(); j++)
+              row.createCell(j).setCellValue(rows.get(i).get(j));
+          }
+          book.write(output);
+        }
+      }
+      case ".pdf" -> writePdf(title, rows, path);
+      default -> throw new IllegalArgumentException(extension);
     }
-    return path + file;
   }
 
-  private static String verifyExist(String file) {
-
-    filePath = setPath(file);
-
-    if (!filePath.equals(file) && new File(filePath).exists() && Alerts.replaceFile()) {
-      filePath = filePath.substring(0, filePath.length() - 4) + "(" + (n++) + ")" + file;
+  private static void writePdf(String title, List<List<String>> rows, Path path)
+      throws IOException {
+    try (var document = new PDDocument();
+        var in = ExportFile.class.getResourceAsStream("/fonts/NotoSans-Regular.ttf")) {
+      var font = PDType0Font.load(document, in);
+      float width = 760f / rows.getFirst().size();
+      var lines = new ArrayList<List<String>>();
+      for (var row : rows) {
+        var columns = new ArrayList<List<String>>();
+        for (var cell : row) {
+          var wrapped = new ArrayList<String>();
+          StringBuilder line = new StringBuilder();
+          for (int cp : cell.replaceAll("\\p{Cntrl}", " ").codePoints().toArray()) {
+            String ch = new String(Character.toChars(cp));
+            try {
+              font.encode(ch);
+            } catch (IllegalArgumentException missing) {
+              ch = "?";
+            }
+            if (!line.isEmpty() && font.getStringWidth(line.toString() + ch) * 0.009f > width - 5) {
+              wrapped.add(line.toString());
+              line.setLength(0);
+            }
+            line.append(ch);
+          }
+          wrapped.add(line.toString());
+          columns.add(wrapped);
+        }
+        int height = columns.stream().mapToInt(List::size).max().orElse(1);
+        for (int i = 0; i < height; i++) {
+          var line = new ArrayList<String>();
+          for (var column : columns) line.add(i < column.size() ? column.get(i) : "");
+          lines.add(line);
+        }
+      }
+      for (int offset = 0; offset < lines.size(); offset += 38) {
+        var page = new PDPage(new PDRectangle(842, 595));
+        document.addPage(page);
+        try (var content = new PDPageContentStream(document, page)) {
+          content.beginText();
+          content.setFont(font, 14);
+          content.newLineAtOffset(40, 555);
+          content.showText(title + " - PackApps");
+          content.endText();
+          int y = 530;
+          for (var line : lines.subList(offset, Math.min(offset + 38, lines.size()))) {
+            for (int col = 0; col < line.size(); col++) {
+              content.beginText();
+              content.setFont(font, 9);
+              content.newLineAtOffset(40 + col * width, y);
+              content.showText(line.get(col));
+              content.endText();
+            }
+            y -= 13;
+          }
+        }
+      }
+      document.save(path.toFile());
     }
-
-    return filePath;
-  }
-
-  private ExportFile() {
   }
 }

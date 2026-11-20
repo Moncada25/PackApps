@@ -1,7 +1,6 @@
 package com.bookverse.packapps.utils;
 
 import java.awt.Desktop;
-import java.net.Socket;
 import java.net.URI;
 import java.security.SecureRandom;
 import java.util.Properties;
@@ -29,7 +28,7 @@ public final class GeneralUtils {
 
       if (!password.isEmpty()) {
 
-        if (getConfig(Configs.PASSWORD_DBA).equals(password)) {
+        if (Access.verify("admin", password)) {
           return true;
         } else {
           Alerts.message("Error", "Incorrect password");
@@ -40,17 +39,6 @@ public final class GeneralUtils {
       }
     }
 
-    return false;
-  }
-
-  public static boolean verifyConnection(String request, boolean show) {
-    try (Socket socket = new Socket("www.google.com", 80)) {
-      return socket.isConnected();
-    } catch (Exception e) {
-      if (show) {
-        Alerts.message("No internet connection", request);
-      }
-    }
     return false;
   }
 

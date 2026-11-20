@@ -111,7 +111,7 @@ public class GuessNumberService {
 
   private void saveData() {
 
-    if (GeneralUtils.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (Alerts.saveGame()) {
 
       String level = (isHard) ? "Hard" : "Easy";
 

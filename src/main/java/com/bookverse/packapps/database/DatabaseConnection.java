@@ -1,71 +1,60 @@
 package com.bookverse.packapps.database;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import lombok.SneakyThrows;
-import org.apache.commons.dbcp2.BasicDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.bookverse.packapps.automation.utils.SerenityConf;
 
 public final class DatabaseConnection {
+  private DatabaseConnection() {}
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseConnection.class);
-  private static BasicDataSource dataSource = null;
-
-  private DatabaseConnection() {
+  public static Path dataDirectory() {
+    return Path.of(
+        System.getenv()
+            .getOrDefault(
+                "PACKAPPS_HOME", Path.of(System.getProperty("user.home"), ".packapps").toString()));
   }
 
-  @SneakyThrows
-  public static Connection getConnection() {
+  public static Connection getConnection() throws SQLException {
+    String url = System.getenv("PACKAPPS_MYSQL_URL");
+    if (url != null && !url.isBlank()) {
+      if (!url.startsWith("jdbc:mariadb://"))
+        throw new SQLException("Expected a jdbc:mariadb:// URL");
+      return DriverManager.getConnection(
+          url, System.getenv("PACKAPPS_MYSQL_USER"), System.getenv("PACKAPPS_MYSQL_PASSWORD"));
+    }
     try {
-      Connection conn = getDataSource().getConnection();
-      if (!conn.isValid(5)) {
-        conn.close();
-        return getDataSource().getConnection();
+      Files.createDirectories(dataDirectory());
+      var connection =
+          DriverManager.getConnection("jdbc:sqlite:" + dataDirectory().resolve("packapps.db"));
+      try (var statement = connection.createStatement()) {
+        statement.execute("PRAGMA busy_timeout=5000");
+        try (var version = statement.executeQuery("PRAGMA user_version")) {
+          if (!version.next()) throw new SQLException("Cannot determine database version");
+          int schemaVersion = version.getInt(1);
+          if (schemaVersion == 1) return connection;
+          if (schemaVersion > 1)
+            throw new SQLException("This database requires a newer PackApps release");
+        }
+        connection.setAutoCommit(false);
+        try (var schema = DatabaseConnection.class.getResourceAsStream("/data/sqlite.sql")) {
+          for (String sql : new String(schema.readAllBytes(), StandardCharsets.UTF_8).split(";")) {
+            if (!sql.isBlank()) statement.execute(sql);
+          }
+        }
+        statement.execute("PRAGMA user_version=1");
+        connection.commit();
+        connection.setAutoCommit(true);
+        return connection;
+      } catch (Exception e) {
+        connection.close();
+        throw e;
       }
-
-      return conn;
-    } catch (SQLException e) {
-      throw new SQLException("Failed to connect to database: ", e);
-    }
-  }
-
-  private static BasicDataSource getDataSource() {
-    if (dataSource == null) {
-      synchronized (DatabaseConnection.class) {
-        final String JDBC_URL = String.format(
-            "jdbc:mysql://%s:3306/%s?serverTimezone=UTC",
-            SerenityConf.getDatabaseConfig("hostname"),
-            SerenityConf.getDatabaseConfig("database")
-        );
-
-        dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUsername(SerenityConf.getDatabaseConfig("username"));
-        dataSource.setPassword(SerenityConf.getDatabaseConfig("password"));
-        dataSource.setUrl(JDBC_URL);
-        dataSource.setMaxTotal(250);
-        dataSource.setMaxIdle(100);
-        dataSource.setMinIdle(50);
-
-        dataSource.setTestOnBorrow(true);
-        dataSource.setTestWhileIdle(true);
-        dataSource.setValidationQuery("SELECT 1");
-        dataSource.setRemoveAbandonedOnBorrow(true);
-      }
-    }
-    return dataSource;
-  }
-
-  public static void close(PreparedStatement stmt) {
-    if (stmt != null) {
-      try {
-        stmt.close();
-      } catch (SQLException e) {
-        LOGGER.error("Failed close of PreparedStatement ", e);
-      }
+    } catch (IOException e) {
+      throw new SQLException("Cannot open the PackApps data directory", e);
     }
   }
 }

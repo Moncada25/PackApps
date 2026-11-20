@@ -1,0 +1,43 @@
+name: Native packages
+on:
+  workflow_call:
+    inputs:
+      retain:
+        required: false
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  package:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, windows-2025, macos-15, macos-15-intel]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-java@v6.3.0
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v6.4.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.13'
+      - if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fakeroot xvfb
+          xvfb-run -a python scripts/package.py
+      - if: runner.os != 'Linux'
+        run: python scripts/package.py
+      - if: inputs.retain
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: packapps-${{ matrix.runner }}
+          path: build/release/*
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error

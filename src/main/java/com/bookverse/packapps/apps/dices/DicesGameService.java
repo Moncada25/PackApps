@@ -205,7 +205,7 @@ public class DicesGameService {
 
   public void insertResults(String name, String win) {
 
-    if (GeneralUtils.verifyConnection("Data don't saved", true) && Alerts.saveGame()) {
+    if (Alerts.saveGame()) {
       try {
         String[] data = {DatabaseConstants.DICES, name, win, String.valueOf(round),
             Format.getDate()};

@@ -1,5 +1,6 @@
 package com.bookverse.packapps.repositories;
 
+import com.bookverse.packapps.database.Query;
 import static com.bookverse.packapps.utils.constants.DatabaseConstants.CASH_REGISTER;
 import static com.bookverse.packapps.utils.constants.DatabaseConstants.DICES;
 import static com.bookverse.packapps.utils.constants.DatabaseConstants.FEEDBACK;
@@ -18,6 +19,8 @@ import com.bookverse.packapps.apps.store.StoreData;
 import com.bookverse.packapps.utils.ui.Alerts;
 import com.bookverse.packapps.database.Queries;
 import java.sql.Connection;
+import com.bookverse.packapps.utils.Access;
+import com.bookverse.packapps.utils.Format;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -35,16 +38,13 @@ public final class OlderRepository {
   }
 
   public static final StoreData store = new StoreData();
-  private static Connection connection = null;
-  private static ResultSet resultSet;
-  private static PreparedStatement preparedStatement;
-  private static DefaultTableModel tableModel;
+
 
   public static boolean insertData(@NotNull String[] data) {
 
-    try {
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
+      PreparedStatement preparedStatement;
       switch (data[0]) {
         case GUESS_NUMBER:
           preparedStatement = connection.prepareStatement(Queries.insertGuessNumber());
@@ -160,14 +160,12 @@ public final class OlderRepository {
     }
   }
 
-  public static boolean readTable(JTable tabla, String query, boolean isMain) {
+  public static boolean readTable(JTable tabla, Query query, boolean isMain) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(query);
-      resultSet = preparedStatement.executeQuery();
+      PreparedStatement preparedStatement = query.prepare(connection);
+      ResultSet resultSet = preparedStatement.executeQuery();
       ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
       ArrayList<Object[]> data = new ArrayList<>();
       while (resultSet.next()) {
@@ -182,7 +180,7 @@ public final class OlderRepository {
         Alerts.emptyTable();
         return false;
       } else {
-        tableModel = (DefaultTableModel) tabla.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) tabla.getModel();
         IntStream.range(0, data.size()).forEach(i -> tableModel.addRow(data.get(i)));
         return true;
       }
@@ -197,11 +195,9 @@ public final class OlderRepository {
 
   public static void updateData(String nickname, String id, String table) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries.updateNickname(nickname, id, table));
+      PreparedStatement preparedStatement = Queries.updateNickname(nickname, id, table).prepare(connection);
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
       Alerts.error(e, "Database");
@@ -210,16 +206,17 @@ public final class OlderRepository {
 
   public static void deleteData(@NotNull String[] rows, String table) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      for (String row : rows) {
-        preparedStatement = connection.prepareStatement(Queries.deleteDataByID(row, table));
-        preparedStatement.addBatch();
+      try (var delete = connection.prepareStatement("DELETE FROM " + Format.tableName(table) + " WHERE ID = ?")) {
+        connection.setAutoCommit(false);
+        for (String row : rows) {
+          delete.setString(1, row);
+          delete.addBatch();
+        }
+        delete.executeBatch();
+        connection.commit();
       }
-
-      preparedStatement.executeBatch();
 
     } catch (SQLException e) {
       Alerts.error(e, "Database");
@@ -236,11 +233,9 @@ public final class OlderRepository {
       trueUnits = units - store.getUnitsActual();
     }
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries.updateInventory(reference, trueUnits));
+      PreparedStatement preparedStatement = Queries.updateInventory(reference, trueUnits).prepare(connection);
       preparedStatement.executeUpdate();
     } catch (SQLException e) {
       Alerts.error(e, "Database");
@@ -250,12 +245,10 @@ public final class OlderRepository {
 
   public static boolean searchProductByReference(String reference, String table) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries.getDataProduct(reference, table));
-      resultSet = preparedStatement.executeQuery();
+      PreparedStatement preparedStatement = Queries.getDataProduct(reference, table).prepare(connection);
+      ResultSet resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {
         store.setReference(resultSet.getString("ID"));
@@ -273,13 +266,11 @@ public final class OlderRepository {
 
   public static void updateSales(String user, int productsSold, Double totalSales) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries
+      PreparedStatement preparedStatement = Queries
           .updateCashRegisterSales(user, (productsSold + store.getSoldProducts()),
-              (totalSales + store.getTotalSales())));
+              (totalSales + store.getTotalSales())).prepare(connection);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -289,13 +280,11 @@ public final class OlderRepository {
 
   public static void updatePurchases(String user, int purchasedProducts, Double totalPurchases) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries
+      PreparedStatement preparedStatement = Queries
           .updateCashRegisterPurchases(user, (purchasedProducts + store.getPurchasedProducts()),
-              (totalPurchases + store.getTotalPurchases())));
+              (totalPurchases + store.getTotalPurchases())).prepare(connection);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -305,12 +294,9 @@ public final class OlderRepository {
 
   public static void updateLoan(String user, Double loanValue) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(
-          Queries.updateCashRegisterLoan(user, (loanValue + store.getTotalLoans())));
+      PreparedStatement preparedStatement = Queries.updateCashRegisterLoan(user, (loanValue + store.getTotalLoans())).prepare(connection);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -320,11 +306,9 @@ public final class OlderRepository {
 
   public static void recordLogin(String status, String user) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries.recordLogin(status, user));
+      PreparedStatement preparedStatement = Queries.recordLogin(status, user).prepare(connection);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -334,12 +318,10 @@ public final class OlderRepository {
 
   public static boolean searchDataUserInCashRegister(String user) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries.searchDataUserInCashRegister(user));
-      resultSet = preparedStatement.executeQuery();
+      PreparedStatement preparedStatement = Queries.searchDataUserInCashRegister(user).prepare(connection);
+      ResultSet resultSet = preparedStatement.executeQuery();
 
       if (resultSet.next()) {
         store.setUser(resultSet.getString("User"));
@@ -359,12 +341,10 @@ public final class OlderRepository {
 
   public static boolean userAlreadyExist(String user) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries.searchUser(user));
-      resultSet = preparedStatement.executeQuery();
+      PreparedStatement preparedStatement = Queries.searchUser(user).prepare(connection);
+      ResultSet resultSet = preparedStatement.executeQuery();
 
       return resultSet.next();
 
@@ -377,14 +357,13 @@ public final class OlderRepository {
 
   public static boolean searchStoreUser(String user, String password) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries.searchUserRegister(user, password));
-      resultSet = preparedStatement.executeQuery();
+      PreparedStatement preparedStatement = connection.prepareStatement("SELECT Password FROM users WHERE Username = ?");
+      preparedStatement.setString(1, user);
+      ResultSet resultSet = preparedStatement.executeQuery();
 
-      return resultSet.next();
+      return resultSet.next() && Access.matchesAccount(password, resultSet.getString(1));
 
     } catch (SQLException e) {
       Alerts.error(e, "Database");
@@ -395,11 +374,9 @@ public final class OlderRepository {
 
   public static void updatePassword(String user, String newPassword) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries.updatePassword(user, newPassword));
+      PreparedStatement preparedStatement = Queries.updatePassword(user, newPassword).prepare(connection);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -409,11 +386,9 @@ public final class OlderRepository {
 
   public static void updateUsername(String user, String newUsername) {
 
-    try {
-      
-      connection = DatabaseConnection.getConnection();
+    try (Connection connection = DatabaseConnection.getConnection()) {
 
-      preparedStatement = connection.prepareStatement(Queries.updateUsername(user, newUsername));
+      PreparedStatement preparedStatement = Queries.updateUsername(user, newUsername).prepare(connection);
       preparedStatement.executeUpdate();
 
     } catch (SQLException e) {
@@ -421,27 +396,4 @@ public final class OlderRepository {
     }
   }
 
-  public static List<String> getListBook() {
-
-    ArrayList<String> listBook = new ArrayList<>();
-
-    try {
-      
-      connection = DatabaseConnection.getConnection();
-
-      preparedStatement = connection.prepareStatement(Queries.getTitleBooks());
-      resultSet = preparedStatement.executeQuery();
-
-      while (resultSet.next()) {
-        listBook.add(resultSet.getString(1));
-      }
-
-      return listBook;
-
-    } catch (SQLException e) {
-      Alerts.error(e, "Database");
-    }
-
-    return listBook;
-  }
 }

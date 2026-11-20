@@ -14,19 +14,17 @@ public final class FeedbackService {
 
   public static void sendCommentary(String username, String commentary) {
 
-    if (GeneralUtils.verifyConnection("Make sure you are connected to a network", true)) {
 
-      String[] data = {FEEDBACK, username, commentary, Format.getDate()};
+    String[] data = {FEEDBACK, username, commentary, Format.getDate()};
 
-      if (OlderRepository.insertData(data)) {
+    if (OlderRepository.insertData(data)) {
 
-        JOptionPane.showMessageDialog(null,
-            "<html>" + Format.style()
-                + "<strong><center>Commentary sent</center></strong><br>"
-                + "Feedback sent, your opinion will be taken into account."
-                + "</html>",
-            "Successfully", JOptionPane.PLAIN_MESSAGE);
-      }
+      JOptionPane.showMessageDialog(null,
+          "<html>" + Format.style()
+              + "<strong><center>Comment saved</center></strong><br>"
+              + "Your feedback was saved in the selected database."
+              + "</html>",
+          "Successfully", JOptionPane.PLAIN_MESSAGE);
     }
   }
 

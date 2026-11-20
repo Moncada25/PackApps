@@ -1,74 +1,53 @@
 package com.bookverse.packapps.apps.ocr;
 
-import com.bookverse.packapps.utils.GeneralUtils;
-import java.io.File;
-import java.io.FileOutputStream;
+import static org.bytedeco.leptonica.global.leptonica.pixDestroy;
+import static org.bytedeco.leptonica.global.leptonica.pixRead;
+
+import com.bookverse.packapps.database.DatabaseConnection;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Objects;
-import lombok.SneakyThrows;
-import net.sourceforge.tess4j.ITesseract;
-import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import org.bytedeco.tesseract.TessBaseAPI;
 
 public class OcrService {
-
-  private static void copyTessdataFromJar(File outputDir) throws IOException {
-
-    if (!outputDir.exists() && !outputDir.mkdirs()) {
-      throw new IOException("Folder not found " + outputDir.getAbsolutePath());
-    }
-
-    String tessdataPathInJar = "/tessdata";
-    String[] resourceFiles = {"spa.traineddata", "eng.traineddata"};
-
-    for (String resourceFile : resourceFiles) {
-      String file = tessdataPathInJar + "/" + resourceFile;
-
-      try (InputStream inputStream = OcrService.class.getResourceAsStream(file)) {
-        if (inputStream == null) {
-          System.err.println("File not found: " + resourceFile);
-          continue;
-        }
-
-        File outputFile = new File(outputDir, resourceFile);
-
-        try (OutputStream outputStream = new FileOutputStream(outputFile)) {
-          byte[] buffer = new byte[1024];
-          int bytesRead;
-          while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, bytesRead);
-          }
-        }
-
-        System.out.println("File copied " + outputFile.getAbsolutePath());
+  private static Path models() throws IOException {
+    Path dir = DatabaseConnection.dataDirectory().resolve("tessdata-v5");
+    Files.createDirectories(dir);
+    for (String lang : new String[] {"eng", "spa"}) {
+      String name = lang + ".traineddata";
+      if (Files.isRegularFile(dir.resolve(name))) continue;
+      Path temp = Files.createTempFile(dir, lang, ".tmp");
+      try (var in = OcrService.class.getResourceAsStream("/tessdata/" + name)) {
+        Files.copy(in, temp, StandardCopyOption.REPLACE_EXISTING);
+        Files.move(temp, dir.resolve(name), StandardCopyOption.ATOMIC_MOVE);
+      } finally {
+        Files.deleteIfExists(temp);
       }
     }
+    return dir;
   }
 
-  @SneakyThrows
   public String readText(String image, boolean onlyText) {
-
-    String outputDir = GeneralUtils.getOutputDirectory() + "tessdata";
-    File tessdataDir = new File(outputDir);
-
-    if (!tessdataDir.exists() || Objects.requireNonNull(tessdataDir.listFiles()).length == 0) {
-      copyTessdataFromJar(tessdataDir);
-    }
-
-    ITesseract tesseract = new Tesseract();
-    tesseract.setDatapath(tessdataDir.getAbsolutePath());
-    tesseract.setPageSegMode(1);
-    tesseract.setOcrEngineMode(1);
-
-    if (!onlyText) {
-      tesseract.setVariable("tessedit_create_hocr", "1");
-    }
-
-    try {
-      return tesseract.doOCR(new File(image));
-    } catch (TesseractException e) {
+    if (image == null || image.isBlank()) return "Error";
+    try (var api = new TessBaseAPI()) {
+      if (api.Init(models().toString(), "spa+eng") != 0) return "Error";
+      var pixels = pixRead(image);
+      if (pixels == null || pixels.isNull()) return "Error";
+      try {
+        api.SetImage(pixels);
+        var result = onlyText ? api.GetUTF8Text() : api.GetHOCRText(0);
+        if (result == null || result.isNull()) return "Error";
+        try {
+          return result.getString(java.nio.charset.StandardCharsets.UTF_8);
+        } finally {
+          org.bytedeco.tesseract.global.tesseract.TessDeleteText(result);
+        }
+      } finally {
+        api.End();
+        pixDestroy(pixels);
+      }
+    } catch (IOException | RuntimeException e) {
       return "Error";
     }
   }
